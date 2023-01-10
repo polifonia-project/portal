@@ -1,0 +1,34 @@
+{
+    "d_01": {
+        "id": "d_01",
+        "dataset_name": "musow",
+        "iri_base": "",
+        "query_method": "sparql_endpoint",
+        "sparql_endpoint": "https://projects.dharc.unibo.it/musow/sparql",
+        "rest_api": ""
+    },
+    "d_02": {
+        "id": "d_02",
+        "dataset_name": "choco",
+        "iri_base": "",
+        "query_method": "sparql_endpoint",
+        "sparql_endpoint": "https://polifonia.disi.unibo.it/choco/sparql",
+        "rest_api": ""
+    },
+    "d_03": {
+        "id": "d_03",
+        "dataset_name": "sound and vision",
+        "iri_base": "",
+        "query_method": "sparql_endpoint",
+        "sparql_endpoint": "https://cat.apis.beeldengeluid.nl/sparql",
+        "rest_api": ""
+    },
+    "d_04": {
+        "id": "d_04",
+        "dataset_name": "wikidata",
+        "iri_base": "",
+        "query_method": "sparql_endpoint",
+        "sparql_endpoint": "https://query.wikidata.org/sparql",
+        "rest_api": ""
+    }
+}
