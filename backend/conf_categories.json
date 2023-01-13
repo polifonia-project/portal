@@ -1,0 +1,47 @@
+{
+    "cat_01": {
+        "id": "cat_01",
+        "name": "people",
+        "color": "green",
+        "search_pattern": [
+            {
+                "dataset": "d_01",
+                "query": "pattern_query"
+            },
+            {
+                "dataset": "d_04",
+                "query": "pattern_query"
+            }
+        ]
+    },
+    "cat_02": {
+        "id": "cat_02",
+        "name": "places",
+        "color": "yellow",
+        "search_pattern": [
+            {
+                "dataset": "d_01",
+                "query": "pattern_query"
+            },
+            {
+                "dataset": "d_01",
+                "query": "pattern_query"
+            }
+        ]
+    },
+    "cat_03": {
+        "id": "cat_03",
+        "name": "topics",
+        "color": "red",
+        "search_pattern": [
+            {
+                "dataset": "d_01",
+                "query": "pattern_query"
+            },
+            {
+                "dataset": "d_04",
+                "query": "pattern_query"
+            }
+        ]
+    }
+}
