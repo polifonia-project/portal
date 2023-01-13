@@ -12,25 +12,11 @@ app = Flask(__name__)
 
 # access all conf files: datasets (d), categories (c) and feed info (f)
 d, c, f = methods.access_conf_info('conf_general.json')
+print(type(c))
 
 @app.route('/feed', methods=['GET'])
 def feed():
-    clips = []
-    # d = methods.read_json('conf_datasets.json')
-    
-    with IngestClient("127.0.0.1", 1491, "SecretPassword") as ingestcl:
-        print(ingestcl.ping())
-        print(ingestcl.protocol)
-        print(ingestcl.bufsize)
-        for uri, label in data.items():
-            ingestcl.push("polifonia", "entities", uri, label)
-    for clip in f:
-        clip_info = {}
-        clip_info['name'] = f[clip]['name']
-        clip_info['iri'] = f[clip]['iri']
-        clips.append(clip_info)
-    # print(clips)
-    return clips
+    return jsonify({'categories': c, 'clips': f})
 
 # @app.route('/index', methods=['GET'])
 # def test():

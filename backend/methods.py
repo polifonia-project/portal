@@ -20,6 +20,15 @@ def read_json(file_name):
         return data
 
 def access_conf_info(file_path):
+    '''
+    
+
+    Args:
+        
+
+    Returns:
+        
+    '''
     #read general conf
     g = read_json(file_path)
     #read feed json
