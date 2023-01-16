@@ -8,8 +8,6 @@ import indexing as i
 
 app = Flask(__name__)
 
-# data = methods.query_sparql('https://projects.dharc.unibo.it/musow/sparql', 'https://w3id.org/musow/1635268063-587743')
-
 # access all conf files: datasets (d), categories (c) and feed info (f)
 d, c, f = methods.access_conf_info('conf_general.json')
 i.index_per_category(d, c)
@@ -17,7 +15,13 @@ i.index_per_category(d, c)
 
 @app.route('/feed', methods=['GET'])
 def feed():
-    return jsonify({'categories': c, 'clips': f})
+    c_list = []
+    f_list = []
+    for cat in c.values():
+        c_list.append(cat)
+    for clip in f.values():
+        f_list.append(clip)
+    return jsonify({'categories': c_list, 'clips': f_list})
 
 # @app.route('/index', methods=['GET'])
 # def test():
