@@ -1,3 +1,4 @@
+# builtin libraries
 import json
 
 
@@ -14,3 +15,24 @@ def read_json(file_name):
     with open(file_name) as config_form:
         data = json.load(config_form)
         return data
+
+
+def access_conf_info(file_path):
+    '''
+
+
+    Args:
+
+
+    Returns:
+
+    '''
+    # read general conf
+    g = read_json(file_path)
+    # read feed json
+    f = read_json(g['data_sources']['feed'])
+    # read dataset json
+    d = read_json(g['data_sources']['datatsets'])
+    # read feed json
+    c = read_json(g['data_sources']['categories'])
+    return d, c, f
