@@ -26,7 +26,7 @@ class Feed extends React.Component {
         // to update state
         this.setState({ searchField: event.target.value });
         console.log(event.target.value)
-        let request = '/index?data=' + event.target.value; /index?para1=nnnnn&param2=iiiii
+        let request = '/index?data=' + event.target.value;
         console.log(request);
         fetch(request)
             .then(res => res.json())
