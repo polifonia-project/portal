@@ -1,6 +1,7 @@
 # external libraries
 from SPARQLWrapper import SPARQLWrapper, JSON
 from sonicclient import SearchClient, IngestClient, ControlClient
+from flask import jsonify
 
 # internal libraries
 import methods
@@ -55,3 +56,9 @@ def index_per_category(d, c):
                 print('[SUCCESS] ingestion for:', cat_name.lower())
         # ingest
         sonic_ingest(index_dict, cat_name.lower())
+
+
+def sonic_suggest(cat, word):
+    with SearchClient(g["index_host"], g["index_channel"], g["index_pw"]) as querycl:
+        print(querycl.ping())
+        return {'result': querycl.suggest(cat, "entities", word)}

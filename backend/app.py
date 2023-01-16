@@ -23,18 +23,16 @@ def feed():
         f_list.append(clip)
     return jsonify({'categories': c_list, 'clips': f_list})
 
-# @app.route('/index', methods=['GET'])
-# def test():
-#     word = request.args.get('data')
-#     if len(word) == 0:
-#         result = []
-#         for label in data.values():
-#             result.append(label)
-#         return jsonify({'result': result})
-#     else:
-#         with SearchClient("127.0.0.1", 1491, "SecretPassword") as querycl:
-#             print(querycl.ping())
-#             return jsonify({'result': querycl.suggest("polifonia", "entities", word)})
+
+@app.route('/index', methods=['GET'])
+def index():
+    cat = request.args.get('cat')
+    # alternativa
+    # cat = c[request.args.get('cat')]['name']
+    word = request.args.get('data')
+    if len(word) > 0:
+        suggestions = i.sonic_suggest(cat, word)
+        return jsonify(suggestions)
 
 
 if __name__ == '__main__':
