@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 # access all conf files: datasets (d), categories (c) and feed info (f)
 d, c, f = methods.access_conf_info('conf_general.json')
-i.index_per_category(d, c)
+i.ingest_data(d, c)
 
 
 @app.route('/feed', methods=['GET'])

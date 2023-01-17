@@ -17,6 +17,18 @@ def read_json(file_name):
         return data
 
 
+def update_json(file_name, json_read):
+    '''
+    Update and dump a new json file.
+
+    Args:
+            file_name (str): a string that specifies the name of the json file to update.
+            json_read (dict): the dictionary that contains data to update the json file.
+    '''
+    with open(file_name, 'w') as config_update:
+        config_update.write(json.dumps(json_read, indent=4))
+
+
 def access_conf_info(file_path):
     '''
 
