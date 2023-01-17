@@ -1,6 +1,5 @@
 # external libraries
 from flask import Flask, request, jsonify
-from sonicclient import SearchClient, IngestClient, ControlClient
 
 # internal libraries
 import methods
@@ -27,7 +26,7 @@ def feed():
 @app.route('/index', methods=['GET'])
 def index():
     cat = request.args.get('cat')
-    # alternativa
+    # alternativa con cat_id
     # cat = c[request.args.get('cat')]['name']
     word = request.args.get('data')
     if len(word) > 0:
