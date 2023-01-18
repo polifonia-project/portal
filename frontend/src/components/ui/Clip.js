@@ -3,8 +3,6 @@ import classes from "./Clip.module.css";
 
 function Clip(props) {
 
-    console.log(props.color);
-
     return (
         <div className={classes.clipContainer}>
             <div className={classes.clip}>
