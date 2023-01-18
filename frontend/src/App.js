@@ -1,14 +1,23 @@
-import React from 'react';
-import './App.css';
-import Feed from './Components/Feed/Feed';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
+
+import FeedPage from "./pages/Feed";
+import DataStoriesPage from "./pages/DataStories";
+import AboutPage from "./pages/About";
+import Layout from "./components/layout/Layout";
 
 function App() {
+  const [pagetitle, setPageTitle] = useState();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <Feed />
-      </header>
-    </div>
+    <Layout title={pagetitle}>
+     <Routes>
+        <Route path="/" element={<FeedPage func={setPageTitle}/>} />
+        <Route path="/datastories" element={<DataStoriesPage func={setPageTitle}/>} />
+        <Route path="/about" element={<AboutPage func={setPageTitle}/>} />
+      </Routes>
+    </Layout>
   );
 }
 

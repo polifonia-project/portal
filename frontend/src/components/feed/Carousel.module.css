@@ -1,0 +1,38 @@
+.carousel_card {
+    height: 300px;
+    background-color: #f4edec;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    box-shadow: 1px 1px 16px -5px black;
+    padding: 50px;
+    padding-top: 20px;
+    font-size: 2em; 
+    margin: 0 80px; 
+}
+
+
+.carousel_card h3{
+    font-size: 1em;
+}
+
+.carousel_card p{
+    font-size: 0.5em;
+    padding-right: 30%;
+}
+
+.carouselContainer button{
+    border-radius: 50%;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    color: white;
+    border: 0.5px solid white;
+    outline: 0;
+    background-color: transparent;
+  }
+
+  .carouselContainer button:hover{
+    background-color:rgba(192,192,192,0.3);
+    box-shadow: 1px 1px 16px -5px black;
+  }
+

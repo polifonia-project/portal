@@ -8,7 +8,8 @@
                 "dataset": "d_04",
                 "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q5 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
             }
-        ]
+        ],
+        "status": "ingested"
     },
     "cat_02": {
         "id": "cat_02",
@@ -19,7 +20,8 @@
                 "dataset": "d_04",
                 "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q82794 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
             }
-        ]
+        ],
+        "status": "ingested"
     },
     "cat_03": {
         "id": "cat_03",
@@ -34,6 +36,7 @@
                 "dataset": "d_04",
                 "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
             }
-        ]
+        ],
+        "status": "ingested"
     }
 }

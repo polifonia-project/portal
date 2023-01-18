@@ -1,0 +1,38 @@
+.menu {
+  position: fixed; 
+  width: 100%; 
+  height: 100vh; 
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f4edec;;
+  z-index: 200; 
+  cursor: pointer; 
+}
+.menulist {
+  list-style-type: none;
+  padding-top: 50px;
+}
+
+.menulist li a{
+  font-size: 8vw;
+  color: black;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+/* visited link */
+.menulist li a:visited {
+  color: black;
+}
+
+/* mouse over link */
+.menulist li a:hover {
+  color: #ff02fe;
+}
+
+/* selected link */
+.menulist li a:active {
+  color: black;
+}

@@ -1,0 +1,81 @@
+.header {
+  width: 100%;
+  margin: 0;
+  background-color: #f4edec;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  border-image: linear-gradient(
+      90deg,
+      rgba(253, 56, 67, 1) 0%,
+      rgba(253, 56, 67, 1) 12.5%,
+      rgba(255, 0, 255, 1) 12.5%,
+      rgba(255, 0, 255, 1) 25%,
+      rgba(29, 0, 255, 1) 25%,
+      rgba(29, 0, 255, 1) 37.5%,
+      rgba(100, 0, 180, 1) 37.5%,
+      rgba(100, 0, 180, 1) 50%,
+      rgba(0, 255, 255, 1) 50%,
+      rgba(0, 255, 255, 1) 62.5%,
+      rgba(0, 255, 0, 1) 62.5%,
+      rgba(0, 255, 0, 1) 75%,
+      rgba(255, 255, 0, 1) 75%,
+      rgba(255, 255, 0, 1) 87.5%,
+      rgba(0, 0, 0, 1) 87.5%,
+      rgba(0, 0, 0, 1) 100%
+    )
+    30;
+  border-width: 3px;
+  border-style: solid;
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  padding: 15px 0px 15px 0px;
+  display: flex;
+}
+
+.title {
+  width: 50%;
+  display: flex;
+}
+
+.menu {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 30px;
+}
+
+.logo {
+  width: 140px;
+  height: auto;
+  transition: width 100ms linear;
+  cursor: pointer;
+  position: relative;
+  padding-left: 30px;
+}
+
+.section {
+  padding-left: 7px;
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+}
+
+.section span {
+  margin: 0px;
+  padding: 0px;
+}
+
+.sound {
+  cursor: pointer;
+  width: 22px;
+  z-index: 400;
+}
+
+.hamburger {
+  cursor: pointer;
+  width: 43px;
+  padding-left: 20px;
+  z-index: 400;
+}

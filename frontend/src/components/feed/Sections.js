@@ -1,6 +1,7 @@
 import React from 'react';
+import classes from "./Sections.module.css";
 
-class Feed extends React.Component {
+class Sections extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -37,8 +38,8 @@ class Feed extends React.Component {
 
     render() {
         return (
-            <div>
-                <p>List of clips:</p>
+            <div className={classes.sectionscontainer}>
+                <p>List of sections:</p>
                 <ul>
                     {this.state.clips.map((clip, index) => (
                         <li key={index}>
@@ -62,4 +63,4 @@ class Feed extends React.Component {
     }
 }
 
-export default Feed;
+export default Sections;
