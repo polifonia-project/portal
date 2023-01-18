@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useEffect } from "react";
 import Carousel from "../components/feed/Carousel.js";
 import CategoriesNav from "../components/feed/CategoriesNav";
 import Clips from "../components/feed/Clips";
@@ -8,8 +8,9 @@ import classes from "./Feed.module.css";
 
 
 function FeedPage(props) {
-
-  props.func('Portal');
+  useEffect(() => {
+    props.func('Portal');
+  });
 
   return (
     <section>

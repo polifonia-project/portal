@@ -20,6 +20,7 @@ class Clips extends React.Component {
                 this.setState({ clips: data.clips })
                 this.setState({ categories: data.categories })
                 console.log(data.clips)
+                console.log(data.categories)
             }
             )
     }
@@ -31,7 +32,7 @@ class Clips extends React.Component {
                 <ul>
                     {this.state.clips.map((clip, index) => (
                         
-                        <Clip key={index} title={clip.name}></Clip>
+                        <Clip key={index} title={clip.name} color={index.color}></Clip>
                         
                     ))}
                 </ul>

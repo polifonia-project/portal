@@ -1,9 +1,11 @@
 import React from "react";
+import { useEffect } from "react";
 import LoremIpsumContent from "../components/ui/LoremIpsumContent";
 
 function DataStoriesPage(props) {
-
-  props.func('Data');
+  useEffect(() => {
+    props.func('Data');
+  });
 
     return (
         <section>
