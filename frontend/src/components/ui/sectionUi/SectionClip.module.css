@@ -25,6 +25,33 @@
   vertical-align:middle;
 }
 
+.clip input {
+  display:inline-block; 
+  margin: 0px;
+  margin-left: 20px;
+  font-size: 1.5em;
+  position: relative;
+  vertical-align:middle;
+  border: 0px;
+  background-color: #f4edec;
+  overflow:scroll;
+}
+
+.clip input, textarea{
+  color: black;
+}
+
+.clip input, select, textarea{
+  color: black;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  opacity: 1; /* Firefox */
+  color: black;
+  font-family: "Helvetica Light";
+}
+
+
 .clip button {
   display:inline-block; 
   margin: 0px;

@@ -9,7 +9,8 @@ class Clips extends React.Component {
             clips: [],
             categories: [],
             searchField: '',
-            value_list: []
+            value_list: [],
+            color: "green"
         }
     }
 
@@ -19,21 +20,22 @@ class Clips extends React.Component {
             .then((data) => {
                 this.setState({ clips: data.clips })
                 this.setState({ categories: data.categories })
-                console.log(data.clips)
             }
             )
     }
 
+    
+
     render() {
         return (
             <div className={classes.clipscontainer}>
-                <p>List of clips:</p>
                 <ul>
                     {this.state.clips.map((clip, index) => (
                         
-                        <Clip key={index} title={clip.name}></Clip>
-                        
+                        <Clip key={index} title={clip.name} color={this.state.categories[index].color}></Clip>
+    
                     ))}
+
                 </ul>
             </div>
         )

@@ -1,17 +1,17 @@
 import React from "react";
-import classes from "./Clip.module.css";
+import classes from "./SectionClip.module.css";
 
-function Clip(props) {
+function SectionClip(props) {
 
     return (
         <div className={classes.clipContainer}>
             <div className={classes.clip}>
                 <span className={classes.dot} style={{ backgroundColor: props.color}}></span>
-                <p>{props.title}</p>
-                <button>More +</button>
+                {props.children}
+                <button>Change</button>
             </div>
         </div>
     )
 }
 
-export default Clip;
+export default SectionClip;
