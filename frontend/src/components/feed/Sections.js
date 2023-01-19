@@ -38,12 +38,13 @@ class Sections extends React.Component {
             })
     }
 
+
     render() {
         return (
             <div className={classes.sectionscontainer}>
                     {this.state.clips.map((clip, index) => (
                     <div>
-                    <Section ref={"Section"+index}>
+                    <Section id={"section-"+index}>
                             <SectionClip key={index} color={this.state.categories[index].color}>
                                 <input
                                     type={'search'}
