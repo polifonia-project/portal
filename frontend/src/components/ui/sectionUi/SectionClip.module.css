@@ -1,6 +1,7 @@
 .clipContainer {
   display: block;
   padding: 5px;
+  padding: 20%;
   padding-bottom: 40px;
   padding-top: 40px;
 }
@@ -26,15 +27,15 @@
 }
 
 .clip input {
+  all: unset;
   display:inline-block; 
   margin: 0px;
-  margin-left: 20px;
   font-size: 1.5em;
   position: relative;
   vertical-align:middle;
   border: 0px;
   background-color: #f4edec;
-  overflow:scroll;
+  border-style:solid;
 }
 
 .clip input, textarea{
@@ -74,4 +75,5 @@
   border-radius: 50%;
   display: inline-block;
   vertical-align:middle;
+  margin-right: 20px;
 }
