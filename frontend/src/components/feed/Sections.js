@@ -1,5 +1,7 @@
 import React from 'react';
 import classes from "./Sections.module.css";
+import SectionClip from '../ui/sectionUi/SectionClip.js';
+import Section from '../ui/sectionUi/Section.js';
 
 class Sections extends React.Component {
     constructor() {
@@ -39,25 +41,25 @@ class Sections extends React.Component {
     render() {
         return (
             <div className={classes.sectionscontainer}>
-                <p>List of sections:</p>
-                <ul>
                     {this.state.clips.map((clip, index) => (
-                        <li key={index}>
-                            <p>{clip.name}</p>
-                            <input
-                                type={'search'}
-                                placeholder='change'
-                                onChange={this.onSearchChange}
-                            ></input>
-                        </li>
+                    <div>
+                    <Section ref={"Section"+index}>
+                            <SectionClip key={index} color={this.state.categories[index].color}>
+                                <input
+                                    type={'search'}
+                                    placeholder={clip.name}
+                                    onChange={this.onSearchChange}
+                                ></input>
+                            </SectionClip>
+                            <div>
+                                {this.state.value_list.map((res, index) => (
+                                    <p key={index}>{res}</p>
+                                ))}
+                            </div>
+                    </Section> 
+                    </div>
                     ))}
-                </ul>
-                <div>
-                    {this.state.value_list.map((res, index) => (
-                        <p key={index}>{res}</p>
-                    )
-                    )}
-                </div>
+                
             </div>
         )
     }

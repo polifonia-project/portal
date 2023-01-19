@@ -5,24 +5,26 @@ import CategoriesNav from "../components/feed/CategoriesNav";
 import Clips from "../components/feed/Clips";
 import Sections from "../components/feed/Sections.js";
 import classes from "./Feed.module.css";
+import MainContainer from "../components/feed/MainContainer.js";
 
 
 function FeedPage(props) {
+
   useEffect(() => {
     props.func('Portal');
   });
 
   return (
-    <section>
+    <div className={classes.feedContainer}>
       <div className={classes.carouselContainer}>
       <Carousel />
       </div>
-      <div className={classes.mainContainer}>
-      <CategoriesNav />
-      <Clips />
-      <Sections />
-      </div>
-    </section>
+      <MainContainer>
+        <CategoriesNav />
+        <Clips />
+        <Sections />
+      </MainContainer>
+    </div>
   );
 }
 
