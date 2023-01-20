@@ -30,7 +30,7 @@ def index():
     # cat = c[request.args.get('cat')]['name']
     word = request.args.get('data')
     if len(word) > 0:
-        suggestions = i.sonic_suggest(cat, word)
+        suggestions = i.sonic_suggest(cat, word.lower())
         return jsonify(suggestions)
 
 

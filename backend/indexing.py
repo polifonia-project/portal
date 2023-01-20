@@ -34,9 +34,9 @@ def sonic_ingest(data, collection, bucket='entities'):
     """
     with IngestClient(g['index_host'], g['index_channel'], g['index_pw']) as ingestcl:
         for iri, label in data.items():
-            print(iri, label)
+            print(iri, label.lower())
             ingestcl.ping()
-            ingestcl.push(collection, bucket, iri, label)
+            ingestcl.push(collection, bucket, iri, label.lower())
 
 
 def index_per_category(datasets, categories, cat_id):
