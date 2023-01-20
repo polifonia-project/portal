@@ -25,11 +25,11 @@ class Sections extends React.Component {
             )
     }
 
-    onSearchChange = (event) => {
+    onSearchChange = (event, category) => {
         // to update state
         this.setState({ searchField: event.target.value });
         console.log(event.target.value)
-        let request = '/index?data=' + event.target.value + '&cat=topics';
+        let request = '/index?data=' + event.target.value + '&cat_id=' + category; // restituire category  cat_id=topics
         console.log(request);
         fetch(request)
             .then(res => res.json())
@@ -49,7 +49,7 @@ class Sections extends React.Component {
                                 <input
                                     type={'search'}
                                     placeholder={clip.name}
-                                    onChange={this.onSearchChange}
+                                    onChange={(e) => this.changeRangeName(e, clip.category )}
                                     style={{width: 'calc(1.1ch * '+ clip.name.length +')'}}
                                 ></input>
                             </SectionClip>

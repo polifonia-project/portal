@@ -12,6 +12,7 @@ body {
   font-family:"Helvetica Light";
   margin: 0;
   background-color: #f4edec;
+  overflow: hidden;
 }
 
 h1 {

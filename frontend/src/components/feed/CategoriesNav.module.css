@@ -1,0 +1,34 @@
+.categoriesContainer {
+  width: 100%;
+  display: flex;
+  padding-top: 0px;
+  padding-bottom: 20px;
+  background-color: transparent;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: -44vh;
+  right:0;
+  z-index: 200;
+}
+
+.categoriesContainer div {
+  width: 12.5%;
+  text-align: center;
+}
+
+.categoriesContainer div button {
+  border-radius: 20px;
+  cursor: pointer;
+  border: 0.6px solid transparent;
+  padding: 8px 15px 8px 15px;
+  background-color: #f4edec;
+  font-size: 0.8em;
+  font-family: "Helvetica Light";
+  vertical-align: middle;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 20px 13px rgb(0 0 0 / 10%);
+}
+
+.categoriesContainer div button:hover {
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  }
