@@ -14,20 +14,17 @@ i.ingest_data(d, c)
 
 @app.route('/feed', methods=['GET'])
 def feed():
-    c_list = []
     f_list = []
-    for cat in c.values():
-        c_list.append(cat)
     for clip in f.values():
         f_list.append(clip)
-    return jsonify({'categories': c_list, 'clips': f_list})
+    return jsonify({'categories': c, 'clips': f_list})
 
 
 @app.route('/index', methods=['GET'])
 def index():
-    cat = request.args.get('cat')
+    cat_id = request.args.get('cat_id')
     # alternativa con cat_id
-    # cat = c[request.args.get('cat')]['name']
+    cat = c[cat_id]['name']
     word = request.args.get('data')
     if len(word) > 0:
         suggestions = i.sonic_suggest(cat, word.lower())
