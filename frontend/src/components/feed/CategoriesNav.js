@@ -1,28 +1,46 @@
 import React from "react";
-import classes from "./CategoriesNav.module.css"
+import classes from "./CategoriesNav.module.css";
 
-function CategoriesNav() {
+class CategoriesNav extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      clips: [],
+      categories: [],
+      searchField: "",
+      value_list: [],
+    };
+  }
 
-    const handleClickScroll = (id) => {
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      };
+  componentDidMount = () => {
+    fetch("/feed")
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ clips: data.clips });
+        this.setState({ categories: data.categories });
+      });
+  };
 
-    return(
-        <div className={classes.categoriesContainer}>
-            <div><button onClick={() => handleClickScroll("section-0")}>Topics</button></div>
-            <div><button>Tunes</button></div>
-            <div><button>Genres</button></div>
-            <div><button>Lyrics</button></div>
-            <div><button>Scores</button></div>
-            <div><button>People</button></div>
-            <div><button>Places</button></div>
-            <div><button>Instruments</button></div>
-        </div>
-    )
+  handleClickScroll = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
+  render() {
+    return (
+      <div className={classes.categoriesContainer}>
+        {Object.values(this.state.categories).map((cat, index) =>
+          <div>
+            <button onClick={() => this.handleClickScroll("section-"+cat.id)}>
+              {cat.name}
+            </button>
+          </div>
+        )}
+      </div>
+    );
+  }
 }
 
 export default CategoriesNav;

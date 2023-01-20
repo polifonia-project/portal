@@ -9,7 +9,7 @@ class Clips extends React.Component {
             clips: [],
             categories: [],
             searchField: '',
-            value_list: [],
+            value_list: []
         }
     }
 
@@ -30,7 +30,7 @@ class Clips extends React.Component {
                 <div>
                     {this.state.clips.map((clip, index) => (
                         
-                        <Clip key={index} title={clip.name} color={this.state.categories[clip.category].color} id={'section-'+index}></Clip>
+                        <Clip key={index} title={clip.name} color={this.state.categories[clip.category].color} id={'section-'+ clip.category}></Clip>
     
                     ))}
 

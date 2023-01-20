@@ -44,7 +44,7 @@ class Sections extends React.Component {
             <div className={classes.sectionscontainer}>
                     {this.state.clips.map((clip, index) => (
                     <div key={"section-"+index}>
-                    <Section id={"section-"+index} >
+                    <Section id={"section-"+ clip.category} >
                             <SectionClip key={index} color={this.state.categories[clip.category].color}>
                                 <input
                                     type={'search'}
