@@ -29,7 +29,7 @@ class Sections extends React.Component {
         // to update state
         this.setState({ searchField: event.target.value });
         console.log(event.target.value)
-        let request = '/index?data=' + event.target.value + '&cat_id=' + category; // restituire category  cat_id=topics
+        let request = '/index?data=' + event.target.value + '&cat_id=' + category; 
         console.log(request);
         fetch(request)
             .then(res => res.json())
@@ -43,8 +43,8 @@ class Sections extends React.Component {
         return (
             <div className={classes.sectionscontainer}>
                     {this.state.clips.map((clip, index) => (
-                    <div>
-                    <Section id={"section-"+index}>
+                    <div key={"section-"+index}>
+                    <Section id={"section-"+index} >
                             <SectionClip key={index} color={this.state.categories[clip.category].color}>
                                 <input
                                     type={'search'}

@@ -10,7 +10,6 @@ class Clips extends React.Component {
             categories: [],
             searchField: '',
             value_list: [],
-            color: "green"
         }
     }
 

@@ -7,7 +7,7 @@
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: -44vh;
-  right:0;
+  right: 0;
   z-index: 200;
 }
 
@@ -30,5 +30,5 @@
 }
 
 .categoriesContainer div button:hover {
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-  }
+  box-shadow: 0px 0px 20px 13px rgb(0 0 0 / 10%);
+}
