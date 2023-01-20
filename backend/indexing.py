@@ -62,7 +62,7 @@ def ingest_data(datasets, categories):
         is_ingested = False if 'status' not in categories[cat] else True
 
         cat_name = categories[cat]['name']
-        # # FIRST INGESTION
+        # FIRST INGESTION
         if is_ingested == False:
             index_per_category(datasets, categories, cat)
             print('[SUCCESS] ingestion for:', cat_name.lower())
@@ -76,4 +76,4 @@ def ingest_data(datasets, categories):
 def sonic_suggest(cat, word):
     with SearchClient(g['index_host'], g['index_channel'], g['index_pw']) as querycl:
         print(querycl.ping())
-        return {'result': querycl.suggest(cat, 'entities', word)}
+        return {'result': querycl.suggest(cat, 'entities', word, limit=10)}
