@@ -49,7 +49,7 @@ class Sections extends React.Component {
                                 <input
                                     type={'search'}
                                     placeholder={clip.name}
-                                    onChange={(e) => this.changeRangeName(e, clip.category )}
+                                    onChange={(e) => this.onSearchChange(e, clip.category )}
                                     style={{width: 'calc(1.1ch * '+ clip.name.length +')'}}
                                 ></input>
                             </SectionClip>
