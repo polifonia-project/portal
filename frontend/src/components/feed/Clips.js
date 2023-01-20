@@ -31,7 +31,7 @@ class Clips extends React.Component {
                 <div>
                     {this.state.clips.map((clip, index) => (
                         
-                        <Clip key={index} title={clip.name} color={this.state.categories[index].color} id={'section-'+index}></Clip>
+                        <Clip key={index} title={clip.name} color={this.state.categories[clip.category].color} id={'section-'+index}></Clip>
     
                     ))}
 

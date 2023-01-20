@@ -2,7 +2,7 @@
     "cat_01": {
         "id": "cat_01",
         "name": "people",
-        "color": "green",
+        "color": "#09ff00",
         "search_pattern": [
             {
                 "dataset": "d_04",
@@ -14,7 +14,7 @@
     "cat_02": {
         "id": "cat_02",
         "name": "places",
-        "color": "yellow",
+        "color": "#fdff00",
         "search_pattern": [
             {
                 "dataset": "d_04",
@@ -26,7 +26,7 @@
     "cat_03": {
         "id": "cat_03",
         "name": "topics",
-        "color": "red",
+        "color": "#fd3843",
         "search_pattern": [
             {
                 "dataset": "d_01",
