@@ -5,7 +5,6 @@ import CategoriesNav from "../components/feed/CategoriesNav";
 import Clips from "../components/feed/Clips";
 import Sections from "../components/feed/Sections.js";
 import classes from "./Feed.module.css";
-import MainContainer from "../components/feed/MainContainer.js";
 
 
 function FeedPage(props) {
@@ -15,15 +14,15 @@ function FeedPage(props) {
   });
 
   return (
-    <div className={classes.feedContainer}>
-      <div className={classes.carouselContainer}>
+    <div className={classes.feedContainer + ' ' + classes.parallax }>
+      <div className={classes.carouselContainer + ' ' + classes.parallax__layer + ' ' + classes.parallax__layer__back}>
       <Carousel />
       </div>
-      <MainContainer>
+      <div className={classes.mainContainer + ' ' + classes.parallax__layer + ' ' + classes.parallax__layer__base} > 
         <CategoriesNav />
         <Clips />
         <Sections />
-      </MainContainer>
+      </div>
     </div>
   );
 }

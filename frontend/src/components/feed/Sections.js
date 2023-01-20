@@ -52,7 +52,6 @@ class Sections extends React.Component {
                                     onChange={this.onSearchChange}
                                     style={{width: 'calc(1.1ch * '+ clip.name.length +')'}}
                                 ></input>
-                                
                             </SectionClip>
                             <div>
                                 {this.state.value_list.map((res, index) => (
