@@ -6,7 +6,7 @@
   background-color: transparent;
   position: -webkit-sticky; /* Safari */
   position: sticky;
-  top: -44vh;
+  top: -52vh;
   right: 0;
   z-index: 100;
 }
@@ -27,9 +27,10 @@
   text-transform: capitalize;
   vertical-align: middle;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 0px 20px 13px rgb(0 0 0 / 10%);
+  box-shadow: 0px 4px 20px 5px rgb(0 0 0 / 10%);
+  transition: transform .2s; /* Animation */
 }
 
 .categoriesContainer div button:hover {
-  box-shadow: 0px 0px 20px 13px rgb(0 0 0 / 10%);
+  transform: scale(1.08); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }

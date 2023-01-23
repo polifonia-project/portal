@@ -10,17 +10,16 @@
 }
 
 .carouselContainer {
-    padding-top: 160px;
+    padding-top: 25vh;
     width: 100%;
     background-color: black;
     background-image: url('https://polifonia-project.eu/wp-content/uploads/2021/01/polifonia-animazione-home-scaled.gif');
-    background-size: contain;
+    background-size: auto;
     background-position: top;
     background-repeat: no-repeat;
   }
 
   .mainContainer {
-    /* box-shadow: 0px 0px 50px -16px black; */
     height: 100%;
     block-size: fit-content;
   }
@@ -47,10 +46,9 @@
   }
   .parallax__layer__base {
     transform: translateZ(0);
-    transform: translateY(52vh);
+    transform: translateY(60vh);
   }
   .parallax__layer__back {
     transform: translateZ(-1px) scale(2);
   }
-
 

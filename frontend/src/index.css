@@ -4,6 +4,12 @@
    url("./fonts/HelveticaLight.woff") format("truetype");
   }
 
+@font-face {
+    font-family: "Garnett Medium";
+    src: local("Garnett Medium"),
+     url("./fonts/Garnett-Medium.woff") format("truetype");
+    }
+
 * {
   box-sizing: border-box;
 }

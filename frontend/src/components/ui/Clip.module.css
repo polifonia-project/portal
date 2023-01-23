@@ -7,13 +7,19 @@
 
 .clip {
   box-shadow: 0px 0px 50px -18px black;
+  background-color: #f4edec;
   display:inline-block; 
   padding: 10px;
   border-radius: 6px;
+  cursor: default;
+  transition: transform .2s; /* Animation */
+
 }
 
+
 .clip:hover {
-  box-shadow: 0px 0px 50px -16px black;
+  transform: scale(1.08); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  
 }
 
 .clip p {
