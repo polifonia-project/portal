@@ -24,7 +24,7 @@ class CategoriesNav extends React.Component {
   handleClickScroll = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ block: "nearest", behavior: "smooth" });
     }
   };
 

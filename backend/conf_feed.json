@@ -1,9 +1,9 @@
 {
   "clip_01": {
     "id": "clip_01",
-    "name": "Wolfgang Amadeus Mozart",
-    "iri": "https://www.wikidata.org/wiki/Q254",
-    "category": "cat_06",
+    "name": "Symphonie No.8",
+    "iri": "https://w3id.org/musow/1635268063-587743",
+    "category": "cat_05",
     "timestamp": ""
   },
   "clip_02": {
@@ -22,9 +22,9 @@
   },
   "clip_04": {
     "id": "clip_04",
-    "name": "Symphonie No.8",
-    "iri": "https://w3id.org/musow/1635268063-587743",
-    "category": "cat_05",
+    "name": "Wolfgang Amadeus Mozart",
+    "iri": "https://www.wikidata.org/wiki/Q254",
+    "category": "cat_06",
     "timestamp": ""
   },
   "clip_05": {

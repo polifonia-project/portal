@@ -1,8 +1,8 @@
 .clipContainer {
   display: block;
   padding: 5px;
-  padding-bottom: 40px;
-  padding-top: 40px;
+  padding-bottom: 40vh;
+  padding-top: 0vh;
 }
 
 .clip {
@@ -13,7 +13,6 @@
   border-radius: 6px;
   cursor: default;
   transition: transform .2s; /* Animation */
-
 }
 
 
@@ -53,4 +52,72 @@
   border-radius: 50%;
   display: inline-block;
   vertical-align:middle;
+}
+
+.end_dot {
+  margin-left: 20px;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  vertical-align:middle;
+  display: none;
+}
+
+.section-cat_01 {
+  padding-left: calc(((100% / 16 * 1) - 22px));
+}
+
+.section-cat_02 {
+  padding-left: calc(((100% / 16 * 3) - 22px));
+}
+
+.section-cat_03 {
+  padding-left: calc(((100% / 16 * 5) - 22px));
+}
+
+.section-cat_04 {
+  padding-left: calc(((100% / 16 * 7) - 22px));
+}
+
+.section-cat_05 {
+  padding-left: calc(((100% / 16 * 9) - 22px));
+}
+
+.section-cat_06 {
+  padding-right: calc(((100% / 16 * 5) - 22px));
+  display: flex;
+  justify-content: flex-end;
+}
+
+.section-cat_07 {
+  padding-right: calc(((100% / 16 * 3) - 22px));
+  display: flex;
+  justify-content: flex-end;
+}
+
+.section-cat_08 {
+  padding-right: calc(((100% / 16 * 1) - 22px));
+  display: flex;
+  justify-content: flex-end;
+}
+
+.section-cat_06 .end_dot,
+.section-cat_07 .end_dot,
+.section-cat_08 .end_dot
+{
+  display: inline-block;
+}
+
+.section-cat_06 .dot,
+.section-cat_07 .dot,
+.section-cat_08 .dot
+{
+  display: none;
+}
+
+.section-cat_06 p,
+.section-cat_07 p,
+.section-cat_08 p
+{
+  margin-left: 5px;
 }

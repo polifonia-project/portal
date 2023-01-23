@@ -26,12 +26,11 @@ class Clips extends React.Component {
 
     render() {
         return (
-            <div className={classes.clipscontainer}>
+            <div className={classes.clipscontainer} id='clips_container'>
                 <div>
+                    <h3 className={classes.feedtitle}>Scroll and let the sound of heritage play</h3>
                     {this.state.clips.map((clip, index) => (
-                        
-                        <Clip key={index} title={clip.name} color={this.state.categories[clip.category].color} id={'section-'+ clip.category}></Clip>
-    
+                        <Clip key={index} title={clip.name} color={this.state.categories[clip.category].color} section={'section-'+ clip.category} ></Clip>
                     ))}
 
                 </div>

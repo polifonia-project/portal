@@ -14,12 +14,12 @@
 .small_card {
   width: 60%;
   overflow: hidden;
-  transform: translateX(5ch);
+  transform:translate3d(5ch, 0, 0);
 }
 
 .long_card {
     width: 110%;
-    transform: translateX(-20%);
+    transform:translate3d(-20%, 0, 0);
   }
 
 #card0 {
@@ -83,6 +83,8 @@
     background-size: 35%;
     background-position: right 8px top 5px;
     transform: scaleX(-1);
+backdrop-filter: blur(14.2px);
+-webkit-backdrop-filter: blur(14.2px);
 }
 
 .rightChevron {
@@ -90,6 +92,8 @@
     background-repeat: no-repeat;
     background-size: 35%;
     background-position: right 8px top 5px;
+backdrop-filter: blur(14.2px); /* blur glass effect*/
+-webkit-backdrop-filter: blur(14.2px);
 }
 
 

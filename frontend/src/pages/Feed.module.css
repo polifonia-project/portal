@@ -45,10 +45,9 @@
     left: 0;
   }
   .parallax__layer__base {
-    transform: translateZ(0);
-    transform: translateY(60vh);
+    transform: translate3d(0, 60vh, 0);
   }
   .parallax__layer__back {
-    transform: translateZ(-1px) scale(2);
+    transform: translate3d(0, 0, -1px) scale(2);
   }
 
