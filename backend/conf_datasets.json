@@ -2,7 +2,7 @@
     "d_01": {
         "id": "d_01",
         "name": "musow",
-        "iri_base": "",
+        "iri_base": "https://w3id.org/musow/",
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://projects.dharc.unibo.it/musow/sparql",
         "rest_api": ""
@@ -26,7 +26,7 @@
     "d_04": {
         "id": "d_04",
         "name": "wikidata",
-        "iri_base": "",
+        "iri_base": "http://www.wikidata.org/",
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://query.wikidata.org/sparql",
         "rest_api": ""

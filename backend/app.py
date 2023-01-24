@@ -1,5 +1,6 @@
 # external libraries
 from flask import Flask, request, jsonify
+import sonicclient
 
 # internal libraries
 import methods
@@ -23,13 +24,14 @@ def feed():
 @app.route('/index', methods=['GET'])
 def index():
     cat_id = request.args.get('cat_id')
-    # alternativa con cat_id
     cat = c[cat_id]['name']
     word = request.args.get('data')
     if len(word) > 0:
-        suggestions = i.sonic_suggest(cat, word.lower())
+        suggestions = i.suggested_results(d, c, cat_id, word.lower())
         return jsonify(suggestions)
 
+
+# print(i.suggested_results(d, c, 'cat_01', 'p'))
 
 if __name__ == '__main__':
     app.run(debug=True)

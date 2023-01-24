@@ -21,6 +21,8 @@ def get_sparql_results(query, endpoint):
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
+    results = {result['entity']['value']: result['entityLabel']['value']
+               for result in results['results']['bindings'] if len(result['entityLabel']['value']) > 0}
     return results
 
 
@@ -49,8 +51,6 @@ def index_per_category(datasets, categories, cat_id):
             sparql_endpoint = datasets[dataset]['sparql_endpoint']
             pattern_data = get_sparql_results(pattern_query, sparql_endpoint)
             print('[SUCCESS] got data from endpoint:', sparql_endpoint)
-            pattern_data = {result['entity']['value']: result['entityLabel']['value']
-                            for result in pattern_data['results']['bindings'] if len(result['entityLabel']['value']) > 0}
             index_dict.update(pattern_data)
             print('[SUCCESS] ingestion for:', cat_name.lower())
     # ingest
@@ -76,4 +76,53 @@ def ingest_data(datasets, categories):
 def sonic_suggest(cat, word):
     with SearchClient(g['index_host'], g['index_channel'], g['index_pw']) as querycl:
         print(querycl.ping())
-        return {'result': querycl.suggest(cat, 'entities', word, limit=10)}
+        return querycl.suggest(cat, 'entities', word, limit=10)
+
+
+def sonic_query(cat, word):
+    with SearchClient(g['index_host'], g['index_channel'], g['index_pw']) as querycl:
+        print(querycl.ping())
+        return querycl.query(cat, 'entities', word)
+
+
+def suggested_results(d, c, cat_id, word):
+    suggestions = {}
+    cat = c[cat_id]['name']
+    sonic_suggestions = sonic_suggest(cat, word)
+    # search ids for each suggestion
+    ids = []
+    for sugg in sonic_suggestions:
+        sugg_ids = sonic_query(cat, sugg)
+        ids.extend(sugg_ids)
+    unique_ids = set(ids)
+
+    # associate each id to the correct endpoint
+    entries_to_search = {}
+    search_patterns = c[cat_id]['search_pattern']
+    for pattern in search_patterns:
+        entry_id_list = []
+        d_id = pattern['dataset']
+        iri_base = d[d_id]['iri_base']
+        query_method = d[d_id]['query_method']
+        endpoint = d[d_id][query_method]
+        for id in unique_ids:
+            if iri_base in id:
+                entry_id_list.append('<' + id + '>')
+        entries_to_search[endpoint] = entry_id_list
+
+    # query each endpoint with all the values to have the labels
+    for k, v in entries_to_search.items():
+        endpoint = k
+        values_to_search = ' '.join(v)
+        label_query = '''
+        SELECT DISTINCT ?entity ?entityLabel
+        WHERE {
+            VALUES ?entity {'''+values_to_search+'''} .
+            ?entity rdfs:label ?entityLabel .
+            FILTER (langMatches(lang(?entityLabel), "EN"))
+        }
+        '''
+        results = get_sparql_results(label_query, endpoint)
+        suggestions.update(results)
+    print(suggestions)
+    return suggestions
