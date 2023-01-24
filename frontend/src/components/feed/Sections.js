@@ -34,7 +34,7 @@ class Sections extends React.Component {
         fetch(request)
             .then(res => res.json())
             .then(data => {
-                this.setState({ value_list: data.result });
+                this.setState({ value_list: Object.values(data) });
             })
     }
 

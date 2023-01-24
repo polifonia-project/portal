@@ -30,7 +30,7 @@ class CategoriesNav extends React.Component {
 
   render() {
     return (
-      <div className={classes.categoriesContainer}>
+      <div className={classes.categoriesContainer} id='categoriesNav'>
         {Object.values(this.state.categories).map((cat, index) =>
           <div>
             <button onClick={() => this.handleClickScroll("section-"+cat.id)}>

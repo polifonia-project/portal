@@ -22,10 +22,11 @@ function MainNavigation(props) {
     setSoundOn(prev => !prev)
   }
 
+
   menuOpen ? document.body.style.overflow = "hidden" : document.body.style.overflow = "scroll"
 
   return (
-    <header className={classes.header}>
+    <header className={classes.header} id='mainHeader'>
       <span className={classes.title}>
         <Link to="/"><img className={classes.logo} src={logo} alt="Logo"/></Link>
         <div className={classes.section}><span>{props.sectionName}</span></div>

@@ -1,4 +1,4 @@
-.clipContainer {
+.sectionClipContainer {
   display: block;
   padding: 5px;
   padding: 20%;
@@ -6,7 +6,7 @@
   padding-top: 40px;
 }
 
-.clip {
+.sectionClip {
   box-shadow: 0px 0px 50px -18px black;
   display:inline-block; 
   padding: 10px;
@@ -14,11 +14,11 @@
   background-color: #f4edec;
 }
 
-.clip:hover {
+.sectionClip:hover {
   box-shadow: 0px 0px 50px -16px black;
 }
 
-.clip p {
+.sectionClip p {
   display:inline-block; 
   margin: 0px;
   margin-left: 20px;
@@ -27,7 +27,7 @@
   vertical-align:middle;
 }
 
-.clip input {
+.sectionClip input {
   all: unset;
   display:inline-block; 
   margin: 0px;
@@ -39,11 +39,11 @@
   border-style:solid;
 }
 
-.clip input, textarea{
+.sectionClip input, textarea{
   color: black;
 }
 
-.clip input, select, textarea{
+.sectionClip input, select, textarea{
   color: black;
 }
 
@@ -54,7 +54,7 @@
 }
 
 
-.clip button {
+.sectionClip button {
   display:inline-block; 
   margin: 0px;
   margin-left: 20px;

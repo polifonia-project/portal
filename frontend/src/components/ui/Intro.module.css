@@ -1,0 +1,13 @@
+.feedIntro {
+  width: 22%;
+  margin-left: 10%;
+  margin-top: 50px;
+  margin-bottom: 400px;
+  overflow: hidden;
+}
+
+.feedIntro h3{
+font-size: 30px;
+}
+
+

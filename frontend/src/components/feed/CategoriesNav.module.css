@@ -1,12 +1,13 @@
 .categoriesContainer {
   width: 100%;
   display: flex;
-  padding-top: 0px;
-  padding-bottom: 20px;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
   background-color: transparent;
+  transition: all 0.5s ease;
   position: -webkit-sticky; /* Safari */
   position: sticky;
-  top: -52vh;
+  top: -51vh;
   right: 0;
   z-index: 100;
 }

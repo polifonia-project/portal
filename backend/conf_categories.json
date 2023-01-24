@@ -2,7 +2,7 @@
   "cat_01": {
     "id": "cat_01",
     "name": "topics",
-    "color": "#fd3843",
+    "color": "#f80000",
     "search_pattern": [
       {
         "dataset": "d_01",

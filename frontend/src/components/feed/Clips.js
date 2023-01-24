@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from "./Clips.module.css";
 import Clip from '../ui/Clip';
+import Intro from '../ui/Intro';
 
 class Clips extends React.Component {
     constructor() {
@@ -27,13 +28,11 @@ class Clips extends React.Component {
     render() {
         return (
             <div className={classes.clipscontainer} id='clips_container'>
-                <div>
-                    <h3 className={classes.feedtitle}>Scroll and let the sound of heritage play</h3>
+                    <Intro/>
                     {this.state.clips.map((clip, index) => (
                         <Clip key={index} title={clip.name} color={this.state.categories[clip.category].color} section={'section-'+ clip.category} ></Clip>
                     ))}
 
-                </div>
             </div>
         )
     }
