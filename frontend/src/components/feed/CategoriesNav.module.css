@@ -4,7 +4,7 @@
   padding-top: 2vh;
   padding-bottom: 2vh;
   background-color: transparent;
-  transition: all 0.5s ease;
+  transition: all 1s ease;
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: -51vh;

@@ -1,122 +1,122 @@
 {
-  "cat_01": {
-    "id": "cat_01",
-    "name": "topics",
-    "color": "#f80000",
-    "search_pattern": [
-      {
-        "dataset": "d_01",
-        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 10"
-      },
-      {
-        "dataset": "d_04",
-        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
-      }
-    ],
-    "status": "ingested"
-  },
-  "cat_02": {
-    "id": "cat_02",
-    "name": "tunes",
-    "color": "#ff02fe",
-    "search_pattern": [
-      {
-        "dataset": "d_01",
-        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 10"
-      },
-      {
-        "dataset": "d_04",
-        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
-      }
-    ],
-    "status": "ingested"
-  },
-  "cat_03": {
-    "id": "cat_03",
-    "name": "genres",
-    "color": "#1d00fe",
-    "search_pattern": [
-      {
-        "dataset": "d_01",
-        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 10"
-      },
-      {
-        "dataset": "d_04",
-        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
-      }
-    ],
-    "status": "ingested"
-  },
-  "cat_04": {
-    "id": "cat_04",
-    "name": "lyrics",
-    "color": "#6400b4",
-    "search_pattern": [
-      {
-        "dataset": "d_01",
-        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 10"
-      },
-      {
-        "dataset": "d_04",
-        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
-      }
-    ],
-    "status": "ingested"
-  },
-  "cat_05": {
-    "id": "cat_05",
-    "name": "scores",
-    "color": "#00feff",
-    "search_pattern": [
-      {
-        "dataset": "d_01",
-        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 10"
-      },
-      {
-        "dataset": "d_04",
-        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
-      }
-    ],
-    "status": "ingested"
-  },
-  "cat_06": {
-    "id": "cat_06",
-    "name": "people",
-    "color": "#09ff00",
-    "search_pattern": [
-      {
-        "dataset": "d_04",
-        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q5 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
-      }
-    ],
-    "status": "ingested"
-  },
-  "cat_07": {
-    "id": "cat_07",
-    "name": "places",
-    "color": "#fdff00",
-    "search_pattern": [
-      {
-        "dataset": "d_04",
-        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q82794 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
-      }
-    ],
-    "status": "ingested"
-  },
-  "cat_08": {
-    "id": "cat_08",
-    "name": "instruments",
-    "color": "#000000",
-    "search_pattern": [
-      {
-        "dataset": "d_01",
-        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 10"
-      },
-      {
-        "dataset": "d_04",
-        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
-      }
-    ],
-    "status": "ingested"
-  }
+    "cat_01": {
+        "id": "cat_01",
+        "name": "topics",
+        "color": "#f80000",
+        "search_pattern": [
+            {
+                "dataset": "d_01",
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 10"
+            },
+            {
+                "dataset": "d_04",
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
+            }
+        ],
+        "status": "ingested"
+    },
+    "cat_02": {
+        "id": "cat_02",
+        "name": "tunes",
+        "color": "#ff02fe",
+        "search_pattern": [
+            {
+                "dataset": "d_01",
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 10"
+            },
+            {
+                "dataset": "d_04",
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
+            }
+        ],
+        "status": "ingested"
+    },
+    "cat_03": {
+        "id": "cat_03",
+        "name": "genres",
+        "color": "#1d00fe",
+        "search_pattern": [
+            {
+                "dataset": "d_01",
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 10"
+            },
+            {
+                "dataset": "d_04",
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
+            }
+        ],
+        "status": "ingested"
+    },
+    "cat_04": {
+        "id": "cat_04",
+        "name": "lyrics",
+        "color": "#6400b4",
+        "search_pattern": [
+            {
+                "dataset": "d_01",
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 10"
+            },
+            {
+                "dataset": "d_04",
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
+            }
+        ],
+        "status": "ingested"
+    },
+    "cat_05": {
+        "id": "cat_05",
+        "name": "scores",
+        "color": "#00feff",
+        "search_pattern": [
+            {
+                "dataset": "d_01",
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 10"
+            },
+            {
+                "dataset": "d_04",
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
+            }
+        ],
+        "status": "ingested"
+    },
+    "cat_06": {
+        "id": "cat_06",
+        "name": "people",
+        "color": "#09ff00",
+        "search_pattern": [
+            {
+                "dataset": "d_04",
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q5 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
+            }
+        ],
+        "status": "ingested"
+    },
+    "cat_07": {
+        "id": "cat_07",
+        "name": "places",
+        "color": "#fdff00",
+        "search_pattern": [
+            {
+                "dataset": "d_04",
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q82794 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
+            }
+        ],
+        "status": "ingested"
+    },
+    "cat_08": {
+        "id": "cat_08",
+        "name": "instruments",
+        "color": "#000000",
+        "search_pattern": [
+            {
+                "dataset": "d_01",
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 10"
+            },
+            {
+                "dataset": "d_04",
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
+            }
+        ],
+        "status": "ingested"
+    }
 }
