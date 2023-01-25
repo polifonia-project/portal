@@ -1,13 +1,15 @@
 .feedIntro {
-  width: 22%;
-  margin-left: 10%;
+  margin-left: 9%;
   margin-top: 50px;
   margin-bottom: 400px;
   overflow: hidden;
 }
 
 .feedIntro h3{
-font-size: 30px;
+font-size: 25px;
+font-family: 'Garnett Medium';
+font-weight: 50;
+width: 24%;
 }
 
 

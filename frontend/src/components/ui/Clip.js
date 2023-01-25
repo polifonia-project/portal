@@ -21,6 +21,7 @@ function Clip(props) {
                 document.getElementById("mainHeader").style.backgroundColor = props.color;
                 document.getElementById("mainHeader").style.borderImageWidth = '0px  0px 0px 0px';
                 document.getElementById("categoriesNav").style.backgroundColor = props.color;
+                document.getElementById(props.clip_id).style.transform = 'scale(1)';
                 if (isDarkColor(props.color)) {
                   setTheme('dark');
                   document.getElementById("mainLogo").style.filter= 'brightness(0) invert(1)';
@@ -32,16 +33,21 @@ function Clip(props) {
                   document.getElementById("sectionName").style.color = 'black';
                   document.getElementById("menuOptions").style.filter = 'none';
                 }
-        } 
+        } else {
+                document.getElementById(props.clip_id).style.transform = 'scale(0.8)';
+        }
             
       };
+
+
+      
 
     return (
         
 
         <div className={classes.clipContainer +' '+ classes[props.section]}> 
         <VisibilitySensor onChange={onChange}>     
-            <div className={classes.clip}>
+            <div className={classes.clip} id={props.clip_id}>
                 <span className={classes.dot} style={{ backgroundColor: props.color}}></span>
                 <p>{props.title}</p>
                 <button onClick={() => handleClickScroll(props.section)}>More +</button>
