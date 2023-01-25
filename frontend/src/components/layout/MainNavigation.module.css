@@ -43,6 +43,7 @@
   display: flex;
   justify-content: flex-end;
   padding-right: 30px;
+  position:relative;
 }
 
 .logo {
@@ -52,6 +53,7 @@
   cursor: pointer;
   position: relative;
   padding-left: 30px;
+  filter: brightness(1) invert(0);
 }
 
 .section {
@@ -59,6 +61,7 @@
   font-size: 1.1em;
   display: flex;
   align-items: center;
+  color: black;
 }
 
 .section span {
