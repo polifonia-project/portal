@@ -1,7 +1,6 @@
 .clipContainer {
   display: block;
   padding: 5px;
-  padding: 20%;
   padding-bottom: 400px;
   padding-top: 40px;
 }
@@ -15,24 +14,28 @@
   cursor: default;
   transition: transform 1s ease;
   transform: scale(0.8);
+
 }
 
 
 .clip:hover {
-  transform: scale(1.1) !important;
+  transform: scale(1.06) !important;
   cursor: pointer;
 }
-
-
 
 
 .clip p {
   display:inline-block; 
   margin: 0px;
   margin-left: 20px;
-  font-size: 1.5em;
+  line-height: 30px;
+  font-size: 23px;
   position: relative;
   vertical-align:middle;
+  max-width: 25ch;
+  max-height:30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .clip button {

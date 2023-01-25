@@ -20,6 +20,13 @@
     "category": "cat_01",
     "timestamp": ""
   },
+  "clip_03": {
+    "id": "clip_03",
+    "name": "Lorem ipsum dolor sit amet consectetur adipiscing elit Vestibulum lorem sem commodo at est ac tincidunt euismod est.",
+    "iri": "https://w3id.org/musow/1635268063-587743",
+    "category": "cat_01",
+    "timestamp": ""
+  },
   "clip_04": {
     "id": "clip_04",
     "name": "Wolfgang Amadeus Mozart",
