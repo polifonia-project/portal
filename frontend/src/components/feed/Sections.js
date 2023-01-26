@@ -36,12 +36,19 @@ class Sections extends React.Component {
             .then(data => {
                 this.setState({ value_list: Object.values(data) });
             })
-    }
+    };
 
+    handleClickScroll = (section) => {
+        const element = document.getElementById(section);
+        if (element) {
+          element.scrollIntoView({block: 'end', behavior: 'smooth' });
+        }
+      };
 
     render() {
         return (
             <div className={classes.sectionscontainer}>
+            <button className={classes.backtotop} onClick={() => this.handleClickScroll('topHook')}></button>  
                     {this.state.clips.map((clip, index) => (
                     <div key={"section-"+index}>
                     <Section id={"section-"+ clip.category} >
@@ -60,8 +67,7 @@ class Sections extends React.Component {
                             </div>
                     </Section> 
                     </div>
-                    ))}
-                
+                    ))} 
             </div>
         )
     }

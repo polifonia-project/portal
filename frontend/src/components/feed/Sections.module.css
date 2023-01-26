@@ -14,3 +14,29 @@
     linear-gradient(90deg, transparent, transparent calc((100% / 16 * 15) - 1px), #D8D8D8 calc(100% / 16 * 15), transparent calc(100% / 16 * 15));
 
 }
+
+.backtotop {
+    position: sticky; /* Fixed/sticky position */
+    top: 38vh;
+    left: 95.5vw;
+    z-index: 400;
+    margin-right: 10px;
+    background-color: #f4edec;
+    border: none;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    backdrop-filter: blur(30.2px);
+    -webkit-backdrop-filter: blur(30.2px);
+    cursor: pointer;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: left 4px top 3px;
+    box-shadow: 1px 1px 16px -11px black;
+}
+
+.backtotop:hover {
+    background-color: #f4edec;
+}

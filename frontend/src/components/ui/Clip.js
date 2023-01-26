@@ -55,7 +55,7 @@ function Clip(props) {
 
         <div className={classes.clipContainer +' '+ classes[props.section]}> 
         <VisibilitySensor onChange={onChange}>     
-            <div className={classes.clip} id={props.clip_id}>
+            <div className={classes.clip + ' ' + classes[clipIsExpanded ? 'clipexpanded' : '']} id={props.clip_id}>
                 <span className={classes.dot} style={{ backgroundColor: props.color}}></span>
                 <p onClick={ellipsisActive ? () => setClipExpanded(prev => !prev) : null} id={'cliptitle' + props.clip_id} className ={clipIsExpanded ?  classes.expandedcliptitle : classes.cliptitle}>{props.title}</p>
                 <button onClick={() => handleClickScroll(props.section)}>More +</button>

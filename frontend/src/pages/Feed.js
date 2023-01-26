@@ -15,10 +15,11 @@ function FeedPage(props) {
 
   return (
     <div className={classes.feedContainer + ' ' + classes.parallax }>
+      <span id='topHook'></span>
       <div className={classes.carouselContainer + ' ' + classes.parallax__layer + ' ' + classes.parallax__layer__back}>
       <Carousel />
       </div>
-      <div className={classes.mainContainer + ' ' + classes.parallax__layer + ' ' + classes.parallax__layer__base} > 
+      <div className={classes.mainContainer + ' ' + classes.parallax__layer + ' ' + classes.parallax__layer__base}> 
         <CategoriesNav />
         <Clips />
         <Sections />

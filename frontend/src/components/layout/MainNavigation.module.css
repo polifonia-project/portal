@@ -1,5 +1,6 @@
 .header {
   width: 100%;
+  height: 60px;
   margin: 0;
   background-color: #f4edec;
   position: fixed;
@@ -43,7 +44,11 @@
   display: flex;
   justify-content: flex-end;
   padding-right: 30px;
-  position:relative;
+  position: relative;
+}
+.title a {
+  display: flex;
+  align-items: center;
 }
 
 .logo {

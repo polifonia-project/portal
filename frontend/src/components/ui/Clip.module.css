@@ -16,6 +16,11 @@
   transform: scale(0.8);
 }
 
+.clipexpanded {
+  box-shadow: 0px 0px 50px -30px black;
+  border-radius: 8px;
+}
+
 .clip:hover {
   transform: scale(1.06) !important;
   cursor: pointer;

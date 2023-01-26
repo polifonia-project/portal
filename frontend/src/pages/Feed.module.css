@@ -45,7 +45,7 @@
     left: 0;
   }
   .parallax__layer__base {
-    transform: translate3d(0, 58vh, 0);
+    transform: translate3d(0, 54vh, 0);
   }
   .parallax__layer__back {
     transform: translate3d(0, 0, -1px) scale(2);
