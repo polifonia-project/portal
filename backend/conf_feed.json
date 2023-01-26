@@ -1,8 +1,8 @@
 {
   "clip_01": {
     "id": "clip_01",
-    "name": "Symphonie No.8",
-    "iri": "https://w3id.org/musow/1635268063-587743",
+    "name": "Beethoven Piano Sonata with Function Harmony (BPS-FH) dataset",
+    "iri": "https://w3id.org/musow/1645534635-3681836",
     "category": "cat_05",
     "timestamp": ""
   },
@@ -16,13 +16,6 @@
   "clip_03": {
     "id": "clip_03",
     "name": "Sheet Music Consortium",
-    "iri": "https://w3id.org/musow/1635268063-587743",
-    "category": "cat_01",
-    "timestamp": ""
-  },
-  "clip_03": {
-    "id": "clip_03",
-    "name": "Lorem ipsum dolor sit amet consectetur adipiscing elit Vestibulum lorem sem commodo at est ac tincidunt euismod est.",
     "iri": "https://w3id.org/musow/1635268063-587743",
     "category": "cat_01",
     "timestamp": ""

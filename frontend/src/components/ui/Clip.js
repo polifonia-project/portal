@@ -3,9 +3,20 @@ import classes from "./Clip.module.css";
 import VisibilitySensor from 'react-visibility-sensor';
 import isDarkColor from 'is-dark-color';
 import { ThemeContext } from "../../context/ThemeContext";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 
 function Clip(props) {
+
+    const [ellipsisActive, setEllipsisActive] = useState(false);
+    const [clipIsExpanded, setClipExpanded] = useState(false);
+
+    useEffect(() => {
+      const e = document.getElementById('cliptitle' + props.clip_id);
+      if (e.offsetWidth < e.scrollWidth) {
+        setEllipsisActive(true)
+      }
+    });
+
 
     const handleClickScroll = (section) => {
         const element = document.getElementById(section);
@@ -38,10 +49,7 @@ function Clip(props) {
         }
             
       };
-
-
-      
-
+    
     return (
         
 
@@ -49,11 +57,13 @@ function Clip(props) {
         <VisibilitySensor onChange={onChange}>     
             <div className={classes.clip} id={props.clip_id}>
                 <span className={classes.dot} style={{ backgroundColor: props.color}}></span>
-                <p>{props.title}</p>
+                <p onClick={ellipsisActive ? () => setClipExpanded(prev => !prev) : null} id={'cliptitle' + props.clip_id} className ={clipIsExpanded ?  classes.expandedcliptitle : classes.cliptitle}>{props.title}</p>
                 <button onClick={() => handleClickScroll(props.section)}>More +</button>
                 <span className={classes.end_dot} style={{ backgroundColor: props.color}}></span>
             </div>
         </VisibilitySensor>
+        <br/>
+        <p className={ ellipsisActive ? classes.ellipsisalert : classes.hiddenalert} id={'ellipsisalert' + props.clip_id}>Click on text <br/>{clipIsExpanded ? 'to resize' : 'to see all'}</p>
         </div>
 
         

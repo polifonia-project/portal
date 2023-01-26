@@ -8,38 +8,59 @@
 .clip {
   box-shadow: 0px 0px 50px -18px black;
   background-color: #f4edec;
-  display:inline-block; 
+  display: inline-block;
   padding: 10px;
   border-radius: 6px;
   cursor: default;
   transition: transform 1s ease;
   transform: scale(0.8);
-
 }
-
 
 .clip:hover {
   transform: scale(1.06) !important;
   cursor: pointer;
 }
 
-
 .clip p {
-  display:inline-block; 
+  transition: font-size 1s linear;
+}
+
+.cliptitle {
+  display: inline-block;
   margin: 0px;
   margin-left: 20px;
   line-height: 30px;
   font-size: 23px;
   position: relative;
-  vertical-align:middle;
+  vertical-align: middle;
   max-width: 25ch;
-  max-height:30px;
-  overflow: hidden;
+  max-height: 30px;
+  word-break: break-all;
+  white-space: nowrap;
+  overflow: hidden !important;
   text-overflow: ellipsis;
 }
 
+.expandedcliptitle {
+  display: inline-block;
+  margin: 0px;
+  margin-left: 18px;
+  min-height: 18px;
+  position: relative;
+  vertical-align: top;
+  width: 25ch;
+  line-height: 23px;
+  font-size: 23px;
+  overflow: hidden;
+  white-space: normal;
+  word-break: break-word;
+  font-size: 18px;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
 .clip button {
-  display:inline-block; 
+  display: inline-block;
   margin: 0px;
   margin-left: 20px;
   border-radius: 6px;
@@ -50,7 +71,7 @@
   font-size: 0.8em;
   position: relative;
   font-family: "Helvetica Light";
-  vertical-align:middle;
+  vertical-align: middle;
 }
 
 .dot {
@@ -59,7 +80,7 @@
   width: 25px;
   border-radius: 50%;
   display: inline-block;
-  vertical-align:middle;
+  vertical-align: middle;
 }
 
 .end_dot {
@@ -67,7 +88,19 @@
   height: 25px;
   width: 25px;
   border-radius: 50%;
-  vertical-align:middle;
+  vertical-align: middle;
+  display: none;
+}
+.ellipsisalert {
+  font-size: 14px;
+  position: relative;
+  font-family: "Helvetica Light";
+  color: grey;
+  width: 100%;
+  padding-left: 10px;
+}
+
+.hiddenalert {
   display: none;
 }
 
@@ -95,37 +128,40 @@
   padding-right: calc(((100% / 16 * 5) - 22px));
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
+  text-align: right;
 }
 
 .section-cat_07 {
   padding-right: calc(((100% / 16 * 3) - 22px));
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
+  text-align: right;
 }
 
 .section-cat_08 {
   padding-right: calc(((100% / 16 * 1) - 22px));
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
+  text-align: right;
 }
 
 .section-cat_06 .end_dot,
 .section-cat_07 .end_dot,
-.section-cat_08 .end_dot
-{
+.section-cat_08 .end_dot {
   display: inline-block;
 }
 
 .section-cat_06 .dot,
 .section-cat_07 .dot,
-.section-cat_08 .dot
-{
+.section-cat_08 .dot {
   display: none;
 }
 
 .section-cat_06 p,
 .section-cat_07 p,
-.section-cat_08 p
-{
+.section-cat_08 p {
   margin-left: 5px;
 }
