@@ -1,8 +1,14 @@
+
+.clipBox {
+  padding-bottom: 400px;
+  padding-top: 40px;
+  /* border: 1px solid green; */
+}
+
 .clipContainer {
   display: block;
   padding: 5px;
-  padding-bottom: 400px;
-  padding-top: 40px;
+  /* border: 1px solid red; */
 }
 
 .clip {
@@ -14,6 +20,7 @@
   cursor: default;
   transition: transform 1s ease;
   transform: scale(0.8);
+  /* border: 1px solid blue; */
 }
 
 .clipexpanded {
@@ -27,7 +34,7 @@
 }
 
 .clip p {
-  transition: font-size 1s linear;
+  transition: font-size 2s ease;
 }
 
 .cliptitle {
@@ -53,13 +60,12 @@
   min-height: 18px;
   position: relative;
   vertical-align: top;
-  width: 25ch;
+  width: 28ch;
   line-height: 23px;
-  font-size: 23px;
+  font-size: 20px;
   overflow: hidden;
   white-space: normal;
   word-break: break-word;
-  font-size: 18px;
   text-overflow: ellipsis;
   text-align: left;
 }
@@ -87,6 +93,7 @@
   display: inline-block;
   vertical-align: middle;
 }
+
 
 .end_dot {
   margin-left: 20px;
@@ -169,4 +176,10 @@
 .section-cat_07 p,
 .section-cat_08 p {
   margin-left: 5px;
+}
+
+.visibilityHook {
+  opacity: 0;
+  padding-bottom: 10px;
+  width: 100%;
 }

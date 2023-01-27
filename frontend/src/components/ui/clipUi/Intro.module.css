@@ -1,0 +1,28 @@
+.feedIntro {
+  margin-left: 9%;
+  overflow: hidden;
+}
+
+.introContainer {
+  padding-bottom: 300px;
+  margin: 0px;
+}
+
+.feedIntro h3 {
+  font-size: 28px;
+  font-family: "Garnett Medium";
+  font-weight: 100;
+  width: 26%;
+  margin: 0;
+}
+
+.feedIntro p {
+  width: 17%;
+  font-size: 15px;
+}
+
+.visibilityHook {
+  opacity: 0;
+  margin: 0px;
+  width: 100%;
+}

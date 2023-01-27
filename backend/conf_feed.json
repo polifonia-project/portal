@@ -2,6 +2,9 @@
   "clip_01": {
     "id": "clip_01",
     "name": "Beethoven Piano Sonata with Function Harmony (BPS-FH) dataset",
+    "textcontext": {
+      "title": "This is a clip",
+      "description": "Discover this clip information and more"},
     "iri": "https://w3id.org/musow/1645534635-3681836",
     "category": "cat_05",
     "timestamp": ""
@@ -9,6 +12,9 @@
   "clip_02": {
     "id": "clip_02",
     "name": "Bologna",
+    "textcontext": {
+      "title": "This is a clip",
+      "description": "Discover this clip information and more"},
     "iri": "https://www.wikidata.org/wiki/Q1891",
     "category": "cat_07",
     "timestamp": ""
@@ -16,6 +22,9 @@
   "clip_03": {
     "id": "clip_03",
     "name": "Sheet Music Consortium",
+    "textcontext": {
+      "title": "This is a clip",
+      "description": "Discover this clip information and more"},
     "iri": "https://w3id.org/musow/1635268063-587743",
     "category": "cat_01",
     "timestamp": ""
@@ -23,6 +32,9 @@
   "clip_04": {
     "id": "clip_04",
     "name": "Wolfgang Amadeus Mozart",
+    "textcontext": {
+      "title": "This is a clip",
+      "description": "Discover this clip information and more"},
     "iri": "https://www.wikidata.org/wiki/Q254",
     "category": "cat_06",
     "timestamp": ""
@@ -30,6 +42,9 @@
   "clip_05": {
     "id": "clip_05",
     "name": "DDDEF#",
+    "textcontext": {
+      "title": "This is a clip",
+      "description": "Discover this clip information and more"},
     "iri": "https://www.wikidata.org/wiki/Q254",
     "category": "cat_02",
     "timestamp": ""
@@ -37,6 +52,9 @@
   "clip_06": {
     "id": "clip_06",
     "name": "Jazz",
+    "textcontext": {
+      "title": "This is a clip",
+      "description": "Discover this clip information and more"},
     "iri": "https://www.wikidata.org/wiki/Q1891",
     "category": "cat_03",
     "timestamp": ""
@@ -44,6 +62,9 @@
   "clip_07": {
     "id": "clip_07",
     "name": "Future",
+    "textcontext": {
+      "title": "This is a clip",
+      "description": "Discover this clip information and more"},
     "iri": "https://w3id.org/musow/1635268063-587743",
     "category": "cat_04",
     "timestamp": ""
@@ -51,6 +72,9 @@
   "clip_08": {
     "id": "clip_08",
     "name": "Violin",
+    "textcontext": {
+      "title": "This is a clip",
+      "description": "Discover this clip information and more"},
     "iri": "https://w3id.org/musow/1635268063-587743",
     "category": "cat_08",
     "timestamp": ""

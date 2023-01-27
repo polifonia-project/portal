@@ -2,8 +2,9 @@ import React from "react";
 import classes from "./Clip.module.css";
 import VisibilitySensor from 'react-visibility-sensor';
 import isDarkColor from 'is-dark-color';
-import { ThemeContext } from "../../context/ThemeContext";
+import { ThemeContext } from "../../../context/ThemeContext";
 import { useContext, useState, useEffect } from "react";
+import InfoBox from "./InfoBox";
 
 function Clip(props) {
 
@@ -51,19 +52,20 @@ function Clip(props) {
       };
     
     return (
-        
-
-        <div className={classes.clipContainer +' '+ classes[props.section]}> 
-        <VisibilitySensor onChange={onChange}>     
+        <div className={classes.clipBox}>
+          <InfoBox infotitle={props.infotitle} infodescription={props.description}/>
+          <div className={classes.clipContainer +' '+ classes[props.section]}> 
+            <VisibilitySensor onChange={onChange}>  
+              <div className={classes.visibilityHook}>X</div>  
+            </VisibilitySensor> 
             <div className={classes.clip + ' ' + classes[clipIsExpanded ? 'clipexpanded' : '']} id={props.clip_id}>
                 <span className={classes.dot} style={{ backgroundColor: props.color}}></span>
                 <p onClick={ellipsisActive ? () => setClipExpanded(prev => !prev) : null} id={'cliptitle' + props.clip_id} className ={clipIsExpanded ?  classes.expandedcliptitle : classes.cliptitle}>{props.title}</p>
                 <button onClick={() => handleClickScroll(props.section)}>More +</button>
                 <span className={classes.end_dot} style={{ backgroundColor: props.color}}></span>
             </div>
-        </VisibilitySensor>
-        <br/>
-        <p className={ ellipsisActive ? classes.ellipsisalert : classes.hiddenalert} id={'ellipsisalert' + props.clip_id}>Click on text <br/>{clipIsExpanded ? 'to resize' : 'to see all'}</p>
+          <p className={ ellipsisActive ? classes.ellipsisalert : classes.hiddenalert} id={'ellipsisalert' + props.clip_id}>Click on text <br/>{clipIsExpanded ? 'to resize' : 'to see all'}</p>
+          </div>
         </div>
 
         

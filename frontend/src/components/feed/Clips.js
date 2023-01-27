@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from "./Clips.module.css";
-import Clip from '../ui/Clip';
-import Intro from '../ui/Intro';
+import Clip from '../ui/clipUi/Clip';
+import Intro from '../ui//clipUi/Intro';
 
 class Clips extends React.Component {
     constructor() {
@@ -30,7 +30,7 @@ class Clips extends React.Component {
             <div className={classes.clipscontainer} id='clips_container'>
                     <Intro/>
                     {this.state.clips.map((clip, index) => (
-                        <Clip key={index} title={clip.name} color={this.state.categories[clip.category].color} section={'section-'+ clip.category} clip_id={'clip'+index}></Clip>
+                        <Clip key={index} title={clip.name} color={this.state.categories[clip.category].color} section={'section-'+ clip.category} clip_id={'clip'+index} infotitle={clip.textcontext.title} description={clip.textcontext.description}></Clip>
                     ))}
 
             </div>

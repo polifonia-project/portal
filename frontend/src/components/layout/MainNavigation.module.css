@@ -47,7 +47,6 @@
   position: relative;
 }
 .title a {
-  display: flex;
   align-items: center;
 }
 
