@@ -53,7 +53,13 @@ function Clip(props) {
     
     return (
         <div className={classes.clipBox}>
-          <InfoBox infotitle={props.infotitle} infodescription={props.description}/>
+          <InfoBox 
+          infotitle={props.infotitle} 
+          infodescription={props.description} 
+          highlights={props.highlights} 
+          color={props.color}
+          section={props.section}>
+          </InfoBox>
           <div className={classes.clipContainer +' '+ classes[props.section]}> 
             <VisibilitySensor onChange={onChange}>  
               <div className={classes.visibilityHook}>X</div>  

@@ -1,0 +1,61 @@
+.infoBox {
+    position: sticky;
+    top: -30px;
+}
+
+div.infoBox h3 {
+  font-size: 28px;
+  font-family: "Garnett Medium";
+  font-weight: 100;
+  margin: 0;
+}
+
+div.infoBox h3 i {
+  font-size: 26px;
+  padding: 0px 4px 0px 4px;
+  font-weight: 100;
+}
+
+div.infoBox p {
+  font-size: 15px;
+}
+
+.section-cat_01 {
+  padding-left: calc(((100% / 16 * 9) + 5px));
+  max-width: 85%;
+}
+
+.section-cat_02 {
+  padding-left: calc(((100% / 16 * 9) + 5px));
+  max-width: 85%;
+}
+
+.section-cat_03 {
+  padding-left: calc(((100% / 16 * 9) + 5px));
+  max-width: 85%;
+}
+
+.section-cat_04 {
+  padding-left: calc(((100% / 16 * 1) + 5px));
+  max-width: 40%;
+}
+
+.section-cat_05 {
+  padding-left: calc(((100% / 16 * 1) + 5px));
+  max-width: 40%;
+}
+
+.section-cat_06 {
+  padding-left: calc(((100% / 16 * 1) + 5px));
+  max-width: 40%;
+}
+
+.section-cat_07 {
+    padding-left: calc(((100% / 16 * 1) + 5px));
+    max-width: 40%;
+}
+
+.section-cat_08 {
+    padding-left: calc(((100% / 16 * 1) + 5px));
+    max-width: 40%;
+}

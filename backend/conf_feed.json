@@ -3,8 +3,9 @@
     "id": "clip_01",
     "name": "Beethoven Piano Sonata with Function Harmony (BPS-FH) dataset",
     "textcontext": {
-      "title": "This is a clip",
-      "description": "Discover this clip information and more"},
+      "title": "Scroll and let the sound of heritage play",
+      "description": "Explore the weekly selection of unique music data",
+      "highlights": ["More +"]},
     "iri": "https://w3id.org/musow/1645534635-3681836",
     "category": "cat_05",
     "timestamp": ""
@@ -13,8 +14,9 @@
     "id": "clip_02",
     "name": "Bologna",
     "textcontext": {
-      "title": "This is a clip",
-      "description": "Discover this clip information and more"},
+      "title": "",
+      "description": "",
+      "highlights": []},
     "iri": "https://www.wikidata.org/wiki/Q1891",
     "category": "cat_07",
     "timestamp": ""
@@ -23,8 +25,9 @@
     "id": "clip_03",
     "name": "Sheet Music Consortium",
     "textcontext": {
-      "title": "This is a clip",
-      "description": "Discover this clip information and more"},
+      "title": "Data are connected together. Explore More + or unveil new Data Stories",
+      "description": "Keep scrolling for more!",
+      "highlights": ["More +", "Data Stories"]},
     "iri": "https://w3id.org/musow/1635268063-587743",
     "category": "cat_01",
     "timestamp": ""
@@ -33,8 +36,9 @@
     "id": "clip_04",
     "name": "Wolfgang Amadeus Mozart",
     "textcontext": {
-      "title": "This is a clip",
-      "description": "Discover this clip information and more"},
+      "title": "Click on More + to unveil unexpected music connections!",
+      "description": "Keep scrolling for more scores",
+      "highlights": ["More +"]},
     "iri": "https://www.wikidata.org/wiki/Q254",
     "category": "cat_06",
     "timestamp": ""
@@ -43,8 +47,9 @@
     "id": "clip_05",
     "name": "DDDEF#",
     "textcontext": {
-      "title": "This is a clip",
-      "description": "Discover this clip information and more"},
+      "title": "",
+      "description": "",
+      "highlights": []},
     "iri": "https://www.wikidata.org/wiki/Q254",
     "category": "cat_02",
     "timestamp": ""
@@ -53,8 +58,9 @@
     "id": "clip_06",
     "name": "Jazz",
     "textcontext": {
-      "title": "This is a clip",
-      "description": "Discover this clip information and more"},
+      "title": "Click on More + to unveil unexpected music connections!",
+      "description": "Keep scrolling for more scores",
+      "highlights": ["More +"]},
     "iri": "https://www.wikidata.org/wiki/Q1891",
     "category": "cat_03",
     "timestamp": ""
@@ -63,8 +69,9 @@
     "id": "clip_07",
     "name": "Future",
     "textcontext": {
-      "title": "This is a clip",
-      "description": "Discover this clip information and more"},
+      "title": "",
+      "description": "",
+      "highlights": []},
     "iri": "https://w3id.org/musow/1635268063-587743",
     "category": "cat_04",
     "timestamp": ""
@@ -73,8 +80,9 @@
     "id": "clip_08",
     "name": "Violin",
     "textcontext": {
-      "title": "This is a clip",
-      "description": "Discover this clip information and more"},
+      "title": "Click on More + to unveil unexpected music connections!",
+      "description": "Keep scrolling for more scores",
+      "highlights": ["More +"]},
     "iri": "https://w3id.org/musow/1635268063-587743",
     "category": "cat_08",
     "timestamp": ""

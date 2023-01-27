@@ -1,14 +1,13 @@
 
 .clipBox {
-  padding-bottom: 400px;
+  padding-bottom: 250px;
   padding-top: 40px;
-  /* border: 1px solid green; */
 }
 
 .clipContainer {
   display: block;
   padding: 5px;
-  /* border: 1px solid red; */
+  padding-bottom: 250px;
 }
 
 .clip {
@@ -20,7 +19,6 @@
   cursor: default;
   transition: transform 1s ease;
   transform: scale(0.8);
-  /* border: 1px solid blue; */
 }
 
 .clipexpanded {
@@ -134,6 +132,7 @@
 
 .section-cat_05 {
   padding-left: calc(((100% / 16 * 9) - 22px));
+  padding-top: 100px;
 }
 
 .section-cat_06 {
