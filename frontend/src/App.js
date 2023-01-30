@@ -11,10 +11,10 @@ import { ThemeContext } from "./context/ThemeContext";
 function App() {
   const [pagetitle, setPageTitle] = useState();
   const [theme, setTheme] = useState('default');
-  const [sound, setSound] = useState('off');
+  const [soundOn, setSoundOn] = useState(false);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, sound, setSound}}>
+    <ThemeContext.Provider value={{ theme, setTheme, soundOn, setSoundOn}}>
       <Layout title={pagetitle}>
         <Routes>
           <Route path="/" element={<FeedPage func={setPageTitle} />} />

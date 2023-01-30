@@ -1,19 +1,21 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import classes from "./Carousel.module.css";
-
+import { ThemeContext } from "../../context/ThemeContext";
 import ItemsCarousel from "react-items-carousel";
 
 
 function Carousel() {
     const [activeItemIndex, setActiveItemIndex] = useState(0);
     const chevronWidth = 90;
+    const { soundOn, setSoundOn } = useContext(ThemeContext);
 
     const handleClickScroll = (id) => {
       const element = document.getElementById(id);
       if (element) {
         element.scrollIntoView({ block: "nearest", behavior: 'smooth' });
-      }
+      };
+      if (!soundOn) { setSoundOn(true)}
     };
 
     return (

@@ -14,9 +14,8 @@ import { ThemeContext } from "../../context/ThemeContext";
 function MainNavigation(props) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [shownOverlay, setOverlayStatus] = useState(false)
-  const [soundOn, setSoundOn] = useState(false)
   const { theme } = useContext(ThemeContext);
-  const { setSound } = useContext(ThemeContext);
+  const { soundOn, setSoundOn } = useContext(ThemeContext);
 
   const toggleMenu = () => {
       setMenuOpen(prev => !prev)
@@ -35,12 +34,6 @@ function MainNavigation(props) {
     if (shownOverlay) {
       if (theme === 'dark') {document.getElementById("menuOptions").style.filter= 'brightness(0) invert(1)';}
     }
-  }
-
-  if (soundOn) {
-    setSound('on');
-  } else {
-    setSound('off');
   }
 
   return (

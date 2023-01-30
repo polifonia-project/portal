@@ -36,7 +36,7 @@ function Clip(props) {
       };
 
     const { setTheme } = useContext(ThemeContext);
-    const { sound } = useContext(ThemeContext);
+    const { soundOn } = useContext(ThemeContext);
     
 
     const musiclibrary = { 
@@ -68,7 +68,7 @@ function Clip(props) {
                   document.getElementById("sectionName").style.color = 'black';
                   document.getElementById("menuOptions").style.filter = 'none';
                 };
-                if (sound === 'on') {
+                if (soundOn === true) {
                   musicnote.muted = false;
                   musicnote.play();
                 } else {
