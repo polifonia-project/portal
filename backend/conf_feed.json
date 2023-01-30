@@ -36,9 +36,9 @@
     "id": "clip_04",
     "name": "Wolfgang Amadeus Mozart",
     "textcontext": {
-      "title": "Click on More + to unveil unexpected music connections!",
-      "description": "Keep scrolling for more scores",
-      "highlights": ["More +"]},
+      "title": "",
+      "description": "",
+      "highlights": []},
     "iri": "https://www.wikidata.org/wiki/Q254",
     "category": "cat_06",
     "timestamp": ""

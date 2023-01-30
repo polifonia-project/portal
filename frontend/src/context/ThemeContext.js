@@ -2,5 +2,7 @@ import { createContext } from "react";
 
 export const ThemeContext = createContext({
     theme: "default",
-    setTheme: () => {}
+    setTheme: () => {},
+    sound: "off",
+    setSound: () => {},
   });

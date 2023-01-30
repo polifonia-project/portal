@@ -32,6 +32,7 @@ class Clips extends React.Component {
                         key={index} 
                         title={clip.name} 
                         color={this.state.categories[clip.category].color} 
+                        category = {clip.category} 
                         section={'section-'+ clip.category} 
                         clip_id={'clip'+index} 
                         infotitle={clip.textcontext.title} 

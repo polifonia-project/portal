@@ -5,6 +5,15 @@ import isDarkColor from 'is-dark-color';
 import { ThemeContext } from "../../../context/ThemeContext";
 import { useContext, useState, useEffect } from "react";
 import InfoBox from "./InfoBox";
+import C3 from "../../../assets/audio/C3.mp3";
+import C4 from "../../../assets/audio/C4.mp3";
+import C5 from "../../../assets/audio/C5.mp3";
+import C6 from "../../../assets/audio/C6.mp3";
+import E3 from "../../../assets/audio/E3.mp3";
+import E4 from "../../../assets/audio/E4.mp3";
+import E5 from "../../../assets/audio/E5.mp3";
+import E6 from "../../../assets/audio/E6.mp3";
+
 
 function Clip(props) {
 
@@ -27,6 +36,20 @@ function Clip(props) {
       };
 
     const { setTheme } = useContext(ThemeContext);
+    const { sound } = useContext(ThemeContext);
+    
+
+    const musiclibrary = { 
+      "cat_01": C3,
+      "cat_02": C4,
+      "cat_03": C5,
+      "cat_04": C6,
+      "cat_05": E3,
+      "cat_06": E4,
+      "cat_07": E5,
+      "cat_08": E6,} ;
+
+    const musicnote  = new Audio(musiclibrary[props.category]);
 
     function onChange (isVisible) {
         if (isVisible) {
@@ -44,6 +67,12 @@ function Clip(props) {
                   document.getElementById("mainLogo").style.filter= 'none';
                   document.getElementById("sectionName").style.color = 'black';
                   document.getElementById("menuOptions").style.filter = 'none';
+                };
+                if (sound === 'on') {
+                  musicnote.muted = false;
+                  musicnote.play();
+                } else {
+                  musicnote.muted = true;
                 }
         } else {
                 document.getElementById(props.clip_id).style.transform = 'scale(0.8)';

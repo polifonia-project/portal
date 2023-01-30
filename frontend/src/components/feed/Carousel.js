@@ -3,7 +3,6 @@ import { useState } from "react";
 import classes from "./Carousel.module.css";
 
 import ItemsCarousel from "react-items-carousel";
-import VisibilitySensor from "react-visibility-sensor";
 
 
 function Carousel() {
@@ -17,20 +16,8 @@ function Carousel() {
       }
     };
 
-    function onChange(isVisible) {
-      if (isVisible) {
-        document.getElementById("mainHeader").style.backgroundColor = "#f4edec";
-        document.getElementById("mainHeader").style.borderWidth = "0px  0px 3px 0px";
-        document.getElementById("mainHeader").style.borderImageWidth = "0px  0px 3px 0px";
-        document.getElementById("categoriesNav").style.backgroundColor = "transparent";
-      }
-    }
-
     return (
     <div className={classes.carouselContainer}>
-        <VisibilitySensor onChange={onChange}>
-          <div className={classes.visibilityHook}>X</div>
-        </VisibilitySensor>
         <div className={classes.carousel} >
         <ItemsCarousel
           requestToChangeActive={setActiveItemIndex}

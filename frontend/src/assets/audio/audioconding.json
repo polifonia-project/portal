@@ -1,0 +1,6 @@
+import audio from "./C3.mp3";
+
+{ "cat_01": audio,
+
+
+}

@@ -16,6 +16,7 @@ function MainNavigation(props) {
   const [shownOverlay, setOverlayStatus] = useState(false)
   const [soundOn, setSoundOn] = useState(false)
   const { theme } = useContext(ThemeContext);
+  const { setSound } = useContext(ThemeContext);
 
   const toggleMenu = () => {
       setMenuOpen(prev => !prev)
@@ -36,6 +37,12 @@ function MainNavigation(props) {
     }
   }
 
+  if (soundOn) {
+    setSound('on');
+  } else {
+    setSound('off');
+  }
+
   return (
     <header className={classes.header} id='mainHeader'>
       <span className={classes.title}>
@@ -43,7 +50,7 @@ function MainNavigation(props) {
         <div className={classes.section} id='sectionName'><span>{props.sectionName}</span></div>
       </span>
       <span  className={classes.menu} id='menuOptions'>
-        <img onClick={toggleSound} className={classes.sound} src={soundOn ? soundoff : soundon} alt="Sound Toggle" />
+        <img onClick={toggleSound} className={classes.sound} src={soundOn ? soundon : soundoff} alt="Sound Toggle" />
         <img onClick={toggleMenu} className={classes.hamburger} src={menuOpen ? closemenu : hamburger} alt="Hamburger Menu" />
       </span>
       {menuOpen ? <MenuOverlay toggleMenu={toggleMenu}/> : null}
