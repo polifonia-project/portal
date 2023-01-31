@@ -6,9 +6,7 @@ class CategoriesNav extends React.Component {
     super();
     this.state = {
       clips: [],
-      categories: [],
-      searchField: "",
-      value_list: [],
+      categories: []
     };
   }
 

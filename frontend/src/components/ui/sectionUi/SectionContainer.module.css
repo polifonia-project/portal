@@ -1,0 +1,82 @@
+.sectionContainer {
+  height: 80vh;
+  margin-top: 20vh;
+}
+
+.sectionInfoboxContainer {
+  width: 100%;
+  display: flex;
+}
+
+.sectionInfobox {
+  display: flex;
+  align-items: center;
+}
+
+.sectionMarkerLeft {
+  display: inline-block;
+  width: 80px;
+  height: 100px;
+  margin-right: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.sectionMarkerRight {
+  display: inline-block;
+  width: 150px;
+  height: 100px;
+  margin-left: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.sectionText {
+  display: inline-block;
+}
+
+.sectionTitle {
+  font-size: 28px;
+  font-family: "Garnett Medium";
+  font-weight: 100;
+  margin: 0;
+}
+
+.sectionDescription {
+  font-size: 15px;
+  padding-right: 40%;
+}
+
+.section-cat_01,
+.section-cat_02,
+.section-cat_03,
+.section-cat_04 {
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.section-cat_01 .sectionInfobox p,
+.section-cat_02 .sectionInfobox p,
+.section-cat_03 .sectionInfobox p,
+.section-cat_04 .sectionInfobox p{
+  display: flex;
+  text-align: right;
+  justify-content: flex-end;
+  padding-right: 0%;
+  padding-left: 40%;
+}
+
+.section-cat_01 .sectionMarkerLeft,
+.section-cat_02 .sectionMarkerLeft,
+.section-cat_03 .sectionMarkerLeft,
+.section-cat_04 .sectionMarkerLeft {
+  display: none;
+}
+
+.section-cat_05 .sectionMarkerRight,
+.section-cat_06 .sectionMarkerRight,
+.section-cat_07 .sectionMarkerRight,
+.section-cat_08 .sectionMarkerRight {
+  display: none;
+}

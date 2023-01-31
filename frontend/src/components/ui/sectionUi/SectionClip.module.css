@@ -27,7 +27,7 @@
   vertical-align:middle;
 }
 
-.sectionClip input {
+.sectionClip textarea {
   all: unset;
   display:inline-block; 
   margin: 0px;
@@ -37,6 +37,7 @@
   border: 0px;
   background-color: #f4edec;
   border-style:solid;
+  height: 27px;
 }
 
 .sectionClip input, textarea{
