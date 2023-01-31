@@ -5,6 +5,7 @@
     "data_sources": {
         "datatsets": "conf_datasets.json",
         "categories": "conf_categories.json",
-        "feed": "conf_feed.json"
+        "feed": "conf_feed.json",
+        "carousel": "conf_carousel.json"
     }
 }
