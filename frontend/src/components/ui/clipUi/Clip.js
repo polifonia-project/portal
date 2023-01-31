@@ -19,7 +19,6 @@ function Clip(props) {
 
     const [ellipsisActive, setEllipsisActive] = useState(false);
     const [clipIsExpanded, setClipExpanded] = useState(false);
-    const [clipIsFirst, setClipFirst] = useState(false);
 
     useEffect(() => {
       const e = document.getElementById('cliptitle' + props.clip_id);
@@ -91,7 +90,7 @@ function Clip(props) {
           section={props.section}>
           </InfoBox>
           <div 
-          className={classes.clipContainer +' '+ classes[props.section] + ' ' + classes[clipIsFirst ? 'firstclip' : '']}
+          className={classes.clipContainer +' '+ classes[props.section]}
           style={{ paddingTop: (props.clip_id === 'clip0') ? '100px' : '0px'}}> 
             <VisibilitySensor onChange={onChange}>  
               <div className={classes.visibilityHook}>X</div>  
