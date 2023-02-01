@@ -1,8 +1,7 @@
 .sectionClipContainer {
   display: block;
   padding: 5px;
-  padding: 20%;
-  padding-bottom: 40px;
+  margin-bottom: 20px;
   padding-top: 40px;
 }
 
@@ -78,4 +77,75 @@
   display: inline-block;
   vertical-align:middle;
   margin-right: 20px;
+}
+
+.end_dot {
+  margin-left: 20px;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  vertical-align: middle;
+  display: none;
+}
+
+.sectionclip-cat_01 {
+  padding-left: calc(((100% / 16 * 1) - 22px));
+}
+
+.sectionclip-cat_02 {
+  padding-left: calc(((100% / 16 * 3) - 22px));
+}
+
+.sectionclip-cat_03 {
+  padding-left: calc(((100% / 16 * 5) - 22px));
+}
+
+.sectionclip-cat_04 {
+  padding-left: calc(((100% / 16 * 7) - 22px));
+}
+
+.sectionclip-cat_05 {
+  padding-left: calc(((100% / 16 * 9) - 22px));
+}
+
+.sectionclip-cat_06 {
+  padding-right: calc(((100% / 16 * 5) - 22px));
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  text-align: right;
+}
+
+.sectionclip-cat_07 {
+  padding-right: calc(((100% / 16 * 3) - 22px));
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  text-align: right;
+}
+
+.sectionclip-cat_08 {
+  padding-right: calc(((100% / 16 * 1) - 22px));
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  text-align: right;
+}
+
+.sectionclip-cat_06 .end_dot,
+.sectionclip-cat_07 .end_dot,
+.sectionclip-cat_08 .end_dot {
+  display: inline-block;
+}
+
+.sectionclip-cat_06 .dot,
+.sectionclip-cat_07 .dot,
+.sectionclip-cat_08 .dot {
+  display: none;
+}
+
+.sectionclip-cat_06 p,
+.sectionclip-cat_07 p,
+.sectionclip-cat_08 p {
+  margin-left: 5px;
 }

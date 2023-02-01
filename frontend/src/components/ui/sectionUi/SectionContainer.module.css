@@ -1,6 +1,7 @@
 .sectionContainer {
   height: 80vh;
   margin-top: 20vh;
+  padding-top: 150px;
 }
 
 .sectionInfoboxContainer {
@@ -10,13 +11,13 @@
 
 .sectionInfobox {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .sectionMarkerLeft {
   display: inline-block;
-  width: 80px;
   height: 100px;
+  width: 30px;
   margin-right: 20px;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -24,8 +25,8 @@
 
 .sectionMarkerRight {
   display: inline-block;
-  width: 150px;
   height: 100px;
+  width: 30px;
   margin-left: 20px;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
@@ -36,10 +37,12 @@
 }
 
 .sectionTitle {
-  font-size: 28px;
+  font-size: 25px;
   font-family: "Garnett Medium";
   font-weight: 100;
   margin: 0;
+  padding-right: 60%;
+  padding-top: 10px;
 }
 
 .sectionDescription {
@@ -56,10 +59,23 @@
   text-align: right;
 }
 
+.section-cat_01 .sectionInfobox h3,
+.section-cat_02 .sectionInfobox h3,
+.section-cat_03 .sectionInfobox h3,
+.section-cat_04 .sectionInfobox h3
+{
+  display: flex;
+  text-align: right;
+  justify-content: flex-end;
+  padding-right: 0%;
+  padding-left: 60%;
+}
+
 .section-cat_01 .sectionInfobox p,
 .section-cat_02 .sectionInfobox p,
 .section-cat_03 .sectionInfobox p,
-.section-cat_04 .sectionInfobox p{
+.section-cat_04 .sectionInfobox p
+{
   display: flex;
   text-align: right;
   justify-content: flex-end;
@@ -79,4 +95,36 @@
 .section-cat_07 .sectionMarkerRight,
 .section-cat_08 .sectionMarkerRight {
   display: none;
+}
+
+.section-cat_01 .sectionMarkerRight {
+width: 100px !important;
+}
+
+.section-cat_02 .sectionMarkerRight {
+  width: 150px !important;
+}
+
+.section-cat_03 .sectionMarkerRight {
+  width: 200px !important;
+}
+
+.section-cat_04 .sectionMarkerRight {
+  width: 40px !important;
+}
+
+.section-cat_05 .sectionMarkerLeft {
+  width: 120px !important;
+}
+
+.section-cat_06 .sectionMarkerLeft {
+  width: 30px !important;
+}
+
+.section-cat_07 .sectionMarkerLeft {
+  width: 200px !important;
+}
+
+.section-cat_08 .sectionMarkerLeft {
+  width: 200px !important;
 }

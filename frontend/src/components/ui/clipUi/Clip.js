@@ -31,7 +31,7 @@ function Clip(props) {
     const handleClickScroll = (section) => {
         const element = document.getElementById(section);
         if (element) {
-          element.scrollIntoView({ block: "nearest", behavior: 'smooth' });
+          element.scrollIntoView({ block: "start", behavior: 'smooth' });
         }
       };
 

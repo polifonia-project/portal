@@ -60,7 +60,7 @@ class SectionClip extends React.Component {
 
 render() {
     return (
-        <div className={classes.sectionClipContainer}>
+        <div className={classes.sectionClipContainer +' '+ classes['sectionclip-' + this.props.category]}>
         <VisibilitySensor onChange={this.onChange}>  
             <div className={classes.sectionClip}>
                 <span className={classes.dot} style={{ backgroundColor: this.props.color}}></span>
@@ -71,6 +71,7 @@ render() {
                     style={{width: 'calc(1.2ch * '+ this.props.placeholder.length +')'}}
                 ></textarea>
                 <button>Change</button>
+                <span className={classes.end_dot} style={{ backgroundColor: this.props.color}}></span>
             </div>
         </VisibilitySensor>
         <div>
