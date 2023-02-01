@@ -73,10 +73,10 @@ def ingest_data(datasets, categories):
             print('[UPDATE] data already ingested for', cat_name.lower())
 
 
-def sonic_suggest(cat, word):
-    with SearchClient(g['index_host'], g['index_channel'], g['index_pw']) as querycl:
-        print(querycl.ping())
-        return querycl.suggest(cat, 'entities', word, limit=10)
+# def sonic_suggest(cat, word):
+#     with SearchClient(g['index_host'], g['index_channel'], g['index_pw']) as querycl:
+#         print(querycl.ping())
+#         return querycl.suggest(cat, 'entities', word)
 
 
 def sonic_query(cat, word):
@@ -88,12 +88,8 @@ def sonic_query(cat, word):
 def suggested_results(d, c, cat_id, word):
     suggestions = {}
     cat = c[cat_id]['name']
-    sonic_suggestions = sonic_suggest(cat, word)
     # search ids for each suggestion
-    ids = []
-    for sugg in sonic_suggestions:
-        sugg_ids = sonic_query(cat, sugg)
-        ids.extend(sugg_ids)
+    ids = sonic_query(cat, word)
     unique_ids = set(ids)
 
     # associate each id to the correct endpoint
@@ -119,10 +115,9 @@ def suggested_results(d, c, cat_id, word):
         WHERE {
             VALUES ?entity {'''+values_to_search+'''} .
             ?entity rdfs:label ?entityLabel .
-            FILTER (langMatches(lang(?entityLabel), "EN"))
+            OPTIONAL { FILTER (langMatches(lang(?entityLabel), "EN")) }
         }
         '''
         results = get_sparql_results(label_query, endpoint)
         suggestions.update(results)
-    print(suggestions)
     return suggestions
