@@ -117,7 +117,8 @@ input[type="search"]::-webkit-search-results-decoration {
   background-color: #f4edec;
   overflow-y: scroll;
   overflow-x: visible;
-  width: 500px;
+  width: 460px;
+  margin-left: 20px;
   position: absolute;
   z-index: 14;
   margin-top: -40px;

@@ -11,15 +11,20 @@
   transition: transform 0.2s;
 }
 
-.small_card {
+.small {
   width: 60%;
   overflow: hidden;
   transform: translate3d(5ch, 0, 0);
 }
 
-.long_card {
+.long{
   width: 110%;
   transform: translate3d(-20%, 0, 0);
+}
+
+.medium {
+margin-right: 10%;
+margin-left: 10%;
 }
 
 #card0 {

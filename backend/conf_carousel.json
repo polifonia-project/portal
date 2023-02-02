@@ -1,37 +1,25 @@
 {
-  "card_01": {
-    "id": "card_01",
-    "title": "Interact with MUSIC",
-    "paragraph": "Everyone can play with the infinite music connections of the Polifonia Project.",
-    "image": "",
-    "highlights": ["Everyone"]
-  },
-  "card_02": {
-    "id": "card_02",
-    "title" : "Music Knowledge is now connected!",
-    "paragraph": "Discover unexpected connections with data stories and contents for music experts",
-    "image": "",
-    "highlights": ["music experts"]
-  },
   "card_03": {
     "id": "card_03",
-    "title" : "Play with data",
+    "title" : "Discover the CORPUS",
     "paragraph": "Discover unexpected connections with data stories and contents for music experts",
-    "image": "",
+    "dimension": "small",
     "highlights": ["music experts"]
   },
   "card_04": {
     "id": "card_04",
-    "title" : "Play with data",
+    "title" : "Play with SONAR",
     "paragraph": "Discover unexpected connections with data stories and contents for music experts",
     "image": "",
+    "dimension": "long",
     "highlights": ["music experts"]
   },
   "card_05": {
     "id": "card_05",
-    "title" : "Play with data",
+    "title" : "Know more about the project",
     "paragraph": "Discover unexpected connections with data stories and contents for music experts",
     "image": "",
+    "dimension": "medium",
     "highlights": ["music experts"]
   },
   "card_06": {
@@ -39,6 +27,7 @@
     "title" : "Play with data",
     "paragraph": "Discover unexpected connections with data stories and contents for music experts",
     "image": "",
+    "dimension": "medium",
     "highlights": ["music experts"]
   }
   
