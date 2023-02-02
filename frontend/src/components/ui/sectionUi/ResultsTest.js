@@ -5,7 +5,7 @@ function ResultsTest() {
 
     return (
         <div>
-            Results Test
+            
         </div>
     )
 }

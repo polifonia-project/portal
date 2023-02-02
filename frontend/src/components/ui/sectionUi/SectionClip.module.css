@@ -1,42 +1,42 @@
 .sectionClipContainer {
   display: block;
   padding: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   padding-top: 40px;
+  width: fit-content;
+  width: 500px;
 }
 
 .sectionClip {
-  box-shadow: 0px 0px 50px -18px black;
-  display:inline-block; 
+  box-shadow: 0px 0px 23px -16px black;
+  display:inline-flex; 
   padding: 10px;
-  border-radius: 6px;
+  border-radius: 30px;
   background-color: #f4edec;
+  width: 500px;
+  align-items: center;
 }
 
-.sectionClip:hover {
-  box-shadow: 0px 0px 50px -16px black;
-}
-
-.sectionClip p {
-  display:inline-block; 
-  margin: 0px;
-  margin-left: 20px;
-  font-size: 1.5em;
-  position: relative;
-  vertical-align:middle;
-}
-
-.sectionClip textarea {
+.sectionClip input {
   all: unset;
   display:inline-block; 
   margin: 0px;
-  font-size: 1.5em;
+  font-size: 1.1em;
   position: relative;
   vertical-align:middle;
   border: 0px;
   background-color: #f4edec;
   border-style:solid;
   height: 27px;
+  padding-left: 20px;
+  width: 90%;
+  max-height: 30px;
+  word-break: break-all;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  overflow : scroll;
+  text-transform: capitalize;
 }
 
 .sectionClip input, textarea{
@@ -53,55 +53,43 @@
   font-family: "Helvetica Light";
 }
 
+input:focus::placeholder {
+  color: transparent;
+}
 
-.sectionClip button {
-  display:inline-block; 
+.searchbutton {
+  background-color: transparent;
+  border: transparent;
+  padding: 0px;
   margin: 0px;
-  margin-left: 20px;
-  border-radius: 6px;
+  width: 4%;
   cursor: pointer;
-  border: 0.6px solid black;
-  padding: 3px 5px 3px 5px;
-  background-color: #f4edec;
-  font-size: 0.8em;
-  position: relative;
-  font-family: "Helvetica Light";
-  vertical-align:middle;
+  margin-right: 10px;
+  margin-left: 5px;
 }
 
-.dot {
-  margin: 0px;
-  height: 25px;
-  width: 25px;
-  border-radius: 50%;
-  display: inline-block;
-  vertical-align:middle;
-  margin-right: 20px;
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance:none;
 }
 
-.end_dot {
-  margin-left: 20px;
-  height: 25px;
-  width: 25px;
-  border-radius: 50%;
-  vertical-align: middle;
-  display: none;
-}
 
 .sectionclip-cat_01 {
   padding-left: calc(((100% / 16 * 1) - 22px));
 }
 
 .sectionclip-cat_02 {
-  padding-left: calc(((100% / 16 * 3) - 22px));
+  padding-left: calc(((100% / 16 * 1) - 22px));
 }
 
 .sectionclip-cat_03 {
-  padding-left: calc(((100% / 16 * 5) - 22px));
+  padding-left: calc(((100% / 16 * 1) - 22px));
 }
 
 .sectionclip-cat_04 {
-  padding-left: calc(((100% / 16 * 7) - 22px));
+  padding-left: calc(((100% / 16 * 1) - 22px));
 }
 
 .sectionclip-cat_05 {
@@ -109,43 +97,49 @@
 }
 
 .sectionclip-cat_06 {
-  padding-right: calc(((100% / 16 * 5) - 22px));
-  display: flex;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  text-align: right;
+  padding-left: calc(((100% / 16 * 9) - 22px));
 }
 
 .sectionclip-cat_07 {
-  padding-right: calc(((100% / 16 * 3) - 22px));
-  display: flex;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  text-align: right;
+  padding-left: calc(((100% / 16 * 9) - 22px));
 }
 
 .sectionclip-cat_08 {
-  padding-right: calc(((100% / 16 * 1) - 22px));
-  display: flex;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  text-align: right;
+  padding-left: calc(((100% / 16 * 9) - 22px));
 }
 
-.sectionclip-cat_06 .end_dot,
-.sectionclip-cat_07 .end_dot,
-.sectionclip-cat_08 .end_dot {
-  display: inline-block;
+.suggestionsContainer {
+  box-shadow: 0px 0px 23px -16px black;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #f4edec;
+  overflow-y: scroll;
+  overflow-x: visible;
+  width: 500px;
 }
 
-.sectionclip-cat_06 .dot,
-.sectionclip-cat_07 .dot,
-.sectionclip-cat_08 .dot {
-  display: none;
+.suggestionoption {
+  cursor: pointer;
+  border-bottom: 0.5px solid grey;
+  border-top-width: 0px;
+  padding: 10px;
+  margin: 0px;
+  color: grey;
+  text-transform: capitalize;
+  transition: all 1s ease;
 }
 
-.sectionclip-cat_06 p,
-.sectionclip-cat_07 p,
-.sectionclip-cat_08 p {
-  margin-left: 5px;
+.suggestionoption:hover {
+  color: black;
+  transform: scale(1.05);
+  padding-left: 50px;
 }
+
+.suggestionoption:first-child {
+ padding-top: 20px;
+}
+
+.suggestionoption:last-child {
+ border-bottom: 0px;
+ }
+

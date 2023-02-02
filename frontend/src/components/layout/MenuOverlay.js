@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import classes from "./MenuOverlay.module.css";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
+import menuicon from "../../assets/svg/compactlogo.svg";
 
 function MenuOverlay(props) {
 
@@ -23,6 +24,10 @@ function MenuOverlay(props) {
 
   return (
     <div className={classes.menu}>
+      <div className={classes.menuImage}>
+        <img alt='menuicon' src={menuicon} className={classes.menuIcon}></img>
+      </div>
+      <div className={classes.menuContainer}>
       <nav>
         <ul className={classes.menulist}>
           <li>
@@ -42,6 +47,7 @@ function MenuOverlay(props) {
           </li>
         </ul>
       </nav>
+      </div>
     </div>
   );
 }
