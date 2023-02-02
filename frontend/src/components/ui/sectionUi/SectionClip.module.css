@@ -15,6 +15,8 @@
   background-color: #f4edec;
   width: 500px;
   align-items: center;
+  z-index: 15;
+  position: relative;
 }
 
 .sectionClip input {
@@ -116,6 +118,9 @@ input[type="search"]::-webkit-search-results-decoration {
   overflow-y: scroll;
   overflow-x: visible;
   width: 500px;
+  position: absolute;
+  z-index: 14;
+  margin-top: -40px;
 }
 
 .suggestionoption {
@@ -136,7 +141,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .suggestionoption:first-child {
- padding-top: 20px;
+ padding-top: 50px;
 }
 
 .suggestionoption:last-child {
