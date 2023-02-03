@@ -5,8 +5,11 @@
     "textcontext": {
       "title": "Scroll and let the sound of heritage play",
       "description": "Explore the weekly selection of unique music data",
-      "highlights": ["More +"]},
-    "iri": "https://w3id.org/musow/1645534635-3681836",
+      "highlights": [
+        "More +"
+      ]
+    },
+    "iri": "http://www.wikidata.org/entity/Q1891",
     "category": "cat_05",
     "timestamp": ""
   },
@@ -16,8 +19,9 @@
     "textcontext": {
       "title": "",
       "description": "",
-      "highlights": []},
-    "iri": "https://www.wikidata.org/wiki/Q1891",
+      "highlights": []
+    },
+    "iri": "http://www.wikidata.org/entity/Q1891",
     "category": "cat_07",
     "timestamp": ""
   },
@@ -27,8 +31,12 @@
     "textcontext": {
       "title": "Data are connected together. Explore More + or unveil new Data Stories",
       "description": "Keep scrolling for more!",
-      "highlights": ["More +", "Data Stories"]},
-    "iri": "https://w3id.org/musow/1635268063-587743",
+      "highlights": [
+        "More +",
+        "Data Stories"
+      ]
+    },
+    "iri": "http://www.wikidata.org/entity/Q1891",
     "category": "cat_01",
     "timestamp": ""
   },
@@ -38,8 +46,9 @@
     "textcontext": {
       "title": "",
       "description": "",
-      "highlights": []},
-    "iri": "https://www.wikidata.org/wiki/Q254",
+      "highlights": []
+    },
+    "iri": "http://www.wikidata.org/entity/Q254",
     "category": "cat_06",
     "timestamp": ""
   },
@@ -49,8 +58,9 @@
     "textcontext": {
       "title": "",
       "description": "",
-      "highlights": []},
-    "iri": "https://www.wikidata.org/wiki/Q254",
+      "highlights": []
+    },
+    "iri": "http://www.wikidata.org/entity/Q254",
     "category": "cat_02",
     "timestamp": ""
   },
@@ -60,8 +70,11 @@
     "textcontext": {
       "title": "Click on More + to unveil unexpected music connections!",
       "description": "Keep scrolling for more scores",
-      "highlights": ["More +"]},
-    "iri": "https://www.wikidata.org/wiki/Q1891",
+      "highlights": [
+        "More +"
+      ]
+    },
+    "iri": "http://www.wikidata.org/entity/Q1891",
     "category": "cat_03",
     "timestamp": ""
   },
@@ -71,8 +84,9 @@
     "textcontext": {
       "title": "",
       "description": "",
-      "highlights": []},
-    "iri": "https://w3id.org/musow/1635268063-587743",
+      "highlights": []
+    },
+    "iri": "http://www.wikidata.org/entity/Q1891",
     "category": "cat_04",
     "timestamp": ""
   },
@@ -82,8 +96,11 @@
     "textcontext": {
       "title": "Click on More + to unveil unexpected music connections!",
       "description": "Keep scrolling for more scores",
-      "highlights": ["More +"]},
-    "iri": "https://w3id.org/musow/1635268063-587743",
+      "highlights": [
+        "More +"
+      ]
+    },
+    "iri": "http://www.wikidata.org/entity/Q1891",
     "category": "cat_08",
     "timestamp": ""
   }

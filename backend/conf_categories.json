@@ -13,12 +13,32 @@
                 "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
             }
         ],
-        "status": "ingested",
+        "filters": {
+            "people": [
+                {
+                    "endpoint": "https://query.wikidata.org/sparql",
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
+                }
+            ],
+            "places": [
+                {
+                    "endpoint": "https://query.wikidata.org/sparql",
+                    "query": ""
+                },
+                {
+                    "endpoint": "https://projects.dharc.unibo.it/musow/sparql",
+                    "query": ""
+                }
+            ]
+        },
         "section": {
             "title": "Read all the documents about your research topic",
             "description": "Discover all the possible connections and relations with a topic. See all the results and arrenge them as you want.",
-            "highlights": [""]
-        }
+            "highlights": [
+                ""
+            ]
+        },
+        "status": "ingested"
     },
     "cat_02": {
         "id": "cat_02",
@@ -34,12 +54,32 @@
                 "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
             }
         ],
-        "status": "ingested",
+        "filters": {
+            "people": [
+                {
+                    "endpoint": "https://query.wikidata.org/sparql",
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
+                }
+            ],
+            "places": [
+                {
+                    "endpoint": "https://query.wikidata.org/sparql",
+                    "query": ""
+                },
+                {
+                    "endpoint": "https://projects.dharc.unibo.it/musow/sparql",
+                    "query": ""
+                }
+            ]
+        },
         "section": {
             "title": "Find your own melody",
             "description": "Discover all the possible connections and relations with tunes. See all the results and arrenge them as you want.",
-            "highlights": [""]
-        }
+            "highlights": [
+                ""
+            ]
+        },
+        "status": "ingested"
     },
     "cat_03": {
         "id": "cat_03",
@@ -55,12 +95,32 @@
                 "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
             }
         ],
-        "status": "ingested",
+        "filters": {
+            "people": [
+                {
+                    "endpoint": "https://query.wikidata.org/sparql",
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
+                }
+            ],
+            "places": [
+                {
+                    "endpoint": "https://query.wikidata.org/sparql",
+                    "query": ""
+                },
+                {
+                    "endpoint": "https://projects.dharc.unibo.it/musow/sparql",
+                    "query": ""
+                }
+            ]
+        },
         "section": {
             "title": "Genres to uncover hundreds of relations",
             "description": "Discover all the possible connections and relations with your favorite music genre. See all the results and arrenge them as you want.",
-            "highlights": [""]
-        }
+            "highlights": [
+                ""
+            ]
+        },
+        "status": "ingested"
     },
     "cat_04": {
         "id": "cat_04",
@@ -76,12 +136,32 @@
                 "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
             }
         ],
-        "status": "ingested",
+        "filters": {
+            "people": [
+                {
+                    "endpoint": "https://query.wikidata.org/sparql",
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
+                }
+            ],
+            "places": [
+                {
+                    "endpoint": "https://query.wikidata.org/sparql",
+                    "query": ""
+                },
+                {
+                    "endpoint": "https://projects.dharc.unibo.it/musow/sparql",
+                    "query": ""
+                }
+            ]
+        },
         "section": {
-            "title": "«Ok, ladies. Now, Let's get information»",
+            "title": "\u00abOk, ladies. Now, Let's get information\u00bb",
             "description": "Discover all the possible connections and relations with a lyrics. See all the results and arrenge them as you want.",
-            "highlights": [""]
-        }
+            "highlights": [
+                ""
+            ]
+        },
+        "status": "ingested"
     },
     "cat_05": {
         "id": "cat_05",
@@ -97,12 +177,32 @@
                 "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
             }
         ],
-        "status": "ingested",
+        "filters": {
+            "people": [
+                {
+                    "endpoint": "https://query.wikidata.org/sparql",
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
+                }
+            ],
+            "places": [
+                {
+                    "endpoint": "https://query.wikidata.org/sparql",
+                    "query": ""
+                },
+                {
+                    "endpoint": "https://projects.dharc.unibo.it/musow/sparql",
+                    "query": ""
+                }
+            ]
+        },
         "section": {
             "title": "Be the conductor of your own music composition",
             "description": "Discover all the possible connections and relations with scores. See all the results and arrenge them as you want.",
-            "highlights": [""]
-        }
+            "highlights": [
+                ""
+            ]
+        },
+        "status": "ingested"
     },
     "cat_06": {
         "id": "cat_06",
@@ -114,12 +214,32 @@
                 "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q5 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
             }
         ],
-        "status": "ingested",
+        "filters": {
+            "people": [
+                {
+                    "endpoint": "https://query.wikidata.org/sparql",
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
+                }
+            ],
+            "places": [
+                {
+                    "endpoint": "https://query.wikidata.org/sparql",
+                    "query": ""
+                },
+                {
+                    "endpoint": "https://projects.dharc.unibo.it/musow/sparql",
+                    "query": ""
+                }
+            ]
+        },
         "section": {
             "title": "What about Artists?",
             "description": "Discover all the possible connections and relations with your favorite artist. See all the results and arrenge them as you want.",
-            "highlights": [""]
-        }
+            "highlights": [
+                ""
+            ]
+        },
+        "status": "ingested"
     },
     "cat_07": {
         "id": "cat_07",
@@ -131,12 +251,32 @@
                 "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q82794 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
             }
         ],
-        "status": "ingested",
+        "filters": {
+            "people": [
+                {
+                    "endpoint": "https://query.wikidata.org/sparql",
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
+                }
+            ],
+            "places": [
+                {
+                    "endpoint": "https://query.wikidata.org/sparql",
+                    "query": ""
+                },
+                {
+                    "endpoint": "https://projects.dharc.unibo.it/musow/sparql",
+                    "query": ""
+                }
+            ]
+        },
         "section": {
-            "title": "What’s your next music destination?",
+            "title": "What\u2019s your next music destination?",
             "description": "Discover all the possible connections and relations with places, cities, countries and events. See all the results and arrenge them as you want.",
-            "highlights": [""]
-        }
+            "highlights": [
+                ""
+            ]
+        },
+        "status": "ingested"
     },
     "cat_08": {
         "id": "cat_08",
@@ -152,11 +292,31 @@
                 "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }} LIMIT 10"
             }
         ],
-        "status": "ingested",
+        "filters": {
+            "people": [
+                {
+                    "endpoint": "https://query.wikidata.org/sparql",
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
+                }
+            ],
+            "places": [
+                {
+                    "endpoint": "https://query.wikidata.org/sparql",
+                    "query": ""
+                },
+                {
+                    "endpoint": "https://projects.dharc.unibo.it/musow/sparql",
+                    "query": ""
+                }
+            ]
+        },
         "section": {
             "title": "Play ON",
             "description": "Discover all the possible connections and relations with music instruments. See all the results and arrenge them as you want.",
-            "highlights": [""]
-        }
+            "highlights": [
+                ""
+            ]
+        },
+        "status": "ingested"
     }
 }
