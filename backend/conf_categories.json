@@ -23,11 +23,7 @@
             "places": [
                 {
                     "endpoint": "https://query.wikidata.org/sparql",
-                    "query": ""
-                },
-                {
-                    "endpoint": "https://projects.dharc.unibo.it/musow/sparql",
-                    "query": ""
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
         },
@@ -64,11 +60,7 @@
             "places": [
                 {
                     "endpoint": "https://query.wikidata.org/sparql",
-                    "query": ""
-                },
-                {
-                    "endpoint": "https://projects.dharc.unibo.it/musow/sparql",
-                    "query": ""
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
         },
@@ -105,11 +97,7 @@
             "places": [
                 {
                     "endpoint": "https://query.wikidata.org/sparql",
-                    "query": ""
-                },
-                {
-                    "endpoint": "https://projects.dharc.unibo.it/musow/sparql",
-                    "query": ""
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
         },
@@ -146,11 +134,7 @@
             "places": [
                 {
                     "endpoint": "https://query.wikidata.org/sparql",
-                    "query": ""
-                },
-                {
-                    "endpoint": "https://projects.dharc.unibo.it/musow/sparql",
-                    "query": ""
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
         },
@@ -187,11 +171,7 @@
             "places": [
                 {
                     "endpoint": "https://query.wikidata.org/sparql",
-                    "query": ""
-                },
-                {
-                    "endpoint": "https://projects.dharc.unibo.it/musow/sparql",
-                    "query": ""
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
         },
@@ -224,11 +204,7 @@
             "places": [
                 {
                     "endpoint": "https://query.wikidata.org/sparql",
-                    "query": ""
-                },
-                {
-                    "endpoint": "https://projects.dharc.unibo.it/musow/sparql",
-                    "query": ""
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
         },
@@ -261,11 +237,7 @@
             "places": [
                 {
                     "endpoint": "https://query.wikidata.org/sparql",
-                    "query": ""
-                },
-                {
-                    "endpoint": "https://projects.dharc.unibo.it/musow/sparql",
-                    "query": ""
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
         },
@@ -302,11 +274,7 @@
             "places": [
                 {
                     "endpoint": "https://query.wikidata.org/sparql",
-                    "query": ""
-                },
-                {
-                    "endpoint": "https://projects.dharc.unibo.it/musow/sparql",
-                    "query": ""
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
         },
