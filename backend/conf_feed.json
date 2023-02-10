@@ -9,7 +9,7 @@
         "More +"
       ]
     },
-    "iri": "http://www.wikidata.org/entity/Q1891",
+    "iri": "https://w3id.org/musow/1645534635-3681836",
     "category": "cat_05",
     "timestamp": ""
   },
@@ -36,7 +36,7 @@
         "Data Stories"
       ]
     },
-    "iri": "http://www.wikidata.org/entity/Q1891",
+    "iri": "https://w3id.org/musow/1635268063-587743",
     "category": "cat_01",
     "timestamp": ""
   },
@@ -74,7 +74,7 @@
         "More +"
       ]
     },
-    "iri": "http://www.wikidata.org/entity/Q1891",
+    "iri": "http://www.wikidata.org/entity/Q8341",
     "category": "cat_03",
     "timestamp": ""
   },
@@ -86,7 +86,7 @@
       "description": "",
       "highlights": []
     },
-    "iri": "http://www.wikidata.org/entity/Q1891",
+    "iri": "http://www.wikidata.org/entity/Q63928602",
     "category": "cat_04",
     "timestamp": ""
   },
@@ -100,7 +100,7 @@
         "More +"
       ]
     },
-    "iri": "http://www.wikidata.org/entity/Q1891",
+    "iri": "http://www.wikidata.org/entity/Q8355",
     "category": "cat_08",
     "timestamp": ""
   }
