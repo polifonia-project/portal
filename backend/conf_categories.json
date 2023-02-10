@@ -16,13 +16,13 @@
         "filters": {
             "people": [
                 {
-                    "endpoint": "https://query.wikidata.org/sparql",
+                    "dataset": "d_04",
                     "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
                 }
             ],
             "places": [
                 {
-                    "endpoint": "https://query.wikidata.org/sparql",
+                    "dataset": "d_04",
                     "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
@@ -53,13 +53,13 @@
         "filters": {
             "people": [
                 {
-                    "endpoint": "https://query.wikidata.org/sparql",
+                    "dataset": "d_04",
                     "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
                 }
             ],
             "places": [
                 {
-                    "endpoint": "https://query.wikidata.org/sparql",
+                    "dataset": "d_04",
                     "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
@@ -90,13 +90,13 @@
         "filters": {
             "people": [
                 {
-                    "endpoint": "https://query.wikidata.org/sparql",
+                    "dataset": "d_04",
                     "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
                 }
             ],
             "places": [
                 {
-                    "endpoint": "https://query.wikidata.org/sparql",
+                    "dataset": "d_04",
                     "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
@@ -127,13 +127,13 @@
         "filters": {
             "people": [
                 {
-                    "endpoint": "https://query.wikidata.org/sparql",
+                    "dataset": "d_04",
                     "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
                 }
             ],
             "places": [
                 {
-                    "endpoint": "https://query.wikidata.org/sparql",
+                    "dataset": "d_04",
                     "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
@@ -164,13 +164,13 @@
         "filters": {
             "people": [
                 {
-                    "endpoint": "https://query.wikidata.org/sparql",
+                    "dataset": "d_04",
                     "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
                 }
             ],
             "places": [
                 {
-                    "endpoint": "https://query.wikidata.org/sparql",
+                    "dataset": "d_04",
                     "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
@@ -197,13 +197,13 @@
         "filters": {
             "people": [
                 {
-                    "endpoint": "https://query.wikidata.org/sparql",
+                    "dataset": "d_04",
                     "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
                 }
             ],
             "places": [
                 {
-                    "endpoint": "https://query.wikidata.org/sparql",
+                    "dataset": "d_04",
                     "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
@@ -230,13 +230,13 @@
         "filters": {
             "people": [
                 {
-                    "endpoint": "https://query.wikidata.org/sparql",
+                    "dataset": "d_04",
                     "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
                 }
             ],
             "places": [
                 {
-                    "endpoint": "https://query.wikidata.org/sparql",
+                    "dataset": "d_04",
                     "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
@@ -267,13 +267,13 @@
         "filters": {
             "people": [
                 {
-                    "endpoint": "https://query.wikidata.org/sparql",
+                    "dataset": "d_04",
                     "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
                 }
             ],
             "places": [
                 {
-                    "endpoint": "https://query.wikidata.org/sparql",
+                    "dataset": "d_04",
                     "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]

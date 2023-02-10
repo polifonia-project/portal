@@ -55,34 +55,47 @@ class ResultsTest extends React.Component {
     componentDidMount = () => {
         let results = [];
 
-        for (const cat in this.props.filters) {
-            for (const obj of this.props.filters[cat]) {
-                let endpoint = obj.endpoint;
-                let query = obj.query;
-                query = query.replace('<>', '<' + this.props.el_iri + '>');
-                let url = endpoint + '?query=' + encodeURIComponent(query);
-                try {
-                    fetch(url, {
-                        method: 'GET',
-                        headers: { 'Accept': 'application/sparql-results+json' }
-                    })
-                        .then((res) => res.json())
-                        .then((data) => {
-                            data.results.bindings.map(res => {
-                                let singleResult = {}
-                                singleResult.uri = res.entity.value;
-                                singleResult.label = res.entityLabel.value;
-                                singleResult.cat = cat;
-                                results.push(singleResult)
-                            })
-                        });
+        // get datasets
+        fetch('/datasets')
+            .then((res) => res.json())
+            .then((data) => {
+                for (const cat in this.props.filters) {
+                    for (const obj of this.props.filters[cat]) {
+                        let dataset_id = obj.dataset
+                        let iri_base = data[dataset_id].iri_base
+                        // check if iri_base and el_iri are part of the same dataset
+                        if ((this.props.el_iri).includes(iri_base)) {
+                            let query_method = data[dataset_id].query_method
+                            let endpoint = data[dataset_id][query_method]
+                            let query = obj.query;
+                            query = query.replace('<>', '<' + this.props.el_iri + '>');
+                            let url = endpoint + '?query=' + encodeURIComponent(query);
+                            try {
+                                fetch(url, {
+                                    method: 'GET',
+                                    headers: { 'Accept': 'application/sparql-results+json' }
+                                })
+                                    .then((res) => res.json())
+                                    .then((data) => {
+                                        data.results.bindings.map(res => {
+                                            let singleResult = {}
+                                            singleResult.uri = res.entity.value;
+                                            singleResult.label = res.entityLabel.value;
+                                            singleResult.cat = cat;
+                                            results.push(singleResult)
+                                        })
+                                    });
+                            }
+                            catch (err) {
+                                console.log(err)
+                            }
+                        } else {
+                            console.log('Different iri base.')
+                        }
+                    }
                 }
-                catch (err) {
-                    console.log(err)
-                }
-            }
-        }
-        this.setState({ filtersResults: results });
+                this.setState({ filtersResults: results });
+            })
     };
 }
 

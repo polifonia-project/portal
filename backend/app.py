@@ -20,6 +20,11 @@ def feed():
     return jsonify({'categories': cat, 'carousel': car, 'clips': f_list})
 
 
+@app.route('/datasets', methods=['GET'])
+def datasets():
+    return jsonify(d)
+
+
 @app.route('/index', methods=['GET'])
 def index():
     cat_id = request.args.get('cat_id')
