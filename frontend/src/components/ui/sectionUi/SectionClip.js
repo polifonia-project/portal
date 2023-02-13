@@ -6,6 +6,7 @@ import { ThemeContext } from "../../../context/ThemeContext";
 import searchicon from '../../../assets/svg/magnglass.svg';
 import closeicon from '../../../assets/svg/closesearch.svg';
 import blankicon from '../../../assets/svg/blanksearch.svg';
+import Remainder from "./Remainder";
 
 class SectionClip extends React.Component {
 
@@ -80,8 +81,10 @@ class SectionClip extends React.Component {
 render() {
     return (
         <div className={classes.sectionClipContainer +' '+ classes['sectionclip-' + this.props.category]}>
-        <VisibilitySensor onChange={this.onVisibilityChange}>  
-        <div className={classes.sectionClip}>
+        <VisibilitySensor onChange={this.onVisibilityChange}>
+          <Remainder catName = {this.props.catName} focus = {this.state.isFocused} color = {this.props.color}></Remainder>
+        </VisibilitySensor> 
+          <div className={classes.sectionClip}>
                 <input
                     type={'search'}
                     placeholder={this.props.placeholder}
@@ -97,8 +100,7 @@ render() {
                 <button type="submit" className={classes.searchbutton} onClick={this.onClickSearch}>
                   <img alt='search button' src={searchicon}></img>
                 </button>
-        </div>
-        </VisibilitySensor>
+          </div>
         <div className={classes.suggestionsContainer}>
                 {this.state.value_list.map((res, index) => (
                   <p key={index} onClick={this.onOptionClick} className={classes.suggestionoption}>{res}</p>

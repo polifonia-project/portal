@@ -1,0 +1,17 @@
+.categoryRemainder {
+  width: 200px;
+  padding-left: 30px;
+  color: #666666;
+  text-transform: capitalize;
+  font-size: 0.98em;
+  display: flex;
+  align-items: center;
+  transition: all 3s ease;
+}
+
+.categoryRemainderIcon {
+  width: 12px;
+  height: 12px;
+  margin-left: 6px;
+  transition: all 3s ease;
+}

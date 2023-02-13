@@ -1,5 +1,7 @@
 import React from "react";
-// import classes from "./ResultsTest.module.css" 
+import ResultLine from "./ResultLine";
+import Filters from "./Filters";
+// import classes from "./Results.module.css" 
 
 class ResultsTest extends React.Component {
     constructor(props) {
@@ -31,7 +33,7 @@ class ResultsTest extends React.Component {
         }
         return (
             <div>
-                <div>
+                <Filters>
                     {Object.keys(this.props.filters).map(f => {
                         return (
                             <button onClick={() => this.filterItem(f)}>{f}</button>
@@ -40,11 +42,11 @@ class ResultsTest extends React.Component {
                     <button onClick={() => this.resetFilters()}>
                         Reset
                     </button>
-                </div>
+                </Filters>
                 <div>
-                    {Data.map(res => {
+                    {Data.map((res, index) => {
                         return (
-                            <p>{res.label}</p>
+                            <ResultLine label = {res.label} number = {index}></ResultLine>
                         )
                     })}
                 </div>

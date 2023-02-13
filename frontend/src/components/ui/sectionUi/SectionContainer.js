@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./SectionContainer.module.css";
-import SectionResults from "./SectionResults";
+import ResultsContainer from "../resultsUi/ResultsContainer";
 
 function SectionContainer(props) {
 
@@ -17,7 +17,7 @@ function SectionContainer(props) {
                 </div>
             </div>
             {props.children}
-            <SectionResults cat={props.id.split('-')[1]} filters={props.filters} el_iri={props.el_iri} />
+            <ResultsContainer cat={props.id.split('-')[1]} filters={props.filters} el_iri={props.el_iri} />
         </div>
     )
 }

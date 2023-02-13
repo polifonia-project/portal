@@ -1,0 +1,58 @@
+.resultLine {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px 30px 12px 10px;
+  border-bottom: 0.05px solid grey;
+  font-size: 0.8em;
+  cursor: default;
+}
+.resultNum {
+  display: inline-flex;
+  align-items: center;
+  width: 4%;
+  justify-content: left;
+  padding-left: 10px;
+  font-size: 0.8em;
+}
+
+.resultLabel {
+  display: inline-flex;
+  align-items: center;
+  width: 40%;
+  font-weight: 400;
+}
+
+.resultCat {
+  display: inline-flex;
+  align-items: center;
+  width: 20%;
+}
+
+.resultRel {
+  display: inline-flex;
+  align-items: center;
+  width: 30%;
+}
+
+.resultActions {
+  display: inline-flex;
+  align-items: center;
+  width: 10%;
+  font-size: 0.8em;
+  justify-content: flex-end;
+}
+
+.resultActions button {
+  background-color: #f4edec;
+  border: 0.2px solid grey;
+  margin: 0px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 10px;
+  height: 25px;
+  width: 25px;
+}

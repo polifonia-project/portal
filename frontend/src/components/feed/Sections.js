@@ -34,7 +34,7 @@ class Sections extends React.Component {
         <button className={classes.backtotop} onClick={() => this.handleBackScroll("topHook")} ></button>
         {this.state.clips.map((clip, index) => (
           <SectionContainer key={index} id={"section-" + clip.category} header={this.state.categories[clip.category].section.title} description='Discover all the possible connections and relations with your favorite artist. See all the results and arrenge them as you want.' color={this.state.categories[clip.category].color} filters={this.state.categories[clip.category].filters} el_iri={clip.iri}>
-            <SectionClip key={index} color={this.state.categories[clip.category].color} placeholder={clip.name} category={clip.category} />
+            <SectionClip key={index} color={this.state.categories[clip.category].color} placeholder={clip.name} category={clip.category} catName={this.state.categories[clip.category].name} />
           </SectionContainer>
         ))}
       </div>

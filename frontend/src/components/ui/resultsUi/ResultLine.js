@@ -1,0 +1,18 @@
+import React from "react";
+import classes from "./ResultLine.module.css";
+
+function ResultLine(props) {
+    return (
+    <div className={classes.resultLine}>
+        <div className={classes.resultNum}>{props.number}</div>
+        <div className={classes.resultLabel}>{props.label}</div>
+        <div className={classes.resultCat}>Category</div>
+        <div className={classes.resultRel}>Relation by</div>
+        <div className={classes.resultActions}>
+          EXPAND RESULT <button></button>
+        </div>
+    </div>
+    )
+}
+
+export default ResultLine;
