@@ -3,10 +3,11 @@
   align-items: center;
   width: 100%;
   padding: 12px 30px 12px 10px;
-  border-bottom: 0.05px solid grey;
   font-size: 0.8em;
   cursor: default;
+  border-bottom: 1px solid #e8e3e3;
 }
+
 .resultNum {
   display: inline-flex;
   align-items: center;
@@ -27,12 +28,14 @@
   display: inline-flex;
   align-items: center;
   width: 20%;
+  text-transform: capitalize;
 }
 
 .resultRel {
   display: inline-flex;
   align-items: center;
   width: 30%;
+  text-transform: capitalize;
 }
 
 .resultActions {

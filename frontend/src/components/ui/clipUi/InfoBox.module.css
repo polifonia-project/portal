@@ -1,5 +1,6 @@
 .infoBox {
     position: sticky;
+    position: -webkit-sticky;
     top: -30px;
 }
 

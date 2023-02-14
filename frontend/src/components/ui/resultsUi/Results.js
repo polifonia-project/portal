@@ -1,6 +1,7 @@
 import React from "react";
 import ResultLine from "./ResultLine";
 import Filters from "./Filters";
+import FiltersContainer from "./FiltersContainer";
 // import classes from "./Results.module.css" 
 
 class ResultsTest extends React.Component {
@@ -34,7 +35,8 @@ class ResultsTest extends React.Component {
         }
         return (
             <div>
-                <Filters>
+                <FiltersContainer>
+                <Filters filtersType = "Filters +">
                     {Object.keys(this.props.filters).map(f => {
                         return (
                             <button onClick={() => this.filterItem(f)}>{f}</button>
@@ -43,16 +45,19 @@ class ResultsTest extends React.Component {
                     <button onClick={() => this.resetFilters()}>
                         All
                     </button> <br />
+                </Filters>
+                <Filters filtersType = "Categories +">
                     {this.state.relations.map(rel => {
                         return (
                             <button>{rel}</button>
                         )
                     })}
                 </Filters>
+                </FiltersContainer>
                 <div>
                     {Data.map((res, index) => {
                         return (
-                            <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index}></ResultLine>
+                            <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index +1}></ResultLine>
                         )
                     })}
                 </div>
@@ -87,7 +92,7 @@ class ResultsTest extends React.Component {
                                 })
                                     .then((res) => res.json())
                                     .then((data) => {
-                                        data.results.bindings.map(res => {
+                                        data.results.bindings.forEach(res => {
                                             let singleResult = {}
                                             singleResult.uri = res.entity.value;
                                             singleResult.label = res.entityLabel.value;
