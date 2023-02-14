@@ -20,9 +20,15 @@ class SectionClip extends React.Component {
       searchField: "",
       value_list: [],
       input: "",
+      input_iri: "",
       isFocused: false
     };
   };
+
+
+  handleInput = (e) => {
+    this.props.onQuery((e.target.getAttribute('el_iri')));
+  }
 
   componentDidMount = () => {
     fetch("/feed")
@@ -75,6 +81,7 @@ class SectionClip extends React.Component {
   };
   onOptionClick = e => {
     this.setState({ input: e.currentTarget.innerText });
+    this.setState({ input_iri: e.currentTarget.getAttribute('el_iri') });
     this.setState({ value_list: [] });
   };
 
@@ -89,11 +96,13 @@ class SectionClip extends React.Component {
           <input
             type={'search'}
             placeholder={this.props.placeholder}
+            el_iri={this.props.el_iri}
             onChange={(e) => this.onSearchChange(e, this.props.category)}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
             value={this.state.input}
             onKeyDown={this.onKeyDown}
+            onInput={(e) => this.handleInput(e)}
           ></input>
           <button type="reset" className={classes.searchbutton} onClick={this.onClickReset}>
             <img alt='search button' src={this.state.isFocused ? closeicon : blankicon}></img>
@@ -103,9 +112,14 @@ class SectionClip extends React.Component {
           </button>
         </div>
         <div className={classes.suggestionsContainer}>
-          {this.state.value_list.map((res, index) => (
-            <p key={index} onClick={this.onOptionClick} className={classes.suggestionoption}>{res}</p>
-          ))}
+          {
+            //       Object.entries(this.state.value_list).map((key,value, index) => ()
+            //         <p key={index} onClick={this.onOptionClick} className={classes.suggestionoption} el_iri={key}>{value}</p>
+            //                 console.log(key, obj[key]);
+            // ));
+            this.state.value_list.map((res, index) => (
+              <p key={index} onClick={this.onOptionClick} className={classes.suggestionoption}>{res}</p>
+            ))}
         </div>
       </div>
 

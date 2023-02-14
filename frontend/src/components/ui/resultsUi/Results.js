@@ -19,7 +19,6 @@ class ResultsTest extends React.Component {
         const newItem = (this.state.filtersResults).filter((newVal) => newVal.cat === curcat);
         this.setState({ filtered: newItem });
         this.setState({ filterOn: 'True' });
-        console.log(this.filtered);
     }
 
     resetFilters = () => {
@@ -27,6 +26,7 @@ class ResultsTest extends React.Component {
     }
 
     render() {
+        console.log(this.props.test)
         let Data = [];
         if (this.state.filterOn === 'True') {
             Data = this.state.filtered;
@@ -102,7 +102,7 @@ class ResultsTest extends React.Component {
                                             if (!relations.includes(res.relIdentityLabel.value)) {
                                                 relations.push(res.relIdentityLabel.value);
                                             }
-                                        }
+                                        })
                                     });
                             }
                             catch (err) {
@@ -114,7 +114,6 @@ class ResultsTest extends React.Component {
                     }
                 }
             })
-        console.log(results)
         this.setState({ filtersResults: results });
         this.setState({ relations: relations })
     };

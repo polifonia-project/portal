@@ -6,8 +6,8 @@ function ResultsContainer(props) {
 
     return (
         <div className={classes.resultContainer}>
-            
-            <Results cat={props.cat} filters={props.filters} el_iri={props.el_iri} ></Results>
+
+            <Results cat={props.cat} filters={props.filters} el_iri={props.el_iri} test={props.test} ></Results>
         </div>
     )
 }
