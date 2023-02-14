@@ -7,6 +7,7 @@
 
 .backtotop {
     position: sticky; /* Fixed/sticky position */
+    position: -webkit-sticky;
     top: 38vh;
     left: 95.5vw;
     z-index: 400;
