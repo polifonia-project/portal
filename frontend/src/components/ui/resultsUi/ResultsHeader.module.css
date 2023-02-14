@@ -1,0 +1,56 @@
+
+.resheader {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px 30px 12px 10px;
+  font-size: 0.75em;
+  cursor: default;
+  color: grey;
+  border-bottom: 1px solid #e8e3e3;
+  background-color: #f4edec;
+}
+
+.headerNum {
+  display: inline-flex;
+  align-items: center;
+  width: 4%;
+  justify-content: left;
+  padding-left: 10px;
+  font-size: 0.8em;
+}
+
+.headerLab {
+  display: inline-flex;
+  align-items: center;
+  width: 40%;
+  font-weight: 400;
+}
+
+.headerCat {
+  display: inline-flex;
+  align-items: center;
+  width: 20%;
+  text-transform: capitalize;
+}
+
+.headerRel {
+  display: inline-flex;
+  align-items: center;
+  width: 30%;
+  text-transform: capitalize;
+}
+
+.headerAct {
+  display: inline-flex;
+  align-items: center;
+  width: 10%;
+  font-size: 0.8em;
+  justify-content: flex-end;
+}
+
+.stickyHeader {
+  position: sticky;
+  position: -webkit-sticky;
+  top: -0.5px;
+}
