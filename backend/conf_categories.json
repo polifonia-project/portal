@@ -17,13 +17,13 @@
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
+                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
+                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
         },
@@ -54,13 +54,13 @@
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
+                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
+                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
         },
@@ -91,13 +91,13 @@
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
+                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
+                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
         },
@@ -128,13 +128,13 @@
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
+                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
+                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
         },
@@ -165,13 +165,13 @@
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
+                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
+                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
         },
@@ -198,13 +198,13 @@
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
+                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
+                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
         },
@@ -231,13 +231,13 @@
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
+                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
+                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
         },
@@ -268,13 +268,13 @@
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
+                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" } }"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
+                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q486972 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\" }}"
                 }
             ]
         },

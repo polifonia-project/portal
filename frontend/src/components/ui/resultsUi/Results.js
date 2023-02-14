@@ -9,7 +9,8 @@ class ResultsTest extends React.Component {
         this.state = {
             filtersResults: [],
             filtered: [],
-            filterOn: 'False'
+            filterOn: 'False',
+            relations: []
         }
     };
 
@@ -40,13 +41,18 @@ class ResultsTest extends React.Component {
                         )
                     })}
                     <button onClick={() => this.resetFilters()}>
-                        Reset
-                    </button>
+                        All
+                    </button> <br />
+                    {this.state.relations.map(rel => {
+                        return (
+                            <button>{rel}</button>
+                        )
+                    })}
                 </Filters>
                 <div>
                     {Data.map((res, index) => {
                         return (
-                            <ResultLine label = {res.label} number = {index}></ResultLine>
+                            <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index}></ResultLine>
                         )
                     })}
                 </div>
@@ -56,6 +62,8 @@ class ResultsTest extends React.Component {
 
     componentDidMount = () => {
         let results = [];
+
+        let relations = [];
 
         // get datasets
         fetch('/datasets')
@@ -84,7 +92,11 @@ class ResultsTest extends React.Component {
                                             singleResult.uri = res.entity.value;
                                             singleResult.label = res.entityLabel.value;
                                             singleResult.cat = cat;
-                                            results.push(singleResult)
+                                            singleResult.rel = res.relIdentityLabel.value;
+                                            results.push(singleResult);
+                                            if (!relations.includes(res.relIdentityLabel.value)) {
+                                                relations.push(res.relIdentityLabel.value);
+                                            }
                                         })
                                     });
                             }
@@ -96,8 +108,10 @@ class ResultsTest extends React.Component {
                         }
                     }
                 }
-                this.setState({ filtersResults: results });
             })
+        console.log(results)
+        this.setState({ filtersResults: results });
+        this.setState({ relations: relations })
     };
 }
 

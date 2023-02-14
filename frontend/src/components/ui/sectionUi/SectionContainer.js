@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./SectionContainer.module.css";
 import ResultsContainer from "../resultsUi/ResultsContainer";
 
 function SectionContainer(props) {
+
+    // const [selected, setSelected] = useState();
+    // setSelected(props.el_iri);
 
     return (
         <div id={props.id} className={classes.sectionContainer}>
