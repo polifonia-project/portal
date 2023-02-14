@@ -2,6 +2,7 @@ import React from "react";
 import ResultLine from "./ResultLine";
 import Filters from "./Filters";
 import FiltersContainer from "./FiltersContainer";
+import ResultsHeader from "./ResultsHeader";
 // import classes from "./Results.module.css" 
 
 class ResultsTest extends React.Component {
@@ -19,6 +20,7 @@ class ResultsTest extends React.Component {
         const newItem = (this.state.filtersResults).filter((newVal) => newVal.cat === curcat);
         this.setState({ filtered: newItem });
         this.setState({ filterOn: 'True' });
+        console.log(this.filtered);
     }
 
     resetFilters = () => {
@@ -26,7 +28,6 @@ class ResultsTest extends React.Component {
     }
 
     render() {
-        console.log(this.props.test)
         let Data = [];
         if (this.state.filterOn === 'True') {
             Data = this.state.filtered;
@@ -35,6 +36,7 @@ class ResultsTest extends React.Component {
         }
         return (
             <div>
+                <ResultsHeader>
                 <FiltersContainer>
                     <Filters filtersType="Filters +">
                         {Object.keys(this.props.filters).map(f => {
@@ -54,6 +56,7 @@ class ResultsTest extends React.Component {
                         })}
                     </Filters>
                 </FiltersContainer>
+                </ResultsHeader>
                 <div>
                     {Data.map((res, index) => {
                         return (
@@ -70,7 +73,7 @@ class ResultsTest extends React.Component {
 
         let relations = [];
 
-        // get datasets
+        // get dataset
         fetch('/datasets')
             .then((res) => res.json())
             .then((data) => {
@@ -102,8 +105,8 @@ class ResultsTest extends React.Component {
                                             if (!relations.includes(res.relIdentityLabel.value)) {
                                                 relations.push(res.relIdentityLabel.value);
                                             }
-                                        })
-                                    });
+                                        }
+            )});
                             }
                             catch (err) {
                                 console.log(err)
@@ -114,6 +117,7 @@ class ResultsTest extends React.Component {
                     }
                 }
             })
+        console.log(results)
         this.setState({ filtersResults: results });
         this.setState({ relations: relations })
     };
