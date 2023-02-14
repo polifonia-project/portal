@@ -87,7 +87,7 @@ class ResultsTest extends React.Component {
                                 })
                                     .then((res) => res.json())
                                     .then((data) => {
-                                        data.results.bindings.map(res => {
+                                        for (const res of data.results.bindings) {
                                             let singleResult = {}
                                             singleResult.uri = res.entity.value;
                                             singleResult.label = res.entityLabel.value;
@@ -97,7 +97,7 @@ class ResultsTest extends React.Component {
                                             if (!relations.includes(res.relIdentityLabel.value)) {
                                                 relations.push(res.relIdentityLabel.value);
                                             }
-                                        })
+                                        }
                                     });
                             }
                             catch (err) {
