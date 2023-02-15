@@ -1,24 +1,73 @@
 .filtersType {
-  max-width: 10%;
-  margin-right: 30px;
   cursor: pointer;
+  margin-right: 30px;
+}
+
+.typeOpen {
+  width: 100vw;
+}
+
+.typeClosed {
+  width: auto;
 }
 
 .filtersList {
-  width: 90%;
-  display: inline;
+  display: inline-flex;
+  overflow: hidden;
+  overflow-x: scroll;
+  padding: 5px 0px 5px 0px;
+  transition: opacity 1s ease-out;
+  color:	#282828;
 }
 
-.filtersList button{
+.filtersListClosed {
+  width: 0%;
+  opacity: 0;
+  
+}
+
+.filtersListOpen {
+  width: 100%;
+  opacity: 1;
+  
+}
+
+.selectedDot {
+  color: 	#282828;
+  text-align: center;
+  position: relative;
+  top: -5px;
+  left: 1px;
+  opacity: 0.5;
+}
+
+
+.filtersList button {
   all: unset;
   background-color: #f4edec;
   border-radius: 50px;
-  border: 0.1px solid black;
+  border: 0.1px solid grey;
   padding: 2px 10px 2px 10px;
-  margin: 5px;
-  
+  margin: 5px 10px 5px 0px;
   cursor: pointer;
   outline: none;
   text-transform: capitalize;
   font-size: 1em;
+  white-space: nowrap;
+  transition: transform 2s ease;
 }
+
+.filtersList button:hover {
+  background-color: black;
+  border: 0.1px solid transparent;
+  color: #f4edec;
+  transform: translateY(-8px) scale(1.05);
+}
+
+.filtersList button:focus {
+  background-color: black;
+  border: 0.1px solid black;
+  color: #f4edec;
+  
+}
+

@@ -33,6 +33,7 @@ function SectionContainer(props) {
                 filters={props.filters}
                 el_iri={props.el_iri}
                 test={selected_uri}
+                color={props.color}
             >
             </ResultsContainer>
         </div>

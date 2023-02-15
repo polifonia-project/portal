@@ -11,7 +11,8 @@ class ResultsTest extends React.Component {
         this.state = {
             filtersResults: [],
             filtered: [],
-            filterOn: 'False',
+            filterOn: false,
+            relationOn: false,
             relations: []
         }
     };
@@ -19,26 +20,26 @@ class ResultsTest extends React.Component {
     filterItem = (curcat) => {
         const newItem = (this.state.filtersResults).filter((newVal) => newVal.cat === curcat);
         this.setState({ filtered: newItem });
-        this.setState({ filterOn: 'True' });
+        this.setState({ filterOn: true });
         console.log(this.filtered);
     }
 
     resetFilters = () => {
-        this.setState({ filterOn: 'False' });
+        this.setState({ filterOn: false });
     }
 
     render() {
         let Data = [];
-        if (this.state.filterOn === 'True') {
+        if (this.state.filterOn === true) {
             Data = this.state.filtered;
-        } else if (this.state.filterOn === 'False') {
+        } else if (this.state.filterOn === false) {
             Data = this.state.filtersResults;
         }
         return (
             <div>
                 <ResultsHeader>
                 <FiltersContainer>
-                    <Filters filtersType="Filters +">
+                    <Filters filtersType="Filters" color= {this.props.color} selectedOn={this.state.filterOn}>
                         {Object.keys(this.props.filters).map(f => {
                             return (
                                 <button onClick={() => this.filterItem(f)}>{f}</button>
@@ -48,7 +49,7 @@ class ResultsTest extends React.Component {
                             All
                         </button> <br />
                     </Filters>
-                    <Filters filtersType="Categories +">
+                    <Filters filtersType="Relations" color= {this.props.color} selectedOn={this.state.relationOn}>
                         {this.state.relations.map(rel => {
                             return (
                                 <button>{rel}</button>

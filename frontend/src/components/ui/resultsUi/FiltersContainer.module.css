@@ -4,12 +4,14 @@
   position: -webkit-sticky;
   top: -0.5px;
   background-color: #f4edec;
-  padding: 20px;
+  padding: 10px 20px 10px 20px;
   box-shadow: inset 1px 9px 10px -16px black;
   margin:0;
   font-size: 0.8em;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   border-bottom: 1px solid #e8e3e3;
+  transition: all 1s linear;
+  justify-content: flex-start;
+  align-items: center;
 }
