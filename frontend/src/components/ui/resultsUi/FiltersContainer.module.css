@@ -4,7 +4,7 @@
   position: -webkit-sticky;
   top: -0.5px;
   background-color: #f4edec;
-  padding: 10px 20px 10px 20px;
+  padding: 10px 20px 10px 0px;
   box-shadow: inset 1px 9px 10px -16px black;
   margin:0;
   font-size: 0.8em;
@@ -14,4 +14,7 @@
   transition: all 1s linear;
   justify-content: flex-start;
   align-items: center;
+  
+  /* height: 70px; */
+  animation: height 1s linear;
 }

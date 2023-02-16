@@ -8,8 +8,9 @@ function Filters(props) {
 
     return(      [
       <div className={classes.filtersType + ' ' + classes[toggle ? 'typeOpen' : 'typeClosed']} onClick={() => setToggle(!toggle)}>
-        {props.filtersType}
-        {toggle ? ' −': props.selectedOn ?  <span><span className={classes.selectedDot} style={{color: props.color}}>•</span>   +</span> : <span> +</span>}
+        <span>{props.filtersType}</span>
+        <span className={classes.slider}></span> 
+        {toggle ? <span className={classes.closeIcon}> −</span>: props.selectedOn ?  <span><span className={classes.selectedDot} style={{color: props.color}}>•</span><span className={classes.openIcon}>  +</span></span>  : <span className={classes.openIcon}> +</span>}
         </div>,
       <div className={classes.filtersList + ' ' + classes[toggle ? 'filtersListOpen' : 'filtersListClosed']}>{props.children}</div>
       ] ) 

@@ -40,23 +40,23 @@ class ResultsTest extends React.Component {
             <div>
                 <ResultsHeader>
                 <FiltersContainer>
+                    <FilterButton isDisabled={this.state.filterOn} resetClass = 'resetButton' buttonClick={() => this.resetFilters()}>
+                      Reset <span className="resetIcon">⟲</span>
+                    </FilterButton> <br/>
                     <Filters filtersType="Filters" color= {this.props.color} selectedOn={this.state.filterOn}>
                         {Object.keys(this.props.filters).map(f => {
                             return (
-                                <FilterButton buttonClick={() => this.filterItem(f)} selectedOn={this.state.filterOn}>{f}</FilterButton>
+                                <FilterButton isDisabled={true} buttonClick={() => this.filterItem(f)} selectedOn={this.state.filterOn}>{f}</FilterButton>
                             )
                         })}
                     </Filters>
                     <Filters filtersType="Relations" color= {this.props.color} selectedOn={this.state.relationOn}>
                         {this.state.relations.map(rel => {
                             return (
-                                <FilterButton selectedOn={this.state.relationOn}>{rel}</FilterButton>
+                                <FilterButton isDisabled={true} selectedOn={this.state.relationOn}>{rel}</FilterButton>
                             )
                         })}
                     </Filters>
-                    <FilterButton resetClass = 'resetButton' buttonClick={() => this.resetFilters()}>
-                    Reset ⟲
-                    </FilterButton> <br/>
                 </FiltersContainer>
                 </ResultsHeader>
                 <div>

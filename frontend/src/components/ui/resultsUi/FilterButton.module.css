@@ -17,7 +17,7 @@
     background-color: black;
     border: 0.1px solid transparent;
     color: #f4edec;
-    transform: translateY(-8px) scale(1.05);
+    transform: translateY(-3px) scale(1.1);
   }
   
   .buttonChecked {
@@ -35,21 +35,40 @@
   .resetButton {
     border: 0.1px solid transparent;
     background-color: transparent;
-  }
-
-  .resetButton:active {
-    border: 0.1px solid transparent;
-    background-color: black;
-    box-shadow: 2px ;
-  }
-
-  .resetButton:hover {
+    margin-left: 10px;
+    transition: all 0.8s ease;
     color: black;
-    transform: none;
-    background-color: rgba(156, 156, 156, 0.136);
+    border: 0.5px solid transparent;
   }
 
   .resetButton.buttonChecked {
     border: 0.1px solid transparent;
-    color: black
+    background-color: transparent;
+    margin-left: 10px;
+    transition: all 0.8s ease;
+    color: black;
+    border: 0.5px solid transparent;
   }
+
+  .resetButton:hover {
+    color: red;
+    transform: none;
+    background-color: #f4edec;
+    border: 0.5px solid red;
+  }
+
+  .resetButton.buttonChecked:hover {
+    color: red;
+    transform: none;
+    background-color: #f4edec;
+    border: 0.5px solid red;
+  }
+
+  .buttonFilter:disabled {
+   color: grey;
+  }
+
+  .buttonFilter:disabled:hover {
+    color: grey;
+    border: 0.5px solid transparent;
+   }

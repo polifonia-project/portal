@@ -20,7 +20,7 @@ useEffect(() => {
   });
 
 return (
-    <button onClick={handleClick} className={classes.buttonFilter + ' ' + classes[toggle ? 'buttonChecked' : null] + ' ' + classes[props.resetClass]}>
+    <button disabled={!props.isDisabled} onClick={handleClick} className={classes.buttonFilter + ' ' + classes[toggle ? 'buttonChecked' : null] + ' ' + classes[props.resetClass]}>
     {props.children}
     </button>
 )
