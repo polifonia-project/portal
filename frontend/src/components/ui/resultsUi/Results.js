@@ -3,6 +3,7 @@ import ResultLine from "./ResultLine";
 import Filters from "./Filters";
 import FiltersContainer from "./FiltersContainer";
 import ResultsHeader from "./ResultsHeader";
+import FilterButton from "./FilterButton";
 // import classes from "./Results.module.css" 
 
 class ResultsTest extends React.Component {
@@ -42,20 +43,20 @@ class ResultsTest extends React.Component {
                     <Filters filtersType="Filters" color= {this.props.color} selectedOn={this.state.filterOn}>
                         {Object.keys(this.props.filters).map(f => {
                             return (
-                                <button onClick={() => this.filterItem(f)}>{f}</button>
+                                <FilterButton buttonClick={() => this.filterItem(f)} selectedOn={this.state.filterOn}>{f}</FilterButton>
                             )
                         })}
-                        <button onClick={() => this.resetFilters()}>
-                            All
-                        </button> <br />
                     </Filters>
                     <Filters filtersType="Relations" color= {this.props.color} selectedOn={this.state.relationOn}>
                         {this.state.relations.map(rel => {
                             return (
-                                <button>{rel}</button>
+                                <FilterButton selectedOn={this.state.relationOn}>{rel}</FilterButton>
                             )
                         })}
                     </Filters>
+                    <FilterButton resetClass = 'resetButton' buttonClick={() => this.resetFilters()}>
+                    Reset ⟲
+                    </FilterButton> <br/>
                 </FiltersContainer>
                 </ResultsHeader>
                 <div>

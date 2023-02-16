@@ -1,0 +1,55 @@
+.buttonFilter {
+    all: unset;
+    background-color: #f4edec;
+    border-radius: 50px;
+    border: 0.1px solid grey;
+    padding: 2px 10px 2px 10px;
+    margin: 5px 10px 5px 0px;
+    cursor: pointer;
+    outline: none;
+    text-transform: capitalize;
+    font-size: 1em;
+    white-space: nowrap;
+    transition: transform 1s ease;
+  }
+  
+  .buttonFilter:hover {
+    background-color: black;
+    border: 0.1px solid transparent;
+    color: #f4edec;
+    transform: translateY(-8px) scale(1.05);
+  }
+  
+  .buttonChecked {
+    background-color: black;
+    border: 0.1px solid black;
+    color: #f4edec;
+  }
+
+  .buttonChecked:hover {
+    background-color: black;
+    border: 0.1px solid black;
+    color: #f4edec;
+  }
+
+  .resetButton {
+    border: 0.1px solid transparent;
+    background-color: transparent;
+  }
+
+  .resetButton:active {
+    border: 0.1px solid transparent;
+    background-color: black;
+    box-shadow: 2px ;
+  }
+
+  .resetButton:hover {
+    color: black;
+    transform: none;
+    background-color: rgba(156, 156, 156, 0.136);
+  }
+
+  .resetButton.buttonChecked {
+    border: 0.1px solid transparent;
+    color: black
+  }
