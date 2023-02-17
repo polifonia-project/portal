@@ -19,10 +19,17 @@
   display: inline-flex;
   overflow: hidden;
   overflow-x: scroll;
+  scrollbar-width: none;
   padding: 10px 0px 5px 18px;
   transition: opacity 1s ease-out;
   color:	#282828;
 }
+
+.filtersList::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+}
+
 
 .filtersListClosed {
   width: 0%;

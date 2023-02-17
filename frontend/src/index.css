@@ -30,3 +30,13 @@ h2 {
   font-size: 1.5rem;
   color: #2c292b;
 }
+
+html {
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+}
+

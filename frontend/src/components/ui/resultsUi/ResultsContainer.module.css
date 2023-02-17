@@ -4,4 +4,10 @@
   height: 500px;
   overflow: scroll;
   background-color: #f4edec;
+  scrollbar-width: none;
+}
+
+.resultContainer::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
 }

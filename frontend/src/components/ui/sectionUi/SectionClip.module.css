@@ -38,7 +38,13 @@
   overflow: hidden !important;
   text-overflow: ellipsis;
   overflow : scroll;
+  scrollbar-width: none;
   text-transform: capitalize;
+}
+
+.sectionClip::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
 }
 
 .sectionClip input, textarea{
@@ -116,6 +122,7 @@ input[type="search"]::-webkit-search-results-decoration {
   border-bottom-right-radius: 10px;
   background-color: #f4edec;
   overflow-y: scroll;
+  scrollbar-width: none;
   overflow-x: visible;
   width: 460px;
   margin-left: 20px;
@@ -123,6 +130,12 @@ input[type="search"]::-webkit-search-results-decoration {
   z-index: 14;
   margin-top: -40px;
 }
+
+.suggestionsContainer::-webkit-scrollbar {
+  -ms-overflow-style: none;
+  display: none;
+}
+
 
 .suggestionoption {
   cursor: pointer;
