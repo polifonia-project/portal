@@ -7,9 +7,9 @@ function ResultsHeader(props) {
       {props.children}
       <div className={classes.resheader}>
         <div className={classes.headerNum}>#</div>
-        <div className={classes.headerLab}>Label</div>
-        <div className={classes.headerCat}>Category</div>
-        <div className={classes.headerRel}>Relations</div>
+        <div className={classes.headerCat}><span className={classes.headerCatBorder}>Category</span></div>
+        <div className={classes.headerLab}>Result</div>
+        <div className={classes.headerRel}>Explanation</div>
         <div className={classes.headerAct}>Expand</div>
       </div>
     </div>

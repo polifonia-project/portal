@@ -59,7 +59,7 @@ class ResultsTest extends React.Component {
                     </Filters>
                 </FiltersContainer>
                 </ResultsHeader>
-                <div>
+                <div style= {{height: '390px', overflow: 'scroll' }}>
                     {Data.map((res, index) => {
                         return (
                             <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1}></ResultLine>

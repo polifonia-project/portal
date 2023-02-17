@@ -6,6 +6,7 @@
   font-size: 0.8em;
   cursor: default;
   border-bottom: 1px solid #e8e3e3;
+  /*cursor:url('../../../assets/svg/customcursor.jpg'), auto;*/
 }
 
 .resultNum {
@@ -14,27 +15,27 @@
   width: 4%;
   justify-content: left;
   padding-left: 10px;
-  font-size: 0.8em;
+
 }
 
 .resultLabel {
   display: inline-flex;
   align-items: center;
-  width: 40%;
+  width: 30%;
   font-weight: 400;
 }
 
 .resultCat {
   display: inline-flex;
   align-items: center;
-  width: 20%;
+  width: 10%;
   text-transform: capitalize;
 }
 
 .resultRel {
   display: inline-flex;
   align-items: center;
-  width: 30%;
+  width: 50%;
   text-transform: capitalize;
 }
 
@@ -58,4 +59,10 @@
   margin-left: 10px;
   height: 25px;
   width: 25px;
+}
+
+.categoryResult {
+  padding: 7px 14px 7px 14px;
+  border: 0.4px solid black;
+  border-radius: 20px;
 }

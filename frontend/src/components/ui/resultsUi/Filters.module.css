@@ -4,10 +4,11 @@
   margin-left: 20px;
   position:relative;
   display:inline-block;
+  transition: all 1s ease;
 }
 
 .typeOpen {
-  margin-right: 90vw;
+  width: 100%;
   margin-top: 10px;
 }
 
@@ -56,7 +57,7 @@
   position: absolute;
   display:block;
   left: 0;
-  top:96%;
+  top:98%;
   margin-top:3px ;
   height: 0.6px;
   background-color: #000;
@@ -65,7 +66,7 @@
 }
 
 .filtersType:hover .slider {
-  width: 80%;
+  width: 100%;
 }
 
 .openIcon {
