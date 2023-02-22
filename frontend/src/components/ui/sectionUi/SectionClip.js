@@ -18,9 +18,8 @@ class SectionClip extends React.Component {
       clips: [],
       categories: [],
       searchField: "",
-      value_list: [],
+      value_obj: {},
       input: "",
-      input_iri: "",
       isFocused: false
     };
   };
@@ -47,8 +46,7 @@ class SectionClip extends React.Component {
     fetch(request)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
-        this.setState({ value_list: Object.values(data) });
+        this.setState({ value_obj: data });
       });
   };
 
@@ -77,12 +75,12 @@ class SectionClip extends React.Component {
   onClickSearch = () => { window.console.log('search start') };
   onClickReset = () => {
     this.setState({ input: '' });
-    this.setState({ value_list: [] });
+    this.setState({ value_obj: {} });
   };
   onOptionClick = e => {
     this.setState({ input: e.currentTarget.innerText });
-    this.setState({ input_iri: e.currentTarget.getAttribute('el_iri') });
-    this.setState({ value_list: [] });
+    this.setState({ value_obj: {} });
+    this.props.onQuery(e.currentTarget.getAttribute('el_iri'));
   };
 
 
@@ -113,13 +111,10 @@ class SectionClip extends React.Component {
         </div>
         <div className={classes.suggestionsContainer}>
           {
-            //       Object.entries(this.state.value_list).map((key,value, index) => ()
-            //         <p key={index} onClick={this.onOptionClick} className={classes.suggestionoption} el_iri={key}>{value}</p>
-            //                 console.log(key, obj[key]);
-            // ));
-            this.state.value_list.map((res, index) => (
-              <p key={index} onClick={this.onOptionClick} className={classes.suggestionoption}>{res}</p>
-            ))}
+            Object.keys(this.state.value_obj).map((key) => (
+              <p onClick={this.onOptionClick} className={classes.suggestionoption} el_iri={key}>{this.state.value_obj[key]}</p>
+            ))
+          }
         </div>
       </div>
 

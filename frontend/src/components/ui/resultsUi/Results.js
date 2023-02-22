@@ -33,12 +33,12 @@ class ResultsTest extends React.Component {
         // apply filters
         this.applyFilter(currentFilters);
 
-       // set filter on alert
-       if (currentFilters.length === 0) {
-        this.setState({ filterOn: false });
-       } else {
-        this.setState({ filterOn: true});
-       }
+        // set filter on alert
+        if (currentFilters.length === 0) {
+            this.setState({ filterOn: false });
+        } else {
+            this.setState({ filterOn: true });
+        }
 
     }
 
@@ -56,19 +56,19 @@ class ResultsTest extends React.Component {
         // apply filters
         this.applyFilter(currentFilters);
 
-       // set filter on alert
-       if (currentFilters.length === 0) {
-        this.setState({ relationOn: false });
-       } else {
-        this.setState({ relationOn: true});
-       }
+        // set filter on alert
+        if (currentFilters.length === 0) {
+            this.setState({ relationOn: false });
+        } else {
+            this.setState({ relationOn: true });
+        }
 
     }
 
     applyFilter = (currentFilters) => {
         // apply filters thare are inside list
-       const newItem = (this.state.totalResults).filter((newVal) => currentFilters.indexOf(newVal.cat) > -1 || currentFilters.indexOf(newVal.rel) > -1);
-       this.setState({ filteredResults: newItem });
+        const newItem = (this.state.totalResults).filter((newVal) => currentFilters.indexOf(newVal.cat) > -1 || currentFilters.indexOf(newVal.rel) > -1);
+        this.setState({ filteredResults: newItem });
     }
 
     resetFilters = () => {
@@ -87,30 +87,30 @@ class ResultsTest extends React.Component {
         return (
             <div>
                 <ResultsHeader>
-                <FiltersContainer>
-                    <FilterButton isDisabled={this.state.filterOn || this.state.relationOn} resetClass = 'resetButton' buttonClick={() => this.resetFilters()}>
-                      Reset <span className="resetIcon">⟲</span>
-                    </FilterButton> <br/>
-                    <Filters filtersType="Filters" color= {this.props.color} selectedOn={this.state.filterOn}>
-                        {Object.keys(this.props.filters).map(f => {
-                            return (
-                                <FilterButton isDisabled={true} buttonClick={() => this.addFilter(f)} selectedOn={this.state.filterOn}>{f}</FilterButton>
-                            )
-                        })}
-                    </Filters>
-                    <Filters filtersType="Relations" color= {this.props.color} selectedOn={this.state.relationOn}>
-                        {this.state.relations.map(rel => {
-                            return (
-                                <FilterButton isDisabled={true} buttonClick={() => this.addRelation(rel)}  selectedOn={this.state.relationOn}>{rel}</FilterButton>
-                            )
-                        })}
-                    </Filters>
-                </FiltersContainer>
+                    <FiltersContainer>
+                        <FilterButton isDisabled={this.state.filterOn || this.state.relationOn} resetClass='resetButton' buttonClick={() => this.resetFilters()}>
+                            Reset <span className="resetIcon">⟲</span>
+                        </FilterButton> <br />
+                        <Filters filtersType="Filters" color={this.props.color} selectedOn={this.state.filterOn}>
+                            {Object.keys(this.props.filters).map(f => {
+                                return (
+                                    <FilterButton isDisabled={true} buttonClick={() => this.addFilter(f)} selectedOn={this.state.filterOn}>{f}</FilterButton>
+                                )
+                            })}
+                        </Filters>
+                        <Filters filtersType="Relations" color={this.props.color} selectedOn={this.state.relationOn}>
+                            {this.state.relations.map(rel => {
+                                return (
+                                    <FilterButton isDisabled={true} buttonClick={() => this.addRelation(rel)} selectedOn={this.state.relationOn}>{rel}</FilterButton>
+                                )
+                            })}
+                        </Filters>
+                    </FiltersContainer>
                 </ResultsHeader>
-                <div style= {{height: '400px', overflow: 'scroll' }}>
+                <div style={{ height: '400px', overflow: 'scroll' }}>
                     {Data.map((res, index) => {
                         return (
-                            <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1} color= {this.props.color}></ResultLine>
+                            <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1} color={this.props.color}></ResultLine>
                         )
                     })}
                 </div>
@@ -118,10 +118,10 @@ class ResultsTest extends React.Component {
         )
     }
 
-    componentDidMount = () => {
+    fetchResults = (uri) => {
         let results = [];
-        let relations = [];
 
+        let relations = [];
         // get dataset
         fetch('/datasets')
             .then((res) => res.json())
@@ -131,11 +131,11 @@ class ResultsTest extends React.Component {
                         let dataset_id = obj.dataset
                         let iri_base = data[dataset_id].iri_base
                         // check if iri_base and el_iri are part of the same dataset
-                        if ((this.props.el_iri).includes(iri_base)) {
+                        if ((uri).includes(iri_base)) {
                             let query_method = data[dataset_id].query_method
                             let endpoint = data[dataset_id][query_method]
                             let query = obj.query;
-                            query = query.replace('<>', '<' + this.props.el_iri + '>');
+                            query = query.replace('<>', '<' + uri + '>');
                             let url = endpoint + '?query=' + encodeURIComponent(query);
                             try {
                                 fetch(url, {
@@ -154,8 +154,11 @@ class ResultsTest extends React.Component {
                                             if (!relations.includes(res.relIdentityLabel.value)) {
                                                 relations.push(res.relIdentityLabel.value);
                                             }
+                                            this.setState({ totalResults: results });
+                                            this.setState({ relations: relations })
                                         }
-            )});
+                                        )
+                                    });
                             }
                             catch (err) {
                                 console.log(err)
@@ -166,10 +169,18 @@ class ResultsTest extends React.Component {
                     }
                 }
             })
-        console.log(results);
-        this.setState({ totalResults: results });
-        this.setState({ relations: relations });
+    }
+
+    componentDidMount = () => {
+        this.fetchResults(this.props.el_iri)
     };
+
+    componentDidUpdate = (prevProps) => {
+        if (this.props.el_iri !== prevProps.el_iri) {
+            console.log('NEW URI', this.props.el_iri)
+            this.fetchResults(this.props.el_iri);
+        }
+    }
 }
 
 export default ResultsTest;
