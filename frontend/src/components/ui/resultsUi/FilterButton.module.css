@@ -10,14 +10,13 @@
     text-transform: capitalize;
     font-size: 1em;
     white-space: nowrap;
-    transition: transform 1s ease;
+    transition: background-color 0.1s ease;
   }
   
   .buttonFilter:hover {
-    background-color: black;
+    background-color: grey;
     border: 0.1px solid transparent;
     color: #f4edec;
-    transform: translateY(-3px) scale(1.1);
   }
   
   .buttonChecked {

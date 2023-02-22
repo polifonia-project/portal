@@ -59,6 +59,15 @@
   margin-left: 10px;
   height: 25px;
   width: 25px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 1s ease;
+}
+
+
+.resultActions button:hover {
+  transform: scale(1.5);
 }
 
 .categoryResult {
