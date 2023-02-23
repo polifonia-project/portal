@@ -110,7 +110,7 @@ class ResultsTest extends React.Component {
                 <div style={{ height: '400px', overflow: 'scroll' }}>
                     {Data.map((res, index) => {
                         return (
-                            <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1} color={this.props.color}></ResultLine>
+                            <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1} color={this.props.color} input_value={this.props.input_value} ></ResultLine>
                         )
                     })}
                 </div>

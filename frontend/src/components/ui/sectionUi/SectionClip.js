@@ -40,7 +40,7 @@ class SectionClip extends React.Component {
 
   onSearchChange = (event, category) => {
     // to update state
-    this.setState({ input: event.target.value })
+    this.setState({ input: event.target.value });
     this.setState({ searchField: event.target.value });
     let request = "/index?data=" + event.target.value + "&cat_id=" + category;
     fetch(request)
@@ -79,6 +79,7 @@ class SectionClip extends React.Component {
   };
   onOptionClick = e => {
     this.setState({ input: e.currentTarget.innerText });
+    this.props.setInputValue(e.currentTarget.innerText);
     this.setState({ value_obj: {} });
     this.props.onQuery(e.currentTarget.getAttribute('el_iri'));
   };

@@ -5,6 +5,7 @@ import SectionClip from "./SectionClip";
 
 function SectionContainer(props) {
     const [selected_uri, setSelected] = useState(props.el_iri);
+    const [selected_value, setValue] = useState(props.placeholder);
 
     return (
         <div id={props.id} className={classes.sectionContainer}>
@@ -25,6 +26,7 @@ function SectionContainer(props) {
                 category={props.category}
                 catName={props.catName}
                 el_iri={selected_uri}
+                setInputValue={setValue}
                 onQuery={setSelected}
             >
             </SectionClip>
@@ -33,6 +35,7 @@ function SectionContainer(props) {
                 filters={props.filters}
                 el_iri={selected_uri}
                 color={props.color}
+                input_value={selected_value}
             >
             </ResultsContainer>
         </div>

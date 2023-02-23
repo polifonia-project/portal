@@ -6,7 +6,12 @@
   font-size: 0.8em;
   cursor: default;
   border-bottom: 1px solid #e8e3e3;
+  border-top: 1px solid #e8e3e3;
   /*cursor:url('../../../assets/svg/customcursor.jpg'), auto;*/
+}
+
+.resultLine:hover {
+  /* Do something */
 }
 
 .resultNum {
@@ -37,6 +42,7 @@
   align-items: center;
   width: 50%;
   text-transform: capitalize;
+  justify-content: flex-start;
 }
 
 .resultActions {
@@ -72,6 +78,6 @@
 
 .categoryResult {
   padding: 7px 14px 7px 14px;
-  border: 0.4px solid black;
-  border-radius: 20px;
+  border: 0.4px solid rgb(71, 71, 71);
+  border-radius: 3px;
 }
