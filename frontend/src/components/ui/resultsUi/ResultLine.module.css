@@ -5,13 +5,16 @@
   padding: 12px 30px 12px 10px;
   font-size: 0.8em;
   cursor: default;
-  border-bottom: 1px solid #e8e3e3;
-  border-top: 1px solid #e8e3e3;
+  border-top: 0.5px solid #e8e3e3;
+  border-bottom: 0.5px solid #e8e3e3;
+  box-shadow: 1px 1px 16px -5px transparent;
+  z-index: 10;
   /*cursor:url('../../../assets/svg/customcursor.jpg'), auto;*/
 }
 
 .resultLine:hover {
   /* Do something */
+
 }
 
 .resultNum {

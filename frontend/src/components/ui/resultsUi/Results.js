@@ -13,6 +13,7 @@ class ResultsTest extends React.Component {
             totalResults: [],
             filteredResults: [],
             activeFilters: [],
+            activeRelations: [],
             filterOn: false,
             relationOn: false,
             relations: []
@@ -31,9 +32,14 @@ class ResultsTest extends React.Component {
         this.setState({ activeFilters: currentFilters });
 
         // apply filters
-        this.applyFilter(currentFilters);
+        if (this.state.relationOn) {
+            let thisFilter = 'filter';
+            this.combineFilters(currentFilters, thisFilter);
+        } else {
+            this.applyFilter(currentFilters);
+        }
 
-        // set filter on alert
+        // set filter on 
         if (currentFilters.length === 0) {
             this.setState({ filterOn: false });
         } else {
@@ -44,19 +50,24 @@ class ResultsTest extends React.Component {
 
     addRelation = (curcat) => {
         // register added or removed filters to list
-        let currentFilters = this.state.activeFilters;
-        if (this.state.activeFilters.indexOf(curcat) > -1) {
+        let currentFilters = this.state.activeRelations;
+        if (this.state.activeRelations.indexOf(curcat) > -1) {
             const newFilters = currentFilters.filter((item) => item !== curcat);
             currentFilters = newFilters;
         } else {
             currentFilters.push(curcat)
         }
-        this.setState({ activeFilters: currentFilters });
+        this.setState({ activeRelations: currentFilters });
 
         // apply filters
-        this.applyFilter(currentFilters);
+        if (this.state.filterOn) {
+            let thisRelation = 'relation';
+            this.combineFilters(currentFilters, thisRelation);
+        } else {
+            this.applyFilter(currentFilters);
+        }
 
-        // set filter on alert
+        // set filter on 
         if (currentFilters.length === 0) {
             this.setState({ relationOn: false });
         } else {
@@ -66,22 +77,37 @@ class ResultsTest extends React.Component {
     }
 
     applyFilter = (currentFilters) => {
-        // apply filters thare are inside list
+        // apply filters thare are inside one list
         const newItem = (this.state.totalResults).filter((newVal) => currentFilters.indexOf(newVal.cat) > -1 || currentFilters.indexOf(newVal.rel) > -1);
         this.setState({ filteredResults: newItem });
+    }
+
+    combineFilters = (currentFilters, lastOne) => {
+        // apply filters thare are inside both lists
+        let otherFilters = [];
+        if (lastOne === 'relation') {
+            otherFilters = this.state.activeFilters;
+        } else if (lastOne === 'filter') {
+            otherFilters = this.state.activeRelations;
+        }
+        const newItem = (this.state.totalResults).filter((newVal) => otherFilters.indexOf(newVal.cat) > -1 || currentFilters.indexOf(newVal.rel) > -1);
+        const newItemCombined = (newItem).filter((newVal) => currentFilters.indexOf(newVal.cat) > -1 || currentFilters.indexOf(newVal.rel) > -1);
+        this.setState({ filteredResults: newItemCombined });
+        console.log(newItemCombined);
     }
 
     resetFilters = () => {
         this.setState({ filterOn: false });
         this.setState({ relationOn: false });
         this.setState({ activeFilters: [] });
+        this.setState({ activeRelations: [] });
     }
 
     render() {
         let Data = [];
-        if (this.state.activeFilters.length > 0) {
+        if (this.state.activeFilters.length > 0 || this.state.activeRelations.length > 0) {
             Data = this.state.filteredResults;
-        } else if (this.state.activeFilters.length === 0) {
+        } else if (this.state.activeFilters.length === 0 && this.state.activeRelations.length === 0) {
             Data = this.state.totalResults;
         }
         return (
