@@ -21,7 +21,7 @@ function ResultLine(props) {
       <div className={classes.resultNum}>{props.number}</div>
       <div className={classes.resultCat}><span className={classes.categoryResult}>{props.cat}</span></div>
       <div className={classes.resultLabel}><b>{props.label}</b></div>
-      <div className={classes.resultRel} style={{flexDirection: isDirect ? 'row-reverse' : 'row', justifyContent:  isDirect ? 'flex-end' : 'flex-start',}}><span>{props.input_value}</span><span>&nbsp;&nbsp;————&nbsp;&nbsp;{props.rel} &nbsp;&nbsp;————&nbsp;&nbsp;</span><span>{props.label}</span></div>
+      <div className={classes.resultRel} style={{flexDirection: isDirect ? 'row-reverse' : 'row', justifyContent:  isDirect ? 'flex-end' : 'flex-start',}}><span>{props.input_value}&nbsp;&nbsp;————&nbsp;&nbsp;</span><span className={classes.listOfRelations}>{props.rel}  &nbsp;/&nbsp; {props.rel}  &nbsp;/&nbsp; {props.rel}</span><span>&nbsp;&nbsp;————&nbsp;&nbsp;{props.label}</span></div>
       <div className={classes.resultActions}>
         <button 
           style={{backgroundColor: isHover ? props.color : 'transparent',

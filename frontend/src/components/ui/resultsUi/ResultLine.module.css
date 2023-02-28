@@ -43,9 +43,16 @@
 .resultRel {
   display: inline-flex;
   align-items: center;
-  width: 50%;
+  width: 60%;
   text-transform: capitalize;
   justify-content: flex-start;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.listOfRelations {
+  max-width: 50%;
+  overflow: scroll;
 }
 
 .resultActions {
