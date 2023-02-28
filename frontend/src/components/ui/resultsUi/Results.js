@@ -16,7 +16,9 @@ class ResultsTest extends React.Component {
             activeRelations: [],
             filterOn: false,
             relationOn: false,
-            relations: []
+            relations: [],
+            relationSet: {},
+            disabled: {}
         }
     };
 
@@ -42,8 +44,20 @@ class ResultsTest extends React.Component {
         // set filter on 
         if (currentFilters.length === 0) {
             this.setState({ filterOn: false });
+            this.setState(prevState => {
+                let disabled = Object.assign({}, prevState.disabled);  
+                Object.keys(disabled).forEach(v => disabled[v] = true);                             
+                return { disabled };                                 
+              })
+            
         } else {
             this.setState({ filterOn: true });
+            this.setState(prevState => {
+                let disabled = Object.assign({}, prevState.disabled);  
+                Object.keys(disabled).forEach(v => disabled[v] = false);
+                currentFilters.forEach (f => disabled[f] = !disabled[f]);                              
+                return { disabled };                                 
+              })
         }
 
     }
@@ -85,15 +99,19 @@ class ResultsTest extends React.Component {
     combineFilters = (currentFilters, lastOne) => {
         // apply filters thare are inside both lists
         let otherFilters = [];
+        let newItemCombined = [];
         if (lastOne === 'relation') {
             otherFilters = this.state.activeFilters;
         } else if (lastOne === 'filter') {
             otherFilters = this.state.activeRelations;
         }
-        const newItem = (this.state.totalResults).filter((newVal) => otherFilters.indexOf(newVal.cat) > -1 || currentFilters.indexOf(newVal.rel) > -1);
-        const newItemCombined = (newItem).filter((newVal) => currentFilters.indexOf(newVal.cat) > -1 || currentFilters.indexOf(newVal.rel) > -1);
+        const newItem = (this.state.totalResults).filter((newVal) => otherFilters.indexOf(newVal.cat) > -1 || otherFilters.indexOf(newVal.rel) > -1);
+        newItemCombined = (newItem).filter((newVal) => currentFilters.indexOf(newVal.cat) > -1 || currentFilters.indexOf(newVal.rel) > -1);
+        if (currentFilters.length === 0) {
+            newItemCombined = newItem;
+        }
+
         this.setState({ filteredResults: newItemCombined });
-        console.log(newItemCombined);
     }
 
     resetFilters = () => {
@@ -101,6 +119,12 @@ class ResultsTest extends React.Component {
         this.setState({ relationOn: false });
         this.setState({ activeFilters: [] });
         this.setState({ activeRelations: [] });
+        this.setState(prevState => {
+            let disabled = Object.assign({}, prevState.disabled);  
+            Object.keys(disabled).forEach(v => disabled[v] = true)  ;                             
+            return { disabled };                                 
+          })
+        
     }
 
     render() {
@@ -125,10 +149,13 @@ class ResultsTest extends React.Component {
                             })}
                         </Filters>
                         <Filters filtersType="Relations" color={this.props.color} selectedOn={this.state.relationOn}>
-                            {this.state.relations.map(rel => {
-                                return (
-                                    <FilterButton isDisabled={true} buttonClick={() => this.addRelation(rel)} selectedOn={this.state.relationOn}>{rel}</FilterButton>
-                                )
+                            {Object.entries(this.state.relationSet).map(set => {
+                                return set[1].map(rel => {
+                                    return (
+                                        <FilterButton isDisabled={this.state.disabled[set[0]]} buttonClick={() => this.addRelation(rel)} selectedOn={this.state.relationOn}>{rel}</FilterButton>
+                                    )
+                                })
+                                
                             })}
                         </Filters>
                     </FiltersContainer>
@@ -146,8 +173,9 @@ class ResultsTest extends React.Component {
 
     fetchResults = (uri) => {
         let results = [];
-
         let relations = [];
+        let relationSet = {};
+        let disabled = {};
         // get dataset
         fetch('/datasets')
             .then((res) => res.json())
@@ -180,8 +208,22 @@ class ResultsTest extends React.Component {
                                             if (!relations.includes(res.relIdentityLabel.value)) {
                                                 relations.push(res.relIdentityLabel.value);
                                             }
+
+                                            if (!relationSet[singleResult.cat]) {
+                                                relationSet[singleResult.cat] = [];
+                                                disabled[singleResult.cat] = true;
+                                                if (!relationSet[singleResult.cat].includes(res.relIdentityLabel.value)) {
+                                                    relationSet[singleResult.cat].push(res.relIdentityLabel.value)
+                                                }
+                                            } else {
+                                                if (!relationSet[singleResult.cat].includes(res.relIdentityLabel.value)) {
+                                                    relationSet[singleResult.cat].push(res.relIdentityLabel.value)
+                                                }
+                                            }
                                             this.setState({ totalResults: results });
-                                            this.setState({ relations: relations })
+                                            this.setState({ relations: relations });
+                                            this.setState({ relationSet: relationSet });
+                                            this.setState({ disabled: disabled })
                                         }
                                         )
                                     });
