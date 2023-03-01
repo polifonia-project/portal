@@ -18,7 +18,8 @@ class ResultsTest extends React.Component {
             relationOn: false,
             relations: [],
             relationSet: {},
-            disabled: {}
+            disabled: {},
+            loader: false
         }
     };
 
@@ -45,19 +46,19 @@ class ResultsTest extends React.Component {
         if (currentFilters.length === 0) {
             this.setState({ filterOn: false });
             this.setState(prevState => {
-                let disabled = Object.assign({}, prevState.disabled);  
-                Object.keys(disabled).forEach(v => disabled[v] = true);                             
-                return { disabled };                                 
-              })
-            
+                let disabled = Object.assign({}, prevState.disabled);
+                Object.keys(disabled).forEach(v => disabled[v] = true);
+                return { disabled };
+            })
+
         } else {
             this.setState({ filterOn: true });
             this.setState(prevState => {
-                let disabled = Object.assign({}, prevState.disabled);  
+                let disabled = Object.assign({}, prevState.disabled);
                 Object.keys(disabled).forEach(v => disabled[v] = false);
-                currentFilters.forEach (f => disabled[f] = !disabled[f]);                              
-                return { disabled };                                 
-              })
+                currentFilters.forEach(f => disabled[f] = !disabled[f]);
+                return { disabled };
+            })
         }
 
     }
@@ -120,11 +121,11 @@ class ResultsTest extends React.Component {
         this.setState({ activeFilters: [] });
         this.setState({ activeRelations: [] });
         this.setState(prevState => {
-            let disabled = Object.assign({}, prevState.disabled);  
-            Object.keys(disabled).forEach(v => disabled[v] = true)  ;                             
-            return { disabled };                                 
-          })
-        
+            let disabled = Object.assign({}, prevState.disabled);
+            Object.keys(disabled).forEach(v => disabled[v] = true);
+            return { disabled };
+        })
+
     }
 
     render() {
@@ -135,39 +136,44 @@ class ResultsTest extends React.Component {
             Data = this.state.totalResults;
         }
         return (
-            <div>
-                <ResultsHeader>
-                    <FiltersContainer>
-                        <FilterButton isDisabled={this.state.filterOn || this.state.relationOn} resetClass='resetButton' buttonClick={() => this.resetFilters()}>
-                            Reset <span className="resetIcon">⟲</span>
-                        </FilterButton> <br />
-                        <Filters filtersType="Filters" color={this.props.color} selectedOn={this.state.filterOn}>
-                            {Object.keys(this.props.filters).map(f => {
+            <>
+                {this.state.loader
+                    ? <p>Something is loading.</p>
+                    : <div>
+                        <ResultsHeader>
+                            <FiltersContainer>
+                                <FilterButton isDisabled={this.state.filterOn || this.state.relationOn} resetClass='resetButton' buttonClick={() => this.resetFilters()}>
+                                    Reset <span className="resetIcon">⟲</span>
+                                </FilterButton> <br />
+                                <Filters filtersType="Filters" color={this.props.color} selectedOn={this.state.filterOn}>
+                                    {Object.keys(this.props.filters).map(f => {
+                                        return (
+                                            <FilterButton isDisabled={true} buttonClick={() => this.addFilter(f)} selectedOn={this.state.filterOn}>{f}</FilterButton>
+                                        )
+                                    })}
+                                </Filters>
+                                <Filters filtersType="Relations" color={this.props.color} selectedOn={this.state.relationOn}>
+                                    {Object.entries(this.state.relationSet).map(set => {
+                                        return set[1].map(rel => {
+                                            return (
+                                                <FilterButton isDisabled={this.state.disabled[set[0]]} buttonClick={() => this.addRelation(rel)} selectedOn={this.state.relationOn}>{rel}</FilterButton>
+                                            )
+                                        })
+
+                                    })}
+                                </Filters>
+                            </FiltersContainer>
+                        </ResultsHeader>
+                        <div style={{ height: '400px', overflow: 'scroll' }}>
+                            {Data.map((res, index) => {
                                 return (
-                                    <FilterButton isDisabled={true} buttonClick={() => this.addFilter(f)} selectedOn={this.state.filterOn}>{f}</FilterButton>
+                                    <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1} color={this.props.color} input_value={this.props.input_value} ></ResultLine>
                                 )
                             })}
-                        </Filters>
-                        <Filters filtersType="Relations" color={this.props.color} selectedOn={this.state.relationOn}>
-                            {Object.entries(this.state.relationSet).map(set => {
-                                return set[1].map(rel => {
-                                    return (
-                                        <FilterButton isDisabled={this.state.disabled[set[0]]} buttonClick={() => this.addRelation(rel)} selectedOn={this.state.relationOn}>{rel}</FilterButton>
-                                    )
-                                })
-                                
-                            })}
-                        </Filters>
-                    </FiltersContainer>
-                </ResultsHeader>
-                <div style={{ height: '400px', overflow: 'scroll' }}>
-                    {Data.map((res, index) => {
-                        return (
-                            <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1} color={this.props.color} input_value={this.props.input_value} ></ResultLine>
-                        )
-                    })}
-                </div>
-            </div>
+                        </div>
+                    </div>
+                }
+            </>
         )
     }
 
@@ -176,6 +182,7 @@ class ResultsTest extends React.Component {
         let relations = [];
         let relationSet = {};
         let disabled = {};
+        this.setState({ loader: true });
         // get dataset
         fetch('/datasets')
             .then((res) => res.json())
@@ -223,7 +230,8 @@ class ResultsTest extends React.Component {
                                             this.setState({ totalResults: results });
                                             this.setState({ relations: relations });
                                             this.setState({ relationSet: relationSet });
-                                            this.setState({ disabled: disabled })
+                                            this.setState({ disabled: disabled });
+                                            this.setState({ loader: false })
                                         }
                                         )
                                     });
