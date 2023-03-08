@@ -4,6 +4,7 @@ import Filters from "./Filters";
 import FiltersContainer from "./FiltersContainer";
 import ResultsHeader from "./ResultsHeader";
 import FilterButton from "./FilterButton";
+import LoaderResultLine from "../loaders/LoaderResultLine";
 // import classes from "./Results.module.css" 
 
 class ResultsTest extends React.Component {
@@ -137,15 +138,12 @@ class ResultsTest extends React.Component {
         }
         return (
             <>
-                {this.state.loader
-                    ? <p>Something is loading.</p>
-                    : <div>
-                        <ResultsHeader>
+            <ResultsHeader>
                             <FiltersContainer>
                                 <FilterButton isDisabled={this.state.filterOn || this.state.relationOn} resetClass='resetButton' buttonClick={() => this.resetFilters()}>
                                     Reset <span className="resetIcon">⟲</span>
                                 </FilterButton> <br />
-                                <Filters filtersType="Filters" color={this.props.color} selectedOn={this.state.filterOn}>
+                                <Filters filtersType="Categories" color={this.props.color} selectedOn={this.state.filterOn}>
                                     {Object.keys(this.props.filters).map(f => {
                                         return (
                                             <FilterButton isDisabled={true} buttonClick={() => this.addFilter(f)} selectedOn={this.state.filterOn}>{f}</FilterButton>
@@ -163,7 +161,10 @@ class ResultsTest extends React.Component {
                                     })}
                                 </Filters>
                             </FiltersContainer>
-                        </ResultsHeader>
+                </ResultsHeader>
+                {this.state.loader
+                    ? <LoaderResultLine></LoaderResultLine>
+                    : <div>
                         <div style={{ height: '400px', overflow: 'scroll' }}>
                             {Data.map((res, index) => {
                                 return (

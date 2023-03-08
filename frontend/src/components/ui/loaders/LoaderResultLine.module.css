@@ -23,7 +23,6 @@
   width: 4%;
   justify-content: left;
   padding-left: 10px;
-
 }
 
 .resultLabel {
@@ -48,6 +47,7 @@
   justify-content: flex-start;
   white-space: nowrap;
   overflow: hidden;
+  color: grey;
 }
 
 .listOfRelations {
@@ -71,30 +71,54 @@
 }
 
 .resultActions button {
-  background-color: #f4edec;
-  border: 0.2px solid grey;
+  border: 0.2px solid transparent;
   margin: 0px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   border-radius: 50%;
-  cursor: pointer;
   margin-left: 10px;
-  height: 25px;
-  width: 25px;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  transition: transform 1s ease;
+  height: 30px;
+  width: 30px;
+}
+
+.resultNum button {
+  border: 0.2px solid transparent;
+  margin: 0px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
 }
 
 
-.resultActions button:hover {
-  transform: scale(1.5);
+.loaderResult {
+  border: 0.4px solid transparent;
+  border-radius: 3px;
+  color: transparent;
+  background: linear-gradient(90deg, rgba(230,230,230,1) 31%, rgba(244,237,236,1) 47%, rgba(230,230,230,1) 68%);
+  background-size: 300% 200%;
+  animation: slidein 1s ease 0.5s infinite;
 }
 
 .categoryResult {
   padding: 7px 14px 7px 14px;
-  border: 0.4px solid rgb(71, 71, 71);
+  border: 0.4px solid transparent;
   border-radius: 3px;
+  color: transparent;
+  background: linear-gradient(90deg, rgba(230,230,230,1) 31%, rgba(244,237,236,1) 47%, rgba(230,230,230,1) 68%);
+  background-size: 300% 200%;
+  animation: slidein 1s ease 0.5s infinite;
+}
+
+@keyframes slidein {
+  from {
+    background-position: right;
+  }
+
+  to {
+    background-position: left;
+  }
 }
