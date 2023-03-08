@@ -1,0 +1,38 @@
+.barchartContainer {
+    width: 10%;
+    box-shadow: inset 1px 9px 10px -16px black;
+    display: flex;
+    justify-content: right;
+}
+
+.barchartBox {
+    margin-top: 20px;
+    margin-right: 30px;
+    max-width: 60%;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+
+    align-items: center;
+    align-items: end;
+    transition: transform 1s ease;
+}
+
+.barchartBox:hover {
+    transform: scale(2);
+}
+
+.barLine {
+    height: 100%;
+    width: 1px;
+    margin: 1.5px;
+    background-color: black;
+    display:inline-flex;
+    border-radius: 20px;
+    
+
+}
+
+.barLine:hover {
+    
+}
