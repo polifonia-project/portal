@@ -2,18 +2,26 @@ import React from "react";
 import classes from "./SourcesBarchart.module.css";
 
 function SourcesBarchart() {
+
+  const a = { 
+    'pilot dataset': 10,
+    'pilot data': 20,
+    'musow': 50,
+    'wikidata': 70,
+    'choco': 50,
+    'sound and vision': 20,
+    'polifonia': 10,
+  }
+
   return (
     <div className={classes.barchartContainer}>
       <div className={classes.barchartBox}>
-          <span className={classes.barLine} style={{height: '20%'}}/>
-          <span className={classes.barLine} style={{height: '10%'}}/>
-          <span className={classes.barLine} style={{height: '20%'}}/>
-          <span className={classes.barLine} style={{height: '50%'}}/>
-          <span className={classes.barLine} style={{height: '80%'}}/>
-          <span className={classes.barLine} style={{height: '80%'}}/>
-          <span className={classes.barLine} style={{height: '50%'}}/>
-          <span className={classes.barLine} style={{height: '20%'}}/>
-          <span className={classes.barLine} style={{height: '40%'}}/>
+        {Object.values(a).map(value => (
+            <span className={classes.barLine}>
+            <span className={classes.barLineRight} style={{height: value + '%'}}/>
+            <span className={classes.barLineLeft} style={{height: value + '%'}}/>
+            </span>
+        ))}
       </div>
     </div>
   );

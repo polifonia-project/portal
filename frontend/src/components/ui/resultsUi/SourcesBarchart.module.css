@@ -1,8 +1,12 @@
 .barchartContainer {
     width: 10%;
-    box-shadow: inset 1px 9px 10px -16px black;
     display: flex;
     justify-content: right;
+    border-bottom:1px solid #e8e3e3;
+}
+
+.barchartContainer div {
+    font-size: 0.8em;
 }
 
 .barchartBox {
@@ -12,27 +16,40 @@
     height: 20px;
     display: flex;
     justify-content: center;
-
-    align-items: center;
-    align-items: end;
+    align-items: flex-end;
     transition: transform 1s ease;
 }
 
 .barchartBox:hover {
-    transform: scale(2);
+
+    
 }
 
 .barLine {
     height: 100%;
-    width: 1px;
-    margin: 1.5px;
-    background-color: black;
     display:inline-flex;
-    border-radius: 20px;
-    
-
+    align-items: flex-end;
+    border-radius: 30px;
+    padding-bottom:4px;
 }
 
-.barLine:hover {
-    
+.barLineRight {
+    height: 100%;
+    width: 4px;
+    background-color: transparent;
+    display:inline-flex;
+    transition: all 1s ease;
+    border-right: 1px solid black;
+}
+
+.barLineLeft {
+    height: 100%;
+    width: 3px;
+    background-color: transparent;
+    display:inline-flex;
+    transition: all 1s ease;  
+}
+
+.barLine:hover { 
+    background-color: rgb(227, 225, 225);
 }
