@@ -111,13 +111,17 @@ def suggested_results(d, c, cat_id, word):
         endpoint = k
         values_to_search = ' '.join(v)
         label_query = '''
-        SELECT DISTINCT ?entity ?entityLabel
+        SELECT DISTINCT ?entity (SAMPLE(?entityLabel) AS ?entityLabel)
         WHERE {
             VALUES ?entity {'''+values_to_search+'''} .
             ?entity rdfs:label ?entityLabel .
-            OPTIONAL { FILTER (langMatches(lang(?entityLabel), "EN")) }
-        }
+            OPTIONAL { 
+                FILTER (langMatches(lang(?entityLabel), "en"))
+                BIND (?entityLabel AS ?entityLabel) 
+                }
+        } GROUP BY ?entity
         '''
         results = get_sparql_results(label_query, endpoint)
         suggestions.update(results)
+    print(suggestions)
     return suggestions
