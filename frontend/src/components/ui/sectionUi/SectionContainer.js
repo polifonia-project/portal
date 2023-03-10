@@ -34,6 +34,7 @@ function SectionContainer(props) {
                 cat={props.id.split("-")[1]}
                 filters={props.filters}
                 el_iri={selected_uri}
+                datasets={props.datasets}
                 color={props.color}
                 input_value={selected_value}
             >

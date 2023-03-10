@@ -8,6 +8,7 @@ class Sections extends React.Component {
     this.state = {
       clips: [],
       categories: [],
+      datasets: []
     };
   }
 
@@ -15,6 +16,7 @@ class Sections extends React.Component {
     fetch("/conf_info")
       .then((res) => res.json())
       .then((data) => {
+        this.setState({ datasets: data.datasets });
         this.setState({ clips: data.clips });
         this.setState({ categories: data.categories });
       });
@@ -42,6 +44,7 @@ class Sections extends React.Component {
             el_iri={clip.iri}
             category={clip.category}
             catName={this.state.categories[clip.category].name}
+            datasets={this.state.datasets}
             placeholder={clip.name} >
           </SectionContainer>
         ))}

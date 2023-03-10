@@ -138,29 +138,29 @@ class ResultsTest extends React.Component {
         }
         return (
             <>
-            <ResultsHeader>
-                            <FiltersContainer>
-                                <FilterButton isDisabled={this.state.filterOn || this.state.relationOn} resetClass='resetButton' buttonClick={() => this.resetFilters()}>
-                                    Reset <span className="resetIcon">⟲</span>
-                                </FilterButton> <br />
-                                <Filters filtersType="Categories" color={this.props.color} selectedOn={this.state.filterOn}>
-                                    {Object.keys(this.props.filters).map(f => {
-                                        return (
-                                            <FilterButton isDisabled={true} buttonClick={() => this.addFilter(f)} selectedOn={this.state.filterOn}>{f}</FilterButton>
-                                        )
-                                    })}
-                                </Filters>
-                                <Filters filtersType="Relations" color={this.props.color} selectedOn={this.state.relationOn}>
-                                    {Object.entries(this.state.relationSet).map(set => {
-                                        return set[1].map(rel => {
-                                            return (
-                                                <FilterButton isDisabled={this.state.disabled[set[0]]} buttonClick={() => this.addRelation(rel)} selectedOn={this.state.relationOn}>{rel}</FilterButton>
-                                            )
-                                        })
+                <ResultsHeader>
+                    <FiltersContainer>
+                        <FilterButton isDisabled={this.state.filterOn || this.state.relationOn} resetClass='resetButton' buttonClick={() => this.resetFilters()}>
+                            Reset <span className="resetIcon">⟲</span>
+                        </FilterButton> <br />
+                        <Filters filtersType="Categories" color={this.props.color} selectedOn={this.state.filterOn}>
+                            {Object.keys(this.props.filters).map(f => {
+                                return (
+                                    <FilterButton isDisabled={true} buttonClick={() => this.addFilter(f)} selectedOn={this.state.filterOn}>{f}</FilterButton>
+                                )
+                            })}
+                        </Filters>
+                        <Filters filtersType="Relations" color={this.props.color} selectedOn={this.state.relationOn}>
+                            {Object.entries(this.state.relationSet).map(set => {
+                                return set[1].map(rel => {
+                                    return (
+                                        <FilterButton isDisabled={this.state.disabled[set[0]]} buttonClick={() => this.addRelation(rel)} selectedOn={this.state.relationOn}>{rel}</FilterButton>
+                                    )
+                                })
 
-                                    })}
-                                </Filters>
-                            </FiltersContainer>
+                            })}
+                        </Filters>
+                    </FiltersContainer>
                 </ResultsHeader>
                 {this.state.loader
                     ? <LoaderResultLine></LoaderResultLine>
@@ -185,67 +185,66 @@ class ResultsTest extends React.Component {
         let disabled = {};
         this.setState({ loader: true });
         // get dataset
-        fetch('/datasets')
-            .then((res) => res.json())
-            .then((data) => {
-                for (const cat in this.props.filters) {
-                    for (const obj of this.props.filters[cat]) {
-                        let dataset_id = obj.dataset
-                        let iri_base = data[dataset_id].iri_base
-                        // check if iri_base and el_iri are part of the same dataset
-                        if ((uri).includes(iri_base)) {
-                            let query_method = data[dataset_id].query_method
-                            let endpoint = data[dataset_id][query_method]
-                            let query = obj.query;
-                            query = query.replace('<>', '<' + uri + '>');
-                            let url = endpoint + '?query=' + encodeURIComponent(query);
-                            try {
-                                fetch(url, {
-                                    method: 'GET',
-                                    headers: { 'Accept': 'application/sparql-results+json' }
-                                })
-                                    .then((res) => res.json())
-                                    .then((data) => {
-                                        data.results.bindings.forEach(res => {
-                                            let singleResult = {}
-                                            singleResult.uri = res.entity.value;
-                                            singleResult.label = res.entityLabel.value;
-                                            singleResult.cat = cat;
-                                            singleResult.rel = res.relIdentityLabel.value;
-                                            results.push(singleResult);
-                                            if (!relations.includes(res.relIdentityLabel.value)) {
-                                                relations.push(res.relIdentityLabel.value);
-                                            }
+        let datasets = this.props.datasets;
 
-                                            if (!relationSet[singleResult.cat]) {
-                                                relationSet[singleResult.cat] = [];
-                                                disabled[singleResult.cat] = true;
-                                                if (!relationSet[singleResult.cat].includes(res.relIdentityLabel.value)) {
-                                                    relationSet[singleResult.cat].push(res.relIdentityLabel.value)
-                                                }
-                                            } else {
-                                                if (!relationSet[singleResult.cat].includes(res.relIdentityLabel.value)) {
-                                                    relationSet[singleResult.cat].push(res.relIdentityLabel.value)
-                                                }
-                                            }
-                                            this.setState({ totalResults: results });
-                                            this.setState({ relations: relations });
-                                            this.setState({ relationSet: relationSet });
-                                            this.setState({ disabled: disabled });
-                                            this.setState({ loader: false })
+        for (const cat in this.props.filters) {
+            for (const obj of this.props.filters[cat]) {
+                let dataset_id = obj.dataset
+                let iri_base = datasets[dataset_id].iri_base
+                // check if iri_base and el_iri are part of the same dataset
+                if ((uri).includes(iri_base)) {
+                    let query_method = datasets[dataset_id].query_method
+                    let endpoint = datasets[dataset_id][query_method]
+                    let query = obj.query;
+                    query = query.replace('<>', '<' + uri + '>');
+                    let url = endpoint + '?query=' + encodeURIComponent(query);
+                    try {
+                        fetch(url, {
+                            method: 'GET',
+                            headers: { 'Accept': 'application/sparql-results+json' }
+                        })
+                            .then((res) => res.json())
+                            .then((data) => {
+                                data.results.bindings.forEach(res => {
+                                    let singleResult = {}
+                                    singleResult.uri = res.entity.value;
+                                    singleResult.label = res.entityLabel.value;
+                                    singleResult.cat = cat;
+                                    singleResult.rel = res.relIdentityLabel.value;
+                                    results.push(singleResult);
+                                    if (!relations.includes(res.relIdentityLabel.value)) {
+                                        relations.push(res.relIdentityLabel.value);
+                                    }
+
+                                    if (!relationSet[singleResult.cat]) {
+                                        relationSet[singleResult.cat] = [];
+                                        disabled[singleResult.cat] = true;
+                                        if (!relationSet[singleResult.cat].includes(res.relIdentityLabel.value)) {
+                                            relationSet[singleResult.cat].push(res.relIdentityLabel.value)
                                         }
-                                        )
-                                    });
-                            }
-                            catch (err) {
-                                console.log(err)
-                            }
-                        } else {
-                            console.log('Different iri base.')
-                        }
+                                    } else {
+                                        if (!relationSet[singleResult.cat].includes(res.relIdentityLabel.value)) {
+                                            relationSet[singleResult.cat].push(res.relIdentityLabel.value)
+                                        }
+                                    }
+                                    this.setState({ totalResults: results });
+                                    this.setState({ relations: relations });
+                                    this.setState({ relationSet: relationSet });
+                                    this.setState({ disabled: disabled });
+                                    this.setState({ loader: false })
+                                }
+                                )
+                            });
                     }
+                    catch (err) {
+                        console.log(err)
+                    }
+                } else {
+                    console.log('Different iri base.')
                 }
-            })
+            }
+        }
+
     }
 
     componentDidMount = () => {
