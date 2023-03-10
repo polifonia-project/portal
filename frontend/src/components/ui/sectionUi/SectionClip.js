@@ -30,7 +30,7 @@ class SectionClip extends React.Component {
   }
 
   componentDidMount = () => {
-    fetch("/feed")
+    fetch("/conf_info")
       .then((res) => res.json())
       .then((data) => {
         this.setState({ clips: data.clips });

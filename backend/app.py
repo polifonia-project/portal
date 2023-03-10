@@ -12,17 +12,12 @@ d, cat, f, car = methods.access_conf_info('conf_general.json')
 i.ingest_data(d, cat)
 
 
-@app.route('/feed', methods=['GET'])
+@app.route('/conf_info', methods=['GET'])
 def feed():
     f_list = []
     for clip in f.values():
         f_list.append(clip)
-    return jsonify({'categories': cat, 'carousel': car, 'clips': f_list})
-
-
-@app.route('/datasets', methods=['GET'])
-def datasets():
-    return jsonify(d)
+    return jsonify({'datasets': d, 'categories': cat, 'carousel': car, 'clips': f_list})
 
 
 @app.route('/index', methods=['GET'])

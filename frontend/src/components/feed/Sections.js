@@ -12,7 +12,7 @@ class Sections extends React.Component {
   }
 
   componentDidMount = () => {
-    fetch("/feed")
+    fetch("/conf_info")
       .then((res) => res.json())
       .then((data) => {
         this.setState({ clips: data.clips });
@@ -32,17 +32,17 @@ class Sections extends React.Component {
       <div className={classes.sectionscontainer}>
         <button className={classes.backtotop} onClick={() => this.handleBackScroll("topHook")} ></button>
         {this.state.clips.map((clip, index) => (
-          <SectionContainer 
-              key={index} 
-              id={"section-" + clip.category} 
-              header={this.state.categories[clip.category].section.title} 
-              description={this.state.categories[clip.category].section.description} 
-              color={this.state.categories[clip.category].color} 
-              filters={this.state.categories[clip.category].filters} 
-              el_iri={clip.iri}
-              category={clip.category} 
-              catName={this.state.categories[clip.category].name}
-              placeholder={clip.name} >
+          <SectionContainer
+            key={index}
+            id={"section-" + clip.category}
+            header={this.state.categories[clip.category].section.title}
+            description={this.state.categories[clip.category].section.description}
+            color={this.state.categories[clip.category].color}
+            filters={this.state.categories[clip.category].filters}
+            el_iri={clip.iri}
+            category={clip.category}
+            catName={this.state.categories[clip.category].name}
+            placeholder={clip.name} >
           </SectionContainer>
         ))}
       </div>

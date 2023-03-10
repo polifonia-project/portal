@@ -11,7 +11,7 @@ class CategoriesNav extends React.Component {
   }
 
   componentDidMount = () => {
-    fetch("/feed")
+    fetch("/conf_info")
       .then((res) => res.json())
       .then((data) => {
         this.setState({ clips: data.clips });
@@ -30,8 +30,8 @@ class CategoriesNav extends React.Component {
     return (
       <div className={classes.categoriesContainer} id='categoriesNav'>
         {Object.values(this.state.categories).map((cat, index) =>
-          <div key={'nav'+index}>
-            <button onClick={() => this.handleClickScroll("section-"+cat.id)}>
+          <div key={'nav' + index}>
+            <button onClick={() => this.handleClickScroll("section-" + cat.id)}>
               {cat.name}
             </button>
           </div>

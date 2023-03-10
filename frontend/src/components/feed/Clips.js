@@ -14,7 +14,7 @@ class Clips extends React.Component {
     }
 
     componentDidMount = () => {
-        fetch('/feed')
+        fetch('/conf_info')
             .then((res) => res.json())
             .then((data) => {
                 this.setState({ clips: data.clips })
@@ -27,18 +27,18 @@ class Clips extends React.Component {
     render() {
         return (
             <div className={classes.clipscontainer} id='clips_container'>
-                    {this.state.clips.map((clip, index) => (
-                        <Clip 
-                        key={index} 
-                        title={clip.name} 
-                        color={this.state.categories[clip.category].color} 
-                        category = {clip.category} 
-                        section={'section-'+ clip.category} 
-                        clip_id={'clip'+ index} 
-                        infotitle={clip.textcontext.title} 
-                        description={clip.textcontext.description} 
+                {this.state.clips.map((clip, index) => (
+                    <Clip
+                        key={index}
+                        title={clip.name}
+                        color={this.state.categories[clip.category].color}
+                        category={clip.category}
+                        section={'section-' + clip.category}
+                        clip_id={'clip' + index}
+                        infotitle={clip.textcontext.title}
+                        description={clip.textcontext.description}
                         highlights={clip.textcontext.highlights}></Clip>
-                    ))}
+                ))}
 
             </div>
         )
