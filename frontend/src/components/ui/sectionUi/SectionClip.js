@@ -20,7 +20,8 @@ class SectionClip extends React.Component {
       searchField: "",
       value_obj: {},
       input: "",
-      isFocused: false
+      isFocused: false,
+      mainClip: this.props.el_iri,
     };
   };
 
@@ -73,15 +74,18 @@ class SectionClip extends React.Component {
   onFocus = () => { this.setState({ isFocused: true }) };
   onBlur = () => { this.setState({ isFocused: false }) };
   onClickSearch = () => { window.console.log('search start') };
-  onClickReset = () => {
+  onClickReset = e => {
     this.setState({ input: '' });
+    this.props.setInputValue(this.props.placeholder);
     this.setState({ value_obj: {} });
+    this.props.onQuery(this.state.mainClip);
   };
   onOptionClick = e => {
     this.setState({ input: e.currentTarget.innerText });
     this.props.setInputValue(e.currentTarget.innerText);
     this.setState({ value_obj: {} });
     this.props.onQuery(e.currentTarget.getAttribute('el_iri'));
+    console.log(e.currentTarget.getAttribute('el_iri'));
   };
 
 
@@ -103,7 +107,7 @@ class SectionClip extends React.Component {
             onKeyDown={this.onKeyDown}
             onInput={(e) => this.handleInput(e)}
           ></input>
-          <button type="reset" className={classes.searchbutton} onClick={this.onClickReset}>
+          <button type="reset" className={classes.resetbutton} onClick={this.onClickReset} el_iri={this.props.el_iri}>
             <img alt='search button' src={this.state.isFocused ? closeicon : blankicon}></img>
           </button>
           <button type="submit" className={classes.searchbutton} onClick={this.onClickSearch}>

@@ -71,9 +71,19 @@ input:focus::placeholder {
   padding: 0px;
   margin: 0px;
   width: 4%;
-  cursor: pointer;
   margin-right: 10px;
   margin-left: 5px;
+}
+
+.resetbutton {
+  background-color: transparent;
+  border: transparent;
+  padding: 0px;
+  margin: 0px;
+  width: 4%;
+  margin-right: 10px;
+  margin-left: 5px;
+  cursor: pointer;
 }
 
 input[type="search"]::-webkit-search-decoration,

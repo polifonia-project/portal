@@ -5,6 +5,10 @@ import FiltersContainer from "./FiltersContainer";
 import ResultsHeader from "./ResultsHeader";
 import FilterButton from "./FilterButton";
 import LoaderResultLine from "../loaders/LoaderResultLine";
+import InfiniteScroll from "react-infinite-scroll-component";
+import LoadMoreResults from "../loaders/LoadMoreResults";
+import NoMoreResults from "../loaders/NoMoreResults";
+import NoResultsError from "../loaders/NoResultsError";
 // import classes from "./Results.module.css" 
 
 class ResultsTest extends React.Component {
@@ -20,7 +24,8 @@ class ResultsTest extends React.Component {
             relations: [],
             relationSet: {},
             disabled: {},
-            loader: false
+            loader: false,
+            hasMore: true
         }
     };
 
@@ -129,6 +134,11 @@ class ResultsTest extends React.Component {
 
     }
 
+    fetchMoreData = () => {
+          this.setState({ hasMore: false });
+          return;
+        }
+
     render() {
         let Data = [];
         if (this.state.activeFilters.length > 0 || this.state.activeRelations.length > 0) {
@@ -163,14 +173,23 @@ class ResultsTest extends React.Component {
                     </FiltersContainer>
                 </ResultsHeader>
                 {this.state.loader
-                    ? <LoaderResultLine></LoaderResultLine>
+                    ? <NoResultsError />
                     : <div>
                         <div style={{ height: '400px', overflow: 'scroll' }}>
-                            {Data.map((res, index) => {
-                                return (
-                                    <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1} color={this.props.color} input_value={this.props.input_value} ></ResultLine>
-                                )
-                            })}
+                        <InfiniteScroll
+                        dataLength={Data.length}
+                        next={this.fetchMoreData}
+                        hasMore={this.state.hasMore}
+                        loader={<LoadMoreResults/>}
+                        height={400}
+                        endMessage={<NoMoreResults/>}
+                        >
+                        {Data.map((res, index) => {
+                        return (
+                        <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1} color={this.props.color} input_value={this.props.input_value} ></ResultLine>
+                        )
+                        })}
+                        </InfiniteScroll>
                         </div>
                     </div>
                 }
