@@ -137,7 +137,7 @@ class ResultsTest extends React.Component {
     }
 
     fetchMoreData = () => {
-        this.fetchResults(this.props.el_iri, true);
+        this.fetchResults(this.props.el_iri, false);
         return;
     }
 
@@ -199,7 +199,7 @@ class ResultsTest extends React.Component {
         )
     }
 
-    fetchResults = (uri, newState = false) => {
+    fetchResults = (uri, newState = true) => {
         let results = [];
         let relations = [];
         let relationSet = {};
@@ -210,7 +210,7 @@ class ResultsTest extends React.Component {
         let catOffset = {};
 
 
-        if (newState === true) {
+        if (newState === false) {
             results = this.state.totalResults;
             relations = this.state.relations;
             relationSet = this.state.relationSet;
@@ -296,7 +296,6 @@ class ResultsTest extends React.Component {
                                 }
                                 else {
                                     this.setState({ loader: false })
-
                                     catOffset[cat] = false;
                                     this.setState({ catOffset: catOffset })
                                     if (!Object.values(this.state.catOffset).includes(true)) {
