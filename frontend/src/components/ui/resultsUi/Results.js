@@ -173,7 +173,7 @@ class ResultsTest extends React.Component {
                     </FiltersContainer>
                 </ResultsHeader>
                 {this.state.loader
-                    ? <NoResultsError />
+                    ? <NoResultsError/>
                     : <div>
                         <div style={{ height: '400px', overflow: 'scroll' }}>
                         <InfiniteScroll
@@ -186,7 +186,7 @@ class ResultsTest extends React.Component {
                         >
                         {Data.map((res, index) => {
                         return (
-                        <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1} color={this.props.color} input_value={this.props.input_value} ></ResultLine>
+                        <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1} color={this.props.color} input_value={this.props.input_value} isdirect={false}></ResultLine>
                         )
                         })}
                         </InfiniteScroll>
