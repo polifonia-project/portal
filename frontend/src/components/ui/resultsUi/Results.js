@@ -137,7 +137,7 @@ class ResultsTest extends React.Component {
     }
 
     fetchMoreData = () => {
-        this.fetchResults(this.props.el_iri);
+        this.fetchResults(this.props.el_iri, true);
         return;
     }
 
@@ -199,13 +199,28 @@ class ResultsTest extends React.Component {
         )
     }
 
-    fetchResults = (uri) => {
-        let results = this.state.totalResults;
-        let relations = this.state.relations;
-        let relationSet = this.state.relationSet;
-        let disabled = this.state.disabled;
+    fetchResults = (uri, newState = false) => {
+        let results = [];
+        let relations = [];
+        let relationSet = {};
+        let disabled = {};
+        // get offset value
+        let queryOffset = 0;
+        // get offset switch per category
+        let catOffset = {};
+
+
+        if (newState === true) {
+            results = this.state.totalResults;
+            relations = this.state.relations;
+            relationSet = this.state.relationSet;
+            disabled = this.state.disabled;
+            queryOffset = this.state.offsetValue;
+            catOffset = this.state.catOffset;
+        }
 
         this.setState({ loader: true });
+
         // get dataset
         let datasets = this.props.datasets;
         // define the LIMIT value for each query, that is proportional to the number of filters on a max of 20
@@ -213,13 +228,7 @@ class ResultsTest extends React.Component {
         let queryLimit = Math.round(20 / catNum);
         let queryLimitString = 'LIMIT ' + queryLimit.toString();
 
-        // get offset value
-        let queryOffset = this.state.offsetValue;
-
         let queryOffsetString = 'OFFSET ' + queryOffset.toString();
-
-        // get offset switch per category
-        let catOffset = this.state.catOffset;
 
         for (const cat in this.props.filters) {
             for (const obj of this.props.filters[cat]) {
@@ -315,6 +324,8 @@ class ResultsTest extends React.Component {
     componentDidUpdate = (prevProps) => {
         if (this.props.el_iri !== prevProps.el_iri) {
             console.log('NEW URI', this.props.el_iri)
+            this.setState({ hasMore: true });
+            this.setState({ loader: true });
             this.fetchResults(this.props.el_iri);
         }
     }
