@@ -25,7 +25,9 @@ class ResultsTest extends React.Component {
             relationSet: {},
             disabled: {},
             loader: false,
-            hasMore: true
+            hasMore: true,
+            offsetValue: 0,
+            catOffset: {}
         }
     };
 
@@ -135,9 +137,9 @@ class ResultsTest extends React.Component {
     }
 
     fetchMoreData = () => {
-          this.setState({ hasMore: false });
-          return;
-        }
+        this.fetchResults(this.props.el_iri);
+        return;
+    }
 
     render() {
         let Data = [];
@@ -173,23 +175,23 @@ class ResultsTest extends React.Component {
                     </FiltersContainer>
                 </ResultsHeader>
                 {this.state.loader
-                    ? <NoResultsError/>
+                    ? <NoResultsError />
                     : <div>
                         <div style={{ height: '400px', overflow: 'scroll' }}>
-                        <InfiniteScroll
-                        dataLength={Data.length}
-                        next={this.fetchMoreData}
-                        hasMore={this.state.hasMore}
-                        loader={<LoadMoreResults/>}
-                        height={400}
-                        endMessage={<NoMoreResults/>}
-                        >
-                        {Data.map((res, index) => {
-                        return (
-                        <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1} color={this.props.color} input_value={this.props.input_value} isdirect={false}></ResultLine>
-                        )
-                        })}
-                        </InfiniteScroll>
+                            <InfiniteScroll
+                                dataLength={Data.length}
+                                next={this.fetchMoreData}
+                                hasMore={this.state.hasMore}
+                                loader={<LoadMoreResults />}
+                                height={400}
+                                endMessage={<NoMoreResults />}
+                            >
+                                {Data.map((res, index) => {
+                                    return (
+                                        <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1} color={this.props.color} input_value={this.props.input_value} isdirect={false}></ResultLine>
+                                    )
+                                })}
+                            </InfiniteScroll>
                         </div>
                     </div>
                 }
@@ -198,16 +200,30 @@ class ResultsTest extends React.Component {
     }
 
     fetchResults = (uri) => {
-        let results = [];
-        let relations = [];
-        let relationSet = {};
-        let disabled = {};
+        let results = this.state.totalResults;
+        let relations = this.state.relations;
+        let relationSet = this.state.relationSet;
+        let disabled = this.state.disabled;
+
         this.setState({ loader: true });
         // get dataset
         let datasets = this.props.datasets;
+        // define the LIMIT value for each query, that is proportional to the number of filters on a max of 20
+        let catNum = Object.keys(this.props.filters).length;
+        let queryLimit = Math.round(20 / catNum);
+        let queryLimitString = 'LIMIT ' + queryLimit.toString();
+
+        // get offset value
+        let queryOffset = this.state.offsetValue;
+
+        let queryOffsetString = 'OFFSET ' + queryOffset.toString();
+
+        // get offset switch per category
+        let catOffset = this.state.catOffset;
 
         for (const cat in this.props.filters) {
             for (const obj of this.props.filters[cat]) {
+
                 let dataset_id = obj.dataset
                 let iri_base = datasets[dataset_id].iri_base
                 // check if iri_base and el_iri are part of the same dataset
@@ -216,6 +232,7 @@ class ResultsTest extends React.Component {
                     let endpoint = datasets[dataset_id][query_method]
                     let query = obj.query;
                     query = query.replace('<>', '<' + uri + '>');
+                    query = query.concat(' ', queryOffsetString).concat(' ', queryLimitString);
                     let url = endpoint + '?query=' + encodeURIComponent(query);
                     try {
                         fetch(url, {
@@ -224,35 +241,59 @@ class ResultsTest extends React.Component {
                         })
                             .then((res) => res.json())
                             .then((data) => {
-                                data.results.bindings.forEach(res => {
-                                    let singleResult = {}
-                                    singleResult.uri = res.entity.value;
-                                    singleResult.label = res.entityLabel.value;
-                                    singleResult.cat = cat;
-                                    singleResult.rel = res.relIdentityLabel.value;
-                                    results.push(singleResult);
-                                    if (!relations.includes(res.relIdentityLabel.value)) {
-                                        relations.push(res.relIdentityLabel.value);
-                                    }
 
-                                    if (!relationSet[singleResult.cat]) {
-                                        relationSet[singleResult.cat] = [];
-                                        disabled[singleResult.cat] = true;
-                                        if (!relationSet[singleResult.cat].includes(res.relIdentityLabel.value)) {
-                                            relationSet[singleResult.cat].push(res.relIdentityLabel.value)
+                                let dataLen = data.results.bindings.length;
+
+                                if (dataLen > 0) {
+                                    catOffset[cat] = true;
+                                    this.setState({ catOffset: catOffset })
+                                    data.results.bindings.forEach(res => {
+                                        let singleResult = {}
+                                        singleResult.uri = res.entity.value;
+                                        singleResult.label = res.entityLabel.value;
+                                        singleResult.cat = cat;
+                                        singleResult.rel = res.relIdentityLabel.value;
+                                        results.push(singleResult);
+                                        if (!relations.includes(res.relIdentityLabel.value)) {
+                                            relations.push(res.relIdentityLabel.value);
                                         }
-                                    } else {
-                                        if (!relationSet[singleResult.cat].includes(res.relIdentityLabel.value)) {
-                                            relationSet[singleResult.cat].push(res.relIdentityLabel.value)
+
+                                        if (!relationSet[singleResult.cat]) {
+                                            relationSet[singleResult.cat] = [];
+                                            disabled[singleResult.cat] = true;
+                                            if (!relationSet[singleResult.cat].includes(res.relIdentityLabel.value)) {
+                                                relationSet[singleResult.cat].push(res.relIdentityLabel.value)
+                                            }
+                                        } else {
+                                            if (!relationSet[singleResult.cat].includes(res.relIdentityLabel.value)) {
+                                                relationSet[singleResult.cat].push(res.relIdentityLabel.value)
+                                            }
+                                        }
+                                        this.setState({ totalResults: results });
+                                        this.setState({ relations: relations });
+                                        this.setState({ relationSet: relationSet });
+                                        this.setState({ disabled: disabled });
+                                        this.setState({ loader: false })
+                                    }
+                                    )
+                                    if (dataLen < queryLimit) {
+
+                                        catOffset[cat] = false;
+                                        this.setState({ catOffset: catOffset })
+                                        if (!Object.values(this.state.catOffset).includes(true)) {
+                                            this.setState({ hasMore: false })
                                         }
                                     }
-                                    this.setState({ totalResults: results });
-                                    this.setState({ relations: relations });
-                                    this.setState({ relationSet: relationSet });
-                                    this.setState({ disabled: disabled });
-                                    this.setState({ loader: false })
                                 }
-                                )
+                                else {
+                                    this.setState({ loader: false })
+
+                                    catOffset[cat] = false;
+                                    this.setState({ catOffset: catOffset })
+                                    if (!Object.values(this.state.catOffset).includes(true)) {
+                                        this.setState({ hasMore: false })
+                                    }
+                                }
                             });
                     }
                     catch (err) {
@@ -263,6 +304,7 @@ class ResultsTest extends React.Component {
                 }
             }
         }
+        this.setState({ offsetValue: queryOffset + queryLimit });
 
     }
 
