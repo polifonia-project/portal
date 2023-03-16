@@ -5,10 +5,9 @@ import FiltersContainer from "./FiltersContainer";
 import ResultsHeader from "./ResultsHeader";
 import FilterButton from "./FilterButton";
 import LoaderResultLine from "../loaders/LoaderResultLine";
-import InfiniteScroll from "react-infinite-scroll-component";
 import LoadMoreResults from "../loaders/LoadMoreResults";
+import InfiniteScroll from "react-infinite-scroll-component";
 import NoMoreResults from "../loaders/NoMoreResults";
-import NoResultsError from "../loaders/NoResultsError";
 // import classes from "./Results.module.css" 
 
 class ResultsTest extends React.Component {
@@ -137,7 +136,8 @@ class ResultsTest extends React.Component {
     }
 
     fetchMoreData = () => {
-        this.fetchResults(this.props.el_iri, false);
+        setTimeout(() => this.fetchResults(this.props.el_iri, false), 800);
+        // this.fetchResults(this.props.el_iri, false);
         return;
     }
 
@@ -174,27 +174,21 @@ class ResultsTest extends React.Component {
                         </Filters>
                     </FiltersContainer>
                 </ResultsHeader>
-                {this.state.loader
-                    ? <NoResultsError />
-                    : <div>
-                        <div style={{ height: '400px', overflow: 'scroll' }}>
                             <InfiniteScroll
                                 dataLength={Data.length}
                                 next={this.fetchMoreData}
                                 hasMore={this.state.hasMore}
                                 loader={<LoadMoreResults />}
                                 height={400}
+                                scrollThreshold={1}
                                 endMessage={<NoMoreResults />}
                             >
                                 {Data.map((res, index) => {
                                     return (
-                                        <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1} color={this.props.color} input_value={this.props.input_value} isdirect={false}></ResultLine>
+                                        <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1} color={this.props.color} input_value={this.props.input_value} isdirect={false} key={index}></ResultLine>
                                     )
                                 })}
                             </InfiniteScroll>
-                        </div>
-                    </div>
-                }
             </>
         )
     }

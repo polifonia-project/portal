@@ -37,12 +37,12 @@ function MainNavigation(props) {
   }
 
   return (
-    <header className={classes.header} id='mainHeader'>
+    <header className={classes.header} id='mainHeader' >
       <span className={classes.title}>
         <Link to="/"><img className={classes.logo} src={logo} alt="Logo" id='mainLogo'/></Link>
         <div className={classes.section} id='sectionName'><span>{props.sectionName}</span></div>
       </span>
-      <span  className={classes.menu} id='menuOptions'>
+      <span  className={classes.menu} id='menuOptions' >
         <img onClick={toggleSound} className={classes.sound} src={soundOn ? soundon : soundoff} alt="Sound Toggle" />
         <img onClick={toggleMenu} className={classes.hamburger} src={menuOpen ? closemenu : hamburger} alt="Hamburger Menu" />
       </span>

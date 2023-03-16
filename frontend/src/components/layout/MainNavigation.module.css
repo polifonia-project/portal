@@ -32,7 +32,14 @@
   border-color:#f4edec;
   padding: 15px 0px 15px 0px;
   display: flex;
+
+  /*
+  border-width: 0px  0px 0px 0px !important; 
+  background-color: #f4edec6f !important;
+  background-color: #f4edec1f !important; 
+  */
 }
+
 
 .title {
   width: 50%;
