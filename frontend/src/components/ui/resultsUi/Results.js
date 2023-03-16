@@ -137,7 +137,6 @@ class ResultsTest extends React.Component {
 
     fetchMoreData = () => {
         setTimeout(() => this.fetchResults(this.props.el_iri, false), 800);
-        // this.fetchResults(this.props.el_iri, false);
         return;
     }
 
