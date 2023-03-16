@@ -14,10 +14,15 @@
     width: 100%;
     background-color: black;
     background-image: url('https://polifonia-project.eu/wp-content/uploads/2021/01/polifonia-animazione-home-scaled.gif');
-    /* background-image: url('../assets/png/sfondo.png');  */
-    background-size: auto;
     background-position: top;
     background-repeat: no-repeat;
+
+    /*
+    background-image: url('../assets/png/sfondo.png');
+    background-size: 150%;
+    background-image: none;
+    background-color: aqua;
+    */
   }
 
   .mainContainer {
