@@ -188,7 +188,7 @@ class ResultsTest extends React.Component {
                             >
                                 {Data.map((res, index) => {
                                     return (
-                                        <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1} color={this.props.color} input_value={this.props.input_value} isdirect={false}></ResultLine>
+                                        <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1} color={this.props.color} input_value={this.props.input_value} isdirect={res.inverse}></ResultLine>
                                     )
                                 })}
                             </InfiniteScroll>
@@ -200,6 +200,7 @@ class ResultsTest extends React.Component {
     }
 
     fetchResults = (uri, newState = true) => {
+
         let results = [];
         let relations = [];
         let relationSet = {};
@@ -208,6 +209,9 @@ class ResultsTest extends React.Component {
         let queryOffset = 0;
         // get offset switch per category
         let catOffset = {};
+        for (const cat in this.props.filters) {
+            catOffset[cat] = true;
+        }
 
 
         if (newState === false) {
@@ -232,7 +236,6 @@ class ResultsTest extends React.Component {
 
         for (const cat in this.props.filters) {
             for (const obj of this.props.filters[cat]) {
-
                 let dataset_id = obj.dataset
                 let iri_base = datasets[dataset_id].iri_base
                 // check if iri_base and el_iri are part of the same dataset
@@ -240,7 +243,7 @@ class ResultsTest extends React.Component {
                     let query_method = datasets[dataset_id].query_method
                     let endpoint = datasets[dataset_id][query_method]
                     let query = obj.query;
-                    query = query.replace('<>', '<' + uri + '>');
+                    query = query.replaceAll('<>', '<' + uri + '>');
                     query = query.concat(' ', queryOffsetString).concat(' ', queryLimitString);
                     let url = endpoint + '?query=' + encodeURIComponent(query);
                     try {
@@ -254,28 +257,39 @@ class ResultsTest extends React.Component {
                                 let dataLen = data.results.bindings.length;
 
                                 if (dataLen > 0) {
-                                    catOffset[cat] = true;
-                                    this.setState({ catOffset: catOffset })
                                     data.results.bindings.forEach(res => {
                                         let singleResult = {}
                                         singleResult.uri = res.entity.value;
                                         singleResult.label = res.entityLabel.value;
                                         singleResult.cat = cat;
-                                        singleResult.rel = res.relIdentityLabel.value;
+                                        singleResult.rel = '';
+                                        singleResult.inverse = false;
+                                        if (res.inverse_rel) {
+                                            if (res.inverse_rel.value.length !== '') {
+                                                singleResult.rel = res.inverse_rel.value;
+                                                singleResult.inverse = true;
+                                            } else {
+                                                singleResult.rel = res.rel.value;
+                                                singleResult.inverse = false;
+                                            }
+                                        } else {
+                                            singleResult.rel = res.rel.value;
+                                            singleResult.inverse = false;
+                                        }
                                         results.push(singleResult);
-                                        if (!relations.includes(res.relIdentityLabel.value)) {
-                                            relations.push(res.relIdentityLabel.value);
+                                        if (!relations.includes(singleResult.rel)) {
+                                            relations.push(singleResult.rel);
                                         }
 
                                         if (!relationSet[singleResult.cat]) {
                                             relationSet[singleResult.cat] = [];
                                             disabled[singleResult.cat] = true;
-                                            if (!relationSet[singleResult.cat].includes(res.relIdentityLabel.value)) {
-                                                relationSet[singleResult.cat].push(res.relIdentityLabel.value)
+                                            if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
+                                                relationSet[singleResult.cat].push(singleResult.rel)
                                             }
                                         } else {
-                                            if (!relationSet[singleResult.cat].includes(res.relIdentityLabel.value)) {
-                                                relationSet[singleResult.cat].push(res.relIdentityLabel.value)
+                                            if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
+                                                relationSet[singleResult.cat].push(singleResult.rel)
                                             }
                                         }
                                         this.setState({ totalResults: results });
@@ -286,19 +300,21 @@ class ResultsTest extends React.Component {
                                     }
                                     )
                                     if (dataLen < queryLimit) {
-
                                         catOffset[cat] = false;
                                         this.setState({ catOffset: catOffset })
-                                        if (!Object.values(this.state.catOffset).includes(true)) {
+                                        if (!Object.values(catOffset).includes(true)) {
                                             this.setState({ hasMore: false })
                                         }
+                                    } else {
+                                        catOffset[cat] = true;
+                                        this.setState({ catOffset: catOffset });
                                     }
                                 }
                                 else {
                                     this.setState({ loader: false })
                                     catOffset[cat] = false;
                                     this.setState({ catOffset: catOffset })
-                                    if (!Object.values(this.state.catOffset).includes(true)) {
+                                    if (!Object.values(catOffset).includes(true)) {
                                         this.setState({ hasMore: false })
                                     }
                                 }

@@ -17,13 +17,13 @@
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q515 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q515 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -54,13 +54,13 @@
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737/wdt:P737/wdt:P737 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q515 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P19 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of birth\") AS ?rel) } UNION { <> wdt:P20 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of death\") AS ?rel) } UNION { <> wdt:P937 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has work location\") AS ?rel) }. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -91,13 +91,13 @@
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { { <> wdt:P3095 ?entity. ?entity wdt:P31/wdt:P279* wd:Q5 . BIND(str(\"practiced by\") AS ?rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q515 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P495 ?entity. ?entity wdt:P31/wdt:P279* wd:Q6256 . BIND(str(\"has country of origin\") AS ?rel) }. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -128,13 +128,7 @@
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
-                }
-            ],
-            "places": [
-                {
-                    "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q515 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P162 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"producer\") AS ?rel) } UNION { <> wdt:P175 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"performer\") AS ?rel) } UNION { <> wdt:P86 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"composer\") AS ?rel) }. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -165,13 +159,13 @@
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q515 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q515 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -198,13 +192,13 @@
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737/wdt:P737/wdt:P737 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q515 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P19 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of birth\") AS ?rel) } UNION { <> wdt:P20 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of death\") AS ?rel) } UNION { <> wdt:P937 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has work location\") AS ?rel) }. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -231,13 +225,13 @@
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { { <> wdt:P6 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has head of government\") AS ?rel) } UNION {<> wdt:P417 ?entity . ?entity wdt:P31 wd:Q5 . BIND(str(\"has patron saint\") AS ?rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q515 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P190 ?entity. ?entity wdt:P31/wdt:P279* wd:Q82794 . BIND(str(\"twinned administrative body\") AS ?rel) } UNION {<> ^wdt:P47 ?entity . ?entity wdt:P31/wdt:P279* wd:Q82794 . BIND(str(\"shares border with\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -268,13 +262,7 @@
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
-                }
-            ],
-            "places": [
-                {
-                    "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?relIdentityLabel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q515 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P1535 ?entity. BIND(str(\"used by\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
