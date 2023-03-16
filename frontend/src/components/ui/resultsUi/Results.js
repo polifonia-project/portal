@@ -5,9 +5,9 @@ import FiltersContainer from "./FiltersContainer";
 import ResultsHeader from "./ResultsHeader";
 import FilterButton from "./FilterButton";
 import LoaderResultLine from "../loaders/LoaderResultLine";
-import LoadMoreResults from "../loaders/LoadMoreResults";
 import InfiniteScroll from "react-infinite-scroll-component";
 import NoMoreResults from "../loaders/NoMoreResults";
+import NoResultsError from "../loaders/NoResultsError";
 // import classes from "./Results.module.css" 
 
 class ResultsTest extends React.Component {
@@ -136,7 +136,7 @@ class ResultsTest extends React.Component {
     }
 
     fetchMoreData = () => {
-        setTimeout(() => this.fetchResults(this.props.el_iri, false), 800);
+        setTimeout(() => this.fetchResults(this.props.el_iri, false), 500);
         return;
     }
 
@@ -146,6 +146,7 @@ class ResultsTest extends React.Component {
             Data = this.state.filteredResults;
         } else if (this.state.activeFilters.length === 0 && this.state.activeRelations.length === 0) {
             Data = this.state.totalResults;
+            console.log('DATA',this.state.totalResults);
         }
         return (
             <>
@@ -173,11 +174,12 @@ class ResultsTest extends React.Component {
                         </Filters>
                     </FiltersContainer>
                 </ResultsHeader>
+                {Data.length ? 
                 <InfiniteScroll
                     dataLength={Data.length}
                     next={this.fetchMoreData}
                     hasMore={this.state.hasMore}
-                    loader={<LoadMoreResults />}
+                    loader={<LoaderResultLine />}
                     height={400}
                     scrollThreshold={1}
                     endMessage={<NoMoreResults />}
@@ -187,7 +189,8 @@ class ResultsTest extends React.Component {
                             <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1} color={this.props.color} input_value={this.props.input_value} isdirect={res.inverse}></ResultLine>
                         )
                     })}
-                </InfiniteScroll>
+                </InfiniteScroll> : <NoResultsError /> 
+                }
             </>
         )
     }
@@ -314,7 +317,7 @@ class ResultsTest extends React.Component {
                             });
                     }
                     catch (err) {
-                        console.log(err)
+                        console.log('error', err)
                     }
                 } else {
                     console.log('Different iri base.')
