@@ -7,7 +7,7 @@ function SourcesBarchart() {
   const a = { 
     'musow': 50,
     'wikidata': 30,
-    'choco': 70,
+    'choco': 100,
     'sound and vision': 90,
     'polifonia': 30,
   }

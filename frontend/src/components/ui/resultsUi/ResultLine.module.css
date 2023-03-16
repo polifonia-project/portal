@@ -98,3 +98,9 @@
   border: 0.4px solid rgb(71, 71, 71);
   border-radius: 3px;
 }
+
+.inputResult {
+  border: 0.4px solid rgb(71, 71, 71);
+  border-radius: 3px;
+  padding: 1px 3px 1px 3px;
+}
