@@ -26,7 +26,8 @@ class ResultsTest extends React.Component {
             loader: false,
             hasMore: true,
             offsetValue: 0,
-            catOffset: {}
+            catOffset: {},
+            endMessage: false
         }
     };
 
@@ -137,6 +138,7 @@ class ResultsTest extends React.Component {
 
     fetchMoreData = () => {
         setTimeout(() => this.fetchResults(this.props.el_iri, false), 500);
+        this.setState({ endMessage: true });
         return;
     }
 
@@ -182,7 +184,7 @@ class ResultsTest extends React.Component {
                     loader={<LoaderResultLine />}
                     height={400}
                     scrollThreshold={1}
-                    endMessage={<NoMoreResults />}
+                    endMessage={<NoMoreResults message={this.state.endMessage}/>}
                 >
                     {Data.map((res, index) => {
                         return (

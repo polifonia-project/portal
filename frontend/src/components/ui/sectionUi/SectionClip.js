@@ -7,6 +7,7 @@ import searchicon from '../../../assets/svg/magnglass.svg';
 import closeicon from '../../../assets/svg/closesearch.svg';
 import blankicon from '../../../assets/svg/blanksearch.svg';
 import Remainder from "./Remainder";
+import expandIcon from '../../../assets/svg/expand.svg';
 
 class SectionClip extends React.Component {
 
@@ -22,7 +23,21 @@ class SectionClip extends React.Component {
       input: "",
       isFocused: false,
       mainClip: this.props.el_iri,
+      isHover: false,
+      helpT: '',
+      helpTMargin: '400px'
     };
+  };
+
+
+  handleMouseEnter = (t,m) => {
+     this.setState({ isHover: true });
+     this.setState({ helpT: t });
+     this.setState({ helpTMargin: m });
+  };
+
+   handleMouseLeave = () => {
+    this.setState({ isHover: false });
   };
 
 
@@ -80,6 +95,7 @@ class SectionClip extends React.Component {
     this.setState({ value_obj: {} });
     this.props.onQuery(this.state.mainClip);
   };
+
   onOptionClick = e => {
     this.setState({ input: e.currentTarget.innerText });
     this.props.setInputValue(e.currentTarget.innerText);
@@ -88,6 +104,18 @@ class SectionClip extends React.Component {
     console.log(e.currentTarget.getAttribute('el_iri'));
   };
 
+  handleKeyPress = (e) => {
+    if (e.key === 'Enter'){
+      console.log('ENTER press here! ');
+    }; 
+    if (e.key === 'ArrowDown'){
+      console.log('DOWN press here! ');
+    };
+    
+    if (e.key === 'ArrowUp'){
+      console.log('UP press here! ');
+    }
+  };
 
   render() {
     return (
@@ -104,16 +132,28 @@ class SectionClip extends React.Component {
             onFocus={this.onFocus}
             onBlur={this.onBlur}
             value={this.state.input}
-            onKeyDown={this.onKeyDown}
             onInput={(e) => this.handleInput(e)}
+            onKeyDown={this.handleKeyPress}
           ></input>
-          <button type="reset" className={classes.resetbutton} onClick={this.onClickReset} el_iri={this.props.el_iri}>
-            <img alt='search button' src={this.state.isFocused ? closeicon : blankicon}></img>
+          <button type="reset" className={classes.resetbutton} onClick={this.onClickReset} 
+                  el_iri={this.props.el_iri} style={{cursor: this.state.isFocused ? 'pointer' : 'default'}}
+                  onMouseEnter={ this.state.isFocused ? () => this.handleMouseEnter('Reset','420px') : null}
+                  onMouseLeave={this.handleMouseLeave}>
+            <img alt='search button' src={this.state.isFocused ? closeicon : blankicon} ></img>
           </button>
-          <button type="submit" className={classes.searchbutton} onClick={this.onClickSearch}>
+          <button type="submit" className={classes.searchbutton} onClick={this.onClickSearch}
+                  onMouseEnter={() => this.handleMouseEnter('Digit / Select','435px')}
+                  onMouseLeave={this.handleMouseLeave}>
             <img alt='search button' src={searchicon}></img>
           </button>
         </div>
+        <div className={ classes.helpText + ' ' + classes[this.state.isHover ? 'helpTextVisible': 'helpTextHidden']} style={{marginLeft: this.state.helpTMargin}}><p>{this.state.helpT}</p></div>
+        <button 
+          className={classes.expandButton}
+          style={{backgroundImage: `url(${expandIcon})` }}
+          onMouseEnter={() => this.handleMouseEnter('Expand','508px')}
+          onMouseLeave={this.handleMouseLeave}
+        ></button>
         <div className={classes.suggestionsContainer}>
           {
             Object.keys(this.state.value_obj).map((key) => (

@@ -1,12 +1,12 @@
 import React from "react";
 import classes from "./NoMoreResults.module.css";
 
-function NoMoreResults() {
+function NoMoreResults(props) {
 
   return (
     <div>
         <div className={classes.resultLine}>
-        <div><p>You have seen it all!</p></div>
+        {props.message ? <div><p>You have seen it all!</p></div> : <div></div>}
         </div>
     </div>
   )
