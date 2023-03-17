@@ -25,7 +25,8 @@ class SectionClip extends React.Component {
       mainClip: this.props.el_iri,
       isHover: false,
       helpT: '',
-      helpTMargin: '400px'
+      helpTMargin: '400px',
+      arrowOption: false
     };
   };
 
@@ -39,7 +40,6 @@ class SectionClip extends React.Component {
    handleMouseLeave = () => {
     this.setState({ isHover: false });
   };
-
 
   handleInput = (e) => {
     this.props.onQuery((e.target.getAttribute('el_iri')));
@@ -93,6 +93,7 @@ class SectionClip extends React.Component {
     this.setState({ input: '' });
     this.props.setInputValue(this.props.placeholder);
     this.setState({ value_obj: {} });
+    this.setState({ arrowOption: false });
     this.props.onQuery(this.state.mainClip);
   };
 
@@ -101,19 +102,62 @@ class SectionClip extends React.Component {
     this.props.setInputValue(e.currentTarget.innerText);
     this.setState({ value_obj: {} });
     this.props.onQuery(e.currentTarget.getAttribute('el_iri'));
-    console.log(e.currentTarget.getAttribute('el_iri'));
+  };
+
+  onArrowClick = (iri, label) => {
+    this.setState({ input:label });
+    this.props.setInputValue(label);
+    this.setState({ value_obj: {} });
+    this.setState({ arrowOption: false });
+    this.props.onQuery(iri);
   };
 
   handleKeyPress = (e) => {
     if (e.key === 'Enter'){
-      console.log('ENTER press here! ');
+      if (Object.keys(this.state.value_obj).length > 0) {
+        if (this.state.arrowOption === false) { 
+          let label = document.getElementById('option0').innerText;
+          let iri = document.getElementById('option0').getAttribute('el_iri');
+          this.onArrowClick(iri,label);
+        } else {
+          let label = document.getElementById('option' + this.state.arrowOption).innerText;
+          let iri = document.getElementById('option' + this.state.arrowOption).getAttribute('el_iri');
+          this.onArrowClick(iri,label);
+        }
+      }
     }; 
     if (e.key === 'ArrowDown'){
-      console.log('DOWN press here! ');
+      if (this.state.arrowOption === false) {
+        this.setState({ arrowOption: 0});
+        document.getElementById('option0').style.backgroundColor = '#DDDCDC';
+      } else if (this.state.arrowOption === Object.keys(this.state.value_obj).length -1) {
+        document.getElementById('option' + this.state.arrowOption).style.backgroundColor = 'transparent';
+        let newNumber = Object.keys(this.state.value_obj).length -1;
+        document.getElementById('option' + newNumber).style.backgroundColor = '#DDDCDC';
+        this.setState({ arrowOption: newNumber});
+      } else {
+        document.getElementById('option' + this.state.arrowOption).style.backgroundColor = 'transparent';
+        let newNumber = this.state.arrowOption + 1;
+        document.getElementById('option' + newNumber).style.backgroundColor = '#DDDCDC';
+        this.setState({ arrowOption: newNumber});
+      }
     };
     
     if (e.key === 'ArrowUp'){
-      console.log('UP press here! ');
+      if (this.state.arrowOption === false) {
+        this.setState({ arrowOption: 0});
+        document.getElementById('option0').style.backgroundColor = '#DDDCDC';
+      } else if (this.state.arrowOption === 0) {
+        document.getElementById('option' + this.state.arrowOption).style.backgroundColor = 'transparent';
+        let newNumber = 0;
+        document.getElementById('option' + newNumber).style.backgroundColor = '#DDDCDC';
+        this.setState({ arrowOption: newNumber});
+      } else if (this.state.arrowOption > 0) {
+      document.getElementById('option' + this.state.arrowOption).style.backgroundColor = 'transparent';
+      let newNumber = this.state.arrowOption - 1;
+      document.getElementById('option' + newNumber).style.backgroundColor = '#DDDCDC';
+      this.setState({ arrowOption: newNumber});
+    }
     }
   };
 
@@ -154,10 +198,10 @@ class SectionClip extends React.Component {
           onMouseEnter={() => this.handleMouseEnter('Expand','508px')}
           onMouseLeave={this.handleMouseLeave}
         ></button>
-        <div className={classes.suggestionsContainer}>
+        <div className={classes.suggestionsContainer} style={{opacity: this.state.isFocused ? '1' : '0'}}>
           {
-            Object.keys(this.state.value_obj).map((key) => (
-              <p onClick={this.onOptionClick} className={classes.suggestionoption} el_iri={key}>{this.state.value_obj[key]}</p>
+            Object.keys(this.state.value_obj).map((key, index) => (
+              <p onClick={this.onOptionClick} className={classes.suggestionoption} el_iri={key} id={'option' + index}>{this.state.value_obj[key]}</p>
             ))
           }
         </div>
