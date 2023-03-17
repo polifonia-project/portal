@@ -58,12 +58,17 @@ class SectionClip extends React.Component {
     // to update state
     this.setState({ input: event.target.value });
     this.setState({ searchField: event.target.value });
+    if (event.target.value === '') {
+      this.setState({ value_obj: {} });
+      this.setState({ arrowOption: false});
+    };
     let request = "/index?data=" + event.target.value + "&cat_id=" + category;
     fetch(request)
       .then((res) => res.json())
       .then((data) => {
         this.setState({ value_obj: data });
       });
+
   };
 
   onVisibilityChange = (isVisible) => {
@@ -199,7 +204,7 @@ class SectionClip extends React.Component {
           onMouseLeave={this.handleMouseLeave}
         ></button>
         <div className={classes.suggestionsContainer} style={{opacity: this.state.isFocused ? '1' : '0'}}>
-          {
+          { 
             Object.keys(this.state.value_obj).map((key, index) => (
               <p onClick={this.onOptionClick} className={classes.suggestionoption} el_iri={key} id={'option' + index}>{this.state.value_obj[key]}</p>
             ))
