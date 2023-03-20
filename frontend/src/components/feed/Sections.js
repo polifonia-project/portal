@@ -33,7 +33,7 @@ class Sections extends React.Component {
   render() {
     return (
       <div className={classes.sectionscontainer}>
-        <button className={classes.backtotop} onClick={() => this.handleBackScroll("topHook")} ><img src={backTopButton}/></button>
+        <button className={classes.backtotop} onClick={() => this.handleBackScroll("topHook")} ><img alt='back to top button' src={backTopButton}/></button>
         {this.state.clips.map((clip, index) => (
           <SectionContainer
             key={index}
