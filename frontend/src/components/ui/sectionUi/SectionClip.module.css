@@ -157,12 +157,12 @@ input[type="search"]::-webkit-search-results-decoration {
   text-transform: capitalize;
   transition: all 1s ease;
 }
-
+/*
 .suggestionoption:hover {
   color: black;
   transform: scale(1.05);
   padding-left: 50px;
-}
+}*/
 
 .suggestionoption:first-child {
  padding-top: 50px;

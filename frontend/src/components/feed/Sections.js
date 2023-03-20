@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./Sections.module.css";
 import SectionContainer from "../ui/sectionUi/SectionContainer.js";
+import backTopButton from '../../assets/svg/backToTop.svg';
 
 class Sections extends React.Component {
   constructor() {
@@ -32,7 +33,7 @@ class Sections extends React.Component {
   render() {
     return (
       <div className={classes.sectionscontainer}>
-        <button className={classes.backtotop} onClick={() => this.handleBackScroll("topHook")} ></button>
+        <button className={classes.backtotop} onClick={() => this.handleBackScroll("topHook")} ><img src={backTopButton}/></button>
         {this.state.clips.map((clip, index) => (
           <SectionContainer
             key={index}

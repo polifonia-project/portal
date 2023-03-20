@@ -29,7 +29,36 @@ class SectionClip extends React.Component {
       arrowOption: false
     };
   };
+  handleMouseEnterOption = (e) => {
+    this.setState({ arrowOption: false});
+    let ul = e.target.parentNode;
+    let childern = ul.childNodes;
+    childern.forEach(li => {
+    this.unStyleOption(li)
+    });
+    this.styleOption(e.target);
+ };
 
+  handleMouseLeaveOption = (e) => {
+    this.setState({ arrowOption: false});
+    let ul = e.target.parentNode;
+    let childern = ul.childNodes;
+    childern.forEach(li => {
+    li.style.backgroundColor = 'transparent';
+    });
+ };
+
+ styleOption = (option) => {
+  option.style.color = 'black';
+  option.style.transform = 'scale(1.05)';
+  option.style.paddingLeft = '50px';
+};
+
+ unStyleOption = (option) => {
+  option.style.color = 'grey';
+  option.style.transform = 'scale(1)';
+  option.style.paddingLeft = '10px';
+};
 
   handleMouseEnter = (t,m) => {
      this.setState({ isHover: true });
@@ -131,19 +160,20 @@ class SectionClip extends React.Component {
         }
       }
     }; 
+
     if (e.key === 'ArrowDown'){
       if (this.state.arrowOption === false) {
         this.setState({ arrowOption: 0});
-        document.getElementById('option0').style.backgroundColor = '#DDDCDC';
+        this.styleOption(document.getElementById('option0'));
       } else if (this.state.arrowOption === Object.keys(this.state.value_obj).length -1) {
-        document.getElementById('option' + this.state.arrowOption).style.backgroundColor = 'transparent';
+        this.unStyleOption(document.getElementById('option' + this.state.arrowOption));
         let newNumber = Object.keys(this.state.value_obj).length -1;
-        document.getElementById('option' + newNumber).style.backgroundColor = '#DDDCDC';
+        this.styleOption(document.getElementById('option' + newNumber));
         this.setState({ arrowOption: newNumber});
       } else {
-        document.getElementById('option' + this.state.arrowOption).style.backgroundColor = 'transparent';
+        this.unStyleOption(document.getElementById('option' + this.state.arrowOption));
         let newNumber = this.state.arrowOption + 1;
-        document.getElementById('option' + newNumber).style.backgroundColor = '#DDDCDC';
+        this.styleOption(document.getElementById('option' + newNumber));
         this.setState({ arrowOption: newNumber});
       }
     };
@@ -151,16 +181,16 @@ class SectionClip extends React.Component {
     if (e.key === 'ArrowUp'){
       if (this.state.arrowOption === false) {
         this.setState({ arrowOption: 0});
-        document.getElementById('option0').style.backgroundColor = '#DDDCDC';
+        this.styleOption(document.getElementById('option0'));
       } else if (this.state.arrowOption === 0) {
-        document.getElementById('option' + this.state.arrowOption).style.backgroundColor = 'transparent';
+        this.unStyleOption(document.getElementById('option' + this.state.arrowOption));
         let newNumber = 0;
-        document.getElementById('option' + newNumber).style.backgroundColor = '#DDDCDC';
+        this.styleOption(document.getElementById('option' + newNumber));
         this.setState({ arrowOption: newNumber});
       } else if (this.state.arrowOption > 0) {
-      document.getElementById('option' + this.state.arrowOption).style.backgroundColor = 'transparent';
+        this.unStyleOption(document.getElementById('option' + this.state.arrowOption));
       let newNumber = this.state.arrowOption - 1;
-      document.getElementById('option' + newNumber).style.backgroundColor = '#DDDCDC';
+      this.styleOption(document.getElementById('option' + newNumber));
       this.setState({ arrowOption: newNumber});
     }
     }
@@ -203,10 +233,14 @@ class SectionClip extends React.Component {
           onMouseEnter={() => this.handleMouseEnter('Expand','508px')}
           onMouseLeave={this.handleMouseLeave}
         ></button>
-        <div className={classes.suggestionsContainer} style={{opacity: this.state.isFocused ? '1' : '0'}}>
+        <div id={'suggContainer'} className={classes.suggestionsContainer} style={{opacity: this.state.isFocused ? '1' : '0'}}>
           { 
             Object.keys(this.state.value_obj).map((key, index) => (
-              <p onClick={this.onOptionClick} className={classes.suggestionoption} el_iri={key} id={'option' + index}>{this.state.value_obj[key]}</p>
+              <p onClick={this.onOptionClick}
+                 onMouseEnter={ (e) => this.handleMouseEnterOption(e)}
+                 onMouseLeave={this.handleMouseLeaveOption}
+                 className={classes.suggestionoption} 
+                 el_iri={key} id={'option' + index}>{this.state.value_obj[key]}</p>
             ))
           }
         </div>

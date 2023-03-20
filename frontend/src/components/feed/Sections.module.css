@@ -8,26 +8,28 @@
 .backtotop {
     position: sticky; /* Fixed/sticky position */
     position: -webkit-sticky;
-    top: 38vh;
-    left: 95.5vw;
+    top: 37vh;
+    left: 95vw;
     z-index: 400;
     margin-right: 10px;
-    background-color: #f4edec;
+    background-color: transparent;
     border: none;
     display: inline-block;
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    backdrop-filter: blur(30.2px);
-    -webkit-backdrop-filter: blur(30.2px);
+    
     cursor: pointer;
     background-color: transparent;
     background-repeat: no-repeat;
     background-size: 80%;
     background-position: left 4px top 3px;
     box-shadow: 1px 1px 16px -11px black;
+    transition: all 1s ease;
+
 }
 
 .backtotop:hover {
     background-color: #f4edec;
+    transform: translateY(-20px) scale(1.3);
 }

@@ -148,7 +148,6 @@ class ResultsTest extends React.Component {
             Data = this.state.filteredResults;
         } else if (this.state.activeFilters.length === 0 && this.state.activeRelations.length === 0) {
             Data = this.state.totalResults;
-            console.log('DATA',this.state.totalResults);
         }
         return (
             <>
