@@ -158,6 +158,8 @@ class SectionClip extends React.Component {
           let iri = document.getElementById('option' + this.state.arrowOption).getAttribute('el_iri');
           this.onArrowClick(iri,label);
         }
+        let inputRef = document.getElementById('thisinput' + this.props.catName);
+        inputRef.blur();
       }
     }; 
 
@@ -204,6 +206,7 @@ class SectionClip extends React.Component {
         </VisibilitySensor>
         <div className={classes.sectionClip}>
           <input
+            id={'thisinput' + this.props.catName}
             type={'search'}
             placeholder={this.props.placeholder}
             el_iri={this.props.el_iri}

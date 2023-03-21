@@ -2,14 +2,16 @@ import React from "react";
 import classes from "./SourcesBarchart.module.css";
 import { useState } from "react";
 
-function SourcesBarchart() {
+function SourcesBarchart(props) {
 
   const a = { 
+    'hola': 60,
     'musow': 50,
-    'wikidata': 60,
-    'choco': 80,
-    'sound and vision': 90,
+    'wikidata': 100,
+    'choco': 50,
+    'sound and vision': 80,
     'polifonia': 40,
+
   }
 
   const [isShown, setIsShown] = useState(false);
@@ -48,15 +50,18 @@ function SourcesBarchart() {
 
   const handleReset = () => {
     setFiltered(false);
+    Object.keys(a).forEach(function(key) {
+      let li = document.getElementById('source' + props.cat + key);
+      li.style.backgroundColor = 'transparent';
+    });
   }
 
   return (
     <div className={classes.barchartContainer}>
       <div className={classes.barchartFilter} onClick={() => handleReset()}><div  className={ isFiltered ? classes.filterChecked : classes.filterUnchecked} style={{display: isFiltered ? 'flex' : isShown ? 'flex' : 'none'}}>Data source: {caption} ({textValue}%) <span style={{display: isFiltered ? 'flex' : 'none'}}><span className={classes.removeFilter}>+</span></span></div></div>
-      <div className={classes.barchartVisual}>
       <div className={classes.barchartBox} id={'barchartBox'}>
         {Object.entries(a).map(([key,value])=> (
-            <div id={'source' + key} className={classes.barLine} 
+            <div id={'source' + props.cat + key} className={classes.barLine} 
               onMouseEnter={() => handleHover(key, value)}
               onMouseLeave={() => setIsShown(false)}
               onClick={(e) => handleClick(e, key, value)}
@@ -66,7 +71,6 @@ function SourcesBarchart() {
             </div>
         ))}
       </div> 
-      </div>
   </div>
   );
 }

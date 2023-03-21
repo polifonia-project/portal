@@ -6,7 +6,7 @@ function ResultsHeader(props) {
   return (
     <div className={classes.stickyHeader}>
       {props.children}
-      <SourcesBarchart></SourcesBarchart>
+      <SourcesBarchart cat={props.cat}></SourcesBarchart>
       <div className={classes.resheader}>
         <div className={classes.headerNum}>#</div>
         <div className={classes.headerCat}><span className={classes.headerCatBorder}>Category</span></div>

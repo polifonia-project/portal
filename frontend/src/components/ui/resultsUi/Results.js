@@ -151,7 +151,7 @@ class ResultsTest extends React.Component {
         }
         return (
             <>
-                <ResultsHeader>
+                <ResultsHeader cat={this.props.cat}>
                     <FiltersContainer>
                         <FilterButton isDisabled={this.state.filterOn || this.state.relationOn} resetClass='resetButton' buttonClick={() => this.resetFilters()}>
                             Reset <span className="resetIcon">⟲</span>
