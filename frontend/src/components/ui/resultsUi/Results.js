@@ -175,22 +175,22 @@ class ResultsTest extends React.Component {
                         </Filters>
                     </FiltersContainer>
                 </ResultsHeader>
-                {Data.length ? 
-                <InfiniteScroll
-                    dataLength={Data.length}
-                    next={this.fetchMoreData}
-                    hasMore={this.state.hasMore}
-                    loader={<LoaderResultLine />}
-                    height={400}
-                    scrollThreshold={1}
-                    endMessage={<NoMoreResults message={this.state.endMessage}/>}
-                >
-                    {Data.map((res, index) => {
-                        return (
-                            <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1} color={this.props.color} input_value={this.props.input_value} isdirect={res.inverse}></ResultLine>
-                        )
-                    })}
-                </InfiniteScroll> : <NoResultsError /> 
+                {Data.length ?
+                    <InfiniteScroll
+                        dataLength={Data.length}
+                        next={this.fetchMoreData}
+                        hasMore={this.state.hasMore}
+                        loader={<LoaderResultLine />}
+                        height={400}
+                        scrollThreshold={1}
+                        endMessage={<NoMoreResults message={this.state.endMessage} />}
+                    >
+                        {Data.map((res, index) => {
+                            return (
+                                <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1} color={this.props.color} input_value={this.props.input_value} isdirect={res.inverse}></ResultLine>
+                            )
+                        })}
+                    </InfiniteScroll> : <NoResultsError />
                 }
             </>
         )
@@ -261,6 +261,7 @@ class ResultsTest extends React.Component {
                                         singleResult.cat = cat;
                                         singleResult.rel = '';
                                         singleResult.inverse = false;
+                                        singleResult.dataset = datasets[dataset_id].name;
                                         if (res.inverse_rel) {
                                             if (res.inverse_rel.value.length !== '') {
                                                 singleResult.rel = res.inverse_rel.value;
