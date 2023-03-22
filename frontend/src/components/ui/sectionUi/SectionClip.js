@@ -235,6 +235,7 @@ class SectionClip extends React.Component {
           style={{backgroundImage: `url(${expandIcon})` }}
           onMouseEnter={() => this.handleMouseEnter('Expand','508px')}
           onMouseLeave={this.handleMouseLeave}
+          onClick={() => console.log(this.context['setCardOpen'](true))}
         ></button>
         <div id={'suggContainer'} className={classes.suggestionsContainer} style={{opacity: this.state.isFocused ? '1' : '0'}}>
           { 

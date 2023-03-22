@@ -1,11 +1,14 @@
 import React from "react";
 import classes from "./ResultLine.module.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { ThemeContext } from "../../../context/ThemeContext";
 import expandIcon from '../../../assets/svg/expand.svg';
 import expandIconWhite from '../../../assets/svg/expandWhite.svg';
 
 function ResultLine(props) {
   const [isHover, setIsHover] = useState(false);
+  const { setCardOpen } = useContext(ThemeContext);
+  const { setCardContent } = useContext(ThemeContext);
 
   const handleMouseEnter = () => {
      setIsHover(true);
@@ -28,6 +31,7 @@ function ResultLine(props) {
                   backgroundImage: isHover ? `url(${expandIconWhite})` : `url(${expandIcon})` }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
+          onClick={() => {setCardOpen(true); setCardContent({title: props.label, cat: 'Card category', iri: 'Card iri', color: props.color})}}
         ></button>
       </div>
     </div>

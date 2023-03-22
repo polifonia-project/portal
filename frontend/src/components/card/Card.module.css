@@ -1,0 +1,138 @@
+.cardContainer {
+  position: fixed; 
+  width: 100%; 
+  height: 100vh; 
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #f4edec;
+  z-index: 190; 
+  transition: all 1s ease;
+  display: flex;
+  flex-wrap: wrap;
+  transform: translateX(-100%);
+  /*
+  background-color: transparent;
+  backdrop-filter: blur(19.2px);  blur glass effect
+  -webkit-backdrop-filter: blur(14.2px); */
+}
+
+.titleBlock {
+  margin-top: 60px;
+  background-color: rgb(226, 226, 226);
+  height: 25%;
+  width: 100%;
+  font-family: "Garnett Medium";
+  font-family: "Helvetica Light";
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  padding: 30px 100px 30px 100px;
+}
+
+.titleBlock button {
+  padding: 30px;
+  background-color: transparent;
+  box-shadow:0px 0px 25px -10px black;
+  border: 0.2px solid transparent;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all 1.5s ease;
+  transform: rotate(45deg);
+}
+
+.titleBlock button:hover {
+  transform: scale(1.2) rotate(45deg);
+  background-color: #f4edec;
+}
+
+.firstBlock {
+  height: 60%;
+  width: 25%;
+  padding: 0px 0px 30px 100px;
+}
+
+.firstBlock h2 {
+  font-size: 1em;
+  color: black;
+  font-weight: bold;
+}
+
+.firstBlock p {
+  font-size: 0.8em;
+  text-align: justify;
+}
+
+.secondBlock {
+  height: 60%;
+  width: 25%;
+  padding: 0px 50px 30px 100px;
+}
+
+.secondBlock ul {
+  list-style-type: none;
+  padding: 0px;
+  font-size:  0.8em;
+}
+
+.secondBlock li {
+padding-bottom: 3px;
+}
+
+.secondBlock h2 {
+  font-size: 1em;
+  color: black;
+  font-weight: bold;
+}
+
+.secondBlock p {
+  font-size: 0.8em;
+  text-align: justify;
+}
+.linkButton {
+  background-color: #f4edec;
+  padding: 5px 15px 5px 15px;
+  border-radius: 8px;
+  box-shadow:0px 0px 15px -8px black;
+  margin: 10px 10px 0px 0px;
+  border: 0px;
+  cursor: pointer;
+  font: inherit;
+	outline: inherit;
+  font-size: 0.8em;
+  transition: all 1s ease;
+}
+
+.linkButton:hover {
+  transform: scale(1.1);
+}
+
+.thirdBlock {
+  height: 60%;
+  width: 50%;
+  padding: 0px 50px 30px 100px;
+}
+
+.thirdBlock h2 {
+  font-size: 1em;
+  color: black;
+  font-weight: bold;
+}
+
+.thirdBlock p {
+  font-size: 0.8em;
+  text-align: justify;
+}
+
+.dataVis {
+  display: block;
+  background-color: rgb(230, 227, 227);
+  width: 550px;
+  height: 300px;
+}

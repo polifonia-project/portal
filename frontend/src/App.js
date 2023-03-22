@@ -12,9 +12,11 @@ function App() {
   const [pagetitle, setPageTitle] = useState();
   const [theme, setTheme] = useState('default');
   const [soundOn, setSoundOn] = useState(false);
+  const [cardOpen, setCardOpen] = useState(false);
+  const [cardContent, setCardContent] = useState({title: 'Card Title', cat: 'Card category', iri: 'Card iri', color: 'red'});
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, soundOn, setSoundOn}}>
+    <ThemeContext.Provider value={{ theme, setTheme, soundOn, setSoundOn, cardOpen, setCardOpen, cardContent, setCardContent}}>
       <Layout title={pagetitle}>
         <Routes>
           <Route path="/" element={<FeedPage func={setPageTitle} />} />

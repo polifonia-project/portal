@@ -5,4 +5,8 @@ export const ThemeContext = createContext({
     setTheme: () => {},
     soundOn: false,
     setSoundOn: () => {},
+    cardOpen: false,
+    setCardOpen: () => {},
+    cardContent: {},
+    setContent: () => {},
   });
