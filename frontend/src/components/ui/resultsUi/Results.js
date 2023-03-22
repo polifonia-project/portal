@@ -236,94 +236,97 @@ class ResultsTest extends React.Component {
                 let dataset_id = obj.dataset
                 let iri_base = datasets[dataset_id].iri_base
                 // check if iri_base and el_iri are part of the same dataset
-                if ((uri).includes(iri_base)) {
-                    let query_method = datasets[dataset_id].query_method
-                    let endpoint = datasets[dataset_id][query_method]
-                    let query = obj.query;
-                    query = query.replaceAll('<>', '<' + uri + '>');
-                    query = query.concat(' ', queryOffsetString).concat(' ', queryLimitString);
-                    let url = endpoint + '?query=' + encodeURIComponent(query);
-                    try {
-                        fetch(url, {
-                            method: 'GET',
-                            headers: { 'Accept': 'application/sparql-results+json' }
-                        })
-                            .then((res) => res.json())
-                            .then((data) => {
+                // if ((uri).includes(iri_base)) {
+                let query_method = datasets[dataset_id].query_method
+                let endpoint = datasets[dataset_id][query_method]
+                let query = obj.query;
+                query = query.replaceAll('<>', '<' + uri + '>');
+                query = query.concat(' ', queryOffsetString).concat(' ', queryLimitString);
+                let url = endpoint + '?query=' + encodeURIComponent(query);
+                try {
+                    fetch(url, {
+                        method: 'GET',
+                        headers: { 'Accept': 'application/sparql-results+json' }
+                    })
+                        .then((res) => res.json())
+                        .then((data) => {
 
-                                let dataLen = data.results.bindings.length;
+                            let dataLen = data.results.bindings.length;
 
-                                if (dataLen > 0) {
-                                    data.results.bindings.forEach(res => {
-                                        let singleResult = {}
-                                        singleResult.uri = res.entity.value;
-                                        singleResult.label = res.entityLabel.value;
-                                        singleResult.cat = cat;
-                                        singleResult.rel = '';
-                                        singleResult.inverse = false;
-                                        singleResult.dataset = datasets[dataset_id].name;
-                                        if (res.inverse_rel) {
-                                            if (res.inverse_rel.value.length !== '') {
-                                                singleResult.rel = res.inverse_rel.value;
-                                                singleResult.inverse = true;
-                                            } else {
-                                                singleResult.rel = res.rel.value;
-                                                singleResult.inverse = false;
-                                            }
+                            if (dataLen > 0) {
+                                data.results.bindings.forEach(res => {
+                                    let singleResult = {}
+                                    singleResult.uri = res.entity.value;
+                                    singleResult.label = res.entityLabel.value;
+                                    singleResult.cat = cat;
+                                    singleResult.rel = '';
+                                    singleResult.inverse = false;
+                                    singleResult.dataset = datasets[dataset_id].name;
+                                    if (res.inverse_rel) {
+                                        if (res.inverse_rel.value.length !== '') {
+                                            singleResult.rel = res.inverse_rel.value;
+                                            singleResult.inverse = true;
                                         } else {
                                             singleResult.rel = res.rel.value;
                                             singleResult.inverse = false;
                                         }
-                                        results.push(singleResult);
-                                        if (!relations.includes(singleResult.rel)) {
-                                            relations.push(singleResult.rel);
-                                        }
-
-                                        if (!relationSet[singleResult.cat]) {
-                                            relationSet[singleResult.cat] = [];
-                                            disabled[singleResult.cat] = true;
-                                            if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
-                                                relationSet[singleResult.cat].push(singleResult.rel)
-                                            }
-                                        } else {
-                                            if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
-                                                relationSet[singleResult.cat].push(singleResult.rel)
-                                            }
-                                        }
-                                        this.setState({ totalResults: results });
-                                        this.setState({ relations: relations });
-                                        this.setState({ relationSet: relationSet });
-                                        this.setState({ disabled: disabled });
-                                        this.setState({ loader: false })
+                                    } else {
+                                        singleResult.rel = res.rel.value;
+                                        singleResult.inverse = false;
                                     }
-                                    )
-                                    if (dataLen < queryLimit) {
-                                        catOffset[cat] = false;
-                                        this.setState({ catOffset: catOffset })
-                                        if (!Object.values(catOffset).includes(true)) {
-                                            this.setState({ hasMore: false })
+                                    results.push(singleResult);
+                                    if (!relations.includes(singleResult.rel)) {
+                                        relations.push(singleResult.rel);
+                                    }
+
+                                    if (!relationSet[singleResult.cat]) {
+                                        relationSet[singleResult.cat] = [];
+                                        disabled[singleResult.cat] = true;
+                                        if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
+                                            relationSet[singleResult.cat].push(singleResult.rel)
                                         }
                                     } else {
-                                        catOffset[cat] = true;
-                                        this.setState({ catOffset: catOffset });
+                                        if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
+                                            relationSet[singleResult.cat].push(singleResult.rel)
+                                        }
                                     }
-                                }
-                                else {
+                                    this.setState({ totalResults: results });
+                                    this.setState({ relations: relations });
+                                    this.setState({ relationSet: relationSet });
+                                    this.setState({ disabled: disabled });
                                     this.setState({ loader: false })
+                                }
+                                )
+                                if (dataLen < queryLimit) {
                                     catOffset[cat] = false;
                                     this.setState({ catOffset: catOffset })
                                     if (!Object.values(catOffset).includes(true)) {
                                         this.setState({ hasMore: false })
                                     }
+                                } else {
+                                    catOffset[cat] = true;
+                                    this.setState({ catOffset: catOffset });
                                 }
-                            });
-                    }
-                    catch (err) {
-                        console.log('error', err)
-                    }
-                } else {
-                    console.log('Different iri base.')
+                            }
+                            else {
+                                if (!(uri).includes(iri_base)) {
+                                    console.log('Try reconciliation.')
+                                }
+                                this.setState({ loader: false })
+                                catOffset[cat] = false;
+                                this.setState({ catOffset: catOffset })
+                                if (!Object.values(catOffset).includes(true)) {
+                                    this.setState({ hasMore: false })
+                                }
+                            }
+                        });
                 }
+                catch (err) {
+                    console.log('error', err)
+                }
+                // } else {
+                //     console.log('Different iri base.')
+                // }
             }
         }
         this.setState({ offsetValue: queryOffset + queryLimit });
