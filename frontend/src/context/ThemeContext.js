@@ -7,6 +7,6 @@ export const ThemeContext = createContext({
     setSoundOn: () => {},
     cardOpen: false,
     setCardOpen: () => {},
-    cardContent: {},
+    cardContent: {title: 'Card Title', cat: 'Card category', iri: 'Card iri', color: 'red'},
     setContent: () => {},
   });

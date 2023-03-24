@@ -8,7 +8,7 @@ function SectionContainer(props) {
     const [selected_value, setValue] = useState(props.placeholder);
 
     return (
-        <div id={props.id} className={classes.sectionContainer}>
+        <div id={props.id} className={classes.sectionContainer + " " + classes['background' + props.tot_categories]}>
             <div className={classes.sectionInfoboxContainer + " " + classes[props.id]}>
                 <div className={classes.sectionInfobox}>
                     <div className={classes.sectionMarkerLeft} style={{ backgroundColor: props.color }}></div>

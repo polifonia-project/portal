@@ -26,7 +26,7 @@ class Clips extends React.Component {
 
     render() {
         return (
-            <div className={classes.clipscontainer} id='clips_container'>
+            <div className={classes.clipscontainer + ' ' + classes['background' + Object.keys(this.state.categories).length] } id='clips_container'>
                 {this.state.clips.map((clip, index) => (
                     <Clip
                         key={index}
@@ -37,7 +37,8 @@ class Clips extends React.Component {
                         clip_id={'clip' + index}
                         infotitle={clip.textcontext.title}
                         description={clip.textcontext.description}
-                        highlights={clip.textcontext.highlights}></Clip>
+                        highlights={clip.textcontext.highlights}
+                        tot_categories={Object.keys(this.state.categories).length} ></Clip>
                 ))}
 
             </div>

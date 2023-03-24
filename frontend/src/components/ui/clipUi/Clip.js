@@ -90,7 +90,7 @@ function Clip(props) {
           section={props.section}>
           </InfoBox>
           <div 
-          className={classes.clipContainer +' '+ classes[props.section]}
+          className={classes.clipContainer +' '+ classes[props.section] + ' ' + classes[props.section + '0' +props.tot_categories]}
           style={{ paddingTop: (props.clip_id === 'clip0') ? '100px' : '0px'}}> 
             <VisibilitySensor onChange={onChange}>  
               <div className={classes.visibilityHook}>X</div>  
