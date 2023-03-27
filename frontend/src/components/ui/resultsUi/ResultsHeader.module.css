@@ -14,7 +14,7 @@
 .scrollResult {
   display: block;
   width: 92%;
-  overflow-x: scroll;
+  overflow-x: hidden;
   overflow-y: hidden;
   white-space: nowrap;
 }

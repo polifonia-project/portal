@@ -87,7 +87,9 @@ function Clip(props) {
           infodescription={props.description} 
           highlights={props.highlights} 
           color={props.color}
-          section={props.section}>
+          section={props.section}
+          tot_categories={props.tot_categories}
+          >
           </InfoBox>
           <div 
           className={classes.clipContainer +' '+ classes[props.section] + ' ' + classes[props.section + '0' +props.tot_categories]}

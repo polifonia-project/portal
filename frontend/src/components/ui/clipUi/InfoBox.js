@@ -13,7 +13,7 @@ function InfoBox(props) {
 
   
   return (
-    <div className={classes.infoBox + ' ' + classes[props.section]}>
+    <div className={classes.infoBox + ' ' + classes[props.section] + ' ' + classes[props.section + '0' + props.tot_categories]}>
       <h3>
       {title}
       </h3>
