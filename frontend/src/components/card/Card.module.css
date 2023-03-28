@@ -1,139 +1,114 @@
 .cardContainer {
   position: fixed; 
   width: 100%; 
-  height: 100vh; 
+  min-height: 100vh; 
   top: 0;
   right: 0;
   left: 0;
-  bottom: 0;
   background-color: #f4edec;
   z-index: 190; 
   transition: all 1s ease;
   display: flex;
   flex-wrap: wrap;
   transform: translateX(-100%);
-  /*
-  background-color: transparent;
-  backdrop-filter: blur(19.2px);  blur glass effect
-  -webkit-backdrop-filter: blur(14.2px); */
+  align-content: flex-start;
 }
 
 .titleBlock {
-  margin-top: 60px;
   background-color: rgb(226, 226, 226);
-  height: 25%;
+  height: 20%;
   width: 100%;
-  font-family: "Garnett Medium";
   font-family: "Helvetica Light";
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content:space-between;
-  padding: 30px 100px 30px 100px;
+  padding-top: 130px;
+  padding-right: 50px;
+  padding-left: 50px;
+  padding-bottom: 30px;
 }
 
-.titleBlock button {
-  padding: 30px;
-  background-color: transparent;
-  box-shadow:0px 0px 25px -10px black;
-  border: 0.2px solid transparent;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  transition: all 1.5s ease;
-  transform: rotate(45deg);
-}
-
-.titleBlock button:hover {
-  transform: scale(1.2) rotate(45deg);
+.contentBlock {
+  display: flex;
   background-color: #f4edec;
+  width:150%;
+  height: 100vh;
+  overflow-y: scroll;
+  margin-top: 0px;
+  margin-right: 50px;
+  margin-left: 25px;
+  margin-bottom: 30px;
+  justify-content: flex-start;
 }
 
-.firstBlock {
-  height: 60%;
-  width: 25%;
-  padding: 0px 0px 30px 100px;
+.titleContainer {
 }
 
-.firstBlock h2 {
-  font-size: 1em;
-  color: black;
-  font-weight: bold;
+.titleContainer h1 {
+  font-family: "Garnett Medium";
+  margin: 0;
 }
 
-.firstBlock p {
-  font-size: 0.8em;
-  text-align: justify;
+.titleContainer p {
+  margin-bottom:0px;
 }
 
-.secondBlock {
-  height: 60%;
-  width: 25%;
-  padding: 0px 50px 30px 100px;
-}
-
-.secondBlock ul {
-  list-style-type: none;
-  padding: 0px;
-  font-size:  0.8em;
-}
-
-.secondBlock li {
-padding-bottom: 3px;
-}
-
-.secondBlock h2 {
-  font-size: 1em;
-  color: black;
-  font-weight: bold;
-}
-
-.secondBlock p {
-  font-size: 0.8em;
-  text-align: justify;
-}
-.linkButton {
-  background-color: #f4edec;
-  padding: 5px 15px 5px 15px;
-  border-radius: 8px;
-  box-shadow:0px 0px 15px -8px black;
-  margin: 10px 10px 0px 0px;
-  border: 0px;
-  cursor: pointer;
-  font: inherit;
+.titleContainer button {
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
 	outline: inherit;
-  font-size: 0.8em;
-  transition: all 1s ease;
+  background-color: transparent;
+  border: 0.2px solid transparent;
+  cursor: pointer;
+  padding: 3px 5px 3px 5px;
+  border-radius: 6px;
 }
 
-.linkButton:hover {
-  transform: scale(1.1);
+.exitButton {
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+  padding: 10px 14px 10px 14px;
+  border: 0.4px solid rgb(71, 71, 71);
+  border-radius: 3px;
 }
 
-.thirdBlock {
-  height: 60%;
-  width: 50%;
-  padding: 0px 50px 30px 100px;
-  overflow: hidden;
+.categoryResult {
+  padding: 7px 14px 7px 14px;
+  border: 0.4px solid rgb(71, 71, 71);
+  border-radius: 3px;
 }
 
-.thirdBlock h2 {
-  font-size: 1em;
-  color: black;
-  font-weight: bold;
+.categoryResult span{
+  border-right: 0.4px solid rgb(71, 71, 71);
+  padding-right:10px;
+  padding-left:10px;
+  cursor: default;
 }
 
-.thirdBlock p {
-  font-size: 0.8em;
-  text-align: justify;
+.categoryResult span:first-child{
+  border-right: 0.4px solid rgb(71, 71, 71);
+  padding-right:10px;
+  padding-left:0px;
+  text-transform: capitalize;
 }
 
-.dataVis {
-  display: block;
-  background-color: rgb(230, 227, 227);
-  width: 550px;
-  height: 300px;
+.categoryResult span:last-child{
+  border-right: 0px solid rgb(71, 71, 71);
+  padding-right:0px;
+  padding-left:10px;
+}
+
+.categoryResult span span{
+  padding: 0px;
+  margin:0px;
+  cursor: pointer;
 }

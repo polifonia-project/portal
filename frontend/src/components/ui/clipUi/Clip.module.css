@@ -40,7 +40,7 @@
   margin: 0px;
   margin-left: 20px;
   line-height: 30px;
-  font-size: 23px;
+  font-size: 25px;
   position: relative;
   vertical-align: middle;
   max-width: 25ch;
@@ -101,13 +101,21 @@
   vertical-align: middle;
   display: none;
 }
+
 .ellipsisalert {
-  font-size: 14px;
+  font-size: 12px;
   position: relative;
   font-family: "Helvetica Light";
-  color: grey;
+  color: rgb(160, 159, 159);
   width: 100%;
   padding-left: 10px;
+  white-space: nowrap;
+}
+
+.ellipsisalert span {
+  border: 0.4px solid rgb(160, 159, 159);
+  padding:  2px 5px 2px 5px;
+  border-radius: 2px;
 }
 
 .hiddenalert {

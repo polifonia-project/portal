@@ -103,7 +103,7 @@ function Clip(props) {
                 <button onClick={() => handleClickScroll(props.section)}>More +</button>
                 <span className={classes.end_dot} style={{ backgroundColor: props.color}}></span>
             </div>
-          <p className={ ellipsisActive ? classes.ellipsisalert : classes.hiddenalert} id={'ellipsisalert' + props.clip_id}>Click on text <br/>{clipIsExpanded ? 'to resize' : 'to see all'}</p>
+          <p className={ ellipsisActive ? classes.ellipsisalert : classes.hiddenalert} id={'ellipsisalert' + props.clip_id}><span>Click on text {clipIsExpanded ? 'to resize' : 'to expand'}</span></p>
           </div>
         </div>
 

@@ -13,7 +13,7 @@ function App() {
   const [theme, setTheme] = useState('default');
   const [soundOn, setSoundOn] = useState(false);
   const [cardOpen, setCardOpen] = useState(false);
-  const [cardContent, setCardContent] = useState({title: 'Card Title', cat: 'Card category', iri: 'Card iri', color: 'red'});
+  const [cardContent, setCardContent] = useState({title: 'Card Title', cat: 'Card category', iri: 'Card iri', color: '#e5e3e3'});
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, soundOn, setSoundOn, cardOpen, setCardOpen, cardContent, setCardContent}}>
