@@ -2,3 +2,8 @@
 .flaskenv
 /__pycache__
 .DS_Store
+
+#blazegraph
+blazegraph.jar
+blazegraph.jnl
+rules.log
