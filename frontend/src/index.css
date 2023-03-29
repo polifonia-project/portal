@@ -10,6 +10,11 @@
      url("./fonts/Garnett-Medium.woff") format("truetype");
     }
 
+@font-face {
+      font-family: "Helvetica Regular";
+      src: local("Helvetica Regular"),
+       url("./fonts/Helvetica.woff") format("truetype");
+      }
 * {
   box-sizing: border-box;
 }

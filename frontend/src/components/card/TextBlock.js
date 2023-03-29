@@ -1,8 +1,8 @@
 import React from "react";
-import classes from "./CardBlock.module.css";
+import classes from "./TextBlock.module.css";
 
 
-function CardBlock(props) {
+function TextBlock(props) {
 
   return (
     <div className={classes.cardBlockContainer} style={{width: 'calc(' + props.width + '% - 25px)'}}>
@@ -16,4 +16,4 @@ function CardBlock(props) {
 }
 
 
-export default CardBlock;
+export default TextBlock;

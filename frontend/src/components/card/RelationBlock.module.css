@@ -16,7 +16,7 @@
   border-radius: 3px;
   overflow: hidden;
   font-family: "Helvetica Light";
-  margin: 0;
+  margin-top: 10px;
 }
 
 .cardBlockContainer:hover {
@@ -32,9 +32,15 @@
   font-family: 'Helvetica Regular';
 }
 
-.blockParagraph {
+.relationLi {
   font-size: 1.1em;
   font-weight:lighter;
   color: black;
   font-family: 'Helvetica Light';
+  margin: 0.5em 0px;
+  line-height: 1.2;
+}
+
+.relationBlock {
+  margin-bottom: 30px;
 }

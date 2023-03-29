@@ -17,6 +17,7 @@
   overflow: hidden;
   font-family: "Helvetica Light";
   margin: 0;
+  padding-top: 10px;
 }
 
 .cardBlockContainer:hover {
@@ -32,9 +33,11 @@
   font-family: 'Helvetica Regular';
 }
 
-.blockParagraph {
-  font-size: 1.1em;
-  font-weight:lighter;
-  color: black;
-  font-family: 'Helvetica Light';
+.mockVis {
+  display: block;
+  width: 100%;
+  height: 400px;
+  background-color: rgb(141, 140, 140);
+  border-radius: 3px;
+
 }
