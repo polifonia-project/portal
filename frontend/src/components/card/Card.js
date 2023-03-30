@@ -6,6 +6,7 @@ import CardBlock from "./CardBlock";
 import TextBlock from "./TextBlock";
 import RelationBlock from "./RelationBlock.js";
 import VisualBlock from "./VisualBlock";
+import LinkBlock from "./LinkBlock";
 
 function Card(props) {
 
@@ -34,9 +35,11 @@ function Card(props) {
         <RelationBlock width={25}></RelationBlock> 
         <RelationBlock width={25}></RelationBlock> 
         <RelationBlock width={25}></RelationBlock> 
-        <VisualBlock width={100}></VisualBlock>  
+        <LinkBlock width={25}></LinkBlock>
+        <VisualBlock width={75}></VisualBlock>  
 
-      {/* <CardBlock width={100}></CardBlock> */}
+      {/* <CardBlock width={100}></CardBlock> */
+      /* <LinkBlock width={100}></LinkBlock> */}
 
       </div>
     </div>
