@@ -188,6 +188,10 @@
                 "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/character> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 20"
             },
             {
+                "dataset": "d_03",
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity a <https://schema.org/Person> . ?entity <http://www.w3.org/2004/02/skos/core#prefLabel> ?entityLabel FILTER CONTAINS(str(?entity), \"http://data.beeldengeluid.nl/gtaa/13467\") }"
+            },
+            {
                 "dataset": "d_04",
                 "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q5 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
             }

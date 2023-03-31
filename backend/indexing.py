@@ -91,6 +91,7 @@ def suggested_results(d, c, cat_id, word):
     # search ids for each suggestion
     ids = sonic_query(cat, word)
     unique_ids = set(ids)
+    print('unique_ids', unique_ids)
 
     # associate each id to the correct endpoint
     entries_to_search = {}
@@ -105,6 +106,7 @@ def suggested_results(d, c, cat_id, word):
             if iri_base in id:
                 entry_id_list.append('<' + id + '>')
         entries_to_search[endpoint] = entry_id_list
+    print('entries_to_search', entries_to_search)
 
     # query each endpoint with all the values to have the labels
     for k, v in entries_to_search.items():
@@ -114,7 +116,7 @@ def suggested_results(d, c, cat_id, word):
         SELECT DISTINCT ?entity (SAMPLE(?entityLabel) AS ?entityLabel)
         WHERE {
             VALUES ?entity {'''+values_to_search+'''} .
-            ?entity rdfs:label ?entityLabel .
+            ?entity <http://www.w3.org/2000/01/rdf-schema#label>|<http://www.w3.org/2004/02/skos/core#prefLabel> ?entityLabel .
             OPTIONAL { 
                 FILTER (langMatches(lang(?entityLabel), "en"))
                 BIND (?entityLabel AS ?entityLabel) 
