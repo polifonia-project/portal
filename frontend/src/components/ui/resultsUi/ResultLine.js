@@ -4,9 +4,11 @@ import { useState, useContext } from "react";
 import { ThemeContext } from "../../../context/ThemeContext";
 import expandIcon from '../../../assets/svg/expand.svg';
 import expandIconWhite from '../../../assets/svg/expandWhite.svg';
+import { useEffect } from "react";
 
 function ResultLine(props) {
   const [isHover, setIsHover] = useState(false);
+  const [datasetOn, setDatasetOn] = useState(false);
   const { setCardOpen } = useContext(ThemeContext);
   const { setCardContent } = useContext(ThemeContext);
 
@@ -17,9 +19,17 @@ function ResultLine(props) {
      setIsHover(false);
   };
 
+  useEffect(() => {
+   if (props.dataset === props.currentDataset) {
+    setDatasetOn(true);
+   } else {
+    setDatasetOn(false);
+   }
+  });
+
 
   return (
-    <div className={classes.resultLine}>
+    <div className={classes.resultLine} style={{display : props.datasetOn ? datasetOn ? 'inline-flex' : 'none' : null}}>
       <div className={classes.resultNum}>{props.number}</div>
       <div className={classes.scrollResult}>
       <div className={classes.resultCat}><span className={classes.categoryResult}>{props.cat}</span></div>

@@ -5,13 +5,10 @@ import { useState } from "react";
 function SourcesBarchart(props) {
 
   const a = { 
-    'hola': 60,
-    'musow': 50,
-    'wikidata': 100,
-    'choco': 50,
-    'sound and vision': 80,
+    'musow': 20,
+    'wikidata': 90,
     'polifonia': 40,
-
+    'other dataset': 60,
   }
 
   const [isShown, setIsShown] = useState(false);
@@ -27,6 +24,7 @@ function SourcesBarchart(props) {
   }
 
   const handleClick= (e, key, value) => {
+     /* style */
       if( e.target.parentElement.id === 'barchartBox') {
         let ul = e.target.parentElement;
         let childern = ul.childNodes;
@@ -43,12 +41,15 @@ function SourcesBarchart(props) {
         });
         e.target.parentElement.style.backgroundColor = '#cccaca';
       }
+      /* filter */
+      props.handleDataset(key);
       setFiltered(true);
       setCaption(key);
       setValue(value);
   }
 
   const handleReset = () => {
+    props.resetDataset(false);
     setFiltered(false);
     Object.keys(a).forEach(function(key) {
       let li = document.getElementById('source' + props.cat + key);

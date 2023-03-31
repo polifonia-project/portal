@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import classes from "./Card.module.css";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
-import CardBlock from "./CardBlock";
 import TextBlock from "./TextBlock";
 import RelationBlock from "./RelationBlock.js";
 import VisualBlock from "./VisualBlock";

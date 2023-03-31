@@ -8,6 +8,7 @@ import LoaderResultLine from "../loaders/LoaderResultLine";
 import InfiniteScroll from "react-infinite-scroll-component";
 import NoMoreResults from "../loaders/NoMoreResults";
 import NoResultsError from "../loaders/NoResultsError";
+import SourcesBarchart from "./SourcesBarchart";
 // import classes from "./Results.module.css" 
 
 class ResultsTest extends React.Component {
@@ -20,6 +21,8 @@ class ResultsTest extends React.Component {
             activeRelations: [],
             filterOn: false,
             relationOn: false,
+            datasetOn: false,
+            currentDataset: '',
             relations: [],
             relationSet: {},
             disabled: {},
@@ -142,17 +145,30 @@ class ResultsTest extends React.Component {
         return;
     }
 
+    handleDataset = (x) => {
+        this.setState({ datasetOn: true });
+        this.setState({ currentDataset: x });
+        return;
+    }
+
+    resetDataset = (x) => {
+        this.setState({ datasetOn: x });
+        this.setState({ currentDataset: '' });
+        return;
+    }
+
+
     render() {
         let Data = [];
         if (this.state.activeFilters.length > 0 || this.state.activeRelations.length > 0) {
             Data = this.state.filteredResults;
         } else if (this.state.activeFilters.length === 0 && this.state.activeRelations.length === 0) {
             Data = this.state.totalResults;
-            console.log(Data);
         }
         return (
             <>
                 <ResultsHeader cat={this.props.cat}>
+                <SourcesBarchart cat={this.props.cat} handleDataset={this.handleDataset} resetDataset={this.resetDataset}></SourcesBarchart>
                     <FiltersContainer>
                         <FilterButton isDisabled={this.state.filterOn || this.state.relationOn} resetClass='resetButton' buttonClick={() => this.resetFilters()}>
                             Reset <span className="resetIcon">⟲</span>
@@ -188,7 +204,7 @@ class ResultsTest extends React.Component {
                     >
                         {Data.map((res, index) => {
                             return (
-                                <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1} color={this.props.color} input_value={this.props.input_value} isdirect={res.inverse}></ResultLine>
+                                <ResultLine label={res.label} rel={res.rel} cat={res.cat} dataset={res.dataset} currentDataset={this.state.currentDataset} datasetOn={this.state.datasetOn}number={index + 1} color={this.props.color} input_value={this.props.input_value} isdirect={res.inverse}></ResultLine>
                             )
                         })}
                     </InfiniteScroll> : <NoResultsError />
