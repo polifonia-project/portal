@@ -308,9 +308,35 @@ class ResultsTest extends React.Component {
                                     this.setState({ catOffset: catOffset });
                                 }
                             }
+                            // reconciliation
                             else {
                                 if (!(uri).includes(iri_base)) {
-                                    console.log('Try reconciliation.')
+                                    let reconciliationQuery = 'PREFIX schema: <http://schema.org/> SELECT ?another_uri WHERE { <' + uri + '> schema:sameAs ?another_uri . ?another_uri schema:location ?dataset . FILTER CONTAINS (str(?dataset), "' + iri_base + '")}';
+                                    let request = "/reconciliation?query=" + encodeURIComponent(reconciliationQuery);
+                                    try {
+                                        fetch(request)
+                                            .then((res) => res.json())
+                                            .then((data) => {
+                                                let dataLen = data.results.bindings.length;
+                                                if (dataLen > 0) {
+                                                    data.results.bindings.forEach(res => {
+                                                        let alternativeUri = res.another_uri.value;
+                                                        let new_query = obj.query;
+                                                        new_query = new_query.replaceAll('<>', '<' + alternativeUri + '>');
+                                                        new_query = new_query.concat(' ', queryOffsetString).concat(' ', queryLimitString);
+                                                        let new_url = endpoint + '?query=' + encodeURIComponent(new_query);
+                                                        fetch(new_url, {
+                                                            method: 'GET',
+                                                            headers: { 'Accept': 'application/sparql-results+json' }
+                                                        })
+                                                            .then((res) => res.json())
+                                                            .then((data) => { console.log(data) })
+                                                    })
+                                                }
+                                            })
+                                    } catch (err) {
+                                        console.log('error in rec', err)
+                                    }
                                 }
                                 this.setState({ loader: false })
                                 catOffset[cat] = false;
