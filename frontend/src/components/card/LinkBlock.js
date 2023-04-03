@@ -10,12 +10,12 @@ function LinkBlock(props) {
       <div className={classes.cardBlockBox}>
       <p className={classes.blockParagraph}>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
       <div className={classes.linksContainer}>
-      <button className={classes.linkButton}>Share</button>
       <button className={classes.linkButton}>Link to website</button>
+      <button className={classes.linkButton}>Link</button>
       <button className={classes.linkButton}>Genius Lyrics</button>
       <button className={classes.linkButton}>Spotify</button>
       <button className={classes.linkButton}>Corpus</button>
-      <button className={classes.linkButton}>Corpus</button>
+      <button className={classes.linkButton}>Link to page</button>
       </div>
     </div>
     </div>

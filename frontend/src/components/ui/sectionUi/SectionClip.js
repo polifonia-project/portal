@@ -200,6 +200,7 @@ class SectionClip extends React.Component {
 
   render() {
     return (
+      <div className={classes.sectionClipFlex + ' ' + classes['sectionClipFlex' + this.props.category]}>
       <div className={classes.sectionClipContainer + ' ' + classes['sectionclip-' + this.props.category]}>
         <VisibilitySensor onChange={this.onVisibilityChange}>
           <Remainder catName={this.props.catName} focus={this.state.isFocused} color={this.props.color}></Remainder>
@@ -248,6 +249,7 @@ class SectionClip extends React.Component {
             ))
           }
         </div>
+      </div>
       </div>
 
 

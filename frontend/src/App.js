@@ -24,7 +24,7 @@ function App() {
     cat_03: '#1d00fe', 
     cat_04: '#6400b4',
     cat_05: '#00feff',
-    people: '#09ff00',
+    people: '#6400b4',
     places: '#fdff00',
     cat_08: '#000000',
    });

@@ -49,6 +49,7 @@
 .titleContainer h1 {
   font-family: "Garnett Medium";
   margin: 0;
+  width: 100%;
 }
 
 .titleContainer p {
@@ -68,6 +69,11 @@
   border: 0.2px solid transparent;
   cursor: pointer;
   border-radius: 6px;
+}
+
+.titleContainer {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .exitButton {
@@ -92,26 +98,71 @@
   border-color: transparent;
   box-shadow: 0px 0px 10px -5px black;
   box-shadow: 0 4px 12px 0 rgba(12,18,45,.1);
+  color: black !important;
+  border-color: transparent  !important;
+}
+
+.cardShareButton {
+  padding: 10px 19px 10px 10px;
+  border: 0.4px solid rgb(71, 71, 71);
+  border-radius: 3px;
+  transition: all 1s ease, color 1ms;
+  cursor: pointer;
+  border-left: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 
 .categoryResult {
-  padding: 10px 19px 10px 19px;
+  padding: 10px 0px 10px 19px;
   border: 0.4px solid rgb(71, 71, 71);
   border-radius: 3px;
-  transition: all 1s ease;
+  transition: all 1s ease, color 1ms;
+  border-right: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px; 
 }
 
-.categoryResult:hover {
+.titleContainer:hover .categoryResult {
+  overflow: hidden;
+  border-radius: 30px;
+  background-color: #f4edec;
+  box-shadow: 0px 0px 10px -5px black;
+  box-shadow: 0 4px 12px 0 rgba(12,18,45,.1);
+  transform: translateX(-10px);
+  padding: 10px 19px 10px 19px;
+  color: black !important;
+  border-color: transparent !important;
+}
+
+.titleContainer:hover .cardShareButton {
   overflow: hidden;
   border-radius: 30px;
   background-color: #f4edec;
   border-color: transparent;
   box-shadow: 0px 0px 10px -5px black;
   box-shadow: 0 4px 12px 0 rgba(12,18,45,.1);
-  transform: translateX(-10px);
+  transform: translateX(10px);
+  padding: 10px 19px 10px 19px;
+  color: black !important;
+  border-color: transparent !important;
 }
 
-.categoryResult span{
+.titleContainer:hover .cardShareButton button{
+  color: black !important;
+}
+
+.titleContainer:hover .categoryResult span {
+  border-right: 0.4px solid black !important;
+}
+
+.titleContainer:hover .categoryResult span:last-child {
+  border-right: 0.4px solid transparent !important;
+}
+
+
+
+.categoryResult span {
   border-right: 0.4px solid rgb(71, 71, 71);
   padding-right:10px;
   padding-left:10px;
@@ -128,14 +179,9 @@
   text-transform: capitalize;
 }
 
-.categoryResult span:last-child{
-  border-right: 0px solid rgb(71, 71, 71);
-  padding-right:0px;
-  padding-left:10px;
-}
-
 .categoryResult span span{
   padding: 0px;
   margin:0px;
   cursor: pointer;
 }
+

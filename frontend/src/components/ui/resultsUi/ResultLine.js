@@ -29,7 +29,7 @@ function ResultLine(props) {
 
 
   return (
-    <div className={classes.resultLine} style={{display : props.datasetOn ? datasetOn ? 'inline-flex' : 'none' : null}}>
+    <div className={classes.resultLine} style={{backgroundColor : props.datasetOn ? datasetOn ? '#e7e2e2' : '#f4edec' : null, borderTop : props.datasetOn ? datasetOn ? '0.5px solid #f4edec' : '0.5px solid #e8e3e3' : null, borderBottom : props.datasetOn ? datasetOn ? '0.5px solid #f4edec' : '0.5px solid #e8e3e3' : null}}>
       <div className={classes.resultNum}>{props.number}</div>
       <div className={classes.scrollResult}>
       <div className={classes.resultCat}><span className={classes.categoryResult}>{props.cat}</span></div>
