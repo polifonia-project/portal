@@ -212,6 +212,49 @@
                 }
             ]
         },
+        "card": {
+            "01" : {
+                "type": "text",
+                "size": "small",
+                "title": "Lorem Ipsum",
+                "content": [{},{},{}]
+            },
+            "02" : {
+                "type": "relation",
+                "size": "small",
+                "title": "Lorem Ipsum",
+                "content": [{},{},{}]
+            },
+            "03" : {
+                "type": "link",
+                "size": "small",
+                "title": "Lorem Ipsum",
+                "description": "Lorem Ipsum",
+                "content": [{
+                    "linktype" : "static",
+                    "label" : "Click me",
+                    "url" : "www.google.it"
+                    },
+                    {
+                    "linktype" : "dynamic",
+                    "label" : "Click me",
+                    "url" : "www.google.it"
+                    }
+                ]
+            },
+            "04" : {
+                "type": "visual",
+                "size": "medium",
+                "title": "Lorem Ipsum",
+                "content": [{},{},{}]
+            },
+            "05" : {
+                "type": "tag",
+                "size": "large",
+                "title": "Lorem Ipsum",
+                "content": ["people","polifonia","h2020"]
+            }
+        },
         "section": {
             "title": "What about Artists?",
             "description": "Discover all the possible connections and relations with your favorite artist. See all the results and arrenge them as you want.",
