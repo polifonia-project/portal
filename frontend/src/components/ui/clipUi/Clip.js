@@ -87,10 +87,12 @@ function Clip(props) {
           infodescription={props.description} 
           highlights={props.highlights} 
           color={props.color}
-          section={props.section}>
+          section={props.section}
+          tot_categories={props.tot_categories}
+          >
           </InfoBox>
           <div 
-          className={classes.clipContainer +' '+ classes[props.section]}
+          className={classes.clipContainer +' '+ classes[props.section] + ' ' + classes[props.section + '0' +props.tot_categories]}
           style={{ paddingTop: (props.clip_id === 'clip0') ? '100px' : '0px'}}> 
             <VisibilitySensor onChange={onChange}>  
               <div className={classes.visibilityHook}>X</div>  
@@ -101,7 +103,7 @@ function Clip(props) {
                 <button onClick={() => handleClickScroll(props.section)}>More +</button>
                 <span className={classes.end_dot} style={{ backgroundColor: props.color}}></span>
             </div>
-          <p className={ ellipsisActive ? classes.ellipsisalert : classes.hiddenalert} id={'ellipsisalert' + props.clip_id}>Click on text <br/>{clipIsExpanded ? 'to resize' : 'to see all'}</p>
+          <p className={ ellipsisActive ? classes.ellipsisalert : classes.hiddenalert} id={'ellipsisalert' + props.clip_id}><span>Click on text {clipIsExpanded ? 'to resize' : 'to expand'}</span></p>
           </div>
         </div>
 

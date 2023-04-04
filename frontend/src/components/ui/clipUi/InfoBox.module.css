@@ -5,7 +5,7 @@
 }
 
 div.infoBox h3 {
-  font-size: 28px;
+  font-size: 35px;
   font-family: "Garnett Medium";
   font-weight: 100;
   margin: 0;
@@ -59,4 +59,77 @@ div.infoBox p {
 .section-cat_08 {
     padding-left: calc(((100% / 16 * 1) + 5px));
     max-width: 40%;
+}
+
+
+/*------------07-----------*/
+
+.section-cat_0307 {
+  padding-left: calc(((100% / 16 * 1) + 5px));
+  max-width: 30%;
+}
+
+/*------------06-----------*/
+
+.section-cat_0206 {
+  padding-left: calc(((100% / 16 * 10) + 5px));
+  max-width: 85%;
+}
+
+.section-cat_0306 {
+  padding-left: calc(((100% / 16 * 1) + 5px));
+  max-width: 30%;
+}
+
+/*------------05-----------*/
+
+.section-cat_0205 {
+  padding-left: calc(((100% / 16 * 11) + 25px));
+  max-width: 90%;
+}
+
+.section-cat_0305 {
+  padding-left: calc(((100% / 16 * 1) + 5px));
+  max-width: 30%;
+}
+
+/*------------04-----------*/
+
+.section-cat_0204 {
+  padding-left: calc(((100% / 16 * 1) + 5px));
+  max-width: 30%;
+}
+
+.section-cat_0304 {
+  padding-left: calc(((100% / 16 * 1) + 5px));
+  max-width: 30%;
+}
+
+/*------------03-----------*/
+
+.section-cat_0203 {
+  padding-left: calc(((100% / 16 * 1) + 5px));
+  max-width: 40%;
+}
+
+.section-cat_0303 {
+  padding-left: calc(((100% / 16 * 1) + 5px));
+  max-width: 40%;
+}
+/*------------02-----------*/
+.section-cat_0102 {
+  padding-left: calc(((100% / 16 * 10) + 5px));
+  max-width: 90%;
+}
+
+.section-cat_0202 {
+  padding-left: calc(((100% / 16 * 1) + 5px));
+  max-width: 40%;
+}
+
+/*------------01-----------*/
+
+.section-cat_0101 {
+  padding-left: calc(((100% / 16 * 1) + 5px));
+  max-width: 40%;
 }

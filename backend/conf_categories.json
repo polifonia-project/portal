@@ -80,11 +80,11 @@
         "search_pattern": [
             {
                 "dataset": "d_01",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/genre> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 20"
             },
             {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q188451 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
             }
         ],
         "filters": {
@@ -184,6 +184,10 @@
         "color": "#09ff00",
         "search_pattern": [
             {
+                "dataset": "d_01",
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/character> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 20"
+            },
+            {
                 "dataset": "d_04",
                 "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q5 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
             }
@@ -199,6 +203,12 @@
                 {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P19 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of birth\") AS ?rel) } UNION { <> wdt:P20 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of death\") AS ?rel) } UNION { <> wdt:P937 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has work location\") AS ?rel) }. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                }
+            ],
+            "creative works": [
+                {
+                    "dataset": "d_01",
+                    "query": "SELECT DISTINCT ?inverse_rel ?entity ?entityLabel WHERE { { <> ^<https://schema.org/character> ?entity. ?entity rdfs:label ?entityLabel BIND(str(\"has character\") AS ?inverse_rel) } } ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -260,6 +270,7 @@
         ],
         "filters": {
             "people": [
+                
                 {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P1535 ?entity. BIND(str(\"used by\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"

@@ -1,0 +1,76 @@
+.cardBlockContainer {
+  display: block;
+  width: 30%;
+  background-color: #f4edec;
+  margin-top:25px;
+  font-size: 0.85em;
+  margin-right: 25px;
+  border-radius: 3px;
+  transition: all 1s ease;
+  cursor: default;
+  padding: 0px 30px 30px 30px;
+}
+
+.cardBlockBox {
+ /* box-shadow: 0px 0px 7px 0.3px #dfdad9; */
+  border-radius: 3px;
+  font-family: "Helvetica Light";
+  margin: 0;
+  overflow: visible;
+}
+
+.cardBlockContainer:hover {
+}
+
+.blockTitle {
+  margin: 0;
+}
+
+.blockTitle span{
+  font-size: 1.2em;
+  color: rgb(40, 39, 39);
+  font-family: 'Helvetica Regular';
+}
+
+.blockParagraph {
+  font-size: 1.1em;
+  font-weight:lighter;
+  color: black;
+  font-family: 'Helvetica Light';
+}
+
+.linkButton {
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 20px;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+  background-color: transparent;
+  border: 0.2px solid transparent;
+  border-radius: 6px;
+}
+
+.linkButton {
+  padding: 10px 19px 10px 19px;
+  border: 0.4px solid rgb(71, 71, 71);
+  border-radius: 3px;
+  transition: all 1s ease;
+  margin: 6px;
+}
+
+.linkButton:hover {
+  overflow: hidden;
+  border-radius: 30px;
+  background-color: #f4edec;
+  border-color: transparent;
+  box-shadow: 0px 0px 10px -5px black;
+  box-shadow: 0 4px 12px 0 rgba(12,18,45,.1);
+  z-index: 40;
+}
+
+.linksContainer {
+  transform: translateX(-10px);
+  z-index: 30;
+}

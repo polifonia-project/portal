@@ -11,7 +11,8 @@
 }
 
 .clip {
-  box-shadow: 0px 0px 50px -18px black;
+  box-shadow: 0px 0px 35px -18px black;
+  box-shadow: 0 4px 12px 0 rgba(12,18,45,.1);
   background-color: #f4edec;
   display: inline-block;
   padding: 10px;
@@ -22,7 +23,8 @@
 }
 
 .clipexpanded {
-  box-shadow: 0px 0px 50px -30px black;
+  box-shadow: 0px 0px 23px -16px black;
+  box-shadow: 0 4px 12px 0 rgba(12,18,45,.1);
   border-radius: 8px;
 }
 
@@ -40,7 +42,7 @@
   margin: 0px;
   margin-left: 20px;
   line-height: 30px;
-  font-size: 23px;
+  font-size: 25px;
   position: relative;
   vertical-align: middle;
   max-width: 25ch;
@@ -101,13 +103,21 @@
   vertical-align: middle;
   display: none;
 }
+
 .ellipsisalert {
-  font-size: 14px;
+  font-size: 12px;
   position: relative;
   font-family: "Helvetica Light";
-  color: grey;
+  color: rgb(160, 159, 159);
   width: 100%;
   padding-left: 10px;
+  white-space: nowrap;
+}
+
+.ellipsisalert span {
+  border: 0.4px solid rgb(160, 159, 159);
+  padding:  2px 5px 2px 5px;
+  border-radius: 2px;
 }
 
 .hiddenalert {
@@ -135,7 +145,6 @@
 }
 
 .section-cat_06 {
-  padding-right: calc(((100% / 16 * 5) - 22px));
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;
@@ -143,7 +152,6 @@
 }
 
 .section-cat_07 {
-  padding-right: calc(((100% / 16 * 3) - 22px));
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;
@@ -151,7 +159,6 @@
 }
 
 .section-cat_08 {
-  padding-right: calc(((100% / 16 * 1) - 22px));
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;
@@ -180,4 +187,265 @@
   opacity: 0;
   padding-bottom: 10px;
   width: 100%;
+}
+
+/*----------------08--------------*/
+
+
+.section-cat_0108 {
+  padding-left: calc(((100% / 16 * 1) - 22px));
+}
+
+.section-cat_0208 {
+  padding-left: calc(((100% / 16 * 3) - 22px));
+}
+
+.section-cat_0308 {
+  padding-left: calc(((100% / 16 * 5) - 22px));
+}
+
+.section-cat_0408 {
+  padding-left: calc(((100% / 16 * 7) - 22px));
+}
+
+.section-cat_0508 {
+  padding-left: calc(((100% / 16 * 9) - 22px));
+}
+
+.section-cat_0608 {
+  padding-right: calc(((100% / 16 * 5) - 22px));
+}
+
+.section-cat_0708 {
+  padding-right: calc(((100% / 16 * 3) - 22px));
+}
+
+.section-cat_0808 {
+  padding-right: calc(((100% / 16 * 1) - 22px));
+}
+
+
+/*----------------07--------------*/
+
+.section-cat_0107 {
+  padding-left: calc(((100% / 14 * 1) - 22px));
+}
+
+.section-cat_0207 {
+  padding-left: calc(((100% / 14 * 3) - 22px));
+}
+
+.section-cat_0307 {
+  padding-left: calc(((100% / 14 * 5) - 22px));
+}
+
+.section-cat_0407 {
+  padding-left: calc(((100% / 14 * 7) - 22px));
+}
+
+.section-cat_0507 {
+  padding-left: calc(((100% / 14 * 9) - 22px));
+}
+
+.section-cat_0607 {
+  padding-right: calc(((100% / 14 * 3) - 22px));
+}
+
+.section-cat_0707 {
+  padding-right: calc(((100% / 14 * 1) - 22px));
+}
+
+/*----------------06--------------*/
+
+.section-cat_0106 {
+  padding-left: calc(((100% / 12 * 1) - 22px));
+}
+
+.section-cat_0206 {
+  padding-left: calc(((100% / 12 * 3) - 22px));
+}
+
+.section-cat_0306 {
+  padding-left: calc(((100% / 12 * 5) - 22px));
+}
+
+.section-cat_0406 {
+  padding-left: calc(((100% / 12 * 7) - 22px));
+}
+
+.section-cat_0506 {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  text-align: right;
+  padding-left: 0;
+  padding-right: calc(((100% / 12 * 3) - 22px));
+}
+
+.section-cat_0506 .end_dot {
+  display: inline-block;
+}
+
+.section-cat_0506 .dot {
+  display: none;
+}
+
+.section-cat_0506 p {
+  margin-left: 5px;
+}
+
+.section-cat_0606 {
+  padding-right: calc(((100% / 12 * 1) - 22px));
+}
+
+
+/*----------------05--------------*/
+
+.section-cat_0105 {
+  padding-left: calc(((100% / 10 * 1) - 22px));
+}
+
+.section-cat_0205 {
+  padding-left: calc(((100% / 10 * 3) - 22px));
+}
+
+.section-cat_0305 {
+  padding-left: calc(((100% / 10 * 5) - 22px));
+}
+
+.section-cat_0405 {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  text-align: right;
+  padding-left: 0;
+  padding-right: calc(((100% / 10 * 3) - 22px));
+}
+
+.section-cat_0505 {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  text-align: right;
+  padding-left: 0;
+  padding-right: calc(((100% / 10 * 1) - 22px));
+}
+
+.section-cat_0505 .end_dot,
+.section-cat_0405 .end_dot {
+  display: inline-block;
+}
+
+.section-cat_0505 .dot,
+.section-cat_0405 .dot {
+  display: none;
+}
+
+.section-cat_0505 p ,
+.section-cat_0405 p {
+  margin-left: 5px;
+}
+
+/*----------------04--------------*/
+
+.section-cat_0104 {
+  padding-left: calc(((100% /8 * 1) - 22px));
+}
+
+.section-cat_0204 {
+  padding-left: calc(((100% /8 * 3) - 22px));
+}
+
+.section-cat_0304 {
+  padding-left: calc(((100% /8 * 5) - 22px));
+}
+
+.section-cat_0404 {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  text-align: right;
+  padding-left: 0;
+  padding-right: calc(((100% / 8 * 1) - 22px));
+}
+
+.section-cat_0404 .end_dot {
+  display: inline-block;
+}
+
+.section-cat_0404 .dot {
+  display: none;
+}
+
+.section-cat_0404 p {
+  margin-left: 5px;
+}
+
+
+/*----------------03--------------*/
+
+
+.section-cat_0103 {
+  padding-left: calc(((100% /6 * 1) - 22px));
+}
+
+.section-cat_0203 {
+  padding-left: calc(((100% /6 * 3) - 22px));
+}
+
+.section-cat_0303 {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  text-align: right;
+  padding-left: 0;
+  padding-right: calc(((100% / 6 * 1) - 22px));
+}
+
+.section-cat_0303 .end_dot {
+  display: inline-block;
+}
+
+.section-cat_0303 .dot {
+  display: none;
+}
+
+.section-cat_0303 p {
+  margin-left: 5px;
+}
+
+
+/*----------------02--------------*/
+
+
+.section-cat_0102 {
+  padding-left: calc(((100% /4 * 1) - 22px));
+}
+
+.section-cat_0202 {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  text-align: right;
+  padding-left: 0;
+  padding-right: calc(((100% / 4 * 1) - 22px));
+}
+
+.section-cat_0202 .end_dot {
+  display: inline-block;
+}
+
+.section-cat_0202 .dot {
+  display: none;
+}
+
+.section-cat_0202 p {
+  margin-left: 5px;
+}
+
+/*----------------01--------------*/
+
+
+.section-cat_0101 {
+  padding-left: calc(((100% /2 * 1) - 22px));
 }

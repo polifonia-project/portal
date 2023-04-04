@@ -158,6 +158,8 @@ class SectionClip extends React.Component {
           let iri = document.getElementById('option' + this.state.arrowOption).getAttribute('el_iri');
           this.onArrowClick(iri,label);
         }
+        let inputRef = document.getElementById('thisinput' + this.props.catName);
+        inputRef.blur();
       }
     }; 
 
@@ -198,12 +200,14 @@ class SectionClip extends React.Component {
 
   render() {
     return (
+      <div className={classes.sectionClipFlex + ' ' + classes['sectionClipFlex' + this.props.category]}>
       <div className={classes.sectionClipContainer + ' ' + classes['sectionclip-' + this.props.category]}>
         <VisibilitySensor onChange={this.onVisibilityChange}>
           <Remainder catName={this.props.catName} focus={this.state.isFocused} color={this.props.color}></Remainder>
         </VisibilitySensor>
         <div className={classes.sectionClip}>
           <input
+            id={'thisinput' + this.props.catName}
             type={'search'}
             placeholder={this.props.placeholder}
             el_iri={this.props.el_iri}
@@ -232,6 +236,7 @@ class SectionClip extends React.Component {
           style={{backgroundImage: `url(${expandIcon})` }}
           onMouseEnter={() => this.handleMouseEnter('Expand','508px')}
           onMouseLeave={this.handleMouseLeave}
+          onClick={() => console.log(this.context['setCardOpen'](true))}
         ></button>
         <div id={'suggContainer'} className={classes.suggestionsContainer} style={{opacity: this.state.isFocused ? '1' : '0'}}>
           { 
@@ -244,6 +249,7 @@ class SectionClip extends React.Component {
             ))
           }
         </div>
+      </div>
       </div>
 
 

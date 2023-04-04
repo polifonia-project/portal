@@ -8,6 +8,7 @@ import LoaderResultLine from "../loaders/LoaderResultLine";
 import InfiniteScroll from "react-infinite-scroll-component";
 import NoMoreResults from "../loaders/NoMoreResults";
 import NoResultsError from "../loaders/NoResultsError";
+import SourcesBarchart from "./SourcesBarchart";
 // import classes from "./Results.module.css" 
 
 class ResultsTest extends React.Component {
@@ -20,6 +21,8 @@ class ResultsTest extends React.Component {
             activeRelations: [],
             filterOn: false,
             relationOn: false,
+            datasetOn: false,
+            currentDataset: '',
             relations: [],
             relationSet: {},
             disabled: {},
@@ -142,6 +145,19 @@ class ResultsTest extends React.Component {
         return;
     }
 
+    handleDataset = (x) => {
+        this.setState({ datasetOn: true });
+        this.setState({ currentDataset: x });
+        return;
+    }
+
+    resetDataset = (x) => {
+        this.setState({ datasetOn: x });
+        this.setState({ currentDataset: '' });
+        return;
+    }
+
+
     render() {
         let Data = [];
         if (this.state.activeFilters.length > 0 || this.state.activeRelations.length > 0) {
@@ -151,7 +167,8 @@ class ResultsTest extends React.Component {
         }
         return (
             <>
-                <ResultsHeader>
+                <ResultsHeader cat={this.props.cat}>
+                <SourcesBarchart cat={this.props.cat} handleDataset={this.handleDataset} resetDataset={this.resetDataset}></SourcesBarchart>
                     <FiltersContainer>
                         <FilterButton isDisabled={this.state.filterOn || this.state.relationOn} resetClass='resetButton' buttonClick={() => this.resetFilters()}>
                             Reset <span className="resetIcon">⟲</span>
@@ -175,22 +192,22 @@ class ResultsTest extends React.Component {
                         </Filters>
                     </FiltersContainer>
                 </ResultsHeader>
-                {Data.length ? 
-                <InfiniteScroll
-                    dataLength={Data.length}
-                    next={this.fetchMoreData}
-                    hasMore={this.state.hasMore}
-                    loader={<LoaderResultLine />}
-                    height={400}
-                    scrollThreshold={1}
-                    endMessage={<NoMoreResults message={this.state.endMessage}/>}
-                >
-                    {Data.map((res, index) => {
-                        return (
-                            <ResultLine label={res.label} rel={res.rel} cat={res.cat} number={index + 1} color={this.props.color} input_value={this.props.input_value} isdirect={res.inverse}></ResultLine>
-                        )
-                    })}
-                </InfiniteScroll> : <NoResultsError /> 
+                {Data.length ?
+                    <InfiniteScroll
+                        dataLength={Data.length}
+                        next={this.fetchMoreData}
+                        hasMore={this.state.hasMore}
+                        loader={<LoaderResultLine />}
+                        height={400}
+                        scrollThreshold={1}
+                        endMessage={<NoMoreResults message={this.state.endMessage} />}
+                    >
+                        {Data.map((res, index) => {
+                            return (
+                                <ResultLine label={res.label} rel={res.rel} cat={res.cat} dataset={res.dataset} currentDataset={this.state.currentDataset} datasetOn={this.state.datasetOn}number={index + 1} color={this.props.color} input_value={this.props.input_value} isdirect={res.inverse}></ResultLine>
+                            )
+                        })}
+                    </InfiniteScroll> : <NoResultsError />
                 }
             </>
         )
@@ -236,93 +253,97 @@ class ResultsTest extends React.Component {
                 let dataset_id = obj.dataset
                 let iri_base = datasets[dataset_id].iri_base
                 // check if iri_base and el_iri are part of the same dataset
-                if ((uri).includes(iri_base)) {
-                    let query_method = datasets[dataset_id].query_method
-                    let endpoint = datasets[dataset_id][query_method]
-                    let query = obj.query;
-                    query = query.replaceAll('<>', '<' + uri + '>');
-                    query = query.concat(' ', queryOffsetString).concat(' ', queryLimitString);
-                    let url = endpoint + '?query=' + encodeURIComponent(query);
-                    try {
-                        fetch(url, {
-                            method: 'GET',
-                            headers: { 'Accept': 'application/sparql-results+json' }
-                        })
-                            .then((res) => res.json())
-                            .then((data) => {
+                // if ((uri).includes(iri_base)) {
+                let query_method = datasets[dataset_id].query_method
+                let endpoint = datasets[dataset_id][query_method]
+                let query = obj.query;
+                query = query.replaceAll('<>', '<' + uri + '>');
+                query = query.concat(' ', queryOffsetString).concat(' ', queryLimitString);
+                let url = endpoint + '?query=' + encodeURIComponent(query);
+                try {
+                    fetch(url, {
+                        method: 'GET',
+                        headers: { 'Accept': 'application/sparql-results+json' }
+                    })
+                        .then((res) => res.json())
+                        .then((data) => {
 
-                                let dataLen = data.results.bindings.length;
+                            let dataLen = data.results.bindings.length;
 
-                                if (dataLen > 0) {
-                                    data.results.bindings.forEach(res => {
-                                        let singleResult = {}
-                                        singleResult.uri = res.entity.value;
-                                        singleResult.label = res.entityLabel.value;
-                                        singleResult.cat = cat;
-                                        singleResult.rel = '';
-                                        singleResult.inverse = false;
-                                        if (res.inverse_rel) {
-                                            if (res.inverse_rel.value.length !== '') {
-                                                singleResult.rel = res.inverse_rel.value;
-                                                singleResult.inverse = true;
-                                            } else {
-                                                singleResult.rel = res.rel.value;
-                                                singleResult.inverse = false;
-                                            }
+                            if (dataLen > 0) {
+                                data.results.bindings.forEach(res => {
+                                    let singleResult = {}
+                                    singleResult.uri = res.entity.value;
+                                    singleResult.label = res.entityLabel.value;
+                                    singleResult.cat = cat;
+                                    singleResult.rel = '';
+                                    singleResult.inverse = false;
+                                    singleResult.dataset = datasets[dataset_id].name;
+                                    if (res.inverse_rel) {
+                                        if (res.inverse_rel.value.length !== '') {
+                                            singleResult.rel = res.inverse_rel.value;
+                                            singleResult.inverse = true;
                                         } else {
                                             singleResult.rel = res.rel.value;
                                             singleResult.inverse = false;
                                         }
-                                        results.push(singleResult);
-                                        if (!relations.includes(singleResult.rel)) {
-                                            relations.push(singleResult.rel);
-                                        }
-
-                                        if (!relationSet[singleResult.cat]) {
-                                            relationSet[singleResult.cat] = [];
-                                            disabled[singleResult.cat] = true;
-                                            if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
-                                                relationSet[singleResult.cat].push(singleResult.rel)
-                                            }
-                                        } else {
-                                            if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
-                                                relationSet[singleResult.cat].push(singleResult.rel)
-                                            }
-                                        }
-                                        this.setState({ totalResults: results });
-                                        this.setState({ relations: relations });
-                                        this.setState({ relationSet: relationSet });
-                                        this.setState({ disabled: disabled });
-                                        this.setState({ loader: false })
+                                    } else {
+                                        singleResult.rel = res.rel.value;
+                                        singleResult.inverse = false;
                                     }
-                                    )
-                                    if (dataLen < queryLimit) {
-                                        catOffset[cat] = false;
-                                        this.setState({ catOffset: catOffset })
-                                        if (!Object.values(catOffset).includes(true)) {
-                                            this.setState({ hasMore: false })
+                                    results.push(singleResult);
+                                    if (!relations.includes(singleResult.rel)) {
+                                        relations.push(singleResult.rel);
+                                    }
+
+                                    if (!relationSet[singleResult.cat]) {
+                                        relationSet[singleResult.cat] = [];
+                                        disabled[singleResult.cat] = true;
+                                        if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
+                                            relationSet[singleResult.cat].push(singleResult.rel)
                                         }
                                     } else {
-                                        catOffset[cat] = true;
-                                        this.setState({ catOffset: catOffset });
+                                        if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
+                                            relationSet[singleResult.cat].push(singleResult.rel)
+                                        }
                                     }
-                                }
-                                else {
+                                    this.setState({ totalResults: results });
+                                    this.setState({ relations: relations });
+                                    this.setState({ relationSet: relationSet });
+                                    this.setState({ disabled: disabled });
                                     this.setState({ loader: false })
+                                }
+                                )
+                                if (dataLen < queryLimit) {
                                     catOffset[cat] = false;
                                     this.setState({ catOffset: catOffset })
                                     if (!Object.values(catOffset).includes(true)) {
                                         this.setState({ hasMore: false })
                                     }
+                                } else {
+                                    catOffset[cat] = true;
+                                    this.setState({ catOffset: catOffset });
                                 }
-                            });
-                    }
-                    catch (err) {
-                        console.log('error', err)
-                    }
-                } else {
-                    console.log('Different iri base.')
+                            }
+                            else {
+                                if (!(uri).includes(iri_base)) {
+                                    console.log('Try reconciliation.')
+                                }
+                                this.setState({ loader: false })
+                                catOffset[cat] = false;
+                                this.setState({ catOffset: catOffset })
+                                if (!Object.values(catOffset).includes(true)) {
+                                    this.setState({ hasMore: false })
+                                }
+                            }
+                        });
                 }
+                catch (err) {
+                    console.log('error', err)
+                }
+                // } else {
+                //     console.log('Different iri base.')
+                // }
             }
         }
         this.setState({ offsetValue: queryOffset + queryLimit });

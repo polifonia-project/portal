@@ -17,33 +17,59 @@
 
 }
 
+.scrollResult {
+  display: block;
+  width: 92%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
 .resultNum {
   display: inline-flex;
   align-items: center;
-  width: 4%;
+  width: 60px;
   justify-content: left;
   padding-left: 10px;
-
 }
 
-.resultLabel {
+.resultActions {
   display: inline-flex;
   align-items: center;
-  width: 30%;
-  font-weight: 400;
+  width: 50px;
+  font-size: 0.8em;
+  justify-content: flex-end;
 }
 
 .resultCat {
   display: inline-flex;
-  align-items: center;
-  width: 10%;
   text-transform: capitalize;
+  white-space: nowrap;
+  padding-right: 20px;
+  width: 150px;
+  word-break: break-all;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}
+
+.resultLabel {
+  display: inline-block;
+  align-items: center;
+  width: 400px;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
 }
 
 .resultRel {
   display: inline-flex;
   align-items: center;
-  width: 60%;
+  min-width: 600px;
   text-transform: capitalize;
   justify-content: flex-start;
   white-space: nowrap;
@@ -51,6 +77,7 @@
 }
 
 .listOfRelations {
+  min-width: 50px;
   max-width: 50%;
   overflow: scroll;
   scrollbar-width: none;
@@ -62,21 +89,13 @@
   -ms-overflow-style: none;
 }
 
-.resultActions {
-  display: inline-flex;
-  align-items: center;
-  width: 10%;
-  font-size: 0.8em;
-  justify-content: flex-end;
-}
-
 .resultActions button {
   background-color: #f4edec;
   border: 0.2px solid grey;
   margin: 0px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+  display:block;
   border-radius: 50%;
   cursor: pointer;
   margin-left: 10px;

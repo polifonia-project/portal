@@ -9,6 +9,7 @@ import hamburger from "../../assets/svg/HamburgerIcon.svg";
 import closemenu from "../../assets/svg/CloseMenu.svg";
 import classes from "./MainNavigation.module.css";
 import MenuOverlay from "./MenuOverlay.js";
+import Card from "../card/Card";
 import { ThemeContext } from "../../context/ThemeContext";
 
 function MainNavigation(props) {
@@ -47,6 +48,7 @@ function MainNavigation(props) {
         <img onClick={toggleMenu} className={classes.hamburger} src={menuOpen ? closemenu : hamburger} alt="Hamburger Menu" />
       </span>
       {menuOpen ? <MenuOverlay toggleMenu={toggleMenu}/> : null}
+      <Card></Card>
     </header>
     
   );
