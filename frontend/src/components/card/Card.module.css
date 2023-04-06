@@ -88,6 +88,9 @@
   border: 0.4px solid rgb(71, 71, 71);
   border-radius: 3px;
   transition: all 1s ease;
+  display: block;
+  width: 90px !important;
+
 }
 
 .exitButton:hover {
@@ -158,6 +161,7 @@
 
 .titleContainer:hover .categoryResult span:last-child {
   border-right: 0.4px solid transparent !important;
+  padding-right:0px;
 }
 
 

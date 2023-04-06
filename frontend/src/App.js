@@ -7,30 +7,27 @@ import DataStoriesPage from "./pages/DataStories";
 import AboutPage from "./pages/About";
 import Layout from "./components/layout/Layout";
 import { ThemeContext } from "./context/ThemeContext";
+import { CardContext } from "./context/CardContext";
 
 function App() {
   const [pagetitle, setPageTitle] = useState();
+
   const [theme, setTheme] = useState('default');
   const [soundOn, setSoundOn] = useState(false);
+  const [colorSet, setColorSet] = useState({});
+
   const [cardOpen, setCardOpen] = useState(false);
+  const [cardBlocks, setCardBlocks] = useState({});
   const [cardContent, setCardContent] = useState(
     {title: 'Card Title', 
     cat: 'Card category', 
-    iri: 'Card iri', 
+    input: 'Input name', 
+    uri: 'url',
     color: '#e5e3e3'});
-  const [colorSet, setColorSet] = useState(
-    {cat_01: '#f80000',
-    cat_02: '#ff02fe', 
-    cat_03: '#1d00fe', 
-    cat_04: '#6400b4',
-    cat_05: '#00feff',
-    people: '#6400b4',
-    places: '#fdff00',
-    cat_08: '#000000',
-   });
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, soundOn, setSoundOn, cardOpen, setCardOpen, cardContent, setCardContent, colorSet, setColorSet}}>
+    <ThemeContext.Provider value={{ theme, setTheme, soundOn, setSoundOn, colorSet, setColorSet}}>
+    <CardContext.Provider value={{cardOpen, setCardOpen, cardContent, setCardContent, cardBlocks, setCardBlocks}}>
       <Layout title={pagetitle}>
         <Routes>
           <Route path="/" element={<FeedPage func={setPageTitle} />} />
@@ -38,6 +35,7 @@ function App() {
           <Route path="/about" element={<AboutPage func={setPageTitle} />} />
         </Routes>
       </Layout>
+    </CardContext.Provider>
     </ThemeContext.Provider>
   );
 }

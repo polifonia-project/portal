@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./ResultLine.module.css";
 import { useState, useContext } from "react";
-import { ThemeContext } from "../../../context/ThemeContext";
+import { CardContext } from "../../../context/CardContext";
 import expandIcon from '../../../assets/svg/expand.svg';
 import expandIconWhite from '../../../assets/svg/expandWhite.svg';
 import { useEffect } from "react";
@@ -9,8 +9,8 @@ import { useEffect } from "react";
 function ResultLine(props) {
   const [isHover, setIsHover] = useState(false);
   const [datasetOn, setDatasetOn] = useState(false);
-  const { setCardOpen } = useContext(ThemeContext);
-  const { setCardContent } = useContext(ThemeContext);
+  const { setCardOpen } = useContext(CardContext);
+  const { setCardContent } = useContext(CardContext);
 
   const handleMouseEnter = () => {
      setIsHover(true);
@@ -43,7 +43,7 @@ function ResultLine(props) {
                   backgroundImage: isHover ? `url(${expandIconWhite})` : `url(${expandIcon})` }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          onClick={() => {setCardOpen(true); setCardContent({title: props.label, cat: props.cat, iri: 'Card iri', color: props.color})}}
+          onClick={() => {setCardOpen(true); setCardContent({title: props.label, cat: props.cat, input: props.input_value, uri: 'url', color: props.color})}}
         ></button>
       </div>
     </div>

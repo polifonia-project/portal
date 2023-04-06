@@ -7,7 +7,7 @@ import searchicon from '../../../assets/svg/magnglass.svg';
 import closeicon from '../../../assets/svg/closesearch.svg';
 import blankicon from '../../../assets/svg/blanksearch.svg';
 import Remainder from "./Remainder";
-import expandIcon from '../../../assets/svg/expand.svg';
+import ExpandButton from "./ExpandButton";
 
 class SectionClip extends React.Component {
 
@@ -231,13 +231,10 @@ class SectionClip extends React.Component {
           </button>
         </div>
         <div className={ classes.helpText + ' ' + classes[this.state.isHover ? 'helpTextVisible': 'helpTextHidden']} style={{marginLeft: this.state.helpTMargin}}><p>{this.state.helpT}</p></div>
-        <button 
-          className={classes.expandButton}
-          style={{backgroundImage: `url(${expandIcon})` }}
-          onMouseEnter={() => this.handleMouseEnter('Expand','508px')}
-          onMouseLeave={this.handleMouseLeave}
-          onClick={() => console.log(this.context['setCardOpen'](true))}
-        ></button>
+        <ExpandButton 
+          mouseEnter={() => this.handleMouseEnter('Expand','508px')}
+          mouseLeave={this.handleMouseLeave}
+        ></ExpandButton>
         <div id={'suggContainer'} className={classes.suggestionsContainer} style={{opacity: this.state.isFocused ? '1' : '0'}}>
           { 
             Object.keys(this.state.value_obj).map((key, index) => (

@@ -20,6 +20,7 @@ class Sections extends React.Component {
         this.setState({ datasets: data.datasets });
         this.setState({ clips: data.clips });
         this.setState({ categories: data.categories });
+
       });
   };
 
@@ -48,6 +49,8 @@ class Sections extends React.Component {
             datasets={this.state.datasets}
             placeholder={clip.name} 
             tot_categories={Object.keys(this.state.categories).length} 
+            alt_colors={this.state.categories[clip.category].card.altcolors}
+            card_blocks={this.state.categories[clip.category].card.blocks}
             >
           </SectionContainer>
         ))}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import classes from "./Card.module.css";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
+import { CardContext } from "../../context/CardContext";
 import isDarkColor from 'is-dark-color';
 
 import TextBlock from "./TextBlock";
@@ -12,18 +13,23 @@ import TagBlock from "./TagBlock";
 
 function Card(props) {
 
-  const { cardOpen, setCardOpen } = useContext(ThemeContext);
-  const { cardContent } = useContext(ThemeContext);
+  const { cardOpen, setCardOpen } = useContext(CardContext);
+  const { cardContent } = useContext(CardContext);
+  const { cardBlocks } = useContext(CardContext);
   const { colorSet } = useContext(ThemeContext);
+
   const [colorBackground, setColorBackground] = useState('#e2e2e2')
   const [colorIsDark, setColorIsDark] = useState(false)
+  const [currentBlock, setCurrentBlock] = useState({})
 
   useEffect(() => {
     if (cardOpen) {
       if (colorSet[cardContent.cat]) {
         setColorBackground(colorSet[cardContent.cat]);
+        setCurrentBlock(cardBlocks[cardContent.cat]); 
       } else {
         setColorBackground('#e2e2e2');
+        setCurrentBlock(cardBlocks.people); /* GENERIC CATEGORY DEFAULT CARD*/
       }
       
       if (isDarkColor(colorBackground)) {
@@ -70,7 +76,7 @@ function Card(props) {
           <h1 style={{color: colorIsDark ? 'white' : 'black'}}>{cardContent.title}</h1>
           <p className={classes.categoryResult} style={{color: colorIsDark ? 'white' : 'black', borderColor: colorIsDark ? 'white' : '#474747'}}>
             <span style={{borderColor: colorIsDark ? 'white' : '#474747'}}>{cardContent.cat}</span>
-            <span style={{borderColor: colorIsDark ? 'white' : '#474747'}}>Related to Wolfgang Amadeus Mozart</span>
+            <span style={{borderColor: colorIsDark ? 'white' : '#474747'}}>Related to {cardContent.input}</span>
           </p>
           <p className={classes.cardShareButton} style={{borderColor: colorIsDark ? 'white' : '#474747'}}>
             <span><button className={classes.shareButton} style={{color: colorIsDark ? 'white' : 'black'}}>Share</button></span>
@@ -81,15 +87,27 @@ function Card(props) {
         </div>
       </div>
       <div className={classes.contentBlock}>
-        <TextBlock width={25}></TextBlock>
-        <RelationBlock width={25}></RelationBlock> 
-        <RelationBlock width={25}></RelationBlock> 
-        <LinkBlock width={25}></LinkBlock>
-        <VisualBlock width={50}></VisualBlock>  
-        <TagBlock width={50}></TagBlock> 
 
-      {/* <CardBlock width={100}></CardBlock> */
-      /* <LinkBlock width={100}></LinkBlock> */}
+        {Object.values(currentBlock).map((block) => {
+          if (block.type === 'text') {
+            return <TextBlock width={25} title={block.title}></TextBlock>} 
+
+          else if (block.type === 'relation')
+          { return <RelationBlock width={25} ></RelationBlock>}
+
+          else if (block.type === 'link')
+          { return <LinkBlock width={25} ></LinkBlock>}
+
+          else if (block.type === 'visual')
+          { return <VisualBlock width={25} ></VisualBlock>}
+
+          else if (block.type === 'tag')
+          { return <TagBlock width={25} ></TagBlock>}
+
+          return null
+        })}
+
+        
 
       </div>
     </div>
