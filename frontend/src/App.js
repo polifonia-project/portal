@@ -23,7 +23,8 @@ function App() {
     cat: 'Card category', 
     input: 'Input name', 
     uri: 'url',
-    color: '#e5e3e3'});
+    color: '#e5e3e3',
+    hasInput: false});
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, soundOn, setSoundOn, colorSet, setColorSet}}>

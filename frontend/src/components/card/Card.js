@@ -21,9 +21,11 @@ function Card(props) {
   const [colorBackground, setColorBackground] = useState('#e2e2e2')
   const [colorIsDark, setColorIsDark] = useState(false)
   const [currentBlock, setCurrentBlock] = useState({})
+  const [fromSectionClip, setFromSectionClip] = useState(false)
 
   useEffect(() => {
     if (cardOpen) {
+      setFromSectionClip(cardContent.hasInput); 
       if (colorSet[cardContent.cat]) {
         setColorBackground(colorSet[cardContent.cat]);
         setCurrentBlock(cardBlocks[cardContent.cat]); 
@@ -76,7 +78,9 @@ function Card(props) {
           <h1 style={{color: colorIsDark ? 'white' : 'black'}}>{cardContent.title}</h1>
           <p className={classes.categoryResult} style={{color: colorIsDark ? 'white' : 'black', borderColor: colorIsDark ? 'white' : '#474747'}}>
             <span style={{borderColor: colorIsDark ? 'white' : '#474747'}}>{cardContent.cat}</span>
-            <span style={{borderColor: colorIsDark ? 'white' : '#474747'}}>Related to {cardContent.input}</span>
+            {fromSectionClip ? null
+            : <span style={{borderColor: colorIsDark ? 'white' : '#474747'}}>Related to {cardContent.input}</span>
+            }
           </p>
           <p className={classes.cardShareButton} style={{borderColor: colorIsDark ? 'white' : '#474747'}}>
             <span><button className={classes.shareButton} style={{color: colorIsDark ? 'white' : 'black'}}>Share</button></span>
@@ -90,19 +94,19 @@ function Card(props) {
 
         {Object.values(currentBlock).map((block) => {
           if (block.type === 'text') {
-            return <TextBlock width={25} title={block.title}></TextBlock>} 
+            return <TextBlock width={block.size} title={block.title}></TextBlock>} 
 
           else if (block.type === 'relation')
-          { return <RelationBlock width={25} ></RelationBlock>}
+          { return <RelationBlock width={block.size} title={block.title}></RelationBlock>}
 
           else if (block.type === 'link')
-          { return <LinkBlock width={25} ></LinkBlock>}
+          { return <LinkBlock width={block.size} title={block.title} links={block.content}></LinkBlock>}
 
           else if (block.type === 'visual')
-          { return <VisualBlock width={25} ></VisualBlock>}
+          { return <VisualBlock width={block.size} title={block.title}></VisualBlock>}
 
           else if (block.type === 'tag')
-          { return <TagBlock width={25} ></TagBlock>}
+          { return <TagBlock width={block.size} title={block.title} tags={block.content}></TagBlock>}
 
           return null
         })}

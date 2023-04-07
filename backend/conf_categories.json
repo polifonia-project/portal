@@ -471,43 +471,54 @@
                 "01" : {
                     "type": "text",
                     "size": "small",
-                    "title": "Lorem Ipsum",
+                    "title": "Biography",
                     "content": [{},{},{}]
                 },
                 "02" : {
                     "type": "relation",
                     "size": "small",
-                    "title": "Lorem Ipsum",
+                    "title": "Influenced by",
                     "content": [{},{},{}]
                 },
                 "03" : {
-                    "type": "link",
+                    "type": "relation",
                     "size": "small",
-                    "title": "Lorem Ipsum",
-                    "description": "Lorem Ipsum",
-                    "content": [{
-                        "linktype" : "static",
-                        "label" : "Click me",
-                        "url" : "www.google.it"
-                        },
-                        {
-                        "linktype" : "dynamic",
-                        "label" : "Click me",
-                        "url" : "www.google.it"
-                        }
-                    ]
+                    "title": "Worked with",
+                    "content": [{},{},{}]
                 },
                 "04" : {
                     "type": "visual",
-                    "size": "medium",
-                    "title": "Lorem Ipsum",
+                    "size": "small",
+                    "title": "Portrait",
                     "content": [{},{},{}]
                 },
                 "05" : {
+                    "type": "link",
+                    "size": "small",
+                    "title": "Useful links",
+                    "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+                    "content": [{
+                        "linktype" : "static",
+                        "label" : "Spotify",
+                        "url" : "https://www.google.com/"
+                        },
+                        {
+                        "linktype" : "static",
+                        "label" : "Wikipedia",
+                        "url" : "https://www.google.com/"
+                        },
+                        {
+                        "linktype" : "static",
+                        "label" : "Genius Lyrics",
+                        "url" : "https://www.google.com/"
+                        }
+                    ]
+                },
+                "06" : {
                     "type": "tag",
-                    "size": "large",
-                    "title": "Lorem Ipsum",
-                    "content": ["people","polifonia","h2020"]
+                    "size": "small",
+                    "title": "Tags",
+                    "content": ["people","polifonia","h2020", "artist","musician","art"]
                 }
             }
 
@@ -553,44 +564,54 @@
             "blocks" : { 
                 "01" : {
                     "type": "text",
-                    "size": "small",
-                    "title": "Lorem Ipsum",
+                    "size": "medium",
+                    "title": "Description",
                     "content": [{},{},{}]
                 },
                 "02" : {
                     "type": "relation",
                     "size": "small",
-                    "title": "Lorem Ipsum",
+                    "title": "Famous guests",
                     "content": [{},{},{}]
                 },
                 "03" : {
                     "type": "link",
                     "size": "small",
-                    "title": "Lorem Ipsum",
-                    "description": "Lorem Ipsum",
+                    "title": "Useful links",
+                    "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
                     "content": [{
                         "linktype" : "static",
-                        "label" : "Click me",
-                        "url" : "www.google.it"
+                        "label" : "Maps",
+                        "url" : "https://www.google.com/"
                         },
                         {
-                        "linktype" : "dynamic",
-                        "label" : "Click me",
-                        "url" : "www.google.it"
+                        "linktype" : "static",
+                        "label" : "Genius Lyrics",
+                        "url" : "https://www.google.com/"
+                        },
+                        {
+                        "linktype" : "static",
+                        "label" : "Corpus",
+                        "url" : "https://www.google.com/"
+                        },
+                        {
+                        "linktype" : "static",
+                        "label" : "Official Website",
+                        "url" : "https://www.google.com/"
                         }
                     ]
                 },
-                "04" : {
+                "04" :{
                     "type": "visual",
-                    "size": "medium",
-                    "title": "Lorem Ipsum",
+                    "size": "large",
+                    "title": "Map",
                     "content": [{},{},{}]
                 },
                 "05" : {
                     "type": "tag",
                     "size": "large",
-                    "title": "Lorem Ipsum",
-                    "content": ["people","polifonia","h2020"]
+                    "title": "Tags",
+                    "content": ["places","italy","polifonia","geography","city","h2020" ]
                 }
             }
 

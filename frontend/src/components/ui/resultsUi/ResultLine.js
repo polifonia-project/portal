@@ -43,7 +43,7 @@ function ResultLine(props) {
                   backgroundImage: isHover ? `url(${expandIconWhite})` : `url(${expandIcon})` }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          onClick={() => {setCardOpen(true); setCardContent({title: props.label, cat: props.cat, input: props.input_value, uri: 'url', color: props.color})}}
+          onClick={() => {setCardOpen(true); setCardContent({title: props.label, cat: props.cat, input: props.input_value, uri: 'url', color: props.color, hasInput: false})}}
         ></button>
       </div>
     </div>

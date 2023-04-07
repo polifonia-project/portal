@@ -21,6 +21,7 @@ class SectionClip extends React.Component {
       searchField: "",
       value_obj: {},
       input: "",
+      current_input: this.props.placeholder,
       isFocused: false,
       mainClip: this.props.el_iri,
       isHover: false,
@@ -125,6 +126,7 @@ class SectionClip extends React.Component {
   onClickSearch = () => { window.console.log('search start') };
   onClickReset = e => {
     this.setState({ input: '' });
+    this.setState({ current_input: this.props.placeholder });
     this.props.setInputValue(this.props.placeholder);
     this.setState({ value_obj: {} });
     this.setState({ arrowOption: false });
@@ -133,6 +135,7 @@ class SectionClip extends React.Component {
 
   onOptionClick = e => {
     this.setState({ input: e.currentTarget.innerText });
+    this.setState({ current_input: e.currentTarget.innerText });
     this.props.setInputValue(e.currentTarget.innerText);
     this.setState({ value_obj: {} });
     this.props.onQuery(e.currentTarget.getAttribute('el_iri'));
@@ -234,6 +237,9 @@ class SectionClip extends React.Component {
         <ExpandButton 
           mouseEnter={() => this.handleMouseEnter('Expand','508px')}
           mouseLeave={this.handleMouseLeave}
+          label={this.state.current_input}
+          cat={this.props.catName}
+          color={this.props.color}
         ></ExpandButton>
         <div id={'suggContainer'} className={classes.suggestionsContainer} style={{opacity: this.state.isFocused ? '1' : '0'}}>
           { 
