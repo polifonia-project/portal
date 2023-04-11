@@ -9,7 +9,6 @@ import TextBlock from "./TextBlock";
 import RelationBlock from "./RelationBlock.js";
 import VisualBlock from "./VisualBlock";
 import LinkBlock from "./LinkBlock";
-import TagBlock from "./TagBlock";
 
 function Card(props) {
 
@@ -104,9 +103,6 @@ function Card(props) {
 
           else if (block.type === 'visual')
           { return <VisualBlock width={block.size} title={block.title}></VisualBlock>}
-
-          else if (block.type === 'tag')
-          { return <TagBlock width={block.size} title={block.title} tags={block.content}></TagBlock>}
 
           return null
         })}

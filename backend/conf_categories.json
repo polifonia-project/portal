@@ -511,10 +511,23 @@
                         "linktype" : "static",
                         "label" : "Genius Lyrics",
                         "url" : "https://www.google.com/"
+                        },
+                        {
+                        "linktype" : "api",
+                        "label" : "Spotify",
+                        "url" : "https://www.google.com/"
+                        },
+                        {
+                        "linktype" : "query",
+                        "label" : "Spotify",
+                        "dataset" : [{
+                                "dataset_01" : "query/...",
+                                "dataset_02" : "query/..."
+                                }]
                         }
                     ]
                 },
-                "06" : {
+                "06" : { 
                     "type": "tag",
                     "size": "small",
                     "title": "Tags",
