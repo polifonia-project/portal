@@ -91,18 +91,18 @@ function Card(props) {
       </div>
       <div className={classes.contentBlock}>
 
-        {Object.values(currentBlock).map((block) => {
+        {Object.values(currentBlock).map((block, i) => {
           if (block.type === 'text') {
-            return <TextBlock width={block.size} title={block.title}></TextBlock>} 
+            return <TextBlock key={'textblock-' + i} width={block.size} title={block.title}></TextBlock>} 
 
           else if (block.type === 'relation')
-          { return <RelationBlock width={block.size} title={block.title}></RelationBlock>}
+          { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title}></RelationBlock>}
 
           else if (block.type === 'link')
-          { return <LinkBlock width={block.size} title={block.title} links={block.content}></LinkBlock>}
+          { return <LinkBlock key={'linkblock-' + i} width={block.size} title={block.title} links={block.content}></LinkBlock>}
 
           else if (block.type === 'visual')
-          { return <VisualBlock width={block.size} title={block.title}></VisualBlock>}
+          { return <VisualBlock key={'visualblock-' + i} width={block.size} title={block.title}></VisualBlock>}
 
           return null
         })}

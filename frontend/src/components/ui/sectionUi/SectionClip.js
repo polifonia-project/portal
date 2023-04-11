@@ -245,6 +245,7 @@ class SectionClip extends React.Component {
           { 
             Object.keys(this.state.value_obj).map((key, index) => (
               <p onClick={this.onOptionClick}
+                key={'option--' + index}
                  onMouseEnter={ (e) => this.handleMouseEnterOption(e)}
                  onMouseLeave={this.handleMouseLeaveOption}
                  className={classes.suggestionoption} 

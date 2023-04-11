@@ -1,17 +1,18 @@
 {
   "card_03": {
-    "id": "card_03",
-    "title" : "Discover the CORPUS",
+    "id": "card_06",
+    "title" : "Play with data",
     "paragraph": "Discover unexpected connections with data stories and contents for music experts",
-    "dimension": "small",
+    "image": "",
+    "dimension": "medium",
     "highlights": ["music experts"]
   },
   "card_04": {
-    "id": "card_04",
-    "title" : "Play with SONAR",
+    "id": "card_06",
+    "title" : "Play with data",
     "paragraph": "Discover unexpected connections with data stories and contents for music experts",
     "image": "",
-    "dimension": "long",
+    "dimension": "medium",
     "highlights": ["music experts"]
   },
   "card_05": {

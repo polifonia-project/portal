@@ -61,8 +61,8 @@ function SourcesBarchart(props) {
     <div className={classes.barchartContainer}>
       <div className={classes.barchartFilter} onClick={() => handleReset()}><div  className={ isFiltered ? classes.filterChecked : classes.filterUnchecked} style={{display: isFiltered ? 'flex' : isShown ? 'flex' : 'none'}}>Data source: {caption} ({textValue}%) <span style={{display: isFiltered ? 'flex' : 'none'}}><span className={classes.removeFilter}>+</span></span></div></div>
       <div className={classes.barchartBox} id={'barchartBox'}>
-        {Object.entries(a).map(([key,value])=> (
-            <div id={'source' + props.cat + key} className={classes.barLine} 
+        {Object.entries(a).map(([key,value, i])=> (
+            <div id={'source' + props.cat + key} key={'sources-entry--' + value} className={classes.barLine} 
               onMouseEnter={() => handleHover(key, value)}
               onMouseLeave={() => setIsShown(false)}
               onClick={(e) => handleClick(e, key, value)}

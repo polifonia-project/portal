@@ -29,7 +29,7 @@ class Clips extends React.Component {
             <div className={classes.clipscontainer + ' ' + classes['background' + Object.keys(this.state.categories).length] } id='clips_container'>
                 {this.state.clips.map((clip, index) => (
                     <Clip
-                        key={index}
+                        key={'clip-' + index}
                         title={clip.name}
                         color={this.state.categories[clip.category].color}
                         category={clip.category}

@@ -27,7 +27,7 @@ function LinkBlock(props) {
       <p className={classes.blockParagraph}>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
       <div className={classes.linksContainer}>
         {props.links.map(function(link, i){
-          return  <a href={link.url} target="_blank" rel="noopener noreferrer"><button className={classes.linkButton}>{link.label}</button></a>
+          return  <a href={link.url} key={'link-' + i} target="_blank" rel="noopener noreferrer"><button className={classes.linkButton}>{link.label}</button></a>
         })}
       </div>
     </div>

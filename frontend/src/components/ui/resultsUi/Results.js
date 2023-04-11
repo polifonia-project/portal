@@ -173,19 +173,16 @@ class ResultsTest extends React.Component {
                         <FilterButton isDisabled={this.state.filterOn || this.state.relationOn} resetClass='resetButton' buttonClick={() => this.resetFilters()}>
                             Reset <span className="resetIcon">⟲</span>
                         </FilterButton> <br />
-                        <Filters filtersType="Categories" color={this.props.color} selectedOn={this.state.filterOn}>
+                        <Filters filtersType="Categories" color={this.props.color} cat={this.props.cat} selectedOn={this.state.filterOn}>
                             {Object.keys(this.props.filters).map(f => {
-                                return (
-                                    <FilterButton isDisabled={true} buttonClick={() => this.addFilter(f)} selectedOn={this.state.filterOn}>{f}</FilterButton>
-                                )
+                                return <FilterButton key={'filterbutton--' + f} isDisabled={true} buttonClick={() => this.addFilter(f)} selectedOn={this.state.filterOn}>{f}</FilterButton>
                             })}
                         </Filters>
-                        <Filters filtersType="Relations" color={this.props.color} selectedOn={this.state.relationOn}>
+                        <Filters filtersType="Relations" color={this.props.color} cat={this.props.cat} selectedOn={this.state.relationOn}>
                             {Object.entries(this.state.relationSet).map(set => {
                                 return set[1].map(rel => {
-                                    return (
-                                        <FilterButton isDisabled={this.state.disabled[set[0]]} buttonClick={() => this.addRelation(rel)} selectedOn={this.state.relationOn}>{rel}</FilterButton>
-                                    )
+                                    return <FilterButton key={'filterbutton--' + rel} isDisabled={this.state.disabled[set[0]]} buttonClick={() => this.addRelation(rel)} selectedOn={this.state.relationOn}>{rel}</FilterButton>
+                                   
                                 })
 
                             })}
@@ -204,7 +201,7 @@ class ResultsTest extends React.Component {
                     >
                         {Data.map((res, index) => {
                             return (
-                                <ResultLine label={res.label} rel={res.rel} cat={res.cat} dataset={res.dataset} currentDataset={this.state.currentDataset} datasetOn={this.state.datasetOn}number={index + 1} color={this.props.color} input_value={this.props.input_value} isdirect={res.inverse}></ResultLine>
+                                <ResultLine key={'resultline--' + index} label={res.label} rel={res.rel} cat={res.cat} dataset={res.dataset} currentDataset={this.state.currentDataset} datasetOn={this.state.datasetOn}number={index + 1} color={this.props.color} input_value={this.props.input_value} isdirect={res.inverse}></ResultLine>
                             )
                         })}
                     </InfiniteScroll> : <NoResultsError />
