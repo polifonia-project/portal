@@ -54,7 +54,6 @@ function Clip(props) {
     function onChange (isVisible) {
         if (isVisible) {
                 document.getElementById("mainHeader").style.backgroundColor = props.color;
-                document.getElementById("mainHeader").style.borderImageWidth = '0px  0px 0px 0px';
                 document.getElementById("categoriesNav").style.backgroundColor = props.color;
                 document.getElementById(props.clip_id).style.transform = 'scale(1)';
                 if (isDarkColor(props.color)) {

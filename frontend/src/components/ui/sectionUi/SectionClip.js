@@ -104,7 +104,6 @@ class SectionClip extends React.Component {
   onVisibilityChange = (isVisible) => {
     if (isVisible) {
       document.getElementById("mainHeader").style.backgroundColor = this.props.color;
-      document.getElementById("mainHeader").style.borderImageWidth = '0px  0px 0px 0px';
       document.getElementById("categoriesNav").style.backgroundColor = this.props.color;
       if (isDarkColor(this.props.color)) {
         this.context.setTheme('dark');

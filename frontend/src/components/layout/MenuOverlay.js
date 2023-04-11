@@ -13,8 +13,6 @@ function MenuOverlay(props) {
     if (isVisible) {
       setTheme('default');
       document.getElementById("mainHeader").style.backgroundColor = "#f4edec";
-      document.getElementById("mainHeader").style.borderWidth = "0px  0px 3px 0px";
-      document.getElementById("mainHeader").style.borderImageWidth = "0px  0px 3px 0px";
       document.getElementById("categoriesNav").style.backgroundColor = "transparent";
       document.getElementById("mainLogo").style.filter= 'none';
       document.getElementById("sectionName").style.color = 'black';
