@@ -14,6 +14,7 @@ function App() {
 
   const [theme, setTheme] = useState('default');
   const [soundOn, setSoundOn] = useState(false);
+  const [backToTopOn, setbackToTopOn] = useState(false);
   const [colorSet, setColorSet] = useState({});
 
   const [cardOpen, setCardOpen] = useState(false);
@@ -27,7 +28,7 @@ function App() {
     hasInput: false});
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, soundOn, setSoundOn, colorSet, setColorSet}}>
+    <ThemeContext.Provider value={{ theme, setTheme, soundOn, setSoundOn, colorSet, setColorSet, backToTopOn, setbackToTopOn}}>
     <CardContext.Provider value={{cardOpen, setCardOpen, cardContent, setCardContent, cardBlocks, setCardBlocks}}>
       <Layout title={pagetitle}>
         <Routes>

@@ -36,6 +36,7 @@ function Clip(props) {
       };
 
     const { setTheme } = useContext(ThemeContext);
+    const { setbackToTopOn } = useContext(ThemeContext);
     const { soundOn } = useContext(ThemeContext);
     
 
@@ -56,6 +57,7 @@ function Clip(props) {
                 document.getElementById("mainHeader").style.backgroundColor = props.color;
                 document.getElementById("categoriesNav").style.backgroundColor = props.color;
                 document.getElementById(props.clip_id).style.transform = 'scale(1)';
+                setbackToTopOn(false);
                 if (isDarkColor(props.color)) {
                   setTheme('dark');
                   document.getElementById("mainLogo").style.filter= 'brightness(0) invert(1)';

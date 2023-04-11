@@ -7,7 +7,13 @@
   top: 0;
   z-index: 100;
   transition: all 1s ease;
-  /*
+  border-width: 0px  0px 0px 0px;
+  border-style: solid;
+  border-color:#f4edec;
+  display: flex;
+  justify-content: space-between;
+
+    /*
   border-image: linear-gradient(
       90deg,
       rgba(253, 56, 67, 1) 0%,
@@ -28,11 +34,6 @@
       rgba(0, 0, 0, 1) 100%
     )
     30; */
-  border-width: 0px  0px 0px 0px;
-  border-style: solid;
-  border-color:#f4edec;
-  padding: 15px 0px 15px 0px;
-  display: flex;
 
   /*
   border-width: 0px  0px 0px 0px !important; 
@@ -43,39 +44,52 @@
 
 
 .title {
-  width: 50%;
   display: flex;
+  height: 30px;
   align-items: center;
   z-index: 400;
+  margin: 10px 15px 15px 15px;
+  padding: 20px 20px 20px 15px;
+  transition: all 0.5s ease;
+}
+
+.title:hover {
+  background-color: #f4edec58;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 .menu {
-  width: 50%;
   display: flex;
   justify-content: flex-end;
   padding-right: 30px;
   position: relative;
 }
+
 .title a {
   align-items: center;
 }
 
 .logo {
-  width: 140px;
+  width: 120px;
   height: auto;
   transition: width 100ms linear;
   cursor: pointer;
   position: relative;
-  padding-left: 30px;
   filter: brightness(1) invert(0);
 }
 
 .section {
-  padding-left: 7px;
+  padding-left: 5px;
   font-size: 1.1em;
   display: flex;
   align-items: center;
   color: black;
+  cursor: default;
+  transform: translateY(1.5px);
 }
 
 .section span {
@@ -85,13 +99,35 @@
 
 .sound {
   cursor: pointer;
-  width: 22px;
   z-index: 400;
+  margin: 10px 0px 10px 10px;
+  padding: 10px;
+  transition: all 0.5s ease;
+}
+
+.sound:hover {
+  background-color: #f4edec58;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 .hamburger {
   cursor: pointer;
   width: 43px;
-  padding-left: 20px;
   z-index: 400;
+  margin: 10px 0px 10px 10px;
+  padding: 10px;
+  transition: all 0.5s ease;
+}
+
+.hamburger:hover {
+  background-color: #f4edec58;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }

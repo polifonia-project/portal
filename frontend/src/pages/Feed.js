@@ -29,11 +29,10 @@ function onChange(isVisible) {
         </VisibilitySensor>
         
       <div className={classes.carouselContainer + ' ' + classes.parallax__layer + ' ' + classes.parallax__layer__back}>
-      {/* <Carousel /> */}
       <video className='videoTag' autoPlay loop muted>
           <source src={backgroundVid} type='video/mp4' />
       </video>
-
+            {/* <Carousel /> */}
       </div>
       <div className={classes.mainContainer + ' ' + classes.parallax__layer + ' ' + classes.parallax__layer__base}> 
         <CategoriesNav />

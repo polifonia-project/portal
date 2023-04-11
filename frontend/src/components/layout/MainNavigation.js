@@ -6,6 +6,7 @@ import logo from "../../assets/svg/PolifoniaLogo.svg";
 import soundon from "../../assets/svg/SoundOn.svg";
 import soundoff from "../../assets/svg/SoundOff.svg";
 import hamburger from "../../assets/svg/HamburgerIcon.svg";
+import backToTop from "../../assets/svg/backToTopp.svg";
 import closemenu from "../../assets/svg/CloseMenu.svg";
 import classes from "./MainNavigation.module.css";
 import MenuOverlay from "./MenuOverlay.js";
@@ -17,6 +18,7 @@ function MainNavigation(props) {
   const [shownOverlay, setOverlayStatus] = useState(false)
   const { theme } = useContext(ThemeContext);
   const { soundOn, setSoundOn } = useContext(ThemeContext);
+  const { backToTopOn, setbackToTopOn } = useContext(ThemeContext);
 
   const toggleMenu = () => {
       setMenuOpen(prev => !prev)
@@ -26,6 +28,18 @@ function MainNavigation(props) {
   const toggleSound = () => {
     setSoundOn(prev => !prev)
   }
+
+  const toggleBack = () => {
+    setbackToTopOn(prev => !prev);
+    handleBackScroll("topHook");
+  }
+
+  const handleBackScroll = (section) => {
+    const element = document.getElementById(section);
+    if (element) {
+      element.scrollIntoView({ block: "end", behavior: "smooth" });
+    }
+  };
 
   if (menuOpen) {
     document.body.style.overflow = "hidden";
@@ -39,11 +53,12 @@ function MainNavigation(props) {
 
   return (
     <header className={classes.header} id='mainHeader' >
-      <span className={classes.title}>
+      <span className={classes.title} id='title-logo'>
         <Link to="/"><img className={classes.logo} src={logo} alt="Logo" id='mainLogo'/></Link>
         <div className={classes.section} id='sectionName'><span>{props.sectionName}</span></div>
       </span>
       <span  className={classes.menu} id='menuOptions' >
+        <img onClick={toggleBack} className={classes.sound} src={backToTop} alt="Back to top Toggle" style={{display: backToTopOn ? 'block' :'none' }}/>
         <img onClick={toggleSound} className={classes.sound} src={soundOn ? soundon : soundoff} alt="Sound Toggle" />
         <img onClick={toggleMenu} className={classes.hamburger} src={menuOpen ? closemenu : hamburger} alt="Hamburger Menu" />
       </span>

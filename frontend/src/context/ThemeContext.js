@@ -5,7 +5,8 @@ export const ThemeContext = createContext({
     setTheme: () => {},
     soundOn: false,
     setSoundOn: () => {},
+    backToTopOn: false, 
+    setbackToTopOn: () => {},
     colorSet: {},
-
     setColorSet: () => {},
   });

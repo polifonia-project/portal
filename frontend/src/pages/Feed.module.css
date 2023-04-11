@@ -34,6 +34,7 @@
     width: 177.77777778vh; /* 100 * 16 / 9 */
     min-width: 100%;
     min-height: 56.25vw; /* 100 * 9 / 16 */
+    transform: scale(1.5) translateY(-100px);
   }
 
   .mainContainer {
@@ -62,7 +63,7 @@
     left: 0;
   }
   .parallax__layer__base {
-    transform: translate3d(0, 56vh, 0);
+    transform: translate3d(0, 60vh, 0);
   }
   .parallax__layer__back {
     transform: translate3d(0, 0, -1px) scale(2);

@@ -105,6 +105,7 @@ class SectionClip extends React.Component {
     if (isVisible) {
       document.getElementById("mainHeader").style.backgroundColor = this.props.color;
       document.getElementById("categoriesNav").style.backgroundColor = this.props.color;
+      this.context.setbackToTopOn(true);
       if (isDarkColor(this.props.color)) {
         this.context.setTheme('dark');
         document.getElementById("mainLogo").style.filter = 'brightness(0) invert(1)';
@@ -244,11 +245,10 @@ class SectionClip extends React.Component {
           { 
             Object.keys(this.state.value_obj).map((key, index) => (
               <p onClick={this.onOptionClick}
-                key={'option--' + index}
                  onMouseEnter={ (e) => this.handleMouseEnterOption(e)}
                  onMouseLeave={this.handleMouseLeaveOption}
                  className={classes.suggestionoption} 
-                 el_iri={key} id={'option' + index}>{this.state.value_obj[key]}</p>
+                 el_iri={key} id={'option' + index} key={'option--' + index}>{this.state.value_obj[key]}</p>
             ))
           }
         </div>
