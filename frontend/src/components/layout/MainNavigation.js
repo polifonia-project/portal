@@ -12,6 +12,7 @@ import classes from "./MainNavigation.module.css";
 import MenuOverlay from "./MenuOverlay.js";
 import Card from "../card/Card";
 import { ThemeContext } from "../../context/ThemeContext";
+import { CardContext } from "../../context/CardContext";
 
 function MainNavigation(props) {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -19,6 +20,8 @@ function MainNavigation(props) {
   const { theme } = useContext(ThemeContext);
   const { soundOn, setSoundOn } = useContext(ThemeContext);
   const { backToTopOn, setbackToTopOn } = useContext(ThemeContext);
+  const { cardOpen } = useContext(CardContext);
+
 
   const toggleMenu = () => {
       setMenuOpen(prev => !prev)
@@ -32,6 +35,10 @@ function MainNavigation(props) {
   const toggleBack = () => {
     setbackToTopOn(prev => !prev);
     handleBackScroll("topHook");
+    document.getElementById("backToTop").style.opacity = '0';
+    setTimeout(() => {
+      document.getElementById("backToTop").style.opacity = '1';
+    }, 3000);
   }
 
   const handleBackScroll = (section) => {
@@ -58,7 +65,7 @@ function MainNavigation(props) {
         <div className={classes.section} id='sectionName'><span>{props.sectionName}</span></div>
       </span>
       <span  className={classes.menu} id='menuOptions' >
-        <img onClick={toggleBack} className={classes.sound} src={backToTop} alt="Back to top Toggle" style={{display: backToTopOn ? 'block' :'none' }}/>
+        <img onClick={toggleBack} id='backToTop' className={classes.sound} src={backToTop} alt="Back to top Toggle" style={{display: backToTopOn ? cardOpen ? 'none' :'block' : 'none' }}/>
         <img onClick={toggleSound} className={classes.sound} src={soundOn ? soundon : soundoff} alt="Sound Toggle" />
         <img onClick={toggleMenu} className={classes.hamburger} src={menuOpen ? closemenu : hamburger} alt="Hamburger Menu" />
       </span>

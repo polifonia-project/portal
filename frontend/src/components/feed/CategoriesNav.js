@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./CategoriesNav.module.css";
 
 class CategoriesNav extends React.Component {
+
   constructor() {
     super();
     this.state = {
