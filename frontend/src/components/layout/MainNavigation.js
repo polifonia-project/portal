@@ -7,6 +7,7 @@ import soundon from "../../assets/svg/SoundOn.svg";
 import soundoff from "../../assets/svg/SoundOff.svg";
 import hamburger from "../../assets/svg/HamburgerIcon.svg";
 import backToTop from "../../assets/svg/backToTopp.svg";
+import backToClip from "../../assets/svg/backToClip.svg";
 import closemenu from "../../assets/svg/CloseMenu.svg";
 import classes from "./MainNavigation.module.css";
 import MenuOverlay from "./MenuOverlay.js";
@@ -65,6 +66,7 @@ function MainNavigation(props) {
         <div className={classes.section} id='sectionName'><span>{props.sectionName}</span></div>
       </span>
       <span  className={classes.menu} id='menuOptions' >
+        <img onClick={toggleBack} id='backToTop' className={classes.sound} src={backToClip} alt="Back to top Toggle" style={{display: backToTopOn ? cardOpen ? 'none' :'block' : 'none' }}/>
         <img onClick={toggleBack} id='backToTop' className={classes.sound} src={backToTop} alt="Back to top Toggle" style={{display: backToTopOn ? cardOpen ? 'none' :'block' : 'none' }}/>
         <img onClick={toggleSound} className={classes.sound} src={soundOn ? soundon : soundoff} alt="Sound Toggle" />
         <img onClick={toggleMenu} className={classes.hamburger} src={menuOpen ? closemenu : hamburger} alt="Hamburger Menu" />

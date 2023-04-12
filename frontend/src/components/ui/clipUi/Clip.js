@@ -100,11 +100,10 @@ function Clip(props) {
             </VisibilitySensor> 
             <div className={classes.clip + ' ' + classes[clipIsExpanded ? 'clipexpanded' : '']} id={props.clip_id}>
                 <span className={classes.dot} style={{ backgroundColor: props.color}}></span>
-                <p onClick={ellipsisActive ? () => setClipExpanded(prev => !prev) : null} id={'cliptitle' + props.clip_id} className ={clipIsExpanded ?  classes.expandedcliptitle : classes.cliptitle}>{props.title}</p>
-                <button onClick={() => handleClickScroll(props.section)}>More +</button>
+                <p onClick={() => handleClickScroll(props.section)} id={'cliptitle' + props.clip_id} className ={clipIsExpanded ?  classes.expandedcliptitle : classes.cliptitle}>{props.title}</p>
+                <button  onClick={ellipsisActive ? () => setClipExpanded(prev => !prev) : null} style={{display: ellipsisActive ? 'inline' : 'none'}}>{clipIsExpanded ? 'Resize -' : 'Expand +'}</button>
                 <span className={classes.end_dot} style={{ backgroundColor: props.color}}></span>
             </div>
-          <p className={ ellipsisActive ? classes.ellipsisalert : classes.hiddenalert} id={'ellipsisalert' + props.clip_id}><span>Click on text {clipIsExpanded ? 'to resize' : 'to expand'}</span></p>
           </div>
         </div>
 
