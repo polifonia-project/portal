@@ -106,6 +106,7 @@ class SectionClip extends React.Component {
       document.getElementById("mainHeader").style.backgroundColor = this.props.color;
       document.getElementById("categoriesNav").style.backgroundColor = this.props.color;
       this.context.setbackToTopOn(true);
+      this.context.setCurrentSection(this.props.category);
       if (isDarkColor(this.props.color)) {
         this.context.setTheme('dark');
         document.getElementById("mainLogo").style.filter = 'brightness(0) invert(1)';

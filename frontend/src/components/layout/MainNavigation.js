@@ -19,6 +19,7 @@ function MainNavigation(props) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [shownOverlay, setOverlayStatus] = useState(false)
   const { theme } = useContext(ThemeContext);
+  const { currentSection } = useContext(ThemeContext);
   const { soundOn, setSoundOn } = useContext(ThemeContext);
   const { backToTopOn, setbackToTopOn } = useContext(ThemeContext);
   const { cardOpen } = useContext(CardContext);
@@ -33,13 +34,27 @@ function MainNavigation(props) {
     setSoundOn(prev => !prev)
   }
 
-  const toggleBack = () => {
+  const toggleBackTop = () => {
     setbackToTopOn(prev => !prev);
     handleBackScroll("topHook");
     document.getElementById("backToTop").style.opacity = '0';
+    document.getElementById("backToClip").style.opacity = '0';
+
     setTimeout(() => {
-      document.getElementById("backToTop").style.opacity = '1';
+    document.getElementById("backToTop").style.opacity = '1';
+    document.getElementById("backToClip").style.opacity = '1';
     }, 3000);
+
+  }
+
+
+  const toggleBackClip = () => {
+    handleBackScroll("clipbox-" + currentSection);
+    document.getElementById("backToClip").style.opacity = '0';
+    setTimeout(() => {
+    document.getElementById("backToClip").style.opacity = '1';
+    }, 3000);
+    
   }
 
   const handleBackScroll = (section) => {
@@ -66,8 +81,8 @@ function MainNavigation(props) {
         <div className={classes.section} id='sectionName'><span>{props.sectionName}</span></div>
       </span>
       <span  className={classes.menu} id='menuOptions' >
-        <img onClick={toggleBack} id='backToTop' className={classes.sound} src={backToClip} alt="Back to top Toggle" style={{display: backToTopOn ? cardOpen ? 'none' :'block' : 'none' }}/>
-        <img onClick={toggleBack} id='backToTop' className={classes.sound} src={backToTop} alt="Back to top Toggle" style={{display: backToTopOn ? cardOpen ? 'none' :'block' : 'none' }}/>
+        <img onClick={toggleBackClip} id='backToClip' className={classes.sound} src={backToClip} alt="Back to top Toggle" style={{display: backToTopOn ? cardOpen ? 'none' :'block' : 'none' }}/>
+        <img onClick={toggleBackTop} id='backToTop' className={classes.sound} src={backToTop} alt="Back to top Toggle" style={{display: backToTopOn ? cardOpen ? 'none' :'block' : 'none' }}/>
         <img onClick={toggleSound} className={classes.sound} src={soundOn ? soundon : soundoff} alt="Sound Toggle" />
         <img onClick={toggleMenu} className={classes.hamburger} src={menuOpen ? closemenu : hamburger} alt="Hamburger Menu" />
       </span>

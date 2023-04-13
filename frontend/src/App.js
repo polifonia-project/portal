@@ -16,6 +16,7 @@ function App() {
   const [soundOn, setSoundOn] = useState(false);
   const [backToTopOn, setbackToTopOn] = useState(false);
   const [colorSet, setColorSet] = useState({});
+  const [currentSection, setCurrentSection] = useState('cat_01');
 
   const [cardOpen, setCardOpen] = useState(false);
   const [cardBlocks, setCardBlocks] = useState({});
@@ -28,7 +29,7 @@ function App() {
     hasInput: false});
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, soundOn, setSoundOn, colorSet, setColorSet, backToTopOn, setbackToTopOn}}>
+    <ThemeContext.Provider value={{ theme, setTheme, soundOn, setSoundOn, colorSet, setColorSet, backToTopOn, setbackToTopOn, currentSection, setCurrentSection}}>
     <CardContext.Provider value={{cardOpen, setCardOpen, cardContent, setCardContent, cardBlocks, setCardBlocks}}>
       <Layout title={pagetitle}>
         <Routes>

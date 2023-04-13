@@ -82,7 +82,7 @@ function Clip(props) {
       };
     
     return (
-        <div className={classes.clipBox}>
+        <div className={classes.clipBox} id={'clipbox-' + props.category}>
           <InfoBox 
           infotitle={props.infotitle} 
           infodescription={props.description} 

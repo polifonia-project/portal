@@ -6,6 +6,7 @@ import Sections from "../components/feed/Sections.js";
 import classes from "./Feed.module.css";
 import VisibilitySensor from "react-visibility-sensor";
 import backgroundVid from '../assets/video/A-01.mp4';
+import MainTitle from "../components/feed/MainTitle";
 
 
 function FeedPage(props) {
@@ -33,6 +34,7 @@ function onChange(isVisible) {
           <source src={backgroundVid} type='video/mp4' />
       </video>
             {/* <Carousel /> */}
+            <MainTitle />
       </div>
       <div className={classes.mainContainer + ' ' + classes.parallax__layer + ' ' + classes.parallax__layer__base}> 
         <CategoriesNav />

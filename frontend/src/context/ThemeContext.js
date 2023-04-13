@@ -9,4 +9,7 @@ export const ThemeContext = createContext({
     setbackToTopOn: () => {},
     colorSet: {},
     setColorSet: () => {},
+    currentSection: 'cat_01',
+    setCurrentSection: () => {},
+
   });
