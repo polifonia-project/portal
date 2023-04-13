@@ -27,6 +27,7 @@ class Clips extends React.Component {
     render() {
         return (
             <div className={classes.clipscontainer + ' ' + classes['background' + Object.keys(this.state.categories).length] } id='clips_container'>
+              {/* <Carousel /> */}
                 {this.state.clips.map((clip, index) => (
                     <Clip
                         key={'clip-' + index}
