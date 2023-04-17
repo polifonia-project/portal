@@ -1,24 +1,25 @@
 .feedIntro {
-  margin-left: 9%;
+  padding-left: calc(((100% / 16 * 1) + 5px));
   overflow: hidden;
 }
 
 .introContainer {
-  padding-bottom: 300px;
+  padding-bottom: 50px;
   margin: 0px;
 }
 
 .feedIntro h3 {
-  font-size: 28px;
+  width: 70%;
+  font-size: 65px;
   font-family: "Garnett Medium";
   font-weight: 100;
-  width: 26%;
   margin: 0;
 }
 
 .feedIntro p {
-  width: 17%;
-  font-size: 15px;
+  width: 70%;
+  padding-top: 30px;
+  font-size: 20px;
 }
 
 .visibilityHook {

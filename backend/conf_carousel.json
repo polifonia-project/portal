@@ -52,6 +52,36 @@
     "image": "",
     "dimension": "medium",
     "highlights": ["music experts"]
+  },
+  "card_07": {
+    "id": "card_07",
+    "claim" : "Create",
+    "title" : "The catalogue of music data on the web",
+    "paragraph": "Discover unexpected connections with data stories and contents for music experts",
+    "image": "",
+    "dimension": "medium",
+    "highlights": ["music experts"]
+  },
+  "card_08": {
+    "id": "card_08",
+    "claim" : "Create",
+    "title" : "The catalogue of music data on the web",
+    "paragraph": "Discover unexpected connections with data stories and contents for music experts",
+    "image": "",
+    "dimension": "medium",
+    "highlights": ["music experts"]
   }
+  ,
+  "card_09": {
+    "id": "card_09",
+    "claim" : "Create",
+    "title" : "The catalogue of music data on the web",
+    "paragraph": "Discover unexpected connections with data stories and contents for music experts",
+    "image": "",
+    "dimension": "medium",
+    "highlights": ["music experts"]
+  }
+  
+  
   
 }

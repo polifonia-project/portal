@@ -2,6 +2,7 @@ import React from 'react';
 import classes from "./Clips.module.css";
 import Clip from '../ui/clipUi/Clip';
 import Carousel from './Carousel';
+import Intro from '../ui/clipUi/Intro.js';
 
 class Clips extends React.Component {
     constructor() {
@@ -139,6 +140,7 @@ class Clips extends React.Component {
         return (
             <div className={classes.clipscontainer + ' ' + classes['background' + Object.keys(this.state.categories).length] } id='clips_container'>
               <Carousel />
+              <Intro></Intro>
                 {this.state.clips.map((clip, index) => (
                     <Clip
                         key={'clip-' + index}

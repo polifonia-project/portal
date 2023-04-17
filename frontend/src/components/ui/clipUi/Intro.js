@@ -5,8 +5,8 @@ import VisibilitySensor from "react-visibility-sensor";
 function Intro() {
   function onChange(isVisible) {
     if (isVisible) {
-      document.getElementById("mainHeader").style.backgroundColor = "transparent";
-      document.getElementById("categoriesNav").style.backgroundColor = "transparent";
+      document.getElementById("mainHeader").style.backgroundColor = "#e2e2e2";
+      document.getElementById("categoriesNav").style.backgroundColor = "#e2e2e2";
     }
   }
 
@@ -17,7 +17,7 @@ function Intro() {
       </VisibilitySensor>
       <div className={classes.introContainer}>
         <h3>Scroll and let the sound of heritage play</h3>
-        <p>Explore the weekly selection of unique music data</p>
+        <p>Sed vitae eros auctor ipsum facilisis pharetra id pretium lacus. Nulla lobortis eu eros ac sagittis. Donec in velit eu risus blandit rhoncus vel sed justo. Praesent consectetur, erat et aliquet lobortis, erat nisi vestibulum massa, vel tempus lacus enim at lectus. Donec blandit magna molestie ullamcorper molestie. Proin eu augue turpis. Quisque tincidunt hendrerit purus, vitae cursus est egestas at. Quisque pretium nulla id diam euismod ultrices. Morbi non bibendum metus. Pellentesque ultrices ex a purus fringilla dignissim.</p>
       </div>
     </div>
   );
