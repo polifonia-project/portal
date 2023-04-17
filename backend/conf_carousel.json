@@ -1,22 +1,43 @@
-{
+{ 
+"card_01": {
+  "id": "card_01",
+  "claim" : "Explore",
+  "title" : "Scroll and discover music highlights",
+  "paragraph": "Discover unexpected connections with data stories and contents for music experts",
+  "image": "",
+  "dimension": "medium",
+  "highlights": ["music experts"]
+}, 
+"card_02": {
+  "id": "card_02",
+  "claim" : "Play",
+  "title" : "Explore stories about music data connections",
+  "paragraph": "Discover unexpected connections with data stories and contents for music experts",
+  "image": "",
+  "dimension": "medium",
+  "highlights": ["music experts"]
+},
   "card_03": {
-    "id": "card_06",
-    "title" : "Play with data",
+    "id": "card_03",
+    "claim" : "Discover",
+    "title" : "The catalogue of music data on the web",
     "paragraph": "Discover unexpected connections with data stories and contents for music experts",
     "image": "",
     "dimension": "medium",
     "highlights": ["music experts"]
   },
   "card_04": {
-    "id": "card_06",
-    "title" : "Play with data",
-    "paragraph": "Discover unexpected connections with data stories and contents for music experts",
+    "id": "card_04",
+    "claim" : "Interrogate",
+    "title" : "The Music Linguistic Corpus",
+    "paragraph": "Online text analysis tool for linguistic interrogation of Polifonia’s multilingual diachronic corpus.",
     "image": "",
     "dimension": "medium",
     "highlights": ["music experts"]
   },
   "card_05": {
     "id": "card_05",
+    "claim" : "Learn",
     "title" : "Know more about the project",
     "paragraph": "Discover unexpected connections with data stories and contents for music experts",
     "image": "",
@@ -25,7 +46,8 @@
   },
   "card_06": {
     "id": "card_06",
-    "title" : "Play with data",
+    "claim" : "Create",
+    "title" : "The catalogue of music data on the web",
     "paragraph": "Discover unexpected connections with data stories and contents for music experts",
     "image": "",
     "dimension": "medium",
