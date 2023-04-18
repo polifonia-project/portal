@@ -4,6 +4,7 @@
   padding-right: 20px;
   padding-left: 20px;
   height: 10vh;
+
 }
 
 .carousel {
@@ -124,10 +125,8 @@ width: 50px;
   color: white;
   border: 0.5px solid transparent;
   outline: 0;
-  background-color: transparent;
+  background-color: #f4edec;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
 }
 
 .leftChevron {
@@ -136,8 +135,6 @@ width: 50px;
   background-size: 35%;
   background-position: right 8px top 5px;
   transform: scaleX(-1);
-  backdrop-filter: blur(14.2px);
-  -webkit-backdrop-filter: blur(14.2px);
 }
 
 .rightChevron {
@@ -145,6 +142,4 @@ width: 50px;
   background-repeat: no-repeat;
   background-size: 35%;
   background-position: right 8px top 5px;
-  backdrop-filter: blur(14.2px); /* blur glass effect*/
-  -webkit-backdrop-filter: blur(14.2px);
 }

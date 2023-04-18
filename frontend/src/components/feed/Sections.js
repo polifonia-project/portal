@@ -1,6 +1,8 @@
 import React from "react";
 import classes from "./Sections.module.css";
 import SectionContainer from "../ui/sectionUi/SectionContainer.js";
+import Carousel from "./Carousel";
+import SectionIntro from '../ui/sectionUi/SectionIntro.js';
 
 class Sections extends React.Component {
 
@@ -27,6 +29,8 @@ class Sections extends React.Component {
   render() {
     return (
       <div className={classes.sectionscontainer}>
+        <Carousel />
+        <SectionIntro />
        {this.state.clips.map((clip, index) => (
           <SectionContainer
             key={'section-container' + index}

@@ -20,7 +20,8 @@
   cursor: default;
   transition: transform 1s ease;
   transform: scale(0.8);
-  padding-right: 14px;
+  padding-right: 15px;
+  padding-left: 13px;
 }
 
 .clipexpanded {

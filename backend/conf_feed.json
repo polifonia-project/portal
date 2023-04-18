@@ -29,11 +29,10 @@
     "id": "clip_03",
     "name": "Sheet Music Consortium",
     "textcontext": {
-      "title": "Data are connected together. Explore More + or unveil new Data Stories",
+      "title": "Play the Music box of interconnected data.",
       "description": "Keep scrolling for more!",
       "highlights": [
-        "More +",
-        "Data Stories"
+        "MUSIC BOX"
       ]
     },
     "iri": "https://w3id.org/musow/1635268063-587743",
@@ -68,10 +67,10 @@
     "id": "clip_06",
     "name": "Jazz",
     "textcontext": {
-      "title": "Click on More + to unveil unexpected music connections!",
+      "title": "Click on the Highlight to unveil unexpected music connections!",
       "description": "Keep scrolling for more scores",
       "highlights": [
-        "More +"
+        "Highlight"
       ]
     },
     "iri": "http://www.wikidata.org/entity/Q8341",
@@ -94,10 +93,10 @@
     "id": "clip_08",
     "name": "Violin",
     "textcontext": {
-      "title": "Click on More + to unveil unexpected music connections!",
+      "title": "Discover more interesting and unexpected links! ",
       "description": "Keep scrolling for more scores",
       "highlights": [
-        "More +"
+        "links"
       ]
     },
     "iri": "http://www.wikidata.org/entity/Q8355",
