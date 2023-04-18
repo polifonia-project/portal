@@ -17,7 +17,6 @@ const Carousel = () => {
 
     var els = document.getElementsByClassName("gwZiig");
     Array.prototype.forEach.call(els, function(el) {
-      console.log('one');
       el.style.overflow = "visible";
     });
 
@@ -40,7 +39,7 @@ const Carousel = () => {
           chevronWidth={chevronWidth}
         >
           {Object.values(content).map((card, i) => (
-            <CarouselCard  index={i} title={card.title} claim={card.claim} par={card.paragraph}></CarouselCard>
+            <CarouselCard  key={'card-car-' + i} index={i} title={card.title} claim={card.claim} par={card.paragraph} url={card.href} type={card.type}></CarouselCard>
           ))}
         </ItemsCarousel>
       </div>

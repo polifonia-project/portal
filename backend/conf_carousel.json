@@ -4,8 +4,8 @@
   "claim" : "Explore",
   "title" : "Scroll and discover music highlights",
   "paragraph": "Discover unexpected connections with data stories and contents for music experts",
-  "image": "",
-  "dimension": "medium",
+  "type": "scroll",
+  "href" : "clips_container",
   "highlights": ["music experts"]
 }, 
 "card_02": {
@@ -13,8 +13,8 @@
   "claim" : "Play",
   "title" : "Explore stories about music data connections",
   "paragraph": "Discover unexpected connections with data stories and contents for music experts",
-  "image": "",
-  "dimension": "medium",
+  "type": "internal",
+  "href" : "/datastories",
   "highlights": ["music experts"]
 },
   "card_03": {
@@ -22,8 +22,8 @@
     "claim" : "Discover",
     "title" : "The catalogue of music data on the web",
     "paragraph": "Discover unexpected connections with data stories and contents for music experts",
-    "image": "",
-    "dimension": "medium",
+    "type": "external",
+    "href" : "https://www.google.com/",
     "highlights": ["music experts"]
   },
   "card_04": {
@@ -31,8 +31,8 @@
     "claim" : "Interrogate",
     "title" : "The Music Linguistic Corpus",
     "paragraph": "Online text analysis tool for linguistic interrogation of Polifonia’s multilingual diachronic corpus.",
-    "image": "",
-    "dimension": "medium",
+    "type": "scroll",
+    "href" : "section-cat_05",
     "highlights": ["music experts"]
   },
   "card_05": {
@@ -40,8 +40,8 @@
     "claim" : "Learn",
     "title" : "Know more about the project",
     "paragraph": "Discover unexpected connections with data stories and contents for music experts",
-    "image": "",
-    "dimension": "medium",
+    "type": "external",
+    "href" : "https://www.google.com/",
     "highlights": ["music experts"]
   },
   "card_06": {
@@ -49,8 +49,8 @@
     "claim" : "Create",
     "title" : "The catalogue of music data on the web",
     "paragraph": "Discover unexpected connections with data stories and contents for music experts",
-    "image": "",
-    "dimension": "medium",
+    "type": "internal",
+    "href" : "/about",
     "highlights": ["music experts"]
   },
   "card_07": {
@@ -58,8 +58,8 @@
     "claim" : "Create",
     "title" : "The catalogue of music data on the web",
     "paragraph": "Discover unexpected connections with data stories and contents for music experts",
-    "image": "",
-    "dimension": "medium",
+    "type": "internal",
+    "href" : "/about",
     "highlights": ["music experts"]
   },
   "card_08": {
@@ -67,8 +67,8 @@
     "claim" : "Create",
     "title" : "The catalogue of music data on the web",
     "paragraph": "Discover unexpected connections with data stories and contents for music experts",
-    "image": "",
-    "dimension": "medium",
+    "type": "external",
+    "href" : "https://www.google.com/",
     "highlights": ["music experts"]
   }
   ,
@@ -77,8 +77,8 @@
     "claim" : "Create",
     "title" : "The catalogue of music data on the web",
     "paragraph": "Discover unexpected connections with data stories and contents for music experts",
-    "image": "",
-    "dimension": "medium",
+    "type": "external",
+    "href" : "https://www.google.com/",
     "highlights": ["music experts"]
   }
   

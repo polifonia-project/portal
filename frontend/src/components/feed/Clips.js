@@ -138,9 +138,10 @@ class Clips extends React.Component {
 
     render() {
         return (
-            <div className={classes.clipscontainer + ' ' + classes['background' + Object.keys(this.state.categories).length] } id='clips_container'>
+            <div className={classes.clipscontainer + ' ' + classes['background' + Object.keys(this.state.categories).length] }>
               <Carousel />
               <Intro></Intro>
+              <span id='clips_container'>
                 {this.state.clips.map((clip, index) => (
                     <Clip
                         key={'clip-' + index}
@@ -154,7 +155,7 @@ class Clips extends React.Component {
                         highlights={clip.textcontext.highlights}
                         tot_categories={Object.keys(this.state.categories).length} ></Clip>
                 ))}
-
+              </span>
             </div>
         )
     }
