@@ -3,8 +3,11 @@ import classes from "./Sections.module.css";
 import SectionContainer from "../ui/sectionUi/SectionContainer.js";
 import Carousel from "./Carousel";
 import SectionIntro from '../ui/sectionUi/SectionIntro.js';
+import { CardContext } from "../../context/CardContext";
 
 class Sections extends React.Component {
+
+  static contextType = CardContext;
 
   constructor() {
     super();
@@ -22,7 +25,7 @@ class Sections extends React.Component {
         this.setState({ datasets: data.datasets });
         this.setState({ clips: data.clips });
         this.setState({ categories: data.categories });
-
+        this.context.setCardBlocksNew(data.cards);
       });
   };
 
@@ -45,8 +48,6 @@ class Sections extends React.Component {
             datasets={this.state.datasets}
             placeholder={clip.name} 
             tot_categories={Object.keys(this.state.categories).length} 
-            alt_colors={this.state.categories[clip.category].card.altcolors}
-            card_blocks={this.state.categories[clip.category].card.blocks}
             >
           </SectionContainer>
         ))}

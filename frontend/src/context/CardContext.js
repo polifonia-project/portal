@@ -7,4 +7,6 @@ export const CardContext = createContext({
   setContent: () => {},
   cardBlocks: {},
   setCardBlocks: () => {},
+  cardBlocksNew: {},
+  setCardBlocksNew: () => {},
   });

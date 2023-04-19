@@ -20,6 +20,7 @@ function App() {
 
   const [cardOpen, setCardOpen] = useState(false);
   const [cardBlocks, setCardBlocks] = useState({});
+  const [cardBlocksNew, setCardBlocksNew] = useState({});
   const [cardContent, setCardContent] = useState(
     {title: 'Card Title', 
     cat: 'Card category', 
@@ -30,7 +31,7 @@ function App() {
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, soundOn, setSoundOn, colorSet, setColorSet, backToTopOn, setbackToTopOn, currentSection, setCurrentSection}}>
-    <CardContext.Provider value={{cardOpen, setCardOpen, cardContent, setCardContent, cardBlocks, setCardBlocks}}>
+    <CardContext.Provider value={{cardOpen, setCardOpen, cardContent, setCardContent, cardBlocks, setCardBlocks, cardBlocksNew, setCardBlocksNew}}>
       <Layout title={pagetitle}>
         <Routes>
           <Route path="/" element={<FeedPage func={setPageTitle} />} />

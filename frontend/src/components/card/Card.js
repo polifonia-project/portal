@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import classes from "./Card.module.css";
 import { useContext } from "react";
-import { ThemeContext } from "../../context/ThemeContext";
 import { CardContext } from "../../context/CardContext";
 import isDarkColor from 'is-dark-color';
 
@@ -14,8 +13,7 @@ function Card(props) {
 
   const { cardOpen, setCardOpen } = useContext(CardContext);
   const { cardContent } = useContext(CardContext);
-  const { cardBlocks } = useContext(CardContext);
-  const { colorSet } = useContext(ThemeContext);
+  const { cardBlocksNew } = useContext(CardContext);
 
   const [colorBackground, setColorBackground] = useState('#e2e2e2')
   const [colorIsDark, setColorIsDark] = useState(false)
@@ -24,13 +22,14 @@ function Card(props) {
 
   useEffect(() => {
     if (cardOpen) {
+      console.log(cardBlocksNew);
       setFromSectionClip(cardContent.hasInput); 
-      if (colorSet[cardContent.cat]) {
-        setColorBackground(colorSet[cardContent.cat]);
-        setCurrentBlock(cardBlocks[cardContent.cat]); 
+      if (cardBlocksNew[cardContent.cat]) {
+        setColorBackground(cardBlocksNew[cardContent.cat].color);
+        setCurrentBlock(cardBlocksNew[cardContent.cat].blocks); 
       } else {
         setColorBackground('#e2e2e2');
-        setCurrentBlock(cardBlocks.people); /* GENERIC CATEGORY DEFAULT CARD*/
+        setCurrentBlock(cardBlocksNew.people.blocks); /* GENERIC CATEGORY DEFAULT CARD*/
       }
       
       if (isDarkColor(colorBackground)) {
@@ -46,7 +45,6 @@ function Card(props) {
 
   const closeCard = () => {
     setCardOpen(false); 
-    setColorBackground('#e2e2e2');
     if (isDarkColor([cardContent.color])) {
       setLightHeader();
     } else {
@@ -72,7 +70,7 @@ function Card(props) {
 
   return (
     <div className={classes.cardContainer} style={{transform: cardOpen? 'translateX(0)' : 'translateX(-100%)'}}>
-      <div className={classes.titleBlock} style={{backgroundColor: colorSet[cardContent.cat]}}>
+      <div className={classes.titleBlock} style={{backgroundColor: colorBackground}}>
         <div className={classes.titleContainer}>
           <h1 style={{color: colorIsDark ? 'white' : 'black'}}>{cardContent.title}</h1>
           <p className={classes.categoryResult} style={{color: colorIsDark ? 'white' : 'black', borderColor: colorIsDark ? 'white' : '#474747'}}>

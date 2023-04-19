@@ -27,56 +27,6 @@
                 }
             ]
         },
-        "card": {
-            "altcolors" : {
-                "creative works": "#ffffff",
-                "works": "#ffffff"
-            },
-            "blocks" : { 
-                "01" : {
-                    "type": "text",
-                    "size": "small",
-                    "title": "Lorem Ipsum",
-                    "content": [{},{},{}]
-                },
-                "02" : {
-                    "type": "relation",
-                    "size": "small",
-                    "title": "Lorem Ipsum",
-                    "content": [{},{},{}]
-                },
-                "03" : {
-                    "type": "link",
-                    "size": "small",
-                    "title": "Lorem Ipsum",
-                    "description": "Lorem Ipsum",
-                    "content": [{
-                        "linktype" : "static",
-                        "label" : "Click me",
-                        "url" : "www.google.it"
-                        },
-                        {
-                        "linktype" : "dynamic",
-                        "label" : "Click me",
-                        "url" : "www.google.it"
-                        }
-                    ]
-                },
-                "04" : {
-                    "type": "visual",
-                    "size": "medium",
-                    "title": "Lorem Ipsum",
-                    "content": [{},{},{}]
-                },
-                "05" : {
-                    "type": "tag",
-                    "size": "large",
-                    "title": "Lorem Ipsum",
-                    "content": ["people","polifonia","h2020"]
-                }
-            }
-
-        },
         "section": {
             "title": "Read all the documents about your research topic",
             "description": "Discover all the possible connections and relations with a topic. See all the results and arrenge them as you want.",
@@ -113,56 +63,6 @@
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P19 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of birth\") AS ?rel) } UNION { <> wdt:P20 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of death\") AS ?rel) } UNION { <> wdt:P937 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has work location\") AS ?rel) }. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
-        },
-        "card": {
-            "altcolors" : {
-                "creative works": "#ffffff",
-                "works": "#ffffff"
-            },
-            "blocks" : { 
-                "01" : {
-                    "type": "text",
-                    "size": "small",
-                    "title": "Lorem Ipsum",
-                    "content": [{},{},{}]
-                },
-                "02" : {
-                    "type": "relation",
-                    "size": "small",
-                    "title": "Lorem Ipsum",
-                    "content": [{},{},{}]
-                },
-                "03" : {
-                    "type": "link",
-                    "size": "small",
-                    "title": "Lorem Ipsum",
-                    "description": "Lorem Ipsum",
-                    "content": [{
-                        "linktype" : "static",
-                        "label" : "Click me",
-                        "url" : "www.google.it"
-                        },
-                        {
-                        "linktype" : "dynamic",
-                        "label" : "Click me",
-                        "url" : "www.google.it"
-                        }
-                    ]
-                },
-                "04" : {
-                    "type": "visual",
-                    "size": "medium",
-                    "title": "Lorem Ipsum",
-                    "content": [{},{},{}]
-                },
-                "05" : {
-                    "type": "tag",
-                    "size": "large",
-                    "title": "Lorem Ipsum",
-                    "content": ["people","polifonia","h2020"]
-                }
-            }
-
         },
         "section": {
             "title": "Find your own melody",
@@ -201,56 +101,6 @@
                 }
             ]
         },
-        "card": {
-            "altcolors" : {
-                "creative works": "#ffffff",
-                "works": "#ffffff"
-            },
-            "blocks" : { 
-                "01" : {
-                    "type": "text",
-                    "size": "small",
-                    "title": "Lorem Ipsum",
-                    "content": [{},{},{}]
-                },
-                "02" : {
-                    "type": "relation",
-                    "size": "small",
-                    "title": "Lorem Ipsum",
-                    "content": [{},{},{}]
-                },
-                "03" : {
-                    "type": "link",
-                    "size": "small",
-                    "title": "Lorem Ipsum",
-                    "description": "Lorem Ipsum",
-                    "content": [{
-                        "linktype" : "static",
-                        "label" : "Click me",
-                        "url" : "www.google.it"
-                        },
-                        {
-                        "linktype" : "dynamic",
-                        "label" : "Click me",
-                        "url" : "www.google.it"
-                        }
-                    ]
-                },
-                "04" : {
-                    "type": "visual",
-                    "size": "medium",
-                    "title": "Lorem Ipsum",
-                    "content": [{},{},{}]
-                },
-                "05" : {
-                    "type": "tag",
-                    "size": "large",
-                    "title": "Lorem Ipsum",
-                    "content": ["people","polifonia","h2020"]
-                }
-            }
-
-        },
         "section": {
             "title": "Genres to uncover hundreds of relations",
             "description": "Discover all the possible connections and relations with your favorite music genre. See all the results and arrenge them as you want.",
@@ -281,56 +131,6 @@
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P162 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"producer\") AS ?rel) } UNION { <> wdt:P175 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"performer\") AS ?rel) } UNION { <> wdt:P86 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"composer\") AS ?rel) }. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
-        },
-        "card": {
-            "altcolors" : {
-                "creative works": "#ffffff",
-                "works": "#ffffff"
-            },
-            "blocks" : { 
-                "01" : {
-                    "type": "text",
-                    "size": "small",
-                    "title": "Lorem Ipsum",
-                    "content": [{},{},{}]
-                },
-                "02" : {
-                    "type": "relation",
-                    "size": "small",
-                    "title": "Lorem Ipsum",
-                    "content": [{},{},{}]
-                },
-                "03" : {
-                    "type": "link",
-                    "size": "small",
-                    "title": "Lorem Ipsum",
-                    "description": "Lorem Ipsum",
-                    "content": [{
-                        "linktype" : "static",
-                        "label" : "Click me",
-                        "url" : "www.google.it"
-                        },
-                        {
-                        "linktype" : "dynamic",
-                        "label" : "Click me",
-                        "url" : "www.google.it"
-                        }
-                    ]
-                },
-                "04" : {
-                    "type": "visual",
-                    "size": "medium",
-                    "title": "Lorem Ipsum",
-                    "content": [{},{},{}]
-                },
-                "05" : {
-                    "type": "tag",
-                    "size": "large",
-                    "title": "Lorem Ipsum",
-                    "content": ["people","polifonia","h2020"]
-                }
-            }
-
         },
         "section": {
             "title": "\u00abOk, ladies. Now, Let's get information\u00bb",
@@ -368,56 +168,6 @@
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q515 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} ORDER BY ?entityLabel"
                 }
             ]
-        },
-        "card": {
-            "altcolors" : {
-                "creative works": "#ffffff",
-                "works": "#ffffff"
-            },
-            "blocks" : { 
-                "01" : {
-                    "type": "text",
-                    "size": "small",
-                    "title": "Lorem Ipsum",
-                    "content": [{},{},{}]
-                },
-                "02" : {
-                    "type": "relation",
-                    "size": "small",
-                    "title": "Lorem Ipsum",
-                    "content": [{},{},{}]
-                },
-                "03" : {
-                    "type": "link",
-                    "size": "small",
-                    "title": "Lorem Ipsum",
-                    "description": "Lorem Ipsum",
-                    "content": [{
-                        "linktype" : "static",
-                        "label" : "Click me",
-                        "url" : "www.google.it"
-                        },
-                        {
-                        "linktype" : "dynamic",
-                        "label" : "Click me",
-                        "url" : "www.google.it"
-                        }
-                    ]
-                },
-                "04" : {
-                    "type": "visual",
-                    "size": "medium",
-                    "title": "Lorem Ipsum",
-                    "content": [{},{},{}]
-                },
-                "05" : {
-                    "type": "tag",
-                    "size": "large",
-                    "title": "Lorem Ipsum",
-                    "content": ["people","polifonia","h2020"]
-                }
-            }
-
         },
         "section": {
             "title": "Be the conductor of your own music composition",
@@ -462,80 +212,6 @@
                 }
             ]
         },
-        "card": {
-            "altcolors" : {
-                "creative works": "#ffffff",
-                "works": "#ffffff"
-            },
-            "blocks" : { 
-                "01" : {
-                    "type": "text",
-                    "size": "small",
-                    "title": "Biography",
-                    "content": [{},{},{}]
-                },
-                "02" : {
-                    "type": "relation",
-                    "size": "small",
-                    "title": "Influenced by",
-                    "content": [{},{},{}]
-                },
-                "03" : {
-                    "type": "relation",
-                    "size": "small",
-                    "title": "Worked with",
-                    "content": [{},{},{}]
-                },
-                "04" : {
-                    "type": "visual",
-                    "size": "small",
-                    "title": "Portrait",
-                    "content": [{},{},{}]
-                },
-                "05" : {
-                    "type": "link",
-                    "size": "small",
-                    "title": "Useful links",
-                    "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-                    "content": [{
-                        "linktype" : "static",
-                        "label" : "Spotify",
-                        "url" : "https://www.google.com/"
-                        },
-                        {
-                        "linktype" : "static",
-                        "label" : "Wikipedia",
-                        "url" : "https://www.google.com/"
-                        },
-                        {
-                        "linktype" : "static",
-                        "label" : "Genius Lyrics",
-                        "url" : "https://www.google.com/"
-                        },
-                        {
-                        "linktype" : "api",
-                        "label" : "Spotify",
-                        "url" : "https://www.google.com/"
-                        },
-                        {
-                        "linktype" : "query",
-                        "label" : "Spotify",
-                        "dataset" : [{
-                                "dataset_01" : "query/...",
-                                "dataset_02" : "query/..."
-                                }]
-                        }
-                    ]
-                },
-                "06" : { 
-                    "type": "tag",
-                    "size": "small",
-                    "title": "Tags",
-                    "content": ["people","polifonia","h2020", "artist","musician","art"]
-                }
-            }
-
-        },
         "section": {
             "title": "What about Artists?",
             "description": "Discover all the possible connections and relations with your favorite artist. See all the results and arrenge them as you want.",
@@ -569,66 +245,6 @@
                 }
             ]
         },
-        "card": {
-            "altcolors" : {
-                "creative works": "#ffffff",
-                "works": "#ffffff"
-            },
-            "blocks" : { 
-                "01" : {
-                    "type": "text",
-                    "size": "medium",
-                    "title": "Description",
-                    "content": [{},{},{}]
-                },
-                "02" : {
-                    "type": "relation",
-                    "size": "small",
-                    "title": "Famous guests",
-                    "content": [{},{},{}]
-                },
-                "03" : {
-                    "type": "link",
-                    "size": "small",
-                    "title": "Useful links",
-                    "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-                    "content": [{
-                        "linktype" : "static",
-                        "label" : "Maps",
-                        "url" : "https://www.google.com/"
-                        },
-                        {
-                        "linktype" : "static",
-                        "label" : "Genius Lyrics",
-                        "url" : "https://www.google.com/"
-                        },
-                        {
-                        "linktype" : "static",
-                        "label" : "Corpus",
-                        "url" : "https://www.google.com/"
-                        },
-                        {
-                        "linktype" : "static",
-                        "label" : "Official Website",
-                        "url" : "https://www.google.com/"
-                        }
-                    ]
-                },
-                "04" :{
-                    "type": "visual",
-                    "size": "large",
-                    "title": "Map",
-                    "content": [{},{},{}]
-                },
-                "05" : {
-                    "type": "tag",
-                    "size": "large",
-                    "title": "Tags",
-                    "content": ["places","italy","polifonia","geography","city","h2020" ]
-                }
-            }
-
-        },
         "section": {
             "title": "What\u2019s your next music destination?",
             "description": "Discover all the possible connections and relations with places, cities, countries and events. See all the results and arrenge them as you want.",
@@ -660,56 +276,6 @@
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P1535 ?entity. BIND(str(\"used by\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
-        },
-        "card": {
-            "altcolors" : {
-                "creative works": "#ff8c00",
-                "works": "#ffffff"
-            },
-            "blocks" : { 
-                "01" : {
-                    "type": "text",
-                    "size": "small",
-                    "title": "Lorem Ipsum",
-                    "content": [{},{},{}]
-                },
-                "02" : {
-                    "type": "relation",
-                    "size": "small",
-                    "title": "Lorem Ipsum",
-                    "content": [{},{},{}]
-                },
-                "03" : {
-                    "type": "link",
-                    "size": "small",
-                    "title": "Lorem Ipsum",
-                    "description": "Lorem Ipsum",
-                    "content": [{
-                        "linktype" : "static",
-                        "label" : "Click me",
-                        "url" : "www.google.it"
-                        },
-                        {
-                        "linktype" : "dynamic",
-                        "label" : "Click me",
-                        "url" : "www.google.it"
-                        }
-                    ]
-                },
-                "04" : {
-                    "type": "visual",
-                    "size": "medium",
-                    "title": "Lorem Ipsum",
-                    "content": [{},{},{}]
-                },
-                "05" : {
-                    "type": "tag",
-                    "size": "large",
-                    "title": "Lorem Ipsum",
-                    "content": ["people","polifonia","h2020"]
-                }
-            }
-
         },
         "section": {
             "title": "Play ON",

@@ -1,29 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import classes from "./SectionContainer.module.css";
 import ResultsContainer from "../resultsUi/ResultsContainer";
 import SectionClip from "./SectionClip";
-import { ThemeContext } from "../../../context/ThemeContext";
-import { CardContext } from "../../../context/CardContext";
-import { useContext } from "react";
 
 function SectionContainer(props) {
     const [selected_uri, setSelected] = useState(props.el_iri);
     const [selected_value, setValue] = useState(props.placeholder);
-    const {setColorSet} = useContext(ThemeContext);
-    const {setCardBlocks} = useContext(CardContext);
-
-    useEffect(() => {
-     let  color = props.color;
-     let  catName = props.catName;
-     let  altColorSet = props.alt_colors;
-     let  cardBlock = props.card_blocks;
-     setColorSet(colorSet => { return {...colorSet, [catName]: color}})
-     setColorSet(colorSet => {return {...colorSet, ...altColorSet};});
-     setCardBlocks(cardBlocks => { return {...cardBlocks, [catName]: cardBlock}});
-    }, []);
-
-
-
 
     return (
         <div id={props.id} className={classes.sectionContainer + " " + classes['background' + props.tot_categories]}>
