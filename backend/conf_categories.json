@@ -193,7 +193,7 @@
             }
         ],
         "filters": {
-            "people": [
+            "agents": [
                 {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737/wdt:P737/wdt:P737 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"

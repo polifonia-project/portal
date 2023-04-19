@@ -8,6 +8,7 @@ import TextBlock from "./TextBlock";
 import RelationBlock from "./RelationBlock.js";
 import VisualBlock from "./VisualBlock";
 import LinkBlock from "./LinkBlock";
+import WarningBlock from "./WarningBlock";
 
 function Card(props) {
 
@@ -29,7 +30,7 @@ function Card(props) {
         setCurrentBlock(cardBlocksNew[cardContent.cat].blocks); 
       } else {
         setColorBackground('#e2e2e2');
-        setCurrentBlock(cardBlocksNew.people.blocks); /* GENERIC CATEGORY DEFAULT CARD*/
+        setCurrentBlock({"01" : { "type": "none"},}); 
       }
       
       if (isDarkColor(colorBackground)) {
@@ -102,6 +103,8 @@ function Card(props) {
           else if (block.type === 'visual')
           { return <VisualBlock key={'visualblock-' + i} width={block.size} title={block.title}></VisualBlock>}
 
+          else if (block.type === 'none')
+          { return <WarningBlock key={'warningblock-' + i} width={'large'}></WarningBlock>}
           return null
         })}
 

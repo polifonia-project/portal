@@ -60,7 +60,7 @@ function MainNavigation(props) {
   const handleBackScroll = (section) => {
     const element = document.getElementById(section);
     if (element) {
-      element.scrollIntoView({ block: "end", behavior: "smooth" });
+      element.scrollIntoView({ block: "start", behavior: "smooth" });
     }
   };
 
