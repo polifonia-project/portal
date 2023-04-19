@@ -49,4 +49,6 @@ def access_conf_info(file_path):
     cat = read_json(g['data_sources']['categories'])
     # read carousel json
     car = read_json(g['data_sources']['carousel'])
-    return d, cat, f, car
+    # read cards json
+    cards = read_json(g['data_sources']['cards'])
+    return d, cat, f, car, cards

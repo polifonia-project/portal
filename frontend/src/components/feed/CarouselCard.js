@@ -31,6 +31,14 @@ const CarouselCard = (props) => {
     else if (props.type === 'external') {
       window.open(props.url);
     }
+    else if (props.type === 'internal') {
+      // style header
+      document.getElementById("mainHeader").style.backgroundColor = "#f4edec";
+      document.getElementById("categoriesNav").style.backgroundColor = "transparent";
+      document.getElementById("mainLogo").style.filter= 'none';
+      document.getElementById("sectionName").style.color = 'black';
+      document.getElementById("menuOptions").style.filter = 'none';
+    }
   };
 
   return (
