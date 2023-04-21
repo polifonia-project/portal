@@ -7,6 +7,7 @@ import classes from "./Feed.module.css";
 import VisibilitySensor from "react-visibility-sensor";
 import backgroundVid from '../assets/video/A-01.mp4';
 import MainTitle from "../components/feed/MainTitle";
+import Footer from "../components/layout/Footer";
 
 
 function FeedPage(props) {
@@ -39,6 +40,7 @@ function onChange(isVisible) {
         <CategoriesNav />
         <Clips />
         <Sections />
+         <Footer></Footer>
       </div>
     </div>
   );

@@ -3,6 +3,10 @@
   padding-top: 200px;
 }
 
+.sectionContainer:last-of-type {
+  padding-bottom: 250px;
+}
+
 .sectionContainer:first-of-type {
   display: block;
   padding-top: 300px;

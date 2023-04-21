@@ -7,6 +7,9 @@ function SectionIntro() {
     if (isVisible) {
       document.getElementById("mainHeader").style.backgroundColor = "#e2e2e2";
       document.getElementById("categoriesNav").style.backgroundColor = "#e2e2e2";
+      document.getElementById("mainLogo").style.filter= 'none';
+      document.getElementById("sectionName").style.color = 'black';
+      document.getElementById("menuOptions").style.filter = 'none';
     }
   }
 
