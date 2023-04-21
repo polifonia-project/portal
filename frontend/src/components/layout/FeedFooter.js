@@ -27,13 +27,14 @@ function FeedFooter(props) {
         <div className={classes.visibilityHook}>X</div>
       </VisibilitySensor>
       <div className={classes.footerMainBlock}>
+        <div className={classes.footerTitle}>
+            <img src={logoPolifonia} alt='polifonia logo'></img>
+        </div>
         <div className={classes.flexBox}>
-        <div className={classes.flexOne}>
-            <p><img src={logoPolifonia} alt='polifonia logo'></img></p>
-            <p>Polifonia H2020 is licensed under a Creative Commons Attribution 4.0 International License</p>
+         <div className={classes.flexOne}>
             <p><img src={logoHorizon} alt='horizon logo'></img></p>
             <p>This project has received funding from the European Union’s Horizon 2020 research<br></br> and innovation programme under grant agreement N. 101004746</p>
-          </div>
+         </div>
           <div className={classes.flexOne}>
             <p className={classes.flexTitle}>CONTACT</p>
             <br></br>
@@ -60,8 +61,13 @@ function FeedFooter(props) {
           </div>
           <div className={classes.flexFour}>
             <p className={classes.flexTitle}>PRIVACY</p>
+            <br></br>
             <p>COOKIES</p>
+            <p>TERMS</p>
           </div>
+        </div>
+        <div className={classes.footerCloser}>
+        <p>Polifonia H2020 is licensed under a Creative Commons Attribution 4.0 International License</p>
         </div>
       </div>
     </div>
