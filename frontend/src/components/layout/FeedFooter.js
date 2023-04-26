@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./FeedFooter.module.css";
 import VisibilitySensor from "react-visibility-sensor";
 import logoPolifonia from "../../assets/svg/logo-polifonia-whitecopia.svg"
-import logoHorizon from "../../assets/svg/logo-eu-white.svg"
+import logoHorizon from "../../assets/svg/logo-eu-white-caption.svg"
 
 function FeedFooter(props) {
 
@@ -31,39 +31,39 @@ function FeedFooter(props) {
             <img src={logoPolifonia} alt='polifonia logo'></img>
         </div>
         <div className={classes.flexBox}>
-         <div className={classes.flexOne}>
+         <div className={classes.flexZero}>
             <p><img src={logoHorizon} alt='horizon logo'></img></p>
             <p>This project has received funding from the European Union’s Horizon 2020 research<br></br> and innovation programme under grant agreement N. 101004746</p>
          </div>
           <div className={classes.flexOne}>
-            <p className={classes.flexTitle}>CONTACT</p>
+            <p className={classes.flexTitle}>Contact</p>
             <br></br>
-            <p>OFFICIAL WEBSITE</p>
-            <p>GITHUB</p>
-            <p>LINKEDIN</p>
-            <p>TWITTER</p>
+            <p>Official website</p>
+            <p>Github</p>
+            <p>Linkedin</p>
+            <p>Twitter</p>
           </div>
           <div className={classes.flexTwo}>
-            <p className={classes.flexTitle}>SITE MAP</p>
+            <p className={classes.flexTitle}>Site Map</p>
             <br></br>
-            <p>FEED</p>
-            <p>DATA STORIES</p>
-            <p>CORPUS</p>
-            <p>SONAR</p>
-            <p>ABOUT</p>
+            <p>Feed</p>
+            <p>Data stories</p>
+            <p>Corpus</p>
+            <p>Sonar</p>
+            <p>About</p>
           </div>
           <div className={classes.flexThree}>
-            <p className={classes.flexTitle}>PEOPLE</p>
+            <p className={classes.flexTitle}>People</p>
             <br></br>
-            <p>TEAM</p>
-            <p>PARTNERS</p>
-            <p>STAKEHOLDERS</p>
+            <p>Team</p>
+            <p>Partners</p>
+            <p>Stakeholders</p>
           </div>
           <div className={classes.flexFour}>
-            <p className={classes.flexTitle}>PRIVACY</p>
+            <p className={classes.flexTitle}>Privacy</p>
             <br></br>
-            <p>COOKIES</p>
-            <p>TERMS</p>
+            <p>Cookies</p>
+            <p>Terms</p>
           </div>
         </div>
         <div className={classes.footerCloser}>
