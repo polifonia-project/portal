@@ -2,83 +2,64 @@
 "card_01": {
   "id": "card_01",
   "claim" : "Explore",
-  "title" : "Scroll and discover music highlights",
-  "paragraph": "Discover unexpected connections with data stories and contents for music experts",
+  "title" : "Scroll to see our highlights",
+  "paragraph": "Weekly curated stories featuring the protagonists of European Music Heritage",
   "type": "scroll",
   "href" : "clips_container",
   "highlights": ["music experts"]
 }, 
 "card_02": {
   "id": "card_02",
-  "claim" : "Play",
-  "title" : "Explore stories about music data connections",
-  "paragraph": "Discover unexpected connections with data stories and contents for music experts",
-  "type": "internal",
-  "href" : "/datastories",
+  "claim" : "Search",
+  "title" : "Look for what you like",
+  "paragraph": "For each category, choose a different protagonist and start searching for their connections",
+  "type": "scroll",
+  "href" : "section-cat_05",
   "highlights": ["music experts"]
 },
   "card_03": {
     "id": "card_03",
-    "claim" : "Discover",
-    "title" : "The catalogue of music data on the web",
-    "paragraph": "Discover unexpected connections with data stories and contents for music experts",
-    "type": "external",
-    "href" : "https://www.google.com/",
+    "claim" : "Play",
+    "title" : "Know your music taste",
+    "paragraph": "Get recommendations based on your taste, habits, and loved music. Coming soon!",
+    "type": "internal",
+    "href" : "/about",
     "highlights": ["music experts"]
   },
   "card_04": {
     "id": "card_04",
-    "claim" : "Interrogate",
-    "title" : "The Music Linguistic Corpus",
-    "paragraph": "Online text analysis tool for linguistic interrogation of Polifonia’s multilingual diachronic corpus.",
-    "type": "scroll",
-    "href" : "section-cat_05",
+    "claim" : "Discover",
+    "title" : "Who's working with music resources?",
+    "paragraph": "Go to the musoW catalogue, including hundreds of music datasets, repertories, software solutions, and more",
+    "type": "external",
+    "href" : "https://projects.dharc.unibo.it/musow/",
     "highlights": ["music experts"]
   },
   "card_05": {
     "id": "card_05",
-    "claim" : "Learn",
-    "title" : "Know more about the project",
-    "paragraph": "Discover unexpected connections with data stories and contents for music experts",
+    "claim" : "Analyse",
+    "title" : "Study millions of text documents",
+    "paragraph": "The Polifonia Corpus offers a professional interface to study how music terminology evolved across countries",
     "type": "external",
-    "href" : "https://www.google.com/",
+    "href" : "https://polifonia.disi.unibo.it/corpus/",
     "highlights": ["music experts"]
   },
   "card_06": {
     "id": "card_06",
     "claim" : "Create",
-    "title" : "The catalogue of music data on the web",
-    "paragraph": "Discover unexpected connections with data stories and contents for music experts",
-    "type": "internal",
-    "href" : "/about",
+    "title" : "Create stories with music data",
+    "paragraph": "Charts, searches, maps and more on MELODY, a platform for authoring data stories with Linked Open Data",
+    "type": "external",
+    "href" : "https://projects.dharc.unibo.it/melody/",
     "highlights": ["music experts"]
   },
   "card_07": {
     "id": "card_07",
-    "claim" : "Create",
-    "title" : "The catalogue of music data on the web",
-    "paragraph": "Discover unexpected connections with data stories and contents for music experts",
+    "claim" : "Learn",
+    "title" : "Who we are",
+    "paragraph": "Know more about the Polifonia project, community, and resources",
     "type": "internal",
     "href" : "/about",
-    "highlights": ["music experts"]
-  },
-  "card_08": {
-    "id": "card_08",
-    "claim" : "Create",
-    "title" : "The catalogue of music data on the web",
-    "paragraph": "Discover unexpected connections with data stories and contents for music experts",
-    "type": "external",
-    "href" : "https://www.google.com/",
-    "highlights": ["music experts"]
-  }
-  ,
-  "card_09": {
-    "id": "card_09",
-    "claim" : "Create",
-    "title" : "The catalogue of music data on the web",
-    "paragraph": "Discover unexpected connections with data stories and contents for music experts",
-    "type": "external",
-    "href" : "https://www.google.com/",
     "highlights": ["music experts"]
   }
   

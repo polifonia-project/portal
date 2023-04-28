@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import classes from "./Carousel.module.css";
+import classes from "./CarouselCard.module.css";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -47,9 +47,11 @@ const CarouselCard = (props) => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             >
-                <h4 className={classes.cardtitle}>{props.claim}</h4>
-                <p className={classes.cardclaim}>{props.title}</p>
-                <p className={classes.cardexpand} style={{display: isHovered ? 'inline': 'none'}}>{props.par}</p>
+                <h4 className={classes.cardtitle}>{props.claim} ⬎</h4>
+                <p className={classes.cardclaim} style={{display: isHovered ? 'none': 'inline'}}>{props.title}</p>
+                <span style={{display: isHovered ? 'inline': 'none'}}>
+                 <p className={classes.cardexpand}> {props.par}</p>
+                </span>
     </div>
     </Link>
   );
