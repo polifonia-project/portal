@@ -1,7 +1,7 @@
 {
   "clip_01": {
     "id": "clip_01",
-    "name": "Beethoven Piano Sonata with Function Harmony (BPS-FH) dataset",
+    "name": "Love Will Tear Us Apart",
     "textcontext": {
       "title": "Highlights of the week",
       "description": "Explore the weekly selection of unique music data. Click on each of the clips to discover more about that category",
@@ -9,25 +9,25 @@
         "More +"
       ]
     },
-    "iri": "https://w3id.org/musow/1645534635-3681836",
+    "iri": "http://www.wikidata.org/entity/Q1426177",
     "category": "cat_05",
     "timestamp": ""
   },
   "clip_02": {
     "id": "clip_02",
-    "name": "Bologna",
+    "name": "Manchester",
     "textcontext": {
       "title": "",
       "description": "",
       "highlights": []
     },
-    "iri": "http://www.wikidata.org/entity/Q1891",
+    "iri": "http://www.wikidata.org/entity/Q18125",
     "category": "cat_07",
     "timestamp": ""
   },
   "clip_03": {
     "id": "clip_03",
-    "name": "Sheet Music Consortium",
+    "name": "Love",
     "textcontext": {
       "title": "Play the Music box of interconnected data.",
       "description": "Keep scrolling for more!",
@@ -35,37 +35,37 @@
         "MUSIC BOX"
       ]
     },
-    "iri": "https://w3id.org/musow/1635268063-587743",
+    "iri": "http://www.wikidata.org/entity/Q316",
     "category": "cat_01",
     "timestamp": ""
   },
   "clip_04": {
     "id": "clip_04",
-    "name": "Wolfgang Amadeus Mozart",
+    "name": "Joy Division",
     "textcontext": {
       "title": "",
       "description": "",
       "highlights": []
     },
-    "iri": "http://www.wikidata.org/entity/Q254",
+    "iri": "http://www.wikidata.org/entity/Q172763",
     "category": "cat_06",
     "timestamp": ""
   },
   "clip_05": {
     "id": "clip_05",
-    "name": "DDDEF#",
+    "name": "Love Will Tear Us Apart",
     "textcontext": {
       "title": "",
       "description": "",
       "highlights": []
     },
-    "iri": "http://www.wikidata.org/entity/Q254",
+    "iri": "http://www.wikidata.org/entity/Q1426177",
     "category": "cat_02",
     "timestamp": ""
   },
   "clip_06": {
     "id": "clip_06",
-    "name": "Jazz",
+    "name": "Post Punk",
     "textcontext": {
       "title": "Click on the Highlight to unveil unexpected music connections!",
       "description": "Keep scrolling for more scores",
@@ -73,25 +73,25 @@
         "Highlight"
       ]
     },
-    "iri": "http://www.wikidata.org/entity/Q8341",
+    "iri": "http://www.wikidata.org/entity/Q598929",
     "category": "cat_03",
     "timestamp": ""
   },
   "clip_07": {
     "id": "clip_07",
-    "name": "Future",
+    "name": "Love Will Tear Us Apart",
     "textcontext": {
       "title": "",
       "description": "",
       "highlights": []
     },
-    "iri": "http://www.wikidata.org/entity/Q63928602",
+    "iri": "http://www.wikidata.org/entity/Q1426177",
     "category": "cat_04",
     "timestamp": ""
   },
   "clip_08": {
     "id": "clip_08",
-    "name": "Violin",
+    "name": "Electric Guitar",
     "textcontext": {
       "title": "Discover more interesting and unexpected links! ",
       "description": "Keep scrolling for more scores",
@@ -99,7 +99,7 @@
         "links"
       ]
     },
-    "iri": "http://www.wikidata.org/entity/Q8355",
+    "iri": "http://www.wikidata.org/entity/Q78987 ",
     "category": "cat_08",
     "timestamp": ""
   }
