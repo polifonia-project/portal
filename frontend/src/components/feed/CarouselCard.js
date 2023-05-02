@@ -8,6 +8,7 @@ import { useEffect } from "react";
 const CarouselCard = (props) => {
   const [isHovered, setIsHovered] = useState(false);
   const [pageTo, setPageTo] = useState("/");
+  const [logo, setLogo] = useState("");
 
   const handleClickScroll = (id) => {
     const element = document.getElementById(id);
@@ -19,6 +20,13 @@ const CarouselCard = (props) => {
   useEffect(() => {
     if (props.type === 'internal') {
       setPageTo(props.url)
+      setLogo("⇥");
+    } if (props.type === 'external') {
+      setPageTo("/")
+      setLogo("⇱");
+    } if (props.type === 'scroll') {
+      setPageTo("/")
+      setLogo("⇣");
     } else {
       setPageTo("/")
     }
@@ -47,9 +55,9 @@ const CarouselCard = (props) => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             >
-                <h4 className={classes.cardtitle}>{props.claim} ⬎</h4>
-                <p className={classes.cardclaim} style={{display: isHovered ? 'none': 'inline'}}>{props.title}</p>
-                <span style={{display: isHovered ? 'inline': 'none'}}>
+                <h4 className={classes.cardtitle}>{props.claim}&nbsp;&nbsp;{logo}</h4>
+                <p className={classes.cardclaim}>{props.title}</p>
+                <span style={{display: isHovered ? 'inline': 'none', opacity: isHovered ? '1': '0'}}>
                  <p className={classes.cardexpand}> {props.par}</p>
                 </span>
     </div>
