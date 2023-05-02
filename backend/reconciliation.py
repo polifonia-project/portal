@@ -55,3 +55,36 @@ def __contact_tp(data, is_post, content_type):
         #                        status_code=str(req.status_code),
         #                        headers={"Content-Type": request.content_type},
         #                        text=req.text)
+
+
+# def linkset_population(datasets, dataset, uri_list):
+#     for uri in uri_list:
+#         creo un dizionario vuoto per tenere tutti gli uri legati all'uri di partenza
+#         same_uri_dict = {}
+#         devo trovare i match in tutti gli altri dataset, quindi
+#         for d in datasets:
+#             find_matches() che lancia query_same_as()
+#             mi restituisce un dizionario {same_uri:d} che vado a infilare nel dizionario vuoto
+#         una volta iterato per tutti i dataset, lancio funzione che fa update del mio linkset
+#         linkset_update() che per ogni same_uri (quindi per ogni entri di same_uri_dict) crea le stesse triple
+#         e le aggiunge al linkset
+
+
+# def query_same_as():
+# qui scrivo la query per estrarre owl:sameAs|skos:exactMatch con oggetto l'URI .
+
+# def find_matches():
+# in questa funzione, per ogni dataset lancio query_same_as() alla ricerca dei valori corrispondenti,
+# e li infilo in un dizionario ()
+
+# def linkset_update():
+#     scrivo triple necessarie
+#     invio con sparql.setMethod(POST) un query con INSERT DATA
+#     INSERT DATA {
+#         <uri1> schema:location <dataset_uri1> ;
+#             owl:sameAs <uri2> .
+#         <dataset_uri1> rdfs:label <datset_name1> .
+#         <uri2> schema:location <dataset_uri2> ;
+#             owl:sameAs <uri1> .
+#         <dataset_uri2> rdfs:label <datset_name2> .
+#     }

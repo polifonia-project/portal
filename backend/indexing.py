@@ -5,6 +5,7 @@ from flask import jsonify
 
 # internal libraries
 import methods
+import reconciliation as rec
 
 g = methods.read_json('conf_general.json')
 
@@ -50,6 +51,8 @@ def index_per_category(datasets, categories, cat_id):
         if datasets[dataset]['query_method'] == 'sparql_endpoint':
             sparql_endpoint = datasets[dataset]['sparql_endpoint']
             pattern_data = get_sparql_results(pattern_query, sparql_endpoint)
+            # qui è dove devo popolare il linkset perché ho gli uri associati al loro dataset
+            # rec.linkset_population(datasets, dataset, pattern_data.keys())
             print('[SUCCESS] got data from endpoint:', sparql_endpoint)
             index_dict.update(pattern_data)
             print('[SUCCESS] ingestion for:', cat_name.lower())
