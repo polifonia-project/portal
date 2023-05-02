@@ -10,20 +10,14 @@
             },
             {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q1053916 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
             }
         ],
         "filters": {
-            "people": [
-                {
-                    "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
-                }
-            ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q515 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P1343 ?entity.  BIND(str(\"described in\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -33,8 +27,7 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     },
     "cat_02": {
         "id": "cat_02",
@@ -42,25 +35,15 @@
         "color": "#ff02fe",
         "search_pattern": [
             {
-                "dataset": "d_01",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 20"
-            },
-            {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q105543609 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
             }
         ],
         "filters": {
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737/wdt:P737/wdt:P737 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
-                }
-            ],
-            "places": [
-                {
-                    "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P19 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of birth\") AS ?rel) } UNION { <> wdt:P20 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of death\") AS ?rel) } UNION { <> wdt:P937 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has work location\") AS ?rel) }. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P86 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has composer\") AS ?rel) } UNION { <> wdt:P676 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"lyrics by\") AS ?rel) } UNION {VALUES ?type {wd:Q215380 wd:Q5} <> wdt:P175 ?entity. ?entity wdt:P31 ?type . BIND(str(\"has performer\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -70,8 +53,7 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     },
     "cat_03": {
         "id": "cat_03",
@@ -99,6 +81,12 @@
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P495 ?entity. ?entity wdt:P31/wdt:P279* wd:Q6256 . BIND(str(\"has country of origin\") AS ?rel) }. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
+            ],
+            "creative works": [
+                {
+                    "dataset": "d_01",
+                    "query": "SELECT DISTINCT ?inverse_rel ?entity ?entityLabel WHERE { { <> ^<https://schema.org/genre> ?entity. ?entity rdfs:label ?entityLabel BIND(str(\"has subject\") AS ?inverse_rel) } } ORDER BY ?entityLabel"
+                }
             ]
         },
         "section": {
@@ -107,8 +95,7 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     },
     "cat_04": {
         "id": "cat_04",
@@ -116,19 +103,15 @@
         "color": "#6400b4",
         "search_pattern": [
             {
-                "dataset": "d_01",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 20"
-            },
-            {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q105543609 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
             }
         ],
         "filters": {
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P162 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"producer\") AS ?rel) } UNION { <> wdt:P175 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"performer\") AS ?rel) } UNION { <> wdt:P86 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"composer\") AS ?rel) }. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P86 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has composer\") AS ?rel) } UNION { <> wdt:P676 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"lyrics by\") AS ?rel) } UNION {VALUES ?type {wd:Q215380 wd:Q5} <> wdt:P175 ?entity. ?entity wdt:P31 ?type . BIND(str(\"has performer\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -138,8 +121,7 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     },
     "cat_05": {
         "id": "cat_05",
@@ -147,25 +129,15 @@
         "color": "#00feff",
         "search_pattern": [
             {
-                "dataset": "d_01",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 20"
-            },
-            {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q105543609 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
             }
         ],
         "filters": {
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
-                }
-            ],
-            "places": [
-                {
-                    "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q515 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P86 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has composer\") AS ?rel) } UNION { <> wdt:P676 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"lyrics by\") AS ?rel) } UNION {VALUES ?type {wd:Q215380 wd:Q5} <> wdt:P175 ?entity. ?entity wdt:P31 ?type . BIND(str(\"has performer\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -175,8 +147,7 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     },
     "cat_06": {
         "id": "cat_06",
@@ -196,19 +167,25 @@
             "agents": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737/wdt:P737/wdt:P737 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P19 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of birth\") AS ?rel) } UNION { <> wdt:P20 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of death\") AS ?rel) } UNION { <> wdt:P937 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has work location\") AS ?rel) }. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P19 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of birth\") AS ?rel) } UNION { <> wdt:P20 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of death\") AS ?rel) } UNION { <> wdt:P937 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has work location\") AS ?rel) } UNION { <> wdt:P740 ?entity. BIND(str(\"location of formation\") AS ?rel)} UNION { <> wdt:P495 ?entity. BIND(str(\"has country of origin\") AS ?rel)} . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ],
             "creative works": [
                 {
                     "dataset": "d_01",
-                    "query": "SELECT DISTINCT ?inverse_rel ?entity ?entityLabel WHERE { { <> ^<https://schema.org/character> ?entity. ?entity rdfs:label ?entityLabel BIND(str(\"has character\") AS ?inverse_rel) } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?inverse_rel ?entity ?entityLabel WHERE { { <> ^<https://schema.org/character> ?entity. ?entity rdfs:label ?entityLabel BIND(str(\"has subject\") AS ?inverse_rel) } } ORDER BY ?entityLabel"
+                }
+            ],
+            "genres": [
+                {
+                    "dataset": "d_04",
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P136 ?entity. BIND(str(\"has genre\") AS ?rel) } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -218,8 +195,7 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     },
     "cat_07": {
         "id": "cat_07",
@@ -251,8 +227,7 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     },
     "cat_08": {
         "id": "cat_08",
@@ -260,20 +235,21 @@
         "color": "#000000",
         "search_pattern": [
             {
-                "dataset": "d_01",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 20"
-            },
-            {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?s wdt:P31 wd:Q110295396 . ?entity wdt:P279* ?s . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
             }
         ],
         "filters": {
             "people": [
-                
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P1535 ?entity. BIND(str(\"used by\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P61 ?entity. BIND(str(\"invented by\") AS ?rel) } UNION { <> wdt:P1535 ?entity. BIND(str(\"used by\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                }
+            ],
+            "places": [
+                {
+                    "dataset": "d_04",
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P1343 ?entity.  BIND(str(\"described in\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -283,7 +259,6 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     }
 }
