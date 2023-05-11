@@ -7,6 +7,8 @@ from SPARQLWrapper import SPARQLWrapper, POST, JSON, DIGEST
 from pymantic import sparql
 
 MYLINKSET = 'http://localhost:9999/bigdata/sparql'
+UPDATEMYLINKSET = 'http://localhost:9999/blazegraph/namespace/kb/sparql/update'
+LILNKSETGRAPH = 'http://reconciliation/linkset'
 
 
 def __run_query_string(active, query_string,
@@ -93,38 +95,21 @@ def __contact_tp(data, is_post, content_type):
     # }
 
 def clear_linkset():
-    server = sparql.SPARQLServer(MYLINKSET)
-    # sparql = SPARQLWrapper(MYLINKSET)
-    # sparql.setHTTPAuth(DIGEST)
-    # sparql.setCredentials('some-login', 'some-pw')
-    # sparql.setMethod(POST)
-    delete_query = '''
+    sparql = SPARQLWrapper(UPDATEMYLINKSET)
+    sparql.setMethod(POST)
+    insert_query = '''
         PREFIX schema: <https://schema.org/>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX a: <http://172.27.35.246:9999/blazegraph/namespace/kb/>
-        WITH <http://172.27.35.246:9999/blazegraph/namespace/kb/>
-        DELETE DATA 
-        {
-                a:test1 schema:location a:test_dataset1 ;
-                    owl:sameAs a:test2 .
-                a:test_dataset1 rdfs:label a:datset_name1 .
-                a:test2 schema:location a:test_dataset2 ;
-                    owl:sameAs a:test1 .
-                a:test_dataset1 rdfs:label a:datset_name2 .
+        PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+        DELETE {?s ?p ?o}
+        WHERE {
+            GRAPH <''' + LILNKSETGRAPH + '''> {
+            ?s ?p ?o
+            } 
         }
     '''
-    server.update(
-        'load <file:///test.ttl> into graph <http://172.27.35.246:9999/blazegraph/namespace/kb/>')
 
-    # sparql.setQuery(delete_query)
-    # print(sparql)
-    # results = sparql.query()
-    # print(results.response.read())
-    # print('check endpoint')
-
-    # sparql = SPARQLWrapper(
-    #     "http://localhost:9999/blazegraph/namespace/kb/sparql/update")
-    # queryString = ''' INSERT DATA { GRAPH <http://example.org/default> { <http://example/egbook3> <http://purl.org/dc/elements/1.1/title>  "This is an example title". } where  {} '''
-    # sparql.setQuery(queryString)
-    # sparql.method = 'POST'
-    # sparql.query()
+    sparql.setQuery(insert_query)
+    sparql.query()
+    print('done')
