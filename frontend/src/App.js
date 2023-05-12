@@ -40,7 +40,7 @@ function App() {
             <Route path="/" element={<FeedPage func={setPageTitle} />} />
             <Route path="/datastories" element={<DataStoriesPage func={setPageTitle} />} />
             <Route path="/about" element={<AboutPage func={setPageTitle} />} />
-            <Route path="/card/:cat/:uri" element={<CardPage />} />
+            <Route path="card" element={<CardPage />} />
           </Routes>
         </Layout>
       </CardContext.Provider>
