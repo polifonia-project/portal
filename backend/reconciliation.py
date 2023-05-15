@@ -62,23 +62,6 @@ def __contact_tp(data, is_post, content_type):
         #                        text=req.text)
 
 
-def linkset_population(datasets, dataset, uri_list):
-    uris_to_search = []
-    for uri in uri_list:
-        uris_to_search.append('<' + uri + '>')
-        # empty dictionary to keep all uris linked to the staring uri
-        same_uri_dict = {}
-        # find matches in all other datasets
-        for d in datasets:
-            if d != dataset:
-                sparql_endpoint = datasets[d]['sparql_endpoint']
-                find_matches(uris_to_search, sparql_endpoint)
-    #     mi restituisce un dizionario {same_uri:d} che vado a infilare nel dizionario vuoto
-    # una volta iterato per tutti i dataset, lancio funzione che fa update del mio linkset
-    # linkset_update() che per ogni same_uri (quindi per ogni entri di same_uri_dict) crea le stesse triple
-    # e le aggiunge al linkset
-
-
 def query_same_as(uri_list):
     values_to_search = ' '.join(uri_list)
     find_query = '''
@@ -105,6 +88,21 @@ def find_matches(uri_list, endpoint):
     return results
 
 
+def linkset_population(datasets, dataset, uri_list):
+    uris_to_search = []
+    for uri in uri_list:
+        uris_to_search.append('<' + uri + '>')
+        # find matches in all other datasets
+        for d in datasets:
+            if d != dataset:
+                sparql_endpoint = datasets[d]['sparql_endpoint']
+                same_uris_dict = find_matches(uris_to_search, sparql_endpoint)
+                for origin_uri, same_uri in same_uris_dict.items():
+                    linkset_update(datasets[dataset]['sparql_endpoint'], datasets[dataset]['name'],
+                                   origin_uri, same_uri, datasets[d]['sparql_endpoint'], datasets[d]['name'])
+        print('[SUCCESS] linkest populated')
+
+
 def linkset_update(dataset_1, dataset_1_label, uri_1, same_uri, dataset_2, dataset_2_label):
     sparql = SPARQLWrapper(UPDATEMYLINKSET)
     sparql.setMethod(POST)
@@ -115,12 +113,12 @@ def linkset_update(dataset_1, dataset_1_label, uri_1, same_uri, dataset_2, datas
 
         INSERT DATA {
             GRAPH <''' + LILNKSETGRAPH + '''> {
-            ''' + uri_1 + '''> schema:location ''' + dataset_1 + ''' ;
-                                                    owl:sameAs ''' + same_uri + ''' .                                              
-            ''' + dataset_1 + ''' rdfs:label ''' + dataset_1_label + ''' .
-            ''' + same_uri + ''' schema:location ''' + dataset_2 + ''' ;
-                                                        owl:sameAs ''' + uri_1 + ''' .
-            ''' + dataset_2 + ''' rdfs:label ''' + dataset_2_label + ''' .
+            <''' + uri_1 + '''> schema:location <''' + dataset_1 + '''> ;
+                                                    owl:sameAs <''' + same_uri + '''> .                                              
+            <''' + dataset_1 + '''> rdfs:label "''' + dataset_1_label + '''" .
+            <''' + same_uri + '''> schema:location <''' + dataset_2 + '''> ;
+                                                        owl:sameAs <''' + uri_1 + '''> .
+            <''' + dataset_2 + '''> rdfs:label "''' + dataset_2_label + '''" .
             }
         }
     '''
