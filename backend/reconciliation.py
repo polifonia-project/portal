@@ -62,25 +62,48 @@ def __contact_tp(data, is_post, content_type):
         #                        text=req.text)
 
 
-# def linkset_population(datasets, dataset, uri_list):
-#     for uri in uri_list:
-#         creo un dizionario vuoto per tenere tutti gli uri legati all'uri di partenza
-#         same_uri_dict = {}
-#         devo trovare i match in tutti gli altri dataset, quindi
-#         for d in datasets:
-#             find_matches() che lancia query_same_as()
-#             mi restituisce un dizionario {same_uri:d} che vado a infilare nel dizionario vuoto
-#         una volta iterato per tutti i dataset, lancio funzione che fa update del mio linkset
-#         linkset_update() che per ogni same_uri (quindi per ogni entri di same_uri_dict) crea le stesse triple
-#         e le aggiunge al linkset
+def linkset_population(datasets, dataset, uri_list):
+    uris_to_search = []
+    for uri in uri_list:
+        uris_to_search.append('<' + uri + '>')
+        # empty dictionary to keep all uris linked to the staring uri
+        same_uri_dict = {}
+        # find matches in all other datasets
+        for d in datasets:
+            if d != dataset:
+                sparql_endpoint = datasets[d]['sparql_endpoint']
+                find_matches(uris_to_search, sparql_endpoint)
+    #     mi restituisce un dizionario {same_uri:d} che vado a infilare nel dizionario vuoto
+    # una volta iterato per tutti i dataset, lancio funzione che fa update del mio linkset
+    # linkset_update() che per ogni same_uri (quindi per ogni entri di same_uri_dict) crea le stesse triple
+    # e le aggiunge al linkset
 
 
-# def query_same_as():
-# qui scrivo la query per estrarre owl:sameAs|skos:exactMatch con oggetto l'URI .
+def query_same_as(uri_list):
+    values_to_search = ' '.join(uri_list)
+    find_query = '''
+    PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    SELECT DISTINCT ?origin_uri ?same_uri
+    WHERE {
+        VALUES ?origin_uri {'''+values_to_search+'''} .
+        ?same_uri owl:sameAs|skos:exactMatch|^owl:sameAs|^skos:exactMatch ?origin_uri .
+    }
+    '''
+    return find_query
 
-# def find_matches():
-# in questa funzione, per ogni dataset lancio query_same_as() alla ricerca dei valori corrispondenti,
-# e li infilo in un dizionario ()
+
+def find_matches(uri_list, endpoint):
+    sparql = SPARQLWrapper(endpoint)
+    query = query_same_as(uri_list)
+    sparql.setQuery(query)
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
+    results = {result['origin_uri']['value']: result['same_uri']['value']
+               for result in results['results']['bindings'] if len(result['same_uri']['value']) > 0}
+    # {origin_uri: same_uri}
+    return results
+
 
 def linkset_update(dataset_1, dataset_1_label, uri_1, same_uri, dataset_2, dataset_2_label):
     sparql = SPARQLWrapper(UPDATEMYLINKSET)
@@ -103,7 +126,7 @@ def linkset_update(dataset_1, dataset_1_label, uri_1, same_uri, dataset_2, datas
     '''
     sparql.setQuery(insert_query)
     sparql.query()
-    print('new triples in linkset')
+    print('[UPDATE] new triples in linkset')
 
 
 def clear_linkset():
@@ -124,4 +147,4 @@ def clear_linkset():
 
     sparql.setQuery(delete_query)
     sparql.query()
-    print('linkeset emptied')
+    print('[DELETE] linkeset emptied')
