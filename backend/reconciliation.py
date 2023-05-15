@@ -82,22 +82,34 @@ def __contact_tp(data, is_post, content_type):
 # in questa funzione, per ogni dataset lancio query_same_as() alla ricerca dei valori corrispondenti,
 # e li infilo in un dizionario ()
 
-# def linkset_update():
-#     scrivo triple necessarie
-#     invio con sparql.setMethod(POST) un query con INSERT DATA
-    # INSERT DATA {
-    #     <uri1> schema:location <dataset_uri1> ;
-    #         owl:sameAs <uri2> .
-    #     <dataset_uri1> rdfs:label <datset_name1> .
-    #     <uri2> schema:location <dataset_uri2> ;
-    #         owl:sameAs <uri1> .
-    #     <dataset_uri2> rdfs:label <datset_name2> .
-    # }
+def linkset_update(dataset_1, dataset_1_label, uri_1, same_uri, dataset_2, dataset_2_label):
+    sparql = SPARQLWrapper(UPDATEMYLINKSET)
+    sparql.setMethod(POST)
+    insert_query = '''
+        PREFIX schema: <https://schema.org/>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+        INSERT DATA {
+            GRAPH <''' + LILNKSETGRAPH + '''> {
+            ''' + uri_1 + '''> schema:location ''' + dataset_1 + ''' ;
+                                                    owl:sameAs ''' + same_uri + ''' .                                              
+            ''' + dataset_1 + ''' rdfs:label ''' + dataset_1_label + ''' .
+            ''' + same_uri + ''' schema:location ''' + dataset_2 + ''' ;
+                                                        owl:sameAs ''' + uri_1 + ''' .
+            ''' + dataset_2 + ''' rdfs:label ''' + dataset_2_label + ''' .
+            }
+        }
+    '''
+    sparql.setQuery(insert_query)
+    sparql.query()
+    print('new triples in linkset')
+
 
 def clear_linkset():
     sparql = SPARQLWrapper(UPDATEMYLINKSET)
     sparql.setMethod(POST)
-    insert_query = '''
+    delete_query = '''
         PREFIX schema: <https://schema.org/>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -110,6 +122,6 @@ def clear_linkset():
         }
     '''
 
-    sparql.setQuery(insert_query)
+    sparql.setQuery(delete_query)
     sparql.query()
-    print('done')
+    print('linkeset emptied')
