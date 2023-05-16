@@ -16,8 +16,8 @@ def get_sparql_results(query, endpoint):
     Returns
     -------
     """
-
-    sparql = SPARQLWrapper(endpoint)
+    user_agent = 'mondoboia/1.0 (https://github.com/mondoboia; mondoboia@example.org)'
+    sparql = SPARQLWrapper(endpoint, agent=user_agent)
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()

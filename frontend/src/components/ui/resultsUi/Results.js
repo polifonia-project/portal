@@ -168,7 +168,7 @@ class ResultsTest extends React.Component {
         return (
             <>
                 <ResultsHeader cat={this.props.cat}>
-                <SourcesBarchart cat={this.props.cat} handleDataset={this.handleDataset} resetDataset={this.resetDataset}></SourcesBarchart>
+                <SourcesBarchart cat={this.props.cat} handleDataset={this.handleDataset} resetDataset={this.resetDataset} results={this.state.totalResults}></SourcesBarchart>
                     <FiltersContainer>
                         <FilterButton isDisabled={this.state.filterOn || this.state.relationOn} resetClass='resetButton' buttonClick={() => this.resetFilters()}>
                             Reset <span className="resetIcon">⟲</span>
