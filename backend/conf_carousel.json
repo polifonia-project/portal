@@ -2,7 +2,7 @@
 "card_01": {
   "id": "card_01",
   "claim" : "Explore",
-  "title" : "Scroll to see our logo",
+  "title" : "Scroll to see our highlights",
   "paragraph": "Weekly curated stories featuring the protagonists of European Music Heritage",
   "type": "scroll",
   "href" : "clips_container",
@@ -55,7 +55,7 @@
   },
   "card_07": {
     "id": "card_07",
-    "claim" : "Learn",
+    "claim" : "Learn more",
     "title" : "Who we are",
     "paragraph": "Know more about the Polifonia project, community, and resources",
     "type": "internal",

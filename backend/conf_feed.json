@@ -4,7 +4,7 @@
     "name": "Love Will Tear Us Apart",
     "textcontext": {
       "title": "Highlights of the week",
-      "description": "Explore the weekly selection of unique music data. Click on each of the clips to discover more about that category",
+      "description": "Explore our weekly selection of unique music data. Each highlight represents a resource coming from the Polifonia network. Scroll and listen to our music box!",
       "highlights": [
         "More +"
       ]
@@ -29,10 +29,10 @@
     "id": "clip_03",
     "name": "Love",
     "textcontext": {
-      "title": "Play the Music box of interconnected data.",
-      "description": "Keep scrolling for more!",
+      "title": "Data are more connected than ever now!",
+      "description": "Scroll down and discover the implicit knowledge that links musical heritage to the wider cultural heritage domain. People, places, topics and music: they are all connected!",
       "highlights": [
-        "MUSIC BOX"
+        "connected"
       ]
     },
     "iri": "http://www.wikidata.org/entity/Q316",
@@ -67,10 +67,10 @@
     "id": "clip_06",
     "name": "Punk Rock",
     "textcontext": {
-      "title": "Click on the Highlight to unveil unexpected music connections!",
-      "description": "Keep scrolling for more scores",
+      "title": "Do you want to know more about this Genre?",
+      "description": "Click on the highlight to unveil unexpected music connections! You can also switch genre and start a search of your own",
       "highlights": [
-        "Highlight"
+        "genre?"
       ]
     },
     "iri": "http://www.wikidata.org/entity/Q3071",
@@ -93,8 +93,8 @@
     "id": "clip_08",
     "name": "Electric Guitar",
     "textcontext": {
-      "title": "Discover more interesting and unexpected links! ",
-      "description": "Keep scrolling for more scores",
+      "title": "This is just the beginning!",
+      "description": "Now it is your turn. Scroll down to the categories sections or enjoy one of the numerous activities inside the Portal",
       "highlights": [
         "links"
       ]

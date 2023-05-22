@@ -20,7 +20,8 @@ function SectionIntro() {
       </VisibilitySensor>
       <div className={classes.introContainer}>
         <h3>Start your own search with your subjetcs of interest</h3>
-        <p>Sed vitae eros auctor ipsum facilisis pharetra id pretium lacus. Nulla lobortis eu eros ac sagittis. Donec in velit eu risus blandit rhoncus vel sed justo. Praesent consectetur, erat et aliquet lobortis, erat nisi vestibulum massa, vel tempus lacus enim at lectus. Donec blandit magna molestie ullamcorper molestie. Proin eu augue turpis. Quisque tincidunt hendrerit purus, vitae cursus est egestas at. Quisque pretium nulla id diam euismod ultrices. Morbi non bibendum metus. Pellentesque ultrices ex a purus fringilla dignissim.</p>
+        <p>Search among thousands of music resources and enhance the understanding of European Cultural Heritage by using our new search feature. Choose your favourite category, type a word and start looking for connections. You will combine the utility of an advanced search tool with the browsing experience of an archive interface of music related resources. Search, filter and expand your knowledge. </p>
+        <button className={classes.introButton}>Start now</button>
       </div>
     </div>
   );

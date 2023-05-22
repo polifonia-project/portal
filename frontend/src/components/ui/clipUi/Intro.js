@@ -19,9 +19,11 @@ function Intro() {
         <div className={classes.visibilityHook}>X</div>
       </VisibilitySensor>
       <div className={classes.introContainer}>
-        <h3>Scroll and let the sound of heritage play</h3>
-        <p>Sed vitae eros auctor ipsum facilisis pharetra id pretium lacus. Nulla lobortis eu eros ac sagittis. Donec in velit eu risus blandit rhoncus vel sed justo. Praesent consectetur, erat et aliquet lobortis, erat nisi vestibulum massa, vel tempus lacus enim at lectus. Donec blandit magna molestie ullamcorper molestie. Proin eu augue turpis. Quisque tincidunt hendrerit purus, vitae cursus est egestas at. Quisque pretium nulla id diam euismod ultrices. Morbi non bibendum metus. Pellentesque ultrices ex a purus fringilla dignissim.</p>
-      </div>
+        <h3>The Portal</h3>
+        <p>Polifonia Portal is the official access point to all the resources and data coming from the Polifonia ecosystem. The preservation, management and study of musical heritage pursued by the project has led to the collection of thousands of music related information, that are now ready to be explored.</p>
+        <p>From the soundscape of Italian historical bells, to the influence of French operas on traditional Dutch music, European cultural heritage hides a goldmine of unknown encounters, influences and practices that can transport us to experience the past, understand the music we love, and imagine the soundtrack of our future.</p>
+        <button className={classes.introButton}>Scroll and play</button>
+        </div>
     </div>
   );
 }
