@@ -2,11 +2,11 @@
 "card_01": {
   "id": "card_01",
   "claim" : "Explore",
-  "title" : "Scroll to see our highlights",
+  "title" : "Scroll to see our logo",
   "paragraph": "Weekly curated stories featuring the protagonists of European Music Heritage",
   "type": "scroll",
   "href" : "clips_container",
-  "highlights": ["music experts"]
+  "logo": "icon-1.svg"
 }, 
 "card_02": {
   "id": "card_02",
@@ -15,7 +15,7 @@
   "paragraph": "For each category, choose a different protagonist and start searching for their connections",
   "type": "scroll",
   "href" : "section-cat_05",
-  "highlights": ["music experts"]
+  "logo": "icon-2.svg"
 },
   "card_03": {
     "id": "card_03",
@@ -24,7 +24,7 @@
     "paragraph": "Get recommendations based on your taste, habits, and loved music. Coming soon!",
     "type": "internal",
     "href" : "/about",
-    "highlights": ["music experts"]
+    "logo": "icon-3.svg"
   },
   "card_04": {
     "id": "card_04",
@@ -33,7 +33,7 @@
     "paragraph": "Go to the musoW catalogue, including hundreds of music datasets, repertories, software solutions, and more",
     "type": "external",
     "href" : "https://projects.dharc.unibo.it/musow/",
-    "highlights": ["music experts"]
+    "logo": "icon-4.svg"
   },
   "card_05": {
     "id": "card_05",
@@ -42,7 +42,7 @@
     "paragraph": "The Polifonia Corpus offers a professional interface to study how music terminology evolved across countries",
     "type": "external",
     "href" : "https://polifonia.disi.unibo.it/corpus/",
-    "highlights": ["music experts"]
+    "logo": "icon-5.svg"
   },
   "card_06": {
     "id": "card_06",
@@ -51,7 +51,7 @@
     "paragraph": "Charts, searches, maps and more on MELODY, a platform for authoring data stories with Linked Open Data",
     "type": "external",
     "href" : "https://projects.dharc.unibo.it/melody/",
-    "highlights": ["music experts"]
+    "logo": "icon-6.svg"
   },
   "card_07": {
     "id": "card_07",
@@ -60,7 +60,7 @@
     "paragraph": "Know more about the Polifonia project, community, and resources",
     "type": "internal",
     "href" : "/about",
-    "highlights": ["music experts"]
+    "logo": "icon-7.svg"
   }
   
   
