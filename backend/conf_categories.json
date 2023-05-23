@@ -23,9 +23,8 @@
         },
         "section": {
             "title": "Know everything about your favorite topic",
-            "description": "Discover all the possible connections and relations with a topic. See all the results and arrange them as you want.",
+            "description": "Explore connections and relations of topics. See all the results, filter and arrange them as you want. ",
             "highlights": [
-                ""
             ]
         },
         "status": "ingested"
@@ -50,7 +49,7 @@
         },
         "section": {
             "title": "Explore famous tunes and find your own melody",
-            "description": "Discover all the possible connections and relations with tunes. See all the results and arrange them as you want.",
+            "description": "Explore connections and relations of tunes. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
             ]
@@ -93,7 +92,7 @@
         },
         "section": {
             "title": "Keep yourself versatile when it comes to music genres",
-            "description": "Discover all the possible connections and relations with your favorite music genre. See all the results and arrange them as you want.",
+            "description": "Explore connections and relations of music genres. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
             ]
@@ -120,7 +119,7 @@
         },
         "section": {
             "title": "\u00abOk, ladies. Now, Let's get information\u00bb",
-            "description": "Discover all the possible connections and relations with a lyrics. See all the results and arrange them as you want.",
+            "description": "Explore connections and relations of lyrics. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
             ]
@@ -147,7 +146,7 @@
         },
         "section": {
             "title": "Be the conductor of your own score!",
-            "description": "Discover all the possible connections and relations with scores. See all the results and arrange them as you want.",
+            "description": "Explore connections and relations of scores. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
             ]
@@ -196,7 +195,7 @@
         },
         "section": {
             "title": "Music connects people",
-            "description": "Discover all the possible connections and relations with your favorite artist. See all the results and arrange them as you want.",
+            "description": "Explore connections and relations of people. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
             ]
@@ -229,7 +228,7 @@
         },
         "section": {
             "title": "What\u2019s your next music destination?",
-            "description": "Discover all the possible connections and relations with places, cities, countries and events. See all the results and arrange them as you want.",
+            "description": "Explore connections and relations of places. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
             ]
@@ -262,7 +261,7 @@
         },
         "section": {
             "title": "Play your favorite instrument!",
-            "description": "Discover all the possible connections and relations with music instruments. See all the results and arrange them as you want.",
+            "description": "Explore connections and relations of instruments. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
             ]

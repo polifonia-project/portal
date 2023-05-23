@@ -3,8 +3,8 @@
     "id": "clip_01",
     "name": "Love Will Tear Us Apart",
     "textcontext": {
-      "title": "Highlights of the week",
-      "description": "Explore our weekly selection of unique music data. Each highlight represents a resource coming from the Polifonia network. Scroll and listen to our music box!",
+      "title": "Start with some highlights",
+      "description": "Explore the selection of unique music data we made for you. Each highlight represents a concept, a person, a place, a tune (and more!) that is somehow interconnected with others, to tell us a story. We update highlights on a regular basis, so that you never get bored. Scroll down and listen to our music box!",
       "highlights": [
         "More +"
       ]
@@ -30,7 +30,7 @@
     "name": "Love",
     "textcontext": {
       "title": "Data are more connected than ever now!",
-      "description": "Scroll down and discover the implicit knowledge that links musical heritage to the wider cultural heritage domain. People, places, topics and music: they are all connected!",
+      "description": "To build our stories, we  link historical information and music data of the European musical heritage and we try to make sense of their relations, showing all you need for a serendipitous discovery journey.",
       "highlights": [
         "connected"
       ]
@@ -67,10 +67,10 @@
     "id": "clip_06",
     "name": "Punk Rock",
     "textcontext": {
-      "title": "Do you want to know more about this Genre?",
-      "description": "Click on the highlight to unveil unexpected music connections! You can also switch genre and start a search of your own",
+      "title": "Do you want to know more?",
+      "description": "Click on any highlight to unveil unexpected music connections! We selected some of the most insightful relations between people, places, genres, and more. Wouldn’t mind a different genre? You can change the subject and start new research.",
       "highlights": [
-        "genre?"
+        "more?"
       ]
     },
     "iri": "http://www.wikidata.org/entity/Q3071",
@@ -94,7 +94,7 @@
     "name": "Electric Guitar",
     "textcontext": {
       "title": "This is just the beginning!",
-      "description": "Now it is your turn. Scroll down to the categories sections or enjoy one of the numerous activities inside the Portal",
+      "description": "Now it is your turn. Scroll down to the sections corresponding to the highlights and let data talk or enjoy one of the many activities offered by Polifonia.",
       "highlights": [
         "links"
       ]

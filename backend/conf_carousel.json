@@ -3,7 +3,7 @@
   "id": "card_01",
   "claim" : "Explore",
   "title" : "Scroll to see our highlights",
-  "paragraph": "Weekly curated stories featuring the protagonists of European Music Heritage",
+  "paragraph": "Get acquainted with curated stories featuring the protagonists of European Music Heritage",
   "type": "scroll",
   "href" : "clips_container",
   "logo": "icon-1.svg"
@@ -12,7 +12,7 @@
   "id": "card_02",
   "claim" : "Search",
   "title" : "Look for what you like",
-  "paragraph": "For each category, choose a different protagonist and start searching for their connections",
+  "paragraph": "Choose a different protagonist and start searching for their connections",
   "type": "scroll",
   "href" : "section-cat_05",
   "logo": "icon-2.svg"
@@ -48,7 +48,7 @@
     "id": "card_06",
     "claim" : "Create",
     "title" : "Create stories with music data",
-    "paragraph": "Charts, searches, maps and more on MELODY, a platform for authoring data stories with Linked Open Data",
+    "paragraph": "Charts, searches, maps, and more on MELODY, a platform for authoring data stories with Linked Open Data",
     "type": "external",
     "href" : "https://projects.dharc.unibo.it/melody/",
     "logo": "icon-6.svg"
@@ -57,7 +57,7 @@
     "id": "card_07",
     "claim" : "Learn more",
     "title" : "Who we are",
-    "paragraph": "Know more about the Polifonia project, community, and resources",
+    "paragraph": "Got your interest? Know more about the Polifonia project, community, and resources",
     "type": "internal",
     "href" : "/about",
     "logo": "icon-7.svg"

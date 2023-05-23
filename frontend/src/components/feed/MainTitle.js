@@ -11,7 +11,7 @@ const MainTitle = () => {
   const handleClickScroll = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ block: "nearest", behavior: 'smooth' });
+      element.scrollIntoView({ block: "center", behavior: 'smooth' });
     };
     if (!soundOn) { setSoundOn(true) }
   };
@@ -19,7 +19,7 @@ const MainTitle = () => {
   return (
     <div className={classes.mainTitleContainer}>
         <h3>Play the sound of Heritage</h3> {/* MUSIC, HISTORY, ... */}
-        <button onClick={() => handleClickScroll('clips_container')}></button>
+        <button onClick={() => handleClickScroll('introduction-Polifonia')}></button>
     </div>
 
   );
