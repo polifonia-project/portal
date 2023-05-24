@@ -5,6 +5,7 @@
 <style type="text/css">
 	.st0{fill:none;stroke:#333333;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 	.st1{fill:none;stroke:#333333;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:#333333;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;}
 </style>
 <g id="Livello_2_00000070104413188760102100000002696261388213290140_">
 	<g id="Layer_2">
@@ -13,5 +14,10 @@
 			C28.3,25.7,27.7,26.4,27,27z"/>
 	</g>
 </g>
-<polygon class="st1" points="11.9,9.5 11.9,23.8 23.6,16.7 "/>
+<line class="st1" x1="36.3" y1="39.5" x2="39.3" y2="36.7"/>
+<line class="st0" x1="41.9" y1="14.6" x2="34.7" y2="14.6"/>
+<line class="st2" x1="20.5" y1="16.2" x2="11.9" y2="16.2"/>
+<line class="st0" x1="41.9" y1="19.5" x2="34.7" y2="19.5"/>
+<line class="st0" x1="41.9" y1="9.6" x2="34.7" y2="9.6"/>
+<line class="st2" x1="16.2" y1="20.5" x2="16.2" y2="11.8"/>
 </svg>
