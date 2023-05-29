@@ -4,11 +4,10 @@ import re
 from flask import request, Response
 import requests
 from SPARQLWrapper import SPARQLWrapper, POST, JSON, DIGEST
-from pymantic import sparql
 
 MYLINKSET = 'http://localhost:9999/bigdata/sparql'
 UPDATEMYLINKSET = 'http://localhost:9999/blazegraph/namespace/kb/sparql/update'
-LILNKSETGRAPH = 'http://reconciliation/linkset'
+LILNKSETGRAPH = 'http://w3id.org/polifonia/linkset/'
 
 
 def __run_query_string(active, query_string,
@@ -62,7 +61,7 @@ def __contact_tp(data, is_post, content_type):
         #                        text=req.text)
 
 
-def query_same_as(uri_list):
+def query_same_as(uri_list):  # altro parametro tipo lista con sparqlenpoint
     values_to_search = ' '.join(uri_list)
     find_query = '''
     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
@@ -94,7 +93,7 @@ def linkset_population(datasets, dataset, uri_list):
         uris_to_search.append('<' + uri + '>')
         # find matches in all other datasets
         for d in datasets:
-            if d != dataset:
+            if d != dataset:  # da togliere
                 sparql_endpoint = datasets[d]['sparql_endpoint']
                 same_uris_dict = find_matches(uris_to_search, sparql_endpoint)
                 for origin_uri, same_uri in same_uris_dict.items():
