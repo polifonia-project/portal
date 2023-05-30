@@ -6,6 +6,7 @@ import requests
 from SPARQLWrapper import SPARQLWrapper, POST, JSON, DIGEST
 from rdflib import Graph, URIRef, Literal
 from rdflib.namespace import SDO, RDFS, OWL
+import os
 
 MYLINKSET = 'http://localhost:9999/bigdata/sparql'
 UPDATEMYLINKSET = 'http://localhost:9999/blazegraph/namespace/kb/sparql/update'
@@ -95,7 +96,7 @@ def find_matches(uri_list, endpoint):
     return results
 
 
-def linkset_update(dataset_1, dataset_1_label, uri_1, same_uri, dataset_2, dataset_2_label):
+def linkset_endpoint_update(triples_string):
     sparql = SPARQLWrapper(UPDATEMYLINKSET)
     sparql.setMethod(POST)
     insert_query = '''
@@ -105,18 +106,13 @@ def linkset_update(dataset_1, dataset_1_label, uri_1, same_uri, dataset_2, datas
 
         INSERT DATA {
             GRAPH <''' + LILNKSETGRAPH + '''> {
-            <''' + uri_1 + '''> schema:location <''' + dataset_1 + '''> ;
-                                                    owl:sameAs <''' + same_uri + '''> .                                              
-            <''' + dataset_1 + '''> rdfs:label "''' + dataset_1_label + '''" .
-            <''' + same_uri + '''> schema:location <''' + dataset_2 + '''> ;
-                                                        owl:sameAs <''' + uri_1 + '''> .
-            <''' + dataset_2 + '''> rdfs:label "''' + dataset_2_label + '''" .
+            ''' + triples_string + '''
             }
         }
     '''
     sparql.setQuery(insert_query)
     sparql.query()
-    print('[UPDATE] new triples in linkset')
+    print('[UPDATE] new triples in linkset endpoint')
 
 
 def clear_linkset():
@@ -147,21 +143,22 @@ def parse_ntriple_linkest(file):
 
 
 def write_ntriple_linkset(g, file):
-    g.serialize(destination=file, format='nt')
+    g.serialize(destination=file, format='nt', encoding='utf-8')
 
 
-def add_triples_to_linkset(g, dataset_1, dataset_1_label, uri_1, same_uri, dataset_2, dataset_2_label):
+def add_triples_to_linkset_file(g, dataset_1, dataset_1_label, uri_1, same_uri, dataset_2, dataset_2_label):
     # uri_1
     g.add((URIRef(uri_1), SDO.location, URIRef(dataset_1)))
     g.add((URIRef(uri_1), OWL.sameAs, URIRef(same_uri)))
-    g.add((URIRef(dataset_1), RDFS.label, Literal(dataset_1_label)))
+    g.add((URIRef(dataset_1), RDFS.label, Literal(dataset_1_label, lang="en")))
     # same_uri
     g.add((URIRef(same_uri), SDO.location, URIRef(dataset_2)))
     g.add((URIRef(same_uri), OWL.sameAs, URIRef(uri_1)))
-    g.add((URIRef(dataset_2), RDFS.label, Literal(dataset_2_label)))
+    g.add((URIRef(dataset_2), RDFS.label, Literal(dataset_2_label, lang="en")))
+    print('[UPDATE] linkset file updated')
 
 
-def linkset_population(datasets, dataset, uri_list):
+def linkset_file_population(datasets, dataset, uri_list):
     linkset_graph = parse_ntriple_linkest('linkset.nt')
     uris_to_search = []
     for uri in uri_list:
@@ -176,7 +173,13 @@ def linkset_population(datasets, dataset, uri_list):
             sparql_endpoint = datasets[d]['sparql_endpoint']
             same_uris_dict = find_matches(uris_to_search, sparql_endpoint)
             for origin_uri, same_uri in same_uris_dict.items():
-                add_triples_to_linkset(linkset_graph, datasets[dataset]['sparql_endpoint'], datasets[dataset]['name'],
-                                       origin_uri, same_uri, datasets[d]['sparql_endpoint'], datasets[d]['name'])
+                add_triples_to_linkset_file(linkset_graph, datasets[dataset]['sparql_endpoint'], datasets[dataset]['name'],
+                                            origin_uri, same_uri, datasets[d]['sparql_endpoint'], datasets[d]['name'])
         write_ntriple_linkset(linkset_graph, 'linkset.nt')
-        print('[SUCCESS] linkest populated')
+        print('[SUCCESS] linkest file population complete')
+
+
+def triples_to_linkset_edpoint(file):
+    ntriple = open(file, 'r')
+    ntriple_string = ntriple.read()
+    linkset_endpoint_update(ntriple_string)

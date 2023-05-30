@@ -52,7 +52,7 @@ def index_per_category(datasets, categories, cat_id):
             sparql_endpoint = datasets[dataset]['sparql_endpoint']
             pattern_data = get_sparql_results(pattern_query, sparql_endpoint)
             # qui è dove devo popolare il linkset perché ho gli uri associati al loro dataset
-            rec.linkset_population(datasets, dataset, pattern_data.keys())
+            rec.linkset_file_population(datasets, dataset, pattern_data.keys())
             print('[SUCCESS] got data from endpoint:', sparql_endpoint)
             index_dict.update(pattern_data)
             print('[SUCCESS] ingestion for:', cat_name.lower())
@@ -72,6 +72,7 @@ def ingest_data(datasets, categories):
             #  change status in categories config
             categories[cat]['status'] = 'ingested'
             methods.update_json(g['data_sources']['categories'], categories)
+            print(rec.triples_to_linkset_edpoint('linkset.nt'))
         else:
             print('[UPDATE] data already ingested for', cat_name.lower())
 
