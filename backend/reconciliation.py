@@ -11,6 +11,7 @@ import os
 MYLINKSET = 'http://localhost:9999/bigdata/sparql'
 UPDATEMYLINKSET = 'http://localhost:9999/blazegraph/namespace/kb/sparql/update'
 LILNKSETGRAPH = 'http://w3id.org/polifonia/linkset/'
+LINKSET_FILE = 'linkset.nt'
 
 WHITE_LIST = ['wikidata', 'dbpedia', 'viaf', 'discogs']
 
@@ -115,7 +116,7 @@ def linkset_endpoint_update(triples_string):
     print('[UPDATE] new triples in linkset endpoint')
 
 
-def clear_linkset():
+def clear_linkset_endpoint():
     sparql = SPARQLWrapper(UPDATEMYLINKSET)
     sparql.setMethod(POST)
     delete_query = '''
@@ -159,7 +160,7 @@ def add_triples_to_linkset_file(g, dataset_1, dataset_1_label, uri_1, same_uri, 
 
 
 def linkset_file_population(datasets, dataset, uri_list):
-    linkset_graph = parse_ntriple_linkest('linkset.nt')
+    linkset_graph = parse_ntriple_linkest(LINKSET_FILE)
     uris_to_search = []
     for uri in uri_list:
         if any((match := substring) in uri for substring in WHITE_LIST):
@@ -175,11 +176,11 @@ def linkset_file_population(datasets, dataset, uri_list):
             for origin_uri, same_uri in same_uris_dict.items():
                 add_triples_to_linkset_file(linkset_graph, datasets[dataset]['sparql_endpoint'], datasets[dataset]['name'],
                                             origin_uri, same_uri, datasets[d]['sparql_endpoint'], datasets[d]['name'])
-        write_ntriple_linkset(linkset_graph, 'linkset.nt')
+        write_ntriple_linkset(linkset_graph, LINKSET_FILE)
         print('[SUCCESS] linkest file population complete')
 
 
 def triples_to_linkset_edpoint(file):
     ntriple = open(file, 'r')
-    ntriple_string = ntriple.read()
+    ntriple_string = ntriple.read()  # add check on lenght and split in case (how)
     linkset_endpoint_update(ntriple_string)

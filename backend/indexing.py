@@ -72,7 +72,7 @@ def ingest_data(datasets, categories):
             #  change status in categories config
             categories[cat]['status'] = 'ingested'
             methods.update_json(g['data_sources']['categories'], categories)
-            print(rec.triples_to_linkset_edpoint('linkset.nt'))
+            print(rec.triples_to_linkset_edpoint(rec.LINKSET_FILE))
         else:
             print('[UPDATE] data already ingested for', cat_name.lower())
 
