@@ -5,6 +5,7 @@ from flask import Flask, request, jsonify
 import methods
 import indexing as i
 import reconciliation as rec
+import linkset_endpoint as endpoint
 
 app = Flask(__name__)
 
@@ -44,15 +45,15 @@ def reconciliation(active=None):
     if request.method == 'GET':
         content_type = request.content_type
         q = request.args.get("query")
-        return rec.__run_query_string(active, q, content_type)
+        return endpoint.__run_query_string(active, q, content_type)
     else:
 
         content_type = request.content_type
         cur_data = request.get_data()
         if "application/x-www-form-urlencoded" in content_type:
-            return rec.__run_query_string(active, cur_data, True, content_type)
+            return endpoint.__run_query_string(active, cur_data, True, content_type)
         elif "application/sparql-query" in content_type:
-            return rec.__contact_tp(cur_data, True, content_type)
+            return endpoint.__contact_tp(cur_data, True, content_type)
 
 
 if __name__ == '__main__':
