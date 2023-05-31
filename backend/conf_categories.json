@@ -26,8 +26,7 @@
             "description": "Explore connections and relations of topics. See all the results, filter and arrange them as you want. ",
             "highlights": [
             ]
-        },
-        "status": "ingested"
+        }
     },
     "cat_02": {
         "id": "cat_02",
@@ -53,8 +52,7 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     },
     "cat_03": {
         "id": "cat_03",
@@ -96,8 +94,7 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     },
     "cat_04": {
         "id": "cat_04",
@@ -123,8 +120,7 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     },
     "cat_05": {
         "id": "cat_05",
@@ -150,8 +146,7 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     },
     "cat_06": {
         "id": "cat_06",
@@ -199,8 +194,7 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     },
     "cat_07": {
         "id": "cat_07",
@@ -232,8 +226,7 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     },
     "cat_08": {
         "id": "cat_08",
@@ -265,7 +258,6 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     }
 }
