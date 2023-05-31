@@ -8,7 +8,7 @@ function InfoBox(props) {
   const highlights = props.highlights;
 
   highlights.map((highlight, index) => ( 
-    title = reactStringReplace(title, highlight, (match, i) => (<i key={'highlight'+ index} style={{ color: props.color}}>{match}<br></br></i>))
+    title = reactStringReplace(title, highlight, (match, i) => (<i key={'highlight'+ index} style={{ color: props.color}}>{match}</i>))
   ));
 
   

@@ -1,0 +1,73 @@
+.mainTitleContainer{
+  display: block;
+  position: relative;
+  cursor: default;
+  transition: transform 0.2s;
+  overflow: hidden;
+  text-align: center;
+  background-color: transparent;
+  box-shadow: 1px 1px 16px -5px transparent;
+  color: black;
+  font-size: 5.8em;
+  width: 60%;
+  margin-right: 20%;
+  margin-left: 20%;
+}
+
+.mainTitleContainer button {
+  background-image: url('../../assets/png/cardFig1.png');
+  background-repeat: no-repeat;
+  background-size: 140%;
+  background-position: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border:0px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+.mainTitleContainer button:hover {
+  transform: rotate(3.142rad);
+  animation: pulse 2s infinite;
+}
+
+.mainTitleContainer h3 {
+  line-height: 1.2em;
+  font-family: "Garnett Medium";
+  margin: 0px;
+}
+
+.carousel_card p {
+  font-size: 0.5em;
+  padding-right: 30%;
+  display: none;
+}
+
+.carousel_card p .highlight {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+  
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+  
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+.visibilityHook {
+  display: block;
+  background-color: red;
+  transform: scaleY();
+}

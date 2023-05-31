@@ -7,7 +7,7 @@
   transition: all 1s ease;
   position: -webkit-sticky; /* Safari */
   position: sticky;
-  top: -56vh;
+  top: -60vh;
   right: 0;
   z-index: 100;
   justify-content: space-around;

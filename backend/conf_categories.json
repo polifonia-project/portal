@@ -10,28 +10,21 @@
             },
             {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q1053916 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
             }
         ],
         "filters": {
-            "people": [
-                {
-                    "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
-                }
-            ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q515 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P1343 ?entity.  BIND(str(\"described in\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
         "section": {
-            "title": "Read all the documents about your research topic",
-            "description": "Discover all the possible connections and relations with a topic. See all the results and arrenge them as you want.",
+            "title": "Know everything about your favorite topic",
+            "description": "Explore connections and relations of topics. See all the results, filter and arrange them as you want. ",
             "highlights": [
-                ""
             ]
         },
         "status": "ingested"
@@ -42,31 +35,21 @@
         "color": "#ff02fe",
         "search_pattern": [
             {
-                "dataset": "d_01",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 20"
-            },
-            {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q105543609 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
             }
         ],
         "filters": {
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737/wdt:P737/wdt:P737 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
-                }
-            ],
-            "places": [
-                {
-                    "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P19 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of birth\") AS ?rel) } UNION { <> wdt:P20 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of death\") AS ?rel) } UNION { <> wdt:P937 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has work location\") AS ?rel) }. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P86 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has composer\") AS ?rel) } UNION { <> wdt:P676 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"lyrics by\") AS ?rel) } UNION {VALUES ?type {wd:Q215380 wd:Q5} <> wdt:P175 ?entity. ?entity wdt:P31 ?type . BIND(str(\"has performer\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
         "section": {
-            "title": "Find your own melody",
-            "description": "Discover all the possible connections and relations with tunes. See all the results and arrenge them as you want.",
+            "title": "Explore famous tunes and find your own melody",
+            "description": "Explore connections and relations of tunes. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
             ]
@@ -99,11 +82,17 @@
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P495 ?entity. ?entity wdt:P31/wdt:P279* wd:Q6256 . BIND(str(\"has country of origin\") AS ?rel) }. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
+            ],
+            "creative works": [
+                {
+                    "dataset": "d_01",
+                    "query": "SELECT DISTINCT ?inverse_rel ?entity ?entityLabel WHERE { { <> ^<https://schema.org/genre> ?entity. ?entity rdfs:label ?entityLabel BIND(str(\"has subject\") AS ?inverse_rel) } } ORDER BY ?entityLabel"
+                }
             ]
         },
         "section": {
-            "title": "Genres to uncover hundreds of relations",
-            "description": "Discover all the possible connections and relations with your favorite music genre. See all the results and arrenge them as you want.",
+            "title": "Keep yourself versatile when it comes to music genres",
+            "description": "Explore connections and relations of music genres. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
             ]
@@ -116,25 +105,21 @@
         "color": "#6400b4",
         "search_pattern": [
             {
-                "dataset": "d_01",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 20"
-            },
-            {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q105543609 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
             }
         ],
         "filters": {
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P162 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"producer\") AS ?rel) } UNION { <> wdt:P175 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"performer\") AS ?rel) } UNION { <> wdt:P86 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"composer\") AS ?rel) }. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P86 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has composer\") AS ?rel) } UNION { <> wdt:P676 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"lyrics by\") AS ?rel) } UNION {VALUES ?type {wd:Q215380 wd:Q5} <> wdt:P175 ?entity. ?entity wdt:P31 ?type . BIND(str(\"has performer\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
         "section": {
             "title": "\u00abOk, ladies. Now, Let's get information\u00bb",
-            "description": "Discover all the possible connections and relations with a lyrics. See all the results and arrenge them as you want.",
+            "description": "Explore connections and relations of lyrics. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
             ]
@@ -147,31 +132,21 @@
         "color": "#00feff",
         "search_pattern": [
             {
-                "dataset": "d_01",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 20"
-            },
-            {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q105543609 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
             }
         ],
         "filters": {
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { ?entity wdt:P31 wd:Q5 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
-                }
-            ],
-            "places": [
-                {
-                    "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE {?entity wdt:P31/wdt:P279* wd:Q515 . <> ?rel ?entity . ?relIdentity wikibase:directClaim ?rel . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P86 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has composer\") AS ?rel) } UNION { <> wdt:P676 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"lyrics by\") AS ?rel) } UNION {VALUES ?type {wd:Q215380 wd:Q5} <> wdt:P175 ?entity. ?entity wdt:P31 ?type . BIND(str(\"has performer\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
         "section": {
-            "title": "Be the conductor of your own music composition",
-            "description": "Discover all the possible connections and relations with scores. See all the results and arrenge them as you want.",
+            "title": "Be the conductor of your own score!",
+            "description": "Explore connections and relations of scores. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
             ]
@@ -196,25 +171,31 @@
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737/wdt:P737/wdt:P737 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P19 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of birth\") AS ?rel) } UNION { <> wdt:P20 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of death\") AS ?rel) } UNION { <> wdt:P937 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has work location\") AS ?rel) }. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P19 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of birth\") AS ?rel) } UNION { <> wdt:P20 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of death\") AS ?rel) } UNION { <> wdt:P937 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has work location\") AS ?rel) } UNION { <> wdt:P740 ?entity. BIND(str(\"location of formation\") AS ?rel)} UNION { <> wdt:P495 ?entity. BIND(str(\"has country of origin\") AS ?rel)} . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ],
             "creative works": [
                 {
                     "dataset": "d_01",
-                    "query": "SELECT DISTINCT ?inverse_rel ?entity ?entityLabel WHERE { { <> ^<https://schema.org/character> ?entity. ?entity rdfs:label ?entityLabel BIND(str(\"has character\") AS ?inverse_rel) } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?inverse_rel ?entity ?entityLabel WHERE { { <> ^<https://schema.org/character> ?entity. ?entity rdfs:label ?entityLabel BIND(str(\"has subject\") AS ?inverse_rel) } } ORDER BY ?entityLabel"
+                }
+            ],
+            "genres": [
+                {
+                    "dataset": "d_04",
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P136 ?entity. BIND(str(\"has genre\") AS ?rel) } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
         "section": {
-            "title": "What about Artists?",
-            "description": "Discover all the possible connections and relations with your favorite artist. See all the results and arrenge them as you want.",
+            "title": "Music connects people",
+            "description": "Explore connections and relations of people. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
             ]
@@ -247,7 +228,7 @@
         },
         "section": {
             "title": "What\u2019s your next music destination?",
-            "description": "Discover all the possible connections and relations with places, cities, countries and events. See all the results and arrenge them as you want.",
+            "description": "Explore connections and relations of places. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
             ]
@@ -260,26 +241,27 @@
         "color": "#000000",
         "search_pattern": [
             {
-                "dataset": "d_01",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 20"
-            },
-            {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q151885 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?s wdt:P31 wd:Q110295396 . ?entity wdt:P279* ?s . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
             }
         ],
         "filters": {
             "people": [
-                
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P1535 ?entity. BIND(str(\"used by\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P61 ?entity. BIND(str(\"invented by\") AS ?rel) } UNION { <> wdt:P1535 ?entity. BIND(str(\"used by\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                }
+            ],
+            "places": [
+                {
+                    "dataset": "d_04",
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P1343 ?entity.  BIND(str(\"described in\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
         "section": {
-            "title": "Play ON",
-            "description": "Discover all the possible connections and relations with music instruments. See all the results and arrenge them as you want.",
+            "title": "Play your favorite instrument!",
+            "description": "Explore connections and relations of instruments. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
             ]

@@ -4,7 +4,9 @@
     position: relative;
     z-index: 20;
     padding-top: 20px;
+    padding-bottom: 100px;
     background-color: #f4edec;
+
 }
 
 .background8 {

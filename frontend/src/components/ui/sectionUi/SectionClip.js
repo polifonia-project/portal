@@ -7,7 +7,7 @@ import searchicon from '../../../assets/svg/magnglass.svg';
 import closeicon from '../../../assets/svg/closesearch.svg';
 import blankicon from '../../../assets/svg/blanksearch.svg';
 import Remainder from "./Remainder";
-import expandIcon from '../../../assets/svg/expand.svg';
+import ExpandButton from "./ExpandButton";
 
 class SectionClip extends React.Component {
 
@@ -21,6 +21,7 @@ class SectionClip extends React.Component {
       searchField: "",
       value_obj: {},
       input: "",
+      current_input: this.props.placeholder,
       isFocused: false,
       mainClip: this.props.el_iri,
       isHover: false,
@@ -103,8 +104,9 @@ class SectionClip extends React.Component {
   onVisibilityChange = (isVisible) => {
     if (isVisible) {
       document.getElementById("mainHeader").style.backgroundColor = this.props.color;
-      document.getElementById("mainHeader").style.borderImageWidth = '0px  0px 0px 0px';
       document.getElementById("categoriesNav").style.backgroundColor = this.props.color;
+      this.context.setbackToTopOn(true);
+      this.context.setCurrentSection(this.props.category);
       if (isDarkColor(this.props.color)) {
         this.context.setTheme('dark');
         document.getElementById("mainLogo").style.filter = 'brightness(0) invert(1)';
@@ -125,6 +127,7 @@ class SectionClip extends React.Component {
   onClickSearch = () => { window.console.log('search start') };
   onClickReset = e => {
     this.setState({ input: '' });
+    this.setState({ current_input: this.props.placeholder });
     this.props.setInputValue(this.props.placeholder);
     this.setState({ value_obj: {} });
     this.setState({ arrowOption: false });
@@ -133,6 +136,7 @@ class SectionClip extends React.Component {
 
   onOptionClick = e => {
     this.setState({ input: e.currentTarget.innerText });
+    this.setState({ current_input: e.currentTarget.innerText });
     this.props.setInputValue(e.currentTarget.innerText);
     this.setState({ value_obj: {} });
     this.props.onQuery(e.currentTarget.getAttribute('el_iri'));
@@ -231,13 +235,13 @@ class SectionClip extends React.Component {
           </button>
         </div>
         <div className={ classes.helpText + ' ' + classes[this.state.isHover ? 'helpTextVisible': 'helpTextHidden']} style={{marginLeft: this.state.helpTMargin}}><p>{this.state.helpT}</p></div>
-        <button 
-          className={classes.expandButton}
-          style={{backgroundImage: `url(${expandIcon})` }}
-          onMouseEnter={() => this.handleMouseEnter('Expand','508px')}
-          onMouseLeave={this.handleMouseLeave}
-          onClick={() => console.log(this.context['setCardOpen'](true))}
-        ></button>
+        <ExpandButton 
+          mouseEnter={() => this.handleMouseEnter('Expand','508px')}
+          mouseLeave={this.handleMouseLeave}
+          label={this.state.current_input}
+          cat={this.props.catName}
+          color={this.props.color}
+        ></ExpandButton>
         <div id={'suggContainer'} className={classes.suggestionsContainer} style={{opacity: this.state.isFocused ? '1' : '0'}}>
           { 
             Object.keys(this.state.value_obj).map((key, index) => (
@@ -245,7 +249,7 @@ class SectionClip extends React.Component {
                  onMouseEnter={ (e) => this.handleMouseEnterOption(e)}
                  onMouseLeave={this.handleMouseLeaveOption}
                  className={classes.suggestionoption} 
-                 el_iri={key} id={'option' + index}>{this.state.value_obj[key]}</p>
+                 el_iri={key} id={'option' + index} key={'option--' + index}>{this.state.value_obj[key]}</p>
             ))
           }
         </div>

@@ -38,3 +38,20 @@
   color: black;
   font-family: 'Helvetica Light';
 }
+
+
+.linkButton {
+  all: unset;
+  color: rgb(40, 39, 39);
+  font-family: 'Helvetica Regular';
+  cursor: pointer;
+  border: 0.8px solid rgb(40, 39, 39);
+  padding: 3px 8px 3px 8px;
+  border-radius: 3px;
+  transition: all 0.4s ease;
+}
+
+.linkButton:hover {
+background-color: rgb(40, 39, 39);
+color: white;
+}

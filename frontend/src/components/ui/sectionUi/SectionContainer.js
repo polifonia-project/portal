@@ -20,7 +20,6 @@ function SectionContainer(props) {
                 </div>
             </div>
             <SectionClip
-                key={props.key}
                 color={props.color}
                 placeholder={props.placeholder}
                 category={props.category}

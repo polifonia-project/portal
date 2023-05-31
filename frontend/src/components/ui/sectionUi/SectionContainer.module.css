@@ -3,6 +3,10 @@
   padding-top: 200px;
 }
 
+.sectionContainer:last-of-type {
+  padding-bottom: 250px;
+}
+
 .sectionContainer:first-of-type {
   display: block;
   padding-top: 300px;
@@ -42,16 +46,17 @@
 }
 
 .sectionTitle {
-  font-size: 25px;
+  font-size: 35px;
   font-family: "Garnett Medium";
   font-weight: 100;
   margin: 0;
-  padding-right: 60%;
+  padding-right: 45%;
   padding-top: 10px;
 }
 
 .sectionDescription {
-  font-size: 15px;
+  font-size: 18px;
+  line-height: 20px;
   padding-right: 40%;
 }
 
@@ -73,7 +78,7 @@
   text-align: right;
   justify-content: flex-end;
   padding-right: 0%;
-  padding-left: 60%;
+  padding-left: 45%;
 }
 
 .section-cat_01 .sectionInfobox p,
@@ -104,34 +109,41 @@
 
 .section-cat_01 .sectionMarkerRight {
 width: 100px !important;
+width: 80px !important;
 }
 
 .section-cat_02 .sectionMarkerRight {
   width: 150px !important;
+  width: 80px !important;
 }
 
 .section-cat_03 .sectionMarkerRight {
   width: 200px !important;
+  width: 80px !important;
 }
 
 .section-cat_04 .sectionMarkerRight {
   width: 40px !important;
+  width: 80px !important;
 }
 
 .section-cat_05 .sectionMarkerLeft {
-  width: 120px !important;
+  width: 80px !important;
 }
 
 .section-cat_06 .sectionMarkerLeft {
   width: 30px !important;
+  width: 80px !important;
 }
 
 .section-cat_07 .sectionMarkerLeft {
   width: 200px !important;
+  width: 80px !important;
 }
 
 .section-cat_08 .sectionMarkerLeft {
   width: 200px !important;
+  width: 80px !important;
 }
 
 

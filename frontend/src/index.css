@@ -11,6 +11,12 @@
     }
 
 @font-face {
+      font-family: "Garnett Light Italic";
+      src: local("Garnett Light Italic"),
+       url("./fonts/Garnett-LightItalic.woff") format("truetype");
+      }
+
+@font-face {
       font-family: "Helvetica Regular";
       src: local("Helvetica Regular"),
        url("./fonts/Helvetica.woff") format("truetype");
