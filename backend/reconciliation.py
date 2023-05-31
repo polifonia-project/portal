@@ -8,6 +8,12 @@ LILNKSETGRAPH = 'http://w3id.org/polifonia/linkset/'
 LINKSET_FILE = 'linkset.nt'
 
 WHITE_LIST = ['wikidata', 'dbpedia', 'viaf', 'discogs']
+WHITE_LIST_PARAM = {
+    'wikidata': {},
+    'dbpedia': {},
+    'viaf': {},
+    'discogs': {}
+}
 
 
 # altro parametro tipo lista con sparqlenpoint
