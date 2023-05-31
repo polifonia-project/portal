@@ -1,0 +1,581 @@
+{ 
+    "topics": {
+        "color": "#f80000",
+        "blocks" : { 
+            "01" : {
+                "type": "text",
+                "size": "small",
+                "title": "Biography",
+                "content": [{},{},{}]
+            },
+            "02" : {
+                "type": "relation",
+                "size": "small",
+                "title": "Influenced by",
+                "content": [{},{},{}]
+            },
+            "03" : {
+                "type": "relation",
+                "size": "small",
+                "title": "Worked with",
+                "content": [{},{},{}]
+            },
+            "04" : {
+                "type": "visual",
+                "size": "small",
+                "title": "Portrait",
+                "content": [{},{},{}]
+            },
+            "05" : {
+                "type": "link",
+                "size": "small",
+                "title": "Useful links",
+                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+                "content": [{
+                    "linktype" : "static",
+                    "label" : "Spotify",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "static",
+                    "label" : "Wikipedia",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "static",
+                    "label" : "Genius Lyrics",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "api",
+                    "label" : "Spotify",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "query",
+                    "label" : "Spotify",
+                    "dataset" : [{
+                            "dataset_01" : "query/...",
+                            "dataset_02" : "query/..."
+                            }]
+                    }
+                ]
+            }
+        }
+
+    }, 
+    "tunes": {
+        "color": "#ff02fe",
+        "blocks" : { 
+            "01" : {
+                "type": "text",
+                "size": "small",
+                "title": "Biography",
+                "content": [{},{},{}]
+            },
+            "02" : {
+                "type": "relation",
+                "size": "small",
+                "title": "Influenced by",
+                "content": [{},{},{}]
+            },
+            "03" : {
+                "type": "relation",
+                "size": "small",
+                "title": "Worked with",
+                "content": [{},{},{}]
+            },
+            "04" : {
+                "type": "visual",
+                "size": "small",
+                "title": "Portrait",
+                "content": [{},{},{}]
+            },
+            "05" : {
+                "type": "link",
+                "size": "small",
+                "title": "Useful links",
+                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+                "content": [{
+                    "linktype" : "static",
+                    "label" : "Spotify",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "static",
+                    "label" : "Wikipedia",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "static",
+                    "label" : "Genius Lyrics",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "api",
+                    "label" : "Spotify",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "query",
+                    "label" : "Spotify",
+                    "dataset" : [{
+                            "dataset_01" : "query/...",
+                            "dataset_02" : "query/..."
+                            }]
+                    }
+                ]
+            }
+        }
+
+    },
+    "genres": {
+        "color": "#1d00fe",
+        "blocks" : { 
+            "01" : {
+                "type": "text",
+                "size": "small",
+                "title": "Biography",
+                "content": [{},{},{}]
+            },
+            "02" : {
+                "type": "relation",
+                "size": "small",
+                "title": "Influenced by",
+                "content": [{},{},{}]
+            },
+            "03" : {
+                "type": "relation",
+                "size": "small",
+                "title": "Worked with",
+                "content": [{},{},{}]
+            },
+            "04" : {
+                "type": "visual",
+                "size": "small",
+                "title": "Portrait",
+                "content": [{},{},{}]
+            },
+            "05" : {
+                "type": "link",
+                "size": "small",
+                "title": "Useful links",
+                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+                "content": [{
+                    "linktype" : "static",
+                    "label" : "Spotify",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "static",
+                    "label" : "Wikipedia",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "static",
+                    "label" : "Genius Lyrics",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "api",
+                    "label" : "Spotify",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "query",
+                    "label" : "Spotify",
+                    "dataset" : [{
+                            "dataset_01" : "query/...",
+                            "dataset_02" : "query/..."
+                            }]
+                    }
+                ]
+            }
+        }
+
+    }, 
+    "lyrics": {
+        "color": "#6400b4",
+        "blocks" : { 
+            "01" : {
+                "type": "text",
+                "size": "small",
+                "title": "Biography",
+                "content": [{},{},{}]
+            },
+            "02" : {
+                "type": "relation",
+                "size": "small",
+                "title": "Influenced by",
+                "content": [{},{},{}]
+            },
+            "03" : {
+                "type": "relation",
+                "size": "small",
+                "title": "Worked with",
+                "content": [{},{},{}]
+            },
+            "04" : {
+                "type": "visual",
+                "size": "small",
+                "title": "Portrait",
+                "content": [{},{},{}]
+            },
+            "05" : {
+                "type": "link",
+                "size": "small",
+                "title": "Useful links",
+                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+                "content": [{
+                    "linktype" : "static",
+                    "label" : "Spotify",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "static",
+                    "label" : "Wikipedia",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "static",
+                    "label" : "Genius Lyrics",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "api",
+                    "label" : "Spotify",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "query",
+                    "label" : "Spotify",
+                    "dataset" : [{
+                            "dataset_01" : "query/...",
+                            "dataset_02" : "query/..."
+                            }]
+                    }
+                ]
+            }
+        }
+
+    }, 
+    "scores": {
+        "color": "#00feff",
+        "blocks" : { 
+            "01" : {
+                "type": "text",
+                "size": "small",
+                "title": "Biography",
+                "content": [{},{},{}]
+            },
+            "02" : {
+                "type": "relation",
+                "size": "small",
+                "title": "Influenced by",
+                "content": [{},{},{}]
+            },
+            "03" : {
+                "type": "relation",
+                "size": "small",
+                "title": "Worked with",
+                "content": [{},{},{}]
+            },
+            "04" : {
+                "type": "visual",
+                "size": "small",
+                "title": "Portrait",
+                "content": [{},{},{}]
+            },
+            "05" : {
+                "type": "link",
+                "size": "small",
+                "title": "Useful links",
+                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+                "content": [{
+                    "linktype" : "static",
+                    "label" : "Spotify",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "static",
+                    "label" : "Wikipedia",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "static",
+                    "label" : "Genius Lyrics",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "api",
+                    "label" : "Spotify",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "query",
+                    "label" : "Spotify",
+                    "dataset" : [{
+                            "dataset_01" : "query/...",
+                            "dataset_02" : "query/..."
+                            }]
+                    }
+                ]
+            }
+        }
+
+    }, 
+    "people": {
+        "color": "#09ff00",
+        "blocks" : { 
+            "01" : {
+                "type": "text",
+                "size": "small",
+                "title": "Biography",
+                "content": [{},{},{}]
+            },
+            "02" : {
+                "type": "relation",
+                "size": "small",
+                "title": "Influenced by",
+                "content": [{},{},{}]
+            },
+            "03" : {
+                "type": "relation",
+                "size": "small",
+                "title": "Worked with",
+                "content": [{},{},{}]
+            },
+            "04" : {
+                "type": "visual",
+                "size": "small",
+                "title": "Portrait",
+                "content": [{},{},{}]
+            },
+            "05" : {
+                "type": "link",
+                "size": "small",
+                "title": "Useful links",
+                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+                "content": [{
+                    "linktype" : "static",
+                    "label" : "Spotify",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "static",
+                    "label" : "Wikipedia",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "static",
+                    "label" : "Genius Lyrics",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "api",
+                    "label" : "Spotify",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "query",
+                    "label" : "Spotify",
+                    "dataset" : [{
+                            "dataset_01" : "query/...",
+                            "dataset_02" : "query/..."
+                            }]
+                    }
+                ]
+            }
+        }
+
+    }, 
+    "places": {
+        "color": "#fdff00",
+        "blocks" : { 
+            "01" : {
+                "type": "text",
+                "size": "medium",
+                "title": "Description",
+                "content": [{},{},{}]
+            },
+            "02" : {
+                "type": "relation",
+                "size": "small",
+                "title": "Famous guests",
+                "content": [{},{},{}]
+            },
+            "03" : {
+                "type": "link",
+                "size": "small",
+                "title": "Useful links",
+                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+                "content": [{
+                    "linktype" : "static",
+                    "label" : "Spotify",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "static",
+                    "label" : "Wikipedia",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "static",
+                    "label" : "Genius Lyrics",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "api",
+                    "label" : "Spotify",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "query",
+                    "label" : "Spotify",
+                    "dataset" : [{
+                            "dataset_01" : "query/...",
+                            "dataset_02" : "query/..."
+                            }]
+                    }
+                ]
+            },
+            "04" :{
+                "type": "visual",
+                "size": "large",
+                "title": "Map",
+                "content": [{},{},{}]
+            }
+        }
+
+    }, 
+    "instruments": {
+        "color": "#000000",
+        "blocks" : { 
+            "01" : {
+                "type": "text",
+                "size": "small",
+                "title": "Biography",
+                "content": [{},{},{}]
+            },
+            "02" : {
+                "type": "relation",
+                "size": "small",
+                "title": "Influenced by",
+                "content": [{},{},{}]
+            },
+            "03" : {
+                "type": "relation",
+                "size": "small",
+                "title": "Worked with",
+                "content": [{},{},{}]
+            },
+            "04" : {
+                "type": "visual",
+                "size": "small",
+                "title": "Portrait",
+                "content": [{},{},{}]
+            },
+            "05" : {
+                "type": "link",
+                "size": "small",
+                "title": "Useful links",
+                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+                "content": [{
+                    "linktype" : "static",
+                    "label" : "Spotify",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "static",
+                    "label" : "Wikipedia",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "static",
+                    "label" : "Genius Lyrics",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "api",
+                    "label" : "Spotify",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "query",
+                    "label" : "Spotify",
+                    "dataset" : [{
+                            "dataset_01" : "query/...",
+                            "dataset_02" : "query/..."
+                            }]
+                    }
+                ]
+            }
+        }
+
+    },
+    "creative works": {
+        "color": "#00ffa5",
+        "blocks" : { 
+            "01" : {
+                "type": "text",
+                "size": "small",
+                "title": "Biography",
+                "content": [{},{},{}]
+            },
+            "02" : {
+                "type": "relation",
+                "size": "small",
+                "title": "Influenced by",
+                "content": [{},{},{}]
+            },
+            "03" : {
+                "type": "relation",
+                "size": "small",
+                "title": "Worked with",
+                "content": [{},{},{}]
+            },
+            "04" : {
+                "type": "visual",
+                "size": "small",
+                "title": "Portrait",
+                "content": [{},{},{}]
+            },
+            "05" : {
+                "type": "link",
+                "size": "small",
+                "title": "Useful links",
+                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+                "content": [{
+                    "linktype" : "static",
+                    "label" : "Spotify",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "static",
+                    "label" : "Wikipedia",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "static",
+                    "label" : "Genius Lyrics",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "api",
+                    "label" : "Spotify",
+                    "url" : "https://www.google.com/"
+                    },
+                    {
+                    "linktype" : "query",
+                    "label" : "Spotify",
+                    "dataset" : [{
+                            "dataset_01" : "query/...",
+                            "dataset_02" : "query/..."
+                            }]
+                    }
+                ]
+            }
+        }
+
+    }
+}

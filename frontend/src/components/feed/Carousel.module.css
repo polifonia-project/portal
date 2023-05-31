@@ -1,0 +1,68 @@
+.carouselContainer {
+  margin-top: 20px;
+  padding-bottom: 200px;
+  padding-right: 20px;
+  padding-left: 20px;
+  height: 10vh;
+
+}
+
+.carousel {
+  margin: 0px;
+  padding: 10px;
+  overflow: visible;
+  z-index: 10;
+}
+
+.leftChevronContainer {
+  height: 100%;
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.5 ease;
+  padding: 100px;
+  padding-top: 70px;
+  background:   linear-gradient(90deg, rgba(172,172,172,0.18953518907563027) 0%, rgba(244,237,236,0) 100%);
+  overflow:visible;
+}
+
+.rightChevronContainer {
+  height: 100%;
+  opacity: 0;
+  transform: translateX(-50px);
+  padding: 100px;
+  padding-top: 70px;
+  background: linear-gradient(280deg, rgba(172,172,172,0.18953518907563027) 0%, rgba(244,237,236,0) 100%);
+}
+
+.leftChevronContainer:hover,
+.rightChevronContainer:hover {
+  opacity: 1;
+}
+
+
+.carouselContainer button {
+  border-radius: 50%;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  color: white;
+  border: 0.5px solid transparent;
+  outline: 0;
+  background-color: #f4edec;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.leftChevron {
+  background-image: url("../../assets/png/carouselarrow.png");
+  background-repeat: no-repeat;
+  background-size: 35%;
+  background-position: right 8px top 5px;
+  transform: scaleX(-1);
+}
+
+.rightChevron {
+  background-image: url("../../assets/png/carouselarrow.png");
+  background-repeat: no-repeat;
+  background-size: 35%;
+  background-position: right 8px top 5px;
+}

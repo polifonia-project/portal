@@ -1,0 +1,13 @@
+.filtersContainer {
+  width: 100%;
+  background-color: #f4edec;
+  padding: 10px 20px 10px 0px;
+  box-shadow: inset 1px 9px 10px -16px black;
+  margin:0;
+  font-size: 0.8em;
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #e8e3e3;
+  justify-content: flex-start;
+  align-items: center;
+}

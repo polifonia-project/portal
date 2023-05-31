@@ -1,0 +1,113 @@
+.clipscontainer {
+    width: 100%;
+    box-shadow: 0px 0px 50px -16px black;
+    position: relative;
+    z-index: 20;
+    padding-top: 20px;
+    padding-bottom: 100px;
+    background-color: #f4edec;
+
+}
+
+.background8 {
+    background-image: 
+    linear-gradient(90deg, transparent, transparent calc(100% / 16), #D8D8D8 calc((100% / 16) + 1px), transparent calc((100% / 16) + 1px)), 
+    linear-gradient(90deg, transparent, transparent calc((100% / 16 * 3) - 1px), #D8D8D8 calc(100% / 16 * 3), transparent calc(100% / 16 * 3)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 16 * 5) - 1px), #D8D8D8 calc(100% /  16 * 5), transparent calc(100% /  16 * 5)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 16 * 7) - 1px), #D8D8D8 calc(100% / 16 * 7), transparent calc(100% / 16 * 7)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 16 * 9) - 1px), #D8D8D8 calc(100% / 16 * 9), transparent calc(100% / 16 * 9)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 16 * 11) - 1px), #D8D8D8 calc(100% /  16 * 11), transparent calc(100% /  16 * 11)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 16 * 13) - 1px), #D8D8D8 calc(100% / 16 * 13), transparent calc(100% / 16 * 13)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 16 * 15) - 1px), #D8D8D8 calc(100% / 16 * 15), transparent calc(100% / 16 * 15));
+
+}
+
+.background7 {
+    background-image: 
+    linear-gradient(90deg, transparent, transparent calc(100% / 14), #D8D8D8 calc((100% / 14) + 1px), transparent calc((100% / 14) + 1px)), 
+    linear-gradient(90deg, transparent, transparent calc((100% / 14 * 3) - 1px), #D8D8D8 calc(100% / 14 * 3), transparent calc(100% / 14 * 3)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 14 * 5) - 1px), #D8D8D8 calc(100% /  14 * 5), transparent calc(100% /  14 * 5)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 14 * 7) - 1px), #D8D8D8 calc(100% / 14 * 7), transparent calc(100% / 14 * 7)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 14 * 9) - 1px), #D8D8D8 calc(100% / 14 * 9), transparent calc(100% / 14 * 9)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 14 * 11) - 1px), #D8D8D8 calc(100% /  14 * 11), transparent calc(100% /  14 * 11)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 14 * 13) - 1px), #D8D8D8 calc(100% / 14 * 13), transparent calc(100% / 14 * 13)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 14 * 15) - 1px), #D8D8D8 calc(100% / 14 * 15), transparent calc(100% / 14 * 15));
+}
+
+.background6 {
+    background-image: 
+    linear-gradient(90deg, transparent, transparent calc(100% / 12), #D8D8D8 calc((100% / 12) + 1px), transparent calc((100% / 12) + 1px)), 
+    linear-gradient(90deg, transparent, transparent calc((100% / 12 * 3) - 1px), #D8D8D8 calc(100% / 12 * 3), transparent calc(100% / 12 * 3)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 12 * 5) - 1px), #D8D8D8 calc(100% /  12 * 5), transparent calc(100% /  12 * 5)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 12 * 7) - 1px), #D8D8D8 calc(100% / 12 * 7), transparent calc(100% / 12 * 7)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 12 * 9) - 1px), #D8D8D8 calc(100% / 12 * 9), transparent calc(100% / 12 * 9)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 12 * 11) - 1px), #D8D8D8 calc(100% /  12 * 11), transparent calc(100% /  12 * 11)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 12 * 13) - 1px), #D8D8D8 calc(100% / 12 * 13), transparent calc(100% / 12 * 13)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 12 * 15) - 1px), #D8D8D8 calc(100% / 12 * 15), transparent calc(100% / 12 * 15));
+
+}
+
+.background5 {
+    background-image: 
+    linear-gradient(90deg, transparent, transparent calc(100% / 10), #D8D8D8 calc((100% / 10) + 1px), transparent calc((100% / 10) + 1px)), 
+    linear-gradient(90deg, transparent, transparent calc((100% / 10 * 3) - 1px), #D8D8D8 calc(100% / 10 * 3), transparent calc(100% / 10 * 3)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 10 * 5) - 1px), #D8D8D8 calc(100% /  10 * 5), transparent calc(100% /  10 * 5)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 10 * 7) - 1px), #D8D8D8 calc(100% / 10 * 7), transparent calc(100% / 10 * 7)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 10 * 9) - 1px), #D8D8D8 calc(100% / 10 * 9), transparent calc(100% / 10 * 9)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 10 * 11) - 1px), #D8D8D8 calc(100% /  10 * 11), transparent calc(100% /  10 * 11)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 10 * 13) - 1px), #D8D8D8 calc(100% / 10 * 13), transparent calc(100% / 10 * 13)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 10 * 15) - 1px), #D8D8D8 calc(100% / 10 * 15), transparent calc(100% / 10 * 15));
+
+}
+
+.background4 {
+    background-image: 
+    linear-gradient(90deg, transparent, transparent calc(100% / 8), #D8D8D8 calc((100% / 8) + 1px), transparent calc((100% / 8) + 1px)), 
+    linear-gradient(90deg, transparent, transparent calc((100% / 8 * 3) - 1px), #D8D8D8 calc(100% / 8 * 3), transparent calc(100% / 8 * 3)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 8 * 5) - 1px), #D8D8D8 calc(100% /  8 * 5), transparent calc(100% /  8 * 5)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 8 * 7) - 1px), #D8D8D8 calc(100% / 8 * 7), transparent calc(100% / 8 * 7)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 8 * 9) - 1px), #D8D8D8 calc(100% / 8 * 9), transparent calc(100% / 8 * 9)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 8 * 11) - 1px), #D8D8D8 calc(100% /  8 * 11), transparent calc(100% /  8 * 11)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 8 * 13) - 1px), #D8D8D8 calc(100% / 8 * 13), transparent calc(100% / 8 * 13)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 8 * 15) - 1px), #D8D8D8 calc(100% / 8 * 15), transparent calc(100% / 8 * 15));
+
+}
+
+.background3 {
+    background-image: 
+    linear-gradient(90deg, transparent, transparent calc(100% / 6), #D8D8D8 calc((100% / 6) + 1px), transparent calc((100% / 6) + 1px)), 
+    linear-gradient(90deg, transparent, transparent calc((100% / 6 * 3) - 1px), #D8D8D8 calc(100% / 6 * 3), transparent calc(100% / 6 * 3)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 6 * 5) - 1px), #D8D8D8 calc(100% /  6 * 5), transparent calc(100% /  6 * 5)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 6 * 7) - 1px), #D8D8D8 calc(100% / 6 * 7), transparent calc(100% / 6 * 7)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 6 * 9) - 1px), #D8D8D8 calc(100% / 6 * 9), transparent calc(100% / 6 * 9)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 6 * 11) - 1px), #D8D8D8 calc(100% /  6 * 11), transparent calc(100% /  6 * 11)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 6 * 13) - 1px), #D8D8D8 calc(100% / 6 * 13), transparent calc(100% / 6 * 13)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 6 * 15) - 1px), #D8D8D8 calc(100% / 6 * 15), transparent calc(100% / 6 * 15));
+
+}
+
+.background2 {
+    background-image: 
+    linear-gradient(90deg, transparent, transparent calc(100% / 4), #D8D8D8 calc((100% / 4) + 1px), transparent calc((100% / 4) + 1px)), 
+    linear-gradient(90deg, transparent, transparent calc((100% / 4 * 3) - 1px), #D8D8D8 calc(100% / 4 * 3), transparent calc(100% / 4 * 3)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 4 * 5) - 1px), #D8D8D8 calc(100% /  4 * 5), transparent calc(100% /  4 * 5)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 4 * 7) - 1px), #D8D8D8 calc(100% / 4 * 7), transparent calc(100% / 4 * 7)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 4 * 9) - 1px), #D8D8D8 calc(100% / 4 * 9), transparent calc(100% / 4 * 9)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 4 * 11) - 1px), #D8D8D8 calc(100% /  4 * 11), transparent calc(100% /  4 * 11)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 4 * 13) - 1px), #D8D8D8 calc(100% / 4 * 13), transparent calc(100% / 4 * 13)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 4 * 15) - 1px), #D8D8D8 calc(100% / 4 * 15), transparent calc(100% / 4 * 15));
+
+}
+
+.background1 {
+    background-image: 
+    linear-gradient(90deg, transparent, transparent calc(100% / 2), #D8D8D8 calc((100% / 2) + 1px), transparent calc((100% / 2) + 1px)), 
+    linear-gradient(90deg, transparent, transparent calc((100% / 2 * 3) - 1px), #D8D8D8 calc(100% / 2 * 3), transparent calc(100% / 2 * 3)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 2 * 5) - 1px), #D8D8D8 calc(100% /  2 * 5), transparent calc(100% /  2 * 5)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 2 * 7) - 1px), #D8D8D8 calc(100% / 2 * 7), transparent calc(100% / 2 * 7)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 2 * 9) - 1px), #D8D8D8 calc(100% / 2 * 9), transparent calc(100% / 2 * 9)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 2 * 11) - 1px), #D8D8D8 calc(100% /  2 * 11), transparent calc(100% /  2 * 11)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 2 * 13) - 1px), #D8D8D8 calc(100% / 2 * 13), transparent calc(100% / 2 * 13)),
+    linear-gradient(90deg, transparent, transparent calc((100% / 2 * 15) - 1px), #D8D8D8 calc(100% / 2 * 15), transparent calc(100% / 2 * 15));
+
+}

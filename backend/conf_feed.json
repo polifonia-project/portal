@@ -1,24 +1,106 @@
 {
-    "clip_01": {
-        "id": "clip_01",
-        "name": "Wolfgang Amadeus Mozart",
-        "iri": "https://www.wikidata.org/wiki/Q254",
-        "cat": "People",
-        "datasets": [
-            "d_04"
-        ],
-        "property": "",
-        "timestamp": ""
+  "clip_01": {
+    "id": "clip_01",
+    "name": "Love Will Tear Us Apart",
+    "textcontext": {
+      "title": "Start with some highlights",
+      "description": "Explore the selection of unique music data we made for you. Each highlight represents a concept, a person, a place, a tune (and more!) that is somehow interconnected with others, to tell us a story. We update highlights on a regular basis, so that you never get bored. Scroll down and listen to our music box!",
+      "highlights": [
+        "More +"
+      ]
     },
-    "clip_02": {
-        "id": "clip_02",
-        "name": "Bologna",
-        "iri": "https://www.wikidata.org/wiki/Q1891",
-        "cat": "Places",
-        "datasets": [
-            "d_04"
-        ],
-        "property": "",
-        "timestamp": ""
-    }
+    "iri": "http://www.wikidata.org/entity/Q1426177",
+    "category": "cat_05",
+    "timestamp": ""
+  },
+  "clip_02": {
+    "id": "clip_02",
+    "name": "Manchester",
+    "textcontext": {
+      "title": "",
+      "description": "",
+      "highlights": []
+    },
+    "iri": "http://www.wikidata.org/entity/Q18125",
+    "category": "cat_07",
+    "timestamp": ""
+  },
+  "clip_03": {
+    "id": "clip_03",
+    "name": "Love",
+    "textcontext": {
+      "title": "Data are more connected than ever now!",
+      "description": "To build our stories, we  link historical information and music data of the European musical heritage and we try to make sense of their relations, showing all you need for a serendipitous discovery journey.",
+      "highlights": [
+        "connected"
+      ]
+    },
+    "iri": "http://www.wikidata.org/entity/Q316",
+    "category": "cat_01",
+    "timestamp": ""
+  },
+  "clip_04": {
+    "id": "clip_04",
+    "name": "Joy Division",
+    "textcontext": {
+      "title": "",
+      "description": "",
+      "highlights": []
+    },
+    "iri": "http://www.wikidata.org/entity/Q172763",
+    "category": "cat_06",
+    "timestamp": ""
+  },
+  "clip_05": {
+    "id": "clip_05",
+    "name": "Love Will Tear Us Apart",
+    "textcontext": {
+      "title": "",
+      "description": "",
+      "highlights": []
+    },
+    "iri": "http://www.wikidata.org/entity/Q1426177",
+    "category": "cat_02",
+    "timestamp": ""
+  },
+  "clip_06": {
+    "id": "clip_06",
+    "name": "Punk Rock",
+    "textcontext": {
+      "title": "Do you want to know more?",
+      "description": "Click on any highlight to unveil unexpected music connections! We selected some of the most insightful relations between people, places, genres, and more. Wouldn’t mind a different genre? You can change the subject and start new research.",
+      "highlights": [
+        "more?"
+      ]
+    },
+    "iri": "http://www.wikidata.org/entity/Q3071",
+    "category": "cat_03",
+    "timestamp": ""
+  },
+  "clip_07": {
+    "id": "clip_07",
+    "name": "Love Will Tear Us Apart",
+    "textcontext": {
+      "title": "",
+      "description": "",
+      "highlights": []
+    },
+    "iri": "http://www.wikidata.org/entity/Q1426177",
+    "category": "cat_04",
+    "timestamp": ""
+  },
+  "clip_08": {
+    "id": "clip_08",
+    "name": "Electric Guitar",
+    "textcontext": {
+      "title": "This is just the beginning!",
+      "description": "Now it is your turn. Scroll down to the sections corresponding to the highlights and let data talk or enjoy one of the many activities offered by Polifonia.",
+      "highlights": [
+        "links"
+      ]
+    },
+    "iri": "http://www.wikidata.org/entity/Q78987",
+    "category": "cat_08",
+    "timestamp": ""
+  }
 }

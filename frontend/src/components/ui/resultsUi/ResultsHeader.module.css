@@ -1,0 +1,67 @@
+
+.resheader {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px 30px 12px 10px;
+  font-size: 0.75em;
+  cursor: default;
+  color: grey;
+  border-bottom: 1px solid #e8e3e3;
+  background-color: #f4edec;
+}
+
+.scrollResult {
+  display: block;
+  width: 92%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.headerNum {
+  display: inline-flex;
+  align-items: center;
+  width: 60px;
+  justify-content: left;
+  padding-left: 10px;
+}
+
+.headerCat {
+  display: inline-flex;
+  align-items: center;
+  width: 150px;
+  text-transform: capitalize;
+}
+
+.headerLab {
+  display: inline-flex;
+  align-items: center;
+  width: 400px;
+  font-weight: 400;
+}
+
+.headerRel {
+  display: inline-flex;
+  align-items: center;
+  width: 600px;
+}
+
+.headerAct {
+  display: inline-flex;
+  align-items: center;
+  width: 50px;
+  font-size: 0.8em;
+  justify-content: flex-end;
+}
+
+.headerCatBorder {
+  padding: 7px 14px 7px 14px;
+  border: 0.4px solid grey;
+  border-radius: 3px;
+}
+
+.stickyHeader {
+  display: flex;
+  flex-wrap: wrap;
+}

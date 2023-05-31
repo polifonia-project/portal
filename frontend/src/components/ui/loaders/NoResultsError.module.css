@@ -1,0 +1,28 @@
+.resultLine {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-size: 0.8em;
+  cursor: default;
+  border-top: 0.5px solid #e8e3e3;
+  border-bottom: 0.5px solid #e8e3e3;
+  box-shadow: 1px 1px 16px -5px transparent;
+  z-index: 10;
+  justify-content: center;
+  background-color: #e9e6e670;
+  padding-top: 40px;
+  padding-bottom: 200px;
+  /*cursor:url('../../../assets/svg/customcursor.jpg'), auto;*/
+}
+
+.resultLine div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resultLine div p{
+  text-align: center;
+  border-radius: 3px;
+  color:rgb(88, 88, 88);
+}

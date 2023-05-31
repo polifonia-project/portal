@@ -1,0 +1,124 @@
+.resultLine {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px 30px 12px 10px;
+  font-size: 0.8em;
+  cursor: default;
+  border-top: 0.5px solid #e8e3e3;
+  border-bottom: 0.5px solid #e8e3e3;
+  box-shadow: 1px 1px 16px -5px transparent;
+  z-index: 10;
+  /*cursor:url('../../../assets/svg/customcursor.jpg'), auto;*/
+}
+
+.resultLine:hover {
+  /* Do something */
+
+}
+
+.resultNum {
+  display: inline-flex;
+  align-items: center;
+  width: 4%;
+  justify-content: left;
+  padding-left: 10px;
+}
+
+.resultLabel {
+  display: inline-flex;
+  align-items: center;
+  width: 30%;
+  font-weight: 400;
+}
+
+.resultCat {
+  display: inline-flex;
+  align-items: center;
+  width: 10%;
+  text-transform: capitalize;
+}
+
+.resultRel {
+  display: inline-flex;
+  align-items: center;
+  width: 60%;
+  text-transform: capitalize;
+  justify-content: flex-start;
+  white-space: nowrap;
+  overflow: hidden;
+  color: grey;
+}
+
+.listOfRelations {
+  max-width: 50%;
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
+
+.listOfRelations::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+}
+
+.resultActions {
+  display: inline-flex;
+  align-items: center;
+  width: 10%;
+  font-size: 0.8em;
+  justify-content: flex-end;
+}
+
+.resultActions button {
+  border: 0.2px solid transparent;
+  margin: 0px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 50%;
+  margin-left: 10px;
+  height: 30px;
+  width: 30px;
+}
+
+.resultNum button {
+  border: 0.2px solid transparent;
+  margin: 0px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+}
+
+
+.loaderResult {
+  border: 0.4px solid transparent;
+  border-radius: 3px;
+  color: transparent;
+  background: linear-gradient(90deg, rgba(230,230,230,1) 31%, rgba(244,237,236,1) 47%, rgba(230,230,230,1) 68%);
+  background-size: 300% 200%;
+  animation: slidein 1s ease 0.5s infinite;
+}
+
+.categoryResult {
+  padding: 7px 14px 7px 14px;
+  border: 0.4px solid transparent;
+  border-radius: 3px;
+  color: transparent;
+  background: linear-gradient(90deg, rgba(230,230,230,1) 31%, rgba(244,237,236,1) 47%, rgba(230,230,230,1) 68%);
+  background-size: 300% 200%;
+  animation: slidein 1s ease 0.5s infinite;
+}
+
+@keyframes slidein {
+  from {
+    background-position: right;
+  }
+
+  to {
+    background-position: left;
+  }
+}

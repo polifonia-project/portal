@@ -1,0 +1,102 @@
+
+.carousel_card {
+  border: 1px solid #f4edec;
+  background-color: #f4edec;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px 0 rgba(12,18,45,.1);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  text-align: center;
+  overflow: visible;
+  z-index: 10;
+  padding-left: 25px;
+  padding-right: 20px;
+  border-radius: 10px;
+  min-height: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+}
+
+.carousel_card:hover   .cardtitle {
+  color: black;
+}
+
+.carousel_card:hover   .cardclaim {
+  color: black;
+  font-size: 10px;
+  padding: 3px;
+  padding-right: 5px;
+  padding-left: 5px;
+  border: 0.2px solid black;
+  border-radius: 2px;
+}
+
+
+.cardfigure {
+width: 50px;
+}
+
+.carouselContainer #carousel-card1 {
+  background-image: url("../../assets/png/cardFigure.png");
+  background-repeat: no-repeat;
+  background-size: 35%;
+  background-position: right 8px top 5px;
+  border:1px solid red;
+}
+
+.cardexpand {
+  font-size: 12px;
+  margin: 0px;
+  color:rgb(81, 81, 81);
+  width: 100%;
+  text-align: left;
+  padding-top: 10px;
+  transition: all 1s ease;
+  line-height: 11px;
+}
+
+.carousel_card:hover {
+  transform: scale(1.1);
+  z-index: 30;
+  min-height: 140px;
+}
+
+.cardclaim {
+  font-size: 12px;
+  margin: 0px;
+  text-align: left;
+  color: grey;
+  text-transform: uppercase;
+}
+
+.cardtitle {
+  font-size: 20px;
+  margin: 0px;
+  color: rgb(42, 42, 42);
+  text-align: left;
+  font-family: "Garnett Light Italic";
+  font-family: "Helvetica Light";
+  font-family: "Garnett Medium";
+}
+
+.cardtitle h4 {
+  margin: 0px;
+}
+
+.carousel_card p .highlight {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.logoSvg {
+  width:20px;
+}
+
+.titlewrapper {
+  width: 100%;
+  display: flex;
+  margin-bottom: 7px;
+}

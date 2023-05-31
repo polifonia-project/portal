@@ -1,0 +1,12 @@
+.resultContainer {
+  width: 100%;
+  box-shadow: inset 0px 0px 19px -16px black;
+  background-color: #f4edec;
+  scrollbar-width: none;
+  overflow: hidden;
+}
+
+.resultContainer::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+}
