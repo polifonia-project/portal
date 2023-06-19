@@ -24,15 +24,15 @@ function Card(props) {
   useEffect(() => {
     if (cardOpen) {
       console.log(cardBlocksNew);
-      setFromSectionClip(cardContent.hasInput); 
+      setFromSectionClip(cardContent.hasInput);
       if (cardBlocksNew[cardContent.cat]) {
         setColorBackground(cardBlocksNew[cardContent.cat].color);
-        setCurrentBlock(cardBlocksNew[cardContent.cat].blocks); 
+        setCurrentBlock(cardBlocksNew[cardContent.cat].blocks);
       } else {
         setColorBackground('#e2e2e2');
-        setCurrentBlock({"01" : { "type": "none"},}); 
+        setCurrentBlock({ "01": { "type": "none" }, });
       }
-      
+
       if (isDarkColor(colorBackground)) {
         setColorIsDark(true);
         setLightHeader();
@@ -41,11 +41,11 @@ function Card(props) {
         setDarkHeader();
       }
 
-    } 
-  });
+    }
+  }, [cardOpen, cardBlocksNew, cardContent.hasInput, cardContent.cat, colorBackground]);
 
   const closeCard = () => {
-    setCardOpen(false); 
+    setCardOpen(false);
     if (isDarkColor([cardContent.color])) {
       setLightHeader();
     } else {
@@ -55,60 +55,57 @@ function Card(props) {
   }
 
   const setLightHeader = () => {
-    document.getElementById("mainLogo").style.filter= 'brightness(0) invert(1)';
+    document.getElementById("mainLogo").style.filter = 'brightness(0) invert(1)';
     document.getElementById("sectionName").style.color = 'white';
     document.getElementById("menuOptions").style.filter = 'brightness(0) invert(1)';
     document.getElementById("menuOptions").style.zIndex = '300';
-   }
+  }
 
   const setDarkHeader = () => {
-    document.getElementById("mainLogo").style.filter= 'none';
+    document.getElementById("mainLogo").style.filter = 'none';
     document.getElementById("sectionName").style.color = 'black';
     document.getElementById("menuOptions").style.filter = 'none';
-   }
+  }
 
 
 
   return (
-    <div className={classes.cardContainer} style={{transform: cardOpen? 'translateX(0)' : 'translateX(-100%)'}}>
-      <div className={classes.titleBlock} style={{backgroundColor: colorBackground}}>
+    <div className={classes.cardContainer} style={{ transform: cardOpen ? 'translateX(0)' : 'translateX(-100%)' }}>
+      <div className={classes.titleBlock} style={{ backgroundColor: colorBackground }}>
         <div className={classes.titleContainer}>
-          <h1 style={{color: colorIsDark ? 'white' : 'black'}}>{cardContent.title}</h1>
-          <p className={classes.categoryResult} style={{color: colorIsDark ? 'white' : 'black', borderColor: colorIsDark ? 'white' : '#474747'}}>
-            <span style={{borderColor: colorIsDark ? 'white' : '#474747'}}>{cardContent.cat}</span>
+          <h1 style={{ color: colorIsDark ? 'white' : 'black' }}>{cardContent.title}</h1>
+          <p className={classes.categoryResult} style={{ color: colorIsDark ? 'white' : 'black', borderColor: colorIsDark ? 'white' : '#474747' }}>
+            <span style={{ borderColor: colorIsDark ? 'white' : '#474747' }}>{cardContent.cat}</span>
             {fromSectionClip ? null
-            : <span style={{borderColor: colorIsDark ? 'white' : '#474747'}}>Related to {cardContent.input}</span>
+              : <span style={{ borderColor: colorIsDark ? 'white' : '#474747' }}>Related to {cardContent.input}</span>
             }
           </p>
-          <p className={classes.cardShareButton} style={{borderColor: colorIsDark ? 'white' : '#474747'}}>
-            <span><button className={classes.shareButton} style={{color: colorIsDark ? 'white' : 'black'}}>Share</button></span>
+          <p className={classes.cardShareButton} style={{ borderColor: colorIsDark ? 'white' : '#474747' }}>
+            <span><button className={classes.shareButton} style={{ color: colorIsDark ? 'white' : 'black' }}>Share</button></span>
           </p>
         </div>
         <div>
-          <button className={classes.exitButton} onClick={()=> closeCard()} style={{color: colorIsDark ? 'white' : 'black', borderColor: colorIsDark ? 'white' : '#474747'}}>Back ⇢</button>
+          <button className={classes.exitButton} onClick={() => closeCard()} style={{ color: colorIsDark ? 'white' : 'black', borderColor: colorIsDark ? 'white' : '#474747' }}>Back ⇢</button>
         </div>
       </div>
       <div className={classes.contentBlock}>
 
         {Object.values(currentBlock).map((block, i) => {
           if (block.type === 'text') {
-            return <TextBlock key={'textblock-' + i} width={block.size} title={block.title}></TextBlock>} 
+            return <TextBlock key={'textblock-' + i} width={block.size} title={block.title}></TextBlock>
+          }
 
-          else if (block.type === 'relation')
-          { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title}></RelationBlock>}
+          else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title}></RelationBlock> }
 
-          else if (block.type === 'link')
-          { return <LinkBlock key={'linkblock-' + i} width={block.size} title={block.title} links={block.content}></LinkBlock>}
+          else if (block.type === 'link') { return <LinkBlock key={'linkblock-' + i} width={block.size} title={block.title} links={block.content}></LinkBlock> }
 
-          else if (block.type === 'visual')
-          { return <VisualBlock key={'visualblock-' + i} width={block.size} title={block.title}></VisualBlock>}
+          else if (block.type === 'visual') { return <VisualBlock key={'visualblock-' + i} width={block.size} title={block.title}></VisualBlock> }
 
-          else if (block.type === 'none')
-          { return <WarningBlock key={'warningblock-' + i} width={'large'}></WarningBlock>}
+          else if (block.type === 'none') { return <WarningBlock key={'warningblock-' + i} width={'large'}></WarningBlock> }
           return null
         })}
 
-        
+
 
       </div>
     </div>
