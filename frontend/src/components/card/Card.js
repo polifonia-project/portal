@@ -10,10 +10,13 @@ import VisualBlock from "./VisualBlock";
 import LinkBlock from "./LinkBlock";
 import WarningBlock from "./WarningBlock";
 
+import ShareModal from "./ShareModal";
+
 import TextBlockFake from "./TextBlockFake";
 import LinkBlockFake from "./LinkBlockFake";
 import RelationBlockFake from "./RelationBlockFake";
 import VisualBlockFake from "./VisualBlockFake";
+
 
 function Card(props) {
 
@@ -26,6 +29,8 @@ function Card(props) {
   const [isManchester,  setManchester] = useState(false)
   const [currentBlock, setCurrentBlock] = useState({})
   const [fromSectionClip, setFromSectionClip] = useState(false)
+
+  const [displayShare,  setDisplayShare] = useState(false)
 
   useEffect(() => {
     if (cardOpen) {
@@ -81,6 +86,7 @@ function Card(props) {
 
   return (
     <div className={classes.cardContainer} style={{transform: cardOpen? 'translateX(0)' : 'translateX(-100%)'}}>
+      <ShareModal url="https://polifonia.disi.unibo.it/portal/" display={displayShare} changeDisplay={setDisplayShare}/>
       <div className={classes.titleBlock} style={{backgroundColor: colorBackground}}>
         <div className={classes.titleContainer}>
           <h1 style={{color: colorIsDark ? 'white' : 'black'}}>{cardContent.title}</h1>
@@ -91,7 +97,7 @@ function Card(props) {
             }
           </p>
           <p className={classes.cardShareButton} style={{borderColor: colorIsDark ? 'white' : '#474747'}}>
-            <span><button className={classes.shareButton} style={{color: colorIsDark ? 'white' : 'black'}}>Share</button></span>
+            <span><button className={classes.shareButton} style={{color: colorIsDark ? 'white' : 'black'}} onClick={()=> setDisplayShare(true)}>Share</button></span>
           </p>
         </div>
         <div>

@@ -1,0 +1,36 @@
+.modalContainer {
+width: 100vw;
+height: 100vh;
+background-color: rgba(123, 123, 123, 0.52);
+position: fixed;
+display: flex;
+justify-content: center;
+align-items: center;
+
+visibility: hidden;
+opacity: 0;
+transition: visibility 0.5s, opacity 0.5s linear;
+flex-direction: column-reverse;
+}
+
+
+.closeButton {
+  border-radius: 30px;
+  background-color: #f4edec;
+  border-color: transparent;
+  box-shadow: 0px 0px 10px -5px black;
+  box-shadow: 0 4px 12px 0 rgba(12,18,45,.1);
+  color: black !important;
+  border-color: transparent  !important;
+  padding: 10px 14px 10px 14px;
+  width: 90px !important;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+  margin-bottom: 100px;
+  font-family: 'Helvetica Light';
+  font-size: 15px;
+}
+
+.closeButton:hover {
+transform: scale(1.1);
+}
