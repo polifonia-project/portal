@@ -23,7 +23,7 @@ function Card(props) {
   const [currentBlock, setCurrentBlock] = useState({})
   const [fromSectionClip, setFromSectionClip] = useState(false)
 
-  const [displayShare,  setDisplayShare] = useState(false)
+  const [displayShare, setDisplayShare] = useState(false)
 
   useEffect(() => {
     if (cardOpen) {
@@ -75,7 +75,7 @@ function Card(props) {
 
   return (
     <div className={classes.cardContainer} style={{ transform: cardOpen ? 'translateX(0)' : 'translateX(-100%)' }}>
-      <ShareModal url="https://polifonia.disi.unibo.it/portal/" display={displayShare} changeDisplay={setDisplayShare}/>
+      <ShareModal url={window.location + 'card?title=' + cardContent.title + '&cat=' + cardContent.cat + '&uri=' + cardContent.uri} display={displayShare} changeDisplay={setDisplayShare} />
       <div className={classes.titleBlock} style={{ backgroundColor: colorBackground }}>
         <div className={classes.titleContainer}>
           <h1 style={{ color: colorIsDark ? 'white' : 'black' }}>{cardContent.title}</h1>
@@ -86,7 +86,7 @@ function Card(props) {
             }
           </p>
           <p className={classes.cardShareButton} style={{ borderColor: colorIsDark ? 'white' : '#474747' }}>
-            <span><button className={classes.shareButton} style={{ color: colorIsDark ? 'white' : 'black' }} onClick={()=> setDisplayShare(true)}>Share</button></span>
+            <span><button className={classes.shareButton} style={{ color: colorIsDark ? 'white' : 'black' }} onClick={() => setDisplayShare(true)}>Share</button></span>
           </p>
         </div>
         <div>
