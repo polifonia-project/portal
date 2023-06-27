@@ -71,11 +71,18 @@ function Card(props) {
     document.getElementById("menuOptions").style.filter = 'none';
   }
 
+  const encodeShareLink = () => {
+    const params = 'title=' + cardContent.title + '&cat=' + cardContent.cat + '&uri=' + cardContent.uri;
+    const encodedParams = encodeURI(params);
+    const encodedUrl = window.location + 'card?' + encodedParams
+    return encodedUrl
+  }
+
 
 
   return (
     <div className={classes.cardContainer} style={{ transform: cardOpen ? 'translateX(0)' : 'translateX(-100%)' }}>
-      <ShareModal url={window.location + 'card?title=' + cardContent.title + '&cat=' + cardContent.cat + '&uri=' + cardContent.uri} display={displayShare} changeDisplay={setDisplayShare} />
+      <ShareModal url={encodeShareLink()} display={displayShare} changeDisplay={setDisplayShare} />
       <div className={classes.titleBlock} style={{ backgroundColor: colorBackground }}>
         <div className={classes.titleContainer}>
           <h1 style={{ color: colorIsDark ? 'white' : 'black' }}>{cardContent.title}</h1>

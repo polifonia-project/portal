@@ -8,9 +8,10 @@ import Card from "../components/card/Card";
 function CardPage() {
     // try with http://localhost:3000/card?title=mozart&cat=people&uri=wikidata
     let [searchParams, setSearchParams] = useSearchParams()
-    const title = searchParams.get('title')
-    const cat = searchParams.get('cat')
-    const uri = searchParams.get('uri')
+    // searchParams = decodeURI(searchParams);
+    const title = searchParams.get('title');
+    const cat = searchParams.get('cat');
+    const uri = searchParams.get('uri');
     console.log(title, cat, uri)
 
     const { setCardOpen } = useContext(CardContext);
