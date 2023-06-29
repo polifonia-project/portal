@@ -23,6 +23,7 @@ function MainNavigation(props) {
   const { soundOn, setSoundOn } = useContext(ThemeContext);
   const { backToTopOn, setbackToTopOn } = useContext(ThemeContext);
   const { cardOpen } = useContext(CardContext);
+  const { setCardOpen } = useContext(CardContext);
 
 
   const toggleMenu = () => {
@@ -77,7 +78,7 @@ function MainNavigation(props) {
   return (
     <header className={classes.header} id='mainHeader' >
       <span className={classes.title} id='title-logo'>
-        <Link to="/"><img className={classes.logo} src={logo} alt="Logo" id='mainLogo'/></Link>
+        <Link to="/" onClick={()=> setCardOpen(false)}><img className={classes.logo} src={logo} alt="Logo" id='mainLogo'/></Link>
         <div className={classes.section} id='sectionName'><span>{props.sectionName}</span></div>
       </span>
       <span  className={classes.menu} id='menuOptions' >

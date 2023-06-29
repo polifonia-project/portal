@@ -22,13 +22,16 @@ function Card(props) {
   const [colorIsDark, setColorIsDark] = useState(false)
   const [currentBlock, setCurrentBlock] = useState({})
   const [fromSectionClip, setFromSectionClip] = useState(false)
+  const [fromExternalLink, setFromExternalLink] = useState(false)
 
   const [displayShare, setDisplayShare] = useState(false)
 
   useEffect(() => {
     if (cardOpen) {
       console.log(cardBlocksNew);
+      console.log(cardContent);
       setFromSectionClip(cardContent.hasInput);
+      setFromExternalLink(cardContent.goesBack);
       if (cardBlocksNew[cardContent.cat]) {
         setColorBackground(cardBlocksNew[cardContent.cat].color);
         setCurrentBlock(cardBlocksNew[cardContent.cat].blocks);
@@ -46,7 +49,7 @@ function Card(props) {
       }
 
     }
-  }, [cardOpen, cardBlocksNew, cardContent.hasInput, cardContent.cat, colorBackground]);
+  }, [cardOpen, cardBlocksNew, cardContent.hasInput, cardContent.goesBack, cardContent.cat, colorBackground]);
 
   const closeCard = () => {
     setCardOpen(false);
@@ -97,7 +100,9 @@ function Card(props) {
           </p>
         </div>
         <div>
-          <button className={classes.exitButton} onClick={() => closeCard()} style={{ color: colorIsDark ? 'white' : 'black', borderColor: colorIsDark ? 'white' : '#474747' }}>Back ⇢</button>
+         { fromExternalLink ? <button className={classes.exitButton} onClick={() => closeCard()} style={{ color: colorIsDark ? 'white' : 'black', borderColor: colorIsDark ? 'white' : '#474747' }}>Back ⇢</button>
+          : null
+        }
         </div>
       </div>
       <div className={classes.contentBlock}>

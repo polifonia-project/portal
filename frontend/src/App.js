@@ -29,7 +29,8 @@ function App() {
       input: 'Input name',
       uri: 'url',
       color: '#e5e3e3',
-      hasInput: false
+      hasInput: false,
+      goesBack: true
     });
 
   return (
@@ -40,7 +41,7 @@ function App() {
             <Route path="/" element={<FeedPage func={setPageTitle} />} />
             <Route path="/datastories" element={<DataStoriesPage func={setPageTitle} />} />
             <Route path="/about" element={<AboutPage func={setPageTitle} />} />
-            <Route path="card" element={<CardPage />} />
+            <Route path="/card" element={<CardPage func={setPageTitle} />} />
           </Routes>
         </Layout>
       </CardContext.Provider>

@@ -4,10 +4,12 @@ import classes from "./MenuOverlay.module.css";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 import menuicon from "../../assets/svg/compactlogo.svg";
+import { CardContext } from "../../context/CardContext";
 
 function MenuOverlay(props) {
 
   const { setTheme } = useContext(ThemeContext);
+  const { setCardOpen } = useContext(CardContext);
 
   function onChange(isVisible) {
     if (isVisible) {
@@ -29,7 +31,7 @@ function MenuOverlay(props) {
       <nav>
         <ul className={classes.menulist}>
           <li>
-            <Link onClick={props.toggleMenu } to="/">Homepage</Link>
+            <Link onClick={() => {props.toggleMenu(); setCardOpen(false) }}  to="/">Homepage</Link>
           </li>
           <li>
             <Link onClick={() => { props.toggleMenu(); onChange('isVisible'); }} to="/datastories">Data Stories</Link>

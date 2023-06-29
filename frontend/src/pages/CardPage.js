@@ -5,8 +5,9 @@ import { useSearchParams } from 'react-router-dom';
 import { CardContext } from "../context/CardContext";
 import Card from "../components/card/Card";
 
-function CardPage() {
-    // try with http://localhost:3000/card?title=mozart&cat=people&uri=wikidata
+function CardPage(props) {
+    
+    // try with http://localhost:3000/card?title=Wolfgang%20Amadeus%20Mozart&cat=people&uri=wikidata
     let [searchParams, setSearchParams] = useSearchParams()
     // searchParams = decodeURI(searchParams);
     const title = searchParams.get('title');
@@ -16,14 +17,20 @@ function CardPage() {
 
     const { setCardOpen } = useContext(CardContext);
     const { setCardContent } = useContext(CardContext);
+    const { setCardBlocksNew } = useContext(CardContext);
 
     useEffect(() => {
-
+        props.func('Portal');
         setCardOpen(true);
-        setCardContent({ title: title, cat: cat, uri: uri })
+        setCardContent({title: title, cat: cat, input: 'no input', uri: 'url', color: '#000000', hasInput: true, goesBack: false})
     }, []);
 
-    return <Card />
+    useEffect(() => {
+        fetch("/conf_info")
+        .then(res => res.json())
+        .then(data => setCardBlocksNew(data.cards))
+        },["/conf_info"]);
+
 }
 
 export default CardPage;

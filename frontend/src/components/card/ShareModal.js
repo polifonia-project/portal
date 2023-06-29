@@ -10,7 +10,7 @@ const style = {
         backgroundColor: '#f4edec',
         borderRadius: '8px',
         border: 0,
-        boxShadow: 'rgb(124 123 123 / 13%) -1px 5px 30px 1px;',
+        boxShadow: 'rgb(124 123 123 / 13%) -1px 5px 30px 1px',
         color: 'white',
         width: '80vw',
         marginBottom: '20px',
@@ -20,7 +20,7 @@ const style = {
         backgroundColor: 'rgb(217 214 214)',
         borderRadius: '8px',
         border: 0,
-        boxShadow: 'rgb(124 123 123 / 13%) -1px 5px 30px 1px;',
+        boxShadow: 'rgb(124 123 123 / 13%) -1px 5px 30px 1px',
         color: 'black !important'
         }
       };
