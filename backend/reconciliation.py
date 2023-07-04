@@ -102,8 +102,8 @@ def linkset_file_population(datasets, dataset, uri_list):
             sparql_endpoint = datasets[d]['sparql_endpoint']
             same_uris_dict = find_matches(uris_to_search, sparql_endpoint)
             for origin_uri, same_uri in same_uris_dict.items():
-                add_triples_to_linkset_file(linkset_graph, datasets[dataset]['sparql_endpoint'], datasets[dataset]['name'],
-                                            origin_uri, same_uri, datasets[d]['sparql_endpoint'], datasets[d]['name'])
+                add_triples_to_linkset_file(linkset_graph, datasets[dataset]['iri_base'], datasets[dataset]['name'],
+                                            origin_uri, same_uri, datasets[d]['iri_base'], datasets[d]['name'])
         write_ntriple_linkset(linkset_graph, LINKSET_FILE)
         print('[SUCCESS] linkest file population complete')
 
