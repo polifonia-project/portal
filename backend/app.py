@@ -12,6 +12,7 @@ app = Flask(__name__)
 # access all conf files: datasets (d), categories (cat), feed info (f) and carouse (car)
 d, cat, f, car = methods.access_conf_info('conf_general.json')
 i.ingest_data(d, cat)
+rec.clear_linkset_endpoint(False)
 
 
 @app.route('/conf_info', methods=['GET'])

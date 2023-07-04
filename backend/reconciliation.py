@@ -65,25 +65,26 @@ def linkset_endpoint_update(triples_string):
     print('[UPDATE] new triples in linkset endpoint')
 
 
-def clear_linkset_endpoint():
-    sparql = SPARQLWrapper(UPDATEMYLINKSET)
-    sparql.setMethod(POST)
-    delete_query = '''
-        PREFIX schema: <https://schema.org/>
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX owl: <http://www.w3.org/2002/07/owl#>
+def clear_linkset_endpoint(proceed=False):
+    if proceed:
+        sparql = SPARQLWrapper(UPDATEMYLINKSET)
+        sparql.setMethod(POST)
+        delete_query = '''
+            PREFIX schema: <https://schema.org/>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX owl: <http://www.w3.org/2002/07/owl#>
 
-        DELETE {?s ?p ?o}
-        WHERE {
-            GRAPH <''' + LILNKSETGRAPH + '''> {
-            ?s ?p ?o
-            } 
-        }
-    '''
+            DELETE {?s ?p ?o}
+            WHERE {
+                GRAPH <''' + LILNKSETGRAPH + '''> {
+                ?s ?p ?o
+                } 
+            }
+        '''
 
-    sparql.setQuery(delete_query)
-    sparql.query()
-    print('[DELETE] linkeset emptied')
+        sparql.setQuery(delete_query)
+        sparql.query()
+        print('[DELETE] linkeset emptied')
 
 
 def parse_ntriple_linkest(file):
