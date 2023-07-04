@@ -65,28 +65,6 @@ def linkset_endpoint_update(triples_string):
     print('[UPDATE] new triples in linkset endpoint')
 
 
-def clear_linkset_endpoint(proceed=False):
-    if proceed:
-        sparql = SPARQLWrapper(UPDATEMYLINKSET)
-        sparql.setMethod(POST)
-        delete_query = '''
-            PREFIX schema: <https://schema.org/>
-            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-            PREFIX owl: <http://www.w3.org/2002/07/owl#>
-
-            DELETE {?s ?p ?o}
-            WHERE {
-                GRAPH <''' + LILNKSETGRAPH + '''> {
-                ?s ?p ?o
-                } 
-            }
-        '''
-
-        sparql.setQuery(delete_query)
-        sparql.query()
-        print('[DELETE] linkeset emptied')
-
-
 def parse_ntriple_linkest(file):
     g = Graph()
     g.parse(file, format='nt')
@@ -134,3 +112,41 @@ def triples_to_linkset_edpoint(file):
     ntriple = open(file, 'r')
     ntriple_string = ntriple.read()  # add check on lenght and split in case (how)
     linkset_endpoint_update(ntriple_string)
+
+
+def clear_linkset_endpoint():
+    '''empty endpoint'''
+    sparql = SPARQLWrapper(UPDATEMYLINKSET)
+    sparql.setMethod(POST)
+    delete_query = '''
+        PREFIX schema: <https://schema.org/>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+        DELETE {?s ?p ?o}
+        WHERE {
+            GRAPH <''' + LILNKSETGRAPH + '''> {
+            ?s ?p ?o
+            } 
+        }
+    '''
+
+    sparql.setQuery(delete_query)
+    sparql.query()
+    print('[DELETE] endpoint emptied')
+
+
+def clear_linkset_file(file):
+    '''empty linkset.nt'''
+    g = parse_ntriple_linkest(file)
+    g.remove((None, None, None))
+    write_ntriple_linkset(g, file)
+    print('[DELETE] nt emptied')
+
+
+def clear_linkset(proceed=False, file=''):
+    '''apply clearing functions'''
+    if proceed:
+        clear_linkset_file(file)
+        clear_linkset_endpoint()
+        print('[DELETE] linkset emptied')
