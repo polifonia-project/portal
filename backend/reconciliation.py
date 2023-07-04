@@ -92,6 +92,11 @@ def linkset_file_population(datasets, dataset, uri_list):
     uris_to_search = []
     for uri in uri_list:
         if any((match := substring) in uri for substring in WHITE_LIST):
+            linkset_graph.add((URIRef(uri), SDO.location,
+                              URIRef(datasets[dataset]['iri_base'])))
+            linkset_graph.add((URIRef(datasets[dataset]['iri_base']), RDFS.label, Literal(
+                datasets[dataset]['name'], lang="en")))
+            write_ntriple_linkset(linkset_graph, LINKSET_FILE)
             print(match, 'try something else')
         else:
             uris_to_search.append('<' + uri + '>')
@@ -102,8 +107,9 @@ def linkset_file_population(datasets, dataset, uri_list):
             sparql_endpoint = datasets[d]['sparql_endpoint']
             same_uris_dict = find_matches(uris_to_search, sparql_endpoint)
             for origin_uri, same_uri in same_uris_dict.items():
-                add_triples_to_linkset_file(linkset_graph, datasets[dataset]['iri_base'], datasets[dataset]['name'],
-                                            origin_uri, same_uri, datasets[d]['iri_base'], datasets[d]['name'])
+                if origin_uri != same_uri:
+                    add_triples_to_linkset_file(linkset_graph, datasets[dataset]['iri_base'], datasets[dataset]['name'],
+                                                origin_uri, same_uri, datasets[d]['iri_base'], datasets[d]['name'])
         write_ntriple_linkset(linkset_graph, LINKSET_FILE)
         print('[SUCCESS] linkest file population complete')
 
@@ -113,6 +119,13 @@ def triples_to_linkset_edpoint(file):
     ntriple_string = ntriple.read()  # add check on lenght and split in case (how)
     linkset_endpoint_update(ntriple_string)
 
+
+# def initalise_linkset(categories):
+#     for cat in categories:
+#         is_reconciled = False if 'linkset' not in categories[cat] else True
+
+#         if is_reconciled == False:
+#             triples_to_linkset_edpoint(LINKSET_FILE)
 
 def clear_linkset_endpoint():
     '''empty endpoint'''

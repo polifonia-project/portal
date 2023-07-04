@@ -3,6 +3,10 @@ import re
 import requests
 from flask import request, Response
 from urllib.parse import parse_qs, quote
+from SPARQLWrapper import SPARQLWrapper, POST
+
+# internal methods
+import reconciliation as rec
 
 MYLINKSET = 'http://localhost:9999/bigdata/sparql'
 
@@ -56,3 +60,41 @@ def __contact_tp(data, is_post, content_type):
         #                        status_code=str(req.status_code),
         #                        headers={"Content-Type": request.content_type},
         #                        text=req.text)
+
+
+def clear_linkset_endpoint():
+    '''empty endpoint'''
+    sparql = SPARQLWrapper(rec.UPDATEMYLINKSET)
+    sparql.setMethod(POST)
+    delete_query = '''
+        PREFIX schema: <https://schema.org/>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+        DELETE {?s ?p ?o}
+        WHERE {
+            GRAPH <''' + rec.LILNKSETGRAPH + '''> {
+            ?s ?p ?o
+            } 
+        }
+    '''
+
+    sparql.setQuery(delete_query)
+    sparql.query()
+    print('[DELETE] endpoint emptied')
+
+
+def clear_linkset_file(file):
+    '''empty linkset.nt'''
+    g = rec.parse_ntriple_linkest(file)
+    g.remove((None, None, None))
+    rec.write_ntriple_linkset(g, file)
+    print('[DELETE] nt emptied')
+
+
+def clear_linkset(proceed=False, file=''):
+    '''apply clearing functions'''
+    if proceed:
+        clear_linkset_file(file)
+        clear_linkset_endpoint()
+        print('[DELETE] linkset emptied')
