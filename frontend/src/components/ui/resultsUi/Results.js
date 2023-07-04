@@ -196,6 +196,125 @@ class ResultsTest extends React.Component {
         )
     }
 
+    checkUriLocation = (uri, dataset_iri_base) => {
+        let returnCheck = false
+        let locationQuery = 'SELECT DISTINCT ?d_location WHERE {GRAPH <http://w3id.org/polifonia/linkset/> {<' + uri + '> <https://schema.org/location> ?d_location}}';
+        try {
+            return fetch('/reconciliation?query=' + encodeURIComponent(locationQuery))
+                .then((res) => res.json())
+                .then((data) => {
+                    let dataLen = data.results.bindings.length;
+
+                    if (dataLen > 0) {
+                        let locationValues = (data.results.bindings).map(val => val.d_location.value)
+                        if (!locationValues.includes(dataset_iri_base)) {
+                            returnCheck = true;
+                            return returnCheck
+                        }
+                    }
+                })
+        }
+        catch (err) {
+            console.log('error', err)
+        }
+    }
+
+    getCorrectUri = (uri, dataset_iri_base) => {
+        let sameUriQuery = 'SELECT DISTINCT ?same_uri WHERE {GRAPH <http://w3id.org/polifonia/linkset/> {<' + uri + '> owl:sameAs ?same_uri . ?same_uri <https://schema.org/location> <' + dataset_iri_base + '>}}';
+        try {
+            return fetch('/reconciliation?query=' + encodeURIComponent(sameUriQuery))
+                .then((res) => res.json())
+                .then((data) => {
+                    let dataLen = data.results.bindings.length;
+
+                    if (dataLen > 0) {
+                        let sameUriArray = (data.results.bindings).map(val => val.same_uri.value);
+                        return sameUriArray
+                    } else { return false }
+                })
+        }
+        catch (err) {
+            console.log('error', err)
+        }
+    }
+
+    queryResults = (query, uri, endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet) => {
+        // query, uri, endpoint
+        query = query.replaceAll('<>', '<' + uri + '>');
+        query = query.concat(' ', queryOffsetString).concat(' ', queryLimitString);
+        let url = endpoint + '?query=' + encodeURIComponent(query);
+        try {
+            return fetch(url, {
+                method: 'GET',
+                headers: { 'Accept': 'application/sparql-results+json' }
+            })
+                .then((res) => res.json())
+                .then((data) => {
+
+                    let dataLen = data.results.bindings.length;
+
+                    if (dataLen > 0) {
+                        data.results.bindings.forEach(res => {
+                            let singleResult = {}
+                            singleResult.uri = res.entity.value;
+                            singleResult.label = res.entityLabel.value;
+                            singleResult.cat = cat;
+                            singleResult.rel = '';
+                            singleResult.inverse = false;
+                            singleResult.dataset = datasets[dataset_id].name;
+                            if (res.inverse_rel) {
+                                if (res.inverse_rel.value.length !== '') {
+                                    singleResult.rel = res.inverse_rel.value;
+                                    singleResult.inverse = true;
+                                } else {
+                                    singleResult.rel = res.rel.value;
+                                    singleResult.inverse = false;
+                                }
+                            } else {
+                                singleResult.rel = res.rel.value;
+                                singleResult.inverse = false;
+                            }
+                            results.push(singleResult);
+                            if (!relations.includes(singleResult.rel)) {
+                                relations.push(singleResult.rel);
+                            }
+
+                            if (!relationSet[singleResult.cat]) {
+                                relationSet[singleResult.cat] = [];
+                                disabled[singleResult.cat] = true;
+                                if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
+                                    relationSet[singleResult.cat].push(singleResult.rel)
+                                }
+                            } else {
+                                if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
+                                    relationSet[singleResult.cat].push(singleResult.rel)
+                                }
+                            }
+                            this.setState({ totalResults: results });
+                            this.setState({ relations: relations });
+                            this.setState({ relationSet: relationSet });
+                            this.setState({ disabled: disabled });
+                            this.setState({ loader: false })
+                        }
+                        )
+                        if (dataLen < queryLimit) {
+                            catOffset[cat] = false;
+                            this.setState({ catOffset: catOffset })
+                            if (!Object.values(catOffset).includes(true)) {
+                                this.setState({ hasMore: false })
+                            }
+                        } else {
+                            catOffset[cat] = true;
+                            this.setState({ catOffset: catOffset });
+                        }
+                    }
+                });
+        }
+        catch (err) {
+            console.log('error', err)
+        }
+    }
+
     fetchResults = (uri, newState = true) => {
 
         let results = [];
@@ -234,126 +353,26 @@ class ResultsTest extends React.Component {
         for (const cat in this.props.filters) {
             for (const obj of this.props.filters[cat]) {
                 let dataset_id = obj.dataset
+
                 let iri_base = datasets[dataset_id].iri_base
-                // check if iri_base and el_iri are part of the same dataset
-                // if ((uri).includes(iri_base)) {
                 let query_method = datasets[dataset_id].query_method
                 let endpoint = datasets[dataset_id][query_method]
                 let query = obj.query;
-                query = query.replaceAll('<>', '<' + uri + '>');
-                query = query.concat(' ', queryOffsetString).concat(' ', queryLimitString);
-                let url = endpoint + '?query=' + encodeURIComponent(query);
-                try {
-                    fetch(url, {
-                        method: 'GET',
-                        headers: { 'Accept': 'application/sparql-results+json' }
-                    })
-                        .then((res) => res.json())
-                        .then((data) => {
-
-                            let dataLen = data.results.bindings.length;
-
-                            if (dataLen > 0) {
-                                data.results.bindings.forEach(res => {
-                                    let singleResult = {}
-                                    singleResult.uri = res.entity.value;
-                                    singleResult.label = res.entityLabel.value;
-                                    singleResult.cat = cat;
-                                    singleResult.rel = '';
-                                    singleResult.inverse = false;
-                                    singleResult.dataset = datasets[dataset_id].name;
-                                    if (res.inverse_rel) {
-                                        if (res.inverse_rel.value.length !== '') {
-                                            singleResult.rel = res.inverse_rel.value;
-                                            singleResult.inverse = true;
-                                        } else {
-                                            singleResult.rel = res.rel.value;
-                                            singleResult.inverse = false;
-                                        }
-                                    } else {
-                                        singleResult.rel = res.rel.value;
-                                        singleResult.inverse = false;
-                                    }
-                                    results.push(singleResult);
-                                    if (!relations.includes(singleResult.rel)) {
-                                        relations.push(singleResult.rel);
-                                    }
-
-                                    if (!relationSet[singleResult.cat]) {
-                                        relationSet[singleResult.cat] = [];
-                                        disabled[singleResult.cat] = true;
-                                        if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
-                                            relationSet[singleResult.cat].push(singleResult.rel)
-                                        }
-                                    } else {
-                                        if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
-                                            relationSet[singleResult.cat].push(singleResult.rel)
-                                        }
-                                    }
-                                    this.setState({ totalResults: results });
-                                    this.setState({ relations: relations });
-                                    this.setState({ relationSet: relationSet });
-                                    this.setState({ disabled: disabled });
-                                    this.setState({ loader: false })
-                                }
-                                )
-                                if (dataLen < queryLimit) {
-                                    catOffset[cat] = false;
-                                    this.setState({ catOffset: catOffset })
-                                    if (!Object.values(catOffset).includes(true)) {
-                                        this.setState({ hasMore: false })
-                                    }
-                                } else {
-                                    catOffset[cat] = true;
-                                    this.setState({ catOffset: catOffset });
-                                }
+                let new_uri = 'default';
+                // check if el_iri has location dataset
+                this.checkUriLocation(uri, iri_base).then((tryRec) => {
+                    // if not, try reconciliation
+                    if (tryRec) {
+                        this.getCorrectUri(uri, iri_base).then((arr) => {
+                            if (arr) {
+                                console.log('FINALLY A RESULT TO TRY', arr)
                             }
-                            // reconciliation
-                            else {
-                                console.log('try REC for', endpoint, ' with', uri)
-                                let reconciliationQuery = 'PREFIX schema: <https://schema.org/> PREFIX owl: <http://www.w3.org/2002/07/owl#> SELECT ?another_uri WHERE { GRAPH <http://reconciliation/linkset> { <' + uri + '> owl:sameAs ?another_uri . ?another_uri schema:location ?dataset .}}';
-                                let request = "/reconciliation?query=" + encodeURIComponent(reconciliationQuery);
-                                try {
-                                    fetch(request)
-                                        .then((res) => res.json())
-                                        .then((data) => {
-                                            let dataLen = data.results.bindings.length;
-                                            if (dataLen > 0) {
-                                                console.log('same uri', data)
-                                                data.results.bindings.forEach(res => {
-                                                    let alternativeUri = res.another_uri.value;
-                                                    let new_query = obj.query;
-                                                    new_query = new_query.replaceAll('<>', '<' + alternativeUri + '>');
-                                                    new_query = new_query.concat(' ', queryOffsetString).concat(' ', queryLimitString);
-                                                    let new_url = endpoint + '?query=' + encodeURIComponent(new_query);
-                                                    fetch(new_url, {
-                                                        method: 'GET',
-                                                        headers: { 'Accept': 'application/sparql-results+json' }
-                                                    })
-                                                        .then((res) => res.json())
-                                                        .then((data) => { console.log('REC data', data) })
-                                                })
-                                            }
-                                        })
-                                } catch (err) {
-                                    console.log('error in rec', err)
-                                }
-
-                                this.setState({ loader: false })
-                                catOffset[cat] = false;
-                                this.setState({ catOffset: catOffset })
-                                if (!Object.values(catOffset).includes(true)) {
-                                    this.setState({ hasMore: false })
-                                }
-                            }
-                        });
-                }
-                catch (err) {
-                    console.log('error', err)
-                }
-                // } else {
-                //     console.log('Different iri base.')
-                // }
+                        })
+                    } else {
+                        console.log('normal');
+                        this.queryResults(query, uri, endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
+                    }
+                })
             }
         }
         this.setState({ offsetValue: queryOffset + queryLimit });
