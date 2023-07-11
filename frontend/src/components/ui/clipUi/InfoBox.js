@@ -8,12 +8,12 @@ function InfoBox(props) {
   const highlights = props.highlights;
 
   highlights.map((highlight, index) => ( 
-    title = reactStringReplace(title, highlight, (match, i) => (<i key={'highlight'+ index} style={{ color: props.color}}>{match}<br></br></i>))
+    title = reactStringReplace(title, highlight, (match, i) => (<i key={'highlight'+ index} style={{ color: props.color}}>{match}</i>))
   ));
 
   
   return (
-    <div className={classes.infoBox + ' ' + classes[props.section]}>
+    <div className={classes.infoBox + ' ' + classes[props.section] + ' ' + classes[props.section + '0' + props.tot_categories]}>
       <h3>
       {title}
       </h3>

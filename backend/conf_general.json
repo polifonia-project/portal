@@ -6,6 +6,7 @@
         "datatsets": "conf_datasets.json",
         "categories": "conf_categories.json",
         "feed": "conf_feed.json",
-        "carousel": "conf_carousel.json"
+        "carousel": "conf_carousel.json",
+        "cards": "conf_cards.json"
     }
 }

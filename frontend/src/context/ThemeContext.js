@@ -5,4 +5,11 @@ export const ThemeContext = createContext({
     setTheme: () => {},
     soundOn: false,
     setSoundOn: () => {},
+    backToTopOn: false, 
+    setbackToTopOn: () => {},
+    colorSet: {},
+    setColorSet: () => {},
+    currentSection: 'cat_01',
+    setCurrentSection: () => {},
+
   });

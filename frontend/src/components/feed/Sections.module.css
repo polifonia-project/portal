@@ -3,12 +3,13 @@
     z-index: 20;
     padding-top: 20px;
     background-color: #f4edec;
+    
 }
 
 .backtotop {
     position: sticky; /* Fixed/sticky position */
     position: -webkit-sticky;
-    top: 37vh;
+    top: 33vh;
     left: 95vw;
     z-index: 400;
     margin-right: 10px;

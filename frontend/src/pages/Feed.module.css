@@ -10,19 +10,31 @@
 }
 
 .carouselContainer {
-    padding-top: 25vh;
+    padding-top: 10vh;
     width: 100%;
-    background-color: black;
-    background-image: url('https://polifonia-project.eu/wp-content/uploads/2021/01/polifonia-animazione-home-scaled.gif');
+    background-color: #f6f6f6;
+      /* background-image: url('https://polifonia-project.eu/wp-content/uploads/2021/01/polifonia-animazione-home-scaled.gif'); */
     background-position: top;
     background-repeat: no-repeat;
-
     /*
-    background-image: url('../assets/png/sfondo.png');
     background-size: 150%;
     background-image: none;
     background-color: aqua;
     */
+  }
+
+  .carouselContainer video {
+    position: fixed;
+    display: block;
+    margin: 0 auto;
+    top: 0;
+    min-width: 100%;
+    min-height: 100%;
+    height: 100%;
+    width: 140vh;
+    min-width: 100%;
+    min-height: 60vw;
+    transform: scale(1.6);
   }
 
   .mainContainer {
@@ -51,7 +63,7 @@
     left: 0;
   }
   .parallax__layer__base {
-    transform: translate3d(0, 56vh, 0);
+    transform: translate3d(0, 60vh, 0);
   }
   .parallax__layer__back {
     transform: translate3d(0, 0, -1px) scale(2);

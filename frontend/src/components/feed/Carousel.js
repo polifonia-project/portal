@@ -1,29 +1,26 @@
 import React from "react";
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import classes from "./Carousel.module.css";
-import { ThemeContext } from "../../context/ThemeContext";
 import ItemsCarousel from "react-items-carousel";
+import CarouselCard from "./CarouselCard";
 
 
 const Carousel = () => {
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const [content, setContent] = useState([]);
   const chevronWidth = 90;
-  const { soundOn, setSoundOn } = useContext(ThemeContext);
 
   useEffect(() => {
     fetch("/conf_info")
       .then(response => response.json())
       .then(data => setContent(data.carousel))
-  }, [])
 
-  const handleClickScroll = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ block: "nearest", behavior: 'smooth' });
-    };
-    if (!soundOn) { setSoundOn(true) }
-  };
+    var els = document.getElementsByClassName("gwZiig");
+    Array.prototype.forEach.call(els, function(el) {
+      el.style.overflow = "visible";
+    });
+
+  }, [])
 
   return (
     <div className={classes.carouselContainer}>
@@ -31,18 +28,18 @@ const Carousel = () => {
         <ItemsCarousel
           requestToChangeActive={setActiveItemIndex}
           activeItemIndex={activeItemIndex}
-          numberOfCards={2}
-          gutter={20}
-          slidesToScroll={2}
-          leftChevron={<button className={classes.leftChevron}>{" "}</button>}
-          rightChevron={<button className={classes.rightChevron}>{" "}</button>}
-
+          numberOfCards={4}
+          gutter={30}
+          slidesToScroll={3}
+          outsideChevron={true}
+          showSlither={true}
+          leftChevron={<div className={classes.leftChevronContainer}><button className={classes.leftChevron}>{" "}</button></div>}
+          rightChevron={<div className={classes.rightChevronContainer}><button className={classes.rightChevron}>{" "}</button></div>}
+          className={classes.carousel}
           chevronWidth={chevronWidth}
         >
-          <div className={classes.carousel_card + ' ' + classes.small} id={classes.card0} onClick={() => handleClickScroll('clips_container')}><h3>Interact with <br />MUSIC</h3><p><span className={classes.highlight}>Everyone</span> can play with the infinite music connections of the Polifonia Project.</p><button></button></div>
-          <div className={classes.carousel_card + ' ' + classes.long} id={classes.card1}><h3>Music Knowledge<br /> is now connected!</h3><p>Discover unexpected connections <br /> with data stories and contents for <span className={classes.highlight}>music experts</span></p></div>
-          {Object.values(content).map((card) => (
-            <div className={classes.carousel_card + ' ' + classes[card.dimension]} ><h3>{card.title}</h3><p>{card.paragraph}</p></div>
+          {Object.values(content).map((card, i) => (
+            <CarouselCard  key={'card-car-' + i} index={i} title={card.title} claim={card.claim} par={card.paragraph} url={card.href} type={card.type} logo={card.logo}></CarouselCard>
           ))}
         </ItemsCarousel>
       </div>

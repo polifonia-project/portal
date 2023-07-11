@@ -4,17 +4,17 @@ import classes from "./MenuOverlay.module.css";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 import menuicon from "../../assets/svg/compactlogo.svg";
+import { CardContext } from "../../context/CardContext";
 
 function MenuOverlay(props) {
 
   const { setTheme } = useContext(ThemeContext);
+  const { setCardOpen } = useContext(CardContext);
 
   function onChange(isVisible) {
     if (isVisible) {
       setTheme('default');
       document.getElementById("mainHeader").style.backgroundColor = "#f4edec";
-      document.getElementById("mainHeader").style.borderWidth = "0px  0px 3px 0px";
-      document.getElementById("mainHeader").style.borderImageWidth = "0px  0px 3px 0px";
       document.getElementById("categoriesNav").style.backgroundColor = "transparent";
       document.getElementById("mainLogo").style.filter= 'none';
       document.getElementById("sectionName").style.color = 'black';
@@ -31,7 +31,7 @@ function MenuOverlay(props) {
       <nav>
         <ul className={classes.menulist}>
           <li>
-            <Link onClick={props.toggleMenu } to="/">Homepage</Link>
+            <Link onClick={() => {props.toggleMenu(); setCardOpen(false) }}  to="/">Homepage</Link>
           </li>
           <li>
             <Link onClick={() => { props.toggleMenu(); onChange('isVisible'); }} to="/datastories">Data Stories</Link>

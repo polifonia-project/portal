@@ -17,8 +17,8 @@ def get_sparql_results(query, endpoint):
     Returns
     -------
     """
-
-    sparql = SPARQLWrapper(endpoint)
+    user_agent = 'mondoboia/1.0 (https://github.com/mondoboia; mondoboia@example.org)'
+    sparql = SPARQLWrapper(endpoint, agent=user_agent)
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
@@ -42,6 +42,19 @@ def sonic_ingest(data, collection, bucket='entities'):
             ingestcl.push(collection, bucket, iri, label.lower())
 
 
+def sonic_flush_index(collection):
+    """
+    Parameters
+    ----------
+
+    Returns
+    -------
+    """
+    with IngestClient(g['index_host'], g['index_channel'], g['index_pw']) as ingestcl:
+        print('FLUSHED ', collection)
+        ingestcl.flush(collection)
+
+
 def index_per_category(datasets, categories, cat_id):
     cat_name = categories[cat_id]['name']
     index_dict = {}
@@ -56,6 +69,8 @@ def index_per_category(datasets, categories, cat_id):
             print('[SUCCESS] got data from endpoint:', sparql_endpoint)
             index_dict.update(pattern_data)
             print('[SUCCESS] ingestion for:', cat_name.lower())
+    # flush
+    sonic_flush_index(cat_name.lower())
     # ingest
     sonic_ingest(index_dict, cat_name.lower())
 

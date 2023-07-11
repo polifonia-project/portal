@@ -10,6 +10,17 @@
      url("./fonts/Garnett-Medium.woff") format("truetype");
     }
 
+@font-face {
+      font-family: "Garnett Light Italic";
+      src: local("Garnett Light Italic"),
+       url("./fonts/Garnett-LightItalic.woff") format("truetype");
+      }
+
+@font-face {
+      font-family: "Helvetica Regular";
+      src: local("Helvetica Regular"),
+       url("./fonts/Helvetica.woff") format("truetype");
+      }
 * {
   box-sizing: border-box;
 }
@@ -38,5 +49,26 @@ html {
 body::-webkit-scrollbar {
   display: none;
   -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+  width: 1px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 1.5px;
+  height: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 3px transparent;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: grey;
 }
 

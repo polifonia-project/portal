@@ -1,9 +1,14 @@
 import React from "react";
 import classes from "./Sections.module.css";
 import SectionContainer from "../ui/sectionUi/SectionContainer.js";
-import backTopButton from '../../assets/svg/backToTop.svg';
+import Carousel from "./Carousel";
+import SectionIntro from '../ui/sectionUi/SectionIntro.js';
+import { CardContext } from "../../context/CardContext";
 
 class Sections extends React.Component {
+
+  static contextType = CardContext;
+
   constructor() {
     super();
     this.state = {
@@ -20,23 +25,18 @@ class Sections extends React.Component {
         this.setState({ datasets: data.datasets });
         this.setState({ clips: data.clips });
         this.setState({ categories: data.categories });
+        this.context.setCardBlocksNew(data.cards);
       });
-  };
-
-  handleBackScroll = (section) => {
-    const element = document.getElementById(section);
-    if (element) {
-      element.scrollIntoView({ block: "end", behavior: "smooth" });
-    }
   };
 
   render() {
     return (
       <div className={classes.sectionscontainer}>
-        <button className={classes.backtotop} onClick={() => this.handleBackScroll("topHook")} ><img alt='back to top button' src={backTopButton}/></button>
-        {this.state.clips.map((clip, index) => (
+        <Carousel />
+        <SectionIntro />
+       {this.state.clips.map((clip, index) => (
           <SectionContainer
-            key={index}
+            key={'section-container' + index}
             id={"section-" + clip.category}
             header={this.state.categories[clip.category].section.title}
             description={this.state.categories[clip.category].section.description}
@@ -46,7 +46,9 @@ class Sections extends React.Component {
             category={clip.category}
             catName={this.state.categories[clip.category].name}
             datasets={this.state.datasets}
-            placeholder={clip.name} >
+            placeholder={clip.name} 
+            tot_categories={Object.keys(this.state.categories).length} 
+            >
           </SectionContainer>
         ))}
       </div>

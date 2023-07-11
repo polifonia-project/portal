@@ -11,39 +11,46 @@
   background-color: #f4edec;
 }
 
+.scrollResult {
+  display: block;
+  width: 92%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
 
 .headerNum {
   display: inline-flex;
   align-items: center;
-  width: 4%;
+  width: 60px;
   justify-content: left;
   padding-left: 10px;
-}
-
-.headerLab {
-  display: inline-flex;
-  align-items: center;
-  width: 30%;
-  font-weight: 400;
 }
 
 .headerCat {
   display: inline-flex;
   align-items: center;
-  width: 10%;
+  width: 150px;
   text-transform: capitalize;
+}
+
+.headerLab {
+  display: inline-flex;
+  align-items: center;
+  width: 400px;
+  font-weight: 400;
 }
 
 .headerRel {
   display: inline-flex;
   align-items: center;
-  width: 60%;
+  width: 600px;
 }
 
 .headerAct {
   display: inline-flex;
   align-items: center;
-  width: 10%;
+  width: 50px;
   font-size: 0.8em;
   justify-content: flex-end;
 }

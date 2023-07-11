@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./CategoriesNav.module.css";
 
 class CategoriesNav extends React.Component {
+
   constructor() {
     super();
     this.state = {
@@ -31,7 +32,7 @@ class CategoriesNav extends React.Component {
       <div className={classes.categoriesContainer} id='categoriesNav'>
         {Object.values(this.state.categories).map((cat, index) =>
           <div key={'nav' + index}>
-            <button onClick={() => this.handleClickScroll("section-" + cat.id)}>
+            <button onClick={() => this.handleClickScroll("section-" + cat.id)} key={'button-cat' + index}>
               {cat.name}
             </button>
           </div>

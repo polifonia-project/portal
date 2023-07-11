@@ -36,6 +36,7 @@ function Clip(props) {
       };
 
     const { setTheme } = useContext(ThemeContext);
+    const { setbackToTopOn } = useContext(ThemeContext);
     const { soundOn } = useContext(ThemeContext);
     
 
@@ -54,9 +55,9 @@ function Clip(props) {
     function onChange (isVisible) {
         if (isVisible) {
                 document.getElementById("mainHeader").style.backgroundColor = props.color;
-                document.getElementById("mainHeader").style.borderImageWidth = '0px  0px 0px 0px';
                 document.getElementById("categoriesNav").style.backgroundColor = props.color;
                 document.getElementById(props.clip_id).style.transform = 'scale(1)';
+                setbackToTopOn(false);
                 if (isDarkColor(props.color)) {
                   setTheme('dark');
                   document.getElementById("mainLogo").style.filter= 'brightness(0) invert(1)';
@@ -81,27 +82,28 @@ function Clip(props) {
       };
     
     return (
-        <div className={classes.clipBox}>
+        <div className={classes.clipBox} id={'clipbox-' + props.category}>
           <InfoBox 
           infotitle={props.infotitle} 
           infodescription={props.description} 
           highlights={props.highlights} 
           color={props.color}
-          section={props.section}>
+          section={props.section}
+          tot_categories={props.tot_categories}
+          >
           </InfoBox>
           <div 
-          className={classes.clipContainer +' '+ classes[props.section]}
-          style={{ paddingTop: (props.clip_id === 'clip0') ? '100px' : '0px'}}> 
+          className={classes.clipContainer +' '+ classes[props.section] + ' ' + classes[props.section + '0' +props.tot_categories]}
+            > 
             <VisibilitySensor onChange={onChange}>  
               <div className={classes.visibilityHook}>X</div>  
             </VisibilitySensor> 
             <div className={classes.clip + ' ' + classes[clipIsExpanded ? 'clipexpanded' : '']} id={props.clip_id}>
                 <span className={classes.dot} style={{ backgroundColor: props.color}}></span>
-                <p onClick={ellipsisActive ? () => setClipExpanded(prev => !prev) : null} id={'cliptitle' + props.clip_id} className ={clipIsExpanded ?  classes.expandedcliptitle : classes.cliptitle}>{props.title}</p>
-                <button onClick={() => handleClickScroll(props.section)}>More +</button>
+                <p onClick={() => handleClickScroll(props.section)} id={'cliptitle' + props.clip_id} className ={clipIsExpanded ?  classes.expandedcliptitle : classes.cliptitle}>{props.title}</p>
+                <button  onClick={ellipsisActive ? () => setClipExpanded(prev => !prev) : null} style={{display: ellipsisActive ? 'inline' : 'none'}}>{clipIsExpanded ? 'Resize -' : 'Expand +'}</button>
                 <span className={classes.end_dot} style={{ backgroundColor: props.color}}></span>
             </div>
-          <p className={ ellipsisActive ? classes.ellipsisalert : classes.hiddenalert} id={'ellipsisalert' + props.clip_id}>Click on text <br/>{clipIsExpanded ? 'to resize' : 'to see all'}</p>
           </div>
         </div>
 
