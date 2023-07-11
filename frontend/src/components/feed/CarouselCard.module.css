@@ -76,9 +76,7 @@ width: 50px;
   font-size: 20px;
   margin: 0px;
   color: rgb(42, 42, 42);
-  width: 100%;
   text-align: left;
-  margin-bottom: 5px;
   font-family: "Garnett Light Italic";
   font-family: "Helvetica Light";
   font-family: "Garnett Medium";
@@ -93,3 +91,12 @@ width: 50px;
   text-decoration: underline;
 }
 
+.logoSvg {
+  width:20px;
+}
+
+.titlewrapper {
+  width: 100%;
+  display: flex;
+  margin-bottom: 7px;
+}

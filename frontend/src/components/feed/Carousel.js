@@ -39,7 +39,7 @@ const Carousel = () => {
           chevronWidth={chevronWidth}
         >
           {Object.values(content).map((card, i) => (
-            <CarouselCard  key={'card-car-' + i} index={i} title={card.title} claim={card.claim} par={card.paragraph} url={card.href} type={card.type}></CarouselCard>
+            <CarouselCard  key={'card-car-' + i} index={i} title={card.title} claim={card.claim} par={card.paragraph} url={card.href} type={card.type} logo={card.logo}></CarouselCard>
           ))}
         </ItemsCarousel>
       </div>

@@ -21,22 +21,23 @@ div.infoBox h3 i {
 }
 
 div.infoBox p {
-  font-size: 15px;
+  font-size: 20px;
+  line-height: 25px;
 }
 
 .section-cat_01 {
   padding-left: calc(((100% / 16 * 9) + 5px));
-  max-width: 85%;
+  max-width: 90%;
 }
 
 .section-cat_02 {
   padding-left: calc(((100% / 16 * 9) + 5px));
-  max-width: 85%;
+  max-width: 90%;
 }
 
 .section-cat_03 {
   padding-left: calc(((100% / 16 * 9) + 5px));
-  max-width: 85%;
+  max-width: 90%;
 }
 
 .section-cat_04 {

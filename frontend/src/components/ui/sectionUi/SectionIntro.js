@@ -13,14 +13,22 @@ function SectionIntro() {
     }
   }
 
+  const handleClickScroll = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ block: "start", behavior: 'smooth' });
+    };
+  };
+
   return (
     <div className={classes.feedIntro}>
       <VisibilitySensor onChange={onChange}>
         <div className={classes.visibilityHook}>X</div>
       </VisibilitySensor>
       <div className={classes.introContainer}>
-        <h3>Start your own search with your subjetcs of interest</h3>
-        <p>Sed vitae eros auctor ipsum facilisis pharetra id pretium lacus. Nulla lobortis eu eros ac sagittis. Donec in velit eu risus blandit rhoncus vel sed justo. Praesent consectetur, erat et aliquet lobortis, erat nisi vestibulum massa, vel tempus lacus enim at lectus. Donec blandit magna molestie ullamcorper molestie. Proin eu augue turpis. Quisque tincidunt hendrerit purus, vitae cursus est egestas at. Quisque pretium nulla id diam euismod ultrices. Morbi non bibendum metus. Pellentesque ultrices ex a purus fringilla dignissim.</p>
+        <h3>Search for what you care the most</h3>
+        <p>Search among music resources and discover the gems of the European Cultural Heritage by using our search & filter feature. Choose your starting point (e.g. a person), type a word and start looking for connections. You will combine the utility of an advanced search tool with the browsing experience of an archive interface of music related resources. So, it’s time to search, filter and expand your knowledge. </p>
+        <button className={classes.introButton}onClick={() => handleClickScroll('section-cat_05')}>Start now</button>
       </div>
     </div>
   );

@@ -12,6 +12,11 @@ import WarningBlock from "./WarningBlock";
 
 import ShareModal from "./ShareModal";
 
+import TextBlockFake from "./TextBlockFake";
+import LinkBlockFake from "./LinkBlockFake";
+import RelationBlockFake from "./RelationBlockFake";
+import VisualBlockFake from "./VisualBlockFake";
+
 function Card(props) {
 
   const { cardOpen, setCardOpen } = useContext(CardContext);
@@ -20,6 +25,7 @@ function Card(props) {
 
   const [colorBackground, setColorBackground] = useState('#e2e2e2')
   const [colorIsDark, setColorIsDark] = useState(false)
+  const [isManchester, setManchester] = useState(false)
   const [currentBlock, setCurrentBlock] = useState({})
   const [fromSectionClip, setFromSectionClip] = useState(false)
   const [fromExternalLink, setFromExternalLink] = useState(false)
@@ -100,31 +106,33 @@ function Card(props) {
           </p>
         </div>
         <div>
-         { fromExternalLink ? <button className={classes.exitButton} onClick={() => closeCard()} style={{ color: colorIsDark ? 'white' : 'black', borderColor: colorIsDark ? 'white' : '#474747' }}>Back ⇢</button>
-          : null
-        }
+          {fromExternalLink ? <button className={classes.exitButton} onClick={() => closeCard()} style={{ color: colorIsDark ? 'white' : 'black', borderColor: colorIsDark ? 'white' : '#474747' }}>Back ⇢</button>
+            : null
+          }
         </div>
       </div>
-      <div className={classes.contentBlock}>
+      {isManchester ?
+        <div className={classes.contentBlock}>
 
-        {Object.values(currentBlock).map((block, i) => {
-          if (block.type === 'text') {
-            return <TextBlock key={'textblock-' + i} width={block.size} title={block.title}></TextBlock>
-          }
+          {Object.values(currentBlock).map((block, i) => {
+            if (block.type === 'text') {
+              return <TextBlock key={'textblock-' + i} width={block.size} title={block.title}></TextBlock>
+            }
 
-          else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title}></RelationBlock> }
+            else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title}></RelationBlock> }
 
-          else if (block.type === 'link') { return <LinkBlock key={'linkblock-' + i} width={block.size} title={block.title} links={block.content}></LinkBlock> }
+            else if (block.type === 'link') { return <LinkBlock key={'linkblock-' + i} width={block.size} title={block.title} links={block.content}></LinkBlock> }
 
-          else if (block.type === 'visual') { return <VisualBlock key={'visualblock-' + i} width={block.size} title={block.title}></VisualBlock> }
+            else if (block.type === 'visual') { return <VisualBlock key={'visualblock-' + i} width={block.size} title={block.title}></VisualBlock> }
 
-          else if (block.type === 'none') { return <WarningBlock key={'warningblock-' + i} width={'large'}></WarningBlock> }
-          return null
-        })}
+            else if (block.type === 'none') { return <WarningBlock key={'warningblock-' + i} width={'large'}></WarningBlock> }
+            return null
+          })}
 
 
 
-      </div>
+        </div>
+      }
     </div>
   );
 }

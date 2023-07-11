@@ -168,7 +168,7 @@ class ResultsTest extends React.Component {
         return (
             <>
                 <ResultsHeader cat={this.props.cat}>
-                <SourcesBarchart cat={this.props.cat} handleDataset={this.handleDataset} resetDataset={this.resetDataset}></SourcesBarchart>
+                <SourcesBarchart cat={this.props.cat} handleDataset={this.handleDataset} resetDataset={this.resetDataset} results={this.state.totalResults}></SourcesBarchart>
                     <FiltersContainer>
                         <FilterButton isDisabled={this.state.filterOn || this.state.relationOn} resetClass='resetButton' buttonClick={() => this.resetFilters()}>
                             Reset <span className="resetIcon">⟲</span>
@@ -201,7 +201,7 @@ class ResultsTest extends React.Component {
                     >
                         {Data.map((res, index) => {
                             return (
-                                <ResultLine key={'resultline--' + index} label={res.label} rel={res.rel} cat={res.cat} dataset={res.dataset} currentDataset={this.state.currentDataset} datasetOn={this.state.datasetOn}number={index + 1} color={this.props.color} input_value={this.props.input_value} isdirect={res.inverse}></ResultLine>
+                                <ResultLine key={'resultline--' + index} label={res.label} rel={res.rel} cat={res.cat} dataset={res.dataset} currentDataset={this.state.currentDataset} datasetOn={this.state.datasetOn}number={index + 1} color={this.props.color} input_value={res.input_value} isdirect={res.inverse}></ResultLine>
                             )
                         })}
                     </InfiniteScroll> : <NoResultsError />
@@ -275,6 +275,7 @@ class ResultsTest extends React.Component {
                                     singleResult.cat = cat;
                                     singleResult.rel = '';
                                     singleResult.inverse = false;
+                                    singleResult.input_value = this.props.input_value;
                                     singleResult.dataset = datasets[dataset_id].name;
                                     if (res.inverse_rel) {
                                         if (res.inverse_rel.value.length !== '') {

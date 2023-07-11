@@ -50,12 +50,13 @@
   font-family: "Garnett Medium";
   font-weight: 100;
   margin: 0;
-  padding-right: 40%;
+  padding-right: 45%;
   padding-top: 10px;
 }
 
 .sectionDescription {
-  font-size: 15px;
+  font-size: 18px;
+  line-height: 20px;
   padding-right: 40%;
 }
 
@@ -77,7 +78,7 @@
   text-align: right;
   justify-content: flex-end;
   padding-right: 0%;
-  padding-left: 40%;
+  padding-left: 45%;
 }
 
 .section-cat_01 .sectionInfobox p,

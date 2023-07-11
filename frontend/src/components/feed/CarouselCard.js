@@ -8,7 +8,6 @@ import { useEffect } from "react";
 const CarouselCard = (props) => {
   const [isHovered, setIsHovered] = useState(false);
   const [pageTo, setPageTo] = useState("/");
-  const [logo, setLogo] = useState("");
 
   const handleClickScroll = (id) => {
     const element = document.getElementById(id);
@@ -20,13 +19,10 @@ const CarouselCard = (props) => {
   useEffect(() => {
     if (props.type === 'internal') {
       setPageTo(props.url)
-      setLogo("⇥");
     } if (props.type === 'external') {
       setPageTo("/")
-      setLogo("⇱");
     } if (props.type === 'scroll') {
       setPageTo("/")
-      setLogo("⇣");
     } else {
       setPageTo("/")
     }
@@ -35,6 +31,7 @@ const CarouselCard = (props) => {
   const handleClick = (e) => {
     if (props.type === 'scroll') {
       handleClickScroll(props.url);
+      console.log(props.logo)
     }
     else if (props.type === 'external') {
       window.open(props.url);

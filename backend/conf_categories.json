@@ -22,10 +22,9 @@
             ]
         },
         "section": {
-            "title": "Read all the documents about your research topic",
-            "description": "Discover all the possible connections and relations with a topic. See all the results and arrenge them as you want.",
+            "title": "Know everything about your favorite topic",
+            "description": "Explore connections and relations of topics. See all the results, filter and arrange them as you want. ",
             "highlights": [
-                ""
             ]
         },
         "status": "ingested"
@@ -49,8 +48,8 @@
             ]
         },
         "section": {
-            "title": "Find your own melody",
-            "description": "Discover all the possible connections and relations with tunes. See all the results and arrenge them as you want.",
+            "title": "Explore famous tunes and find your own melody",
+            "description": "Explore connections and relations of tunes. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
             ]
@@ -92,8 +91,8 @@
             ]
         },
         "section": {
-            "title": "Genres to uncover hundreds of relations",
-            "description": "Discover all the possible connections and relations with your favorite music genre. See all the results and arrenge them as you want.",
+            "title": "Keep yourself versatile when it comes to music genres",
+            "description": "Explore connections and relations of music genres. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
             ]
@@ -120,7 +119,7 @@
         },
         "section": {
             "title": "\u00abOk, ladies. Now, Let's get information\u00bb",
-            "description": "Discover all the possible connections and relations with a lyrics. See all the results and arrenge them as you want.",
+            "description": "Explore connections and relations of lyrics. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
             ]
@@ -146,8 +145,8 @@
             ]
         },
         "section": {
-            "title": "Be the conductor of your own music composition",
-            "description": "Discover all the possible connections and relations with scores. See all the results and arrenge them as you want.",
+            "title": "Be the conductor of your own score!",
+            "description": "Explore connections and relations of scores. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
             ]
@@ -169,7 +168,7 @@
             }
         ],
         "filters": {
-            "agents": [
+            "people": [
                 {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
@@ -195,8 +194,8 @@
             ]
         },
         "section": {
-            "title": "What about Artists?",
-            "description": "Discover all the possible connections and relations with your favorite artist. See all the results and arrenge them as you want.",
+            "title": "Music connects people",
+            "description": "Explore connections and relations of people. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
             ]
@@ -229,7 +228,7 @@
         },
         "section": {
             "title": "What\u2019s your next music destination?",
-            "description": "Discover all the possible connections and relations with places, cities, countries and events. See all the results and arrenge them as you want.",
+            "description": "Explore connections and relations of places. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
             ]
@@ -261,8 +260,8 @@
             ]
         },
         "section": {
-            "title": "Play ON",
-            "description": "Discover all the possible connections and relations with music instruments. See all the results and arrenge them as you want.",
+            "title": "Play your favorite instrument!",
+            "description": "Explore connections and relations of instruments. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
             ]
