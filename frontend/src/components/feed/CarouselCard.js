@@ -52,7 +52,10 @@ const CarouselCard = (props) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <h4 className={classes.cardtitle}>{props.claim}&nbsp;&nbsp;{logo}</h4>
+        <span className={classes.titlewrapper}>
+          <h4 className={classes.cardtitle}>{props.claim}&nbsp;&nbsp;</h4>
+          <img className={classes.logoSvg} alt="logo carousel" src={`icons/${props.logo}`}></img>
+        </span>
         <p className={classes.cardclaim}>{props.title}</p>
         <span style={{ display: isHovered ? 'inline' : 'none', opacity: isHovered ? '1' : '0' }}>
           <p className={classes.cardexpand}> {props.par}</p>

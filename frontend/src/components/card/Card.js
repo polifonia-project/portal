@@ -111,28 +111,26 @@ function Card(props) {
           }
         </div>
       </div>
-      {isManchester ?
-        <div className={classes.contentBlock}>
+      <div className={classes.contentBlock}>
 
-          {Object.values(currentBlock).map((block, i) => {
-            if (block.type === 'text') {
-              return <TextBlock key={'textblock-' + i} width={block.size} title={block.title}></TextBlock>
-            }
+        {Object.values(currentBlock).map((block, i) => {
+          if (block.type === 'text') {
+            return <TextBlock key={'textblock-' + i} width={block.size} title={block.title}></TextBlock>
+          }
 
-            else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title}></RelationBlock> }
+          else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title}></RelationBlock> }
 
-            else if (block.type === 'link') { return <LinkBlock key={'linkblock-' + i} width={block.size} title={block.title} links={block.content}></LinkBlock> }
+          else if (block.type === 'link') { return <LinkBlock key={'linkblock-' + i} width={block.size} title={block.title} links={block.content}></LinkBlock> }
 
-            else if (block.type === 'visual') { return <VisualBlock key={'visualblock-' + i} width={block.size} title={block.title}></VisualBlock> }
+          else if (block.type === 'visual') { return <VisualBlock key={'visualblock-' + i} width={block.size} title={block.title}></VisualBlock> }
 
-            else if (block.type === 'none') { return <WarningBlock key={'warningblock-' + i} width={'large'}></WarningBlock> }
-            return null
-          })}
-
+          else if (block.type === 'none') { return <WarningBlock key={'warningblock-' + i} width={'large'}></WarningBlock> }
+          return null
+        })}
 
 
-        </div>
-      }
+
+      </div>
     </div>
   );
 }
