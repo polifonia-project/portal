@@ -12,11 +12,6 @@ import WarningBlock from "./WarningBlock";
 
 import ShareModal from "./ShareModal";
 
-import TextBlockFake from "./TextBlockFake";
-import LinkBlockFake from "./LinkBlockFake";
-import RelationBlockFake from "./RelationBlockFake";
-import VisualBlockFake from "./VisualBlockFake";
-
 function Card(props) {
 
   const { cardOpen, setCardOpen } = useContext(CardContext);
@@ -25,7 +20,6 @@ function Card(props) {
 
   const [colorBackground, setColorBackground] = useState('#e2e2e2')
   const [colorIsDark, setColorIsDark] = useState(false)
-  const [isManchester, setManchester] = useState(false)
   const [currentBlock, setCurrentBlock] = useState({})
   const [fromSectionClip, setFromSectionClip] = useState(false)
   const [fromExternalLink, setFromExternalLink] = useState(false)
