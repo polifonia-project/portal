@@ -23,15 +23,17 @@ function Card(props) {
   const [currentBlock, setCurrentBlock] = useState({})
   const [fromSectionClip, setFromSectionClip] = useState(false)
   const [fromExternalLink, setFromExternalLink] = useState(false)
-
   const [displayShare, setDisplayShare] = useState(false)
+
+  // content states
+  const [textContent, setTextContent] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
 
   useEffect(() => {
     if (cardOpen) {
-      console.log(cardBlocksNew);
-      console.log(cardContent);
       setFromSectionClip(cardContent.hasInput);
       setFromExternalLink(cardContent.goesBack);
+      // launch fecth
+      fetchResults(cardContent.uri);
       if (cardBlocksNew[cardContent.cat]) {
         setColorBackground(cardBlocksNew[cardContent.cat].color);
         setCurrentBlock(cardBlocksNew[cardContent.cat].blocks);
@@ -81,7 +83,10 @@ function Card(props) {
     return encodedUrl
   }
 
-
+ // fetchResults demo 
+  const fetchResults = (uri) => {
+    setTextContent(uri)
+  }
 
   return (
     <div className={classes.cardContainer} style={{ transform: cardOpen ? 'translateX(0)' : 'translateX(-100%)' }}>
@@ -109,7 +114,7 @@ function Card(props) {
 
         {Object.values(currentBlock).map((block, i) => {
           if (block.type === 'text') {
-            return <TextBlock key={'textblock-' + i} width={block.size} title={block.title}></TextBlock>
+            return <TextBlock key={'textblock-' + i} width={block.size} title={block.title} content={textContent}></TextBlock>
           }
 
           else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title}></RelationBlock> }
