@@ -20,7 +20,7 @@ function CardPage(props) {
     useEffect(() => {
         props.func('Portal');
         setCardOpen(true);
-        setCardContent({ title: title, cat: cat, input: 'no input', uri: 'url', color: '#000000', hasInput: true, goesBack: false })
+        setCardContent({ title: title, cat: cat, input: 'no input', uri: uri, color: '#000000', hasInput: true, goesBack: false })
     }, []);
 
     useEffect(() => {

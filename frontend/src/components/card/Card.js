@@ -83,15 +83,13 @@ function Card(props) {
     return encodedUrl
   }
 
- // fetchResults demo 
+  // fetchResults demo 
   const fetchResults = (uri) => {
-    let results = [] 
+    let results = []
     let query_method = "sparql_endpoint"
     let endpoint = "https://query.wikidata.org/sparql"
     let dataset_id = "";
     let query = "";
-    let queryLimitString = 'LIMIT 10';
-    let queryOffsetString = 'OFFSET 0';
 
     Object.values(currentBlock).map((block, i) => {
       if (block.type === 'text') {
@@ -103,38 +101,40 @@ function Card(props) {
 
       }
       query = query.replaceAll('<>', '<' + uri + '>');
-      query = query.concat(' ', queryOffsetString).concat(' ', queryLimitString);
       let url = endpoint + '?query=' + encodeURIComponent(query);
       try {
         fetch(url, {
-            method: 'GET',
-            headers: { 'Accept': 'application/sparql-results+json' }
+          method: 'GET',
+          headers: { 'Accept': 'application/sparql-results+json' }
         })
-            .then((res) => res.json())
-            .then((data) => {
+          .then((res) => res.json())
+          .then((data) => {
 
-                let dataLen = data.results.bindings.length;
+            let dataLen = data.results.bindings.length;
 
-                if (dataLen > 0) {
-                    data.results.bindings.forEach(res => {
-                        let singleResult = {}
-                        singleResult.desc = res.desc.value;
-                        singleResult.method = query_method;
-                        singleResult.dataset = dataset_id;
-                        results.push(singleResult);
-                        setTextContent(res.desc.value)
-                    }
-                    )
+            if (dataLen > 0) {
+              data.results.bindings.forEach(res => {
+                if (Object.keys(res).length > 0) {
+                  let singleResult = {}
+                  singleResult.desc = res.desc.value;
+                  singleResult.method = query_method;
+                  singleResult.dataset = dataset_id;
+                  results.push(singleResult);
+                  setTextContent(res.desc.value)
                 }
-                else {
-                // try riconciliation
-                }
-            });
-    }
-    catch (err) {
+              }
+              )
+            }
+            else {
+              // try riconciliation
+            }
+          });
+      }
+      catch (err) {
         console.log('error', err)
-    }
-    return null })
+      }
+      return null
+    })
     console.log(results)
   }
 
