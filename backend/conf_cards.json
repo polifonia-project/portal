@@ -7,9 +7,9 @@
                 "size": "small",
                 "title": "Biography",
                 "content": [{
-                    "dataset": "d_01",
+                    "dataset": "d_04",
                     "query": "SELECT ?desc WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?desc .}}"
-                    },{},{}]
+                    }]
             },
             "02" : {
                 "type": "relation",
@@ -75,9 +75,9 @@
                 "size": "small",
                 "title": "Biography",
                 "content": [{
-                    "dataset": "d_01",
+                    "dataset": "d_04",
                     "query": "SELECT ?desc WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?desc .}}"
-                    },{},{}]
+                    }]
             },
             "02" : {
                 "type": "relation",
@@ -143,9 +143,9 @@
                 "size": "small",
                 "title": "Biography",
                 "content": [{
-                    "dataset": "d_01",
+                    "dataset": "d_04",
                     "query": "SELECT ?desc WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?desc .}}"
-                    },{},{}]
+                    }]
             },
             "02" : {
                 "type": "relation",
@@ -211,9 +211,9 @@
                 "size": "small",
                 "title": "Biography",
                 "content": [{
-                    "dataset": "d_01",
+                    "dataset": "d_04",
                     "query": "SELECT ?desc WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?desc .}}"
-                    },{},{}]
+                    }]
             },
             "02" : {
                 "type": "relation",
@@ -279,9 +279,9 @@
                 "size": "small",
                 "title": "Biography",
                 "content": [{
-                    "dataset": "d_01",
+                    "dataset": "d_04",
                     "query": "SELECT ?desc WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?desc .}}"
-                    },{},{}]
+                    }]
             },
             "02" : {
                 "type": "relation",
@@ -347,9 +347,9 @@
                 "size": "small",
                 "title": "Biography",
                 "content": [  {
-                    "dataset": "d_01",
+                    "dataset": "d_04",
                     "query": "SELECT ?desc WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?desc .}}"
-                    },{},{}]
+                    }]
             },
             "02" : {
                 "type": "relation",
@@ -415,9 +415,9 @@
                 "size": "medium",
                 "title": "Description",
                 "content": [{
-                    "dataset": "d_01",
+                    "dataset": "d_04",
                     "query": "SELECT ?desc WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?desc .}}"
-                    },{},{}]
+                    }]
             },
             "02" : {
                 "type": "relation",
@@ -477,9 +477,9 @@
                 "size": "small",
                 "title": "Biography",
                 "content": [{
-                    "dataset": "d_01",
+                    "dataset": "d_04",
                     "query": "SELECT ?desc WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?desc .}}"
-                    },{},{}]
+                    }]
             },
             "02" : {
                 "type": "relation",
@@ -545,9 +545,9 @@
                 "size": "small",
                 "title": "Biography",
                 "content": [{
-                    "dataset": "d_01",
+                    "dataset": "d_04",
                     "query": "SELECT ?desc WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?desc .}}"
-                    },{},{}]
+                    }]
             },
             "02" : {
                 "type": "relation",

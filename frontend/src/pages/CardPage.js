@@ -7,7 +7,7 @@ import { CardContext } from "../context/CardContext";
 function CardPage(props) {
 
     // try with http://localhost:3000/card?title=Wolfgang%20Amadeus%20Mozart&cat=people&uri=wikidata
-    let [searchParams, setSearchParams] = useSearchParams()
+    let [searchParams] = useSearchParams()
     const title = searchParams.get('title');
     const cat = searchParams.get('cat');
     const uri = searchParams.get('uri');
