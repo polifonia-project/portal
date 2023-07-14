@@ -3,9 +3,9 @@ from SPARQLWrapper import SPARQLWrapper, POST, JSON, DIGEST
 from rdflib import Graph, URIRef, Literal
 from rdflib.namespace import SDO, RDFS, OWL
 
-UPDATEMYLINKSET = 'http://localhost:9999/blazegraph/namespace/kb/sparql/update'
-LILNKSETGRAPH = 'http://w3id.org/polifonia/linkset/'
-LINKSET_FILE = 'linkset.nt'
+
+# internal methods
+import linkset_endpoint as endpoint
 
 WHITE_LIST = ['wikidata', 'dbpedia', 'viaf', 'discogs']
 WHITE_LIST_PARAM = {
@@ -47,7 +47,7 @@ def find_matches(uri_list, endpoint):
 
 
 def linkset_endpoint_update(triples_string):
-    sparql = SPARQLWrapper(UPDATEMYLINKSET)
+    sparql = SPARQLWrapper(endpoint.UPDATEMYLINKSET)
     sparql.setMethod(POST)
     insert_query = '''
         PREFIX schema: <https://schema.org/>
@@ -55,7 +55,7 @@ def linkset_endpoint_update(triples_string):
         PREFIX owl: <http://www.w3.org/2002/07/owl#>
 
         INSERT DATA {
-            GRAPH <''' + LILNKSETGRAPH + '''> {
+            GRAPH <''' + endpoint.LILNKSETGRAPH + '''> {
             ''' + triples_string + '''
             }
         }
@@ -88,7 +88,7 @@ def add_triples_to_linkset_file(g, dataset_1, dataset_1_label, uri_1, same_uri, 
 
 
 def linkset_file_population(datasets, dataset, uri_list):
-    linkset_graph = parse_ntriple_linkest(LINKSET_FILE)
+    linkset_graph = parse_ntriple_linkest(endpoint.LINKSET_FILE)
     uris_to_search = []
     for uri in uri_list:
         if any((match := substring) in uri for substring in WHITE_LIST):
@@ -96,7 +96,7 @@ def linkset_file_population(datasets, dataset, uri_list):
                               URIRef(datasets[dataset]['iri_base'])))
             linkset_graph.add((URIRef(datasets[dataset]['iri_base']), RDFS.label, Literal(
                 datasets[dataset]['name'], lang="en")))
-            write_ntriple_linkset(linkset_graph, LINKSET_FILE)
+            write_ntriple_linkset(linkset_graph, endpoint.LINKSET_FILE)
             print(match, 'try something else')
         else:
             uris_to_search.append('<' + uri + '>')
@@ -110,7 +110,7 @@ def linkset_file_population(datasets, dataset, uri_list):
                 if origin_uri != same_uri:
                     add_triples_to_linkset_file(linkset_graph, datasets[dataset]['iri_base'], datasets[dataset]['name'],
                                                 origin_uri, same_uri, datasets[d]['iri_base'], datasets[d]['name'])
-        write_ntriple_linkset(linkset_graph, LINKSET_FILE)
+        write_ntriple_linkset(linkset_graph, endpoint.LINKSET_FILE)
         print('[SUCCESS] linkest file population complete')
 
 

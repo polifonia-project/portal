@@ -4,7 +4,6 @@ from flask import Flask, request, jsonify
 # internal libraries
 import methods
 import indexing as i
-import reconciliation as rec
 import linkset_endpoint as endpoint
 
 app = Flask(__name__)
@@ -12,7 +11,7 @@ app = Flask(__name__)
 # access all conf files: datasets (d), categories (cat), feed info (f) and carouse (car)
 d, cat, f, car, cards = methods.access_conf_info('conf_general.json')
 i.ingest_data(d, cat)
-endpoint.clear_linkset(False, rec.LINKSET_FILE)
+endpoint.clear_linkset(False, endpoint.LINKSET_FILE)
 
 
 @app.route('/conf_info', methods=['GET'])

@@ -8,6 +8,10 @@ from SPARQLWrapper import SPARQLWrapper, POST
 # internal methods
 import reconciliation as rec
 
+UPDATEMYLINKSET = 'http://localhost:9999/blazegraph/namespace/kb/sparql/update'
+LILNKSETGRAPH = 'http://w3id.org/polifonia/linkset/'
+LINKSET_FILE = 'linkset.nt'
+
 MYLINKSET = 'http://localhost:9999/bigdata/sparql'
 
 
@@ -64,7 +68,7 @@ def __contact_tp(data, is_post, content_type):
 
 def clear_linkset_endpoint():
     '''empty endpoint'''
-    sparql = SPARQLWrapper(rec.UPDATEMYLINKSET)
+    sparql = SPARQLWrapper(UPDATEMYLINKSET)
     sparql.setMethod(POST)
     delete_query = '''
         PREFIX schema: <https://schema.org/>
@@ -73,7 +77,7 @@ def clear_linkset_endpoint():
 
         DELETE {?s ?p ?o}
         WHERE {
-            GRAPH <''' + rec.LILNKSETGRAPH + '''> {
+            GRAPH <''' + LILNKSETGRAPH + '''> {
             ?s ?p ?o
             } 
         }
