@@ -115,3 +115,5 @@ def fill_entities_dict(state, categories, datasets):
         update_json('entities.json', entities_object)
 
         return entities_object
+    else:
+        return 'Please turn ON state in fill_entities_dict if you want to fill in entities.json'
