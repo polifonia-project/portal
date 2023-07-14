@@ -1,6 +1,9 @@
 # builtin libraries
 import json
 
+# external libraries
+from SPARQLWrapper import SPARQLWrapper, JSON
+
 
 def read_json(file_name):
     '''
@@ -52,3 +55,63 @@ def access_conf_info(file_path):
     # read cards json
     cards = read_json(g['data_sources']['cards'])
     return d, cat, f, car, cards
+
+
+def get_sparql_results(query, endpoint):
+    """
+    Parameters
+    ----------
+    Returns
+    -------
+    """
+    user_agent = 'mondoboia/1.0 (https://github.com/mondoboia; mondoboia@example.org)'
+    sparql = SPARQLWrapper(endpoint, agent=user_agent)
+    sparql.setQuery(query)
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
+    results = [result['entity']['value']
+               for result in results['results']['bindings'] if len(result['entityLabel']['value']) > 0]
+    return results
+
+
+def set_entities_dict(categories, datasets):
+    entities_object = {}
+    for dat in datasets:
+        entities_object[dat] = {}
+
+    for cat in categories:
+        for pattern in categories[cat]['search_pattern']:
+            entities_object[pattern['dataset']][cat] = []
+    return entities_object
+
+
+def collect_entities_uris(categories, cat_id, datasets, d_id):
+    for pattern in categories[cat_id]['search_pattern']:
+        if pattern['dataset'] == d_id:
+            pattern_query = pattern['query']
+            dataset = d_id
+            if datasets[dataset]['query_method'] == 'sparql_endpoint':
+                sparql_endpoint = datasets[dataset]['sparql_endpoint']
+                pattern_data = get_sparql_results(
+                    pattern_query, sparql_endpoint)
+                print(
+                    f"[SUCCESS] got {categories[cat_id]['name']} data from {sparql_endpoint}.")
+    return pattern_data
+
+
+def fill_entities_dict(state, categories, datasets):
+    if state == 'ON':
+        # set the dictionary that will host all entities divided by dataset and category
+        entities_object = set_entities_dict(categories, datasets)
+
+        # for each dataset and category send queries and retrieve a list of uris
+        for d in entities_object:
+            for cat in entities_object[d]:
+                cat_entities = collect_entities_uris(
+                    categories, cat, datasets, d)
+                entities_object[d][cat] = cat_entities
+
+        # put everythin in a json file
+        update_json('entities.json', entities_object)
+
+        return entities_object
