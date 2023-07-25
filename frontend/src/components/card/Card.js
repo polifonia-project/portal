@@ -27,6 +27,9 @@ function Card(props) {
 
   // content states
   const [textContent, setTextContent] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
+  const [relContent, setRelContent] = useState([{name: "Lorem Ipsummm", link: "https://www.google.com/"},{name: "Lorem Ipsum", link: "https://www.google.com/"},{name: "Lorem Ipsum", link: "https://www.google.com/"},{name: "Lorem Ipsum", link: "https://www.google.com/"}])
+  const [visualContent, setVisualContent] = useState({id_3:'', id_4:''})
+
 
   useEffect(() => {
     if (cardOpen) {
@@ -86,56 +89,148 @@ function Card(props) {
   // fetchResults demo 
   const fetchResults = (uri) => {
     let results = []
+    let relResults = []
     let query_method = "sparql_endpoint"
     let endpoint = "https://query.wikidata.org/sparql"
     let dataset_id = "";
     let query = "";
 
     Object.values(currentBlock).map((block, i) => {
+      
       if (block.type === 'text') {
         Object.values(block.content).map((q, i) => {
           dataset_id = q.dataset;
           query = q.query;
           return null
         })
-
-      }
-      query = query.replaceAll('<>', '<' + uri + '>');
-      let url = endpoint + '?query=' + encodeURIComponent(query);
-      try {
-        fetch(url, {
-          method: 'GET',
-          headers: { 'Accept': 'application/sparql-results+json' }
-        })
-          .then((res) => res.json())
-          .then((data) => {
-
-            let dataLen = data.results.bindings.length;
-
-            if (dataLen > 0) {
-              data.results.bindings.forEach(res => {
-                if (Object.keys(res).length > 0) {
-                  let singleResult = {}
-                  singleResult.desc = res.desc.value;
-                  singleResult.method = query_method;
-                  singleResult.dataset = dataset_id;
-                  results.push(singleResult);
-                  setTextContent(res.desc.value)
+        query = query.replaceAll('<>', '<' + uri + '>');
+        let url = endpoint + '?query=' + encodeURIComponent(query);
+        try {
+          fetch(url, {
+            method: 'GET',
+            headers: { 'Accept': 'application/sparql-results+json' }
+          })
+            .then((res) => res.json())
+            .then((data) => {
+  
+              let dataLen = data.results.bindings.length;
+  
+              if (dataLen > 0) {
+                data.results.bindings.forEach(res => {
+                  if (Object.keys(res).length > 0) {
+                    let singleResult = {}
+                    singleResult.desc = res.desc.value;
+                    singleResult.method = query_method;
+                    singleResult.dataset = dataset_id;
+                    results.push(singleResult);
+                    setTextContent(res.desc.value)
+                  }
                 }
+                )
               }
-              )
-            }
-            else {
-              // try riconciliation
-            }
-          });
+              else {
+                // try riconciliation
+              }
+            });
+        }
+        catch (err) {
+          console.log('error', err)
+        }
+        return null
       }
-      catch (err) {
-        console.log('error', err)
+      else if (block.type === 'relation') {
+        Object.values(block.content).map((q, i) => {
+          dataset_id = q.dataset;
+          query = q.query;
+          return null
+        })
+        console.log(query)
+        query = query.replaceAll('<>', '<' + uri + '>');
+        let url = endpoint + '?query=' + encodeURIComponent(query);
+        try {
+          fetch(url, {
+            method: 'GET',
+            headers: { 'Accept': 'application/sparql-results+json' }
+          })
+            .then((res) => res.json())
+            .then((data) => {
+  
+              let dataLen = data.results.bindings.length;
+  
+              if (dataLen > 0) {
+                data.results.bindings.forEach(res => {
+                  if (Object.keys(res).length > 0) {
+                    let singleResult = []
+                    singleResult.name = res.entityLabel.value;
+                    singleResult.link = res.entity.value;
+                    relResults.push(singleResult);
+                  }
+                }
+                )
+              setRelContent(relResults)
+              }
+              else {
+                // try riconciliation
+              }
+            });
+        }
+        catch (err) {
+          console.log('error', err)
+        }
+        return null
+      } 
+      else if (block.type === 'visual') {
+        let number = "";
+        Object.values(block.content).map((q, i) => {
+          dataset_id = q.dataset;
+          query = q.query;
+          number = block.id;
+          return null
+        })
+        query = query.replaceAll('<>', '<' + uri + '>');
+        let url = endpoint + '?query=' + encodeURIComponent(query);
+        try {
+          fetch(url, {
+            method: 'GET',
+            headers: { 'Accept': 'application/sparql-results+json' }
+          })
+            .then((res) => res.json())
+            .then((data) => {
+  
+              let dataLen = data.results.bindings.length;
+  
+              if (dataLen > 0) {
+                data.results.bindings.forEach(res => {
+                  if (Object.keys(res).length > 0) {
+                    number = number - 1;
+                    number = 'id_' + number;
+                    let pic_link = res.pic.value;
+                    console.log(pic_link);
+                    setVisualContent(prev => ({
+                      ...prev,
+                      [number] : pic_link,
+                    }))
+
+                  }
+                }
+                )
+              }
+              else {
+                // try riconciliation
+              }
+            });
+        }
+        catch (err) {
+          console.log('error', err)
+        }
+        return null
       }
-      return null
+      
+ 
+    return null
     })
     console.log(results)
+    
   }
 
   return (
@@ -167,11 +262,11 @@ function Card(props) {
             return <TextBlock key={'textblock-' + i} width={block.size} title={block.title} content={textContent}></TextBlock>
           }
 
-          else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title}></RelationBlock> }
+          else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title} content={relContent}></RelationBlock> }
 
           else if (block.type === 'link') { return <LinkBlock key={'linkblock-' + i} width={block.size} title={block.title} links={block.content}></LinkBlock> }
 
-          else if (block.type === 'visual') { return <VisualBlock key={'visualblock-' + i} width={block.size} title={block.title}></VisualBlock> }
+          else if (block.type === 'visual') { return <VisualBlock key={'visualblock-' + i} width={block.size} title={block.title} content={ visualContent['id_'+ i] }></VisualBlock> }
 
           else if (block.type === 'none') { return <WarningBlock key={'warningblock-' + i} width={'large'}></WarningBlock> }
           return null

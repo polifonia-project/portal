@@ -37,8 +37,20 @@
   font-weight:lighter;
   color: black;
   font-family: 'Helvetica Light';
-  margin: 0.5em 0px;
+  padding: 4px 0px 4px 0px;
+  margin: 0;
   line-height: 1.2;
+}
+
+.cardBlockBox:hover .relationLi a{ 
+  opacity: 0.6;
+ }
+
+ .relationLi a:hover{
+  color: black;
+  cursor: pointer;
+  font-weight: 900;
+  opacity: 2 !important;
 }
 
 .relationBlock {

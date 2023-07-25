@@ -39,6 +39,10 @@
   font-family: 'Helvetica Light';
 }
 
+.blockParagraph:first-letter {
+  text-transform: uppercase;
+}
+
 
 .linkButton {
   all: unset;

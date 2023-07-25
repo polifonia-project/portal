@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 function RelationBlock(props) {
 
   const [numericWidth, setNumericWidth] = useState(25);
+  const relList = props.content
 
   useEffect(() => {
     var current_width = props.width;
@@ -25,17 +26,9 @@ function RelationBlock(props) {
       <div className={classes.relationBlock}>
         <p className={classes.blockTitle}><span>{props.title}</span></p>
         <div className={classes.cardBlockBox}>
-          <p className={classes.relationLi}>————&nbsp;&nbsp;Remy Warner</p>
-          <p className={classes.relationLi}>————&nbsp;&nbsp;Jaxton Ponce</p>
-          <p className={classes.relationLi}>————&nbsp;&nbsp;Aileen Shepherd</p>
-          <p className={classes.relationLi}>————&nbsp;&nbsp;Aileen Shepherd</p>
-          <p className={classes.relationLi}>————&nbsp;&nbsp;Warren Castaneda</p>
-          <br></br>
-          <p className={classes.relationLi}>————&nbsp;&nbsp;Remy Warner</p>
-          <p className={classes.relationLi}>————&nbsp;&nbsp;Jaxton Ponce</p>
-          <p className={classes.relationLi}>————&nbsp;&nbsp;Aileen Shepherd</p>
-          <p className={classes.relationLi}>————&nbsp;&nbsp;Aileen Shepherd</p>
-          <p className={classes.relationLi}>————&nbsp;&nbsp;Warren Castaneda</p>
+        {relList.map(function(data) {
+          return ( <p className={classes.relationLi}><a href={data.link} target="_blank" rel="noopener noreferrer">————&nbsp;&nbsp; {data.name}</a></p>)
+         })}  
         </div>
       </div>
     
