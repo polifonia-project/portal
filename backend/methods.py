@@ -1,5 +1,6 @@
 # builtin libraries
 import json
+import os
 
 # external libraries
 from SPARQLWrapper import SPARQLWrapper, JSON
@@ -95,6 +96,7 @@ def create_entities_files(categories, datasets):
 
 
 def collect_entities_uris(categories, cat_id, datasets, d_id):
+    # given a category and a dataset retrieve a list of entities based on the specified query
     for pattern in categories[cat_id]['search_pattern']:
         if pattern['dataset'] == d_id:
             pattern_query = pattern['query']
@@ -108,21 +110,30 @@ def collect_entities_uris(categories, cat_id, datasets, d_id):
     return pattern_data
 
 
-def fill_entities_dict(state, categories, datasets):
+def fill_entities_files(state, categories, datasets):
     if state == 'ON':
-        # set the dictionary that will host all entities divided by dataset and category
-        entities_object = set_entities_dict(categories, datasets)
+        # create files that will host the entities
+        entities_files = create_entities_files(categories, datasets)
 
-        # for each dataset and category send queries and retrieve a list of uris
-        for d in entities_object:
-            for cat in entities_object[d]:
-                cat_entities = collect_entities_uris(
-                    categories, cat, datasets, d)
-                entities_object[d][cat] = cat_entities
+        # iterate over the files in the entities folder
+        directory = 'entities'
 
-        # put everythin in a json file
-        update_json('entities.json', entities_object)
+        for filename in os.listdir(directory):
+            # set the list that will host entities for a dataset_category
+            entities_list = read_json(directory+'/'+filename)
+            # get dataset and category from filename
+            split_name = filename.strip('.json').split('__')
+            dat_id = split_name[0]
+            cat_id = split_name[1]
 
-        return entities_object
+            # sed query for that cat to the dat endpoint and retrieve list of uris
+            cat_entities = collect_entities_uris(
+                categories, cat_id, datasets, dat_id)
+            entities_list = cat_entities
+
+            # put everything in the corresponding json file
+            update_json(directory+'/'+filename, entities_list)
+
+            return filename, entities_list
     else:
-        return 'Please turn ON state in fill_entities_dict if you want to fill in entities.json'
+        print('Please turn ON state in fill_entities_dict if you want to fill in the entities folder')
