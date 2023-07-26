@@ -74,15 +74,24 @@ def get_sparql_results(query, endpoint):
     return results
 
 
-def set_entities_dict(categories, datasets):
-    entities_object = {}
+def create_entities_files(categories, datasets):
+    '''create a file for each dataset_category to contain a list of their entities'''
+    dat_cat_object = {}
     for dat in datasets:
-        entities_object[dat] = {}
+        dat_cat_object[dat] = []
 
     for cat in categories:
         for pattern in categories[cat]['search_pattern']:
-            entities_object[pattern['dataset']][cat] = []
-    return entities_object
+            dataset_list = dat_cat_object[pattern['dataset']]
+            dataset_list.append(cat)
+            dat_cat_object[pattern['dataset']] = dataset_list
+
+    for d, cat_list in dat_cat_object.items():
+        for cat in cat_list:
+            name = d + '__' + cat
+            entities_object = []
+            with open('entities/' + name + '.json', 'w') as f:
+                json.dump(entities_object, f)
 
 
 def collect_entities_uris(categories, cat_id, datasets, d_id):
