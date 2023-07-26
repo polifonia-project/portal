@@ -136,4 +136,4 @@ def fill_entities_files(state, categories, datasets):
 
             return filename, entities_list
     else:
-        print('Please turn ON state in fill_entities_dict if you want to fill in the entities folder')
+        print('Please turn ON state in fill_entities_files if you want to fill in the entities folder')
