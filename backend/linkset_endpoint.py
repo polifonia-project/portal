@@ -110,6 +110,12 @@ def linkset_endpoint_update(entities_dir, datasets, file):
     print('[UPDATE] linkset populated')
 
 
+def parse_nquads(file):
+    ds = Dataset()
+    ds.parse(file)
+    return ds
+
+
 def clear_linkset_endpoint():
     '''empty endpoint'''
     sparql = SPARQLWrapper(UPDATEMYLINKSET)
@@ -121,9 +127,7 @@ def clear_linkset_endpoint():
 
         DELETE {?s ?p ?o}
         WHERE {
-            GRAPH <''' + LILNKSETGRAPH + '''> {
             ?s ?p ?o
-            } 
         }
     '''
 
@@ -133,16 +137,16 @@ def clear_linkset_endpoint():
 
 
 def clear_linkset_file(file):
-    '''empty linkset.nt'''
-    g = rec.parse_ntriple_linkest(file)
-    g.remove((None, None, None))
-    rec.write_ntriple_linkset(g, file)
-    print('[DELETE] nt emptied')
+    '''empty linkset.nq'''
+    ds = parse_nquads(file)
+    ds.remove((None, None, None, None))
+    ds.serialize(destination=file, format='nquads', encoding='US-ASCII')
+    print('[DELETE] nq emptied')
 
 
-def clear_linkset(proceed=False, directory=''):
+def clear_linkset(proceed=False, file=''):
     '''apply clearing functions'''
     if proceed:
-        clear_linkset_file(directory)
+        clear_linkset_file(file)
         clear_linkset_endpoint()
         print('[DELETE] linkset emptied')
