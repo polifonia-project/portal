@@ -113,7 +113,7 @@ def collect_entities_uris(categories, cat_id, datasets, d_id):
 def fill_entities_files(state, categories, datasets):
     if state == 'ON':
         # create files that will host the entities
-        entities_files = create_entities_files(categories, datasets)
+        create_entities_files(categories, datasets)
 
         # iterate over the files in the entities folder
         directory = 'entities'
