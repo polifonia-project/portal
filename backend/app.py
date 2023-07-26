@@ -11,8 +11,9 @@ app = Flask(__name__)
 # access all conf files: datasets (d), categories (cat), feed info (f) and carouse (car)
 d, cat, f, car, cards = methods.access_conf_info('conf_general.json')
 # i.ingest_data(d, cat)
-# endpoint.clear_linkset(False, endpoint.LINKSET_FILE)
-methods.fill_entities_dict('OFF', cat, d)
+endpoint.clear_linkset(False, endpoint.LINKSET_FILE)
+methods.fill_entities_files('OFF', cat, d)
+endpoint.linkset_file_population('entities', d, endpoint.LINKSET_FILE)
 
 
 @app.route('/conf_info', methods=['GET'])

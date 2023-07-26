@@ -1,16 +1,23 @@
+# builtin libraries
+import os
+
 # external libraries
 import re
 import requests
 from flask import request, Response
 from urllib.parse import parse_qs, quote
 from SPARQLWrapper import SPARQLWrapper, POST
+from rdflib import Graph, URIRef, Dataset, ConjunctiveGraph
+from rdflib.namespace import SDO, RDFS, OWL
+from pymantic import sparql
 
 # internal methods
 import reconciliation as rec
+import methods
 
 UPDATEMYLINKSET = 'http://localhost:9999/blazegraph/namespace/kb/sparql/update'
 LILNKSETGRAPH = 'http://w3id.org/polifonia/linkset/'
-LINKSET_FILE = 'linkset.nt'
+LINKSET_FILE = 'linkset.nq'
 
 MYLINKSET = 'http://localhost:9999/bigdata/sparql'
 
@@ -64,6 +71,41 @@ def __contact_tp(data, is_post, content_type):
         #                        status_code=str(req.status_code),
         #                        headers={"Content-Type": request.content_type},
         #                        text=req.text)
+
+
+def linkset_file_population(entities_dir, datasets, file):
+    '''fill the linkset starting from the entities files'''
+    ds = Dataset()
+
+    for filename in os.listdir(entities_dir):
+        split_name = filename.strip('.json').split('__')
+        dat_id = split_name[0]
+        cat_id = split_name[1]
+
+        # get the list of uris in the file
+        uri_list = methods.read_json(entities_dir+'/'+filename)
+        # test graph insertion
+        for index, uri in enumerate(uri_list):
+            GRAPH_NAME = LILNKSETGRAPH + \
+                dat_id + '/' + cat_id + '/' + str(index)
+            named_graph = ds.graph(URIRef(GRAPH_NAME))
+            named_graph.add((URIRef(uri), SDO.location,
+                            URIRef(datasets[dat_id]['iri_base'])))
+    # save to file
+    ds.serialize(destination=file, format='nquads', encoding='US-ASCII')
+
+
+def linkset_endpoint_update(entities_dir, datasets, file):
+    # populate the file
+    linkset_file_population(entities_dir, datasets, file)
+
+    # prepare endpoint
+    server = sparql.SPARQLServer(UPDATEMYLINKSET)
+
+    # Loading data to Blazegraph
+    server.update(
+        'load <file:///home/giuliarenda/web_portal_test/backend/linkset.nq>')  # to do: understand how to generalise
+    print('[UPDATE] linkset populated')
 
 
 def clear_linkset_endpoint():
