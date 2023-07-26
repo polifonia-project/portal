@@ -110,14 +110,12 @@ def collect_entities_uris(categories, cat_id, datasets, d_id):
     return pattern_data
 
 
-def fill_entities_files(state, categories, datasets):
+def fill_entities_files(state, categories, datasets, directory):
     if state == 'ON':
         # create files that will host the entities
         create_entities_files(categories, datasets)
 
         # iterate over the files in the entities folder
-        directory = 'entities'
-
         for filename in os.listdir(directory):
             # set the list that will host entities for a dataset_category
             entities_list = read_json(directory+'/'+filename)

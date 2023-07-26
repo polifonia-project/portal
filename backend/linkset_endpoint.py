@@ -18,6 +18,7 @@ import methods
 UPDATEMYLINKSET = 'http://localhost:9999/blazegraph/namespace/kb/sparql/update'
 LILNKSETGRAPH = 'http://w3id.org/polifonia/linkset/'
 LINKSET_FILE = 'linkset.nq'
+LINKSET_DIRECTORY = 'entities'
 
 MYLINKSET = 'http://localhost:9999/bigdata/sparql'
 
@@ -96,6 +97,7 @@ def linkset_file_population(entities_dir, datasets, file):
 
 
 def linkset_endpoint_update(entities_dir, datasets, file):
+    '''update Blazegraph enpoint with triples in linkset.nq'''
     # populate the file
     linkset_file_population(entities_dir, datasets, file)
 
@@ -138,9 +140,9 @@ def clear_linkset_file(file):
     print('[DELETE] nt emptied')
 
 
-def clear_linkset(proceed=False, file=''):
+def clear_linkset(proceed=False, directory=''):
     '''apply clearing functions'''
     if proceed:
-        clear_linkset_file(file)
+        clear_linkset_file(directory)
         clear_linkset_endpoint()
         print('[DELETE] linkset emptied')
