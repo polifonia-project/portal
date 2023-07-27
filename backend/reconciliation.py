@@ -36,6 +36,7 @@ def query_same_as_internal(uri_list):
 
 def find_matches(uri_list, endpoint):
     sparql = SPARQLWrapper(endpoint)
+    # qui potrei generalizzare, parametro query che cambia??
     query = query_same_as_internal(uri_list)
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
@@ -44,35 +45,6 @@ def find_matches(uri_list, endpoint):
                for result in results['results']['bindings'] if len(result['same_uri']['value']) > 0}
     # {origin_uri: same_uri}
     return results
-
-
-def linkset_endpoint_update(triples_string):
-    sparql = SPARQLWrapper(endpoint.UPDATEMYLINKSET)
-    sparql.setMethod(POST)
-    insert_query = '''
-        PREFIX schema: <https://schema.org/>
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX owl: <http://www.w3.org/2002/07/owl#>
-
-        INSERT DATA {
-            GRAPH <''' + endpoint.LILNKSETGRAPH + '''> {
-            ''' + triples_string + '''
-            }
-        }
-    '''
-    sparql.setQuery(insert_query)
-    sparql.query()
-    print('[UPDATE] new triples in linkset endpoint')
-
-
-def parse_ntriple_linkest(file):
-    g = Graph()
-    g.parse(file, format='nt')
-    return g
-
-
-def write_ntriple_linkset(g, file):
-    g.serialize(destination=file, format='nt', encoding='utf-8')
 
 
 def add_triples_to_linkset_file(g, dataset_1, dataset_1_label, uri_1, same_uri, dataset_2, dataset_2_label):
@@ -112,17 +84,3 @@ def linkset_file_population(datasets, dataset, uri_list):
                                                 origin_uri, same_uri, datasets[d]['iri_base'], datasets[d]['name'])
         write_ntriple_linkset(linkset_graph, endpoint.LINKSET_FILE)
         print('[SUCCESS] linkest file population complete')
-
-
-def triples_to_linkset_edpoint(file):
-    ntriple = open(file, 'r')
-    ntriple_string = ntriple.read()  # add check on lenght and split in case (how)
-    linkset_endpoint_update(ntriple_string)
-
-
-# def initalise_linkset(categories):
-#     for cat in categories:
-#         is_reconciled = False if 'linkset' not in categories[cat] else True
-
-#         if is_reconciled == False:
-#             triples_to_linkset_edpoint(LINKSET_FILE)
