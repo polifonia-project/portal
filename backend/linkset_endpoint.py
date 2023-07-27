@@ -7,8 +7,7 @@ import requests
 from flask import request, Response
 from urllib.parse import parse_qs, quote
 from SPARQLWrapper import SPARQLWrapper, POST
-from rdflib import Graph, URIRef, Dataset, ConjunctiveGraph
-from rdflib.namespace import SDO, RDFS, OWL
+from rdflib import Dataset
 from pymantic import sparql
 
 # internal methods
@@ -76,7 +75,6 @@ def __contact_tp(data, is_post, content_type):
 
 def linkset_file_population(entities_dir, datasets, file):
     '''fill the linkset starting from the entities files'''
-    ds = Dataset()
 
     for filename in os.listdir(entities_dir):
         split_name = filename.strip('.json').split('__')
@@ -85,15 +83,9 @@ def linkset_file_population(entities_dir, datasets, file):
 
         # get the list of uris in the file
         uri_list = methods.read_json(entities_dir+'/'+filename)
-        # test graph insertion
-        for index, uri in enumerate(uri_list):
-            GRAPH_NAME = LILNKSETGRAPH + \
-                dat_id + '/' + cat_id + '/' + str(index)
-            named_graph = ds.graph(URIRef(GRAPH_NAME))
-            named_graph.add((URIRef(uri), SDO.location,
-                            URIRef(datasets[dat_id]['iri_base'])))
-    # save to file
-    ds.serialize(destination=file, format='nquads', encoding='US-ASCII')
+        # activate reconciliation process
+        rec.first_level_reconciliation(
+            uri_list, datasets, dat_id, cat_id, LILNKSETGRAPH, file)
 
 
 def linkset_endpoint_update(entities_dir, datasets, file):

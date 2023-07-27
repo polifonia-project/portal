@@ -1,6 +1,6 @@
 # external libraries
-from SPARQLWrapper import SPARQLWrapper, POST, JSON, DIGEST
-from rdflib import Graph, URIRef, Literal
+from SPARQLWrapper import SPARQLWrapper, JSON
+from rdflib import URIRef, Literal, Dataset
 from rdflib.namespace import SDO, RDFS, OWL
 
 
@@ -47,40 +47,46 @@ def find_matches(uri_list, endpoint):
     return results
 
 
-def add_triples_to_linkset_file(g, dataset_1, dataset_1_label, uri_1, same_uri, dataset_2, dataset_2_label):
+def add_quads_to_conj_graph(ds, graph_name, dataset_1, dataset_1_label, uri_1, same_uri, dataset_2, dataset_2_label):
+    named_graph = ds.graph(URIRef(graph_name))
     # uri_1
-    g.add((URIRef(uri_1), SDO.location, URIRef(dataset_1)))
-    g.add((URIRef(uri_1), OWL.sameAs, URIRef(same_uri)))
-    g.add((URIRef(dataset_1), RDFS.label, Literal(dataset_1_label, lang="en")))
+    named_graph.add((URIRef(uri_1), SDO.location, URIRef(dataset_1)))
+    named_graph.add((URIRef(uri_1), OWL.sameAs, URIRef(same_uri)))
+    named_graph.add((URIRef(dataset_1), RDFS.label,
+                    Literal(dataset_1_label, lang="en")))
     # same_uri
-    g.add((URIRef(same_uri), SDO.location, URIRef(dataset_2)))
-    g.add((URIRef(same_uri), OWL.sameAs, URIRef(uri_1)))
-    g.add((URIRef(dataset_2), RDFS.label, Literal(dataset_2_label, lang="en")))
-    print('[UPDATE] linkset file updated')
+    named_graph.add((URIRef(same_uri), SDO.location, URIRef(dataset_2)))
+    named_graph.add((URIRef(same_uri), OWL.sameAs, URIRef(uri_1)))
+    named_graph.add((URIRef(dataset_2), RDFS.label,
+                    Literal(dataset_2_label, lang="en")))
+    print(f'[UPDATE] Dataset updated for Graph {graph_name}')
+    return ds
 
 
-def linkset_file_population(datasets, dataset, uri_list):
-    linkset_graph = parse_ntriple_linkest(endpoint.LINKSET_FILE)
+def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, linkset_namespace, file):
     uris_to_search = []
-    for uri in uri_list:
+    graph_names_dict = {}
+    ds = Dataset()
+    ds.parse(file)
+
+    for index, uri in enumerate(uris_list):
+        # generate unique graphnames for each uri and store in dictionary
+        GRAPH_NAME = linkset_namespace + dataset_id + '/' + category_id + \
+            '/' + str(index)  # I can work on generlising this
+        graph_names_dict[uri] = GRAPH_NAME
         if any((match := substring) in uri for substring in WHITE_LIST):
-            linkset_graph.add((URIRef(uri), SDO.location,
-                              URIRef(datasets[dataset]['iri_base'])))
-            linkset_graph.add((URIRef(datasets[dataset]['iri_base']), RDFS.label, Literal(
-                datasets[dataset]['name'], lang="en")))
-            write_ntriple_linkset(linkset_graph, endpoint.LINKSET_FILE)
             print(match, 'try something else')
         else:
             uris_to_search.append('<' + uri + '>')
     print('TO SEARCH', uris_to_search)
-    # find matches in all datasets
+    # find matches in all datasets - 1st level of reconciliation
     if len(uris_to_search) > 0:
         for d in datasets:
             sparql_endpoint = datasets[d]['sparql_endpoint']
             same_uris_dict = find_matches(uris_to_search, sparql_endpoint)
             for origin_uri, same_uri in same_uris_dict.items():
                 if origin_uri != same_uri:
-                    add_triples_to_linkset_file(linkset_graph, datasets[dataset]['iri_base'], datasets[dataset]['name'],
-                                                origin_uri, same_uri, datasets[d]['iri_base'], datasets[d]['name'])
-        write_ntriple_linkset(linkset_graph, endpoint.LINKSET_FILE)
-        print('[SUCCESS] linkest file population complete')
+                    ds_updated = add_quads_to_conj_graph(
+                        ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri, datasets[d]['iri_base'], datasets[d]['name'])
+                    ds = ds_updated
+        ds.serialize(destination=file, format='nquads', encoding='US-ASCII')
