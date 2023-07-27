@@ -124,14 +124,14 @@ def fill_entities_files(state, categories, datasets, directory):
             dat_id = split_name[0]
             cat_id = split_name[1]
 
-            # sed query for that cat to the dat endpoint and retrieve list of uris
+            # send query for that cat to the dat endpoint and retrieve list of uris
             cat_entities = collect_entities_uris(
                 categories, cat_id, datasets, dat_id)
-            entities_list = cat_entities
+            entities_list.extend(cat_entities)
 
             # put everything in the corresponding json file
             update_json(directory+'/'+filename, entities_list)
 
-            return filename, entities_list
+        print('[SUCCESS] filled entities files')
     else:
         print('Please turn ON state in fill_entities_files if you want to fill in the entities folder')
