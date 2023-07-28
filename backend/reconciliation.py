@@ -9,10 +9,13 @@ import linkset_endpoint as endpoint
 
 WHITE_LIST = ['wikidata', 'dbpedia', 'viaf', 'discogs']
 WHITE_LIST_PARAM = {
-    'wikidata': {},
-    'dbpedia': {},
-    'viaf': {},
-    'discogs': {}
+    'wikidata': {
+        'endpoint': '',
+        'query': ''
+    },
+    'dbpedia': ['schema:sameAs', 'owl:sameAs', 'skos:exactMatch'],
+    'viaf': {'redirect_to': 'wikidata'},
+    'discogs': {'redirect_to': 'wikidata'}
 }
 
 
@@ -23,10 +26,11 @@ def query_same_as_internal(uri_list):
         find_query = '''
         PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
         PREFIX owl: <http://www.w3.org/2002/07/owl#>
+        PREFIX schema: <https://schema.org/>
         SELECT DISTINCT ?origin_uri ?same_uri
         WHERE {
             VALUES ?origin_uri {'''+values_to_search+'''} .
-            ?same_uri owl:sameAs|skos:exactMatch|^owl:sameAs|^skos:exactMatch ?origin_uri .
+            ?same_uri owl:sameAs|skos:exactMatch|schema:sameAs|^owl:sameAs|^skos:exactMatch|^schema:sameAs ?origin_uri .
         }
         '''
         return find_query
@@ -34,10 +38,8 @@ def query_same_as_internal(uri_list):
         print('[NEED ACTION] values_to_search too long.')
 
 
-def find_matches(uri_list, endpoint):
+def find_matches(query, endpoint):
     sparql = SPARQLWrapper(endpoint)
-    # qui potrei generalizzare, parametro query che cambia??
-    query = query_same_as_internal(uri_list)
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
@@ -83,7 +85,8 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
     if len(uris_to_search) > 0:
         for d in datasets:
             sparql_endpoint = datasets[d]['sparql_endpoint']
-            same_uris_dict = find_matches(uris_to_search, sparql_endpoint)
+            query = query_same_as_internal(uris_to_search)
+            same_uris_dict = find_matches(query, sparql_endpoint)
             for origin_uri, same_uri in same_uris_dict.items():
                 if origin_uri != same_uri:
                     ds_updated = add_quads_to_conj_graph(
