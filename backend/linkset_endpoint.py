@@ -113,10 +113,6 @@ def clear_linkset_endpoint():
     sparql = SPARQLWrapper(UPDATEMYLINKSET)
     sparql.setMethod(POST)
     delete_query = '''
-        PREFIX schema: <https://schema.org/>
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX owl: <http://www.w3.org/2002/07/owl#>
-
         DELETE {?s ?p ?o}
         WHERE {
             ?s ?p ?o
