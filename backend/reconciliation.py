@@ -13,7 +13,10 @@ WHITE_LIST_PARAM = {
         'endpoint': 'https://query.wikidata.org/sparql',
         'property_path': 'owl:sameAs|skos:exactMatch|schema:sameAs|wdt:P2888|^owl:sameAs|^skos:exactMatch|^schema:sameAs|^wdt:P2888'
     },
-    'dbpedia': ['schema:sameAs', 'owl:sameAs', 'skos:exactMatch'],
+    'dbpedia': {
+        'endpoint': 'https://dbpedia.org/sparql',
+        'property_path': 'schema:sameAs|owl:sameAs|skos:exactMatch|^schema:sameAs|^owl:sameAs|^skos:exactMatch'
+    },
     'viaf': {
         'endpoint': 'https://query.wikidata.org/sparql',
         'query': 'wdt:P214|^wdt:P214'
