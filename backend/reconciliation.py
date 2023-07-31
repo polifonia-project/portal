@@ -10,11 +10,14 @@ import linkset_endpoint as endpoint
 WHITE_LIST = ['wikidata', 'dbpedia', 'viaf', 'discogs']
 WHITE_LIST_PARAM = {
     'wikidata': {
-        'endpoint': '',
-        'query': ''
+        'endpoint': 'https://query.wikidata.org/sparql',
+        'property_path': 'owl:sameAs|skos:exactMatch|schema:sameAs|wdt:P2888|^owl:sameAs|^skos:exactMatch|^schema:sameAs|^wdt:P2888'
     },
     'dbpedia': ['schema:sameAs', 'owl:sameAs', 'skos:exactMatch'],
-    'viaf': {'redirect_to': 'wikidata'},
+    'viaf': {
+        'endpoint': 'https://query.wikidata.org/sparql',
+        'query': 'wdt:P214|^wdt:P214'
+    },
     'discogs': {'redirect_to': 'wikidata'}
 }
 
@@ -31,6 +34,21 @@ def query_same_as_internal(uri_list):
         WHERE {
             VALUES ?origin_uri {'''+values_to_search+'''} .
             ?same_uri owl:sameAs|skos:exactMatch|schema:sameAs|^owl:sameAs|^skos:exactMatch|^schema:sameAs ?origin_uri .
+        }
+        '''
+        return find_query
+    else:
+        print('[NEED ACTION] values_to_search too long.')
+
+
+def query_same_as_external(uri_list, property_path):
+    values_to_search = ' '.join(uri_list)
+    if len(values_to_search) < 1500:
+        find_query = '''
+        SELECT DISTINCT ?origin_uri ?same_uri
+        WHERE {
+            VALUES ?origin_uri {'''+values_to_search+'''} .
+            ?same_uri '''+property_path+''' ?origin_uri .
         }
         '''
         return find_query
