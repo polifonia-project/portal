@@ -2,6 +2,7 @@
 .flaskenv
 /__pycache__
 .DS_Store
+entities/
 
 #blazegraph
 blazegraph.jar
