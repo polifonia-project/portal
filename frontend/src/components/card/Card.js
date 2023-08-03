@@ -27,19 +27,20 @@ function Card(props) {
 
   // content states
   const [textContent, setTextContent] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
-  const [relContent, setRelContent] = useState([])
-  const [visualContent, setVisualContent] = useState({id_3:'', id_4:''})
+  const [relContent, setRelContent] = useState({"id_1":[], "id_2":[]})
+  const [visualContent, setVisualContent] = useState({"id_3":'', "id_4":''})
 
 
   useEffect(() => {
     if (cardOpen) {
+      
       // entryway setting
       setFromSectionClip(cardContent.hasInput);
       setFromExternalLink(cardContent.goesBack);
 
       // reset content states
       setTextContent("");
-      setRelContent([]);
+      setRelContent({});
       setVisualContent({});
 
       // launch fecth
@@ -96,12 +97,11 @@ function Card(props) {
   // fetchResults demo 
   const fetchResults = (uri) => {
     let results = []
-    let relResults = []
     let query_method = "sparql_endpoint"
     let endpoint = "https://query.wikidata.org/sparql"
     let dataset_id = "";
     let query = "";
-    let query_test = "";
+    
 
     Object.values(currentBlock).map((block, i) => {
       
@@ -147,16 +147,19 @@ function Card(props) {
         return null
       }
       else if (block.type === 'relation') {
+        let relResults = []
         let number = "";
         Object.values(block.content).map((q, i) => {
           dataset_id = q.dataset;
-          query_test = q.query;
+          query = q.query;
           number = block.id;
+          number = number - 1;
+          number = 'id_' + number;
+          relResults = [];
           return null
         })
-        console.log(typeof query_test)
-        query_test = query_test.replaceAll('<>', '<' + uri + '>');
-        let url = endpoint + '?query=' + encodeURIComponent(query_test);
+        query = query.replaceAll('<>', '<' + uri + '>');
+        let url = endpoint + '?query=' + encodeURIComponent(query);
         try {
           fetch(url, {
             method: 'GET',
@@ -166,12 +169,9 @@ function Card(props) {
             .then((data) => {
   
               let dataLen = data.results.bindings.length;
-  
               if (dataLen > 0) {
                 data.results.bindings.forEach(res => {
                   if (Object.keys(res).length > 0) {
-                    number = number - 1;
-                    number = 'id_' + number;
                     let singleResult = []
                     singleResult.name = res.entityLabel.value;
                     singleResult.link = res.entity.value;
@@ -179,7 +179,10 @@ function Card(props) {
                   }
                 }
                 )
-                setRelContent(relResults)
+                setRelContent(prev => ({
+                  ...prev,
+                  [number] : relResults,
+                }))
               }
               else {
                 // try riconciliation
@@ -236,11 +239,9 @@ function Card(props) {
         }
         return null
       }
-      
- 
     return null
     })
-    console.log(results)
+    
     
   }
 
@@ -273,7 +274,7 @@ function Card(props) {
             return <TextBlock key={'textblock-' + i} width={block.size} title={block.title} content={textContent}></TextBlock>
           }
 
-          else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title} category={block.category} content={relContent}></RelationBlock> }
+          else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title} category={block.category} content={relContent['id_'+i]}></RelationBlock> }
 
           else if (block.type === 'link') { return <LinkBlock key={'linkblock-' + i} width={block.size} title={block.title} links={block.content}></LinkBlock> }
 

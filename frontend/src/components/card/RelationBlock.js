@@ -7,10 +7,17 @@ function RelationBlock(props) {
 
   const [numericWidth, setNumericWidth] = useState(25);
   const [isLoaded, setIsLoaded] = useState(true);
-  const relList = props.content;
+  const [relList, setRelList] = useState([])
 
   useEffect(() => {
+    if (props.content === undefined) {
+      setIsLoaded(false);
+    } else {
+      setIsLoaded(true);
+      setRelList(props.content);
+    }
 
+  
   var current_width = props.width;
   if (current_width === 'small') {
     setNumericWidth(25);
@@ -30,11 +37,11 @@ function RelationBlock(props) {
         <p className={classes.blockTitle}><span>{props.title}</span></p>
         <div className={classes.cardBlockBox}>
         {relList.map(function(data) {
-          return ( <p KEY={data.link} className={classes.relationLi}><a href={"http://localhost:3000/card?title=" + data.name + "&cat="+ props.category +"&uri=" + data.link} target="_blank" rel="noopener noreferrer">————&nbsp;&nbsp; {data.name}</a></p>)
+          return ( <p key={data.link} className={classes.relationLi}><a href={"http://localhost:3000/card?title=" + data.name + "&cat="+ props.category +"&uri=" + data.link} target="_blank" rel="noopener noreferrer">————&nbsp;&nbsp; {data.name}</a></p>)
          })}  
         </div>
       </div>
-    </div> : <p>Loading relations... </p>
+    </div> : null
   );
 }
 

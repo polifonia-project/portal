@@ -440,7 +440,7 @@
                 "category" : "places",
                 "content": [  {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { <> ^wdt:P47 ?entity . ?entity wdt:P31/wdt:P279* wd:Q82794 . BIND(str(\"shares border with\") AS ?inverse_rel)}.  SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 10"
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { <> ^wdt:P47 ?entity . ?entity wdt:P31/wdt:P279* wd:Q82794 . BIND(str(\"shares border with\") AS ?inverse_rel) .  SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 10"
                 }]
             },
             "04" : {
