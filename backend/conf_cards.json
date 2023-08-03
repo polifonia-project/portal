@@ -14,25 +14,14 @@
             "02" : {
                 "type": "relation",
                 "size": "small",
-                "title": "Influenced by",
-                "content": [{},{},{}]
-            },
-            "03" : {
-                "type": "relation",
-                "size": "small",
                 "title": "Worked with",
+                "category" : "people",
                 "content": [ {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }]
             },
-            "04" : {
-                "type": "visual",
-                "size": "small",
-                "title": "Portrait",
-                "content": [{},{},{}]
-            },
-            "05" : {
+            "03" : {
                 "type": "link",
                 "size": "small",
                 "title": "Useful links",
@@ -86,22 +75,20 @@
                 "type": "relation",
                 "size": "small",
                 "title": "Influenced by",
+                "category" : "people",
                 "content": [ {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }]
             },
-            "03" : {
-                "type": "relation",
-                "size": "small",
-                "title": "Worked with",
-                "content": [{},{},{}]
-            },
             "04" : {
                 "type": "visual",
                 "size": "small",
                 "title": "Portrait",
-                "content": [{},{},{}]
+                "content": [{
+                    "dataset": "d_04",
+                    "query": "SELECT ?item ?itemLabel ?pic WHERE {<> wdt:P18 ?pic } LIMIT 1"
+                }]
             },
             "05" : {
                 "type": "link",
@@ -157,22 +144,20 @@
                 "type": "relation",
                 "size": "small",
                 "title": "Influenced by",
+                "category" : "people",
                 "content": [ {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }]
             },
-            "03" : {
-                "type": "relation",
-                "size": "small",
-                "title": "Worked with",
-                "content": [{},{},{}]
-            },
             "04" : {
                 "type": "visual",
                 "size": "small",
                 "title": "Portrait",
-                "content": [{},{},{}]
+                "content": [{
+                    "dataset": "d_04",
+                    "query": "SELECT ?item ?itemLabel ?pic WHERE {<> wdt:P18 ?pic } LIMIT 1"
+                }]
             },
             "05" : {
                 "type": "link",
@@ -228,22 +213,20 @@
                 "type": "relation",
                 "size": "small",
                 "title": "Influenced by",
+                "category" : "people",
                 "content": [ {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }]
             },
-            "03" : {
-                "type": "relation",
-                "size": "small",
-                "title": "Worked with",
-                "content": [{},{},{}]
-            },
             "04" : {
                 "type": "visual",
                 "size": "small",
                 "title": "Portrait",
-                "content": [{},{},{}]
+                "content": [{
+                    "dataset": "d_04",
+                    "query": "SELECT ?item ?itemLabel ?pic WHERE {<> wdt:P18 ?pic } LIMIT 1"
+                }]
             },
             "05" : {
                 "type": "link",
@@ -299,22 +282,20 @@
                 "type": "relation",
                 "size": "small",
                 "title": "Influenced by",
+                "category" : "people",
                 "content": [ {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }]
             },
-            "03" : {
-                "type": "relation",
-                "size": "small",
-                "title": "Worked with",
-                "content": [{},{},{}]
-            },
             "04" : {
                 "type": "visual",
                 "size": "small",
                 "title": "Portrait",
-                "content": [{},{},{}]
+                "content": [{
+                    "dataset": "d_04",
+                    "query": "SELECT ?item ?itemLabel ?pic WHERE {<> wdt:P18 ?pic } LIMIT 1"
+                }]
             },
             "05" : {
                 "type": "link",
@@ -358,6 +339,7 @@
         "color": "#09ff00",
         "blocks" : { 
             "01" : {
+                "id": "1",
                 "type": "text",
                 "size": "small",
                 "title": "Biography",
@@ -367,27 +349,28 @@
                     }]
             },
             "02" : {
+                "id": "2",
                 "type": "relation",
                 "size": "small",
-                "title": "Geographical contacts",
+                "title": "Related places",
+                "category" : "places",
                 "content": [ {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P19 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of birth\") AS ?rel) } UNION { <> wdt:P20 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of death\") AS ?rel) } UNION { <> wdt:P937 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has work location\") AS ?rel) } UNION { <> wdt:P740 ?entity. BIND(str(\"location of formation\") AS ?rel)} UNION { <> wdt:P495 ?entity. BIND(str(\"has country of origin\") AS ?rel)} . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 10"
                 }]
             },
             "03" : {
-                "type": "relation",
-                "size": "small",
-                "title": "Worked with",
-                "content": [{},{},{}]
-            },
-            "04" : {
+                "id": "3",
                 "type": "visual",
                 "size": "small",
                 "title": "Portrait",
-                "content": [{},{},{}]
+                "content": [{
+                    "dataset": "d_04",
+                    "query": "SELECT ?pic WHERE {<> wdt:P18 ?pic } LIMIT 1"
+                }]
             },
-            "05" : {
+            "04" : {
+                "id": "4",
                 "type": "link",
                 "size": "small",
                 "title": "Useful links",
@@ -431,7 +414,7 @@
             "01" : {
                 "id": "1",
                 "type": "text",
-                "size": "medium",
+                "size": "small",
                 "title": "Description",
                 "content": [{
                     "dataset": "d_04",
@@ -442,14 +425,26 @@
                 "id": "2",
                 "type": "relation",
                 "size": "small",
-                "title": "Borders",
+                "title": "Related places",
+                "category" : "places",
                 "content": [  {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P190 ?entity. ?entity wdt:P31/wdt:P279* wd:Q82794 . BIND(str(\"twinned administrative body\") AS ?rel) } UNION {<> ^wdt:P47 ?entity . ?entity wdt:P31/wdt:P279* wd:Q82794 . BIND(str(\"shares border with\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 10"
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { <> wdt:P190 ?entity. ?entity wdt:P31/wdt:P279* wd:Q82794 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 10"
                 }]
             },
             "03" : {
                 "id": "3",
+                "type": "relation",
+                "size": "small",
+                "title": "Borders",
+                "category" : "places",
+                "content": [  {
+                    "dataset": "d_04",
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { <> ^wdt:P47 ?entity . ?entity wdt:P31/wdt:P279* wd:Q82794 . BIND(str(\"shares border with\") AS ?inverse_rel)}.  SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 10"
+                }]
+            },
+            "04" : {
+                "id": "4",
                 "type": "link",
                 "size": "small",
                 "title": "Useful links",
@@ -484,8 +479,8 @@
                     }
                 ]
             },
-            "04" :{
-                "id": "4",
+            "05" :{
+                "id": "5",
                 "type": "visual",
                 "size": "medium",
                 "title": "City View",
@@ -494,8 +489,8 @@
                     "query": "SELECT ?item ?itemLabel ?pic WHERE {<> wdt:P18 ?pic } LIMIT 1"
                 }]
             },
-            "05" :{
-                "id": "5",
+            "06" :{
+                "id": "6",
                 "type": "visual",
                 "size": "medium",
                 "title": "Map",
@@ -523,22 +518,20 @@
                 "type": "relation",
                 "size": "small",
                 "title": "Influenced by",
+                "category" : "people",
                 "content": [ {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }]
             },
-            "03" : {
-                "type": "relation",
-                "size": "small",
-                "title": "Worked with",
-                "content": [{},{},{}]
-            },
             "04" : {
                 "type": "visual",
                 "size": "small",
                 "title": "Portrait",
-                "content": [{},{},{}]
+                "content": [{
+                    "dataset": "d_04",
+                    "query": "SELECT ?item ?itemLabel ?pic WHERE {<> wdt:P18 ?pic } LIMIT 1"
+                }]
             },
             "05" : {
                 "type": "link",
@@ -594,22 +587,20 @@
                 "type": "relation",
                 "size": "small",
                 "title": "Influenced by",
+                "category" : "people",
                 "content": [ {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }]
             },
-            "03" : {
-                "type": "relation",
-                "size": "small",
-                "title": "Worked with",
-                "content": [{},{},{}]
-            },
             "04" : {
                 "type": "visual",
                 "size": "small",
                 "title": "Portrait",
-                "content": [{},{},{}]
+                "content": [{
+                    "dataset": "d_04",
+                    "query": "SELECT ?item ?itemLabel ?pic WHERE {<> wdt:P18 ?pic } LIMIT 1"
+                }]
             },
             "05" : {
                 "type": "link",

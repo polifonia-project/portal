@@ -46,7 +46,7 @@
   opacity: 0.6;
  }
 
- .relationLi a:hover{
+ .relationLi:hover a{
   color: black;
   cursor: pointer;
   font-weight: 900;

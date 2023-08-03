@@ -24,7 +24,7 @@ function TextBlock(props) {
     <div className={classes.cardBlockContainer} style={{width: 'calc(' + numericWidth + '% - 25px)'}}>
       <p className={classes.blockTitle}><span>{props.title}</span></p>
       <div className={classes.cardBlockBox}>
-      <p className={classes.blockParagraph}>{props.content}</p>
+      <p className={classes.blockParagraph}>{props.content}.</p>
       {props.children}
     </div>
     </div>

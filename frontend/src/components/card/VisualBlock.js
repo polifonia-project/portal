@@ -6,9 +6,15 @@ import { useState, useEffect } from "react";
 function VisualBlock(props) {
 
   const [numericWidth, setNumericWidth] = useState(25);
+  const [isLoaded, setIsLoaded] = useState(true)
   
 
   useEffect(() => {
+  if (props.content === undefined) {
+    setIsLoaded(false)
+  } else {
+    setIsLoaded(true)
+  }
     var current_width = props.width;
   if (current_width === 'small') {
     setNumericWidth(25);
@@ -23,17 +29,19 @@ function VisualBlock(props) {
 
 
   return (
+    isLoaded ? 
     <div className={classes.cardBlockContainer} style={{width: 'calc(' + numericWidth + '% - 25px)'}}>
       <p className={classes.blockTitle}><span>{props.title}</span></p>
       <div className={classes.cardBlockBox}>
       <div className={classes.mockVis}>
-              <img 
+      <img 
       src={props.content}
       alt="new"
       />
       </div>
     </div>
-    </div>
+    </div> : null
+  
   );
 }
 
