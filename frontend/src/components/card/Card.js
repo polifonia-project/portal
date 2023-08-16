@@ -41,7 +41,7 @@ function Card(props) {
       // reset content states
       setTextContent("");
       setRelContent({});
-      setmediaContent({});
+      setMediaContent({});
 
       // launch fecth
       fetchResults(cardContent.uri);
@@ -278,7 +278,7 @@ function Card(props) {
 
           else if (block.type === 'link') { return <LinkBlock key={'linkblock-' + i} width={block.size} title={block.title} links={block.content}></LinkBlock> }
 
-          else if (block.type === 'media') { return <MediaBlock key={'mediablock-' + i} width={block.size} title={block.title} content={ mediaContent['id_'+ i] }></MediaBlock> }
+          else if (block.type === 'media') { return <MediaBlock key={'mediablock-' + i} width={block.size} title={block.title} class={block.class} content={ mediaContent['id_'+ i] }></MediaBlock> }
 
           else if (block.type === 'none') { return <WarningBlock key={'warningblock-' + i} width={'large'}></WarningBlock> }
           return null

@@ -45,3 +45,22 @@
   width: 100%;
   border-radius: 5px;
 }
+
+.mockVis video {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.mockVis audio {
+  width: 100%;
+  padding: 10px 19px 10px 19px;
+    border: 0.4px solid rgb(71, 71, 71);
+    border-radius: 3px;
+}
+
+
+.mockVis audio::-webkit-media-controls-play-button,
+     audio::-webkit-media-controls-panel {
+     background-color: #f4edec;
+     color: #f4edec;
+     }
