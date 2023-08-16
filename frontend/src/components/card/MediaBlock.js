@@ -1,9 +1,9 @@
 import React from "react";
-import classes from "./VisualBlock.module.css";
+import classes from "./MediaBlock.module.css";
 import { useState, useEffect } from "react";
 
 
-function VisualBlock(props) {
+function MediaBlock(props) {
 
   const [numericWidth, setNumericWidth] = useState(25);
   const [isLoaded, setIsLoaded] = useState(true)
@@ -46,4 +46,4 @@ function VisualBlock(props) {
 }
 
 
-export default VisualBlock;
+export default MediaBlock;

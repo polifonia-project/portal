@@ -82,7 +82,7 @@
                 }]
             },
             "04" : {
-                "type": "visual",
+                "type": "media",
                 "size": "small",
                 "title": "Portrait",
                 "content": [{
@@ -151,7 +151,7 @@
                 }]
             },
             "04" : {
-                "type": "visual",
+                "type": "media",
                 "size": "small",
                 "title": "Portrait",
                 "content": [{
@@ -220,7 +220,7 @@
                 }]
             },
             "04" : {
-                "type": "visual",
+                "type": "media",
                 "size": "small",
                 "title": "Portrait",
                 "content": [{
@@ -289,7 +289,7 @@
                 }]
             },
             "04" : {
-                "type": "visual",
+                "type": "media",
                 "size": "small",
                 "title": "Portrait",
                 "content": [{
@@ -361,7 +361,7 @@
             },
             "03" : {
                 "id": "3",
-                "type": "visual",
+                "type": "media",
                 "size": "small",
                 "title": "Portrait",
                 "content": [{
@@ -481,7 +481,7 @@
             },
             "05" :{
                 "id": "5",
-                "type": "visual",
+                "type": "media",
                 "size": "medium",
                 "title": "City View",
                 "content": [  {
@@ -491,7 +491,7 @@
             },
             "06" :{
                 "id": "6",
-                "type": "visual",
+                "type": "media",
                 "size": "medium",
                 "title": "Map",
                 "content": [  {
@@ -525,7 +525,7 @@
                 }]
             },
             "04" : {
-                "type": "visual",
+                "type": "media",
                 "size": "small",
                 "title": "Portrait",
                 "content": [{
@@ -594,7 +594,7 @@
                 }]
             },
             "04" : {
-                "type": "visual",
+                "type": "media",
                 "size": "small",
                 "title": "Portrait",
                 "content": [{

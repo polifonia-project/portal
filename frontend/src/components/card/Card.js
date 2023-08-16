@@ -6,7 +6,7 @@ import isDarkColor from 'is-dark-color';
 
 import TextBlock from "./TextBlock";
 import RelationBlock from "./RelationBlock.js";
-import VisualBlock from "./VisualBlock";
+import MediaBlock from "./MediaBlock";
 import LinkBlock from "./LinkBlock";
 import WarningBlock from "./WarningBlock";
 
@@ -28,7 +28,7 @@ function Card(props) {
   // content states
   const [textContent, setTextContent] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
   const [relContent, setRelContent] = useState({"id_1":[], "id_2":[]})
-  const [visualContent, setVisualContent] = useState({"id_3":'', "id_4":''})
+  const [mediaContent, setMediaContent] = useState({"id_3":'', "id_4":''})
 
 
   useEffect(() => {
@@ -41,7 +41,7 @@ function Card(props) {
       // reset content states
       setTextContent("");
       setRelContent({});
-      setVisualContent({});
+      setmediaContent({});
 
       // launch fecth
       fetchResults(cardContent.uri);
@@ -194,7 +194,7 @@ function Card(props) {
         }
         return null
       } 
-      else if (block.type === 'visual') {
+      else if (block.type === 'media') {
         let number = "";
         Object.values(block.content).map((q, i) => {
           dataset_id = q.dataset;
@@ -220,7 +220,7 @@ function Card(props) {
                     number = number - 1;
                     number = 'id_' + number;
                     let pic_link = res.pic.value;
-                    setVisualContent(prev => ({
+                    setMediaContent(prev => ({
                       ...prev,
                       [number] : pic_link,
                     }))
@@ -278,7 +278,7 @@ function Card(props) {
 
           else if (block.type === 'link') { return <LinkBlock key={'linkblock-' + i} width={block.size} title={block.title} links={block.content}></LinkBlock> }
 
-          else if (block.type === 'visual') { return <VisualBlock key={'visualblock-' + i} width={block.size} title={block.title} content={ visualContent['id_'+ i] }></VisualBlock> }
+          else if (block.type === 'media') { return <MediaBlock key={'mediablock-' + i} width={block.size} title={block.title} content={ mediaContent['id_'+ i] }></MediaBlock> }
 
           else if (block.type === 'none') { return <WarningBlock key={'warningblock-' + i} width={'large'}></WarningBlock> }
           return null
