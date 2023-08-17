@@ -90,9 +90,12 @@ def create_entities_files(categories, datasets):
     for d, cat_list in dat_cat_object.items():
         for cat in cat_list:
             name = d + '__' + cat
+            content_object = {}
+            content_object['sameAs'] = False
             entities_object = []
+            content_object['entities'] = entities_object
             with open('entities/' + name + '.json', 'w') as f:
-                json.dump(entities_object, f)
+                json.dump(content_object, f)
 
 
 def collect_entities_uris(categories, cat_id, datasets, d_id):
@@ -118,19 +121,21 @@ def fill_entities_files(state, categories, datasets, directory):
         # iterate over the files in the entities folder
         for filename in os.listdir(directory):
             # set the list that will host entities for a dataset_category
-            entities_list = read_json(directory+'/'+filename)
+            entities_file = read_json(directory+'/'+filename)
+            entities_list = entities_file['entities']
             # get dataset and category from filename
             split_name = filename.strip('.json').split('__')
             dat_id = split_name[0]
             cat_id = split_name[1]
 
-            # send query for that cat to the dat endpoint and retrieve list of uris
-            cat_entities = collect_entities_uris(
-                categories, cat_id, datasets, dat_id)
+            # send query for that cat to the dat endpoint and retrieve list of uris (convert to set to avoid duplicates)
+            cat_entities = set(collect_entities_uris(
+                categories, cat_id, datasets, dat_id))
             entities_list.extend(cat_entities)
+            entities_file['entities'] = entities_list
 
             # put everything in the corresponding json file
-            update_json(directory+'/'+filename, entities_list)
+            update_json(directory+'/'+filename, entities_file)
 
         print('[SUCCESS] filled entities files')
     else:
