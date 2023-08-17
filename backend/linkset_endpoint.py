@@ -7,7 +7,7 @@ import requests
 from flask import request, Response
 from urllib.parse import parse_qs, quote
 from SPARQLWrapper import SPARQLWrapper, POST
-from rdflib import Dataset
+from rdflib import Dataset, URIRef
 from pymantic import sparql
 
 # internal methods
@@ -82,7 +82,8 @@ def linkset_file_population(entities_dir, datasets, file):
         cat_id = split_name[1]
 
         # get the list of uris in the file
-        uri_list = methods.read_json(entities_dir+'/'+filename)
+        entities_file = methods.read_json(entities_dir+'/'+filename)
+        uri_list = entities_file['entities']
         # activate reconciliation process
         rec.first_level_reconciliation(
             uri_list, datasets, dat_id, cat_id, LILNKSETGRAPH, file)
@@ -90,9 +91,29 @@ def linkset_file_population(entities_dir, datasets, file):
 
 def linkset_endpoint_update(entities_dir, datasets, file):
     '''update Blazegraph enpoint with triples in linkset.nq'''
+
+    # work on named graphs with shared sameAs entities
+    # ds = parse_nquads(file)
+    # for filename in os.listdir(entities_dir):
+    #     uri_list = methods.read_json(entities_dir+'/'+filename)
+    #     for uri in uri_list:
+    #         query = '''
+    #             SELECT DISTINCT ?g
+    #             WHERE {
+    #             GRAPH ?g { {<'''+uri+'''> ?p ?o .} UNION { ?s ?p <'''+uri+'''> .}  }
+    #             }
+    #             '''
+
+    #         res = ds.query(query)
+    #         g_list = []
+    #         for row in res:
+    #             g_list.append(row.g)
+    #         if len(g_list) > 1:
+    #             '''query to retrieve triples, delete graph and insert into new'''
+    #             print(g_list[0])
+
     # populate the file
     linkset_file_population(entities_dir, datasets, file)
-
     # prepare endpoint
     server = sparql.SPARQLServer(UPDATEMYLINKSET)
 
@@ -121,10 +142,7 @@ def clear_linkset_endpoint():
     sparql = SPARQLWrapper(UPDATEMYLINKSET)
     sparql.setMethod(POST)
     delete_query = '''
-        DELETE {?s ?p ?o}
-        WHERE {
-            ?s ?p ?o
-        }
+        DROP NAMED
     '''
 
     sparql.setQuery(delete_query)
