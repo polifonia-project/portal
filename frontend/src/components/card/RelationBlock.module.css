@@ -54,5 +54,12 @@
 }
 
 .relationBlock {
-  margin-bottom: 30px;
+  margin-bottom: 3px;
+}
+
+.sourceTag {
+  font-size: 10px;
+  margin: 0;
+  margin-top: 3px;
+  color: grey;
 }

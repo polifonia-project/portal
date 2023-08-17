@@ -24,6 +24,7 @@ function Card(props) {
   const [fromSectionClip, setFromSectionClip] = useState(false)
   const [fromExternalLink, setFromExternalLink] = useState(false)
   const [displayShare, setDisplayShare] = useState(false)
+  const [resetOn, setResetOn] = useState(false)
 
   // content states
   const [textContent, setTextContent] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
@@ -33,7 +34,9 @@ function Card(props) {
 
   useEffect(() => {
     if (cardOpen) {
-      
+      //reset 
+      setResetOn(false);
+
       // entryway setting
       setFromSectionClip(cardContent.hasInput);
       setFromExternalLink(cardContent.goesBack);
@@ -66,6 +69,7 @@ function Card(props) {
 
   const closeCard = () => {
     setCardOpen(false);
+    setResetOn(false)
     if (isDarkColor([cardContent.color])) {
       setLightHeader();
     } else {
@@ -219,10 +223,10 @@ function Card(props) {
                   if (Object.keys(res).length > 0) {
                     number = number - 1;
                     number = 'id_' + number;
-                    let pic_link = res.pic.value;
+                    let media_link = res.media.value;
                     setMediaContent(prev => ({
                       ...prev,
-                      [number] : pic_link,
+                      [number] : media_link,
                     }))
 
                   }
@@ -271,7 +275,7 @@ function Card(props) {
 
         {Object.values(currentBlock).map((block, i) => {
           if (block.type === 'text') {
-            return <TextBlock key={'textblock-' + i} width={block.size} title={block.title} content={textContent}></TextBlock>
+            return <TextBlock key={'textblock-' + i} width={block.size} title={block.title} content={textContent} reset={resetOn}></TextBlock>
           }
 
           else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title} category={block.category} content={relContent['id_'+i]}></RelationBlock> }

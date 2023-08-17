@@ -49,10 +49,11 @@ function MediaBlock(props) {
       <div className={classes.cardBlockBox}>
         <div className={classes.mockVis}>
           {isImage ? <img src={props.content} alt="new"/> : null}
-          {isVideo ? <video src="http://commons.wikimedia.org/wiki/Special:FilePath/Couch%20Commander.webm" controls /> : null}
-          {isAudio ? <audio src="http://commons.wikimedia.org/wiki/Special:FilePath/JOHN%20MICHEL%20CELLO-BEETHOVEN%20SYMPHONY%207%20Allegretto.ogg" controls /> : null}
+          {isVideo ? <video src={props.content} controls /> : null}
+          {isAudio ? <audio src={props.content} controls /> : null}
         </div>
       </div>
+      <p className={classes.sourceTag}>Source: Wikidata</p>
     </div> : null
   
   );

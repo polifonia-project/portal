@@ -41,6 +41,7 @@ function RelationBlock(props) {
          })}  
         </div>
       </div>
+      <p className={classes.sourceTag}>Source: Wikidata</p>
     </div> : null
   );
 }

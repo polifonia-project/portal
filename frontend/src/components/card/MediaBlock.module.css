@@ -64,3 +64,11 @@
      background-color: #f4edec;
      color: #f4edec;
      }
+
+
+.sourceTag {
+      font-size: 10px;
+      margin: 0;
+      margin-top: 3px;
+      color: grey;
+    }
