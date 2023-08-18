@@ -151,3 +151,4 @@ def graph_merging(entity_uri):
     # if more than 1:
     # create new name for graph (the merging of the existing ones)
     # insert triples from each graph into the new one and delete the olds
+    pass
