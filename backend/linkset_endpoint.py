@@ -17,7 +17,8 @@ import methods
 UPDATEMYLINKSET = 'http://localhost:9999/blazegraph/namespace/kb/sparql/update'
 LILNKSETGRAPH = 'http://w3id.org/polifonia/linkset/'
 LINKSET_FILE = 'linkset.nq'
-LINKSET_DIRECTORY = 'entities'
+LINKSET_DIRECTORY = 'linkset_files'
+ENTITIES_DIRECTORY = 'entities'
 
 MYLINKSET = 'http://localhost:9999/bigdata/sparql'
 
@@ -73,7 +74,7 @@ def __contact_tp(data, is_post, content_type):
         #                        text=req.text)
 
 
-def linkset_file_population(entities_dir, datasets, file):
+def linkset_file_population(entities_dir, datasets, file_directory):
     '''fill the linkset starting from the entities files'''
 
     for filename in os.listdir(entities_dir):
@@ -81,12 +82,13 @@ def linkset_file_population(entities_dir, datasets, file):
         dat_id = split_name[0]
         cat_id = split_name[1]
 
+        file_path = file_directory + '/' + dat_id + '__' + cat_id + '.nq'
         # get the list of uris in the file
         entities_file = methods.read_json(entities_dir+'/'+filename)
         uri_list = entities_file.keys()
         # activate reconciliation process
         sameAS_track_dictionary = rec.first_level_reconciliation(
-            uri_list, datasets, dat_id, cat_id, LILNKSETGRAPH, file)
+            uri_list, datasets, dat_id, cat_id, LILNKSETGRAPH, file_path)
 
         # update sameAs information for each uri
         for uri, info in sameAS_track_dictionary.items():
@@ -95,7 +97,7 @@ def linkset_file_population(entities_dir, datasets, file):
         methods.update_json(entities_dir+'/'+filename, entities_file)
 
 
-def linkset_endpoint_update(entities_dir, datasets, file):
+def linkset_endpoint_update(entities_dir, datasets, linkset_directory):
     '''update Blazegraph enpoint with triples in linkset.nq'''
 
     # work on named graphs with shared sameAs entities
@@ -118,14 +120,16 @@ def linkset_endpoint_update(entities_dir, datasets, file):
     #             '''query to retrieve triples, delete graph and insert into new'''
     #             print(g_list[0])
 
-    # populate the file
-    linkset_file_population(entities_dir, datasets, file)
+    # populate the files
+    linkset_file_population(entities_dir, datasets, linkset_directory)
     # prepare endpoint
     server = sparql.SPARQLServer(UPDATEMYLINKSET)
 
     # Loading data to Blazegraph
-    server.update(
-        'load <file:///home/giuliarenda/web_portal_test/backend/linkset.nq>')  # to do: understand how to generalise
+    for filename in os.listdir(linkset_directory):
+        file_path = linkset_directory + '/' + filename
+        server.update(
+            'load <file:///home/giuliarenda/web_portal_test/backend/' + file_path + '>')  # to do: understand how to generalise
     print('[UPDATE] linkset populated')
 
 
@@ -156,18 +160,21 @@ def clear_linkset_endpoint():
     print('[DELETE] endpoint emptied')
 
 
-def clear_linkset_file(file):
+def clear_linkset_files(linkset_directory):
     '''empty linkset.nq'''
-    ds = parse_nquads(file)
-    ds.remove((None, None, None, None))
-    ds.serialize(destination=file, format='nquads', encoding='US-ASCII')
-    print('[DELETE] nq emptied')
+    for filename in os.listdir(linkset_directory):
+        file_path = linkset_directory+'/'+filename
+        ds = parse_nquads(file_path)
+        ds.remove((None, None, None, None))
+        ds.serialize(destination=file_path,
+                     format='nquads', encoding='US-ASCII')
+    print('[DELETE] nqs emptied')
 
 
-def clear_linkset(proceed=False, file='', directory=''):
+def clear_linkset(proceed, linkset_directory, entities_directory):
     '''apply clearing functions'''
     if proceed:
-        clear_linkset_file(file)
+        clear_linkset_files(linkset_directory)
         clear_linkset_endpoint()
-        clear_entities_files(directory)
+        clear_entities_files(entities_directory)
         print('[DELETE] linkset emptied')

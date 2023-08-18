@@ -11,9 +11,11 @@ app = Flask(__name__)
 # access all conf files: datasets (d), categories (cat), feed info (f) and carouse (car)
 d, cat, f, car, cards = methods.access_conf_info('conf_general.json')
 # i.ingest_data(d, cat)
-endpoint.clear_linkset(False, endpoint.LINKSET_DIRECTORY)
-methods.fill_entities_files('OFF', cat, d, endpoint.LINKSET_DIRECTORY)
-endpoint.linkset_endpoint_update('entities', d, endpoint.LINKSET_DIRECTORY)
+endpoint.clear_linkset(False, endpoint.LINKSET_DIRECTORY,
+                       endpoint.ENTITIES_DIRECTORY)
+methods.fill_entities_files('OFF', cat, d, endpoint.ENTITIES_DIRECTORY)
+endpoint.linkset_endpoint_update(
+    endpoint.ENTITIES_DIRECTORY, d, endpoint.LINKSET_DIRECTORY)
 
 
 @app.route('/conf_info', methods=['GET'])

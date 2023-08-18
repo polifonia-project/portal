@@ -102,14 +102,14 @@ def add_quads_to_conj_graph(ds, graph_name, dataset_1, dataset_1_label, uri_1, s
     return ds
 
 
-def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, linkset_namespace, file):
+def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, linkset_namespace, file_path):
     uris_to_search = []
     graph_names_dict = {}
     # big dictionary to track if origin_uri has at least 1 sameAs uri
     sameAs_track_dictionary = {}
 
     ds = Dataset()
-    ds.parse(file)
+    # ds.parse(file)
 
     for index, uri in enumerate(uris_list):
         # generate unique graphnames for each uri and store in dictionary
@@ -131,5 +131,9 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                 ds_updated = add_quads_to_conj_graph(
                     ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, datasets[d]['iri_base'], datasets[d]['name'])
                 ds = ds_updated
-    ds.serialize(destination=file, format='nquads', encoding='US-ASCII')
+    ds.serialize(destination=file_path, format='nquads', encoding='US-ASCII')
     return sameAs_track_dictionary
+
+
+def white_list_reconciliation():
+    pass
