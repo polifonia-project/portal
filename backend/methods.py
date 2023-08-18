@@ -91,9 +91,6 @@ def create_entities_files(categories, datasets):
         for cat in cat_list:
             name = d + '__' + cat
             content_object = {}
-            content_object['sameAs'] = False
-            entities_object = []
-            content_object['entities'] = entities_object
             with open('entities/' + name + '.json', 'w') as f:
                 json.dump(content_object, f)
 
@@ -122,7 +119,7 @@ def fill_entities_files(state, categories, datasets, directory):
         for filename in os.listdir(directory):
             # set the list that will host entities for a dataset_category
             entities_file = read_json(directory+'/'+filename)
-            entities_list = entities_file['entities']
+            entities_list = []
             # get dataset and category from filename
             split_name = filename.strip('.json').split('__')
             dat_id = split_name[0]
@@ -132,7 +129,12 @@ def fill_entities_files(state, categories, datasets, directory):
             cat_entities = set(collect_entities_uris(
                 categories, cat_id, datasets, dat_id))
             entities_list.extend(cat_entities)
-            entities_file['entities'] = entities_list
+            for entity in entities_list:
+                entity_info = {
+                    'sameAs': False,
+                    'label': ''
+                }
+                entities_file[entity] = entity_info
 
             # put everything in the corresponding json file
             update_json(directory+'/'+filename, entities_file)
