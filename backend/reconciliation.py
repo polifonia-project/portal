@@ -36,11 +36,11 @@ def query_same_as_internal(uri_list):
         PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
         PREFIX owl: <http://www.w3.org/2002/07/owl#>
         PREFIX schema: <https://schema.org/>
-        SELECT DISTINCT ?origin_uri ?same_uri
+        SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same_uri); SEPARATOR=", ") AS ?same_uri)
         WHERE {
             VALUES ?origin_uri {'''+values_to_search+'''} .
             ?same_uri owl:sameAs|skos:exactMatch|schema:sameAs|^owl:sameAs|^skos:exactMatch|^schema:sameAs ?origin_uri .
-        }
+        } GROUP BY ?origin_uri
         '''
         return find_query
     else:
@@ -69,22 +69,29 @@ def find_matches(query, endpoint):
     results = sparql.query().convert()
     results = {result['origin_uri']['value']: result['same_uri']['value']
                for result in results['results']['bindings'] if len(result['same_uri']['value']) > 0}
-    # {origin_uri: same_uri}
+    # {origin_uri: 'same_uri_1, same_uri_n'}
     return results
 
 
-def add_quads_to_conj_graph(ds, graph_name, dataset_1, dataset_1_label, uri_1, same_uri, dataset_2, dataset_2_label, double_location=False):
+def add_quads_to_conj_graph(ds, graph_name, dataset_1, dataset_1_label, uri_1, same_uri_list, dataset_2, dataset_2_label, double_location=False):
     named_graph = ds.graph(URIRef(graph_name))
-    # uri_1
+
+    # n case more than one uri for each origin_uri
+    same_uri_list = same_uri_list.split(', ')
+
     named_graph.add((URIRef(uri_1), SDO.location, URIRef(dataset_1)))
-    named_graph.add((URIRef(uri_1), OWL.sameAs, URIRef(same_uri)))
     named_graph.add((URIRef(dataset_1), RDFS.label,
-                    Literal(dataset_1_label, lang="en")))
-    # same_uri
-    named_graph.add((URIRef(same_uri), SDO.location, URIRef(dataset_2)))
-    named_graph.add((URIRef(same_uri), OWL.sameAs, URIRef(uri_1)))
-    named_graph.add((URIRef(dataset_2), RDFS.label,
-                    Literal(dataset_2_label, lang="en")))
+                     Literal(dataset_1_label, lang="en")))
+
+    for same_uri in same_uri_list:
+        # uri_1
+        named_graph.add((URIRef(uri_1), OWL.sameAs, URIRef(same_uri)))
+
+        # same_uri
+        named_graph.add((URIRef(same_uri), SDO.location, URIRef(dataset_2)))
+        named_graph.add((URIRef(same_uri), OWL.sameAs, URIRef(uri_1)))
+        named_graph.add((URIRef(dataset_2), RDFS.label,
+                        Literal(dataset_2_label, lang="en")))
 
     # in case of double location
     if double_location:
@@ -112,11 +119,11 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
         GRAPH_NAME = linkset_namespace + dataset_id + '/' + category_id + \
             '/' + str(index)  # I can work on generlising this
         graph_names_dict[uri] = GRAPH_NAME
+        # check with WHITE_LIST
         if any((match := substring) in uri for substring in WHITE_LIST):
             any_match = True
             match_list = uris_to_reconcile[match]
             match_list.append('<' + uri + '>')
-            print(match, 'try something else')
         else:
             uris_to_search.append('<' + uri + '>')
     print('TO SEARCH', uris_to_search)
@@ -128,9 +135,10 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
             sparql_endpoint = datasets[d]['sparql_endpoint']
             query = query_same_as_internal(uris_to_search)
             same_uris_dict = find_matches(query, sparql_endpoint)
-            for origin_uri, same_uri in same_uris_dict.items():
+            print('SAME', same_uris_dict)
+            for origin_uri, same_uri_list in same_uris_dict.items():
                 ds_updated = add_quads_to_conj_graph(
-                    ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri, datasets[d]['iri_base'], datasets[d]['name'])
+                    ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, datasets[d]['iri_base'], datasets[d]['name'])
                 ds = ds_updated
     # find matches in external datasets - 1st level of reconciliation
     if any_match:
