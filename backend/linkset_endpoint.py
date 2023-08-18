@@ -83,7 +83,7 @@ def linkset_file_population(entities_dir, datasets, file):
 
         # get the list of uris in the file
         entities_file = methods.read_json(entities_dir+'/'+filename)
-        uri_list = entities_file['entities']
+        uri_list = entities_file.keys()
         # activate reconciliation process
         rec.first_level_reconciliation(
             uri_list, datasets, dat_id, cat_id, LILNKSETGRAPH, file)
@@ -132,9 +132,9 @@ def parse_nquads(file):
 def clear_entities_files(directory):
     for filename in os.listdir(directory):
         # set the list that will host entities for a dataset_category
-        entities_list = methods.read_json(directory+'/'+filename)
-        entities_list.clear()
-        methods.update_json(directory+'/'+filename, entities_list)
+        entities_content = methods.read_json(directory+'/'+filename)
+        entities_content.clear()
+        methods.update_json(directory+'/'+filename, entities_content)
 
 
 def clear_linkset_endpoint():
