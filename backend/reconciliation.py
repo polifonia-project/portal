@@ -113,8 +113,8 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
 
     for index, uri in enumerate(uris_list):
         # generate unique graphnames for each uri and store in dictionary
-        GRAPH_NAME = linkset_namespace + dataset_id + '/' + category_id + \
-            '/' + str(index)  # I can work on generlising this
+        GRAPH_NAME = linkset_namespace + dataset_id + '__' + category_id + \
+            '__' + str(index)  # I can work on generlising this
         graph_names_dict[uri] = GRAPH_NAME
         uris_to_search.append('<' + uri + '>')
     print('TO SEARCH', uris_to_search)
@@ -137,3 +137,17 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
 
 def white_list_reconciliation():
     pass
+
+
+def graph_merging(entity_uri):
+    # for the uri ask in how many graphs it's in
+    # if only 1:
+    # I take the ?o and search if they appear in other graphs
+    # if not:
+    # pass
+    # if yes:
+    # create new name for graph (the merging of the existing ones)
+    # insert triples from each graph into the new one and delete the olds
+    # if more than 1:
+    # create new name for graph (the merging of the existing ones)
+    # insert triples from each graph into the new one and delete the olds
