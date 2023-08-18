@@ -139,14 +139,6 @@ def parse_nquads(file):
     return ds
 
 
-def clear_entities_files(directory):
-    for filename in os.listdir(directory):
-        # set the list that will host entities for a dataset_category
-        entities_content = methods.read_json(directory+'/'+filename)
-        entities_content.clear()
-        methods.update_json(directory+'/'+filename, entities_content)
-
-
 def clear_linkset_endpoint():
     '''empty endpoint'''
     sparql = SPARQLWrapper(UPDATEMYLINKSET)
@@ -160,21 +152,18 @@ def clear_linkset_endpoint():
     print('[DELETE] endpoint emptied')
 
 
-def clear_linkset_files(linkset_directory):
-    '''empty linkset.nq'''
-    for filename in os.listdir(linkset_directory):
-        file_path = linkset_directory+'/'+filename
-        ds = parse_nquads(file_path)
-        ds.remove((None, None, None, None))
-        ds.serialize(destination=file_path,
-                     format='nquads', encoding='US-ASCII')
+def clear_files(directory):
+    '''empty directory'''
+    for filename in os.listdir(directory):
+        file_path = directory+'/'+filename
+        os.remove(file_path)
     print('[DELETE] nqs emptied')
 
 
 def clear_linkset(proceed, linkset_directory, entities_directory):
     '''apply clearing functions'''
     if proceed:
-        clear_linkset_files(linkset_directory)
+        clear_files(linkset_directory)
         clear_linkset_endpoint()
-        clear_entities_files(entities_directory)
+        clear_files(entities_directory)
         print('[DELETE] linkset emptied')
