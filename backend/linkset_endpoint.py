@@ -85,8 +85,14 @@ def linkset_file_population(entities_dir, datasets, file):
         entities_file = methods.read_json(entities_dir+'/'+filename)
         uri_list = entities_file.keys()
         # activate reconciliation process
-        rec.first_level_reconciliation(
+        sameAS_track_dictionary = rec.first_level_reconciliation(
             uri_list, datasets, dat_id, cat_id, LILNKSETGRAPH, file)
+
+        # update sameAs information for each uri
+        for uri, info in sameAS_track_dictionary.items():
+            entities_file[uri]['sameAs'] = info
+
+        methods.update_json(entities_dir+'/'+filename, entities_file)
 
 
 def linkset_endpoint_update(entities_dir, datasets, file):

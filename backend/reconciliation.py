@@ -76,22 +76,23 @@ def find_matches(query, endpoint):
 def add_quads_to_conj_graph(ds, graph_name, dataset_1, dataset_1_label, uri_1, same_uri_list, dataset_2, dataset_2_label, double_location=False):
     named_graph = ds.graph(URIRef(graph_name))
 
-    # n case more than one uri for each origin_uri
-    same_uri_list = same_uri_list.split(', ')
-
     named_graph.add((URIRef(uri_1), SDO.location, URIRef(dataset_1)))
     named_graph.add((URIRef(dataset_1), RDFS.label,
                      Literal(dataset_1_label, lang="en")))
 
-    for same_uri in same_uri_list:
-        # uri_1
-        named_graph.add((URIRef(uri_1), OWL.sameAs, URIRef(same_uri)))
+    if len(same_uri_list) > 0:
+        # in case more than one uri for each origin_uri
+        same_uri_list = same_uri_list.split(', ')
+        for same_uri in same_uri_list:
+            # uri_1
+            named_graph.add((URIRef(uri_1), OWL.sameAs, URIRef(same_uri)))
 
-        # same_uri
-        named_graph.add((URIRef(same_uri), SDO.location, URIRef(dataset_2)))
-        named_graph.add((URIRef(same_uri), OWL.sameAs, URIRef(uri_1)))
-        named_graph.add((URIRef(dataset_2), RDFS.label,
-                        Literal(dataset_2_label, lang="en")))
+            # same_uri
+            named_graph.add(
+                (URIRef(same_uri), SDO.location, URIRef(dataset_2)))
+            named_graph.add((URIRef(same_uri), OWL.sameAs, URIRef(uri_1)))
+            named_graph.add((URIRef(dataset_2), RDFS.label,
+                            Literal(dataset_2_label, lang="en")))
 
     # in case of double location
     if double_location:
@@ -103,13 +104,9 @@ def add_quads_to_conj_graph(ds, graph_name, dataset_1, dataset_1_label, uri_1, s
 
 def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, linkset_namespace, file):
     uris_to_search = []
-    uris_to_reconcile = {}
-    for el in WHITE_LIST:
-        uris_to_reconcile[el] = []
-
-    any_match = False
-
     graph_names_dict = {}
+    # big dictionary to track if origin_uri has at least 1 sameAs uri
+    sameAs_track_dictionary = {}
 
     ds = Dataset()
     ds.parse(file)
@@ -119,15 +116,8 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
         GRAPH_NAME = linkset_namespace + dataset_id + '/' + category_id + \
             '/' + str(index)  # I can work on generlising this
         graph_names_dict[uri] = GRAPH_NAME
-        # check with WHITE_LIST
-        if any((match := substring) in uri for substring in WHITE_LIST):
-            any_match = True
-            match_list = uris_to_reconcile[match]
-            match_list.append('<' + uri + '>')
-        else:
-            uris_to_search.append('<' + uri + '>')
+        uris_to_search.append('<' + uri + '>')
     print('TO SEARCH', uris_to_search)
-    print('TO REC', uris_to_reconcile)
 
     # find matches in all internal datasets - 1st level of reconciliation
     if len(uris_to_search) > 0:
@@ -135,21 +125,11 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
             sparql_endpoint = datasets[d]['sparql_endpoint']
             query = query_same_as_internal(uris_to_search)
             same_uris_dict = find_matches(query, sparql_endpoint)
-            print('SAME', same_uris_dict)
             for origin_uri, same_uri_list in same_uris_dict.items():
+                if len(same_uri_list) > 0:
+                    sameAs_track_dictionary[origin_uri] = True
                 ds_updated = add_quads_to_conj_graph(
                     ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, datasets[d]['iri_base'], datasets[d]['name'])
                 ds = ds_updated
-    # find matches in external datasets - 1st level of reconciliation
-    if any_match:
-        for match, uri_list in uris_to_reconcile.items():
-            if len(uri_list) > 0:
-                sparql_endpoint = WHITE_LIST_PARAM[match]['sparql_endpoint']
-                query = query_same_as_external(
-                    uri_list, WHITE_LIST_PARAM[match]['property_path'])
-                same_uris_dict = find_matches(query, sparql_endpoint)
-                for origin_uri, same_uri in same_uris_dict.items():
-                    ds_updated = add_quads_to_conj_graph(ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'],
-                                                         datasets[dataset_id]['name'], origin_uri, same_uri, WHITE_LIST_PARAM[match]['iri_base'], match, double_location=True)
-                    ds = ds_updated
     ds.serialize(destination=file, format='nquads', encoding='US-ASCII')
+    return sameAs_track_dictionary
