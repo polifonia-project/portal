@@ -1,6 +1,9 @@
 # external libraries
 from flask import Flask, request, jsonify
 
+# builtin libraries
+import timeit
+
 # internal libraries
 import methods
 import indexing as i
@@ -12,13 +15,22 @@ app = Flask(__name__)
 # access all conf files: datasets (d), categories (cat), feed info (f) and carouse (car)
 d, cat, f, car, cards = methods.access_conf_info('conf_general.json')
 # i.ingest_data(d, cat)
-endpoint.clear_linkset(False, endpoint.LINKSET_DIRECTORY,
-                       endpoint.ENTITIES_DIRECTORY)
-methods.fill_entities_files('OFF', cat, d, endpoint.ENTITIES_DIRECTORY)
-endpoint.linkset_endpoint_update(
-    endpoint.ENTITIES_DIRECTORY, d, endpoint.LINKSET_DIRECTORY)
-rec.graphs_reconciliation(endpoint.ENTITIES_DIRECTORY,
-                          endpoint.UPDATEMYLINKSET)
+
+clear_linkset_result = timeit.timeit(
+    stmt='endpoint.clear_linkset(False, endpoint.LINKSET_DIRECTORY, endpoint.ENTITIES_DIRECTORY)', globals=globals(), number=1)
+print(f"Execution time for clear_linkset is {clear_linkset_result} seconds")
+
+fill_entities_files_result = timeit.timeit(
+    stmt='methods.fill_entities_files("OFF", cat, d, endpoint.ENTITIES_DIRECTORY)', globals=globals(), number=1)
+print(
+    f"Execution time for fill_entities_files is {fill_entities_files_result} seconds")
+
+linkset_endpoint_update_result = timeit.timeit(
+    stmt='endpoint.linkset_endpoint_update(endpoint.ENTITIES_DIRECTORY, d, endpoint.LINKSET_DIRECTORY)', globals=globals(), number=1)
+print(
+    f"Execution time for linkset_endpoint_update is {linkset_endpoint_update_result} seconds")
+
+# rec.graphs_reconciliation(endpoint.ENTITIES_DIRECTORY, endpoint.UPDATEMYLINKSET)
 
 
 @app.route('/conf_info', methods=['GET'])
