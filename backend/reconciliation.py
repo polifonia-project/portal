@@ -1,18 +1,22 @@
+# builtin libraries
+import os
+
 # external libraries
 from SPARQLWrapper import SPARQLWrapper, JSON
 from rdflib import URIRef, Literal, Dataset
 from rdflib.namespace import SDO, RDFS, OWL
 
-
 # internal methods
 import linkset_endpoint as endpoint
+import methods
 
 WHITE_LIST = ['wikidata', 'dbpedia', 'viaf', 'discogs']
 WHITE_LIST_PARAM = {
     'wikidata': {
         'sparql_endpoint': 'https://query.wikidata.org/sparql',
         'iri_base': 'http://www.wikidata.org/',
-        'property_path': 'owl:sameAs|skos:exactMatch|schema:sameAs|wdt:P2888|^owl:sameAs|^skos:exactMatch|^schema:sameAs|^wdt:P2888'
+        'property_path': 'owl:sameAs|skos:exactMatch|schema:sameAs|wdt:P2888|^owl:sameAs|^skos:exactMatch|^schema:sameAs|^wdt:P2888',
+        'query': 'SELECT DISTINCT ?origin_uri ?same_uri WHERE { VALUES ?origin_uri {<http://www.wikidata.org/entity/Q254>} .  { ?same_uri schema:sameAs|owl:sameAs|skos:exactMatch|^schema:sameAs|^owl:sameAs|^skos:exactMatch ?origin_uri . } UNION {?same_uri wdt:P214|^wdt:P214 ?origin_uri} UNION {?same_uri wdt:P1953|wdt:P1954|^wdt:P1953|^wdt:P1954 ?origin_uri }}'
     },
     'dbpedia': {
         'sparql_endpoint': 'https://dbpedia.org/sparql',
@@ -139,16 +143,82 @@ def white_list_reconciliation():
     pass
 
 
-def graph_merging(entity_uri):
+def graph_merging(entity_uri, endpoint):
+    query = '''
+        SELECT DISTINCT ?g
+        WHERE {
+            GRAPH ?g { {<'''+entity_uri+'''> ?p ?o .} }
+            }
+        '''
+    sparql = SPARQLWrapper(endpoint)
+    sparql.setQuery(query)
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
+
+    data = results['results']['bindings']
     # for the uri ask in how many graphs it's in
+    graphs_num = len(data)
+
+    graph_list = []
+    for result in data:
+        graph_list.append('<' + result['g']['value'] + '>')
+
+    values_to_search = ' '.join(graph_list)
+    # print('GRAPHS', graph_list)
     # if only 1:
-    # I take the ?o and search if they appear in other graphs
-    # if not:
-    # pass
-    # if yes:
-    # create new name for graph (the merging of the existing ones)
-    # insert triples from each graph into the new one and delete the olds
+    if graphs_num == 1:
+        # I take the ?o and search if they appear in other graphs
+        # o_query = '''
+        # SELECT DISTINCT ?g
+        # WHERE {
+        #     <'''+entity_uri+'''> ?p ?o .
+        #     GRAPH ?g { {?s ?p ?o } UNION {?o ?p ?s}  FILTER(?o != <'''+entity_uri+'''>)}
+        #     }
+        # '''
+        # sparql = SPARQLWrapper(endpoint)
+        # sparql.setQuery(o_query)
+        # sparql.setReturnFormat(JSON)
+        # o_results = sparql.query().convert()
+
+        # o_data = results['results']['bindings']
+        print('only 1')
+
+        # if not:
+        # pass
+        # if yes:
+
+        # create new name for graph (the merging of the existing ones)
+        # insert triples from each graph into the new one and delete the olds
     # if more than 1:
+    elif graphs_num > 1:
+        dat = ''
+        cat = ''
+        id = ''
+        graph_list = []
+        for result in data:
+            graph_name_parts = result['g']['value'].split('/')[-1].split('__')
+            dat = (dat + '__' + graph_name_parts[0]).strip('__')
+            cat = (cat + '__' + graph_name_parts[1]).strip('__')
+            id = (id + '__' + graph_name_parts[2]).strip('__')
+        new_graph_name = dat + '___' + cat + '___' + id
+        print(new_graph_name)
     # create new name for graph (the merging of the existing ones)
     # insert triples from each graph into the new one and delete the olds
-    pass
+
+
+def graphs_reconciliation(entities_dir, endpoint):
+    for filename in os.listdir(entities_dir):
+        entities_content = methods.read_json(entities_dir+'/'+filename)
+        for uri, info in entities_content.items():
+            if info['sameAs'] == True:
+                graph_merging(uri, endpoint)
+                # break
+        #     for uri in uri_list:
+
+        #         res = ds.query(query)
+        #         g_list = []
+        #         for row in res:
+        #             g_list.append(row.g)
+        #         if len(g_list) > 1:
+        #             '''query to retrieve triples, delete graph and insert into new'''
+        #             print(g_list[0])
