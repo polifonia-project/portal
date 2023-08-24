@@ -5,7 +5,6 @@
   margin-top:25px;
   font-size: 0.85em;
   margin-right: 25px;
-  border-radius: 3px;
   transition: all 1s ease;
   cursor: default;
   padding: 0px 30px 30px 30px;
@@ -13,8 +12,7 @@
 
 .cardBlockBox {
  /* box-shadow: 0px 0px 7px 0.3px #dfdad9; */
-  border-radius: 3px;
-  overflow: hidden;
+  
   font-family: "Helvetica Light";
   margin: 0;
   padding-top: 10px;
@@ -37,7 +35,6 @@
   display: contents;
   width: 100%;
   background-color: rgb(141, 140, 140);
-  border-radius: 5px;
   text-align: center;
 }
 
@@ -48,7 +45,6 @@
 
 .mockVis video {
   width: 100%;
-  border-radius: 5px;
 }
 
 .mockVis audio {
@@ -71,4 +67,32 @@
       margin: 0;
       margin-top: 3px;
       color: grey;
+      text-align: left;
+      margin-bottom: 10px;
     }
+
+.cardChevronRight {
+  opacity: 1;
+  position:absolute;
+  transform: translateX(-30px);
+  transition: all 1s ease;
+}
+
+.cardChevronLeft {
+  opacity: 1;
+  position:absolute;
+  transform: translateX(30px);
+  transition: all 1s ease;
+}
+
+.cardChevronRight:hover {
+  opacity: 1;
+  position:absolute;
+  transform: translateX(-30px);
+}
+
+.cardChevronLeft:hover {
+  opacity: 1;
+  position:absolute;
+  transform: translateX(30px);
+}

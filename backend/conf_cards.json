@@ -360,7 +360,7 @@
                 "class" : "image",
                 "content": [{
                     "dataset": "d_04",
-                    "query": "SELECT ?media WHERE {<> wdt:P18 ?media } LIMIT 1"
+                    "query": "SELECT ?media WHERE {<> wdt:P18 ?media }"
                 }]
             },
             "03" : {
@@ -371,7 +371,7 @@
                 "class" : "video",
                 "content": [{
                     "dataset": "d_04",
-                    "query": "SELECT ?media WHERE {<> wdt:P10 ?media } LIMIT 1"
+                    "query": "SELECT ?media WHERE {<> wdt:P10 ?media }"
                 }]
             },
             "04" : {
@@ -382,7 +382,7 @@
                 "class" : "audio",
                 "content": [{
                     "dataset": "d_04",
-                    "query": "SELECT ?media WHERE {<> wdt:P51 ?media } LIMIT 1"
+                    "query": "SELECT ?media WHERE {<> wdt:P51 ?media }"
                 }]
             },
             "05" : {
