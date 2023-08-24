@@ -5,6 +5,7 @@ from flask import Flask, request, jsonify
 import methods
 import indexing as i
 import linkset_endpoint as endpoint
+import reconciliation as rec
 
 app = Flask(__name__)
 
@@ -16,6 +17,8 @@ endpoint.clear_linkset(False, endpoint.LINKSET_DIRECTORY,
 methods.fill_entities_files('OFF', cat, d, endpoint.ENTITIES_DIRECTORY)
 endpoint.linkset_endpoint_update(
     endpoint.ENTITIES_DIRECTORY, d, endpoint.LINKSET_DIRECTORY)
+rec.graphs_reconciliation(endpoint.ENTITIES_DIRECTORY,
+                          endpoint.UPDATEMYLINKSET)
 
 
 @app.route('/conf_info', methods=['GET'])
