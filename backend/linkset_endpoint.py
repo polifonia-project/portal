@@ -20,7 +20,7 @@ LINKSET_FILE = 'linkset.nq'
 LINKSET_DIRECTORY = 'linkset_files'
 ENTITIES_DIRECTORY = 'entities'
 
-MYLINKSET = 'http://localhost:9999/bigdata/sparql'
+MYLINKSET = 'http://localhost:9999/bigdata/sparql/'
 
 
 def __run_query_string(active, query_string,
@@ -74,7 +74,7 @@ def __contact_tp(data, is_post, content_type):
         #                        text=req.text)
 
 
-def linkset_file_population(entities_dir, datasets, file_directory):
+def linkset_file_population(entities_dir, datasets, linkset_directory):
     '''fill the linkset starting from the entities files'''
 
     for filename in os.listdir(entities_dir):
@@ -82,13 +82,13 @@ def linkset_file_population(entities_dir, datasets, file_directory):
         dat_id = split_name[0]
         cat_id = split_name[1]
 
-        file_path = file_directory + '/' + dat_id + '__' + cat_id + '.nq'
+        new_linkset_file_path = linkset_directory + '/' + dat_id + '__' + cat_id + '.nq'
         # get the list of uris in the file
         entities_file = methods.read_json(entities_dir+'/'+filename)
         uri_list = entities_file.keys()
         # activate reconciliation process
         sameAS_track_dictionary = rec.first_level_reconciliation(
-            uri_list, datasets, dat_id, cat_id, LILNKSETGRAPH, file_path)
+            uri_list, datasets, dat_id, cat_id, LILNKSETGRAPH, new_linkset_file_path)
 
         # update sameAs information for each uri
         for uri, info in sameAS_track_dictionary.items():
@@ -99,26 +99,6 @@ def linkset_file_population(entities_dir, datasets, file_directory):
 
 def linkset_endpoint_update(entities_dir, datasets, linkset_directory):
     '''update Blazegraph enpoint with triples in linkset.nq'''
-
-    # work on named graphs with shared sameAs entities
-    # ds = parse_nquads(file)
-    # for filename in os.listdir(entities_dir):
-    #     uri_list = methods.read_json(entities_dir+'/'+filename)
-    #     for uri in uri_list:
-    #         query = '''
-    #             SELECT DISTINCT ?g
-    #             WHERE {
-    #             GRAPH ?g { {<'''+uri+'''> ?p ?o .} UNION { ?s ?p <'''+uri+'''> .}  }
-    #             }
-    #             '''
-
-    #         res = ds.query(query)
-    #         g_list = []
-    #         for row in res:
-    #             g_list.append(row.g)
-    #         if len(g_list) > 1:
-    #             '''query to retrieve triples, delete graph and insert into new'''
-    #             print(g_list[0])
 
     # populate the files
     linkset_file_population(entities_dir, datasets, linkset_directory)
