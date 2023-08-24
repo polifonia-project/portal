@@ -35,8 +35,7 @@ WHITE_LIST_PARAM = {
 # altro parametro tipo lista con sparqlenpoint
 def query_same_as_internal(uri_list):
     values_to_search = ' '.join(uri_list)
-    if len(values_to_search) < 1500:
-        find_query = '''
+    find_query = '''
         PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
         PREFIX owl: <http://www.w3.org/2002/07/owl#>
         PREFIX schema: <https://schema.org/>
@@ -46,9 +45,7 @@ def query_same_as_internal(uri_list):
             ?same_uri owl:sameAs|skos:exactMatch|schema:sameAs|^owl:sameAs|^skos:exactMatch|^schema:sameAs ?origin_uri .
         } GROUP BY ?origin_uri
         '''
-        return find_query
-    else:
-        print('[NEED ACTION] values_to_search too long.')
+    return find_query
 
 
 def query_same_as_external(uri_list, property_path):
@@ -127,14 +124,35 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
     if len(uris_to_search) > 0:
         for d in datasets:
             sparql_endpoint = datasets[d]['sparql_endpoint']
-            query = query_same_as_internal(uris_to_search)
-            same_uris_dict = find_matches(query, sparql_endpoint)
-            for origin_uri, same_uri_list in same_uris_dict.items():
-                if len(same_uri_list) > 0:
-                    sameAs_track_dictionary[origin_uri] = True
-                ds_updated = add_quads_to_conj_graph(
-                    ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, datasets[d]['iri_base'], datasets[d]['name'])
-                ds = ds_updated
+            # 1500 is the control number to avoid having a VALUE in the QUERY that is too long
+            if len(' '.join(uris_to_search)) < 1500:
+                query = query_same_as_internal(uris_to_search)
+                same_uris_dict = find_matches(query, sparql_endpoint)
+                for origin_uri, same_uri_list in same_uris_dict.items():
+                    if len(same_uri_list) > 0:
+                        sameAs_track_dictionary[origin_uri] = True
+                    ds_updated = add_quads_to_conj_graph(
+                        ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, datasets[d]['iri_base'], datasets[d]['name'])
+                    ds = ds_updated
+            elif len(' '.join(uris_to_search)) >= 1500:
+                # if too long we divide the list in more or less half
+                n = round(len(uris_to_search)/4)
+                uris_to_search_chunks = methods.divide_list_in_chunks(
+                    uris_to_search, n)
+                # for every chunk, we repeate the same process aas above
+                # but what happens if even the half is >= 1500?
+                # # Generalise the proccess taking into account that ds cannot be passed into between functions.
+                for chunk in uris_to_search_chunks:
+                    if len(' '.join(chunk)) >= 1500:
+                        print('WARNING uris_to_search length')
+                    query = query_same_as_internal(chunk)
+                    same_uris_dict = find_matches(query, sparql_endpoint)
+                    for origin_uri, same_uri_list in same_uris_dict.items():
+                        if len(same_uri_list) > 0:
+                            sameAs_track_dictionary[origin_uri] = True
+                        ds_updated = add_quads_to_conj_graph(
+                            ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, datasets[d]['iri_base'], datasets[d]['name'])
+                        ds = ds_updated
     ds.serialize(destination=file_path, format='nquads', encoding='US-ASCII')
     return sameAs_track_dictionary
 

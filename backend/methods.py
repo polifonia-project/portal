@@ -142,3 +142,9 @@ def fill_entities_files(state, categories, datasets, directory):
         print('[SUCCESS] filled entities files')
     else:
         print('Please turn ON state in fill_entities_files if you want to fill in the entities folder')
+
+
+def divide_list_in_chunks(l, n):
+    '''Yield successive n-sized chunks from l.'''
+    for i in range(0, len(l), n):
+        yield l[i:i + n]
