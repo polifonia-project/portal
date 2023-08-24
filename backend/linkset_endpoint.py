@@ -20,7 +20,7 @@ LINKSET_FILE = 'linkset.nq'
 LINKSET_DIRECTORY = 'linkset_files'
 ENTITIES_DIRECTORY = 'entities'
 
-MYLINKSET = 'http://localhost:9999/bigdata/sparql/'
+MYLINKSET = 'http://localhost:9999/bigdata/sparql'
 
 
 def __run_query_string(active, query_string,
