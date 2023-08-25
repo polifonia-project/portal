@@ -12,7 +12,7 @@ function MediaBlock(props) {
   const [isVideo, setIsVideo] = useState(false)
   const [isAudio, setIsAudio] = useState(false)
   const [activeItemIndex, setActiveItemIndex] = useState(0);
-
+  const [singleResult, setSingleResult] = useState(true);
   const [mediaList, setMediaList] = useState([])
 
 
@@ -23,6 +23,14 @@ function MediaBlock(props) {
   } else {
     setIsLoaded(true)
     setMediaList(props.content);
+  }
+
+  // single-result
+
+  if (mediaList.length === 1) {
+    setSingleResult(false)
+  } else {
+    setSingleResult(true)
   }
 
   // class 
@@ -56,17 +64,18 @@ function MediaBlock(props) {
       <ItemsCarousel numberOfCards={1} gutter={30}
       requestToChangeActive={setActiveItemIndex}
       activeItemIndex={activeItemIndex}
-        leftChevron={<button className={classes.cardChevronLeft}>{'<'}</button>}
-        rightChevron={<button className={classes.cardChevronRight}>{'>'}</button>}
+      leftChevron={<button className={classes.leftChevron}>{" "}</button>}
+      rightChevron={<button className={classes.rightChevron}>{" "}</button>}
         outsideChevron={true}
         chevronWidth={40}
       >
-      {mediaList.map(function(content) { return ( 
+      {mediaList.map(function(content, indx) { return ( 
         <div className={classes.mockVis} key={content}>
           {isImage ? <img src={content} alt="new"/>  : null}
           {isVideo ? <video src={content} controls /> : null}
           {isAudio ? <audio src={content} controls /> : null}
           <p className={classes.sourceTag}>Source: Wikidata</p>
+          {singleResult ? <p className={classes.sourceTag}> {indx +1}/{mediaList.length}</p> : null }
         </div>
       )})}
       </ItemsCarousel>

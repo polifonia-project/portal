@@ -96,3 +96,45 @@
   position:absolute;
   transform: translateX(30px);
 }
+
+.leftChevron {
+  border-radius: 50%;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  color: white;
+  border: 0.5px solid transparent;
+  outline: 0;
+  background-color: #f4edec;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background-image: url("../../assets/png/carouselarrow.png");
+  background-repeat: no-repeat;
+  background-size: 35%;
+  background-position: right 8px top 5px;
+  transform: scaleX(-1);
+  position: absolute;
+  top: 0;
+}
+
+.rightChevron {
+  border-radius: 50%;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  color: white;
+  border: 0.5px solid transparent;
+  outline: 0;
+  background-color: #f4edec;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background-image: url("../../assets/png/carouselarrow.png");
+  background-repeat: no-repeat;
+  background-size: 35%;
+  background-position: right 8px top 5px;
+  position: absolute;
+  top: 0;
+}
+
+.leftChevron, 
+.rightChevron { 
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
