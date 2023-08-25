@@ -27,9 +27,11 @@ function Card(props) {
   const [resetOn, setResetOn] = useState(false)
 
   // content states
-  const [textContent, setTextContent] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
-  const [relContent, setRelContent] = useState({"id_1":[], "id_2":[]})
-  const [mediaContent, setMediaContent] = useState({"id_3":[], "id_4":[]})
+  const [textContent, setTextContent] = useState({"id_1":[], "id_2":[]})
+  const [relContent, setRelContent] = useState({"id_3":[], "id_4":[]})
+  const [mediaContent, setMediaContent] = useState({"id_5":[], "id_6":[]})
+
+  const [textList] = useState(['Lorem ipsum dolor sit amet','Lorem ipsum dolor sit amet','Lorem ipsum dolor sit amet']);
 
 
   useEffect(() => {
@@ -42,7 +44,7 @@ function Card(props) {
       setFromExternalLink(cardContent.goesBack);
 
       // reset content states
-      setTextContent("");
+      setTextContent({});
       setRelContent({});
       setMediaContent({});
 
@@ -100,19 +102,21 @@ function Card(props) {
 
   // fetchResults demo 
   const fetchResults = (uri) => {
-    let results = []
-    let query_method = "sparql_endpoint"
     let endpoint = "https://query.wikidata.org/sparql"
-    let dataset_id = "";
     let query = "";
     
 
     Object.values(currentBlock).map((block, i) => {
       
       if (block.type === 'text') {
+        let textResults = []
+        let number = "";
         Object.values(block.content).map((q, i) => {
-          dataset_id = q.dataset;
           query = q.query;
+          number = block.id;
+          number = number - 1;
+          number = 'id_' + number;
+          textResults = [];
           return null
         })
         query = query.replaceAll('<>', '<' + uri + '>');
@@ -126,19 +130,18 @@ function Card(props) {
             .then((data) => {
   
               let dataLen = data.results.bindings.length;
-  
               if (dataLen > 0) {
                 data.results.bindings.forEach(res => {
                   if (Object.keys(res).length > 0) {
-                    let singleResult = {}
-                    singleResult.desc = res.desc.value;
-                    singleResult.method = query_method;
-                    singleResult.dataset = dataset_id;
-                    results.push(singleResult);
-                    setTextContent(res.desc.value)
+                    let desc = res.desc.value;
+                    textResults.push(desc); 
                   }
                 }
                 )
+                setTextContent(prev => ({
+                  ...prev,
+                  [number] : textResults,
+                }))
               }
               else {
                 // try riconciliation
@@ -149,12 +152,11 @@ function Card(props) {
           console.log('error', err)
         }
         return null
-      }
+      } 
       else if (block.type === 'relation') {
         let relResults = []
         let number = "";
         Object.values(block.content).map((q, i) => {
-          dataset_id = q.dataset;
           query = q.query;
           number = block.id;
           number = number - 1;
@@ -202,7 +204,6 @@ function Card(props) {
         let mediaResults = []
         let number = "";
         Object.values(block.content).map((q, i) => {
-          dataset_id = q.dataset;
           query = q.query;
           number = block.id;
           number = number - 1;
@@ -276,7 +277,7 @@ function Card(props) {
 
         {Object.values(currentBlock).map((block, i) => {
           if (block.type === 'text') {
-            return <TextBlock key={'textblock-' + i} width={block.size} title={block.title} content={textContent} reset={resetOn}></TextBlock>
+            return <TextBlock key={'textblock-' + i} width={block.size} title={block.title} content={textContent['id_'+i]} reset={resetOn}></TextBlock>
           }
 
           else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title} category={block.category} content={relContent['id_'+i]}></RelationBlock> }

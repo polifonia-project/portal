@@ -1,18 +1,37 @@
 import React, { useEffect } from "react";
 import classes from "./TextBlock.module.css";
 import { useState } from "react";
+import ItemsCarousel from "react-items-carousel";
 
 
 function TextBlock(props) {
 
   const [numericWidth, setNumericWidth] = useState(25);
-  const [showAllSources, setShowAllSources] = useState(props.reset);
-
-  const toggleSources = () => {
-    setShowAllSources(prev => !prev)
-  }
+  const [isLoaded, setIsLoaded] = useState(true)
+  const [textList, setTextList] = useState([])
+  const [singleResult, setSingleResult] = useState(true);
+  const [activeItemIndex, setActiveItemIndex] = useState(0);
 
   useEffect(() => {
+
+  // loading
+  if (props.content === undefined) {
+    setIsLoaded(false)
+  } else {
+    setIsLoaded(true)
+    setTextList(props.content);
+  }
+
+  // single-result
+
+  if (textList.length === 1) {
+    setSingleResult(false)
+  } else {
+    setSingleResult(true)
+  }
+
+
+  // width
     var current_width = props.width;
   if (current_width === 'small') {
     setNumericWidth(25);
@@ -26,26 +45,28 @@ function TextBlock(props) {
   });
 
   return (
+    isLoaded ? 
     <div className={classes.cardBlockContainer} style={{width: 'calc(' + numericWidth + '% - 25px)'}}>
       <p className={classes.blockTitle}><span>{props.title}</span></p>
       <div className={classes.cardBlockBox}>
-        <p className={classes.blockParagraph}>{props.content}.</p>
-       <p className={classes.sourceTag}>Source: Wikidata</p>
+      <ItemsCarousel numberOfCards={1} gutter={30}
+      requestToChangeActive={setActiveItemIndex}
+      activeItemIndex={activeItemIndex}
+      leftChevron={<button className={classes.leftChevron}>{" "}</button>}
+      rightChevron={<button className={classes.rightChevron}>{" "}</button>}
+      outsideChevron={true}
+      chevronWidth={40}
+      >
+      {textList.map(function(content, indx) { return ( 
+        <div className={classes.textResult} key={content}>
+          <p className={classes.blockParagraph}>{content}.</p>
+          <p className={classes.sourceTag}>Source: Wikidata</p>
+          {singleResult ? <p className={classes.sourceTag}> {indx +1}/{textList.length}</p> : null }
+        </div>
+      )})}
+      </ItemsCarousel>
       </div>
-      {showAllSources ?  
-      <span >
-      <div className={classes.cardBlockBox}>
-        <p className={classes.blockParagraph}>{props.content}.</p>
-       <p className={classes.sourceTag}>Source: Wikidata</p>
-      </div>
-      <div className={classes.cardBlockBox}>
-        <p className={classes.blockParagraph}>{props.content}.</p>
-       <p className={classes.sourceTag}>Source: Wikidata</p>
-      </div>
-      </span> : null}
-
-    <p className={classes.sourceCount}>Shown:{showAllSources ? "3/3" : "1/3"}<button onClick={toggleSources}>{showAllSources ? "Hide others" : "Show all"}</button></p>
-    </div>
+    </div> : null
   );
 }
 

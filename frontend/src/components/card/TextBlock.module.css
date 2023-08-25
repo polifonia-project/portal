@@ -14,9 +14,9 @@
 .cardBlockBox {
  /* box-shadow: 0px 0px 7px 0.3px #dfdad9; */
   border-radius: 3px;
-  overflow: hidden;
   font-family: "Helvetica Light";
   margin: 0;
+  margin-top: 10px;
 }
 
 .cardBlockContainer:hover {
@@ -38,6 +38,7 @@
   color: black;
   font-family: 'Helvetica Light';
   margin-bottom: 3px;
+  margin-top: 0px;
 }
 
 .blockParagraph:first-letter {
@@ -64,8 +65,9 @@ color: white;
 .sourceTag {
   font-size: 10px;
   margin: 0;
-  margin-top: 3px;
+  margin-top: 7px;
   color: grey;
+  margin-bottom: 10px;
 }
 
 .sourceCount {
@@ -107,3 +109,77 @@ color: white;
 }
 
 
+.cardChevronRight {
+  opacity: 1;
+  position:absolute;
+  transform: translateX(-30px);
+  transition: all 1s ease;
+}
+
+.cardChevronLeft {
+  opacity: 1;
+  position:absolute;
+  transform: translateX(30px);
+  transition: all 1s ease;
+}
+
+.cardChevronRight:hover {
+  opacity: 1;
+  position:absolute;
+  transform: translateX(-30px);
+}
+
+.cardChevronLeft:hover {
+  opacity: 1;
+  position:absolute;
+  transform: translateX(30px);
+}
+
+.leftChevron {
+  border-radius: 50%;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  color: white;
+  border: 0.5px solid transparent;
+  outline: 0;
+  background-color: #f4edec;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background-image: url("../../assets/png/carouselarrow.png");
+  background-repeat: no-repeat;
+  background-size: 35%;
+  background-position: right 8px top 5px;
+  transform: scaleX(-1);
+  position: absolute;
+  top: 0;
+}
+
+.rightChevron {
+  border-radius: 50%;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  color: white;
+  border: 0.5px solid transparent;
+  outline: 0;
+  background-color: #f4edec;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background-image: url("../../assets/png/carouselarrow.png");
+  background-repeat: no-repeat;
+  background-size: 35%;
+  background-position: right 8px top 5px;
+  position: absolute;
+  top: 0;
+}
+
+.leftChevron, 
+.rightChevron { 
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+
+.textResult {
+  display: contents;
+  width: 100%;
+  background-color: rgb(141, 140, 140);
+}
