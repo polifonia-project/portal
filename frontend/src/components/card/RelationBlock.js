@@ -8,8 +8,10 @@ function RelationBlock(props) {
   const [numericWidth, setNumericWidth] = useState(25);
   const [isLoaded, setIsLoaded] = useState(true);
   const [relList, setRelList] = useState([])
+  const [chunkedList, setchunkedList] = useState([])
 
   useEffect(() => {
+  // loading
     if (props.content === undefined) {
       setIsLoaded(false);
     } else {
@@ -17,7 +19,7 @@ function RelationBlock(props) {
       setRelList(props.content);
     }
 
-  
+  // width
   var current_width = props.width;
   if (current_width === 'small') {
     setNumericWidth(25);
@@ -30,19 +32,42 @@ function RelationBlock(props) {
   }
   });
 
+
+
+  useEffect(() => { // compontentDidUpdate
+
+  // limit 10 results per column
+   if (relList.length > 10) {
+    const chunkSize = 10;
+    for (let i = 0; i < relList.length; i += chunkSize) {
+    const chunk = relList.slice(i, i + chunkSize);
+    setchunkedList(prevState => [...prevState, chunk])
+    }
+   } else if (relList.length === 0) { 
+    setchunkedList([]);
+   } else {
+    setchunkedList([relList]);
+   }
+  }, [isLoaded]);
+  
+
   return (
-    isLoaded ? 
-    <div className={classes.cardBlockContainer} style={{width: 'calc(' + numericWidth + '% - 25px)'}}>
-      <div className={classes.relationBlock}>
-        <p className={classes.blockTitle}><span>{props.title}</span></p>
+    isLoaded ? <>
+      {chunkedList.map(function(list, idx) {
+       return (
+       <div className={classes.cardBlockContainer} style={{width: 'calc(' + numericWidth + '% - 25px)'}}>
+       <div className={classes.relationBlock}>
+        {(()=> { if (idx === 0) { return <p className={classes.blockTitle}><span>{props.title}</span></p>} else {return <p className={classes.blockTitleHidden}><span>{props.title}</span></p>}})()}
         <div className={classes.cardBlockBox}>
-        {relList.map(function(data) {
+        {list.map(function(data) {
           return ( <p key={data.link} className={classes.relationLi}><a href={"http://localhost:3000/card?title=" + data.name + "&cat="+ props.category +"&uri=" + data.link} target="_blank" rel="noopener noreferrer">————&nbsp;&nbsp; {data.name}</a></p>)
          })}  
         </div>
+        <p className={classes.sourceTag}>Source: Wikidata</p>
       </div>
-      <p className={classes.sourceTag}>Source: Wikidata</p>
-    </div> : null
+      </div>)
+      })}  
+    </>: null
   );
 }
 

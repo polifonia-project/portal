@@ -31,8 +31,6 @@ function Card(props) {
   const [relContent, setRelContent] = useState({"id_3":[], "id_4":[]})
   const [mediaContent, setMediaContent] = useState({"id_5":[], "id_6":[]})
 
-  const [textList] = useState(['Lorem ipsum dolor sit amet','Lorem ipsum dolor sit amet','Lorem ipsum dolor sit amet']);
-
 
   useEffect(() => {
     if (cardOpen) {

@@ -22,7 +22,8 @@
 .cardBlockContainer:hover {
 }
 
-.blockTitle {
+.blockTitle,
+.blockTitleHidden {
   margin: 0;
 }
 
@@ -30,6 +31,14 @@
   font-size: 1.2em;
   color: rgb(40, 39, 39);
   font-family: 'Helvetica Regular';
+}
+
+.blockTitleHidden span{
+  font-size: 1.2em;
+  color: rgb(40, 39, 39);
+  font-family: 'Helvetica Regular';
+  color:transparent;
+  opacity: 0;
 }
 
 .relationLi {
