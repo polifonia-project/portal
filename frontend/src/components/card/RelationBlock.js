@@ -17,6 +17,7 @@ function RelationBlock(props) {
     } else {
       setIsLoaded(true);
       setRelList(props.content);
+      
     }
 
   // width
@@ -55,7 +56,7 @@ function RelationBlock(props) {
     isLoaded ? <>
       {chunkedList.map(function(list, idx) {
        return (
-       <div className={classes.cardBlockContainer} style={{width: 'calc(' + numericWidth + '% - 25px)'}}>
+       <div key={'rel-'+idx} className={classes.cardBlockContainer} style={{width: 'calc(' + numericWidth + '% - 25px)'}}>
        <div className={classes.relationBlock}>
         {(()=> { if (idx === 0) { return <p className={classes.blockTitle}><span>{props.title}</span></p>} else {return <p className={classes.blockTitleHidden}><span>{props.title}</span></p>}})()}
         <div className={classes.cardBlockBox}>
@@ -63,8 +64,8 @@ function RelationBlock(props) {
           return ( <p key={data.link} className={classes.relationLi}><a href={"http://localhost:3000/card?title=" + data.name + "&cat="+ props.category +"&uri=" + data.link} target="_blank" rel="noopener noreferrer">————&nbsp;&nbsp; {data.name}</a></p>)
          })}  
         </div>
-        <p className={classes.sourceTag}>Source: Wikidata</p>
       </div>
+      {(()=> { if (chunkedList.length === idx+1) { return <p className={classes.sourceTag}>Source: {props.source.name} </p>} else {return null}})()}
       </div>)
       })}  
     </>: null

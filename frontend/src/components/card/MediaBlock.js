@@ -71,10 +71,10 @@ function MediaBlock(props) {
       >
       {mediaList.map(function(content, indx) { return ( 
         <div className={classes.mockVis} key={content}>
-          {isImage ? <img src={content} alt="new"/>  : null}
-          {isVideo ? <video src={content} controls /> : null}
-          {isAudio ? <audio src={content} controls /> : null}
-          <p className={classes.sourceTag}>Source: Wikidata</p>
+          {isImage ? <img src={content.mediaLink} alt="new"/>  : null}
+          {isVideo ? <video src={content.mediaLink} controls /> : null}
+          {isAudio ? <audio src={content.mediaLink} controls /> : null}
+          <p className={classes.sourceTag}>Source: {props.datasets[content.dataset].name}</p>
           {singleResult ? <p className={classes.sourceTag}> {indx +1}/{mediaList.length}</p> : null }
         </div>
       )})}

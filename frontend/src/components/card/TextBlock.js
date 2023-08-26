@@ -57,13 +57,15 @@ function TextBlock(props) {
       outsideChevron={true}
       chevronWidth={40}
       >
-      {textList.map(function(content, indx) { return ( 
-        <div className={classes.textResult} key={content}>
-          <p className={classes.blockParagraph}>{content}.</p>
-          <p className={classes.sourceTag}>Source: Wikidata</p>
-          {singleResult ? <p className={classes.sourceTag}> {indx +1}/{textList.length}</p> : null }
-        </div>
-      )})}
+      {textList.map(function(content, indx) { 
+          return ( 
+          <div className={classes.textResult} key={content.desc}>
+            <p className={classes.blockParagraph}>{content.desc}.</p>
+            <p className={classes.sourceTag}>Source: {props.datasets[content.dataset].name}</p>
+            {singleResult ? <p className={classes.sourceTag}> {indx +1}/{textList.length}</p> : null }
+          </div>
+          )
+         })}  
       </ItemsCarousel>
       </div>
     </div> : null

@@ -26,9 +26,12 @@ function Card(props) {
   const [displayShare, setDisplayShare] = useState(false)
   const [resetOn, setResetOn] = useState(false)
 
+  const [datasets, setDatasets] = useState("")
+
   // content states
   const [textContent, setTextContent] = useState({"id_1":[], "id_2":[]})
   const [relContent, setRelContent] = useState({"id_3":[], "id_4":[]})
+  const [relContentSource, setRelContentSource] = useState({"id_3":[], "id_4":[]})
   const [mediaContent, setMediaContent] = useState({"id_5":[], "id_6":[]})
 
 
@@ -44,6 +47,7 @@ function Card(props) {
       // reset content states
       setTextContent({});
       setRelContent({});
+      setRelContentSource("");
       setMediaContent({});
 
       // launch fecth
@@ -67,6 +71,17 @@ function Card(props) {
     }
   }, [cardOpen, cardBlocksNew, cardContent.hasInput, cardContent.goesBack, cardContent.cat, colorBackground]);
 
+ // fetch datasets 
+useEffect(() => {
+  fetch("/conf_info")
+    .then((res) => res.json())
+    .then((data) => {
+      setDatasets(data.datasets);
+    });
+}, []);
+
+
+  // close card
   const closeCard = () => {
     setCardOpen(false);
     setResetOn(false)
@@ -98,10 +113,11 @@ function Card(props) {
     return encodedUrl
   }
 
-  // fetchResults demo 
+  // fetchResults 
   const fetchResults = (uri) => {
     let endpoint = "https://query.wikidata.org/sparql"
     let query = "";
+    let dataset = "";
     
 
     Object.values(currentBlock).map((block, i) => {
@@ -111,6 +127,7 @@ function Card(props) {
         let number = "";
         Object.values(block.content).map((q, i) => {
           query = q.query;
+          dataset = q.dataset;
           number = block.id;
           number = number - 1;
           number = 'id_' + number;
@@ -131,8 +148,11 @@ function Card(props) {
               if (dataLen > 0) {
                 data.results.bindings.forEach(res => {
                   if (Object.keys(res).length > 0) {
-                    let desc = res.desc.value;
-                    textResults.push(desc); 
+                    let singleResult = []
+                    singleResult.desc = res.desc.value;
+                    singleResult.dataset = dataset;
+                   // let desc = res.desc.value;
+                   textResults.push(singleResult); 
                   }
                 }
                 )
@@ -152,14 +172,17 @@ function Card(props) {
         return null
       } 
       else if (block.type === 'relation') {
-        let relResults = []
+        let relResults = [];
+        let relSource = "";
         let number = "";
         Object.values(block.content).map((q, i) => {
           query = q.query;
+          dataset = q.dataset;
           number = block.id;
           number = number - 1;
           number = 'id_' + number;
           relResults = [];
+          relSource = dataset;
           return null
         })
         query = query.replaceAll('<>', '<' + uri + '>');
@@ -186,7 +209,13 @@ function Card(props) {
                 setRelContent(prev => ({
                   ...prev,
                   [number] : relResults,
-                }))
+                }));
+
+                setRelContentSource(prev => ({
+                  ...prev,
+                  [number] : relSource,
+                }));
+
               }
               else {
                 // try riconciliation
@@ -203,6 +232,7 @@ function Card(props) {
         let number = "";
         Object.values(block.content).map((q, i) => {
           query = q.query;
+          dataset = q.dataset;
           number = block.id;
           number = number - 1;
           number = 'id_' + number;
@@ -223,8 +253,10 @@ function Card(props) {
               if (dataLen > 0) {
                 data.results.bindings.forEach(res => {
                   if (Object.keys(res).length > 0) {
-                    let media_link = res.media.value;
-                    mediaResults.push(media_link); 
+                    let singleResult = []
+                    singleResult.mediaLink = res.media.value;
+                    singleResult.dataset = dataset;
+                    mediaResults.push(singleResult); 
                   }
                 }
                 )
@@ -245,8 +277,7 @@ function Card(props) {
       } 
     return null
     })
-    
-    
+     
   }
 
   return (
@@ -274,15 +305,13 @@ function Card(props) {
       <div className={classes.contentBlock}>
 
         {Object.values(currentBlock).map((block, i) => {
-          if (block.type === 'text') {
-            return <TextBlock key={'textblock-' + i} width={block.size} title={block.title} content={textContent['id_'+i]} reset={resetOn}></TextBlock>
-          }
-
-          else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title} category={block.category} content={relContent['id_'+i]}></RelationBlock> }
+          if (block.type === 'text') {  return <TextBlock key={'textblock-' + i} width={block.size} title={block.title} content={textContent['id_'+i]} reset={resetOn} datasets={datasets}></TextBlock> 
+        }
+          else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title} category={block.category} content={relContent['id_'+i]} source={datasets[relContentSource['id_'+i]]} ></RelationBlock> }
 
           else if (block.type === 'link') { return <LinkBlock key={'linkblock-' + i} width={block.size} title={block.title} links={block.content}></LinkBlock> }
 
-          else if (block.type === 'media') { return <MediaBlock key={'mediablock-' + i} width={block.size} title={block.title} class={block.class} content={ mediaContent['id_'+ i]}></MediaBlock> }
+          else if (block.type === 'media') { return <MediaBlock key={'mediablock-' + i} width={block.size} title={block.title} class={block.class} content={ mediaContent['id_'+ i]} datasets={datasets}></MediaBlock> }
 
           else if (block.type === 'none') { return <WarningBlock key={'warningblock-' + i} width={'large'}></WarningBlock> }
           return null
