@@ -115,7 +115,7 @@ useEffect(() => {
 
   // fetchResults 
   const fetchResults = (uri) => {
-    let endpoint = "https://query.wikidata.org/sparql"
+    let endpoint = "";
     let query = "";
     let dataset = "";
     
@@ -131,6 +131,7 @@ useEffect(() => {
           number = block.id;
           number = number - 1;
           number = 'id_' + number;
+          endpoint = datasets[dataset].sparql_endpoint;
           textResults = [];
           return null
         })
