@@ -64,7 +64,8 @@ def query_same_as_external(uri_list, property_path):
 
 
 def find_matches(query, endpoint):
-    sparql = SPARQLWrapper(endpoint)
+    user_agent = 'mondoboia/1.0 (https://github.com/mondoboia; mondoboia@example.org)'
+    sparql = SPARQLWrapper(endpoint, agent=user_agent)
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
@@ -118,7 +119,6 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
             '__' + str(index)  # I can work on generlising this
         graph_names_dict[uri] = GRAPH_NAME
         uris_to_search.append('<' + uri + '>')
-    print('TO SEARCH', uris_to_search)
 
     # find matches in all internal datasets - 1st level of reconciliation
     if len(uris_to_search) > 0:
@@ -135,11 +135,11 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                         ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, datasets[d]['iri_base'], datasets[d]['name'])
                     ds = ds_updated
             elif len(' '.join(uris_to_search)) >= 1500:
-                # if too long we divide the list in more or less half
+                # if too long we divide the list in more or less 4
                 n = round(len(uris_to_search)/4)
                 uris_to_search_chunks = methods.divide_list_in_chunks(
                     uris_to_search, n)
-                # for every chunk, we repeate the same process aas above
+                # for every chunk, we repeate the same process as above
                 # but what happens if even the half is >= 1500?
                 # # Generalise the proccess taking into account that ds cannot be passed into between functions.
                 for chunk in uris_to_search_chunks:
