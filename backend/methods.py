@@ -144,7 +144,20 @@ def fill_entities_files(state, categories, datasets, directory):
         print('Please turn ON state in fill_entities_files if you want to fill in the entities folder')
 
 
-def divide_list_in_chunks(l, n):
-    '''Yield successive n-sized chunks from l.'''
-    for i in range(0, len(l), n):
-        yield l[i:i + n]
+def divide_list_in_chunks(l, step):
+    '''create a list of list composed of step-sized chunks from l.'''
+    list_in_chunks = [l[i * step:(i + 1) * step]
+                      for i in range((len(l) + step - 1) // step)]
+    return list_in_chunks
+
+
+def create_chunks(l):
+    '''given a list, divide it n times so that each part is never >= to 1500. return a list o lists'''
+    # start dividing the list length in half
+    n = 2
+    list_in_chunks = divide_list_in_chunks(l, round(len(l)/n))
+    while len(' '.join(list_in_chunks[0])) >= 1500:
+        n += 1
+        list_in_chunks = divide_list_in_chunks(l, round(len(l)/n))
+    else:
+        return list_in_chunks
