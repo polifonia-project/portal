@@ -1,5 +1,6 @@
 # builtin libraries
 import os
+import re
 
 # external libraries
 from SPARQLWrapper import SPARQLWrapper, JSON
@@ -125,6 +126,11 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
 
     # find matches in all internal datasets - 1st level of reconciliation
     if len(uris_to_search) > 0:
+        # every origin_uri is inserted in the dataset for the first time
+        for origin_uri in uris_to_search:
+            ds_updated = add_quads_to_conj_graph(
+                ds, graph_names_dict[origin_uri.strip('<>')], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri.strip('<>'), [], '', '')
+            ds = ds_updated
         for d in datasets:
             sparql_endpoint = datasets[d]['sparql_endpoint']
             # 1500 is the control number to avoid having a VALUE in the QUERY that is too long
@@ -151,6 +157,7 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                         ds_updated = add_quads_to_conj_graph(
                             ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, datasets[d]['iri_base'], datasets[d]['name'])
                         ds = ds_updated
+
     # find matches in external datasets - 1st level of reconciliation
     if any_match:
         for match, uri_list in uris_to_reconcile.items():
