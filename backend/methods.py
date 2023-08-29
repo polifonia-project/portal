@@ -145,7 +145,7 @@ def fill_entities_files(state, categories, datasets, directory):
 
 
 def divide_list_in_chunks(l, step):
-    '''create a list of list composed of step-sized chunks from l.'''
+    '''create a list composed of step-sized chunks from l.'''
     list_in_chunks = [l[i * step:(i + 1) * step]
                       for i in range((len(l) + step - 1) // step)]
     return list_in_chunks
