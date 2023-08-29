@@ -10,34 +10,22 @@ from rdflib.namespace import SDO, RDFS, OWL
 import linkset_endpoint as endpoint
 import methods
 
-WHITE_LIST = ['http://www.wikidata.org/', 'https://dbpedia.org/sparql',
-              'https://viaf.org/viaf/', 'https://www.discogs.com/']
+WHITE_LIST = ['http://www.wikidata.org/', 'http://dbpedia.org/']
 WHITE_LIST_PARAM = {
     'wikidata': {
         'sparql_endpoint': 'https://query.wikidata.org/sparql',
         'iri_base': 'http://www.wikidata.org/',
         'property_path': 'owl:sameAs|skos:exactMatch|schema:sameAs|wdt:P2888|^owl:sameAs|^skos:exactMatch|^schema:sameAs|^wdt:P2888',
-        'query': 'SELECT DISTINCT ?origin_uri ?same_uri WHERE { VALUES ?origin_uri {<>} . { ?same_uri schema:sameAs|owl:sameAs|skos:exactMatch|wdt:P2888|^schema:sameAs|^owl:sameAs|^skos:exactMatch|^wdt:P2888 ?origin_uri . } UNION {?other_uri wdt:P214|^wdt:P214 ?origin_uri . BIND(CONCAT(\"https://viaf.org/viaf/\", STR( ?other_uri ))  AS ?same_uri )} UNION {?other_uri wdt:P1953|^wdt:P1953 ?origin_uri . BIND(CONCAT(\"https://www.discogs.com/artist/\", ?other_uri )  AS ?same_uri ) } UNION {?other_uri wdt:P1954|^wdt:P1954 ?origin_uri . BIND(CONCAT(\"https://www.discogs.com/master/\", ?other_uri )  AS ?same_uri )}}'
+        'query': 'SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same_uri); SEPARATOR=\", \") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} . { ?same_uri schema:sameAs|owl:sameAs|skos:exactMatch|wdt:P2888|^schema:sameAs|^owl:sameAs|^skos:exactMatch|^wdt:P2888 ?origin_uri . } UNION {?other_uri wdt:P214|^wdt:P214 ?origin_uri . BIND(CONCAT(\"https://viaf.org/viaf/\", STR( ?other_uri ))  AS ?same_uri )} UNION {?other_uri wdt:P1953|^wdt:P1953 ?origin_uri . BIND(CONCAT(\"https://www.discogs.com/artist/\", ?other_uri )  AS ?same_uri ) } UNION {?other_uri wdt:P1954|^wdt:P1954 ?origin_uri . BIND(CONCAT(\"https://www.discogs.com/master/\", ?other_uri )  AS ?same_uri )}} GROUP BY ?origin_uri'
     },
     'dbpedia': {
         'sparql_endpoint': 'https://dbpedia.org/sparql',
-        'iri_base': '',
-        'query': 'SELECT DISTINCT ?origin_uri ?same_uri WHERE { VALUES ?origin_uri {<>} .  { ?same_uri schema:sameAs|owl:sameAs|skos:exactMatch|^schema:sameAs|^owl:sameAs|^skos:exactMatch ?origin_uri . }}'
-    },
-    'viaf': {
-        'sparql_endpoint': 'https://query.wikidata.org/sparql',
-        'iri_base': '',
-        'query': 'wdt:P214|^wdt:P214'
-    },
-    'discogs': {
-        'sparql_endpoint': 'https://query.wikidata.org/sparql',
-        'iri_base': '',
-        'query': 'wdt:P214|^wdt:P214'
+        'iri_base': 'http://dbpedia.org/',
+        'query': 'SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same_uri); SEPARATOR=\", \") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} .  { ?same_uri schema:sameAs|owl:sameAs|skos:exactMatch|^schema:sameAs|^owl:sameAs|^skos:exactMatch ?origin_uri . }} GROUP BY ?origin_uri'
     }
 }
 
 
-# altro parametro tipo lista con sparqlenpoint
 def query_same_as_internal(uri_list):
     values_to_search = ' '.join(uri_list)
     find_query = '''
