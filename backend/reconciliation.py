@@ -10,12 +10,11 @@ from rdflib.namespace import SDO, RDFS, OWL
 import linkset_endpoint as endpoint
 import methods
 
-WHITE_LIST = ['http://www.wikidata.org/', 'http://dbpedia.org/']
+WHITE_LIST = ['wikidata', 'dbpedia']
 WHITE_LIST_PARAM = {
     'wikidata': {
         'sparql_endpoint': 'https://query.wikidata.org/sparql',
         'iri_base': 'http://www.wikidata.org/',
-        'property_path': 'owl:sameAs|skos:exactMatch|schema:sameAs|wdt:P2888|^owl:sameAs|^skos:exactMatch|^schema:sameAs|^wdt:P2888',
         'query': 'SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same_uri); SEPARATOR=\", \") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} . { ?same_uri schema:sameAs|owl:sameAs|skos:exactMatch|wdt:P2888|^schema:sameAs|^owl:sameAs|^skos:exactMatch|^wdt:P2888 ?origin_uri . } UNION {?other_uri wdt:P214|^wdt:P214 ?origin_uri . BIND(CONCAT(\"https://viaf.org/viaf/\", STR( ?other_uri ))  AS ?same_uri )} UNION {?other_uri wdt:P1953|^wdt:P1953 ?origin_uri . BIND(CONCAT(\"https://www.discogs.com/artist/\", ?other_uri )  AS ?same_uri ) } UNION {?other_uri wdt:P1954|^wdt:P1954 ?origin_uri . BIND(CONCAT(\"https://www.discogs.com/master/\", ?other_uri )  AS ?same_uri )}} GROUP BY ?origin_uri'
     },
     'dbpedia': {
@@ -68,7 +67,7 @@ def find_matches(query, endpoint):
     return results
 
 
-def add_quads_to_conj_graph(ds, graph_name, dataset_1, dataset_1_label, uri_1, same_uri_list, dataset_2, dataset_2_label, double_location=False):
+def add_quads_to_conj_graph(ds, graph_name, dataset_1, dataset_1_label, uri_1, same_uri_list, dataset_2, dataset_2_label):
     named_graph = ds.graph(URIRef(graph_name))
 
     named_graph.add((URIRef(uri_1), SDO.location, URIRef(dataset_1)))
@@ -89,22 +88,28 @@ def add_quads_to_conj_graph(ds, graph_name, dataset_1, dataset_1_label, uri_1, s
             named_graph.add((URIRef(dataset_2), RDFS.label,
                             Literal(dataset_2_label, lang="en")))
 
-    # in case of double location
-    if double_location:
-        named_graph.add((URIRef(uri_1), SDO.location, URIRef(dataset_2)))
+    # # in case of double location
+    # if double_location:
+    #     named_graph.add((URIRef(uri_1), SDO.location, URIRef(dataset_2)))
 
     print(f'[UPDATE] Dataset updated for Graph {graph_name}')
     return ds
 
 
 def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, linkset_namespace, file_path):
+    # generale
     uris_to_search = []
+    # for white list action
+    uris_to_reconcile = {}
+    for el in WHITE_LIST:
+        uris_to_reconcile[el] = []
+    any_match = False
+    # track uri-graph_name pairs
     graph_names_dict = {}
     # big dictionary to track if origin_uri has at least 1 sameAs uri
     sameAs_track_dictionary = {}
 
     ds = Dataset()
-    # ds.parse(file)
 
     for index, uri in enumerate(uris_list):
         # generate unique graphnames for each uri and store in dictionary
@@ -112,6 +117,11 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
             '__' + str(index)  # I can work on generlising this
         graph_names_dict[uri] = GRAPH_NAME
         uris_to_search.append('<' + uri + '>')
+        # check with white list
+        if any((match := substring) in uri for substring in WHITE_LIST):
+            any_match = True
+            match_list = uris_to_reconcile[match]
+            match_list.append('<' + uri + '>')
 
     # find matches in all internal datasets - 1st level of reconciliation
     if len(uris_to_search) > 0:
@@ -141,6 +151,37 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                         ds_updated = add_quads_to_conj_graph(
                             ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, datasets[d]['iri_base'], datasets[d]['name'])
                         ds = ds_updated
+    # find matches in external datasets - 1st level of reconciliation
+    if any_match:
+        for match, uri_list in uris_to_reconcile.items():
+            if len(uri_list) > 0:
+                sparql_endpoint = WHITE_LIST_PARAM[match]['sparql_endpoint']
+                query = WHITE_LIST_PARAM[match]['query']
+                # 1500 is the control number to avoid having a VALUE in the QUERY that is too long
+                if len(' '.join(uri_list)) < 1500:
+                    values_to_search = ' '.join(uri_list)
+                    query = query.replace('<>', values_to_search)
+                    same_uris_dict = find_matches(query, sparql_endpoint)
+                    for origin_uri, same_uri_list in same_uris_dict.items():
+                        if len(same_uri_list) > 0:
+                            sameAs_track_dictionary[origin_uri] = True
+                        ds_updated = add_quads_to_conj_graph(ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'],
+                                                             datasets[dataset_id]['name'], origin_uri, same_uri_list, WHITE_LIST_PARAM[match]['iri_base'], match)
+                        ds = ds_updated
+                elif len(' '.join(uri_list)) >= 1500:
+                    # if too long we divide the list n times to obtain n chunks
+                    uris_to_search_chunks = methods.create_chunks(uri_list)
+
+                    for chunk in uris_to_search_chunks:
+                        values_to_search = ' '.join(chunk)
+                        query = query.replace('<>', values_to_search)
+                        same_uris_dict = find_matches(query, sparql_endpoint)
+                        for origin_uri, same_uri_list in same_uris_dict.items():
+                            if len(same_uri_list) > 0:
+                                sameAs_track_dictionary[origin_uri] = True
+                            ds_updated = add_quads_to_conj_graph(
+                                ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, WHITE_LIST_PARAM[match]['iri_base'], match)
+                            ds = ds_updated
     ds.serialize(destination=file_path, format='nquads', encoding='US-ASCII')
     return sameAs_track_dictionary
 
