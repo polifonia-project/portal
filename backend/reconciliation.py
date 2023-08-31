@@ -138,25 +138,51 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                 query = query_same_as_internal(uris_to_search)
                 same_uris_dict = find_matches(query, sparql_endpoint)
                 for origin_uri, same_uri_list in same_uris_dict.items():
-                    if len(same_uri_list) > 0:
-                        sameAs_track_dictionary[origin_uri] = True
                     ds_updated = add_quads_to_conj_graph(
                         ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, datasets[d]['iri_base'], datasets[d]['name'])
                     ds = ds_updated
+                    if len(same_uri_list) > 0:
+                        sameAs_track_dictionary[origin_uri] = True
+                        # find matches in external datasets - 1st level of reconciliation
+                        for uri in same_uri_list.split(', '):
+                            if any((match := substring) in uri for substring in WHITE_LIST):
+                                sparql_endpoint = WHITE_LIST_PARAM[match]['sparql_endpoint']
+                                query = WHITE_LIST_PARAM[match]['query']
+                                query = query.replace('<>', '<' + uri + '>')
+                                same_same_uris_dict = find_matches(
+                                    query, sparql_endpoint)
+                                for same_uri, other_uris_list in same_same_uris_dict.items():
+                                    ds_updated = add_quads_to_conj_graph(ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'],
+                                                                         datasets[dataset_id]['name'], same_uri, other_uris_list, WHITE_LIST_PARAM[match]['iri_base'], match)
+                                    ds = ds_updated
+
             elif len(' '.join(uris_to_search)) >= 1500:
                 # if too long we divide the list n times to obtain n chunks
                 uris_to_search_chunks = methods.create_chunks(uris_to_search)
 
-                # Generalise the process taking into account that ds cannot be passed into between functions.
+                # Generalise the process
                 for chunk in uris_to_search_chunks:
                     query = query_same_as_internal(chunk)
                     same_uris_dict = find_matches(query, sparql_endpoint)
                     for origin_uri, same_uri_list in same_uris_dict.items():
-                        if len(same_uri_list) > 0:
-                            sameAs_track_dictionary[origin_uri] = True
                         ds_updated = add_quads_to_conj_graph(
                             ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, datasets[d]['iri_base'], datasets[d]['name'])
                         ds = ds_updated
+                        if len(same_uri_list) > 0:
+                            sameAs_track_dictionary[origin_uri] = True
+                            # find matches in external datasets - 1st level of reconciliation
+                            for uri in same_uri_list.split(', '):
+                                if any((match := substring) in uri for substring in WHITE_LIST):
+                                    sparql_endpoint = WHITE_LIST_PARAM[match]['sparql_endpoint']
+                                    query = WHITE_LIST_PARAM[match]['query']
+                                    query = query.replace(
+                                        '<>', '<' + uri + '>')
+                                    same_same_uris_dict = find_matches(
+                                        query, sparql_endpoint)
+                                    for same_uri, other_uris_list in same_same_uris_dict.items():
+                                        ds_updated = add_quads_to_conj_graph(ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'],
+                                                                             datasets[dataset_id]['name'], same_uri, other_uris_list, WHITE_LIST_PARAM[match]['iri_base'], match)
+                                        ds = ds_updated
 
     # find matches in external datasets - 1st level of reconciliation
     if any_match:
