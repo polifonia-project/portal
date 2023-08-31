@@ -11,7 +11,6 @@ function CardPage(props) {
     const title = searchParams.get('title');
     const cat = searchParams.get('cat');
     const uri = searchParams.get('uri');
-    console.log(title, cat, uri)
 
     const { setCardOpen } = useContext(CardContext);
     const { setCardContent } = useContext(CardContext);

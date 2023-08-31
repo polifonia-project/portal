@@ -8,6 +8,7 @@ function LinkBlock(props) {
   const [numericWidth, setNumericWidth] = useState(25);
 
   useEffect(() => {
+    
     var current_width = props.width;
   if (current_width === 'small') {
     setNumericWidth(25);
@@ -24,7 +25,7 @@ function LinkBlock(props) {
     <div className={classes.cardBlockContainer} style={{width: 'calc(' + numericWidth + '% - 25px)'}}>
       <p className={classes.blockTitle}><span>{props.title}</span></p>
       <div className={classes.cardBlockBox}>
-      <p className={classes.blockParagraph}>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+      <p className={classes.blockParagraph}>{props.desc}</p>
       <div className={classes.linksContainer}>
         {props.links.map(function(link, i){
           return  <a href={link.url} key={'link-' + i} target="_blank" rel="noopener noreferrer"><button className={classes.linkButton}>{link.label}</button></a>

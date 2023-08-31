@@ -31,7 +31,6 @@ function Card(props) {
   // content states
   const [textContent, setTextContent] = useState({"id_1":[], "id_2":[]})
   const [relContent, setRelContent] = useState({"id_3":[], "id_4":[]})
-  const [relContentSource, setRelContentSource] = useState({"id_3":[], "id_4":[]})
   const [mediaContent, setMediaContent] = useState({"id_5":[], "id_6":[]})
 
 
@@ -47,7 +46,6 @@ function Card(props) {
       // reset content states
       setTextContent({});
       setRelContent({});
-      setRelContentSource("");
       setMediaContent({});
 
       // launch fecth
@@ -133,8 +131,7 @@ useEffect(() => {
           number = 'id_' + number;
           endpoint = datasets[dataset].sparql_endpoint;
           textResults = [];
-          return null
-        })
+
         query = query.replaceAll('<>', '<' + uri + '>');
         let url = endpoint + '?query=' + encodeURIComponent(query);
         try {
@@ -150,10 +147,9 @@ useEffect(() => {
                 data.results.bindings.forEach(res => {
                   if (Object.keys(res).length > 0) {
                     let singleResult = []
-                    singleResult.desc = res.desc.value;
-                    singleResult.dataset = dataset;
-                   // let desc = res.desc.value;
-                   textResults.push(singleResult); 
+                    singleResult.desc = res.descLabel.value;
+                    singleResult.dataset = q.dataset;
+                    textResults.push(singleResult); 
                   }
                 }
                 )
@@ -171,6 +167,7 @@ useEffect(() => {
           console.log('error', err)
         }
         return null
+      })
       } 
       else if (block.type === 'relation') {
         let relResults = [];
@@ -184,8 +181,6 @@ useEffect(() => {
           number = 'id_' + number;
           relResults = [];
           relSource = dataset;
-          return null
-        })
         query = query.replaceAll('<>', '<' + uri + '>');
         let url = endpoint + '?query=' + encodeURIComponent(query);
         try {
@@ -203,18 +198,18 @@ useEffect(() => {
                     let singleResult = []
                     singleResult.name = res.entityLabel.value;
                     singleResult.link = res.entity.value;
+                    singleResult.dataset = q.dataset;
                     relResults.push(singleResult); 
                   }
                 }
                 )
+                let sourceLimit = [];
+                sourceLimit.dataset = q.dataset;
+                relResults.push(sourceLimit); 
+
                 setRelContent(prev => ({
                   ...prev,
                   [number] : relResults,
-                }));
-
-                setRelContentSource(prev => ({
-                  ...prev,
-                  [number] : relSource,
                 }));
 
               }
@@ -227,6 +222,7 @@ useEffect(() => {
           console.log('error', err)
         }
         return null
+      })
       } 
       else if (block.type === 'media') {
         let mediaResults = []
@@ -238,8 +234,6 @@ useEffect(() => {
           number = number - 1;
           number = 'id_' + number;
           mediaResults = [];
-          return null
-        })
         query = query.replaceAll('<>', '<' + uri + '>');
         let url = endpoint + '?query=' + encodeURIComponent(query);
         try {
@@ -256,7 +250,7 @@ useEffect(() => {
                   if (Object.keys(res).length > 0) {
                     let singleResult = []
                     singleResult.mediaLink = res.media.value;
-                    singleResult.dataset = dataset;
+                    singleResult.dataset = q.dataset;
                     mediaResults.push(singleResult); 
                   }
                 }
@@ -275,6 +269,7 @@ useEffect(() => {
           console.log('error', err)
         }
         return null
+      })
       } 
     return null
     })
@@ -308,9 +303,9 @@ useEffect(() => {
         {Object.values(currentBlock).map((block, i) => {
           if (block.type === 'text') {  return <TextBlock key={'textblock-' + i} width={block.size} title={block.title} content={textContent['id_'+i]} reset={resetOn} datasets={datasets}></TextBlock> 
         }
-          else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title} category={block.category} content={relContent['id_'+i]} source={datasets[relContentSource['id_'+i]]} ></RelationBlock> }
+          else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title} category={block.category} content={relContent['id_'+i]} datasets={datasets} ></RelationBlock> }
 
-          else if (block.type === 'link') { return <LinkBlock key={'linkblock-' + i} width={block.size} title={block.title} links={block.content}></LinkBlock> }
+          else if (block.type === 'link') { return <LinkBlock key={'linkblock-' + i} width={block.size} title={block.title} desc={block.description} links={block.content}></LinkBlock> }
 
           else if (block.type === 'media') { return <MediaBlock key={'mediablock-' + i} width={block.size} title={block.title} class={block.class} content={ mediaContent['id_'+ i]} datasets={datasets}></MediaBlock> }
 

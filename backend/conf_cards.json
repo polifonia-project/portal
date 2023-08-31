@@ -8,7 +8,7 @@
                 "title": "Biography",
                 "content": [{
                     "dataset": "d_04",
-                    "query": "SELECT ?desc WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?desc .}}"
+                    "query": "SELECT ?descLabel WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?descLabel .}}"
                     }]
             },
             "02" : {
@@ -20,41 +20,6 @@
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }]
-            },
-            "03" : {
-                "type": "link",
-                "size": "small",
-                "title": "Useful links",
-                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-                "content": [{
-                    "linktype" : "static",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Wikipedia",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Genius Lyrics",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "api",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "query",
-                    "label" : "Spotify",
-                    "dataset" : [{
-                            "dataset_01" : "query/...",
-                            "dataset_02" : "query/..."
-                            }]
-                    }
-                ]
             }
         }
 
@@ -68,7 +33,7 @@
                 "title": "Biography",
                 "content": [{
                     "dataset": "d_04",
-                    "query": "SELECT ?desc WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?desc .}}"
+                    "query": "SELECT ?descLabel WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?descLabel .}}"
                     }]
             },
             "02" : {
@@ -90,41 +55,6 @@
                     "dataset": "d_04",
                     "query": "SELECT ?item ?itemLabel ?media WHERE {<> wdt:P18 ?media } LIMIT 1"
                 }]
-            },
-            "05" : {
-                "type": "link",
-                "size": "small",
-                "title": "Useful links",
-                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-                "content": [{
-                    "linktype" : "static",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Wikipedia",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Genius Lyrics",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "api",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "query",
-                    "label" : "Spotify",
-                    "dataset" : [{
-                            "dataset_01" : "query/...",
-                            "dataset_02" : "query/..."
-                            }]
-                    }
-                ]
             }
         }
 
@@ -138,7 +68,7 @@
                 "title": "Biography",
                 "content": [{
                     "dataset": "d_04",
-                    "query": "SELECT ?desc WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?desc .}}"
+                    "query": "SELECT ?descLabel WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?descLabel .}}"
                     }]
             },
             "02" : {
@@ -160,41 +90,6 @@
                     "dataset": "d_04",
                     "query": "SELECT ?item ?itemLabel ?media WHERE {<> wdt:P18 ?media } LIMIT 1"
                 }]
-            },
-            "05" : {
-                "type": "link",
-                "size": "small",
-                "title": "Useful links",
-                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-                "content": [{
-                    "linktype" : "static",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Wikipedia",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Genius Lyrics",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "api",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "query",
-                    "label" : "Spotify",
-                    "dataset" : [{
-                            "dataset_01" : "query/...",
-                            "dataset_02" : "query/..."
-                            }]
-                    }
-                ]
             }
         }
 
@@ -208,7 +103,7 @@
                 "title": "Biography",
                 "content": [{
                     "dataset": "d_04",
-                    "query": "SELECT ?desc WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?desc .}}"
+                    "query": "SELECT ?descLabel WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?descLabel .}}"
                     }]
             },
             "02" : {
@@ -230,41 +125,6 @@
                     "dataset": "d_04",
                     "query": "SELECT ?item ?itemLabel ?media WHERE {<> wdt:P18 ?media } LIMIT 1"
                 }]
-            },
-            "05" : {
-                "type": "link",
-                "size": "small",
-                "title": "Useful links",
-                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-                "content": [{
-                    "linktype" : "static",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Wikipedia",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Genius Lyrics",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "api",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "query",
-                    "label" : "Spotify",
-                    "dataset" : [{
-                            "dataset_01" : "query/...",
-                            "dataset_02" : "query/..."
-                            }]
-                    }
-                ]
             }
         }
 
@@ -278,7 +138,7 @@
                 "title": "Biography",
                 "content": [{
                     "dataset": "d_04",
-                    "query": "SELECT ?desc WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?desc .}}"
+                    "query": "SELECT ?descLabel WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?descLabel .}}"
                     }]
             },
             "02" : {
@@ -300,41 +160,6 @@
                     "dataset": "d_04",
                     "query": "SELECT ?item ?itemLabel ?media WHERE {<> wdt:P18 ?media } LIMIT 1"
                 }]
-            },
-            "05" : {
-                "type": "link",
-                "size": "small",
-                "title": "Useful links",
-                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-                "content": [{
-                    "linktype" : "static",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Wikipedia",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Genius Lyrics",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "api",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "query",
-                    "label" : "Spotify",
-                    "dataset" : [{
-                            "dataset_01" : "query/...",
-                            "dataset_02" : "query/..."
-                            }]
-                    }
-                ]
             }
         }
 
@@ -349,7 +174,15 @@
                 "title": "Biography",
                 "content": [  {
                     "dataset": "d_04",
-                    "query": "SELECT ?desc WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?desc .}}"
+                    "query": "SELECT ?descLabel WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?descLabel.}}"
+                    }, 
+                    {
+                    "dataset": "d_05",
+                    "query": "SELECT ?desc ?descLabel WHERE { <> wdt:P31 ?desc . SERVICE wikibase:label { bd:serviceParam wikibase:language 'en'. } }"
+                    }, 
+                    {
+                    "dataset": "d_05",
+                    "query": "SELECT ?desc ?descLabel WHERE { <> wdt:P21 ?desc . SERVICE wikibase:label { bd:serviceParam wikibase:language 'en'. } }"
                     }]
             },
             "02" : {
@@ -395,42 +228,6 @@
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P19 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of birth\") AS ?rel) } UNION { <> wdt:P20 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of death\") AS ?rel) } UNION { <> wdt:P937 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has work location\") AS ?rel) } UNION { <> wdt:P740 ?entity. BIND(str(\"location of formation\") AS ?rel)} UNION { <> wdt:P495 ?entity. BIND(str(\"has country of origin\") AS ?rel)} . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 10"
                 }]
-            },
-            "06" : {
-                "id": "6",
-                "type": "link",
-                "size": "small",
-                "title": "Useful links",
-                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-                "content": [{
-                    "linktype" : "static",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Wikipedia",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Genius Lyrics",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "api",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "query",
-                    "label" : "Spotify",
-                    "dataset" : [{
-                            "dataset_01" : "query/...",
-                            "dataset_02" : "query/..."
-                            }]
-                    }
-                ]
             }
         }
 
@@ -445,7 +242,7 @@
                 "title": "Description",
                 "content": [{
                     "dataset": "d_04",
-                    "query": "SELECT ?desc WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?desc .}}"
+                    "query": "SELECT ?descLabel WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?descLabel .}}"
                     }]
             },
             "02" : {
@@ -456,6 +253,10 @@
                 "category" : "places",
                 "content": [  {
                     "dataset": "d_04",
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { <> wdt:P190 ?entity. ?entity wdt:P31/wdt:P279* wd:Q82794 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 30"
+                },
+                {
+                    "dataset": "d_05",
                     "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { <> wdt:P190 ?entity. ?entity wdt:P31/wdt:P279* wd:Q82794 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 30"
                 }]
             },
@@ -468,46 +269,14 @@
                 "content": [  {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { <> ^wdt:P47 ?entity . ?entity wdt:P31/wdt:P279* wd:Q82794 . BIND(str(\"shares border with\") AS ?inverse_rel) .  SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 10"
+                },
+                {
+                    "dataset": "d_05",
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { <> ^wdt:P47 ?entity . ?entity wdt:P31/wdt:P279* wd:Q82794 . BIND(str(\"shares border with\") AS ?inverse_rel) .  SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 10"
                 }]
             },
-            "04" : {
+            "04" :{
                 "id": "4",
-                "type": "link",
-                "size": "small",
-                "title": "Useful links",
-                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-                "content": [{
-                    "linktype" : "static",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Wikipedia",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Genius Lyrics",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "api",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "query",
-                    "label" : "Spotify",
-                    "dataset" : [{
-                            "dataset_01" : "query/...",
-                            "dataset_02" : "query/..."
-                            }]
-                    }
-                ]
-            },
-            "05" :{
-                "id": "5",
                 "type": "media",
                 "size": "medium",
                 "title": "City View",
@@ -517,8 +286,8 @@
                     "query": "SELECT ?item ?itemLabel ?media WHERE {<> wdt:P18 ?media } LIMIT 1"
                 }]
             },
-            "06" :{
-                "id": "6",
+            "05" :{
+                "id": "5",
                 "type": "media",
                 "size": "medium",
                 "title": "Map",
@@ -540,7 +309,7 @@
                 "title": "Biography",
                 "content": [{
                     "dataset": "d_04",
-                    "query": "SELECT ?desc WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?desc .}}"
+                    "query": "SELECT ?descLabel WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?descLabel .}}"
                     }]
             },
             "02" : {
@@ -562,41 +331,6 @@
                     "dataset": "d_04",
                     "query": "SELECT ?item ?itemLabel ?media WHERE {<> wdt:P18 ?media } LIMIT 1"
                 }]
-            },
-            "05" : {
-                "type": "link",
-                "size": "small",
-                "title": "Useful links",
-                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-                "content": [{
-                    "linktype" : "static",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Wikipedia",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Genius Lyrics",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "api",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "query",
-                    "label" : "Spotify",
-                    "dataset" : [{
-                            "dataset_01" : "query/...",
-                            "dataset_02" : "query/..."
-                            }]
-                    }
-                ]
             }
         }
 
@@ -605,66 +339,50 @@
         "color": "#00ffa5",
         "blocks" : { 
             "01" : {
+                "id": "1",
                 "type": "text",
                 "size": "small",
-                "title": "Biography",
+                "title": "Description",
                 "content": [{
-                    "dataset": "d_04",
-                    "query": "SELECT ?desc WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?desc .}}"
+                    "dataset": "d_01",
+                    "query": "SELECT DISTINCT ?descLabel WHERE {<> <https://schema.org/description> ?descLabel .}"
                     }]
             },
             "02" : {
+                "id": "2",
                 "type": "relation",
                 "size": "small",
-                "title": "Influenced by",
-                "category" : "people",
+                "title": "Audience",
+                "category" : "audience type",
                 "content": [ {
-                    "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
-                }]
+                    "dataset": "d_01",
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {<> <https://schema.org/audience> ?entity. ?entity <http://www.w3.org/2000/01/rdf-schema#label> ?entityLabel .}"
+                    }]
+            },
+            "03" : {
+                "id": "3",
+                "type": "relation",
+                "size": "small",
+                "title": "Type of resources",
+                "category" : "audience type",
+                "content": [ {
+                    "dataset": "d_01",
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {<> <https://schema.org/mainEntity> ?entity. ?entity <http://www.w3.org/2000/01/rdf-schema#label> ?entityLabel .}"
+                    }]
             },
             "04" : {
-                "type": "media",
-                "size": "small",
-                "title": "Portrait",
-                "class" : "image",
-                "content": [{
-                    "dataset": "d_04",
-                    "query": "SELECT ?item ?itemLabel ?media WHERE {<> wdt:P18 ?media } LIMIT 1"
-                }]
-            },
-            "05" : {
+                "id": "4",
                 "type": "link",
                 "size": "small",
                 "title": "Useful links",
-                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+                "description": "Discover many other resources related to this creative work available on the web:",
                 "content": [{
-                    "linktype" : "static",
-                    "label" : "Spotify",
+                    "label" : "Website",
                     "url" : "https://www.google.com/"
                     },
                     {
-                    "linktype" : "static",
-                    "label" : "Wikipedia",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Genius Lyrics",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "api",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "query",
-                    "label" : "Spotify",
-                    "dataset" : [{
-                            "dataset_01" : "query/...",
-                            "dataset_02" : "query/..."
-                            }]
+                        "label" : "Sample Resource",
+                        "url" : "https://www.google.com/"
                     }
                 ]
             }
