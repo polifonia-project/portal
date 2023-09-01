@@ -228,7 +228,26 @@
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P19 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of birth\") AS ?rel) } UNION { <> wdt:P20 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of death\") AS ?rel) } UNION { <> wdt:P937 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has work location\") AS ?rel) } UNION { <> wdt:P740 ?entity. BIND(str(\"location of formation\") AS ?rel)} UNION { <> wdt:P495 ?entity. BIND(str(\"has country of origin\") AS ?rel)} . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 10"
                 }]
-            }
+            },
+            "06" : {
+                "id": "6",
+                "type": "link",
+                "size": "small",
+                "title": "Useful links",
+                "description": "Discover many other resources related to this person, all available on the web",
+                "content": [{
+                    "label" : "Website",
+                    "url" : "https://www.google.com/",
+                    "dataset": "d_04",
+                    "query": "SELECT DISTINCT ?entity  WHERE {<> wdt:P856 ?entity .}"
+                    },
+                    {
+                    "label" : "Alt Source",
+                    "url" : "https://www.google.com/",
+                    "dataset": "d_04",
+                    "query": "SELECT DISTINCT ?entity WHERE {<> wdt:P973 ?entity .}"
+                    }]
+                    }
         }
 
     }, 
@@ -364,7 +383,7 @@
                 "type": "relation",
                 "size": "small",
                 "title": "Type of resources",
-                "category" : "audience type",
+                "category" : "resource type",
                 "content": [ {
                     "dataset": "d_01",
                     "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {<> <https://schema.org/mainEntity> ?entity. ?entity <http://www.w3.org/2000/01/rdf-schema#label> ?entityLabel .}"
@@ -375,18 +394,22 @@
                 "type": "link",
                 "size": "small",
                 "title": "Useful links",
-                "description": "Discover many other resources related to this creative work available on the web:",
+                "description": "Discover many other resources related to this creative work available on the web",
                 "content": [{
                     "label" : "Website",
-                    "url" : "https://www.google.com/"
+                    "url" : "https://www.google.com/",
+                    "dataset": "d_01",
+                    "query": "SELECT DISTINCT ?entity  WHERE {<> <https://schema.org/mainEntityOfPage> ?entity .}"
                     },
                     {
-                        "label" : "Sample Resource",
-                        "url" : "https://www.google.com/"
+                    "label" : "Sample Resource",
+                    "url" : "https://www.google.com/",
+                    "dataset": "d_01",
+                    "query": "SELECT DISTINCT ?entity WHERE {<> <https://schema.org/workExample> ?entity .}"
+                    }]
                     }
-                ]
             }
         }
 
-    }
+    
 }

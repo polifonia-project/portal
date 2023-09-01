@@ -16,9 +16,7 @@ function RelationBlock(props) {
       setIsLoaded(false);
     } else {
       setIsLoaded(true);
-      setRelList(props.content);
-      console.log(props.content);
-      
+      setRelList(props.content);     
     }
 
   // width
@@ -39,8 +37,8 @@ function RelationBlock(props) {
   useEffect(() => { // compontentDidUpdate
 
   // limit 10 results per column
-   if (relList.length > 10) {
-    const chunkSize = 10;
+   if (relList.length > 9) {
+    const chunkSize = 9;
     for (let i = 0; i < relList.length; i += chunkSize) {
     const chunk = relList.slice(i, i + chunkSize);
     setchunkedList(prevState => [...prevState, chunk])

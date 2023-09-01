@@ -40,6 +40,10 @@ function MediaBlock(props) {
     setIsVideo(true)
   } else if (props.class === "audio") {
     setIsAudio(true)
+  } else {
+    setIsImage(false)
+    setIsAudio(false)
+    setIsVideo(false)
   }
 
   // width
