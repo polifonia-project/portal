@@ -48,21 +48,6 @@ def query_same_as_internal(uri_list):
     return find_query
 
 
-# def query_same_as_external(uri_list, property_path):
-#     values_to_search = ' '.join(uri_list)
-#     if len(values_to_search) < 1500:
-#         find_query = '''
-#         SELECT DISTINCT ?origin_uri ?same_uri
-#         WHERE {
-#             VALUES ?origin_uri {'''+values_to_search+'''} .
-#             ?same_uri '''+property_path+''' ?origin_uri .
-#         }
-#         '''
-#         return find_query
-#     else:
-#         print('[NEED ACTION] values_to_search too long.')
-
-
 def find_matches(query, endpoint):
     user_agent = 'mondoboia/1.0 (https://github.com/mondoboia; mondoboia@example.org)'
     sparql = SPARQLWrapper(endpoint, agent=user_agent)
@@ -344,13 +329,3 @@ def graphs_reconciliation(entities_dir, endpoint):
         for uri, info in entities_content.items():
             if info['sameAs'] == True:
                 graph_merging(uri, endpoint)
-                # break
-        #     for uri in uri_list:
-
-        #         res = ds.query(query)
-        #         g_list = []
-        #         for row in res:
-        #             g_list.append(row.g)
-        #         if len(g_list) > 1:
-        #             '''query to retrieve triples, delete graph and insert into new'''
-        #             print(g_list[0])
