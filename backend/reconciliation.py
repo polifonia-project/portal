@@ -4,8 +4,9 @@ import re
 
 # external libraries
 from SPARQLWrapper import SPARQLWrapper, JSON
-from rdflib import URIRef, Literal, Dataset
+from rdflib import URIRef, Literal, Dataset, Graph
 from rdflib.namespace import SDO, RDFS, OWL
+# import hydra.tpf
 
 # internal methods
 import linkset_endpoint
@@ -22,6 +23,12 @@ WHITE_LIST_PARAM = {
         'sparql_endpoint': 'https://dbpedia.org/sparql',
         'iri_base': 'http://dbpedia.org/',
         'query': 'SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same_uri); SEPARATOR=\", \") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} .  { ?same_uri schema:sameAs|owl:sameAs|skos:exactMatch|^schema:sameAs|^owl:sameAs|^skos:exactMatch ?origin_uri . }} GROUP BY ?origin_uri'
+    },
+    'viaf': {
+        'fragments': 'true',
+        'endpoint': 'http://data.linkeddatafragments.org/viaf/',
+        'iri_base': 'http://viaf.org/viaf/',
+        'query': ''
     }
 }
 
@@ -146,11 +153,17 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                         # find matches in external datasets - 1st level of reconciliation
                         for uri in same_uri_list.split(', '):
                             if any((match := substring) in uri for substring in WHITE_LIST):
-                                sparql_endpoint = WHITE_LIST_PARAM[match]['sparql_endpoint']
                                 query = WHITE_LIST_PARAM[match]['query']
                                 query = query.replace('<>', '<' + uri + '>')
-                                same_same_uris_dict = find_matches(
-                                    query, sparql_endpoint)
+                                same_same_uris_dict = {}
+                                # check if fragments rec need linked data fragments search
+                                if WHITE_LIST_PARAM[match]['fragments']:
+                                    pass
+                                else:
+                                    sparql_endpoint = WHITE_LIST_PARAM[match]['sparql_endpoint']
+                                    same_same_uris_dict = find_matches(
+                                        query, sparql_endpoint)
+
                                 for same_uri, other_uris_list in same_same_uris_dict.items():
                                     ds_updated = add_quads_to_conj_graph(ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'],
                                                                          datasets[dataset_id]['name'], same_uri, other_uris_list, WHITE_LIST_PARAM[match]['iri_base'], match)
