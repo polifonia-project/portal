@@ -8,7 +8,7 @@ from rdflib import URIRef, Literal, Dataset
 from rdflib.namespace import SDO, RDFS, OWL
 
 # internal methods
-import linkset_endpoint as endpoint
+import linkset_endpoint
 import methods
 
 WHITE_LIST = ['wikidata', 'dbpedia']
@@ -223,6 +223,21 @@ def white_list_reconciliation():
     pass
 
 
+def generate_mergerd_graph_name(data):
+    '''this function creates a new graph name combining existing names.'''
+    dat = ''
+    cat = ''
+    id = ''
+
+    for result in data:
+        graph_name_parts = result['g']['value'].split('/')[-1].split('__')
+        dat = (dat + '__' + graph_name_parts[0]).strip('__')
+        cat = (cat + '__' + graph_name_parts[1]).strip('__')
+        id = (id + '__' + graph_name_parts[2]).strip('__')
+    new_graph_name = dat + '___' + cat + '___' + id
+    return new_graph_name
+
+
 def graph_merging(entity_uri, endpoint):
     query = '''
         SELECT DISTINCT ?g
@@ -245,44 +260,51 @@ def graph_merging(entity_uri, endpoint):
 
     values_to_search = ' '.join(graph_list)
     # print('GRAPHS', graph_list)
+
     # if only 1:
     if graphs_num == 1:
         # I take the ?o and search if they appear in other graphs
-        # o_query = '''
-        # SELECT DISTINCT ?g
-        # WHERE {
-        #     <'''+entity_uri+'''> ?p ?o .
-        #     GRAPH ?g { {?s ?p ?o } UNION {?o ?p ?s}  FILTER(?o != <'''+entity_uri+'''>)}
-        #     }
-        # '''
-        # sparql = SPARQLWrapper(endpoint)
-        # sparql.setQuery(o_query)
-        # sparql.setReturnFormat(JSON)
-        # o_results = sparql.query().convert()
+        o_query = '''
+        SELECT DISTINCT ?g
+        WHERE {
+            <'''+entity_uri+'''> ?p ?o .
+            GRAPH ?g { {?s owl:sameAs|^owl:sameAs ?o }  FILTER(?o != <'''+entity_uri+'''>)}
+            }
+        '''
+        sparql = SPARQLWrapper(endpoint)
+        sparql.setQuery(o_query)
+        sparql.setReturnFormat(JSON)
+        o_results = sparql.query().convert()
 
-        # o_data = results['results']['bindings']
-        print('only 1')
+        o_data = o_results['results']['bindings']
+        for result in o_data:
+            if ('<' + result['g']['value'] + '>') not in graph_list:
+                graph_list.append('<' + result['g']['value'] + '>')
+                print('do more')
+                # create new name for graph (the merging of the existing ones)
+                # insert triples from each graph into the new one and delete the olds
 
-        # if not:
-        # pass
-        # if yes:
-
-        # create new name for graph (the merging of the existing ones)
-        # insert triples from each graph into the new one and delete the olds
     # if more than 1:
     elif graphs_num > 1:
-        dat = ''
-        cat = ''
-        id = ''
-        graph_list = []
-        for result in data:
-            graph_name_parts = result['g']['value'].split('/')[-1].split('__')
-            dat = (dat + '__' + graph_name_parts[0]).strip('__')
-            cat = (cat + '__' + graph_name_parts[1]).strip('__')
-            id = (id + '__' + graph_name_parts[2]).strip('__')
-        new_graph_name = dat + '___' + cat + '___' + id
-        print(new_graph_name)
-    # create new name for graph (the merging of the existing ones)
+        # create new name for graph (the merging of the existing ones)
+        new_graph_name = generate_mergerd_graph_name(data)
+        delete_insert_graphs_query = '''
+        DELETE
+        { GRAPH ?g { ?s ?p ?o } }
+        INSERT
+        { GRAPH <''' + new_graph_name + '''> { ?s ?p ?o }}
+        WHERE {
+        VALUES ?g {'''+values_to_search+'''} .
+        GRAPH ?g { ?s ?p ?o }
+        }
+        '''
+
+        sparql = SPARQLWrapper(linkset_endpoint.UPDATEMYLINKSET)
+        sparql.setQuery(delete_insert_graphs_query)
+        sparql.method = 'POST'
+        sparql.query()
+        print('HERE', entity_uri, graph_list)
+
     # insert triples from each graph into the new one and delete the olds
 
 
