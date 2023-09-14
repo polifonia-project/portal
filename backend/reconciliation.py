@@ -258,7 +258,6 @@ def graph_merging(entity_uri, endpoint):
     for result in data:
         graph_list.append('<' + result['g']['value'] + '>')
 
-    values_to_search = ' '.join(graph_list)
     # print('GRAPHS', graph_list)
 
     # if only 1:
@@ -283,6 +282,24 @@ def graph_merging(entity_uri, endpoint):
                 print('do more')
                 # create new name for graph (the merging of the existing ones)
                 # insert triples from each graph into the new one and delete the olds
+        if len(set(graph_list)) > 1:
+            values_to_search = ' '.join(graph_list)
+            new_graph_name = generate_mergerd_graph_name(data)
+            delete_insert_graphs_query = '''
+            DELETE
+            { GRAPH ?g { ?s ?p ?o } }
+            INSERT
+            { GRAPH <''' + new_graph_name + '''> { ?s ?p ?o }}
+            WHERE {
+            VALUES ?g {'''+values_to_search+'''} .
+            GRAPH ?g { ?s ?p ?o }
+            }
+            '''
+
+            sparql = SPARQLWrapper(linkset_endpoint.UPDATEMYLINKSET)
+            sparql.setQuery(delete_insert_graphs_query)
+            sparql.method = 'POST'
+            sparql.query()
 
     # if more than 1:
     elif graphs_num > 1:
