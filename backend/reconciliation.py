@@ -12,7 +12,7 @@ import hydra.tpf
 import linkset_endpoint
 import methods
 
-WHITE_LIST = ['wikidata', 'dbpedia']
+WHITE_LIST = ['wikidata', 'dbpedia', 'viaf']
 WHITE_LIST_PARAM = {
     'wikidata': {
         'sparql_endpoint': 'https://query.wikidata.org/sparql',
@@ -37,6 +37,10 @@ def query_lod_fragments(endpoint, query):
     g.open(endpoint)
 
     results = g.query(query)
+    {result['origin_uri']['value']: result['same_uri']['value']
+               for result in results['results']['bindings'] if len(result['same_uri']['value']) > 0}
+    # {origin_uri: 'same_uri_1, same_uri_n'}
+    return results
 
 def query_same_as_internal(uri_list):
     values_to_search = ' '.join(uri_list)
@@ -148,7 +152,9 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                                 same_same_uris_dict = {}
                                 # check if fragments rec need linked data fragments search
                                 if WHITE_LIST_PARAM[match]['fragments']:
-                                    pass
+                                    endpoint = WHITE_LIST_PARAM[match]['endpoint']
+                                    same_same_uris_dict = find_matches(
+                                        query, sparql_endpoint)
                                 else:
                                     sparql_endpoint = WHITE_LIST_PARAM[match]['sparql_endpoint']
                                     same_same_uris_dict = find_matches(
