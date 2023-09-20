@@ -6,7 +6,7 @@ import re
 from SPARQLWrapper import SPARQLWrapper, JSON
 from rdflib import URIRef, Literal, Dataset, Graph
 from rdflib.namespace import SDO, RDFS, OWL
-# import hydra.tpf
+import hydra.tpf
 
 # internal methods
 import linkset_endpoint
@@ -28,10 +28,15 @@ WHITE_LIST_PARAM = {
         'fragments': 'true',
         'endpoint': 'http://data.linkeddatafragments.org/viaf/',
         'iri_base': 'http://viaf.org/viaf/',
-        'query': ''
+        'query': 'SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same_uri); SEPARATOR=", ") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} . <http://schema.org/sameAs>|^<http://schema.org/sameAs> ?origin_uri .} GROUP BY ?origin_uri'
     }
 }
 
+def query_lod_fragments(endpoint, query):
+    g = Graph('TPFStore')
+    g.open(endpoint)
+
+    results = g.query(query)
 
 def query_same_as_internal(uri_list):
     values_to_search = ' '.join(uri_list)
