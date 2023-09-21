@@ -55,24 +55,24 @@ def sonic_flush_index(collection):
         ingestcl.flush(collection)
 
 
-def index_per_category(datasets, categories, cat_id):
-    cat_name = categories[cat_id]['name']
+def index_per_category(cat_id, cat_name, entities_dir):
+    '''ingest data for each category iterating over the entities files for that category'''
     index_dict = {}
-    for pattern in categories[cat_id]['search_pattern']:
-        pattern_query = pattern['query']
-        dataset = pattern['dataset']
-        if datasets[dataset]['query_method'] == 'sparql_endpoint':
-            sparql_endpoint = datasets[dataset]['sparql_endpoint']
-            pattern_data = get_sparql_results(pattern_query, sparql_endpoint)
-            # qui è dove devo popolare il linkset perché ho gli uri associati al loro dataset
-            rec.linkset_file_population(datasets, dataset, pattern_data.keys())
-            print('[SUCCESS] got data from endpoint:', sparql_endpoint)
-            index_dict.update(pattern_data)
-            print('[SUCCESS] ingestion for:', cat_name.lower())
+
+    # iterate over entities file and search for the ones that have cat_id
+    for filename in os.listdir(entities_dir):
+        split_name = filename.strip('.json').split('__')
+        # when true, open file to access info
+        if split_name[1] == cat_id:
+            entities_file_data = methods.read_json(entities_dir+'/'+filename)
+            for entity_uri in entities_file_data:
+                index_dict[entity_uri] = entity_uri['label']
     # flush
-    sonic_flush_index(cat_name.lower())
+    sonic_flush_index(cat_name)
+    print('[DELETE] flushed index for:', cat_name)
     # ingest
-    sonic_ingest(index_dict, cat_name.lower())
+    sonic_ingest(index_dict, cat_name)
+    print('[SUCCESS] ingestion for:', cat_name)
 
 
 def ingest_data(datasets, categories):
@@ -145,16 +145,26 @@ def suggested_results(d, c, cat_id, word):
     print(suggestions)
     return suggestions
 
-def create_generic_index():
+def ingest_generic_index(categories, entities_dir):
+    for cat in categories:
+        is_ingested = False if 'status' not in categories[cat] else True
+        # FIRST INGESTION
+        if is_ingested == False:
+            cat_name = cat['name'].lower()
+            index_per_category(cat, cat_name, entities_dir)
+            #  change status in categories config
+        cat['status'] = 'ingested'
+        methods.update_json(g['data_sources']['categories'], categories)
+        else:
+            print('[UPDATE] data already ingested for', cat_name)
+
+def ingest_reconciled_index():
     pass
 
-def create_reconciled_index():
-    pass
-
-def create_Chosen_index(index_type='GENERIC', data_folder):
+def ingest_chosen_index(index_type='GENERIC', categories, entities_dir):
     '''initilise correct sonic index based on type'''
     if index_type == 'GENERIC':
-        create_generic_index()
+        ingest_generic_index(categories, entities_dir)
     elif index_type == 'RECONCILED':
-        create_reconciled_index()
+        ingest_reconciled_index()
     pass
