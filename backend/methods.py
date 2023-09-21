@@ -70,8 +70,8 @@ def get_sparql_results(query, endpoint):
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
-    results = [result['entity']['value']
-               for result in results['results']['bindings'] if len(result['entityLabel']['value']) > 0]
+    results = {result['entity']['value']: result['entityLabel']['value']
+               for result in results['results']['bindings'] if len(result['entityLabel']['value']) > 0}
     return results
 
 
@@ -125,14 +125,15 @@ def fill_entities_files(state, categories, datasets, directory):
             dat_id = split_name[0]
             cat_id = split_name[1]
 
-            # send query for that cat to the dat endpoint and retrieve list of uris (convert to set to avoid duplicates)
-            cat_entities = set(collect_entities_uris(
-                categories, cat_id, datasets, dat_id))
-            entities_list.extend(cat_entities)
+            # send query for that cat to the dat endpoint and retrieve dict uri:label
+            entities_data = collect_entities_uris(categories, cat_id, datasets, dat_id)
+            # get list of uris using keys method
+            entities_uris = entities_data.keys()
+            entities_list.extend(entities_uris)
             for entity in entities_list:
                 entity_info = {
                     'sameAs': False,
-                    'label': ''
+                    'label': entities_data[entity]
                 }
                 entities_file[entity] = entity_info
 
