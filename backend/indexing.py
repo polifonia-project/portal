@@ -1,3 +1,6 @@
+# builtin libraries
+import os
+
 # external libraries
 from SPARQLWrapper import SPARQLWrapper, JSON
 from sonicclient import SearchClient, IngestClient, ControlClient
@@ -66,30 +69,13 @@ def index_per_category(cat_id, cat_name, entities_dir):
         if split_name[1] == cat_id:
             entities_file_data = methods.read_json(entities_dir+'/'+filename)
             for entity_uri in entities_file_data:
-                index_dict[entity_uri] = entity_uri['label']
+                index_dict[entity_uri] = entities_file_data[entity_uri]['label']
     # flush
     sonic_flush_index(cat_name)
     print('[DELETE] flushed index for:', cat_name)
     # ingest
     sonic_ingest(index_dict, cat_name)
     print('[SUCCESS] ingestion for:', cat_name)
-
-
-def ingest_data(datasets, categories):
-    for cat in categories:
-        is_ingested = False if 'status' not in categories[cat] else True
-
-        cat_name = categories[cat]['name']
-        # FIRST INGESTION
-        if is_ingested == False:
-            index_per_category(datasets, categories, cat)
-            print('[SUCCESS] ingestion for:', cat_name.lower())
-            #  change status in categories config
-            categories[cat]['status'] = 'ingested'
-            methods.update_json(g['data_sources']['categories'], categories)
-            rec.triples_to_linkset_edpoint(rec.LINKSET_FILE)
-        else:
-            print('[UPDATE] data already ingested for', cat_name.lower())
 
 
 # def sonic_suggest(cat, word):
@@ -147,21 +133,22 @@ def suggested_results(d, c, cat_id, word):
 
 def ingest_generic_index(categories, entities_dir):
     for cat in categories:
+        cat_name = categories[cat]['name'].lower()
+
         is_ingested = False if 'status' not in categories[cat] else True
         # FIRST INGESTION
         if is_ingested == False:
-            cat_name = cat['name'].lower()
             index_per_category(cat, cat_name, entities_dir)
             #  change status in categories config
-        cat['status'] = 'ingested'
-        methods.update_json(g['data_sources']['categories'], categories)
+            categories[cat]['status'] = 'ingested'
+            methods.update_json(g['data_sources']['categories'], categories)
         else:
             print('[UPDATE] data already ingested for', cat_name)
 
 def ingest_reconciled_index():
     pass
 
-def ingest_chosen_index(index_type='GENERIC', categories, entities_dir):
+def ingest_chosen_index( categories, entities_dir, index_type='GENERIC'):
     '''initilise correct sonic index based on type'''
     if index_type == 'GENERIC':
         ingest_generic_index(categories, entities_dir)
