@@ -15,12 +15,12 @@ import methods
 WHITE_LIST = ['wikidata', 'dbpedia', 'viaf']
 WHITE_LIST_PARAM = {
     'wikidata': {
-        'sparql_endpoint': 'https://query.wikidata.org/sparql',
+        'endpoint': 'https://query.wikidata.org/sparql',
         'iri_base': 'http://www.wikidata.org/',
         'query': 'SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same_uri); SEPARATOR=\", \") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} . { ?same_uri schema:sameAs|owl:sameAs|skos:exactMatch|wdt:P2888|^schema:sameAs|^owl:sameAs|^skos:exactMatch|^wdt:P2888 ?origin_uri . } UNION {?other_uri wdt:P214|^wdt:P214 ?origin_uri . BIND(CONCAT(\"https://viaf.org/viaf/\", STR( ?other_uri ))  AS ?same_uri )} UNION {?other_uri wdt:P1953|^wdt:P1953 ?origin_uri . BIND(CONCAT(\"https://www.discogs.com/artist/\", ?other_uri )  AS ?same_uri ) } UNION {?other_uri wdt:P1954|^wdt:P1954 ?origin_uri . BIND(CONCAT(\"https://www.discogs.com/master/\", ?other_uri )  AS ?same_uri )}} GROUP BY ?origin_uri'
     },
     'dbpedia': {
-        'sparql_endpoint': 'https://dbpedia.org/sparql',
+        'endpoint': 'https://dbpedia.org/sparql',
         'iri_base': 'http://dbpedia.org/',
         'query': 'SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same_uri); SEPARATOR=\", \") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} .  { ?same_uri schema:sameAs|owl:sameAs|skos:exactMatch|^schema:sameAs|^owl:sameAs|^skos:exactMatch ?origin_uri . }} GROUP BY ?origin_uri'
     },
@@ -147,18 +147,15 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                         # find matches in external datasets - 1st level of reconciliation
                         for uri in same_uri_list.split(', '):
                             if any((match := substring) in uri for substring in WHITE_LIST):
-                                query = WHITE_LIST_PARAM[match]['query']
-                                query = query.replace('<>', '<' + uri + '>')
+                                external_query = WHITE_LIST_PARAM[match]['query']
+                                external_query = external_query.replace('<>', '<' + uri + '>')
+                                external_endpoint = WHITE_LIST_PARAM[match]['endpoint']
                                 same_same_uris_dict = {}
                                 # check if fragments rec need linked data fragments search
-                                if WHITE_LIST_PARAM[match]['fragments']:
-                                    endpoint = WHITE_LIST_PARAM[match]['endpoint']
-                                    same_same_uris_dict = find_matches(
-                                        query, sparql_endpoint)
+                                if 'fragments' in WHITE_LIST_PARAM[match]:
+                                    same_same_uris_dict = query_lod_fragments(external_endpoint, external_query)
                                 else:
-                                    sparql_endpoint = WHITE_LIST_PARAM[match]['sparql_endpoint']
-                                    same_same_uris_dict = find_matches(
-                                        query, sparql_endpoint)
+                                    same_same_uris_dict = find_matches(external_query, external_endpoint)
 
                                 for same_uri, other_uris_list in same_same_uris_dict.items():
                                     ds_updated = add_quads_to_conj_graph(ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'],
@@ -182,12 +179,16 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                             # find matches in external datasets - 1st level of reconciliation
                             for uri in same_uri_list.split(', '):
                                 if any((match := substring) in uri for substring in WHITE_LIST):
-                                    sparql_endpoint = WHITE_LIST_PARAM[match]['sparql_endpoint']
-                                    query = WHITE_LIST_PARAM[match]['query']
-                                    query = query.replace(
-                                        '<>', '<' + uri + '>')
-                                    same_same_uris_dict = find_matches(
-                                        query, sparql_endpoint)
+                                    external_query = WHITE_LIST_PARAM[match]['query']
+                                    external_query = external_query.replace('<>', '<' + uri + '>')
+                                    external_endpoint = WHITE_LIST_PARAM[match]['endpoint']
+                                    same_same_uris_dict = {}
+                                    # check if fragments rec need linked data fragments search
+                                    if 'fragments' in WHITE_LIST_PARAM[match]:
+                                        same_same_uris_dict = query_lod_fragments(external_endpoint, external_query)
+                                    else:
+                                        same_same_uris_dict = find_matches(external_query, external_endpoint)
+                                    
                                     for same_uri, other_uris_list in same_same_uris_dict.items():
                                         ds_updated = add_quads_to_conj_graph(ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'],
                                                                              datasets[dataset_id]['name'], same_uri, other_uris_list, WHITE_LIST_PARAM[match]['iri_base'], match)
@@ -197,13 +198,18 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
     if any_match:
         for match, uri_list in uris_to_reconcile.items():
             if len(uri_list) > 0:
-                sparql_endpoint = WHITE_LIST_PARAM[match]['sparql_endpoint']
-                query = WHITE_LIST_PARAM[match]['query']
+                external_endpoint = WHITE_LIST_PARAM[match]['endpoint']
+                external_query = WHITE_LIST_PARAM[match]['query']
                 # 1500 is the control number to avoid having a VALUE in the QUERY that is too long
                 if len(' '.join(uri_list)) < 1500:
                     values_to_search = ' '.join(uri_list)
-                    query = query.replace('<>', values_to_search)
-                    same_uris_dict = find_matches(query, sparql_endpoint)
+                    external_query = external_query.replace('<>', values_to_search)
+                    same_uris_dict = {}
+                    # check if fragments rec need linked data fragments search
+                    if 'fragments' in WHITE_LIST_PARAM[match]:
+                        same_uris_dict = query_lod_fragments(external_endpoint, external_query)
+                    else:
+                        same_uris_dict = find_matches(external_query, external_endpoint)
                     for origin_uri, same_uri_list in same_uris_dict.items():
                         if len(same_uri_list) > 0:
                             sameAs_track_dictionary[origin_uri] = True
@@ -216,8 +222,13 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
 
                     for chunk in uris_to_search_chunks:
                         values_to_search = ' '.join(chunk)
-                        query = query.replace('<>', values_to_search)
-                        same_uris_dict = find_matches(query, sparql_endpoint)
+                        external_query = external_query.replace('<>', values_to_search)
+                        same_uris_dict = {}
+                        # check if fragments rec need linked data fragments search
+                        if 'fragments' in WHITE_LIST_PARAM[match]:
+                            same_uris_dict = query_lod_fragments(external_endpoint, external_query)
+                        else:
+                            same_uris_dict = find_matches(external_query, external_endpoint)
                         for origin_uri, same_uri_list in same_uris_dict.items():
                             if len(same_uri_list) > 0:
                                 sameAs_track_dictionary[origin_uri] = True
