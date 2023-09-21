@@ -144,3 +144,17 @@ def suggested_results(d, c, cat_id, word):
         suggestions.update(results)
     print(suggestions)
     return suggestions
+
+def create_generic_index():
+    pass
+
+def create_reconciled_index():
+    pass
+
+def create_Chosen_index(index_type='GENERIC', data_folder):
+    '''initilise correct sonic index based on type'''
+    if index_type == 'GENERIC':
+        create_generic_index()
+    elif index_type == 'RECONCILED':
+        create_reconciled_index()
+    pass
