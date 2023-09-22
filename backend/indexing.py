@@ -90,44 +90,27 @@ def sonic_query(cat, word):
         return querycl.query(cat, 'entities', word)
 
 
-def suggested_results(d, c, cat_id, word):
+def suggested_results(d, c, cat_id, word, entities_dir):
     suggestions = {}
     cat = c[cat_id]['name']
     # search ids for each suggestion
     ids = sonic_query(cat, word)
     unique_ids = set(ids)
 
-    # associate each id to the correct endpoint
-    entries_to_search = {}
-    search_patterns = c[cat_id]['search_pattern']
-    for pattern in search_patterns:
-        entry_id_list = []
-        d_id = pattern['dataset']
-        iri_base = d[d_id]['iri_base']
-        query_method = d[d_id]['query_method']
-        endpoint = d[d_id][query_method]
-        for id in unique_ids:
-            if iri_base in id:
-                entry_id_list.append('<' + id + '>')
-        entries_to_search[endpoint] = entry_id_list
-
-    # query each endpoint with all the values to have the labels
-    for k, v in entries_to_search.items():
-        endpoint = k
-        values_to_search = ' '.join(v)
-        label_query = '''
-        SELECT DISTINCT ?entity (SAMPLE(?entityLabel) AS ?entityLabel)
-        WHERE {
-            VALUES ?entity {'''+values_to_search+'''} .
-            ?entity <http://www.w3.org/2000/01/rdf-schema#label>|<http://www.w3.org/2004/02/skos/core#prefLabel> ?entityLabel .
-            OPTIONAL { 
-                FILTER (langMatches(lang(?entityLabel), "en"))
-                BIND (?entityLabel AS ?entityLabel) 
-                }
-        } GROUP BY ?entity
-        '''
-        results = get_sparql_results(label_query, endpoint)
-        suggestions.update(results)
+    # iterate over entities file and search for the ones that have one of the unique_ids
+    for filename in os.listdir(entities_dir):
+        split_name = filename.strip('.json').split('__')
+        # when true, open file to access info
+        if split_name[1] == cat_id:
+            entities_file_data = methods.read_json(entities_dir+'/'+filename)
+            # iterate over the uris
+            for uri in unique_ids:
+                # if uri in file
+                if uri in entities_file_data:
+                    print('LABEL', entities_file_data[uri]['label'])
+                    # append uri and its label to suggestions dict
+                    suggestions[uri] = entities_file_data[uri]['label']
+                    
     print(suggestions)
     return suggestions
 
