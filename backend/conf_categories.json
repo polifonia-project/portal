@@ -6,26 +6,25 @@
         "search_pattern": [
             {
                 "dataset": "d_01",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel }"
             },
             {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q1053916 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q1053916 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 100"
             }
         ],
         "filters": {
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P1343 ?entity.  BIND(str(\"described in\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P1343 ?entity.  BIND(str(\"described in\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
         "section": {
             "title": "Know everything about your favorite topic",
             "description": "Explore connections and relations of topics. See all the results, filter and arrange them as you want. ",
-            "highlights": [
-            ]
+            "highlights": []
         },
         "status": "ingested"
     },
@@ -36,14 +35,14 @@
         "search_pattern": [
             {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q105543609 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q105543609 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 100"
             }
         ],
         "filters": {
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P86 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has composer\") AS ?rel) } UNION { <> wdt:P676 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"lyrics by\") AS ?rel) } UNION {VALUES ?type {wd:Q215380 wd:Q5} <> wdt:P175 ?entity. ?entity wdt:P31 ?type . BIND(str(\"has performer\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P86 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has composer\") AS ?rel) } UNION { ?starting_value wdt:P676 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"lyrics by\") AS ?rel) } UNION {VALUES ?type {wd:Q215380 wd:Q5} ?starting_value wdt:P175 ?entity. ?entity wdt:P31 ?type . BIND(str(\"has performer\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -63,30 +62,30 @@
         "search_pattern": [
             {
                 "dataset": "d_01",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/genre> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/genre> ?entity . ?entity rdfs:label ?entityLabel }"
             },
             {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q188451 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q188451 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 100"
             }
         ],
         "filters": {
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { { <> wdt:P3095 ?entity. ?entity wdt:P31/wdt:P279* wd:Q5 . BIND(str(\"practiced by\") AS ?rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P3095 ?entity. ?entity wdt:P31/wdt:P279* wd:Q5 . BIND(str(\"practiced by\") AS ?rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P495 ?entity. ?entity wdt:P31/wdt:P279* wd:Q6256 . BIND(str(\"has country of origin\") AS ?rel) }. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P495 ?entity. ?entity wdt:P31/wdt:P279* wd:Q6256 . BIND(str(\"has country of origin\") AS ?rel) }. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ],
             "creative works": [
                 {
                     "dataset": "d_01",
-                    "query": "SELECT DISTINCT ?inverse_rel ?entity ?entityLabel WHERE { { <> ^<https://schema.org/genre> ?entity. ?entity rdfs:label ?entityLabel BIND(str(\"has subject\") AS ?inverse_rel) } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value ^<https://schema.org/genre> ?entity. ?entity rdfs:label ?entityLabel BIND(str(\"has subject\") AS ?inverse_rel) } } ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -106,14 +105,14 @@
         "search_pattern": [
             {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q105543609 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q105543609 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 100"
             }
         ],
         "filters": {
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P86 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has composer\") AS ?rel) } UNION { <> wdt:P676 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"lyrics by\") AS ?rel) } UNION {VALUES ?type {wd:Q215380 wd:Q5} <> wdt:P175 ?entity. ?entity wdt:P31 ?type . BIND(str(\"has performer\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P86 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has composer\") AS ?rel) } UNION { ?starting_value wdt:P676 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"lyrics by\") AS ?rel) } UNION {VALUES ?type {wd:Q215380 wd:Q5} ?starting_value wdt:P175 ?entity. ?entity wdt:P31 ?type . BIND(str(\"has performer\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -133,14 +132,14 @@
         "search_pattern": [
             {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q105543609 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q105543609 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 100"
             }
         ],
         "filters": {
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P86 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has composer\") AS ?rel) } UNION { <> wdt:P676 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"lyrics by\") AS ?rel) } UNION {VALUES ?type {wd:Q215380 wd:Q5} <> wdt:P175 ?entity. ?entity wdt:P31 ?type . BIND(str(\"has performer\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P86 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has composer\") AS ?rel) } UNION { ?starting_value wdt:P676 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"lyrics by\") AS ?rel) } UNION {VALUES ?type {wd:Q215380 wd:Q5} ?starting_value wdt:P175 ?entity. ?entity wdt:P31 ?type . BIND(str(\"has performer\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -160,40 +159,40 @@
         "search_pattern": [
             {
                 "dataset": "d_01",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/character> ?entity . ?entity rdfs:label ?entityLabel } LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/character> ?entity . ?entity rdfs:label ?entityLabel } ORDER BY ?entity"
             },
             {
                 "dataset": "d_03",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity a <https://schema.org/Person> . ?entity <http://www.w3.org/2004/02/skos/core#prefLabel> ?entityLabel FILTER CONTAINS(str(?entity), \"http://data.beeldengeluid.nl/gtaa/13467\") }"
+                "query": "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?entity ?entityLabel WHERE { { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;  (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity . ?entity skos:prefLabel ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/(sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity . ?entity skos:prefLabel ?entityLabel .} } LIMIT 200"
             },
             {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q5 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {{ ?entity wdt:P106 wd:Q36834 . } UNION { ?entity wdt:P106 wd:Q639669 . } UNION { ?entity wdt:P106 wd:Q753110 . } UNION { ?entity wdt:P106 wd:Q177220 . } UNION { ?entity wdt:P31 wd:Q215380 . } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 200"
             }
         ],
         "filters": {
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { ?starting_value wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { ?starting_value wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {?starting_value wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {?starting_value ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {?starting_value wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {?starting_value ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P19 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of birth\") AS ?rel) } UNION { <> wdt:P20 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of death\") AS ?rel) } UNION { <> wdt:P937 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has work location\") AS ?rel) } UNION { <> wdt:P740 ?entity. BIND(str(\"location of formation\") AS ?rel)} UNION { <> wdt:P495 ?entity. BIND(str(\"has country of origin\") AS ?rel)} . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P19 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of birth\") AS ?rel) } UNION { ?starting_value wdt:P20 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of death\") AS ?rel) } UNION { ?starting_value wdt:P937 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has work location\") AS ?rel) } UNION { ?starting_value wdt:P740 ?entity. BIND(str(\"location of formation\") AS ?rel)} UNION { ?starting_value wdt:P495 ?entity. BIND(str(\"has country of origin\") AS ?rel)} . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ],
             "creative works": [
                 {
                     "dataset": "d_01",
-                    "query": "SELECT DISTINCT ?inverse_rel ?entity ?entityLabel WHERE { { <> ^<https://schema.org/character> ?entity. ?entity rdfs:label ?entityLabel BIND(str(\"has subject\") AS ?inverse_rel) } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value ^<https://schema.org/character> ?entity. ?entity rdfs:label ?entityLabel BIND(str(\"has subject\") AS ?inverse_rel) } } ORDER BY ?entityLabel"
                 }
             ],
             "genres": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P136 ?entity. BIND(str(\"has genre\") AS ?rel) } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P136 ?entity. BIND(str(\"has genre\") AS ?rel) } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -213,20 +212,20 @@
         "search_pattern": [
             {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q82794 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q82794 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 100"
             }
         ],
         "filters": {
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { { <> wdt:P6 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has head of government\") AS ?rel) } UNION {<> wdt:P417 ?entity . ?entity wdt:P31 wd:Q5 . BIND(str(\"has patron saint\") AS ?rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P6 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has head of government\") AS ?rel) } UNION {?starting_value wdt:P417 ?entity . ?entity wdt:P31 wd:Q5 . BIND(str(\"has patron saint\") AS ?rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P190 ?entity. ?entity wdt:P31/wdt:P279* wd:Q82794 . BIND(str(\"twinned administrative body\") AS ?rel) } UNION {<> ^wdt:P47 ?entity . ?entity wdt:P31/wdt:P279* wd:Q82794 . BIND(str(\"shares border with\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P190 ?entity. ?entity wdt:P31/wdt:P279* wd:Q82794 . BIND(str(\"twinned administrative body\") AS ?rel) } UNION {?starting_value ^wdt:P47 ?entity . ?entity wdt:P31/wdt:P279* wd:Q82794 . BIND(str(\"shares border with\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -246,20 +245,20 @@
         "search_pattern": [
             {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?s wdt:P31 wd:Q110295396 . ?entity wdt:P279* ?s . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 20"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?s wdt:P31 wd:Q110295396 . ?entity wdt:P279* ?s . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 100"
             }
         ],
         "filters": {
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P61 ?entity. BIND(str(\"invented by\") AS ?rel) } UNION { <> wdt:P1535 ?entity. BIND(str(\"used by\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P61 ?entity. BIND(str(\"invented by\") AS ?rel) } UNION { ?starting_value wdt:P1535 ?entity. BIND(str(\"used by\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P1343 ?entity.  BIND(str(\"described in\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P1343 ?entity.  BIND(str(\"described in\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },

@@ -212,7 +212,7 @@ class ResultsTest extends React.Component {
 
     checkUriLocation = (uri, dataset_iri_base) => {
         let returnCheck = false
-        let locationQuery = 'SELECT DISTINCT ?d_location WHERE {GRAPH <http://w3id.org/polifonia/linkset/> {<' + uri + '> <https://schema.org/location> ?d_location}}';
+        let locationQuery = 'SELECT DISTINCT ?d_location WHERE {GRAPH ?g {<' + uri + '> <https://schema.org/location> ?d_location}}';
         try {
             return fetch('/reconciliation?query=' + encodeURIComponent(locationQuery))
                 .then((res) => res.json())
@@ -223,9 +223,8 @@ class ResultsTest extends React.Component {
                         let locationValues = (data.results.bindings).map(val => val.d_location.value)
                         if (!locationValues.includes(dataset_iri_base)) {
                             returnCheck = true;
-                            return returnCheck
                         }
-                    }
+                    } return returnCheck
                 })
         }
         catch (err) {
@@ -234,15 +233,16 @@ class ResultsTest extends React.Component {
     }
 
     getCorrectUri = (uri, dataset_iri_base) => {
-        let sameUriQuery = 'SELECT DISTINCT ?same_uri WHERE {GRAPH <http://w3id.org/polifonia/linkset/> {<' + uri + '> owl:sameAs ?same_uri . ?same_uri <https://schema.org/location> <' + dataset_iri_base + '>}}';
+        let sameUriQuery = 'SELECT DISTINCT ?same_uri WHERE {GRAPH ?g {<' + uri + '> owl:sameAs|^owl:sameAs ?same_uri . ?same_uri <https://schema.org/location> <' + dataset_iri_base + '>}}';
         try {
             return fetch('/reconciliation?query=' + encodeURIComponent(sameUriQuery))
                 .then((res) => res.json())
                 .then((data) => {
+                    console.log('CORRECTURI', data)
                     let dataLen = data.results.bindings.length;
 
                     if (dataLen > 0) {
-                        let sameUriArray = (data.results.bindings).map(val => val.same_uri.value);
+                        let sameUriArray = (data.results.bindings).map(val => '<' + val.same_uri.value + '>');
                         return sameUriArray
                     } else { return false }
                 })
@@ -254,7 +254,7 @@ class ResultsTest extends React.Component {
 
     queryResults = (query, uri, endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet) => {
         // query, uri, endpoint
-        query = query.replaceAll('<>', '<' + uri + '>');
+        query = query.replaceAll('{}', '{' + uri + '}');
         query = query.concat(' ', queryOffsetString).concat(' ', queryLimitString);
         let url = endpoint + '?query=' + encodeURIComponent(query);
         try {
@@ -373,20 +373,34 @@ class ResultsTest extends React.Component {
                 let query_method = datasets[dataset_id].query_method
                 let endpoint = datasets[dataset_id][query_method]
                 let query = obj.query;
-                let new_uri = 'default';
+                let new_uris = 'default';
                 // check if el_iri has location dataset
                 this.checkUriLocation(uri, iri_base).then((tryRec) => {
+                    console.log('TRY REC', tryRec)
                     // if not, try reconciliation
-                    if (tryRec) {
-                        this.getCorrectUri(uri, iri_base).then((arr) => {
-                            if (arr) {
-                                console.log('FINALLY A RESULT TO TRY', arr)
-                            }
-                        })
-                    } else {
-                        console.log('normal');
-                        this.queryResults(query, uri, endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
-                    }
+                    // if (!tryRec) {
+                    //     console.log(cat, 'uri-location different')
+                    //     this.getCorrectUri(uri, iri_base).then((arr) => {
+                    //         if (arr) {
+                    //             console.log(cat, 'correct uris')
+                    //             new_uris = arr.join(' ')
+                    //             this.queryResults(query, new_uris, endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
+                    //         } else {
+                    //             console.log(cat, 'no correct uris')
+                    //             // try in any case
+                    //             try {
+                    //                 this.queryResults(query, '<' + uri + '>', endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
+                    //                 console.log(cat, uri, iri_base, 'uri-location different but successful')
+                    //             }
+                    //             catch (err) {
+                    //                 console.log(cat, 'NO NEW URI TO USE');
+                    //             }
+                    //         }
+                    //     })
+                    // } else {
+                    this.queryResults(query, '<' + uri + '>', endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
+                    //     console.log(cat, 'uri-location same');
+                    // }
                 })
             }
         }
