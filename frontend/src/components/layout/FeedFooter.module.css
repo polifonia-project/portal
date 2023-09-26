@@ -48,6 +48,37 @@
   color: #f4edec;
 }
 
+.flexOne a,
+.flexTwo a,
+.flexThree a,
+.flexFour a {
+  padding: 10px 19px 10px 19px;
+  border: 0.4px solid rgb(71, 71, 71);
+  border-radius: 3px;
+  transition: all 1s ease;
+  margin: 6px;
+  cursor: pointer;
+  text-transform: lowercase;
+  font-size: 0.8em; 
+  text-decoration: none;
+  outline: 0;
+  display: block;
+  cursor: pointer !important;
+}
+
+.flexZero a {
+  padding: 10px 19px 10px 19px;
+  border: 0.4px solid rgb(71, 71, 71);
+  border-radius: 3px;
+  transition: all 1s ease;
+  margin: 6px;
+  font-size: 0.8em; 
+  text-decoration: none;
+  outline: 0;
+  display: block;
+  cursor: pointer !important;
+}
+
 .flexOne p,
 .flexTwo p,
 .flexThree p,
@@ -57,9 +88,9 @@
   border-radius: 3px;
   transition: all 1s ease;
   margin: 6px;
-  cursor: pointer;
   text-transform: lowercase;
   font-size: 0.8em; 
+  cursor: default;
 }
 
 .flexZero p {
@@ -69,16 +100,13 @@
   transition: all 1s ease;
   margin: 6px;
   font-size: 0.8em; 
+  cursor: default;
 }
 
-
-
-
-
-.flexOne p:hover,
-.flexTwo p:hover,
-.flexThree p:hover,
-.flexFour p:hover {
+.flexOne a:hover,
+.flexTwo a:hover,
+.flexThree a:hover,
+.flexFour a:hover {
   background-color: #f4edec58;
   border-radius: 7px;
   background: rgba(255, 255, 255, 0.2);

@@ -55,7 +55,7 @@ function RelationBlock(props) {
     isLoaded ? <>
       {chunkedList.map(function(list, idx) {
        return (
-       <div key={'rel-'+idx} className={classes.cardBlockContainer} style={{width: 'calc(' + numericWidth + '% - 25px)'}}>
+       <div key={'idx-' + idx} className={classes.cardBlockContainer} style={{width: 'calc(' + numericWidth + '% - 25px)'}}>
        <div className={classes.relationBlock}>
         {(()=> { if (idx === 0) { return <p className={classes.blockTitle}><span>{props.title}</span></p>} else {return <p className={classes.blockTitleHidden}><span>{props.title}</span></p>}})()}
         

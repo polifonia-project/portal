@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import classes from "./MenuOverlay.module.css";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
-import menuicon from "../../assets/svg/compactlogo.svg";
+import menuicon from "../../assets/png/logomenu.png";
 import { CardContext } from "../../context/CardContext";
 
 function MenuOverlay(props) {
@@ -14,7 +14,7 @@ function MenuOverlay(props) {
   function onChange(isVisible) {
     if (isVisible) {
       setTheme('default');
-      document.getElementById("mainHeader").style.backgroundColor = "#f4edec";
+      document.getElementById("mainHeader").style.backgroundColor = "green !important";
       document.getElementById("categoriesNav").style.backgroundColor = "transparent";
       document.getElementById("mainLogo").style.filter= 'none';
       document.getElementById("sectionName").style.color = 'black';
@@ -34,16 +34,10 @@ function MenuOverlay(props) {
             <Link onClick={() => {props.toggleMenu(); setCardOpen(false) }}  to="/">Homepage</Link>
           </li>
           <li>
-            <Link onClick={() => { props.toggleMenu(); onChange('isVisible'); }} to="/datastories">Data Stories</Link>
+            <Link onClick={() => { props.toggleMenu(); onChange('isVisible'); }} to="/about">About</Link>
           </li>
           <li>
-            <Link onClick={() => { props.toggleMenu(); onChange('isVisible'); }} to="/about">Sonar application</Link>
-          </li>
-          <li>
-            <Link onClick={() => { props.toggleMenu(); onChange('isVisible'); }} to="/about">Corpus</Link>
-          </li>
-          <li>
-            <Link onClick={props.toggleMenu} to="/about">About Polifonia</Link>
+            <Link onClick={() => { props.toggleMenu(); onChange('isVisible'); }} to="/outputs">Outputs</Link>
           </li>
         </ul>
       </nav>

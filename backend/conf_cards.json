@@ -315,6 +315,17 @@
                     "dataset": "d_04",
                     "query": "SELECT ?item ?itemLabel ?media WHERE {<> wdt:P242 ?media} LIMIT 1"
                 }]
+            },
+            "06" : {
+                "id": "6",
+                "type": "media",
+                "size": "medium",
+                "title": "Voice",
+                "class" : "audio",
+                "content": [{
+                    "dataset": "d_04",
+                    "query": "SELECT ?media WHERE {<> wdt:P51 ?media }"
+                }]
             }
         }
 

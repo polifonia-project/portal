@@ -7,10 +7,10 @@ import ItemsCarousel from "react-items-carousel";
 function MediaBlock(props) {
 
   const [numericWidth, setNumericWidth] = useState(25);
-  const [isLoaded, setIsLoaded] = useState(true)
-  const [isImage, setIsImage] = useState(false)
-  const [isVideo, setIsVideo] = useState(false)
-  const [isAudio, setIsAudio] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(true);
+  const [isImage, setIsImage] = useState(false);
+  const [isVideo, setIsVideo] = useState(false);
+  const [isAudio, setIsAudio] = useState(false);
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const [singleResult, setSingleResult] = useState(true);
   const [mediaList, setMediaList] = useState([])
@@ -19,10 +19,31 @@ function MediaBlock(props) {
   useEffect(() => {
   // loading
   if (props.content === undefined) {
-    setIsLoaded(false)
+    setIsLoaded(false);
+    setIsImage(false);
+    setIsVideo(false);
+    setIsAudio(false);
   } else {
-    setIsLoaded(true)
+    setIsImage(false);
+    setIsVideo(false);
+    setIsAudio(false);
+    setIsLoaded(true);
     setMediaList(props.content);
+
+  // class 
+    if (props.class === "image") {
+      setIsImage(true)
+      setIsVideo(false)
+      setIsAudio(false)
+    } else if (props.class === "video") {
+      setIsVideo(true)
+      setIsImage(false)
+      setIsAudio(false)
+    } else if (props.class === "audio") {
+      setIsAudio(true)
+      setIsVideo(false)
+      setIsImage(false)
+    } 
   }
 
   // single-result
@@ -32,19 +53,7 @@ function MediaBlock(props) {
   } else {
     setSingleResult(true)
   }
-
-  // class 
-  if (props.class === "image") {
-    setIsImage(true)
-  } else if (props.class === "video") {
-    setIsVideo(true)
-  } else if (props.class === "audio") {
-    setIsAudio(true)
-  } else {
-    setIsImage(false)
-    setIsAudio(false)
-    setIsVideo(false)
-  }
+  
 
   // width
   var current_width = props.width;
