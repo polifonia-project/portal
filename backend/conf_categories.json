@@ -73,13 +73,19 @@
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P3095 ?entity. ?entity wdt:P31/wdt:P279* wd:Q5 . BIND(str(\"practiced by\") AS ?rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?entity wdt:P136 ?starting_value . ?entity wdt:P31 *wd:Q105756498 BIND(str(\"has genre\") AS ?inverse_rel) }. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } }"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P495 ?entity. ?entity wdt:P31/wdt:P279* wd:Q6256 . BIND(str(\"has country of origin\") AS ?rel) }. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P495 ?entity. BIND(str(\"has country of origin\") AS ?rel) } UNION { ?starting_value wdt:P740 ?entity. BIND(str(\"has location of formation\") AS ?rel) }. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                }
+            ],
+            "genres": [
+                {
+                    "dataset": "d_04",
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P279 ?entity. BIND(str(\"subclass of\") AS ?rel) } UNION { ?entity wdt:P737 ?starting_value. ?entity wdt:P31 wd:Q188451 . BIND(str(\"influenced by\") AS ?inverse_rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ],
             "creative works": [
@@ -219,13 +225,13 @@
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P6 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has head of government\") AS ?rel) } UNION {?starting_value wdt:P417 ?entity . ?entity wdt:P31 wd:Q5 . BIND(str(\"has patron saint\") AS ?rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?entity wdt:P740 ?starting_value. ?entity wdt:P31 *wd:Q105756498  BIND(str(\"is place of formation of\") AS ?rel) }  UNION {?entity wdt:P551 ?starting_value . ?entity wdt:P106 ?occupation . ?occupation wdt:P31 wd:Q66715801 .  BIND(str(\"lived in\") AS ?inverse_rel)}  UNION {?starting_value wdt:P483 ?entity. ?entity wdt:P31 wd:Q746369. BIND(str(\"recorded in\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ],
-            "places": [
+            "instruments": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P190 ?entity. ?entity wdt:P31/wdt:P279* wd:Q82794 . BIND(str(\"twinned administrative body\") AS ?rel) } UNION {?starting_value ^wdt:P47 ?entity . ?entity wdt:P31/wdt:P279* wd:Q82794 . BIND(str(\"shares border with\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} {?entity wdt:P1071 ?starting_value. ?entity wdt:P31 *wd:Q110295396 . BIND(str(\"created in\") AS ?inverse_rel)} SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -252,7 +258,7 @@
             "people": [
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P61 ?entity. BIND(str(\"invented by\") AS ?rel) } UNION { ?starting_value wdt:P1535 ?entity. BIND(str(\"used by\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P61 ?entity. BIND(str(\"invented by\") AS ?rel) } UNION { ?entity wdt:P1535 ?starting_value . BIND(str(\"used by\") AS ?rel) } UNION { ?entity wdt:P1303 ?starting_value. BIND(str(\"played by\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } }"
                 }
             ],
             "places": [
