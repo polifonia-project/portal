@@ -109,7 +109,7 @@ def linkset_endpoint_update(entities_dir, datasets, linkset_directory):
     for filename in os.listdir(linkset_directory):
         file_path = linkset_directory + '/' + filename
         server.update(
-            'load <file:///home/giuliarenda/web_portal_test/backend/' + file_path + '>')  # to do: understand how to generalise
+            'load <file:///home/giuliarenda/portal/backend/' + file_path + '>')  # to do: understand how to generalise
     print('[UPDATE] linkset populated')
 
 
