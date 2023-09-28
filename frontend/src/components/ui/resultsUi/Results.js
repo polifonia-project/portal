@@ -201,7 +201,7 @@ class ResultsTest extends React.Component {
                     >
                         {Data.map((res, index) => {
                             return (
-                                <ResultLine key={'resultline--' + index} label={res.label} rel={res.rel} cat={res.cat} dataset={res.dataset} currentDataset={this.state.currentDataset} datasetOn={this.state.datasetOn}number={index + 1} color={this.props.color} input_value={res.input_value} isdirect={res.inverse} uri={res.uri}></ResultLine>
+                                <ResultLine key={'resultline--' + index} label={res.label} rel={res.rel} cat={res.cat} dataset={res.dataset} currentDataset={this.state.currentDataset} datasetOn={this.state.datasetOn} number={index + 1} color={this.props.color} input_value={res.input_value} isdirect={res.inverse} uri={res.uri}></ResultLine>
                             )
                         })}
                     </InfiniteScroll> : <NoResultsError />
@@ -238,7 +238,7 @@ class ResultsTest extends React.Component {
             return fetch('/reconciliation?query=' + encodeURIComponent(sameUriQuery))
                 .then((res) => res.json())
                 .then((data) => {
-                    console.log('CORRECTURI', data)
+                    // console.log('CORRECTURI', data)
                     let dataLen = data.results.bindings.length;
 
                     if (dataLen > 0) {
@@ -266,7 +266,6 @@ class ResultsTest extends React.Component {
                 .then((data) => {
 
                     let dataLen = data.results.bindings.length;
-
                     if (dataLen > 0) {
                         data.results.bindings.forEach(res => {
                             let singleResult = {}
@@ -373,33 +372,39 @@ class ResultsTest extends React.Component {
                 let query_method = datasets[dataset_id].query_method
                 let endpoint = datasets[dataset_id][query_method]
                 let query = obj.query;
+
                 let new_uris = 'default';
                 // check if el_iri has location dataset
                 this.checkUriLocation(uri, iri_base).then((tryRec) => {
-                    console.log('TRY REC', tryRec)
-                    // if not, try reconciliation
-                    if (!tryRec) {
-                        console.log(cat, 'uri-location different')
-                        this.getCorrectUri(uri, iri_base).then((arr) => {
-                            if (arr) {
-                                console.log(cat, 'correct uris')
-                                new_uris = arr.join(' ')
-                                this.queryResults(query, new_uris, endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
-                            } else {
-                                console.log(cat, 'no correct uris')
-                                // try in any case
-                                try {
-                                    this.queryResults(query, '<' + uri + '>', endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
-                                    console.log(cat, uri, iri_base, 'uri-location different but successful')
+                    console.log('TRY REC', tryRec, uri)
+                    // if true, try reconciliation
+                    if (tryRec) {
+                        if (uri.includes(iri_base)) {
+                            console.log('SPECIAL CASE')
+                            this.queryResults(query, '<' + uri + '>', endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
+                        } else {
+                            // console.log(uri, 'uri-location different')
+                            this.getCorrectUri(uri, iri_base).then((arr) => {
+                                if (arr) {
+                                    new_uris = arr.join(' ')
+                                    console.log(uri, 'correct uris')
+                                    this.queryResults(query, new_uris, endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
+                                } else {
+                                    console.log(uri, 'no correct uris')
+                                    // try in any case
+                                    try {
+                                        this.queryResults(query, '<' + uri + '>', endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
+                                        // console.log(cat, uri, iri_base, 'uri-location different but successful')
+                                    }
+                                    catch (err) {
+                                        console.log(cat, 'NO NEW URI TO USE');
+                                    }
                                 }
-                                catch (err) {
-                                    console.log(cat, 'NO NEW URI TO USE');
-                                }
-                            }
-                        })
+                            })
+                        }
                     } else {
-                    this.queryResults(query, '<' + uri + '>', endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
-                        console.log(cat, 'uri-location same');
+                        this.queryResults(query, '<' + uri + '>', endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
+                        console.log(uri, 'uri-location same');
                     }
                 })
             }
