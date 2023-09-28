@@ -18,7 +18,7 @@
     "d_03": {
         "id": "d_03",
         "name": "sound and vision",
-        "iri_base": "",
+        "iri_base": "https://cat.apis.beeldengeluid.nl/",
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://cat.apis.beeldengeluid.nl/sparql",
         "rest_api": ""

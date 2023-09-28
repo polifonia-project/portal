@@ -1,0 +1,83 @@
+We start reconcialiation during the linkset_file_population (linkset_endpoint.py).
+for each filename in the directory of the entities
+get content in the ofrm of a list (of the keys of the dictionary)
+    separate dataset_id and cat_id to create a new .nq file to contain quads
+    activate first_level_reconciliation with the uri list, datasets info, dat_id and cat_id, LILNKSETGRAPH and the file_path of the new .nq.
+    
+    ## DEF first_level_reconciliation
+    uris_to_search = [] empty list to contain the uris we will search in the databases
+    to interact with the WHITE_LIST we create a dict with form white_list_control_word = [empty list for uris to search for this case]
+    set any_match as false (changes in case we find a match)
+
+    graph_names_dict = {} to keep track of new graph_names
+    sameAs_track_dictionary = {}  big dictionary to track if origin_uri has at least 1 sameAs uri (will be the reutn obj of the function)
+
+    ds = Dataset() empty dataset to contain new quads
+
+    for each index_num and uri of the uri_list:
+        generate unique graphnames for each uri and store in graph_names_dict
+        add uri with <> to the uris_to_search list (for query values purposes)
+        if any substrin of the uri is present in the WHITE_LIST:
+            set any_match as true
+            get the match_list of the case and add this uri with <>
+    
+    # this allows us to have diived uris in this way:
+    # in uris_to_search we have ALL <uri>s ready to be search in the INTERNAL datasets
+    # in uris_to_reconcile we have all <uri>s divided in lists under the correspondig white list control word
+
+    we start by searching in internal datasets
+    if uris_to_search is not empty:
+        for each uri in this list:
+            we immediately add quads for it (lines 64-68) in the database and update it
+            for each internal datset:
+                we get the sparql_endpoint
+                we check the length of uris_to_search as a string because if it is too long of 1500 we need to split it into chunks (check methods.create_chunks)
+                if < 1500:
+                    we set the query (that, provided a list of values searches for sameAs)
+                    we retrieve data as a dictionary of origin_uri: [list_of_sameas_uri]
+                    for each origin_uri and same_uri_list:
+                        add their quads to the database
+                        if same_uri_list is not empty:
+                            we declare in the sameAs_track_dictionary that the origin_uri has at least a sameAs
+                            we check if any uri in the same_uri_list contains a white_list_control_word:
+                                in case yes we get the parameters of eg. wikidata and search its sameAs with the correct query and enpoint
+                                # here I still need to differentiate between frament or not
+                                with the results we get from the query in the external dataset we add more quads to the same nemed_grapf of the origin_uri
+                if >= 1500:
+                    we divide into create_chunks
+                    and repeat the process above for each chunk
+
+    now we can check again the white list but for the origin_uris only, in case any_match is true
+    for each match word and uri_list in the dict uris_to_reconcile.
+        if the list is not empty:
+            we repeate the SAME process with the difference of the queries and the enppoints, because we take them from the WHITE_LIST_PARAM
+
+    finally we seriallize the Dataset into the destination .nq file
+    and return the sameAs_track_dictionary
+
+
+
+## DEF graphs_reconciliation
+takes as parameters the name of the directory that contains entities files and the endpoint for update of the linkset.
+for each filename in the directory
+    get the content of the file (dict) and assign it to entities_content
+    for key-uri and value-dict
+        if we know that the uri has sameAs ("sameAs": true)
+            activate graph_merging
+
+## DEF graph_merging
+takes as parameters the uri and the linkset enpoint for update
+first, starting from the uri we search for all the graphs it appears into
+with the results of the query we create a set() that contains the named_graphs strings
+
+then, taking the same uri as staring point, we search for the ?o and retrieves the graphs they appear into (new query)
+with the results of the query we add to the same set() names of named_graph that could be missing from a first search
+
+## here I still need to understand how to explicit this sameAs relation that is hidden.
+## It is for sure and update query, but we need to understand the correct place and if we want to update only Balzegraph or the files too.
+
+now, if the graph_set contains more than 1 graph_name:
+    we generate a new graph_name that is the result of the combination of all the names in the set
+    we join the graph_names into a string to be used as a query value
+    we perform the query to update blazegraph so that all triples from all named_graphs are put in the new graph
+    and the old graph are deleted

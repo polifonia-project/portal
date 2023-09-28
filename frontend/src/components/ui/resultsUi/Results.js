@@ -168,7 +168,7 @@ class ResultsTest extends React.Component {
         return (
             <>
                 <ResultsHeader cat={this.props.cat}>
-                <SourcesBarchart cat={this.props.cat} handleDataset={this.handleDataset} resetDataset={this.resetDataset} results={this.state.totalResults}></SourcesBarchart>
+                    <SourcesBarchart cat={this.props.cat} handleDataset={this.handleDataset} resetDataset={this.resetDataset} results={this.state.totalResults}></SourcesBarchart>
                     <FiltersContainer>
                         <FilterButton isDisabled={this.state.filterOn || this.state.relationOn} resetClass='resetButton' buttonClick={() => this.resetFilters()}>
                             Reset <span className="resetIcon">⟲</span>
@@ -182,7 +182,7 @@ class ResultsTest extends React.Component {
                             {Object.entries(this.state.relationSet).map(set => {
                                 return set[1].map(rel => {
                                     return <FilterButton key={'filterbutton--' + rel} isDisabled={this.state.disabled[set[0]]} buttonClick={() => this.addRelation(rel)} selectedOn={this.state.relationOn}>{rel}</FilterButton>
-                                   
+
                                 })
 
                             })}
@@ -208,6 +208,126 @@ class ResultsTest extends React.Component {
                 }
             </>
         )
+    }
+
+    checkUriLocation = (uri, dataset_iri_base) => {
+        let returnCheck = false
+        let locationQuery = 'SELECT DISTINCT ?d_location WHERE {GRAPH ?g {<' + uri + '> <https://schema.org/location> ?d_location}}';
+        try {
+            return fetch('/reconciliation?query=' + encodeURIComponent(locationQuery))
+                .then((res) => res.json())
+                .then((data) => {
+                    let dataLen = data.results.bindings.length;
+
+                    if (dataLen > 0) {
+                        let locationValues = (data.results.bindings).map(val => val.d_location.value)
+                        if (!locationValues.includes(dataset_iri_base)) {
+                            returnCheck = true;
+                        }
+                    } return returnCheck
+                })
+        }
+        catch (err) {
+            console.log('error', err)
+        }
+    }
+
+    getCorrectUri = (uri, dataset_iri_base) => {
+        let sameUriQuery = 'SELECT DISTINCT ?same_uri WHERE {GRAPH ?g {<' + uri + '> owl:sameAs|^owl:sameAs ?same_uri . ?same_uri <https://schema.org/location> <' + dataset_iri_base + '>}}';
+        try {
+            return fetch('/reconciliation?query=' + encodeURIComponent(sameUriQuery))
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log('CORRECTURI', data)
+                    let dataLen = data.results.bindings.length;
+
+                    if (dataLen > 0) {
+                        let sameUriArray = (data.results.bindings).map(val => '<' + val.same_uri.value + '>');
+                        return sameUriArray
+                    } else { return false }
+                })
+        }
+        catch (err) {
+            console.log('error', err)
+        }
+    }
+
+    queryResults = (query, uri, endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet) => {
+        // query, uri, endpoint
+        query = query.replaceAll('{}', '{' + uri + '}');
+        query = query.concat(' ', queryOffsetString).concat(' ', queryLimitString);
+        let url = endpoint + '?query=' + encodeURIComponent(query);
+        try {
+            return fetch(url, {
+                method: 'GET',
+                headers: { 'Accept': 'application/sparql-results+json' }
+            })
+                .then((res) => res.json())
+                .then((data) => {
+
+                    let dataLen = data.results.bindings.length;
+
+                    if (dataLen > 0) {
+                        data.results.bindings.forEach(res => {
+                            let singleResult = {}
+                            singleResult.uri = res.entity.value;
+                            singleResult.label = res.entityLabel.value;
+                            singleResult.cat = cat;
+                            singleResult.rel = '';
+                            singleResult.inverse = false;
+                            singleResult.input_value = this.props.input_value;
+                            singleResult.dataset = datasets[dataset_id].name;
+                            if (res.inverse_rel) {
+                                if (res.inverse_rel.value.length !== '') {
+                                    singleResult.rel = res.inverse_rel.value;
+                                    singleResult.inverse = true;
+                                } else {
+                                    singleResult.rel = res.rel.value;
+                                    singleResult.inverse = false;
+                                }
+                            } else {
+                                singleResult.rel = res.rel.value;
+                                singleResult.inverse = false;
+                            }
+                            results.push(singleResult);
+                            if (!relations.includes(singleResult.rel)) {
+                                relations.push(singleResult.rel);
+                            }
+
+                            if (!relationSet[singleResult.cat]) {
+                                relationSet[singleResult.cat] = [];
+                                disabled[singleResult.cat] = true;
+                                if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
+                                    relationSet[singleResult.cat].push(singleResult.rel)
+                                }
+                            } else {
+                                if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
+                                    relationSet[singleResult.cat].push(singleResult.rel)
+                                }
+                            }
+                            this.setState({ totalResults: results });
+                            this.setState({ relations: relations });
+                            this.setState({ relationSet: relationSet });
+                            this.setState({ disabled: disabled });
+                            this.setState({ loader: false })
+                        }
+                        )
+                        if (dataLen < queryLimit) {
+                            catOffset[cat] = false;
+                            this.setState({ catOffset: catOffset })
+                            if (!Object.values(catOffset).includes(true)) {
+                                this.setState({ hasMore: false })
+                            }
+                        } else {
+                            catOffset[cat] = true;
+                            this.setState({ catOffset: catOffset });
+                        }
+                    }
+                });
+        }
+        catch (err) {
+            console.log('error', err)
+        }
     }
 
     fetchResults = (uri, newState = true) => {
@@ -248,100 +368,40 @@ class ResultsTest extends React.Component {
         for (const cat in this.props.filters) {
             for (const obj of this.props.filters[cat]) {
                 let dataset_id = obj.dataset
+
                 let iri_base = datasets[dataset_id].iri_base
-                // check if iri_base and el_iri are part of the same dataset
-                // if ((uri).includes(iri_base)) {
                 let query_method = datasets[dataset_id].query_method
                 let endpoint = datasets[dataset_id][query_method]
                 let query = obj.query;
-                query = query.replaceAll('<>', '<' + uri + '>');
-                query = query.concat(' ', queryOffsetString).concat(' ', queryLimitString);
-                let url = endpoint + '?query=' + encodeURIComponent(query);
-                try {
-                    fetch(url, {
-                        method: 'GET',
-                        headers: { 'Accept': 'application/sparql-results+json' }
-                    })
-                        .then((res) => res.json())
-                        .then((data) => {
-
-                            let dataLen = data.results.bindings.length;
-
-                            if (dataLen > 0) {
-                                data.results.bindings.forEach(res => {
-                                    let singleResult = {}
-                                    singleResult.uri = res.entity.value;
-                                    singleResult.label = res.entityLabel.value;
-                                    singleResult.cat = cat;
-                                    singleResult.rel = '';
-                                    singleResult.inverse = false;
-                                    singleResult.input_value = this.props.input_value;
-                                    singleResult.dataset = datasets[dataset_id].name;
-                                    if (res.inverse_rel) {
-                                        if (res.inverse_rel.value.length !== '') {
-                                            singleResult.rel = res.inverse_rel.value;
-                                            singleResult.inverse = true;
-                                        } else {
-                                            singleResult.rel = res.rel.value;
-                                            singleResult.inverse = false;
-                                        }
-                                    } else {
-                                        singleResult.rel = res.rel.value;
-                                        singleResult.inverse = false;
-                                    }
-                                    results.push(singleResult);
-                                    if (!relations.includes(singleResult.rel)) {
-                                        relations.push(singleResult.rel);
-                                    }
-
-                                    if (!relationSet[singleResult.cat]) {
-                                        relationSet[singleResult.cat] = [];
-                                        disabled[singleResult.cat] = true;
-                                        if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
-                                            relationSet[singleResult.cat].push(singleResult.rel)
-                                        }
-                                    } else {
-                                        if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
-                                            relationSet[singleResult.cat].push(singleResult.rel)
-                                        }
-                                    }
-                                    this.setState({ totalResults: results });
-                                    this.setState({ relations: relations });
-                                    this.setState({ relationSet: relationSet });
-                                    this.setState({ disabled: disabled });
-                                    this.setState({ loader: false })
-                                }
-                                )
-                                if (dataLen < queryLimit) {
-                                    catOffset[cat] = false;
-                                    this.setState({ catOffset: catOffset })
-                                    if (!Object.values(catOffset).includes(true)) {
-                                        this.setState({ hasMore: false })
-                                    }
-                                } else {
-                                    catOffset[cat] = true;
-                                    this.setState({ catOffset: catOffset });
-                                }
-                            }
-                            else {
-                                if (!(uri).includes(iri_base)) {
-                                    console.log('Try reconciliation.')
-                                }
-                                this.setState({ loader: false })
-                                catOffset[cat] = false;
-                                this.setState({ catOffset: catOffset })
-                                if (!Object.values(catOffset).includes(true)) {
-                                    this.setState({ hasMore: false })
-                                }
-                            }
-                        });
-                }
-                catch (err) {
-                    console.log('error', err)
-                }
-                // } else {
-                //     console.log('Different iri base.')
-                // }
+                let new_uris = 'default';
+                // check if el_iri has location dataset
+                this.checkUriLocation(uri, iri_base).then((tryRec) => {
+                    console.log('TRY REC', tryRec)
+                    // if not, try reconciliation
+                    // if (!tryRec) {
+                    //     console.log(cat, 'uri-location different')
+                    //     this.getCorrectUri(uri, iri_base).then((arr) => {
+                    //         if (arr) {
+                    //             console.log(cat, 'correct uris')
+                    //             new_uris = arr.join(' ')
+                    //             this.queryResults(query, new_uris, endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
+                    //         } else {
+                    //             console.log(cat, 'no correct uris')
+                    //             // try in any case
+                    //             try {
+                    //                 this.queryResults(query, '<' + uri + '>', endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
+                    //                 console.log(cat, uri, iri_base, 'uri-location different but successful')
+                    //             }
+                    //             catch (err) {
+                    //                 console.log(cat, 'NO NEW URI TO USE');
+                    //             }
+                    //         }
+                    //     })
+                    // } else {
+                    this.queryResults(query, '<' + uri + '>', endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
+                    //     console.log(cat, 'uri-location same');
+                    // }
+                })
             }
         }
         this.setState({ offsetValue: queryOffset + queryLimit });
