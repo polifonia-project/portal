@@ -241,6 +241,7 @@ class SectionClip extends React.Component {
           label={this.state.current_input}
           cat={this.props.catName}
           color={this.props.color}
+          uri={this.props.el_iri}
         ></ExpandButton>
         <div id={'suggContainer'} className={classes.suggestionsContainer} style={{opacity: this.state.isFocused ? '1' : '0'}}>
           { 

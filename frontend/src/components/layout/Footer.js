@@ -1,32 +1,13 @@
 import React from "react";
 import classes from "./FeedFooter.module.css";
-import VisibilitySensor from "react-visibility-sensor";
 import logoPolifonia from "../../assets/svg/logo-polifonia-whitecopia.svg"
 import logoHorizon from "../../assets/svg/logo-eu-white-caption.svg"
 import { Link } from "react-router-dom";
 
-function FeedFooter(props) {
-
-  function onChange(isVisible) {
-    if (isVisible) {
-      document.getElementById("mainHeader").style.backgroundColor = "#f4edec";
-      document.getElementById("categoriesNav").style.backgroundColor = "#f4edec";
-      document.getElementById("mainLogo").style.filter= 'none';
-      document.getElementById("sectionName").style.color = 'black';
-      document.getElementById("menuOptions").style.filter = 'none';
-      document.getElementById("categoriesNav").style.transform = "translateY(-100px)";
-      document.getElementById("mainHeader").style.transform = "translateY(-100px)";
-    } else {
-      document.getElementById("categoriesNav").style.transform = "translateY(0px)";
-      document.getElementById("mainHeader").style.transform = "translateY(0px)";
-    }
-  }
+function Footer(props) {
 
   return (
     <div className={classes.footerContainer}> 
-      <VisibilitySensor onChange={onChange}>
-        <div className={classes.visibilityHook}>X</div>
-      </VisibilitySensor>
       <div className={classes.footerMainBlock}>
         <div className={classes.footerTitle}>
             <img src={logoPolifonia} alt='polifonia logo'></img>
@@ -74,4 +55,4 @@ function FeedFooter(props) {
 }
 
 
-export default FeedFooter;
+export default Footer;

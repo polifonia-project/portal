@@ -16,7 +16,7 @@ function ExpandButton(props) {
     style={{backgroundImage: `url(${expandIcon})` }}
     onMouseEnter={props.mouseEnter}
     onMouseLeave={props.mouseLeave}
-    onClick={() => {setCardOpen(true); setCardContent({title: props.label, cat: props.cat, input: 'no input', uri: 'url', color: props.color, hasInput: true})}}
+    onClick={() => {setCardOpen(true); setCardContent({title: props.label, cat: props.cat, input: 'no input', uri: props.uri, color: props.color, hasInput: true, goesBack: true})}}
     >
     </button>
   );

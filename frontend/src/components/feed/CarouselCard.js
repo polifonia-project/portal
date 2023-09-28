@@ -26,12 +26,11 @@ const CarouselCard = (props) => {
     } else {
       setPageTo("/")
     }
-  });
+  }, [props.type, props.url]);
 
   const handleClick = (e) => {
     if (props.type === 'scroll') {
       handleClickScroll(props.url);
-      console.log(props.logo)
     }
     else if (props.type === 'external') {
       window.open(props.url);
@@ -40,7 +39,7 @@ const CarouselCard = (props) => {
       // style header
       document.getElementById("mainHeader").style.backgroundColor = "#f4edec";
       document.getElementById("categoriesNav").style.backgroundColor = "transparent";
-      document.getElementById("mainLogo").style.filter= 'none';
+      document.getElementById("mainLogo").style.filter = 'none';
       document.getElementById("sectionName").style.color = 'black';
       document.getElementById("menuOptions").style.filter = 'none';
     }
@@ -48,16 +47,19 @@ const CarouselCard = (props) => {
 
   return (
     <Link onClick={() => handleClick()} to={pageTo}>
-    <div key={'carousel-card' + props.index} id={'carousel-card' + props.index} className={classes.carousel_card}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            >
-                <span className={classes.titlewrapper}><h4 className={classes.cardtitle}>{props.claim}&nbsp;&nbsp;</h4><img className={classes.logoSvg} alt="logo carousel" src={`icons/${props.logo}`}></img></span>
-                <p className={classes.cardclaim}>{props.title}</p>
-                <span style={{display: isHovered ? 'inline': 'none', opacity: isHovered ? '1': '0'}}>
-                 <p className={classes.cardexpand}> {props.par}</p>
-                </span>
-    </div>
+      <div key={'carousel-card' + props.index} id={'carousel-card' + props.index} className={classes.carousel_card}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <span className={classes.titlewrapper}>
+          <h4 className={classes.cardtitle}>{props.claim}&nbsp;&nbsp;</h4>
+          <img className={classes.logoSvg} alt="logo carousel" src={`icons/${props.logo}`}></img>
+        </span>
+        <p className={classes.cardclaim}>{props.title}</p>
+        <span style={{ display: isHovered ? 'inline' : 'none', opacity: isHovered ? '1' : '0' }}>
+          <p className={classes.cardexpand}> {props.par}</p>
+        </span>
+      </div>
     </Link>
   );
 };
