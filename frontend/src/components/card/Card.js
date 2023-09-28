@@ -6,7 +6,7 @@ import isDarkColor from 'is-dark-color';
 
 import TextBlock from "./TextBlock";
 import RelationBlock from "./RelationBlock.js";
-import VisualBlock from "./VisualBlock";
+import MediaBlock from "./MediaBlock";
 import LinkBlock from "./LinkBlock";
 import WarningBlock from "./WarningBlock";
 
@@ -23,15 +23,36 @@ function Card(props) {
   const [currentBlock, setCurrentBlock] = useState({})
   const [fromSectionClip, setFromSectionClip] = useState(false)
   const [fromExternalLink, setFromExternalLink] = useState(false)
-
   const [displayShare, setDisplayShare] = useState(false)
+  const [resetOn, setResetOn] = useState(false)
+
+  const [datasets, setDatasets] = useState("")
+
+  // content states
+  const [textContent, setTextContent] = useState({"id_1":[], "id_2":[]})
+  const [linkContent, setLinkContent] = useState({"id_5":[], "id_6":[]})
+  const [relContent, setRelContent] = useState({"id_3":[], "id_4":[]})
+  const [mediaContent, setMediaContent] = useState({})
+
+
 
   useEffect(() => {
     if (cardOpen) {
-      console.log(cardBlocksNew);
-      console.log(cardContent);
+      console.log("This is media content")
+      console.log(mediaContent);
+
+      // entryway setting
       setFromSectionClip(cardContent.hasInput);
       setFromExternalLink(cardContent.goesBack);
+
+      // reset content states
+      setTextContent({});
+      setLinkContent({});
+      setRelContent({});
+      setMediaContent({});
+
+      // launch fecth
+      fetchResults(cardContent.uri);
       if (cardBlocksNew[cardContent.cat]) {
         setColorBackground(cardBlocksNew[cardContent.cat].color);
         setCurrentBlock(cardBlocksNew[cardContent.cat].blocks);
@@ -51,8 +72,20 @@ function Card(props) {
     }
   }, [cardOpen, cardBlocksNew, cardContent.hasInput, cardContent.goesBack, cardContent.cat, colorBackground]);
 
+ // fetch datasets 
+useEffect(() => {
+  fetch("/conf_info")
+    .then((res) => res.json())
+    .then((data) => {
+      setDatasets(data.datasets);
+    });
+}, []);
+
+
+  // close card
   const closeCard = () => {
     setCardOpen(false);
+    setResetOn(false);
     if (isDarkColor([cardContent.color])) {
       setLightHeader();
     } else {
@@ -81,7 +114,218 @@ function Card(props) {
     return encodedUrl
   }
 
+  // fetchResults 
+  const fetchResults = (uri) => {
+    let endpoint = "";
+    let query = "";
+    let dataset = "";
+    
 
+    Object.values(currentBlock).forEach((block, i) => {
+      
+      if (block.type === 'text') {
+        let textResults = []
+        let number = "";
+        Object.values(block.content).forEach((q, i) => {
+          query = q.query;
+          dataset = q.dataset;
+          number = block.id;
+          number = number - 1;
+          number = 'id_' + number;
+          endpoint = datasets[dataset].sparql_endpoint;
+          textResults = [];
+
+        query = query.replaceAll('<>', '<' + uri + '>');
+        let url = endpoint + '?query=' + encodeURIComponent(query);
+        try {
+          fetch(url, {
+            method: 'GET',
+            headers: { 'Accept': 'application/sparql-results+json' }
+          })
+            .then((res) => res.json())
+            .then((data) => {
+  
+              let dataLen = data.results.bindings.length;
+              if (dataLen > 0) {
+                data.results.bindings.forEach(res => {
+                  if (Object.keys(res).length > 0) {
+                    let singleResult = []
+                    singleResult.desc = res.descLabel.value;
+                    singleResult.dataset = q.dataset;
+                    textResults.push(singleResult); 
+                  }
+                }
+                )
+                setTextContent(prev => ({
+                  ...prev,
+                  [number] : textResults,
+                }))
+              }
+              else {
+                // try riconciliation
+              }
+            });
+        }
+        catch (err) {
+          console.log('error', err)
+        }
+        return null
+      })
+      } 
+      else if (block.type === 'link') {
+        let linkResults = []
+        let number = "";
+        Object.values(block.content).forEach((q, i) => {
+          query = q.query;
+          dataset = q.dataset;
+          number = block.id;
+          number = number - 1;
+          number = 'id_' + number;
+          endpoint = datasets[dataset].sparql_endpoint;
+          linkResults = [];
+
+        query = query.replaceAll('<>', '<' + uri + '>');
+        let url = endpoint + '?query=' + encodeURIComponent(query);
+        try {
+          fetch(url, {
+            method: 'GET',
+            headers: { 'Accept': 'application/sparql-results+json' }
+          })
+            .then((res) => res.json())
+            .then((data) => {
+  
+              let dataLen = data.results.bindings.length;
+              if (dataLen > 0) {
+                data.results.bindings.forEach(res => {
+                  if (Object.keys(res).length > 0) {
+                    let singleResult = []
+                    singleResult.url= res.entity.value;
+                    singleResult.label = q.label;
+                    singleResult.dataset = q.dataset;
+                    linkResults.push(singleResult); 
+                  }
+                }
+                )
+                setLinkContent(prev => ({
+                  ...prev,
+                  [number] : linkResults,
+                }))
+              }
+              else {
+                // try riconciliation
+              }
+            });
+        }
+        catch (err) {
+          console.log('error', err)
+        }
+        return null    
+      })
+      } 
+      else if (block.type === 'relation') {
+        let relResults = [];
+        let number = "";
+        Object.values(block.content).map((q, i) => {
+          query = q.query;
+          dataset = q.dataset;
+          number = block.id;
+          number = number - 1;
+          number = 'id_' + number;
+          relResults = [];
+        query = query.replaceAll('<>', '<' + uri + '>');
+        let url = endpoint + '?query=' + encodeURIComponent(query);
+        try {
+          fetch(url, {
+            method: 'GET',
+            headers: { 'Accept': 'application/sparql-results+json' }
+          })
+            .then((res) => res.json())
+            .then((data) => {
+  
+              let dataLen = data.results.bindings.length;
+              if (dataLen > 0) {
+                data.results.bindings.forEach(res => {
+                  if (Object.keys(res).length > 0) {
+                    let singleResult = []
+                    singleResult.name = res.entityLabel.value;
+                    singleResult.link = res.entity.value;
+                    singleResult.dataset = q.dataset;
+                    relResults.push(singleResult); 
+                  }
+                }
+                )
+                let sourceLimit = [];
+                sourceLimit.dataset = q.dataset;
+                relResults.push(sourceLimit); 
+
+                setRelContent(prev => ({
+                  ...prev,
+                  [number] : relResults,
+                }));
+
+              }
+              else {
+                // try riconciliation
+              }
+            });
+        }
+        catch (err) {
+          console.log('error', err)
+        }
+        return null
+      })
+      } 
+      else if (block.type === 'media') {
+        let mediaResults = []
+        let number = "";
+        Object.values(block.content).map((q, i) => {
+          query = q.query;
+          dataset = q.dataset;
+          number = block.id;
+          number = number - 1;
+          number = 'id_' + number;
+          mediaResults = [];
+        query = query.replaceAll('<>', '<' + uri + '>');
+        let url = endpoint + '?query=' + encodeURIComponent(query);
+        try {
+          fetch(url, {
+            method: 'GET',
+            headers: { 'Accept': 'application/sparql-results+json' }
+          })
+            .then((res) => res.json())
+            .then((data) => {
+  
+              let dataLen = data.results.bindings.length;
+              if (dataLen > 0) {
+                data.results.bindings.forEach(res => {
+                  if (Object.keys(res).length > 0) {
+                    let singleResult = []
+                    singleResult.mediaLink = res.media.value;
+                    singleResult.dataset = q.dataset;
+                    mediaResults.push(singleResult); 
+                  }
+                }
+                )
+                setMediaContent(prev => ({
+                  ...prev,
+                  [number] : mediaResults
+                }))
+              }
+              else {
+                // AVOID ADDING NEW BLOCK IF EMPTY
+              }
+            });
+        }
+        catch (err) {
+          console.log('error', err)
+        }
+        return null
+      })
+      } 
+    return null
+    })
+     
+  }
 
   return (
     <div className={classes.cardContainer} style={{ transform: cardOpen ? 'translateX(0)' : 'translateX(-100%)' }}>
@@ -108,15 +352,13 @@ function Card(props) {
       <div className={classes.contentBlock}>
 
         {Object.values(currentBlock).map((block, i) => {
-          if (block.type === 'text') {
-            return <TextBlock key={'textblock-' + i} width={block.size} title={block.title}></TextBlock>
-          }
+          if (block.type === 'text') {  return <TextBlock key={'textblock-' + i} width={block.size} title={block.title} content={textContent['id_'+i]} reset={resetOn} datasets={datasets}></TextBlock> 
+        }
+          else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title} category={block.category} content={relContent['id_'+i]} datasets={datasets} ></RelationBlock> }
 
-          else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title}></RelationBlock> }
+          else if (block.type === 'link') { return <LinkBlock key={'linkblock-' + i} width={block.size} title={block.title} desc={block.description} reset={resetOn} links={block.content} content={linkContent['id_'+i]}></LinkBlock> }
 
-          else if (block.type === 'link') { return <LinkBlock key={'linkblock-' + i} width={block.size} title={block.title} links={block.content}></LinkBlock> }
-
-          else if (block.type === 'visual') { return <VisualBlock key={'visualblock-' + i} width={block.size} title={block.title}></VisualBlock> }
+          else if (block.type === 'media') { return <MediaBlock key={'mediablock-' + i} width={block.size} title={block.title} class={block.class} content={ mediaContent['id_'+ i]} datasets={datasets}></MediaBlock> }
 
           else if (block.type === 'none') { return <WarningBlock key={'warningblock-' + i} width={'large'}></WarningBlock> }
           return null

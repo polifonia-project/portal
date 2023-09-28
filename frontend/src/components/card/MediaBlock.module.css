@@ -5,7 +5,6 @@
   margin-top:25px;
   font-size: 0.85em;
   margin-right: 25px;
-  border-radius: 3px;
   transition: all 1s ease;
   cursor: default;
   padding: 0px 30px 30px 30px;
@@ -13,10 +12,10 @@
 
 .cardBlockBox {
  /* box-shadow: 0px 0px 7px 0.3px #dfdad9; */
-  border-radius: 3px;
+  
   font-family: "Helvetica Light";
   margin: 0;
-  margin-top: 10px;
+  padding-top: 10px;
 }
 
 .cardBlockContainer:hover {
@@ -32,82 +31,45 @@
   font-family: 'Helvetica Regular';
 }
 
-.blockParagraph {
-  font-size: 1.1em;
-  font-weight:lighter;
-  color: black;
-  font-family: 'Helvetica Light';
-  margin-bottom: 3px;
-  margin-top: 0px;
+.mockVis {
+  display: contents;
+  width: 100%;
+  background-color: rgb(141, 140, 140);
+  text-align: center;
 }
 
-.blockParagraph:first-letter {
-  text-transform: uppercase;
+.mockVis img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.mockVis video {
+  width: 100%;
+}
+
+.mockVis audio {
+  width: 100%;
+  padding: 10px 19px 10px 19px;
+    border: 0.4px solid rgb(71, 71, 71);
+    border-radius: 3px;
 }
 
 
-.linkButton {
-  all: unset;
-  color: rgb(40, 39, 39);
-  font-family: 'Helvetica Regular';
-  cursor: pointer;
-  border: 0.8px solid rgb(40, 39, 39);
-  padding: 3px 8px 3px 8px;
-  border-radius: 3px;
-  transition: all 0.4s ease;
-}
+.mockVis audio::-webkit-media-controls-play-button,
+     audio::-webkit-media-controls-panel {
+     background-color: #f4edec;
+     color: #f4edec;
+     }
 
-.linkButton:hover {
-background-color: rgb(40, 39, 39);
-color: white;
-}
 
 .sourceTag {
-  font-size: 10px;
-  margin: 0;
-  margin-top: 7px;
-  color: grey;
-  margin-bottom: 10px;
-}
-
-.sourceCount {
-  font-size: 10px;
-  margin: 0;
-  margin-bottom: 3px;
-  margin-top: 10px;
-  color: grey;
-}
-
-.sourceCount button {
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  background-color: #f4edec;
-  font-size: 8px;
-  color: grey;
-  border: 0.8px solid rgb(40, 39, 39);
-  border-color: grey;
-  margin: 0;
-  margin-left: 5px;
-  padding: 1px;
-  padding-right: 4px;
-  padding-left: 4px;
-  border-radius: 2px;
-  font-weight: normal;
-  transition: all 0.5s ease;
-}
-
-.sourceCount button:hover {
-  border-color: rgb(85, 85, 85);
-  cursor: pointer;
-  overflow: hidden;
-  color: rgb(114, 113, 113);
-  border-color: transparent;
-  box-shadow: 0px 0px 10px -5px black;
-  box-shadow: 0 4px 12px 0 rgba(12,18,45,.1);
-
-}
-
+      font-size: 10px;
+      margin: 0;
+      margin-top: 3px;
+      color: grey;
+      text-align: left;
+      margin-bottom: 10px;
+    }
 
 .cardChevronRight {
   opacity: 1;
@@ -175,11 +137,4 @@ color: white;
 .leftChevron, 
 .rightChevron { 
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-}
-
-
-.textResult {
-  display: contents;
-  width: 100%;
-  background-color: rgb(141, 140, 140);
 }

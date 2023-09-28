@@ -31,7 +31,6 @@ const CarouselCard = (props) => {
   const handleClick = (e) => {
     if (props.type === 'scroll') {
       handleClickScroll(props.url);
-      console.log(props.logo)
     }
     else if (props.type === 'external') {
       window.open(props.url);

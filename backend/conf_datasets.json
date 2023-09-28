@@ -30,5 +30,13 @@
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://query.wikidata.org/sparql",
         "rest_api": ""
+    },
+    "d_05": {
+        "id": "d_05",
+        "name": "test dataset",
+        "iri_base": "http://www.wikidata.org/",
+        "query_method": "sparql_endpoint",
+        "sparql_endpoint": "https://query.wikidata.org/sparql",
+        "rest_api": ""
     }
 }
