@@ -9,10 +9,10 @@
     },
     "d_02": {
         "id": "d_02",
-        "name": "choco",
-        "iri_base": "",
+        "name": "meetups",
+        "iri_base": "http://w3id.org/polifonia/pilot/meetups/",
         "query_method": "sparql_endpoint",
-        "sparql_endpoint": "https://polifonia.disi.unibo.it/choco/sparql",
+        "sparql_endpoint": "http://data.open.ac.uk/sparql",
         "rest_api": ""
     },
     "d_03": {
@@ -26,14 +26,6 @@
     "d_04": {
         "id": "d_04",
         "name": "wikidata",
-        "iri_base": "http://www.wikidata.org/",
-        "query_method": "sparql_endpoint",
-        "sparql_endpoint": "https://query.wikidata.org/sparql",
-        "rest_api": ""
-    },
-    "d_05": {
-        "id": "d_05",
-        "name": "test dataset",
         "iri_base": "http://www.wikidata.org/",
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://query.wikidata.org/sparql",

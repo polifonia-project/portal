@@ -9,8 +9,12 @@
                 "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/specialty> ?entity . ?entity rdfs:label ?entityLabel }"
             },
             {
+                "dataset": "d_02",
+                "query": "PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> SELECT DISTINCT ?entity ?entityLabel FROM <http://data.open.ac.uk/context/meetups> WHERE { ?entity rdf:type mtp:Purpose ; rdfs:label ?entityLabel.}"
+            },
+            {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q1053916 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 100"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q1053916 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 500"
             }
         ],
         "filters": {
@@ -65,12 +69,20 @@
                 "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/genre> ?entity . ?entity rdfs:label ?entityLabel }"
             },
             {
+                "dataset": "d_03",
+                "query": "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?entity ?entityLabel WHERE { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;sdo:genre ?entity. ?entity skos:prefLabel ?entityLabel}"
+            },
+            {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q188451 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 100"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q188451 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 500"
             }
         ],
         "filters": {
             "people": [
+                {
+                    "dataset": "d_03",
+                    "query": "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;  (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?starting_value ;sdo:genre ?entity.  ?entity skos:prefLabel ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?starting_value  ;sdo:genre ?entity. ?entity skos:prefLabel ?entityLabel .} BIND(\"is associated with\" as ?rel)}"
+                },
                 {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?entity wdt:P136 ?starting_value . ?entity wdt:P31 *wd:Q105756498 BIND(str(\"has genre\") AS ?inverse_rel) }. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } }"
@@ -83,6 +95,10 @@
                 }
             ],
             "genres": [
+                {
+                    "dataset": "d_03",
+                    "query": "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;  sdo:genre ?starting_value ; sdo:genre ?entity. ?entity skos:prefLabel ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:genre ?starting_value ; sdo:genre ?entity. ?entity skos:prefLabel ?entityLabel .} FILTER(?entity != ?starting_value) BIND(\"is associated with\" as ?rel)}"
+                },
                 {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P279 ?entity. BIND(str(\"subclass of\") AS ?rel) } UNION { ?entity wdt:P737 ?starting_value. ?entity wdt:P31 wd:Q188451 . BIND(str(\"influenced by\") AS ?inverse_rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
@@ -168,8 +184,12 @@
                 "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { ?s <https://schema.org/character> ?entity . ?entity rdfs:label ?entityLabel } ORDER BY ?entity"
             },
             {
+                "dataset": "d_02",
+                "query": "PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> SELECT DISTINCT ?entity ?entityLabel FROM <http://data.open.ac.uk/context/meetups> WHERE { ?s mtp:hasSubject ?entity. ?entity rdfs:label ?entityLabel.} LIMIT 200"
+            },
+            {
                 "dataset": "d_03",
-                "query": "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?entity ?entityLabel WHERE { { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;  (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity . ?entity skos:prefLabel ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/(sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity . ?entity skos:prefLabel ?entityLabel .} } LIMIT 200"
+                "query": "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?entity ?entityLabel WHERE { { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;  (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity . ?entity skos:prefLabel ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/(sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity . ?entity skos:prefLabel ?entityLabel .} } LIMIT 500"
             },
             {
                 "dataset": "d_04",
@@ -179,11 +199,19 @@
         "filters": {
             "people": [
                 {
+                    "dataset": "d_02",
+                    "query": "PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> SELECT DISTINCT ?rel ?entity ?entityLabel FROM <http://data.open.ac.uk/context/meetups> WHERE {  VALUES ?starting_value {}  ?s mtp:hasSubject ?starting_value ;    mtp:hasParticipant ?participant .  FILTER  (!regex (str(?participant), str(?starting_value) ) ) .  ?participant rdfs:label ?entityLabel . BIND(str(\"shared a meetup with\") AS ?rel) . BIND(?participant AS ?entity) } ORDER BY ?entityLabel"
+                },
+                {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { ?starting_value wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { ?starting_value wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {?starting_value wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {?starting_value ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {?starting_value wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {?starting_value ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                 }
             ],
             "places": [
+                {
+                    "dataset": "d_02",
+                    "query": "PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> SELECT DISTINCT ?rel ?entity ?entityLabel FROM <http://data.open.ac.uk/context/meetups> WHERE {  VALUES ?starting_value {}  ?s mtp:hasSubject ?starting_value ;    mtp:hasPlace ?place .  ?place rdfs:label ?entityLabel .  BIND(str(\"meetup happened at\") AS ?rel) .  BIND(?place AS ?entity) }ORDER BY ?entityLabel"
+                },
                 {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P19 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of birth\") AS ?rel) } UNION { ?starting_value wdt:P20 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of death\") AS ?rel) } UNION { ?starting_value wdt:P937 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has work location\") AS ?rel) } UNION { ?starting_value wdt:P740 ?entity. BIND(str(\"location of formation\") AS ?rel)} UNION { ?starting_value wdt:P495 ?entity. BIND(str(\"has country of origin\") AS ?rel)} . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
@@ -197,8 +225,18 @@
             ],
             "genres": [
                 {
+                    "dataset": "d_03",
+                    "query": "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ; sdo:genre ?starting_value;  (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity . ?entity skos:prefLabel ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:genre ?starting_value;   (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity  . ?entity skos:prefLabel ?entityLabel .} BIND(\"is associated with\" as ?rel)} "
+                },
+                {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P136 ?entity. BIND(str(\"has genre\") AS ?rel) } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                }
+            ],
+            "topics": [
+                {
+                    "dataset": "d_02",
+                    "query": "PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> SELECT DISTINCT ?rel ?entity ?entityLabel FROM <http://data.open.ac.uk/context/meetups> WHERE { VALUES ?starting_value {} ?s mtp:hasSubject ?starting_value ; mtp:hasParticipant ?participant . FILTER  (!regex (str(?participant), str(?starting_value) ) ) . ?s mtp:hasAPurpose ?purpose . ?purpose rdfs:label ?entityLabel . BIND(str(\"has meetup type\") AS ?rel) . BIND(?purpose AS ?entity) } ORDER BY ?entityLabel"
                 }
             ]
         },
@@ -217,12 +255,20 @@
         "color": "#fdff00",
         "search_pattern": [
             {
+                "dataset": "d_02",
+                "query": "prefix mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> prefix geo: <https://www.w3.org/2003/01/geo/wgs84_pos> select DISTINCT ?entity ?entityLabel from <http://data.open.ac.uk/context/meetups> where { ?entity rdf:type mtp:Location ; rdfs:label ?entityLabel; geo:lat ?lat ; geo:long ?long . } LIMIT 200"
+            },
+            {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q82794 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 100"
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q82794 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 500"
             }
         ],
         "filters": {
             "people": [
+                {
+                    "dataset": "d_02",
+                    "query": "PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> SELECT DISTINCT ?rel ?entity ?entityLabel FROM <http://data.open.ac.uk/context/meetups>WHERE {  VALUES ?starting_value {}  ?starting_value rdf:type mtp:Location .  ?meetup mtp:hasPlace ?starting_value ;    mtp:hasParticipant ?participant .  ?participant rdfs:label ?entityLabel .  BIND(str(\"has meetup participant\") AS ?rel) .  BIND(?participant AS ?entity) }"
+                },
                 {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?entity wdt:P740 ?starting_value. ?entity wdt:P31 *wd:Q105756498  BIND(str(\"is place of formation of\") AS ?rel) }  UNION {?entity wdt:P551 ?starting_value . ?entity wdt:P106 ?occupation . ?occupation wdt:P31 wd:Q66715801 .  BIND(str(\"lived in\") AS ?inverse_rel)}  UNION {?starting_value wdt:P483 ?entity. ?entity wdt:P31 wd:Q746369. BIND(str(\"recorded in\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
