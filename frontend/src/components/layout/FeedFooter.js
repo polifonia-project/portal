@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./FeedFooter.module.css";
 import VisibilitySensor from "react-visibility-sensor";
-import logoPolifonia from "../../assets/svg/logo-polifonia-whitecopia.svg"
+import logoPolifonia from "../../assets/png/polifonia-logo-white.png"
 import logoHorizon from "../../assets/svg/logo-eu-white-caption.svg"
 import { Link } from "react-router-dom";
 
