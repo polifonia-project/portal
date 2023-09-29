@@ -175,14 +175,6 @@
                 "content": [  {
                     "dataset": "d_04",
                     "query": "SELECT ?descLabel WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?descLabel.}}"
-                    }, 
-                    {
-                    "dataset": "d_05",
-                    "query": "SELECT ?desc ?descLabel WHERE { <> wdt:P31 ?desc . SERVICE wikibase:label { bd:serviceParam wikibase:language 'en'. } }"
-                    }, 
-                    {
-                    "dataset": "d_05",
-                    "query": "SELECT ?desc ?descLabel WHERE { <> wdt:P21 ?desc . SERVICE wikibase:label { bd:serviceParam wikibase:language 'en'. } }"
                     }]
             },
             "02" : {
@@ -273,10 +265,6 @@
                 "content": [  {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { <> wdt:P190 ?entity. ?entity wdt:P31/wdt:P279* wd:Q82794 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 30"
-                },
-                {
-                    "dataset": "d_05",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { <> wdt:P190 ?entity. ?entity wdt:P31/wdt:P279* wd:Q82794 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 30"
                 }]
             },
             "03" : {
@@ -287,10 +275,6 @@
                 "category" : "places",
                 "content": [  {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { <> ^wdt:P47 ?entity . ?entity wdt:P31/wdt:P279* wd:Q82794 . BIND(str(\"shares border with\") AS ?inverse_rel) .  SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 10"
-                },
-                {
-                    "dataset": "d_05",
                     "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { <> ^wdt:P47 ?entity . ?entity wdt:P31/wdt:P279* wd:Q82794 . BIND(str(\"shares border with\") AS ?inverse_rel) .  SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 10"
                 }]
             },
