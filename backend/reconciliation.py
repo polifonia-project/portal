@@ -130,7 +130,7 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
             match_list = uris_to_reconcile[match]
             match_list.append('<' + uri + '>')
             uris_to_reconcile[match] = match_list
-
+    
     # find matches in all internal datasets - 1st level of reconciliation
     if len(uris_to_search) > 0:
         # every origin_uri is inserted in the dataset for the first time
@@ -157,21 +157,6 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                                 match_list = uris_to_reconcile[match]
                                 match_list.append('<' + uri + '>')
                                 uris_to_reconcile[match] = match_list
-                                
-                    #             external_query = WHITE_LIST_PARAM[match]['query']
-                    #             external_query = external_query.replace('<>', '<' + uri + '>')
-                    #             external_endpoint = WHITE_LIST_PARAM[match]['endpoint']
-                    #             same_same_uris_dict = {}
-                    #             # check if fragments rec need linked data fragments search
-                    #             if 'fragments' in WHITE_LIST_PARAM[match]:
-                    #                 same_same_uris_dict = query_lod_fragments(external_endpoint, external_query)
-                    #             else:
-                    #                 same_same_uris_dict = find_matches(external_query, external_endpoint)
-
-                    #             for same_uri, other_uris_list in same_same_uris_dict.items():
-                    #                 ds_updated = add_quads_to_conj_graph(ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'],
-                    #                                                      datasets[dataset_id]['name'], same_uri, other_uris_list, WHITE_LIST_PARAM[match]['iri_base'], match)
-                    #                 ds = ds_updated
 
             elif len(' '.join(uris_to_search)) >= 1500:
                 # if too long we divide the list n times to obtain n chunks
@@ -194,22 +179,8 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                                     match_list = uris_to_reconcile[match]
                                     match_list.append('<' + uri + '>')
                                     uris_to_reconcile[match] = match_list
-                                    # external_query = WHITE_LIST_PARAM[match]['query']
-                                    # external_query = external_query.replace('<>', '<' + uri + '>')
-                                    # external_endpoint = WHITE_LIST_PARAM[match]['endpoint']
-                                    # same_same_uris_dict = {}
-                                    # # check if fragments rec need linked data fragments search
-                                    # if 'fragments' in WHITE_LIST_PARAM[match]:
-                                    #     same_same_uris_dict = query_lod_fragments(external_endpoint, external_query)
-                                    # else:
-                                    #     same_same_uris_dict = find_matches(external_query, external_endpoint)
-                                    
-                                    # for same_uri, other_uris_list in same_same_uris_dict.items():
-                                    #     ds_updated = add_quads_to_conj_graph(ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'],
-                                    #                                          datasets[dataset_id]['name'], same_uri, other_uris_list, WHITE_LIST_PARAM[match]['iri_base'], match)
-                                    #     ds = ds_updated
 
-    # # find matches in external datasets - 1st level of reconciliation
+    # find matches in external datasets - 1st level of reconciliation
     if any_match:
         for match, uri_list in uris_to_reconcile.items():
             if len(uri_list) > 0:
