@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 
 function Footer(props) {
 
+  function onChange() { window.scrollTo(0, 0)}
+
   return (
     <div className={classes.footerContainer}> 
       <div className={classes.footerMainBlock}>
@@ -28,9 +30,9 @@ function Footer(props) {
           <div className={classes.flexTwo}>
             <p className={classes.flexTitle}>Polifonia</p>
             <br></br>
-            <Link onClick={() => {}}  to="/">Homepage</Link>
-            <Link onClick={() => {}}  to="/about">About</Link>
-            <Link onClick={() => {}}  to="/outputs">Outputs</Link>
+            <Link onClick={() => {onChange()}}  to="/">Homepage</Link>
+            <Link onClick={() => {onChange()}}  to="/about">About</Link>
+            <Link onClick={() => {onChange()}}  to="/outputs">Outputs</Link>
           </div>
           <div className={classes.flexThree}>
             <p className={classes.flexTitle}>People</p>
@@ -42,8 +44,8 @@ function Footer(props) {
           <div className={classes.flexFour}>
             <p className={classes.flexTitle}>Privacy</p>
             <br></br>
-            <Link onClick={() => {}}  to="/terms">Terms</Link>
-            <Link onClick={() => {}}  to="/cookies">Cookies</Link>
+            <Link onClick={() => {onChange()}}  to="/terms">Terms</Link>
+            <Link onClick={() => {onChange()}}  to="/cookies">Cookies</Link>
           </div>
         </div>
         <div className={classes.footerCloser}>

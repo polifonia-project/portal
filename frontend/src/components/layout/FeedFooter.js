@@ -22,6 +22,8 @@ function FeedFooter(props) {
     }
   }
 
+  function onClickChange() { window.scrollTo(0, 0)}
+
   return (
     <div className={classes.footerContainer}> 
       <VisibilitySensor onChange={onChange}>
@@ -47,9 +49,9 @@ function FeedFooter(props) {
           <div className={classes.flexTwo}>
             <p className={classes.flexTitle}>Polifonia</p>
             <br></br>
-            <Link onClick={() => {}}  to="/">Homepage</Link>
-            <Link onClick={() => {}}  to="/about">About</Link>
-            <Link onClick={() => {}}  to="/outputs">Outputs</Link>
+            <Link onClick={() => {onClickChange() }}  to="/">Homepage</Link>
+            <Link onClick={() => {onClickChange() }}  to="/about">About</Link>
+            <Link onClick={() => {onClickChange() }}  to="/outputs">Outputs</Link>
           </div>
           <div className={classes.flexThree}>
             <p className={classes.flexTitle}>People</p>
@@ -61,8 +63,8 @@ function FeedFooter(props) {
           <div className={classes.flexFour}>
             <p className={classes.flexTitle}>Privacy</p>
             <br></br>
-            <Link onClick={() => {}}  to="/terms">Terms</Link>
-            <Link onClick={() => {}}  to="/cookies">Cookies</Link>
+            <Link onClick={() => {onClickChange() }}  to="/terms">Terms</Link>
+            <Link onClick={() => {onClickChange() }}  to="/cookies">Cookies</Link>
           </div>
         </div>
         <div className={classes.footerCloser}>
