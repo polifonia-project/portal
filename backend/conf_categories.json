@@ -297,7 +297,7 @@
         "search_pattern": [
             {
                 "dataset": "d_04",
-                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?s wdt:P31 wd:Q110295396 . ?entity wdt:P279* ?s . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 100"
+                "query": "SELECT ?entity ?entityLabel { ?entity wdt:P31 wd:Q110295396 . ?entity wikibase:statements ?outcoming . ?entity wikibase:sitelinks ?sitelinks . { SELECT (count(?s) AS ?incoming) ?entity WHERE { ?entity wdt:P31 wd:Q110295396 . ?s ?p ?entity . [] wikibase:directClaim ?p} GROUP BY ?entity} SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" . }.} ORDER BY DESC (?incoming) LIMIT 100"
             }
         ],
         "filters": {
