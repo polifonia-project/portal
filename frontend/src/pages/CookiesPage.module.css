@@ -15,6 +15,7 @@
   display: flex;
   margin: 0px;
   padding-top: 100px;
+  margin-top: -40px;
   margin-bottom: 100px;
   padding-bottom: 5px;
   background-color: #e2e2e2;
@@ -108,4 +109,8 @@
   box-shadow: 0 4px 12px 0 rgba(12,18,45,.1);
   color: black !important;
   border-color: transparent  !important;
+}
+
+.visibilityHook {
+  opacity: 0;
 }

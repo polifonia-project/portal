@@ -16,6 +16,7 @@
   margin: 0px;
   padding-top: 100px;
   margin-bottom: 100px;
+  margin-top: -40px;
   padding-bottom: 5px;
   background-color: #fdff00;
   box-shadow: inset 0px -20px 200px -90px black;
@@ -108,4 +109,10 @@
   box-shadow: 0 4px 12px 0 rgba(12,18,45,.1);
   color: black !important;
   border-color: transparent  !important;
+}
+
+.visibilityHook {
+  opacity: 0;
+  margin: 0px;
+  width: 100%;
 }
