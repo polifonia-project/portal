@@ -109,6 +109,11 @@ div.infoBox p {
   max-width: 30%;
 }
 
+.section-cat_0304 {
+  padding-left: calc(((100% / 16 * 1) + 5px));
+  max-width: 50%;
+}
+
 /*------------03-----------*/
 
 .section-cat_0203 {
@@ -120,6 +125,8 @@ div.infoBox p {
   padding-left: calc(((100% / 16 * 1) + 5px));
   max-width: 40%;
 }
+
+
 /*------------02-----------*/
 .section-cat_0102 {
   padding-left: calc(((100% / 16 * 10) + 5px));
