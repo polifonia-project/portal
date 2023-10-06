@@ -10,3 +10,7 @@ blazegraph.jar
 blazegraph.jnl
 rules.log
 linkset.nq
+
+#hydra
+hydra/build/
+hydra/lib/hydra.egg-info/
