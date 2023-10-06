@@ -57,8 +57,7 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     },
     "cat_02": {
         "id": "cat_02",
@@ -132,8 +131,7 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     },
     "cat_03": {
         "id": "cat_03",
@@ -173,8 +171,7 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     },
     "cat_04": {
         "id": "cat_04",
@@ -206,7 +203,6 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     }
 }
