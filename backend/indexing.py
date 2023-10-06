@@ -2,7 +2,6 @@
 import os
 
 # external libraries
-from SPARQLWrapper import SPARQLWrapper, JSON
 from sonicclient import SearchClient, IngestClient, ControlClient
 from flask import jsonify
 
@@ -11,23 +10,6 @@ import methods
 import reconciliation as rec
 
 g = methods.read_json('conf_general.json')
-
-
-def get_sparql_results(query, endpoint):
-    """
-    Parameters
-    ----------
-    Returns
-    -------
-    """
-    user_agent = 'mondoboia/1.0 (https://github.com/mondoboia; mondoboia@example.org)'
-    sparql = SPARQLWrapper(endpoint, agent=user_agent)
-    sparql.setQuery(query)
-    sparql.setReturnFormat(JSON)
-    results = sparql.query().convert()
-    results = {result['entity']['value']: result['entityLabel']['value']
-               for result in results['results']['bindings'] if len(result['entityLabel']['value']) > 0}
-    return results
 
 
 def sonic_ingest(data, collection, bucket='entities'):
