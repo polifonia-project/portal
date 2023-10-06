@@ -69,10 +69,16 @@ def get_sparql_results(query, endpoint):
     sparql = SPARQLWrapper(endpoint, agent=user_agent)
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
-    results = sparql.query().convert()
-    results = {result['entity']['value']: result['entityLabel']['value']
-               for result in results['results']['bindings'] if len(result['entityLabel']['value']) > 0}
-    return results
+    results = {}
+    try:
+        results = sparql.query().convert()
+        results = {result['entity']['value']: result['entityLabel']['value']
+                for result in results['results']['bindings'] if len(result['entityLabel']['value']) > 0}
+        return results
+    except Exception as e:
+        print('ERROR', e)
+        return results
+
 
 
 def create_entities_files(categories, datasets):
