@@ -1,7 +1,7 @@
 .feedIntro {
   padding-left: calc(((100% / 16 * 1) + 5px));
   overflow: hidden;
-  margin-top: 100px;
+  padding-top: 160px;
   margin-bottom: 100px;
 }
 

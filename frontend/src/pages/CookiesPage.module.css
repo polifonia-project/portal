@@ -113,4 +113,6 @@
 
 .visibilityHook {
   opacity: 0;
+  margin: 0px;
+  width: 100%;
 }
