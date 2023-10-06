@@ -92,7 +92,8 @@ def linkset_file_population(entities_dir, datasets, linkset_directory):
 
         # update sameAs information for each uri
         for uri, info in sameAS_track_dictionary.items():
-            entities_file[uri]['sameAs'] = info
+            if uri in entities_file:
+                entities_file[uri]['sameAs'] = info
 
         methods.update_json(entities_dir+'/'+filename, entities_file)
 

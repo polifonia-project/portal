@@ -35,12 +35,16 @@ WHITE_LIST_PARAM = {
 def query_lod_fragments(endpoint, query):
     g = Graph('TPFStore')
     g.open(endpoint)
-
-    results = g.query(query)
-    {result['origin_uri']['value']: result['same_uri']['value']
-               for result in results['results']['bindings'] if len(result['same_uri']['value']) > 0}
+    results = {}
+    try:
+        results = g.query(query)
+        {result['origin_uri']['value']: result['same_uri']['value']
+                for result in results['results']['bindings'] if len(result['same_uri']['value']) > 0}
+        return results
     # {origin_uri: 'same_uri_1, same_uri_n'}
-    return results
+    except Exception as e:
+        print('ERROR query_lod_fragments', e)
+        return results
 
 def query_same_as_internal(uri_list):
     values_to_search = ' '.join(uri_list)
@@ -70,7 +74,7 @@ def find_matches(query, endpoint):
                 for result in results['results']['bindings'] if len(result['same_uri']['value']) > 0}
         return results
     except Exception as e:
-        print('ERROR', e)
+        print('ERROR find_matches', e)
         return results
 
 
@@ -145,9 +149,12 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                 query = query_same_as_internal(uris_to_search)
                 same_uris_dict = find_matches(query, sparql_endpoint)
                 for origin_uri, same_uri_list in same_uris_dict.items():
-                    ds_updated = add_quads_to_conj_graph(
-                        ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, datasets[d]['iri_base'], datasets[d]['name'])
-                    ds = ds_updated
+                    try:
+                        ds_updated = add_quads_to_conj_graph(
+                            ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, datasets[d]['iri_base'], datasets[d]['name'])
+                        ds = ds_updated
+                    except Exception as e:
+                        print('ERROR add_quads_to_conj_graph INTERNAL < 1500', e)
                     if len(same_uri_list) > 0:
                         sameAs_track_dictionary[origin_uri] = True
                         # find matches in external datasets - 1st level of reconciliation
@@ -167,9 +174,12 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                     query = query_same_as_internal(chunk)
                     same_uris_dict = find_matches(query, sparql_endpoint)
                     for origin_uri, same_uri_list in same_uris_dict.items():
-                        ds_updated = add_quads_to_conj_graph(
-                            ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, datasets[d]['iri_base'], datasets[d]['name'])
-                        ds = ds_updated
+                        try:
+                            ds_updated = add_quads_to_conj_graph(
+                                ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, datasets[d]['iri_base'], datasets[d]['name'])
+                            ds = ds_updated
+                        except Exception as e:
+                            print('ERROR add_quads_to_conj_graph INTERNAL => 1500', e)                        
                         if len(same_uri_list) > 0:
                             sameAs_track_dictionary[origin_uri] = True
                             # find matches in external datasets - 1st level of reconciliation
@@ -199,9 +209,12 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                     for origin_uri, same_uri_list in same_uris_dict.items():
                         if len(same_uri_list) > 0:
                             sameAs_track_dictionary[origin_uri] = True
-                        ds_updated = add_quads_to_conj_graph(ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'],
-                                                             datasets[dataset_id]['name'], origin_uri, same_uri_list, WHITE_LIST_PARAM[match]['iri_base'], match)
-                        ds = ds_updated
+                        try:
+                            ds_updated = add_quads_to_conj_graph(ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'],
+                                                                datasets[dataset_id]['name'], origin_uri, same_uri_list, WHITE_LIST_PARAM[match]['iri_base'], match)
+                            ds = ds_updated
+                        except Exception as e:
+                            print('ERROR add_quads_to_conj_graph WHITE < 1500', e)
                 elif len(' '.join(uri_list)) >= 1500:
                     # if too long we divide the list n times to obtain n chunks
                     uris_to_search_chunks = methods.create_chunks(uri_list)
@@ -218,9 +231,12 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                         for origin_uri, same_uri_list in same_uris_dict.items():
                             if len(same_uri_list) > 0:
                                 sameAs_track_dictionary[origin_uri] = True
-                            ds_updated = add_quads_to_conj_graph(
-                                ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, WHITE_LIST_PARAM[match]['iri_base'], match)
-                            ds = ds_updated
+                            try:
+                                ds_updated = add_quads_to_conj_graph(
+                                    ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, WHITE_LIST_PARAM[match]['iri_base'], match)
+                                ds = ds_updated
+                            except Exception as e:
+                                print('ERROR add_quads_to_conj_graph WHITE => 1500', e)
     ds.serialize(destination=file_path, format='nquads', encoding='US-ASCII')
     return sameAs_track_dictionary
 
