@@ -118,6 +118,8 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
     any_match = False
     # track uri-graph_name pairs
     graph_names_dict = {}
+    # track last id used to create graph names
+    last_graph_id = 0
     # big dictionary to track if origin_uri has at least 1 sameAs uri
     sameAs_track_dictionary = {}
 
@@ -129,6 +131,7 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
             '__' + str(index)  # I can work on generlising this
         graph_names_dict[uri] = GRAPH_NAME
         uris_to_search.append('<' + uri + '>')
+        last_graph_id = index
         # check with white list
         if any((match := substring) in uri for substring in WHITE_LIST):
             any_match = True
@@ -210,12 +213,23 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                     for origin_uri, same_uri_list in same_uris_dict.items():
                         if len(same_uri_list) > 0:
                             sameAs_track_dictionary[origin_uri] = True
-                        try:
-                            ds_updated = add_quads_to_conj_graph(ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'],
-                                                                datasets[dataset_id]['name'], origin_uri, same_uri_list, WHITE_LIST_PARAM[match]['iri_base'], match)
-                            ds = ds_updated
-                        except Exception as e:
-                            print('ERROR add_quads_to_conj_graph WHITE < 1500', e)
+                        graph_name = ''
+                        # check if uri has already a corresponding graph_name
+                        if origin_uri in graph_names_dict:
+                            graph_name = graph_names_dict[origin_uri]
+                        else:
+                            # if not, create the graph name with last_graph_id
+                            graph_name = linkset_namespace + dataset_id + '__' + category_id + '__' + str(last_graph_id)
+                            # raise last_graph_id by 1
+                            last_graph_id = last_graph_id + 1
+                            # add the pair uri:graph_name to the graph_names_dict dict
+                            graph_names_dict[origin_uri] = graph_name
+                            try:
+                                ds_updated = add_quads_to_conj_graph(ds, graph_name, datasets[dataset_id]['iri_base'],
+                                                                    datasets[dataset_id]['name'], origin_uri, same_uri_list, WHITE_LIST_PARAM[match]['iri_base'], match)
+                                ds = ds_updated
+                            except Exception as e:
+                                print('ERROR add_quads_to_conj_graph WHITE < 1500', e)
                 elif len(' '.join(uri_list)) >= 1500:
                     # if too long we divide the list n times to obtain n chunks
                     uris_to_search_chunks = methods.create_chunks(uri_list)
@@ -233,9 +247,20 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                         for origin_uri, same_uri_list in same_uris_dict.items():
                             if len(same_uri_list) > 0:
                                 sameAs_track_dictionary[origin_uri] = True
+                            graph_name = ''
+                            # check if uri has already a corresponding graph_name
+                            if origin_uri in graph_names_dict:
+                                graph_name = graph_names_dict[origin_uri]
+                            else:
+                                # if not, create the graph name with last_graph_id
+                                graph_name = linkset_namespace + dataset_id + '__' + category_id + '__' + str(last_graph_id)
+                                # raise last_graph_id by 1
+                                last_graph_id = last_graph_id + 1
+                                # add the pair uri:graph_name to the graph_names_dict dict
+                                graph_names_dict[origin_uri] = graph_name
                             try:
                                 ds_updated = add_quads_to_conj_graph(
-                                    ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, WHITE_LIST_PARAM[match]['iri_base'], match)
+                                    ds, graph_name, datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, WHITE_LIST_PARAM[match]['iri_base'], match)
                                 ds = ds_updated
                             except Exception as e:
                                 print('ERROR add_quads_to_conj_graph WHITE => 1500', e)
