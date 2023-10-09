@@ -23,7 +23,7 @@ WHITE_LIST_PARAM = {
     'dbpedia': {
         'endpoint': 'https://dbpedia.org/sparql',
         'iri_base': 'http://dbpedia.org/',
-        'query': 'SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same_uri); SEPARATOR=\", \") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} .  { ?same_uri schema:sameAs|owl:sameAs|skos:exactMatch|^schema:sameAs|^owl:sameAs|^skos:exactMatch ?origin_uri . }} GROUP BY ?origin_uri'
+        'query': 'SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same_uri); SEPARATOR=\", \") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} .  { ?same_uri schema:sameAs|skos:exactMatch|^schema:sameAs|^skos:exactMatch ?origin_uri . }} GROUP BY ?origin_uri'
     },
     'viaf': {
         'fragments': 'true',
