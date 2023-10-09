@@ -5,7 +5,8 @@ import re
 # external libraries
 from SPARQLWrapper import SPARQLWrapper, JSON
 from rdflib import URIRef, Literal, Dataset, Graph
-from rdflib.namespace import SDO, RDFS, OWL
+from rdflib.plugins.sparql import prepareQuery
+from rdflib.namespace import SDO, RDFS, OWL, SDO
 import hydra.tpf
 
 # internal methods
@@ -17,7 +18,7 @@ WHITE_LIST_PARAM = {
     'wikidata': {
         'endpoint': 'https://query.wikidata.org/sparql',
         'iri_base': 'http://www.wikidata.org/',
-        'query': 'SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same_uri); SEPARATOR=\", \") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} . { ?same_uri schema:sameAs|owl:sameAs|skos:exactMatch|wdt:P2888|^schema:sameAs|^owl:sameAs|^skos:exactMatch|^wdt:P2888 ?origin_uri . } UNION {?other_uri wdt:P214|^wdt:P214 ?origin_uri . BIND(CONCAT(\"https://viaf.org/viaf/\", STR( ?other_uri ))  AS ?same_uri )} UNION {?other_uri wdt:P1953|^wdt:P1953 ?origin_uri . BIND(CONCAT(\"https://www.discogs.com/artist/\", ?other_uri )  AS ?same_uri ) } UNION {?other_uri wdt:P1954|^wdt:P1954 ?origin_uri . BIND(CONCAT(\"https://www.discogs.com/master/\", ?other_uri )  AS ?same_uri )}} GROUP BY ?origin_uri'
+        'query': 'SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same_uri); SEPARATOR=\", \") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} . { ?same_uri schema:sameAs|owl:sameAs|skos:exactMatch|wdt:P2888|^schema:sameAs|^owl:sameAs|^skos:exactMatch|^wdt:P2888 ?origin_uri . } UNION {?other_uri wdt:P214|^wdt:P214 ?origin_uri . BIND(CONCAT(\"http://viaf.org/viaf/\", STR( ?other_uri ))  AS ?same_uri )} UNION {?other_uri wdt:P1953|^wdt:P1953 ?origin_uri . BIND(CONCAT(\"https://www.discogs.com/artist/\", ?other_uri )  AS ?same_uri ) } UNION {?other_uri wdt:P1954|^wdt:P1954 ?origin_uri . BIND(CONCAT(\"https://www.discogs.com/master/\", ?other_uri )  AS ?same_uri )}} GROUP BY ?origin_uri'
     },
     'dbpedia': {
         'endpoint': 'https://dbpedia.org/sparql',
@@ -26,7 +27,7 @@ WHITE_LIST_PARAM = {
     },
     'viaf': {
         'fragments': 'true',
-        'endpoint': 'http://data.linkeddatafragments.org/viaf/',
+        'endpoint': 'http://data.linkeddatafragments.org/viaf',
         'iri_base': 'http://viaf.org/viaf/',
         'query': 'SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same_uri); SEPARATOR=", ") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} . <http://schema.org/sameAs>|^<http://schema.org/sameAs> ?origin_uri .} GROUP BY ?origin_uri'
     }
@@ -189,7 +190,6 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                                     match_list = uris_to_reconcile[match]
                                     match_list.append('<' + uri + '>')
                                     uris_to_reconcile[match] = match_list
-
     # find matches in external datasets - 1st level of reconciliation
     if any_match:
         for match, uri_list in uris_to_reconcile.items():
@@ -203,7 +203,8 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                     same_uris_dict = {}
                     # check if fragments rec need linked data fragments search
                     if 'fragments' in WHITE_LIST_PARAM[match]:
-                        same_uris_dict = query_lod_fragments(external_endpoint, external_query)
+                        print('Solve fragments problem')
+                        # same_uris_dict = query_lod_fragments(external_endpoint, external_query)
                     else:
                         same_uris_dict = find_matches(external_query, external_endpoint)
                     for origin_uri, same_uri_list in same_uris_dict.items():
@@ -225,7 +226,8 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                         same_uris_dict = {}
                         # check if fragments rec need linked data fragments search
                         if 'fragments' in WHITE_LIST_PARAM[match]:
-                            same_uris_dict = query_lod_fragments(external_endpoint, external_query)
+                            print('Solve fragments problem')
+                            # same_uris_dict = query_lod_fragments(external_endpoint, external_query)
                         else:
                             same_uris_dict = find_matches(external_query, external_endpoint)
                         for origin_uri, same_uri_list in same_uris_dict.items():
