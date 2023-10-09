@@ -9,8 +9,8 @@ from re import compile as regex
 from uritemplate import expand
 from warnings import warn
 
-register('application/ld+json', Parser, 'rdflib_jsonld.parser', 'JsonLDParser')
-register('application/ld+json', Serializer, 'rdflib_jsonld.serializer', 'JsonLDSerializer')
+register('application/ld+json', Parser, 'rdflib.plugins.parsers.jsonld', 'JsonLDParser')
+register('application/ld+json', Serializer, 'rdflib.plugins.serializers.jsonld', 'JsonLDSerializer')
 LOG = logging.getLogger(__name__)
 
 
