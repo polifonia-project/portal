@@ -29,7 +29,7 @@ WHITE_LIST_PARAM = {
         'fragments': 'true',
         'endpoint': 'http://data.linkeddatafragments.org/viaf',
         'iri_base': 'http://viaf.org/viaf/',
-        'query': 'SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same_uri); SEPARATOR=", ") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} . <http://schema.org/sameAs>|^<http://schema.org/sameAs> ?origin_uri .} GROUP BY ?origin_uri'
+        'query': 'SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same_uri); SEPARATOR=", ") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} . ?same_uri <http://schema.org/sameAs>|^<http://schema.org/sameAs> ?origin_uri .} GROUP BY ?origin_uri'
     }
 }
 
