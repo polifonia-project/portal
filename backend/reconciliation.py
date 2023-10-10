@@ -23,7 +23,7 @@ WHITE_LIST_PARAM = {
     'dbpedia': {
         'endpoint': 'https://dbpedia.org/sparql',
         'iri_base': 'http://dbpedia.org/',
-        'query': 'SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same_uri); SEPARATOR=\", \") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} .  { ?same_uri schema:sameAs|skos:exactMatch|^schema:sameAs|^skos:exactMatch ?origin_uri . }} GROUP BY ?origin_uri'
+        'query': 'SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same_uri); SEPARATOR=\", \") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} ?same_uri schema:sameAs|skos:exactMatch|^schema:sameAs|^skos:exactMatch ?origin_uri . } GROUP BY ?origin_uri'
     },
     'viaf': {
         'fragments': 'true',
@@ -286,8 +286,28 @@ def generate_mergerd_graph_name(data):
     new_graph_name = linkset_endpoint.LILNKSETGRAPH + dat + '___' + cat + '___' + id
     return new_graph_name
 
+def add_missing_same_as_links(graph_name):
+    '''this function update the graph with all samAs links'''
+    query = '''
+    INSERT
+        { GRAPH <''' + graph_name + '''> { ?s owl:sameAs ?s1 . }}
+    WHERE {
+    GRAPH <''' + graph_name + '''> 
+        { ?s <https://schema.org/location> ?o .
+            ?s1 <https://schema.org/location> ?oo .
+        }
+    }
+    '''
+    sparql = SPARQLWrapper(linkset_endpoint.UPDATEMYLINKSET)
+    sparql.setQuery(query)
+    sparql.method = 'POST'
+    try:
+        sparql.query()
+    except Exception as e:
+        print('ERROR add_missing_same_as_links', e)
 
 def graph_merging(entity_uri, endpoint):
+    graph_set = set()
     query = '''
         SELECT DISTINCT ?g
         WHERE {
@@ -297,14 +317,21 @@ def graph_merging(entity_uri, endpoint):
     sparql = SPARQLWrapper(endpoint)
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
-    results = sparql.query().convert()
+    try:
+        results = sparql.query().convert()
 
-    data = results['results']['bindings']
+        data = results['results']['bindings']
 
     # keep trace of the named graphs in which the starting entity is
+    # keep trace of the named graphs in which the starting entity is
     graph_set = set()
-    for result in data:
-        graph_set.add('<' + result['g']['value'] + '>')
+        # keep trace of the named graphs in which the starting entity is
+    graph_set = set()
+        for result in data:
+            graph_set.add('<' + result['g']['value'] + '>')
+
+    except Exception as e:
+        print('ERROR graph_merging in searching for graphs', e)
 
     # then I take the ?o and search if they appear in other graphs
     o_query = '''
@@ -317,11 +344,14 @@ def graph_merging(entity_uri, endpoint):
     sparql = SPARQLWrapper(endpoint)
     sparql.setQuery(o_query)
     sparql.setReturnFormat(JSON)
-    o_results = sparql.query().convert()
+    try:
+        o_results = sparql.query().convert()
 
-    o_data = o_results['results']['bindings']
-    for result in o_data:
-        graph_set.add('<' + result['g']['value'] + '>')
+        o_data = o_results['results']['bindings']
+        for result in o_data:
+            graph_set.add('<' + result['g']['value'] + '>')
+    except Exception as e:
+        print('ERROR graph_merging in searching for other graphs', e)
 
     # if there is more than 1 graph, create new name for graph (the merging of the existing ones)
     if len(set(graph_set)) > 1:
@@ -343,7 +373,12 @@ def graph_merging(entity_uri, endpoint):
         sparql = SPARQLWrapper(linkset_endpoint.UPDATEMYLINKSET)
         sparql.setQuery(delete_insert_graphs_query)
         sparql.method = 'POST'
-        sparql.query()
+        try:
+            sparql.query()
+        except Exception as e:
+            print('ERROR graph_merging in updating graph', e)
+        
+        add_missing_same_as_links(new_graph_name)
 
 
 def graphs_reconciliation(entities_dir, endpoint):
