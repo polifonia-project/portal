@@ -30,5 +30,13 @@
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://query.wikidata.org/sparql",
         "rest_api": ""
+    },
+    "d_05": {
+        "id": "d_05",
+        "name": "led",
+        "iri_base": "http://w3id.org/polifonia/pilot/led/",
+        "query_method": "sparql_endpoint",
+        "sparql_endpoint": "http://data.open.ac.uk/sparql",
+        "rest_api": ""
     }
 }
