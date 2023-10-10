@@ -322,11 +322,7 @@ def graph_merging(entity_uri, endpoint):
 
         data = results['results']['bindings']
 
-    # keep trace of the named graphs in which the starting entity is
-    # keep trace of the named graphs in which the starting entity is
-    graph_set = set()
         # keep trace of the named graphs in which the starting entity is
-    graph_set = set()
         for result in data:
             graph_set.add('<' + result['g']['value'] + '>')
 
