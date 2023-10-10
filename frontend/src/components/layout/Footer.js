@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./FeedFooter.module.css";
+import classes from "./Footer.module.css";
 import logoPolifonia from "../../assets/png/polifonia-logo-white.png"
 import logoHorizon from "../../assets/svg/logo-eu-white-caption.svg"
 import { Link } from "react-router-dom";
