@@ -16,7 +16,7 @@ function RelationBlock(props) {
       setIsLoaded(false);
     } else {
       setIsLoaded(true);
-      setRelList(props.content);     
+      setRelList(props.content); 
     }
 
   // width
@@ -30,11 +30,15 @@ function RelationBlock(props) {
   } else {
     setNumericWidth(25);
   }
-  });
+  }, [props.content, props.width]);
 
 
 
   useEffect(() => { // compontentDidUpdate
+
+  // reset lists
+  props.reset ? console.log("not resetted") : setchunkedList([]);
+  
 
   // limit 10 results per column
    if (relList.length > 9) {
@@ -48,7 +52,7 @@ function RelationBlock(props) {
    } else {
     setchunkedList([relList]);
    }
-  }, [isLoaded]);
+  }, [isLoaded,relList]);
   
 
   return (
