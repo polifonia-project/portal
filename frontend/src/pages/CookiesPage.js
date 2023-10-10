@@ -54,7 +54,7 @@ function CookiesPage(props) {
     <h4>6. Updates to This Policy</h4>
     <p>We may update this Privacy Policy to reflect changes in our cookie practices. We encourage you to review this page periodically for the latest information on our use of technical cookies.</p>
 
-    <p>If you have any questions about our use of technical cookies or our privacy practices, please contact us at <a href="mailto:contact@example.com">contact@example.com</a>.</p>
+    <p>If you have any questions about our use of technical cookies or our privacy practices, please contact us at <a href="mailto:info@polifonia-project.eu">info@polifonia-project.eu</a>.</p>
 
     <p>Thank you for trusting Polifonia Portal with your privacy.</p>
         </div>
