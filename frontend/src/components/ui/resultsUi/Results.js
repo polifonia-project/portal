@@ -376,13 +376,13 @@ class ResultsTest extends React.Component {
                 let new_uris = 'default';
                 // check if el_iri has location dataset
                 this.checkUriLocation(uri, iri_base).then((tryRec) => {
-                    console.log('TRY REC', tryRec, uri)
                     // if true, try reconciliation
                     if (tryRec) {
                         if (uri.includes(iri_base)) {
-                            console.log('SPECIAL CASE')
+                            console.log('uri not in dataset but same iri_base', uri, iri_base)
                             this.queryResults(query, '<' + uri + '>', endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
-                        } else {
+                        }
+                        else {
                             // console.log(uri, 'uri-location different')
                             this.getCorrectUri(uri, iri_base).then((arr) => {
                                 if (arr) {
@@ -390,21 +390,30 @@ class ResultsTest extends React.Component {
                                     console.log(uri, 'correct uris')
                                     this.queryResults(query, new_uris, endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
                                 } else {
-                                    console.log(uri, 'no correct uris')
                                     // try in any case
                                     try {
+                                        console.log('uri not in dataset and different iri_base but tried', uri, iri_base)
                                         this.queryResults(query, '<' + uri + '>', endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
-                                        // console.log(cat, uri, iri_base, 'uri-location different but successful')
                                     }
                                     catch (err) {
-                                        console.log(cat, 'NO NEW URI TO USE');
+                                        console.log(err, cat, 'NO NEW URI TO USE');
                                     }
                                 }
                             })
                         }
                     } else {
-                        this.queryResults(query, '<' + uri + '>', endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
-                        console.log(uri, 'uri-location same');
+                        if (uri.includes(iri_base)) {
+                            console.log('uri in dataset and same iri_base', uri, iri_base)
+                            this.queryResults(query, '<' + uri + '>', endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
+                        } else {
+                            console.log('uri in dataset but different iri_base', uri, iri_base)
+                            this.getCorrectUri(uri, iri_base).then((arr) => {
+                                if (arr) {
+                                    new_uris = arr.join(' ')
+                                    this.queryResults(query, new_uris, endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
+                                }
+                            })
+                        }
                     }
                 })
             }
