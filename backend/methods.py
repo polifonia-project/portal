@@ -4,6 +4,7 @@ import os
 
 # external libraries
 from SPARQLWrapper import SPARQLWrapper, JSON
+import urllib.parse
 
 
 def read_json(file_name):
@@ -30,7 +31,7 @@ def update_json(file_name, json_read):
             json_read (dict): the dictionary that contains data to update the json file.
     '''
     with open(file_name, 'w') as config_update:
-        config_update.write(json.dumps(json_read, ensure_ascii=False, indent=4))
+        config_update.write(json.dumps(json_read, indent=4))
 
 
 def access_conf_info(file_path):
@@ -141,7 +142,7 @@ def fill_entities_files(state, categories, datasets, directory):
                     'sameAs': False,
                     'label': entities_data[entity]
                 }
-                entities_file[entity] = entity_info
+                entities_file[urllib.parse.quote(entity)] = entity_info
 
             # put everything in the corresponding json file
             update_json(directory+'/'+filename, entities_file)

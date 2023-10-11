@@ -4,6 +4,7 @@ import os
 # external libraries
 from sonicclient import SearchClient, IngestClient, ControlClient
 from flask import jsonify
+import urllib.parse
 
 # internal libraries
 import methods
@@ -23,8 +24,11 @@ def sonic_ingest(data, collection, bucket='entities'):
     with IngestClient(g['index_host'], g['index_channel'], g['index_pw']) as ingestcl:
         for iri, label in data.items():
             print(iri, label.lower())
-            ingestcl.ping()
-            ingestcl.push(collection, bucket, iri, label.lower())
+            try:
+                ingestcl.ping()
+                ingestcl.push(collection, bucket, iri, label.lower())
+            except Exception as e:
+                print(e)
 
 
 def sonic_flush_index(collection):
@@ -91,7 +95,7 @@ def suggested_results(d, c, cat_id, word, entities_dir):
                 if uri in entities_file_data:
                     print('LABEL', entities_file_data[uri]['label'])
                     # append uri and its label to suggestions dict
-                    suggestions[uri] = entities_file_data[uri]['label']
+                    suggestions[urllib.parse.unquote(uri)] = entities_file_data[uri]['label']
                     
     print(suggestions)
     return suggestions
