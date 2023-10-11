@@ -30,7 +30,7 @@ def update_json(file_name, json_read):
             json_read (dict): the dictionary that contains data to update the json file.
     '''
     with open(file_name, 'w') as config_update:
-        config_update.write(json.dumps(json_read, indent=4))
+        config_update.write(json.dumps(json_read, ensure_ascii=False, indent=4))
 
 
 def access_conf_info(file_path):
@@ -76,7 +76,7 @@ def get_sparql_results(query, endpoint):
                 for result in results['results']['bindings'] if len(result['entityLabel']['value']) > 0}
         return results
     except Exception as e:
-        print('ERROR', e)
+        print('ERROR for ', endpoint, e)
         return results
 
 
