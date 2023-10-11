@@ -44,7 +44,7 @@ def query_lod_fragments(endpoint, query):
         return results
     # {origin_uri: 'same_uri_1, same_uri_n'}
     except Exception as e:
-        print('ERROR query_lod_fragments', e)
+        print('ERROR query_lod_fragments for ', endpoint, e)
         return results
 
 def query_same_as_internal(uri_list):
@@ -75,7 +75,7 @@ def find_matches(query, endpoint):
                 for result in results['results']['bindings'] if len(result['same_uri']['value']) > 0}
         return results
     except Exception as e:
-        print('ERROR find_matches', e)
+        print('ERROR find_matches for ', endpoint, e)
         return results
 
 
@@ -104,7 +104,7 @@ def add_quads_to_conj_graph(ds, graph_name, dataset_1, dataset_1_label, uri_1, s
     # if double_location:
     #     named_graph.add((URIRef(uri_1), SDO.location, URIRef(dataset_2)))
 
-    print(f'[UPDATE] Dataset updated for Graph {graph_name}')
+    # print(f'[UPDATE] Dataset updated for Graph {graph_name}')
     return ds
 
 
@@ -147,8 +147,8 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
             ds = ds_updated
         for d in datasets:
             sparql_endpoint = datasets[d]['sparql_endpoint']
-            # 1300 is the control number to avoid having a VALUE in the QUERY that is too long
-            if len(' '.join(uris_to_search)) < 1300:
+            # 1000 is the control number to avoid having a VALUE in the QUERY that is too long
+            if len(' '.join(uris_to_search)) < 1000:
                 query = query_same_as_internal(uris_to_search)
                 same_uris_dict = find_matches(query, sparql_endpoint)
                 for origin_uri, same_uri_list in same_uris_dict.items():
@@ -157,7 +157,7 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                             ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, datasets[d]['iri_base'], datasets[d]['name'])
                         ds = ds_updated
                     except Exception as e:
-                        print('ERROR add_quads_to_conj_graph INTERNAL < 1300', e)
+                        print('ERROR add_quads_to_conj_graph INTERNAL < 1000', e)
                     if len(same_uri_list) > 0:
                         sameAs_track_dictionary[origin_uri] = True
                         # find matches in external datasets - 1st level of reconciliation
@@ -168,7 +168,7 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                                 match_list.append('<' + uri + '>')
                                 uris_to_reconcile[match] = match_list
 
-            elif len(' '.join(uris_to_search)) >= 1300:
+            elif len(' '.join(uris_to_search)) >= 1000:
                 # if too long we divide the list n times to obtain n chunks
                 uris_to_search_chunks = methods.create_chunks(uris_to_search)
 
@@ -182,7 +182,7 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                                 ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, datasets[d]['iri_base'], datasets[d]['name'])
                             ds = ds_updated
                         except Exception as e:
-                            print('ERROR add_quads_to_conj_graph INTERNAL => 1300', e)                        
+                            print('ERROR add_quads_to_conj_graph INTERNAL => 1000', e)                        
                         if len(same_uri_list) > 0:
                             sameAs_track_dictionary[origin_uri] = True
                             # find matches in external datasets - 1st level of reconciliation
@@ -198,8 +198,8 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
             if len(uri_list) > 0:
                 external_endpoint = WHITE_LIST_PARAM[match]['endpoint']
                 external_query = WHITE_LIST_PARAM[match]['query']
-                # 1300 is the control number to avoid having a VALUE in the QUERY that is too long
-                if len(' '.join(uri_list)) < 1300:
+                # 1000 is the control number to avoid having a VALUE in the QUERY that is too long
+                if len(' '.join(uri_list)) < 1000:
                     values_to_search = ' '.join(uri_list).replace("'", "%27")
                     external_query = external_query.replace('<>', values_to_search)
                     same_uris_dict = {}
@@ -228,8 +228,8 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                                                                     datasets[dataset_id]['name'], origin_uri, same_uri_list, WHITE_LIST_PARAM[match]['iri_base'], match)
                                 ds = ds_updated
                             except Exception as e:
-                                print('ERROR add_quads_to_conj_graph WHITE < 1300', e)
-                elif len(' '.join(uri_list)) >= 1300:
+                                print('ERROR add_quads_to_conj_graph WHITE < 1000', e)
+                elif len(' '.join(uri_list)) >= 1000:
                     # if too long we divide the list n times to obtain n chunks
                     uris_to_search_chunks = methods.create_chunks(uri_list)
 
@@ -262,7 +262,7 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                                     ds, graph_name, datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, WHITE_LIST_PARAM[match]['iri_base'], match)
                                 ds = ds_updated
                             except Exception as e:
-                                print('ERROR add_quads_to_conj_graph WHITE => 1300', e)
+                                print('ERROR add_quads_to_conj_graph WHITE => 1000', e)
     ds.serialize(destination=file_path, format='nquads', encoding='US-ASCII')
     return sameAs_track_dictionary
 
