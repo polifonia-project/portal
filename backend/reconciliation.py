@@ -13,7 +13,7 @@ import hydra.tpf
 import linkset_endpoint
 import methods
 
-WHITE_LIST = ['wikidata', 'dbpedia', 'viaf']
+WHITE_LIST = ['wikidata', 'dbpedia']
 WHITE_LIST_PARAM = {
     'wikidata': {
         'endpoint': 'https://query.wikidata.org/sparql',
@@ -23,7 +23,7 @@ WHITE_LIST_PARAM = {
     'dbpedia': {
         'endpoint': 'https://dbpedia.org/sparql',
         'iri_base': 'http://dbpedia.org/',
-        'query': 'SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same_uri); SEPARATOR=\", \") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} ?same_uri schema:sameAs|skos:exactMatch|^schema:sameAs|^skos:exactMatch ?origin_uri . } GROUP BY ?origin_uri'
+        'query': 'SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same_uri); SEPARATOR=\", \") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} OPTIONAL {?same_uri schema:sameAs|skos:exactMatch|^schema:sameAs|^skos:exactMatch ?origin_uri .} } GROUP BY ?origin_uri'
     },
     'viaf': {
         'fragments': 'true',
@@ -104,7 +104,7 @@ def add_quads_to_conj_graph(ds, graph_name, dataset_1, dataset_1_label, uri_1, s
     # if double_location:
     #     named_graph.add((URIRef(uri_1), SDO.location, URIRef(dataset_2)))
 
-    print(f'[UPDATE] Dataset updated for Graph {graph_name}')
+    # print(f'[UPDATE] Dataset updated for Graph {graph_name}')
     return ds
 
 
