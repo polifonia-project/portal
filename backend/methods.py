@@ -163,7 +163,7 @@ def create_chunks(l):
     # start dividing the list length in half
     n = 2
     list_in_chunks = divide_list_in_chunks(l, round(len(l)/n))
-    while len(' '.join(list_in_chunks[0])) >= 1500:
+    while len(' '.join(list_in_chunks[0])) >= 1300:
         n += 1
         list_in_chunks = divide_list_in_chunks(l, round(len(l)/n))
     else:
