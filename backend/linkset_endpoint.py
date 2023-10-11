@@ -100,7 +100,6 @@ def linkset_file_population(entities_dir, datasets, linkset_directory):
 
 def linkset_endpoint_update(entities_dir, datasets, linkset_directory):
     '''update Blazegraph enpoint with triples in linkset.nq'''
-
     # populate the files
     linkset_file_population(entities_dir, datasets, linkset_directory)
     # prepare endpoint

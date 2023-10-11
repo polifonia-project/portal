@@ -55,7 +55,9 @@ def index_per_category(cat_id, cat_name, entities_dir):
         if split_name[1] == cat_id:
             entities_file_data = methods.read_json(entities_dir+'/'+filename)
             for entity_uri in entities_file_data:
-                index_dict[entity_uri] = entities_file_data[entity_uri]['label']
+                if entities_file_data[entity_uri]['sameAs'] == True:
+                    # use uri only if it's been reconciled
+                    index_dict[entity_uri] = entities_file_data[entity_uri]['label']
     # flush
     sonic_flush_index(cat_name)
     print('[DELETE] flushed index for:', cat_name)
