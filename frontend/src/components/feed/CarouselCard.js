@@ -19,9 +19,9 @@ const CarouselCard = (props) => {
   useEffect(() => {
     if (props.type === 'internal') {
       setPageTo(props.url)
-    } if (props.type === 'external') {
+    } else if (props.type === 'external') {
       setPageTo("/")
-    } if (props.type === 'scroll') {
+    } else if (props.type === 'scroll') {
       setPageTo("/")
     } else {
       setPageTo("/")

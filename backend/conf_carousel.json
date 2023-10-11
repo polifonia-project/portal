@@ -23,7 +23,7 @@
     "title" : "Know your music taste",
     "paragraph": "Get recommendations based on your taste, habits, and loved music. Coming soon!",
     "type": "internal",
-    "href" : "/about",
+    "href" : "outputs",
     "logo": "icon-3.svg"
   },
   "card_04": {
