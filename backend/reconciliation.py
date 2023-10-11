@@ -48,7 +48,7 @@ def query_lod_fragments(endpoint, query):
         return results
 
 def query_same_as_internal(uri_list):
-    values_to_search = ' '.join(uri_list)
+    values_to_search = ' '.join(uri_list).replace("'", "%27")
     find_query = '''
         PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
         PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -138,7 +138,6 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
             match_list = uris_to_reconcile[match]
             match_list.append('<' + uri + '>')
             uris_to_reconcile[match] = match_list
-    
     # find matches in all internal datasets - 1st level of reconciliation
     if len(uris_to_search) > 0:
         # every origin_uri is inserted in the dataset for the first time
@@ -201,7 +200,7 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                 external_query = WHITE_LIST_PARAM[match]['query']
                 # 1300 is the control number to avoid having a VALUE in the QUERY that is too long
                 if len(' '.join(uri_list)) < 1300:
-                    values_to_search = ' '.join(uri_list)
+                    values_to_search = ' '.join(uri_list).replace("'", "%27")
                     external_query = external_query.replace('<>', values_to_search)
                     same_uris_dict = {}
                     # check if fragments rec need linked data fragments search
@@ -235,7 +234,7 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                     uris_to_search_chunks = methods.create_chunks(uri_list)
 
                     for chunk in uris_to_search_chunks:
-                        values_to_search = ' '.join(chunk)
+                        values_to_search = ' '.join(chunk).replace("'", "%27")
                         external_query = external_query.replace('<>', values_to_search)
                         same_uris_dict = {}
                         # check if fragments rec need linked data fragments search
