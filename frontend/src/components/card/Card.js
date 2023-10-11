@@ -35,8 +35,217 @@ function Card(props) {
   const [mediaContent, setMediaContent] = useState({})
 
 
-
   useEffect(() => {
+
+    // fetchResults 
+    const fetchResults = (uri) => {
+          let endpoint = "";
+          let query = "";
+          let dataset = "";
+          Object.values(currentBlock).forEach((block, i) => {
+            
+            if (block.type === 'text') {
+              let textResults = []
+              let number = "";
+              Object.values(block.content).forEach((q, i) => {
+                query = q.query;
+                dataset = q.dataset;
+                number = block.id;
+                number = number - 1;
+                number = 'id_' + number;
+                endpoint = datasets[dataset].sparql_endpoint;
+                textResults = [];
+      
+              query = query.replaceAll('<>', '<' + uri + '>');
+              let url = endpoint + '?query=' + encodeURIComponent(query);
+              try {
+                fetch(url, {
+                  method: 'GET',
+                  headers: { 'Accept': 'application/sparql-results+json' }
+                })
+                  .then((res) => res.json())
+                  .then((data) => {
+        
+                    let dataLen = data.results.bindings.length;
+                    if (dataLen > 0) {
+                      data.results.bindings.forEach(res => {
+                        if (Object.keys(res).length > 0) {
+                          let singleResult = []
+                          singleResult.desc = res.descLabel.value;
+                          singleResult.dataset = q.dataset;
+                          textResults.push(singleResult); 
+                        }
+                      }
+                      )
+                      setTextContent(prev => ({
+                        ...prev,
+                        [number] : textResults,
+                      }))
+                    }
+                    else {
+                      // try riconciliation
+                    }
+                  });
+              }
+              catch (err) {
+                console.log('error', err)
+              }
+              return null
+            })
+            } 
+            else if (block.type === 'link') {
+              let linkResults = []
+              let number = "";
+              Object.values(block.content).forEach((q, i) => {
+                query = q.query;
+                dataset = q.dataset;
+                number = block.id;
+                number = number - 1;
+                number = 'id_' + number;
+                endpoint = datasets[dataset].sparql_endpoint;
+                linkResults = [];
+      
+              query = query.replaceAll('<>', '<' + uri + '>');
+              let url = endpoint + '?query=' + encodeURIComponent(query);
+              try {
+                fetch(url, {
+                  method: 'GET',
+                  headers: { 'Accept': 'application/sparql-results+json' }
+                })
+                  .then((res) => res.json())
+                  .then((data) => {
+        
+                    let dataLen = data.results.bindings.length;
+                    if (dataLen > 0) {
+                      data.results.bindings.forEach(res => {
+                        if (Object.keys(res).length > 0) {
+                          let singleResult = []
+                          singleResult.url= res.entity.value;
+                          singleResult.label = q.label;
+                          singleResult.dataset = q.dataset;
+                          linkResults.push(singleResult); 
+                        }
+                      }
+                      )
+                      setLinkContent(prev => ({
+                        ...prev,
+                        [number] : linkResults,
+                      }))
+                    }
+                    else {
+                      // try riconciliation
+                    }
+                  });
+              }
+              catch (err) {
+                console.log('error', err)
+              }
+              return null    
+            })
+            } 
+            else if (block.type === 'relation') {
+              let relResults = [];
+              let number = "";
+              Object.values(block.content).map((q, i) => {
+                query = q.query;
+                dataset = q.dataset;
+                number = block.id;
+                number = number - 1;
+                number = 'id_' + number;
+                relResults = [];
+              query = query.replaceAll('<>', '<' + uri + '>');
+              let url = endpoint + '?query=' + encodeURIComponent(query);
+              try {
+                fetch(url, {
+                  method: 'GET',
+                  headers: { 'Accept': 'application/sparql-results+json' }
+                })
+                  .then((res) => res.json())
+                  .then((data) => {
+        
+                    let dataLen = data.results.bindings.length;
+                    if (dataLen > 0) {
+                      data.results.bindings.forEach(res => {
+                        if (Object.keys(res).length > 0) {
+                          let singleResult = []
+                          singleResult.name = res.entityLabel.value;
+                          singleResult.link = res.entity.value;
+                          singleResult.dataset = q.dataset;
+                          relResults.push(singleResult); 
+                        }
+                      }
+                      )
+                      let sourceLimit = [];
+                      sourceLimit.dataset = q.dataset;
+                      relResults.push(sourceLimit); 
+                      setRelContent(prev => ({
+                        ...prev,
+                        [number] : relResults,
+                      }));
+                    }
+                    else {
+                      // try riconciliation
+                    }
+                  });
+              }
+              catch (err) {
+                console.log('error', err)
+              }
+              return null
+            })
+            } 
+            else if (block.type === 'media') {
+              let mediaResults = []
+              let number = "";
+              Object.values(block.content).map((q, i) => {
+                query = q.query;
+                dataset = q.dataset;
+                number = block.id;
+                number = number - 1;
+                number = 'id_' + number;
+                mediaResults = [];
+              query = query.replaceAll('<>', '<' + uri + '>');
+              let url = endpoint + '?query=' + encodeURIComponent(query);
+              try {
+                fetch(url, {
+                  method: 'GET',
+                  headers: { 'Accept': 'application/sparql-results+json' }
+                })
+                  .then((res) => res.json())
+                  .then((data) => {
+        
+                    let dataLen = data.results.bindings.length;
+                    if (dataLen > 0) {
+                      data.results.bindings.forEach(res => {
+                        if (Object.keys(res).length > 0) {
+                          let singleResult = []
+                          singleResult.mediaLink = res.media.value;
+                          singleResult.dataset = q.dataset;
+                          mediaResults.push(singleResult); 
+                        }
+                      }
+                      )
+                      setMediaContent(prev => ({
+                        ...prev,
+                        [number] : mediaResults
+                      }))
+                    }
+                    else {
+                      // AVOID ADDING NEW BLOCK IF EMPTY
+                    }
+                  });
+              }
+              catch (err) {
+                console.log('error', err)
+              }
+              return null
+            })
+            } 
+          return null
+          })
+           
+        }
+
     if (cardOpen) {
 
       // reset
@@ -73,7 +282,8 @@ function Card(props) {
       setMediaContent({});
     }
 
-  }, [cardOpen, cardBlocksNew, cardContent.hasInput, cardContent.goesBack, cardContent.cat, colorBackground]);
+
+  }, [cardOpen, cardBlocksNew, cardContent.hasInput, cardContent.goesBack, cardContent.cat, colorBackground, cardContent.uri, currentBlock, datasets]);
 
 
 
@@ -89,6 +299,7 @@ useEffect(() => {
 
   // close card
   const closeCard = () => {
+    setCurrentBlock({});
     setCardOpen(false);
     setResetOn(false);
     if (isDarkColor([cardContent.color])) {
@@ -117,217 +328,6 @@ useEffect(() => {
     const encodedParams = encodeURI(params);
     const encodedUrl = window.location + 'card?' + encodedParams
     return encodedUrl
-  }
-
-  // fetchResults 
-  const fetchResults = (uri) => {
-    let endpoint = "";
-    let query = "";
-    let dataset = "";
-    
-
-    Object.values(currentBlock).forEach((block, i) => {
-      
-      if (block.type === 'text') {
-        let textResults = []
-        let number = "";
-        Object.values(block.content).forEach((q, i) => {
-          query = q.query;
-          dataset = q.dataset;
-          number = block.id;
-          number = number - 1;
-          number = 'id_' + number;
-          endpoint = datasets[dataset].sparql_endpoint;
-          textResults = [];
-
-        query = query.replaceAll('<>', '<' + uri + '>');
-        let url = endpoint + '?query=' + encodeURIComponent(query);
-        try {
-          fetch(url, {
-            method: 'GET',
-            headers: { 'Accept': 'application/sparql-results+json' }
-          })
-            .then((res) => res.json())
-            .then((data) => {
-  
-              let dataLen = data.results.bindings.length;
-              if (dataLen > 0) {
-                data.results.bindings.forEach(res => {
-                  if (Object.keys(res).length > 0) {
-                    let singleResult = []
-                    singleResult.desc = res.descLabel.value;
-                    singleResult.dataset = q.dataset;
-                    textResults.push(singleResult); 
-                  }
-                }
-                )
-                setTextContent(prev => ({
-                  ...prev,
-                  [number] : textResults,
-                }))
-              }
-              else {
-                // try riconciliation
-              }
-            });
-        }
-        catch (err) {
-          console.log('error', err)
-        }
-        return null
-      })
-      } 
-      else if (block.type === 'link') {
-        let linkResults = []
-        let number = "";
-        Object.values(block.content).forEach((q, i) => {
-          query = q.query;
-          dataset = q.dataset;
-          number = block.id;
-          number = number - 1;
-          number = 'id_' + number;
-          endpoint = datasets[dataset].sparql_endpoint;
-          linkResults = [];
-
-        query = query.replaceAll('<>', '<' + uri + '>');
-        let url = endpoint + '?query=' + encodeURIComponent(query);
-        try {
-          fetch(url, {
-            method: 'GET',
-            headers: { 'Accept': 'application/sparql-results+json' }
-          })
-            .then((res) => res.json())
-            .then((data) => {
-  
-              let dataLen = data.results.bindings.length;
-              if (dataLen > 0) {
-                data.results.bindings.forEach(res => {
-                  if (Object.keys(res).length > 0) {
-                    let singleResult = []
-                    singleResult.url= res.entity.value;
-                    singleResult.label = q.label;
-                    singleResult.dataset = q.dataset;
-                    linkResults.push(singleResult); 
-                  }
-                }
-                )
-                setLinkContent(prev => ({
-                  ...prev,
-                  [number] : linkResults,
-                }))
-              }
-              else {
-                // try riconciliation
-              }
-            });
-        }
-        catch (err) {
-          console.log('error', err)
-        }
-        return null    
-      })
-      } 
-      else if (block.type === 'relation') {
-        let relResults = [];
-        let number = "";
-        Object.values(block.content).map((q, i) => {
-          query = q.query;
-          dataset = q.dataset;
-          number = block.id;
-          number = number - 1;
-          number = 'id_' + number;
-          relResults = [];
-        query = query.replaceAll('<>', '<' + uri + '>');
-        let url = endpoint + '?query=' + encodeURIComponent(query);
-        try {
-          fetch(url, {
-            method: 'GET',
-            headers: { 'Accept': 'application/sparql-results+json' }
-          })
-            .then((res) => res.json())
-            .then((data) => {
-  
-              let dataLen = data.results.bindings.length;
-              if (dataLen > 0) {
-                data.results.bindings.forEach(res => {
-                  if (Object.keys(res).length > 0) {
-                    let singleResult = []
-                    singleResult.name = res.entityLabel.value;
-                    singleResult.link = res.entity.value;
-                    singleResult.dataset = q.dataset;
-                    relResults.push(singleResult); 
-                  }
-                }
-                )
-                let sourceLimit = [];
-                sourceLimit.dataset = q.dataset;
-                relResults.push(sourceLimit); 
-                setRelContent(prev => ({
-                  ...prev,
-                  [number] : relResults,
-                }));
-              }
-              else {
-                // try riconciliation
-              }
-            });
-        }
-        catch (err) {
-          console.log('error', err)
-        }
-        return null
-      })
-      } 
-      else if (block.type === 'media') {
-        let mediaResults = []
-        let number = "";
-        Object.values(block.content).map((q, i) => {
-          query = q.query;
-          dataset = q.dataset;
-          number = block.id;
-          number = number - 1;
-          number = 'id_' + number;
-          mediaResults = [];
-        query = query.replaceAll('<>', '<' + uri + '>');
-        let url = endpoint + '?query=' + encodeURIComponent(query);
-        try {
-          fetch(url, {
-            method: 'GET',
-            headers: { 'Accept': 'application/sparql-results+json' }
-          })
-            .then((res) => res.json())
-            .then((data) => {
-  
-              let dataLen = data.results.bindings.length;
-              if (dataLen > 0) {
-                data.results.bindings.forEach(res => {
-                  if (Object.keys(res).length > 0) {
-                    let singleResult = []
-                    singleResult.mediaLink = res.media.value;
-                    singleResult.dataset = q.dataset;
-                    mediaResults.push(singleResult); 
-                  }
-                }
-                )
-                setMediaContent(prev => ({
-                  ...prev,
-                  [number] : mediaResults
-                }))
-              }
-              else {
-                // AVOID ADDING NEW BLOCK IF EMPTY
-              }
-            });
-        }
-        catch (err) {
-          console.log('error', err)
-        }
-        return null
-      })
-      } 
-    return null
-    })
-     
   }
 
   return ( 
