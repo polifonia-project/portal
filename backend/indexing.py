@@ -23,11 +23,11 @@ def sonic_ingest(data, collection, bucket='entities'):
     """
     with IngestClient(g['index_host'], g['index_channel'], g['index_pw']) as ingestcl:
         for iri, label in data.items():
-            print(iri, label.lower())
             try:
                 ingestcl.ping()
-                ingestcl.push(collection, bucket, iri, label.lower())
+                ingestcl.push(collection, bucket, urllib.parse.quote(iri), label.lower())
             except Exception as e:
+                print(iri, label.lower())
                 print(e)
 
 
@@ -91,11 +91,12 @@ def suggested_results(d, c, cat_id, word, entities_dir):
             entities_file_data = methods.read_json(entities_dir+'/'+filename)
             # iterate over the uris
             for uri in unique_ids:
+                uri = urllib.parse.unquote(uri)
                 # if uri in file
                 if uri in entities_file_data:
                     print('LABEL', entities_file_data[uri]['label'])
                     # append uri and its label to suggestions dict
-                    suggestions[urllib.parse.unquote(uri)] = entities_file_data[uri]['label']
+                    suggestions[uri] = entities_file_data[uri]['label']
                     
     print(suggestions)
     return suggestions
