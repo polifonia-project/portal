@@ -387,7 +387,6 @@ class ResultsTest extends React.Component {
                             this.getCorrectUri(uri, iri_base).then((arr) => {
                                 if (arr) {
                                     new_uris = arr.join(' ')
-                                    console.log(uri, 'correct uris')
                                     this.queryResults(query, new_uris, endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
                                 } else {
                                     // try in any case
