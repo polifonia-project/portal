@@ -24,6 +24,8 @@ function AboutPage(props) {
       document.getElementById("sectionName").style.color = 'black';
       document.getElementById("menuOptions").style.filter = 'none';
       document.getElementById("mainHeader").style.transform = "translateY(0px)";
+      document.getElementById("backToClip").style.display= "none";
+      document.getElementById("backToTop").style.display= "none";
     }
   }
 
