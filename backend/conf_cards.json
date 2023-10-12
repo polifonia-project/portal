@@ -1,471 +1,537 @@
-{ 
+{
     "topics": {
         "color": "#f80000",
-        "blocks" : { 
-            "01" : {
+        "blocks": {
+            "01": {
                 "type": "text",
                 "size": "small",
                 "title": "Biography",
-                "content": [{
-                    "dataset": "d_04",
-                    "query": "SELECT ?descLabel WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?descLabel .}}"
-                    }]
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?descLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?descLabel .}}"
+                    }
+                ]
             },
-            "02" : {
+            "02": {
                 "type": "relation",
                 "size": "small",
                 "title": "Worked with",
-                "category" : "people",
-                "content": [ {
-                    "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
-                }]
+                "category": "people",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { ?card_uri wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { ?card_uri wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {?card_uri wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {?card_uri ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {?card_uri wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {?card_uri ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    }
+                ]
             }
         }
-
-    }, 
+    },
     "tunes": {
         "color": "#ff02fe",
-        "blocks" : { 
-            "01" : {
+        "blocks": {
+            "01": {
                 "type": "text",
                 "size": "small",
                 "title": "Biography",
-                "content": [{
-                    "dataset": "d_04",
-                    "query": "SELECT ?descLabel WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?descLabel .}}"
-                    }]
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?descLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?descLabel .}}"
+                    }
+                ]
             },
-            "02" : {
+            "02": {
                 "type": "relation",
                 "size": "small",
                 "title": "Influenced by",
-                "category" : "people",
-                "content": [ {
-                    "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
-                }]
+                "category": "people",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?card_uri {} { ?card_uri wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { ?card_uri wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { ?card_uri wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {?card_uri wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {?card_uri ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {?card_uri wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {?card_uri ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    }
+                ]
             },
-            "04" : {
+            "04": {
                 "type": "media",
                 "size": "small",
                 "title": "Portrait",
-                "class" : "image",
-                "content": [{
-                    "dataset": "d_04",
-                    "query": "SELECT ?item ?itemLabel ?media WHERE {<> wdt:P18 ?media } LIMIT 1"
-                }]
+                "class": "image",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?item ?itemLabel ?media WHERE { VALUES ?card_uri {} ?card_uri wdt:P18 ?media } LIMIT 1"
+                    }
+                ]
             }
         }
-
     },
     "genres": {
         "color": "#1d00fe",
-        "blocks" : { 
-            "01" : {
+        "blocks": {
+            "01": {
                 "id": "1",
                 "type": "text",
                 "size": "small",
                 "title": "Definition",
-                "content": [  {
-                    "dataset": "d_04",
-                    "query": "SELECT ?descLabel WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?descLabel.}}"
-                    }]
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?descLabel WHERE { VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?descLabel.}}"
+                    }
+                ]
             },
-            "02" : {
+            "02": {
                 "id": "2",
                 "type": "media",
                 "size": "small",
                 "title": "Image",
-                "class" : "image",
-                "content": [{
-                    "dataset": "d_04",
-                    "query": "SELECT ?media WHERE {<> wdt:P18 ?media }"
-                }]
+                "class": "image",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?media }"
+                    }
+                ]
             },
-            "03" : {
+            "03": {
                 "id": "3",
                 "type": "media",
                 "size": "small",
                 "title": "Collage image",
-                "class" : "image",
-                "content": [{
-                    "dataset": "d_04",
-                    "query": "SELECT ?media WHERE { <> wdt:P2716 ?media}"
-                }]
+                "class": "image",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P2716 ?media}"
+                    }
+                ]
             },
-            "04" : {
+            "04": {
                 "id": "4",
                 "type": "relation",
                 "size": "small",
                 "title": "Originated in",
-                "category" : "places",
-                "content": [ {
-                    "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { { <> wdt:P495 ?entity.} UNION { <> wdt:P740 ?entity. } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
-                }]
-            }, 
-            "05" : {
+                "category": "places",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P495 ?entity.} UNION { ?card_uri wdt:P740 ?entity. } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                    }
+                ]
+            },
+            "05": {
                 "id": "5",
                 "type": "relation",
                 "size": "small",
                 "title": "Subclass of",
-                "category" : "genres",
-                "content": [ {
-                    "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { { <> wdt:P279 ?entity.} SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
-                }]
-            }, 
-            "06" : {
+                "category": "genres",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P279 ?entity.} SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                    }
+                ]
+            },
+            "06": {
                 "id": "6",
                 "type": "relation",
                 "size": "small",
                 "title": "Associated with",
-                "category" : "genres",
-                "content": [ {
-                    "dataset": "d_03",
-                    "query": "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;  sdo:genre <> ; sdo:genre ?entity. ?entity skos:prefLabel ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:genre <> ; sdo:genre ?entity. ?entity skos:prefLabel ?entityLabel .} FILTER(?entity != <>) BIND(\"is associated with\" as ?rel)}"
-                }]
+                "category": "genres",
+                "content": [
+                    {
+                        "dataset": "d_03",
+                        "query": "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;  sdo:genre ?card_uri ; sdo:genre ?entity. ?entity skos:prefLabel ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:genre ?card_uri ; sdo:genre ?entity. ?entity skos:prefLabel ?entityLabel .} FILTER(?entity != ?card_uri) BIND(\"is associated with\" as ?rel)}"
+                    }
+                ]
             },
-            "07" : {
+            "07": {
                 "id": "7",
                 "type": "media",
                 "size": "medium",
                 "title": "Distribution map",
-                "class" : "image",
-                "content": [{
-                    "dataset": "d_04",
-                    "query": "SELECT ?media WHERE { <> wdt:P1846 ?media}"
-                }]
+                "class": "image",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P1846 ?media}"
+                    }
+                ]
             },
-            "08" : {
+            "08": {
                 "id": "8",
                 "type": "relation",
                 "size": "small",
                 "title": "Artists",
-                "category" : "people",
-                "content": [ {
-                    "dataset": "d_04",
-                    "query": "SELECT ?entity ?entityLabel {?entity wdt:P136 <> . ?entity wikibase:statements ?outcoming . {?entity wdt:P31 wd:Q5.}UNION {?entity wdt:P31 wd:Q215380 .} ?entity wikibase:sitelinks ?sitelinks . { SELECT (count(?s) AS ?incoming) ?entity WHERE {?entity wdt:P136 <> . ?s ?p ?entity .[] wikibase:directClaim ?p } GROUP BY ?entity } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" . }. } ORDER BY DESC (?incoming) LIMIT 35"
-                }]
+                "category": "people",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?entity ?entityLabel {VALUES ?card_uri {} ?entity wdt:P136 ?card_uri . ?entity wikibase:statements ?outcoming . {?entity wdt:P31 wd:Q5.} UNION {?entity wdt:P31 wd:Q215380 .} ?entity wikibase:sitelinks ?sitelinks . { SELECT (count(?s) AS ?incoming) ?entity WHERE {?entity wdt:P136 ?card_uri . ?s ?p ?entity .[] wikibase:directClaim ?p } GROUP BY ?entity } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" . }. } ORDER BY DESC (?incoming) LIMIT 35"
+                    }
+                ]
             }
-
         }
-    }, 
+    },
     "lyrics": {
         "color": "#6400b4",
-        "blocks" : { 
-            "01" : {
+        "blocks": {
+            "01": {
                 "type": "text",
                 "size": "small",
                 "title": "Biography",
-                "content": [{
-                    "dataset": "d_04",
-                    "query": "SELECT ?descLabel WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?descLabel .}}"
-                    }]
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?descLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?descLabel .}}"
+                    }
+                ]
             },
-            "02" : {
+            "02": {
                 "type": "relation",
                 "size": "small",
                 "title": "Influenced by",
-                "category" : "people",
-                "content": [ {
-                    "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
-                }]
+                "category": "people",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { ?card_uri wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { ?card_uri wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {?card_uri wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {?card_uri ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {?card_uri wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {?card_uri ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    }
+                ]
             },
-            "04" : {
+            "04": {
                 "type": "media",
                 "size": "small",
                 "title": "Portrait",
-                "class" : "image",
-                "content": [{
-                    "dataset": "d_04",
-                    "query": "SELECT ?item ?itemLabel ?media WHERE {<> wdt:P18 ?media } LIMIT 1"
-                }]
+                "class": "image",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?item ?itemLabel ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?media } LIMIT 1"
+                    }
+                ]
             }
         }
-
-    }, 
+    },
     "scores": {
         "color": "#00feff",
-        "blocks" : { 
-            "01" : {
+        "blocks": {
+            "01": {
                 "type": "text",
                 "size": "small",
                 "title": "Biography",
-                "content": [{
-                    "dataset": "d_04",
-                    "query": "SELECT ?descLabel WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?descLabel .}}"
-                    }]
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?descLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?descLabel .}}"
+                    }
+                ]
             },
-            "02" : {
+            "02": {
                 "type": "relation",
                 "size": "small",
                 "title": "Influenced by",
-                "category" : "people",
-                "content": [ {
-                    "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { <> wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { <> wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {<> wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {<> ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {<> wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {<> ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
-                }]
+                "category": "people",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE {VALUES ?card_uri {}  { ?card_uri wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { ?card_uri wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { ?card_uri wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {?card_uri wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {?card_uri ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {?card_uri wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {?card_uri ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                    }
+                ]
             },
-            "04" : {
+            "04": {
                 "type": "media",
                 "size": "small",
                 "title": "Portrait",
-                "class" : "image",
-                "content": [{
-                    "dataset": "d_04",
-                    "query": "SELECT ?item ?itemLabel ?media WHERE {<> wdt:P18 ?media } LIMIT 1"
-                }]
+                "class": "image",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?item ?itemLabel ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?media } LIMIT 1"
+                    }
+                ]
             }
         }
-
-    }, 
+    },
     "people": {
         "color": "#09ff00",
-        "blocks" : { 
-            "01" : {
+        "blocks": {
+            "01": {
                 "id": "1",
                 "type": "text",
                 "size": "small",
                 "title": "Biography",
-                "content": [  {
-                    "dataset": "d_04",
-                    "query": "SELECT ?descLabel WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?descLabel.}}"
-                    }]
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?descLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?descLabel.}}"
+                    }
+                ]
             },
-            "02" : {
+            "02": {
                 "id": "2",
                 "type": "media",
                 "size": "small",
                 "title": "Portrait",
-                "class" : "image",
-                "content": [{
-                    "dataset": "d_04",
-                    "query": "SELECT ?media WHERE {<> wdt:P18 ?media }"
-                }]
+                "class": "image",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?media }"
+                    }
+                ]
             },
-            "03" : {
+            "03": {
                 "id": "3",
                 "type": "media",
                 "size": "medium",
                 "title": "Video",
-                "class" : "video",
-                "content": [{
-                    "dataset": "d_04",
-                    "query": "SELECT ?media WHERE {<> wdt:P10 ?media }"
-                }]
+                "class": "video",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P10 ?media }"
+                    }
+                ]
             },
-            "04" : {
+            "04": {
                 "id": "4",
                 "type": "media",
                 "size": "medium",
                 "title": "Voice",
-                "class" : "audio",
-                "content": [{
-                    "dataset": "d_04",
-                    "query": "SELECT ?media WHERE {<> wdt:P51 ?media }"
-                }]
+                "class": "audio",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P51 ?media }"
+                    }
+                ]
             },
-            "05" : {
+            "05": {
                 "id": "5",
                 "type": "relation",
                 "size": "small",
                 "title": "Related places",
-                "category" : "places",
-                "content": [ {
-                    "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { { <> wdt:P19 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of birth\") AS ?rel) } UNION { <> wdt:P20 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of death\") AS ?rel) } UNION { <> wdt:P937 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has work location\") AS ?rel) } UNION { <> wdt:P740 ?entity. BIND(str(\"location of formation\") AS ?rel)} UNION { <> wdt:P495 ?entity. BIND(str(\"has country of origin\") AS ?rel)} . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 10"
-                }]
+                "category": "places",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE {VALUES ?card_uri {}  { ?card_uri wdt:P19 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of birth\") AS ?rel) } UNION { ?card_uri wdt:P20 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of death\") AS ?rel) } UNION { ?card_uri wdt:P937 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has work location\") AS ?rel) } UNION { ?card_uri wdt:P740 ?entity. BIND(str(\"location of formation\") AS ?rel)} UNION { ?card_uri wdt:P495 ?entity. BIND(str(\"has country of origin\") AS ?rel)} . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 10"
+                    }
+                ]
             },
-            "06" : {
+            "06": {
                 "id": "6",
                 "type": "link",
                 "size": "small",
                 "title": "Useful links",
                 "description": "Discover many other resources related to this person, all available on the web",
-                "content": [{
-                    "label" : "Website",
-                    "url" : "https://www.google.com/",
-                    "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity  WHERE {<> wdt:P856 ?entity .}"
+                "content": [
+                    {
+                        "label": "Website",
+                        "url": "https://www.google.com/",
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity  WHERE {VALUES ?card_uri {} ?card_uri wdt:P856 ?entity .}"
                     },
                     {
-                    "label" : "Alt Source",
-                    "url" : "https://www.google.com/",
-                    "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity WHERE {<> wdt:P973 ?entity .}"
-                    }]
+                        "label": "Alt Source",
+                        "url": "https://www.google.com/",
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P973 ?entity .}"
                     }
+                ]
+            }
         }
-
-    }, 
+    },
     "places": {
         "color": "#fdff00",
-        "blocks" : { 
-            "01" : {
+        "blocks": {
+            "01": {
                 "id": "1",
                 "type": "text",
                 "size": "small",
                 "title": "Description",
-                "content": [{
-                    "dataset": "d_04",
-                    "query": "SELECT ?descLabel WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?descLabel .}}"
-                    }]
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?descLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?descLabel .}}"
+                    }
+                ]
             },
-            "02" : {
+            "02": {
                 "id": "2",
                 "type": "relation",
                 "size": "small",
                 "title": "Related places",
-                "category" : "places",
-                "content": [  {
-                    "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { <> wdt:P190 ?entity. ?entity wdt:P31/wdt:P279* wd:Q82794 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 30"
-                }]
+                "category": "places",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {}  ?card_uri wdt:P190 ?entity. ?entity wdt:P31/wdt:P279* wd:Q82794 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 30"
+                    }
+                ]
             },
-            "03" : {
+            "03": {
                 "id": "3",
                 "type": "relation",
                 "size": "small",
                 "title": "Borders",
-                "category" : "places",
-                "content": [  {
-                    "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { <> ^wdt:P47 ?entity . ?entity wdt:P31/wdt:P279* wd:Q82794 . BIND(str(\"shares border with\") AS ?inverse_rel) .  SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 10"
-                }]
+                "category": "places",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {}  ?card_uri ^wdt:P47 ?entity . ?entity wdt:P31/wdt:P279* wd:Q82794 . BIND(str(\"shares border with\") AS ?inverse_rel) .  SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 10"
+                    }
+                ]
             },
-            "04" :{
+            "04": {
                 "id": "4",
                 "type": "media",
                 "size": "medium",
                 "title": "City View",
-                "class" : "image",
-                "content": [  {
-                    "dataset": "d_04",
-                    "query": "SELECT ?item ?itemLabel ?media WHERE {<> wdt:P18 ?media } LIMIT 1"
-                }]
+                "class": "image",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?item ?itemLabel ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?media } LIMIT 1"
+                    }
+                ]
             },
-            "05" :{
+            "05": {
                 "id": "5",
                 "type": "media",
                 "size": "medium",
                 "title": "Map",
-                "class" : "image",
-                "content": [  {
-                    "dataset": "d_04",
-                    "query": "SELECT ?item ?itemLabel ?media WHERE {<> wdt:P242 ?media} LIMIT 1"
-                }]
+                "class": "image",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?item ?itemLabel ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P242 ?media} LIMIT 1"
+                    }
+                ]
             },
-            "06" : {
+            "06": {
                 "id": "6",
                 "type": "media",
                 "size": "medium",
                 "title": "Voice",
-                "class" : "audio",
-                "content": [{
-                    "dataset": "d_04",
-                    "query": "SELECT ?media WHERE {<> wdt:P51 ?media }"
-                }]
+                "class": "audio",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?media WHERE {?card_uri wdt:P51 ?media }"
+                    }
+                ]
             }
         }
-
-    }, 
+    },
     "instruments": {
         "color": "#000000",
-        "blocks" : { 
-            "01" : {
+        "blocks": {
+            "01": {
                 "id": "1",
                 "type": "text",
                 "size": "small",
                 "title": "Definition",
-                "content": [  {
-                    "dataset": "d_04",
-                    "query": "SELECT ?descLabel WHERE {SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . <> schema:description ?descLabel.}}"
-                    }]
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?descLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?descLabel.}}"
+                    }
+                ]
             },
-            "02" : {
+            "02": {
                 "id": "2",
                 "type": "media",
                 "size": "small",
                 "title": "Image",
-                "class" : "image",
-                "content": [{
-                    "dataset": "d_04",
-                    "query": "SELECT ?media WHERE {<> wdt:P18 ?media }"
-                }]
+                "class": "image",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?media }"
+                    }
+                ]
             },
-            "03" : {
+            "03": {
                 "id": "3",
                 "type": "relation",
                 "size": "small",
                 "title": "Played by",
-                "category" : "people",
-                "content": [ {
-                    "dataset": "d_04",
-                    "query": "SELECT ?entity ?entityLabel {?entity wdt:P1303 <> . ?entity wikibase:statements ?outcoming . {?entity wdt:P31 wd:Q5.} UNION {?entity wdt:P31 wd:Q215380 .} ?entity wikibase:sitelinks ?sitelinks . { SELECT (count(?s) AS ?incoming) ?entity WHERE {?entity wdt:P1303 <> . ?s ?p ?entity .[] wikibase:directClaim ?p } GROUP BY ?entity } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" . }. } ORDER BY DESC (?incoming) LIMIT 17"
-                }]
+                "category": "people",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT ?entity ?entityLabel {VALUES ?card_uri {} ?entity wdt:P1303 ?card_uri . ?entity wikibase:statements ?outcoming . {?entity wdt:P31 wd:Q5.} UNION {?entity wdt:P31 wd:Q215380 .} ?entity wikibase:sitelinks ?sitelinks . { SELECT (count(?s) AS ?incoming) ?entity WHERE {?entity wdt:P1303 ?card_uri . ?s ?p ?entity .[] wikibase:directClaim ?p } GROUP BY ?entity } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" . }. } ORDER BY DESC (?incoming) LIMIT 17"
+                    }
+                ]
             }
         }
-
     },
     "creative works": {
         "color": "#00ffa5",
-        "blocks" : { 
-            "01" : {
+        "blocks": {
+            "01": {
                 "id": "1",
                 "type": "text",
                 "size": "small",
                 "title": "Description",
-                "content": [{
-                    "dataset": "d_01",
-                    "query": "SELECT DISTINCT ?descLabel WHERE {<> <https://schema.org/description> ?descLabel .}"
-                    }]
+                "content": [
+                    {
+                        "dataset": "d_01",
+                        "query": "SELECT DISTINCT ?descLabel WHERE {VALUES ?card_uri {} ?card_uri <https://schema.org/description> ?descLabel .}"
+                    }
+                ]
             },
-            "02" : {
+            "02": {
                 "id": "2",
                 "type": "relation",
                 "size": "small",
                 "title": "Audience",
-                "category" : "audience type",
-                "content": [ {
-                    "dataset": "d_01",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {<> <https://schema.org/audience> ?entity. ?entity <http://www.w3.org/2000/01/rdf-schema#label> ?entityLabel .}"
-                    }]
+                "category": "audience type",
+                "content": [
+                    {
+                        "dataset": "d_01",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} ?card_uri <https://schema.org/audience> ?entity. ?entity <http://www.w3.org/2000/01/rdf-schema#label> ?entityLabel .}"
+                    }
+                ]
             },
-            "03" : {
+            "03": {
                 "id": "3",
                 "type": "relation",
                 "size": "small",
                 "title": "Type of resources",
-                "category" : "resource type",
-                "content": [ {
-                    "dataset": "d_01",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {<> <https://schema.org/mainEntity> ?entity. ?entity <http://www.w3.org/2000/01/rdf-schema#label> ?entityLabel .}"
-                    }]
+                "category": "resource type",
+                "content": [
+                    {
+                        "dataset": "d_01",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} ?card_uri <https://schema.org/mainEntity> ?entity. ?entity <http://www.w3.org/2000/01/rdf-schema#label> ?entityLabel .}"
+                    }
+                ]
             },
-            "04" : {
+            "04": {
                 "id": "4",
                 "type": "link",
                 "size": "small",
                 "title": "Useful links",
                 "description": "Discover many other resources related to this creative work available on the web",
-                "content": [{
-                    "label" : "Website",
-                    "url" : "https://www.google.com/",
-                    "dataset": "d_01",
-                    "query": "SELECT DISTINCT ?entity  WHERE {<> <https://schema.org/mainEntityOfPage> ?entity .}"
+                "content": [
+                    {
+                        "label": "Website",
+                        "url": "https://www.google.com/",
+                        "dataset": "d_01",
+                        "query": "SELECT DISTINCT ?entity  WHERE {VALUES ?card_uri {} ?card_uri <https://schema.org/mainEntityOfPage> ?entity .}"
                     },
                     {
-                    "label" : "Sample Resource",
-                    "url" : "https://www.google.com/",
-                    "dataset": "d_01",
-                    "query": "SELECT DISTINCT ?entity WHERE {<> <https://schema.org/workExample> ?entity .}"
-                    }]
+                        "label": "Sample Resource",
+                        "url": "https://www.google.com/",
+                        "dataset": "d_01",
+                        "query": "SELECT DISTINCT ?entity WHERE {VALUES ?card_uri {} ?card_uri <https://schema.org/workExample> ?entity .}"
                     }
+                ]
             }
         }
-
-    
+    }
 }
