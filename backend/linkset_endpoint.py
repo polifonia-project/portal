@@ -21,7 +21,7 @@ LILNKSETGRAPH = conf.linkset_namespace
 LINKSET_DIRECTORY = 'linkset_files'
 ENTITIES_DIRECTORY = 'entities'
 
-MYLINKSET = conf.linkset_namespace
+MYLINKSET = conf.linkset_url_enpoint
 
 
 def __run_query_string(active, query_string,
@@ -110,7 +110,8 @@ def linkset_endpoint_update(entities_dir, datasets, linkset_directory):
     for filename in os.listdir(linkset_directory):
         file_path = linkset_directory + '/' + filename
         server.update(
-            'load <file:'+ conf.linkset_files_directory_path + file_path + '>')  # to do: understand how to generalise
+            'load <file:'+ os.path.dirname(os.path.realpath(__file__)) + file_path + '>')  # to do: understand how to generalise
+            # os.path.dirname(os.path.realpath(__file__))
     print('[UPDATE] linkset populated')
 
 

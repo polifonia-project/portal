@@ -7,7 +7,7 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 from rdflib import URIRef, Literal, Dataset, Graph
 from rdflib.plugins.sparql import prepareQuery
 from rdflib.namespace import SDO, RDFS, OWL, SDO
-import hydra.tpf
+# import hydra.tpf
 
 # internal methods
 import linkset_endpoint

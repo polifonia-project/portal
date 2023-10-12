@@ -67,9 +67,9 @@ fill_entities_files_result = timeit.timeit(
 print(
     f"Execution time for fill_entities_files is {fill_entities_files_result} seconds")
 
-# ingest_chosen_index_result = timeit.timeit(
-#     stmt='i.ingest_chosen_index(cat, endpoint.ENTITIES_DIRECTORY, "GENERIC")', globals=globals(), number=1)
-# print(f"Execution time for ingest_chosen_index is {ingest_chosen_index_result} seconds")
+ingest_chosen_index_result = timeit.timeit(
+    stmt='i.ingest_chosen_index(cat, endpoint.ENTITIES_DIRECTORY, "GENERIC")', globals=globals(), number=1)
+print(f"Execution time for ingest_chosen_index is {ingest_chosen_index_result} seconds")
 
 # linkset_endpoint_update_result = timeit.timeit(
 #     stmt='endpoint.linkset_endpoint_update(endpoint.ENTITIES_DIRECTORY, d, endpoint.LINKSET_DIRECTORY)', globals=globals(), number=1)
