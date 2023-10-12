@@ -15,13 +15,13 @@ import reconciliation as rec
 import methods
 import conf
 
-UPDATEMYLINKSET = 'http://localhost:9999/blazegraph/namespace/kb/sparql/update'
-LILNKSETGRAPH = 'http://w3id.org/polifonia/linkset/'
-LINKSET_FILE = 'linkset.nq'
+UPDATEMYLINKSET = conf.url_to_update_linkset
+LILNKSETGRAPH = conf.linkset_namespace
+
 LINKSET_DIRECTORY = 'linkset_files'
 ENTITIES_DIRECTORY = 'entities'
 
-MYLINKSET = 'http://localhost:9999/bigdata/sparql'
+MYLINKSET = conf.linkset_namespace
 
 
 def __run_query_string(active, query_string,
