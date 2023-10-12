@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./Carousel.module.css";
 import ItemsCarousel from "react-items-carousel";
 import CarouselCard from "./CarouselCard";
@@ -16,7 +15,7 @@ const Carousel = () => {
       .then(data => setContent(data.carousel))
 
     var els = document.getElementsByClassName("gwZiig");
-    Array.prototype.forEach.call(els, function(el) {
+    Array.prototype.forEach.call(els, function (el) {
       el.style.overflow = "visible";
     });
 
@@ -39,7 +38,7 @@ const Carousel = () => {
           chevronWidth={chevronWidth}
         >
           {Object.values(content).map((card, i) => (
-            <CarouselCard  key={'card-car-' + i} index={i} title={card.title} claim={card.claim} par={card.paragraph} url={card.href} type={card.type} logo={card.logo}></CarouselCard>
+            <CarouselCard key={'card-car-' + i} index={i} title={card.title} claim={card.claim} par={card.paragraph} url={card.href} type={card.type} logo={card.logo}></CarouselCard>
           ))}
         </ItemsCarousel>
       </div>

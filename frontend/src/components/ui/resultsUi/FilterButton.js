@@ -1,29 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./FilterButton.module.css";
-import { useEffect } from "react";
-import { useState } from "react";
 
 function FilterButton(props) {
 
-const [toggle, setToggle] = useState(false)
+  const [toggle, setToggle] = useState(false)
 
-const handleClick = (e) => {
+  const handleClick = (e) => {
     props.buttonClick(e);
     setToggle(!toggle);
   }
 
 
-useEffect(() => {
+  useEffect(() => {
     if (props.selectedOn === false) {
-        setToggle(false);
+      setToggle(false);
     }
-  });
+  }, [props.selectedOn]);
 
-return (
+  return (
     <button disabled={!props.isDisabled} onClick={handleClick} className={classes.buttonFilter + ' ' + classes[toggle ? 'buttonChecked' : null] + ' ' + classes[props.resetClass]}>
-    {props.children}
+      {props.children}
     </button>
-)
+  )
 
 }
 

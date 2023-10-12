@@ -1,5 +1,4 @@
-import React from "react";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import classes from "./MainTitle.module.css";
 import { ThemeContext } from "../../context/ThemeContext";
 
@@ -18,8 +17,8 @@ const MainTitle = () => {
 
   return (
     <div className={classes.mainTitleContainer}>
-        <h3>Play the sound of Heritage</h3> {/* MUSIC, HISTORY, ... */}
-        <button onClick={() => handleClickScroll('introduction-Polifonia')}></button>
+      <h3>Play the sound of Heritage</h3> {/* MUSIC, HISTORY, ... */}
+      <button onClick={() => handleClickScroll('introduction-Polifonia')}></button>
     </div>
 
   );

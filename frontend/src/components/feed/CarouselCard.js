@@ -1,8 +1,6 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./CarouselCard.module.css";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 
 
 const CarouselCard = (props) => {

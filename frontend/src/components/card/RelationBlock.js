@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./RelationBlock.module.css";
-import { useState, useEffect } from "react";
 
 
 function RelationBlock(props) {
@@ -52,7 +51,7 @@ function RelationBlock(props) {
     } else {
       setchunkedList([relList]);
     }
-  }, [isLoaded, relList]);
+  }, [isLoaded, relList, props.reset]);
 
 
   return (

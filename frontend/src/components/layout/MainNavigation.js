@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
 import logo from "../../assets/svg/PolifoniaLogo.svg";
@@ -27,9 +26,9 @@ function MainNavigation(props) {
 
 
   const toggleMenu = () => {
-      setMenuOpen(prev => !prev)
-      setOverlayStatus(true)
-    }
+    setMenuOpen(prev => !prev)
+    setOverlayStatus(true)
+  }
 
   const toggleSound = () => {
     setSoundOn(prev => !prev)
@@ -42,8 +41,8 @@ function MainNavigation(props) {
     document.getElementById("backToClip").style.opacity = '0';
 
     setTimeout(() => {
-    document.getElementById("backToTop").style.opacity = '1';
-    document.getElementById("backToClip").style.opacity = '1';
+      document.getElementById("backToTop").style.opacity = '1';
+      document.getElementById("backToClip").style.opacity = '1';
     }, 3000);
 
   }
@@ -53,9 +52,9 @@ function MainNavigation(props) {
     handleBackScroll("clipbox-" + currentSection);
     document.getElementById("backToClip").style.opacity = '0';
     setTimeout(() => {
-    document.getElementById("backToClip").style.opacity = '1';
+      document.getElementById("backToClip").style.opacity = '1';
     }, 3000);
-    
+
   }
 
   const handleBackScroll = (section) => {
@@ -67,30 +66,30 @@ function MainNavigation(props) {
 
   if (menuOpen) {
     document.body.style.overflow = "hidden";
-    document.getElementById("menuOptions").style.filter= 'none';
+    document.getElementById("menuOptions").style.filter = 'none';
   } else {
     document.body.style.overflow = "scroll";
     if (shownOverlay) {
-      if (theme === 'dark') {document.getElementById("menuOptions").style.filter= 'brightness(0) invert(1)';}
+      if (theme === 'dark') { document.getElementById("menuOptions").style.filter = 'brightness(0) invert(1)'; }
     }
   }
 
   return (
     <header className={classes.header} id='mainHeader' >
       <span className={classes.title} id='title-logo'>
-        <Link to="/" onClick={()=> setCardOpen(false)}><img className={classes.logo} src={logo} alt="Logo" id='mainLogo'/></Link>
+        <Link to="/" onClick={() => setCardOpen(false)}><img className={classes.logo} src={logo} alt="Logo" id='mainLogo' /></Link>
         <div className={classes.section} id='sectionName'><span>{props.sectionName}</span></div>
       </span>
-      <span  className={classes.menu} id='menuOptions' >
-        <img onClick={toggleBackClip} id='backToClip' className={classes.sound} src={backToClip} alt="Back to top Toggle" style={{display: backToTopOn ? cardOpen ? 'none' :'block' : 'none' }}/>
-        <img onClick={toggleBackTop} id='backToTop' className={classes.sound} src={backToTop} alt="Back to top Toggle" style={{display: backToTopOn ? cardOpen ? 'none' :'block' : 'none' }}/>
+      <span className={classes.menu} id='menuOptions' >
+        <img onClick={toggleBackClip} id='backToClip' className={classes.sound} src={backToClip} alt="Back to top Toggle" style={{ display: backToTopOn ? cardOpen ? 'none' : 'block' : 'none' }} />
+        <img onClick={toggleBackTop} id='backToTop' className={classes.sound} src={backToTop} alt="Back to top Toggle" style={{ display: backToTopOn ? cardOpen ? 'none' : 'block' : 'none' }} />
         <img onClick={toggleSound} className={classes.sound} src={soundOn ? soundon : soundoff} alt="Sound Toggle" />
         <img onClick={toggleMenu} className={classes.hamburger} src={menuOpen ? closemenu : hamburger} alt="Hamburger Menu" />
       </span>
-      {menuOpen ? <MenuOverlay toggleMenu={toggleMenu}/> : null}
+      {menuOpen ? <MenuOverlay toggleMenu={toggleMenu} /> : null}
       <Card></Card>
     </header>
-    
+
   );
 }
 

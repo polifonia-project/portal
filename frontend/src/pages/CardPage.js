@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useContext } from "react";
+import { useEffect, useContext } from "react";
 import { useSearchParams } from 'react-router-dom';
 import { CardContext } from "../context/CardContext";
 
@@ -25,7 +24,7 @@ function CardPage(props) {
         fetch("/conf_info")
             .then(res => res.json())
             .then(data => setCardBlocksNew(data.cards))
-    }, ["/conf_info"]);
+    }, [setCardBlocksNew]);
 
 }
 
