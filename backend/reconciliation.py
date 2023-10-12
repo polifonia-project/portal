@@ -12,6 +12,7 @@ import hydra.tpf
 # internal methods
 import linkset_endpoint
 import methods
+import conf
 
 WHITE_LIST = ['wikidata', 'dbpedia']
 WHITE_LIST_PARAM = {
@@ -63,7 +64,7 @@ def query_same_as_internal(uri_list):
 
 
 def find_matches(query, endpoint):
-    user_agent = 'mondoboia/1.0 (https://github.com/mondoboia; mondoboia@example.org)'
+    user_agent = conf.sparql_wrapper_user_agent
     sparql = SPARQLWrapper(endpoint, agent=user_agent)
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)

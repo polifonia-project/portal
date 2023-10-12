@@ -6,6 +6,9 @@ import os
 from SPARQLWrapper import SPARQLWrapper, JSON
 import urllib.parse
 
+# internal methods
+import conf
+
 
 def read_json(file_name):
     '''
@@ -66,7 +69,7 @@ def get_sparql_results(query, endpoint):
     Returns
     -------
     """
-    user_agent = 'mondoboia/1.0 (https://github.com/mondoboia; mondoboia@example.org)'
+    user_agent = conf.sparql_wrapper_user_agent
     sparql = SPARQLWrapper(endpoint, agent=user_agent)
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)

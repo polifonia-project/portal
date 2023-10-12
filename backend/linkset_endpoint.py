@@ -13,6 +13,7 @@ from pymantic import sparql
 # internal methods
 import reconciliation as rec
 import methods
+import conf
 
 UPDATEMYLINKSET = 'http://localhost:9999/blazegraph/namespace/kb/sparql/update'
 LILNKSETGRAPH = 'http://w3id.org/polifonia/linkset/'
@@ -109,7 +110,7 @@ def linkset_endpoint_update(entities_dir, datasets, linkset_directory):
     for filename in os.listdir(linkset_directory):
         file_path = linkset_directory + '/' + filename
         server.update(
-            'load <file:///home/giuliarenda/portal/backend/' + file_path + '>')  # to do: understand how to generalise
+            'load <file:'+ conf.linkset_files_directory_path + file_path + '>')  # to do: understand how to generalise
     print('[UPDATE] linkset populated')
 
 
