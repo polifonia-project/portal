@@ -421,7 +421,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?media WHERE {?card_uri wdt:P51 ?media }"
+                        "query": "SELECT ?media WHERE { VALUES ?card_uri {} ?card_uri wdt:P51 ?media }"
                     }
                 ]
             }
