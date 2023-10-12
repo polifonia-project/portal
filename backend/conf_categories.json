@@ -39,7 +39,7 @@
             "places": [
                 {
                     "dataset": "d_03",
-                    "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ; sdo:genre <> ; sdo:locationCreated ?blank_entity . ?blank_entity rdfs:label ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:genre <>; sdo:locationCreated ?blank_entity  . ?blank_entity rdfs:label ?entityLabel .} BIND(\"is associated with\" as ?rel) BIND(IRI(CONCAT(\"https://cat.apis.beeldengeluid.nl/\", STR(?entityLabel))) AS ?entity)} ORDER BY ?entityLabel"
+                    "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?starting_value {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ; sdo:genre ?starting_value ; sdo:locationCreated ?blank_entity . ?blank_entity rdfs:label ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:genre ?starting_value; sdo:locationCreated ?blank_entity  . ?blank_entity rdfs:label ?entityLabel .} BIND(\"is associated with\" as ?rel) BIND(IRI(CONCAT(\"https://cat.apis.beeldengeluid.nl/\", STR(?entityLabel))) AS ?entity)} ORDER BY ?entityLabel"
                 },
                 {
                     "dataset": "d_04",
@@ -228,7 +228,7 @@
             ]
         },
         "section": {
-            "title": "What\u2019s your next music destination?",
+            "title": "What’s your next music destination?",
             "description": "Explore connections and relations of places. See all the results, filter and arrange them as you want. ",
             "highlights": [
                 ""
