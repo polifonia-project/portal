@@ -33,32 +33,33 @@ function Card(props) {
   const [relContent, setRelContent] = useState({ "id_3": [], "id_4": [] })
   const [mediaContent, setMediaContent] = useState({})
 
-  // const sameAsUriList = []
-  // const [sameAsUris, setSameAsUris] = useState(sameAsUriList);
+  const sameAsUriList = []
+  const [sameAsUris, setSameAsUris] = useState(sameAsUriList);
 
   // Function to collect sameAsUris
-  // const getSameAsUris = async (uri) => {
-  //   let sameUriQuery = 'SELECT DISTINCT ?same_uri WHERE {GRAPH ?g {<' + uri + '> owl:sameAs|^owl:sameAs ?same_uri .}}';
-  //   const response = await fetch(
-  //     '/portal/reconciliation?query=' + encodeURIComponent(sameUriQuery)
-  //   ).then((response) => response.json())
-  //   setSameAsUris(response);
-  // };
+  const getSameAsUris = async (uri) => {
+    let sameUriQuery = 'SELECT DISTINCT ?same_uri WHERE {GRAPH ?g {<' + uri + '> owl:sameAs|^owl:sameAs ?same_uri .}}';
+    const response = await fetch(
+      '/portal/reconciliation?query=' + encodeURIComponent(sameUriQuery)
+    ).then((response) => response.json())
+    setSameAsUris(response);
+  };
 
   useEffect(() => {
 
     // fetchResults 
     const fetchResults = (uri) => {
-      let recUri = '<' + uri + '>';
-      // if (sameAsUris.results > 0) {
-      //   if (sameAsUris.results.bindings !== undefined) {
-      //     let sameUriArray = (sameAsUris.results.bindings).map(val => '<' + val.same_uri.value + '>');
-      //     sameUriArray.push('<' + uri + '>');
-      //     console.log('SAME', sameUriArray)
-      //     recUri = sameUriArray.join(' ');
-      //   }
+      let recUri = '';
+      if (sameAsUris.results > 0) {
+        if (sameAsUris.results.bindings !== undefined) {
+          let sameUriArray = (sameAsUris.results.bindings).map(val => '<' + val.same_uri.value + '>');
+          sameUriArray.push('<' + uri + '>');
+          console.log('SAME', sameUriArray)
+          recUri = sameUriArray.join(' ');
+        }
 
-      // } else { recUri = '<' + uri + '>' }
+      } else { recUri = '<' + uri + '>' }
+
       let endpoint = "";
       let query = "";
       let dataset = "";
@@ -296,12 +297,12 @@ function Card(props) {
     }
 
 
-  }, [cardOpen, cardBlocksNew, cardContent.hasInput, cardContent.goesBack, cardContent.cat, colorBackground, cardContent.uri, currentBlock, datasets]);
+  }, [cardOpen, cardBlocksNew, cardContent.hasInput, cardContent.goesBack, cardContent.cat, colorBackground, cardContent.uri, currentBlock, datasets, sameAsUris.results]);
 
   // fetch sameAs uris
-  // useEffect(() => {
-  //   getSameAsUris(cardContent.uri);
-  // }, [cardContent.uri]);
+  useEffect(() => {
+    getSameAsUris(cardContent.uri);
+  }, [cardContent.uri]);
 
   // fetch datasets 
   useEffect(() => {
