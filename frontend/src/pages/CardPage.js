@@ -18,7 +18,7 @@ function CardPage(props) {
         props.func('Portal');
         setCardOpen(true);
         setCardContent({ title: title, cat: cat, input: 'no input', uri: uri, color: '#000000', hasInput: true, goesBack: false })
-    }, []);
+    }, [cat, props, setCardContent, setCardOpen, title, uri]);
 
     useEffect(() => {
         fetch("/conf_info")
