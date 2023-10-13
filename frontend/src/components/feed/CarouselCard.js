@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const CarouselCard = (props) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [pageTo, setPageTo] = useState("/");
+  const [pageTo, setPageTo] = useState("/portal");
 
   const handleClickScroll = (id) => {
     const element = document.getElementById(id);
@@ -18,11 +18,11 @@ const CarouselCard = (props) => {
     if (props.type === 'internal') {
       setPageTo(props.url)
     } else if (props.type === 'external') {
-      setPageTo("/")
+      setPageTo("/portal")
     } else if (props.type === 'scroll') {
-      setPageTo("/")
+      setPageTo("/portal")
     } else {
-      setPageTo("/")
+      setPageTo("/portal")
     }
   }, [props.type, props.url]);
 
