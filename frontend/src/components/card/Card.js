@@ -50,7 +50,7 @@ function Card(props) {
     // fetchResults 
     const fetchResults = (uri) => {
       let recUri = '';
-      if (sameAsUris) {
+      if (Object.keys(sameAsUris).length > 0) {
         if (sameAsUris.results.bindings.length > 0) {
           let sameUriArray = (sameAsUris.results.bindings).map(val => '<' + val.same_uri.value + '>');
           sameUriArray.push('<' + uri + '>');
@@ -297,7 +297,7 @@ function Card(props) {
     }
 
 
-  }, [cardOpen, cardBlocksNew, cardContent.hasInput, cardContent.goesBack, cardContent.cat, colorBackground, cardContent.uri, currentBlock, datasets, sameAsUris.results]);
+  }, [cardOpen, cardBlocksNew, cardContent.hasInput, cardContent.goesBack, cardContent.cat, colorBackground, cardContent.uri, currentBlock, datasets, sameAsUris]);
 
   // fetch sameAs uris
   useEffect(() => {
