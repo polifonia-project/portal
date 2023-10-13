@@ -12,7 +12,7 @@
         "name": "meetups",
         "iri_base": "http://w3id.org/polifonia/pilot/meetups/",
         "query_method": "sparql_endpoint",
-        "sparql_endpoint": "http://data.open.ac.uk/sparql",
+        "sparql_endpoint": "https://data.open.ac.uk/sparql",
         "rest_api": ""
     },
     "d_03": {
@@ -36,7 +36,7 @@
         "name": "led",
         "iri_base": "http://w3id.org/polifonia/pilot/led/",
         "query_method": "sparql_endpoint",
-        "sparql_endpoint": "http://data.open.ac.uk/sparql",
+        "sparql_endpoint": "https://data.open.ac.uk/sparql",
         "rest_api": ""
     }
 }
