@@ -24,7 +24,7 @@ def feed():
     return jsonify({'datasets': d, 'categories': cat, 'carousel': car, 'cards': cards, 'clips': f_list})
 
 
-@app.route('/index', methods=['GET'])
+@app.route('/sonic_index', methods=['GET'])
 def index():
     cat_id = request.args.get('cat_id')
     word = request.args.get('data')

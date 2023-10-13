@@ -92,7 +92,7 @@ class SectionClip extends React.Component {
       this.setState({ value_obj: {} });
       this.setState({ arrowOption: false });
     };
-    let request = "/index?data=" + event.target.value + "&cat_id=" + category;
+    let request = "/sonic_index?data=" + event.target.value + "&cat_id=" + category;
     fetch(request)
       .then((res) => res.json())
       .then((data) => {
