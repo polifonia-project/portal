@@ -214,7 +214,7 @@ class ResultsTest extends React.Component {
         let returnCheck = false
         let locationQuery = 'SELECT DISTINCT ?d_location WHERE {GRAPH ?g {<' + uri + '> <https://schema.org/location> ?d_location}}';
         try {
-            return fetch('/reconciliation?query=' + encodeURIComponent(locationQuery))
+            return fetch('/portal/reconciliation?query=' + encodeURIComponent(locationQuery))
                 .then((res) => res.json())
                 .then((data) => {
                     let dataLen = data.results.bindings.length;
@@ -235,7 +235,7 @@ class ResultsTest extends React.Component {
     getCorrectUri = (uri, dataset_iri_base) => {
         let sameUriQuery = 'SELECT DISTINCT ?same_uri WHERE {GRAPH ?g {<' + uri + '> owl:sameAs|^owl:sameAs ?same_uri . ?same_uri <https://schema.org/location> <' + dataset_iri_base + '>}}';
         try {
-            return fetch('/reconciliation?query=' + encodeURIComponent(sameUriQuery))
+            return fetch('/portal/reconciliation?query=' + encodeURIComponent(sameUriQuery))
                 .then((res) => res.json())
                 .then((data) => {
                     // console.log('CORRECTURI', data)

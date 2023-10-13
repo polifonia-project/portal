@@ -40,7 +40,7 @@ function Card(props) {
   // const getSameAsUris = async (uri) => {
   //   let sameUriQuery = 'SELECT DISTINCT ?same_uri WHERE {GRAPH ?g {<' + uri + '> owl:sameAs|^owl:sameAs ?same_uri .}}';
   //   const response = await fetch(
-  //     '/reconciliation?query=' + encodeURIComponent(sameUriQuery)
+  //     '/portal/reconciliation?query=' + encodeURIComponent(sameUriQuery)
   //   ).then((response) => response.json())
   //   setSameAsUris(response);
   // };
@@ -305,7 +305,7 @@ function Card(props) {
 
   // fetch datasets 
   useEffect(() => {
-    fetch("/conf_info")
+    fetch("/portal/conf_info")
       .then((res) => res.json())
       .then((data) => {
         setDatasets(data.datasets);

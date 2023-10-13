@@ -76,7 +76,7 @@ class SectionClip extends React.Component {
   }
 
   componentDidMount = () => {
-    fetch("/conf_info")
+    fetch("/portal/conf_info")
       .then((res) => res.json())
       .then((data) => {
         this.setState({ clips: data.clips });
@@ -92,7 +92,7 @@ class SectionClip extends React.Component {
       this.setState({ value_obj: {} });
       this.setState({ arrowOption: false });
     };
-    let request = "/sonic_index?data=" + event.target.value + "&cat_id=" + category;
+    let request = "/portal/sonic_index?data=" + event.target.value + "&cat_id=" + category;
     fetch(request)
       .then((res) => res.json())
       .then((data) => {

@@ -19,7 +19,7 @@ class Sections extends React.Component {
   }
 
   componentDidMount = () => {
-    fetch("/conf_info")
+    fetch("/portal/conf_info")
       .then((res) => res.json())
       .then((data) => {
         this.setState({ datasets: data.datasets });

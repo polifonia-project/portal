@@ -21,7 +21,7 @@ function CardPage(props) {
     }, [cat, props, setCardContent, setCardOpen, title, uri]);
 
     useEffect(() => {
-        fetch("/conf_info")
+        fetch("/portal/conf_info")
             .then(res => res.json())
             .then(data => setCardBlocksNew(data.cards))
     }, [setCardBlocksNew]);

@@ -10,7 +10,7 @@ const Carousel = () => {
   const chevronWidth = 90;
 
   useEffect(() => {
-    fetch("/conf_info")
+    fetch("/portal/conf_info")
       .then(response => response.json())
       .then(data => setContent(data.carousel))
 
