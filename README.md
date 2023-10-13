@@ -22,6 +22,9 @@ npm install (--force)
 
 # install sonic index
 # TODO
+
+# install blazegraph
+# wget https://github.com/blazegraph/database/releases/download/BLAZEGRAPH_2_1_6_RC/blazegraph.jar
 ```
 
 
@@ -55,6 +58,10 @@ To populate indexes you must modify the following configuration files, and speci
 
  * `backend/conf_categories.json`
  * `backend/conf_datasets.json`
+ * `backend/conf_carousel.json`
+ * `backend/conf_cards.json`
+ * `backend/conf_feed.json`
+ * `backend/conf_general.json`
 
 For instance in `backend/conf_categories.json`:
 
@@ -86,12 +93,19 @@ and in `backend/conf_datasets.json`:
 
 If you want to force re-populating the indexes when rerunning the application, modify the file `backend/conf_categories.json` and remove every occurrence of `"status":"ingested"`.
 
+### Reconciliation
+
+TODO - which functions and parameters to use 
+TODO - workflow
+
 ### Backend and frontend
 
-In `frontend/package.json` define the proxy for your backend application (dev server only). Default is `"proxy": "http://127.0.0.1:5000/"`
+In `frontend/package.json` define:
 
+ * the proxy for your backend application. default is `"proxy": "http://127.0.0.1:5000/"` on a dev server and `"proxy": "http://0.0.0.0:5000/"` in production.
+ * the homepage. default is `.` on a dev server, and the full URL in production.
 
-### Categories
+### Categories, Carousel, Cards
 
 TODO
 
@@ -105,10 +119,16 @@ $ cd sonic
 $ sonic -c config.cfg # OR $ ./target/release/sonic -c config.cfg
 ```
 
-Run Flask (default port `5000`)
+Run Blazegraph (default port `9999`) - only if reconciliation is enabled
 
 ```
 cd ../backend
+$ java -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -server -Xmx1g -Djetty.port=9999 -jar blazegraph.jar 
+```
+
+Run Flask (default port `5000`)
+
+```
 python3 app.py 5000
 ```
 
@@ -139,14 +159,23 @@ cd ../backend
 gunicorn -w 4 -b 0.0.0.0:5000 app:app &
 ```
 
+### Blazegraph
+
+Run blazegraph as you would do in dev
+
+```
+$ java -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -server -Xmx1g -Djetty.port=9999 -jar blazegraph.jar 
+```
+
+
 ### React
 
-Create a build of the react application and run it
+Create a build of the react application and serve it
 
 ```
 cd frontend
 npm run build # create the build
-npm install -g serve
+npm install -g serve # install serve for the first time
 serve -s build &
 ```
 Check for absolute paths in index.html and change them if you run the app in a subdomain
@@ -182,6 +211,20 @@ server {
     }
 
     location /sonic_index {
+      include proxy_params;
+      #add_header 'Access-Control-Allow-Origin' http://localhost:80;
+      proxy_pass http://0.0.0.0:5000;
+      proxy_redirect default;
+    }
+
+    location /reconciliation {
+      include proxy_params;
+      #add_header 'Access-Control-Allow-Origin' http://localhost:80;
+      proxy_pass http://0.0.0.0:5000;
+      proxy_redirect default;
+    }
+
+    location /card {
       include proxy_params;
       #add_header 'Access-Control-Allow-Origin' http://localhost:80;
       proxy_pass http://0.0.0.0:5000;
