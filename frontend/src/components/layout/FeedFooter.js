@@ -49,7 +49,7 @@ function FeedFooter(props) {
           <div className={classes.flexTwo}>
             <p className={classes.flexTitle}>Polifonia</p>
             <br></br>
-            <Link onClick={() => {onClickChange() }}  to="/portal">Homepage</Link>
+            <Link onClick={() => {onClickChange() }}  to="/portal/">Homepage</Link>
             <Link onClick={() => {onClickChange() }}  to="/portal/about">About</Link>
             <Link onClick={() => {onClickChange() }}  to="/portal/outputs">Outputs</Link>
           </div>

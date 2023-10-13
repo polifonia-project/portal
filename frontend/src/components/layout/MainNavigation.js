@@ -77,7 +77,7 @@ function MainNavigation(props) {
   return (
     <header className={classes.header} id='mainHeader' >
       <span className={classes.title} id='title-logo'>
-        <Link to="/portal" onClick={() => setCardOpen(false)}><img className={classes.logo} src={logo} alt="Logo" id='mainLogo' /></Link>
+        <Link to="/portal/" onClick={() => setCardOpen(false)}><img className={classes.logo} src={logo} alt="Logo" id='mainLogo' /></Link>
         <div className={classes.section} id='sectionName'><span>{props.sectionName}</span></div>
       </span>
       <span className={classes.menu} id='menuOptions' >

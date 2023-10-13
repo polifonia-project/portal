@@ -30,7 +30,7 @@ function Footer(props) {
           <div className={classes.flexTwo}>
             <p className={classes.flexTitle}>Polifonia</p>
             <br></br>
-            <Link onClick={() => {onChange()}}  to="/portal">Homepage</Link>
+            <Link onClick={() => {onChange()}}  to="/portal/">Homepage</Link>
             <Link onClick={() => {onChange()}}  to="/portal/about">About</Link>
             <Link onClick={() => {onChange()}}  to="/portal/outputs">Outputs</Link>
           </div>

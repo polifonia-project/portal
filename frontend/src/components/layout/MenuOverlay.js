@@ -30,7 +30,7 @@ function MenuOverlay(props) {
         <nav>
           <ul className={classes.menulist}>
             <li>
-              <Link onClick={() => { props.toggleMenu(); setCardOpen(false) }} to="/portal">Homepage</Link>
+              <Link onClick={() => { props.toggleMenu(); setCardOpen(false) }} to="/portal/">Homepage</Link>
             </li>
             <li>
               <Link onClick={() => { props.toggleMenu(); onChange('isVisible'); }} to="/portal/about">About</Link>
