@@ -341,10 +341,17 @@ function Card(props) {
   }
 
   const encodeShareLink = () => {
-    const params = 'title=' + cardContent.title + '&cat=' + cardContent.cat + '&uri=' + cardContent.uri;
-    const encodedParams = encodeURI(params);
-    const encodedUrl = window.location + 'card?' + encodedParams
-    return encodedUrl
+    if (fromExternalLink) { 
+      const params = 'title=' + cardContent.title + '&cat=' + cardContent.cat + '&uri=' + cardContent.uri;
+      const encodedParams = encodeURI(params);
+      const encodedUrl = window.location + 'card?' + encodedParams
+      return encodedUrl
+    } else {
+      const params = 'title=' + cardContent.title + '&cat=' + cardContent.cat + '&uri=' + cardContent.uri;
+      const encodedParams = encodeURI(params);
+      const encodedUrl = window.location.origin + window.location.pathname + '?' + encodedParams
+      return encodedUrl
+    }
   }
 
   return (
@@ -375,7 +382,7 @@ function Card(props) {
           if (block.type === 'text') {
             return <TextBlock key={'textblock-' + i} width={block.size} title={block.title} content={textContent['id_' + i]} reset={resetOn} datasets={datasets}></TextBlock>
           }
-          else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title} category={block.category} reset={resetOn} content={relContent['id_' + i]} datasets={datasets} ></RelationBlock> }
+          else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title} category={block.category} reset={resetOn} content={relContent['id_' + i]} datasets={datasets} isExternal={fromExternalLink }></RelationBlock> }
 
           else if (block.type === 'link') { return <LinkBlock key={'linkblock-' + i} width={block.size} title={block.title} desc={block.description} reset={resetOn} links={block.content} content={linkContent['id_' + i]}></LinkBlock> }
 

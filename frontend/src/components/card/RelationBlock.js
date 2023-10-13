@@ -66,7 +66,7 @@ function RelationBlock(props) {
                 {list.map(function (data) {
                   return (<>
                     {(() => {
-                      if (data.name) { return <p key={data.link} className={classes.relationLi}><a href={window.location + "card?title=" + data.name + "&cat=" + props.category + "&uri=" + data.link} target="_blank" rel="noopener noreferrer">————&nbsp;&nbsp; {data.name}</a></p> }
+                      if (data.name) { return <p key={data.link} className={classes.relationLi}><a href={ props.isExternal ? window.location + "card?title=" + data.name + "&cat=" + props.category + "&uri=" + data.link : window.location.origin + window.location.pathname + "?title=" + data.name + "&cat=" + props.category + "&uri=" + data.link} target="_blank" rel="noopener noreferrer">————&nbsp;&nbsp; {data.name}</a></p> }
                       else { return <p className={classes.sourceTag}>Source: {props.datasets[data.dataset].name} </p> }
                     })()}
                   </>)
