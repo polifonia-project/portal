@@ -30,9 +30,9 @@ function Footer(props) {
           <div className={classes.flexTwo}>
             <p className={classes.flexTitle}>Polifonia</p>
             <br></br>
-            <Link onClick={() => {onChange()}}  to="/">Homepage</Link>
-            <Link onClick={() => {onChange()}}  to="/about">About</Link>
-            <Link onClick={() => {onChange()}}  to="/outputs">Outputs</Link>
+            <Link onClick={() => {onChange()}}  to="/portal">Homepage</Link>
+            <Link onClick={() => {onChange()}}  to="/portal/about">About</Link>
+            <Link onClick={() => {onChange()}}  to="/portal/outputs">Outputs</Link>
           </div>
           <div className={classes.flexThree}>
             <p className={classes.flexTitle}>People</p>
@@ -44,8 +44,8 @@ function Footer(props) {
           <div className={classes.flexFour}>
             <p className={classes.flexTitle}>Privacy</p>
             <br></br>
-            <Link onClick={() => {onChange()}}  to="/terms">Terms</Link>
-            <Link onClick={() => {onChange()}}  to="/cookies">Cookies</Link>
+            <Link onClick={() => {onChange()}}  to="/portal/terms">Terms</Link>
+            <Link onClick={() => {onChange()}}  to="/portal/cookies">Cookies</Link>
           </div>
         </div>
         <div className={classes.footerCloser}>

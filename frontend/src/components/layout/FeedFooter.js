@@ -49,9 +49,9 @@ function FeedFooter(props) {
           <div className={classes.flexTwo}>
             <p className={classes.flexTitle}>Polifonia</p>
             <br></br>
-            <Link onClick={() => {onClickChange() }}  to="/">Homepage</Link>
-            <Link onClick={() => {onClickChange() }}  to="/about">About</Link>
-            <Link onClick={() => {onClickChange() }}  to="/outputs">Outputs</Link>
+            <Link onClick={() => {onClickChange() }}  to="/portal">Homepage</Link>
+            <Link onClick={() => {onClickChange() }}  to="/portal/about">About</Link>
+            <Link onClick={() => {onClickChange() }}  to="/portal/outputs">Outputs</Link>
           </div>
           <div className={classes.flexThree}>
             <p className={classes.flexTitle}>People</p>
@@ -63,8 +63,8 @@ function FeedFooter(props) {
           <div className={classes.flexFour}>
             <p className={classes.flexTitle}>Privacy</p>
             <br></br>
-            <Link onClick={() => {onClickChange() }}  to="/terms">Terms</Link>
-            <Link onClick={() => {onClickChange() }}  to="/cookies">Cookies</Link>
+            <Link onClick={() => {onClickChange() }}  to="/portal/terms">Terms</Link>
+            <Link onClick={() => {onClickChange() }}  to="/portal/cookies">Cookies</Link>
           </div>
         </div>
         <div className={classes.footerCloser}>

@@ -23,7 +23,7 @@
     "title" : "Know your music taste",
     "paragraph": "Get recommendations based on your taste, habits, and loved music. Coming soon!",
     "type": "internal",
-    "href" : "outputs",
+    "href" : "/portal/outputs",
     "logo": "icon-3.svg"
   },
   "card_04": {
@@ -59,7 +59,7 @@
     "title" : "Who we are",
     "paragraph": "Got your interest? Know more about the Polifonia project, community, and resources",
     "type": "internal",
-    "href" : "/about",
+    "href" : "/portal/about",
     "logo": "icon-7.svg"
   }
   

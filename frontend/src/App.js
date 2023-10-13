@@ -39,12 +39,12 @@ function App() {
       <CardContext.Provider value={{ cardOpen, setCardOpen, cardContent, setCardContent, cardBlocks, setCardBlocks, cardBlocksNew, setCardBlocksNew }}>
         <Layout title={pagetitle}>
           <Routes>
-            <Route path="/" element={<FeedPage func={setPageTitle} />} />
-            <Route path="/outputs" element={<OutputsPage func={setPageTitle} />} />
-            <Route path="/terms" element={<TermsPage func={setPageTitle} />} />
-            <Route path="/cookies" element={<CookiesPage func={setPageTitle} />} />
-            <Route path="/about" element={<AboutPage func={setPageTitle} />} />
-            <Route path="/card" element={<CardPage func={setPageTitle} />} />
+            <Route path="/portal" element={<FeedPage func={setPageTitle} />} />
+            <Route path="/portal/outputs" element={<OutputsPage func={setPageTitle} />} />
+            <Route path="/portal/terms" element={<TermsPage func={setPageTitle} />} />
+            <Route path="/portal/cookies" element={<CookiesPage func={setPageTitle} />} />
+            <Route path="/portal/about" element={<AboutPage func={setPageTitle} />} />
+            <Route path="/portal/card" element={<CardPage func={setPageTitle} />} />
           </Routes>
         </Layout>
       </CardContext.Provider>
