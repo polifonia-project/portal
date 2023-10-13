@@ -50,13 +50,13 @@ function Card(props) {
     // fetchResults 
     const fetchResults = (uri) => {
       let recUri = '';
-      if (sameAsUris.results > 0) {
-        if (sameAsUris.results.bindings !== undefined) {
+      if (sameAsUris) {
+        if (sameAsUris.results.bindings.length > 0) {
           let sameUriArray = (sameAsUris.results.bindings).map(val => '<' + val.same_uri.value + '>');
           sameUriArray.push('<' + uri + '>');
-          console.log('SAME', sameUriArray)
+          console.log('SAME URIS', sameUriArray)
           recUri = sameUriArray.join(' ');
-        }
+        } else { recUri = '<' + uri + '>' }
 
       } else { recUri = '<' + uri + '>' }
 
@@ -341,7 +341,7 @@ function Card(props) {
   }
 
   const encodeShareLink = () => {
-    if (fromExternalLink) { 
+    if (fromExternalLink) {
       const params = 'title=' + cardContent.title + '&cat=' + cardContent.cat + '&uri=' + cardContent.uri;
       const encodedParams = encodeURI(params);
       const encodedUrl = window.location + 'card?' + encodedParams
@@ -382,7 +382,7 @@ function Card(props) {
           if (block.type === 'text') {
             return <TextBlock key={'textblock-' + i} width={block.size} title={block.title} content={textContent['id_' + i]} reset={resetOn} datasets={datasets}></TextBlock>
           }
-          else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title} category={block.category} reset={resetOn} content={relContent['id_' + i]} datasets={datasets} isExternal={fromExternalLink }></RelationBlock> }
+          else if (block.type === 'relation') { return <RelationBlock key={'relationblock-' + i} width={block.size} title={block.title} category={block.category} reset={resetOn} content={relContent['id_' + i]} datasets={datasets} isExternal={fromExternalLink}></RelationBlock> }
 
           else if (block.type === 'link') { return <LinkBlock key={'linkblock-' + i} width={block.size} title={block.title} desc={block.description} reset={resetOn} links={block.content} content={linkContent['id_' + i]}></LinkBlock> }
 
