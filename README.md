@@ -1,3 +1,24 @@
+---
+component-id: polifonia-web-portal
+type: WebApplication
+name: Polifonia Web Portal
+description: Source code of the Polifonia Portal web application
+work-package: 
+- WP1
+project: polifonia-project
+resource: https://polifonia.disi.unibo.it/portal/
+demo: https://polifonia.disi.unibo.it/portal/
+licence:
+- Cc010Universal
+contributors:
+- Marilena Daquino <https://github.com/marilenadaquino>
+- Marco Grasso <https://github.com/marcograsso>
+- Giulia renda <https://github.com/mondoboia>
+related-components:
+- reuses:
+  - Polifonia-Corpus
+---
+
 # Polifonia Web Portal
 
 ## Requirements
