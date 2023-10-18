@@ -13,10 +13,23 @@ licence:
 contributors:
 - Marilena Daquino <https://github.com/marilenadaquino>
 - Marco Grasso <https://github.com/marcograsso>
-- Giulia renda <https://github.com/mondoboia>
+- Giulia Renda <https://github.com/mondoboia>
 related-components:
-- reuses:
-  - Polifonia-Corpus
+related-components:
+  - serves: 
+     - broadcast-concerts-knowledge-graph
+     - led
+     - meetups-knowledge-graph
+     - musicbo-knowledge-graph
+     - bells-knowledge-graph
+     - musow-dataset
+  - reuses: 
+     - polifonia-corpus-web-api
+     - melody-software
+     - musow-interface
+  - extends: 
+     - web-portal-prototypes
+  
 ---
 
 # Polifonia Web Portal
