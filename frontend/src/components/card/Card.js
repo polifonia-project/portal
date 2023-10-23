@@ -51,6 +51,7 @@ function Card(props) {
     const fetchResults = (uri) => {
       let recUri = '';
       if (Object.keys(sameAsUris).length > 0) {
+        console.log(sameAsUris)
         if (sameAsUris.results.bindings.length > 0) {
           let sameUriArray = (sameAsUris.results.bindings).map(val => '<' + val.same_uri.value + '>');
           sameUriArray.push('<' + uri + '>');
@@ -77,7 +78,7 @@ function Card(props) {
             endpoint = datasets[dataset].sparql_endpoint;
             textResults = [];
 
-            query = query.replace('{}', '{' + recUri + '}');
+            query = query.replaceAll('{}', '{' + recUri + '}');
             let url = endpoint + '?query=' + encodeURIComponent(query);
             try {
               fetch(url, {
@@ -124,7 +125,7 @@ function Card(props) {
             endpoint = datasets[dataset].sparql_endpoint;
             linkResults = [];
 
-            query = query.replace('{}', '{' + recUri + '}');
+            query = query.replaceAll('{}', '{' + recUri + '}');
             let url = endpoint + '?query=' + encodeURIComponent(query);
             try {
               fetch(url, {
@@ -171,7 +172,7 @@ function Card(props) {
             endpoint = datasets[dataset].sparql_endpoint;
             relResults = [];
 
-            query = query.replace('{}', '{' + recUri + '}');
+            query = query.replaceAll('{}', '{' + recUri + '}');
             let url = endpoint + '?query=' + encodeURIComponent(query);
             try {
               fetch(url, {
@@ -221,7 +222,7 @@ function Card(props) {
             mediaResults = [];
             endpoint = datasets[dataset].sparql_endpoint;
 
-            query = query.replace('{}', '{' + recUri + '}');
+            query = query.replaceAll('{}', '{' + recUri + '}');
             let url = endpoint + '?query=' + encodeURIComponent(query);
             try {
               fetch(url, {
