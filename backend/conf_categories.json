@@ -22,7 +22,7 @@
             }
         ],
         "filters": {
-            "people": [
+            "artists": [
                 {
                     "dataset": "d_03",
                     "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;  (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?starting_value ;sdo:genre ?entity.  ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?starting_value  ;sdo:genre ?entity. ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel .} BIND(\"is associated with\" as ?rel)}"
@@ -64,8 +64,8 @@
             ]
         },
         "section": {
-            "title": "Keep yourself versatile when it comes to music genres",
-            "description": "Explore connections and relations of music genres. See all the results, filter and arrange them as you want. ",
+            "title": "Explore music genres",
+            "description": "Jazz, Classical, Rock, Hip-Hop, Pop and more to discover ",
             "highlights": [
                 ""
             ]
@@ -74,7 +74,7 @@
     },
     "cat_02": {
         "id": "cat_02",
-        "name": "people",
+        "name": "artists",
         "color": "#09ff00",
         "search_pattern": [
             {
@@ -99,7 +99,7 @@
             }
         ],
         "filters": {
-            "people": [
+            "artists": [
                 {
                     "dataset": "d_02",
                     "query": "PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> SELECT DISTINCT ?rel ?entity ?entityLabel FROM <http://data.open.ac.uk/context/meetups> WHERE {  VALUES ?starting_value {}  ?s mtp:hasSubject ?starting_value ;    mtp:hasParticipant ?participant .  FILTER  (!regex (str(?participant), str(?starting_value) ) ) .  ?participant rdfs:label ?entityLabel . BIND(str(\"shared a meetup with\") AS ?rel) . BIND(?participant AS ?entity) } ORDER BY ?entityLabel"
@@ -165,8 +165,8 @@
             ]
         },
         "section": {
-            "title": "Music connects people",
-            "description": "Explore connections and relations of people. See all the results, filter and arrange them as you want. ",
+            "title": "Engage with artists",
+            "description": "Bands, Singers, Musicians, Composers, Conductors and beyond await ",
             "highlights": [
                 ""
             ]
@@ -175,6 +175,33 @@
     },
     "cat_03": {
         "id": "cat_03",
+        "name": "music",
+        "color": "#ff02fe",
+        "search_pattern": [
+            {
+                "dataset": "d_04",
+                "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {?entity wdt:P31 wd:Q105543609 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }} LIMIT 100"
+            }
+        ],
+        "filters": {
+            "artists": [
+                {
+                    "dataset": "d_04",
+                    "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P86 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has composer\") AS ?rel) } UNION { ?starting_value wdt:P676 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"lyrics by\") AS ?rel) } UNION {VALUES ?type {wd:Q215380 wd:Q5} ?starting_value wdt:P175 ?entity. ?entity wdt:P31 ?type . BIND(str(\"has performer\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                }
+            ]
+        },
+        "section": {
+            "title": "Dive into music works",
+            "description": "Songs, Symphonies, Jazz Compositions, Film Scores, Pop Hits, and more",
+            "highlights": [
+                ""
+            ]
+        },
+        "status": "ingested"
+    },
+    "cat_04": {
+        "id": "cat_04",
         "name": "places",
         "color": "#fdff00",
         "search_pattern": [
@@ -196,7 +223,7 @@
             }
         ],
         "filters": {
-            "people": [
+            "artists": [
                 {
                     "dataset": "d_02",
                     "query": "PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> SELECT DISTINCT ?rel ?entity ?entityLabel FROM <http://data.open.ac.uk/context/meetups>WHERE {  VALUES ?starting_value {}  ?starting_value rdf:type mtp:Location .  ?meetup mtp:hasPlace ?starting_value ;    mtp:hasParticipant ?participant .  ?participant rdfs:label ?entityLabel .  BIND(str(\"has meetup participant\") AS ?rel) .  BIND(?participant AS ?entity) }"
@@ -230,16 +257,16 @@
             ]
         },
         "section": {
-            "title": "What’s your next music destination?",
-            "description": "Explore connections and relations of places. See all the results, filter and arrange them as you want. ",
+            "title": "Discover places",
+            "description": "Step into a world of mastery: Cities, Concert Halls, Theatres, Recording Studios and more",
             "highlights": [
                 ""
             ]
         },
         "status": "ingested"
     },
-    "cat_04": {
-        "id": "cat_04",
+    "cat_05": {
+        "id": "cat_05",
         "name": "instruments",
         "color": "#000000",
         "search_pattern": [
@@ -253,7 +280,7 @@
             }
         ],
         "filters": {
-            "people": [
+            "artists": [
                 {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P61 ?entity. BIND(str(\"invented by\") AS ?rel) } UNION { ?entity wdt:P1535 ?starting_value . BIND(str(\"used by\") AS ?rel) } UNION { ?entity wdt:P1303 ?starting_value. BIND(str(\"played by\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } }"
@@ -271,8 +298,8 @@
             ]
         },
         "section": {
-            "title": "Play your favorite instrument!",
-            "description": "Explore connections and relations of instruments. See all the results, filter and arrange them as you want. ",
+            "title": "Play with instruments",
+            "description": "Guitars, Organs, Flutes, Drums, and more await your discovery",
             "highlights": [
                 ""
             ]
