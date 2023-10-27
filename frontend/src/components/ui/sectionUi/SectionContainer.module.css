@@ -47,20 +47,17 @@
 
 .sectionTitle {
   font-size: 35px;
-  line-height: 35px;
   font-family: "Garnett Medium";
   font-weight: 100;
   margin: 0;
   padding-right: 45%;
   padding-top: 10px;
-  white-space: nowrap;
 }
 
 .sectionDescription {
-  font-size: 21px;
-  line-height: 28px;
+  font-size: 18px;
+  line-height: 20px;
   padding-right: 40%;
-  margin-top:10px;
 }
 
 .section-cat_01,

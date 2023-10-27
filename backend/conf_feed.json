@@ -10,7 +10,7 @@
       ]
     },
     "iri": "http://www.wikidata.org/entity/Q18125",
-    "category": "cat_04",
+    "category": "cat_03",
     "timestamp": ""
   },
   "clip_02": {
@@ -48,19 +48,7 @@
       "highlights": []
     },
     "iri": "http://www.wikidata.org/entity/Q78987",
-    "category": "cat_05",
-    "timestamp": ""
-  },
-  "clip_05": {
-    "id": "clip_05",
-    "name": "Love Will Tear Us Apart",
-    "textcontext": {
-      "title": "",
-      "description": "",
-      "highlights": []
-    },
-    "iri": "http://www.wikidata.org/entity/Q1426177",
-    "category": "cat_03",
+    "category": "cat_04",
     "timestamp": ""
   }
 }
