@@ -379,7 +379,7 @@ class ResultsTest extends React.Component {
                     // if true, try reconciliation
                     if (tryRec) {
                         if (uri.includes(iri_base)) {
-                            console.log('uri not in dataset but same iri_base', uri, iri_base)
+                            //console.log('uri not in dataset but same iri_base', uri, iri_base)
                             this.queryResults(query, '<' + uri + '>', endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
                         }
                         else {
@@ -391,21 +391,21 @@ class ResultsTest extends React.Component {
                                 } else {
                                     // try in any case
                                     try {
-                                        console.log('uri not in dataset and different iri_base but tried', uri, iri_base)
+                                        //console.log('uri not in dataset and different iri_base but tried', uri, iri_base)
                                         this.queryResults(query, '<' + uri + '>', endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
                                     }
                                     catch (err) {
-                                        console.log(err, cat, 'NO NEW URI TO USE');
+                                       // console.log(err, cat, 'NO NEW URI TO USE');
                                     }
                                 }
                             })
                         }
                     } else {
                         if (uri.includes(iri_base)) {
-                            console.log('uri in dataset and same iri_base', uri, iri_base)
+                            // console.log('uri in dataset and same iri_base', uri, iri_base)
                             this.queryResults(query, '<' + uri + '>', endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
                         } else {
-                            console.log('uri in dataset but different iri_base', uri, iri_base)
+                            // console.log('uri in dataset but different iri_base', uri, iri_base)
                             this.getCorrectUri(uri, iri_base).then((arr) => {
                                 if (arr) {
                                     new_uris = arr.join(' ')

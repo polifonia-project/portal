@@ -23,23 +23,23 @@ function MenuOverlay(props) {
 
   return (
     <div className={classes.menu}>
-      <div className={classes.menuImage}>
-        <img alt='menuicon' src={menuicon} className={classes.menuIcon}></img>
-      </div>
       <div className={classes.menuContainer}>
         <nav>
-          <ul className={classes.menulist}>
-            <li>
-              <Link onClick={() => { props.toggleMenu(); setCardOpen(false) }} to="/portal/">Homepage</Link>
-            </li>
-            <li>
-              <Link onClick={() => { props.toggleMenu(); onChange('isVisible'); }} to="/portal/about">About</Link>
-            </li>
-            <li>
-              <Link onClick={() => { props.toggleMenu(); onChange('isVisible'); }} to="/portal/outputs">Outputs</Link>
-            </li>
-          </ul>
+              <Link style={{ cursor: 'pointer' }} className={classes.menuLink} onClick={() => { props.toggleMenu(); setCardOpen(false) }} to="/portal/">Homepage</Link>
+                 <Link style={{ cursor: 'pointer' }} className={classes.catLink} onClick={() => { props.toggleMenu(); setCardOpen(false) }} to="/portal/#section-cat_01">Genres</Link>
+                 <Link style={{ cursor: 'pointer' }} className={classes.catLink} onClick={() => { props.toggleMenu(); setCardOpen(false) }} to="/portal/#section-cat_02">Artists</Link>
+                 <Link style={{ cursor: 'pointer' }} className={classes.catLink} onClick={() => { props.toggleMenu(); setCardOpen(false) }} to="/portal/#section-cat_03">Music</Link>
+                 <Link style={{ cursor: 'pointer' }} className={classes.catLink} onClick={() => { props.toggleMenu(); setCardOpen(false) }} to="/portal/#section-cat_04">Places</Link>
+              <Link style={{ cursor: 'pointer' }} className={classes.catLink} onClick={() => { props.toggleMenu(); setCardOpen(false) }} to="/portal/#section-cat_05">Instruments</Link>
+              <Link style={{ cursor: 'pointer' }} className={classes.menuLink} onClick={() => { props.toggleMenu(); onChange('isVisible'); }} to="/portal/about">About</Link>
+              <Link style={{ cursor: 'pointer' }} className={classes.menuLink} onClick={() => { props.toggleMenu(); onChange('isVisible'); }} to="/portal/about">Terms</Link>
+              <Link style={{ cursor: 'pointer' }} className={classes.menuLink} onClick={() => { props.toggleMenu(); onChange('isVisible'); }} to="/portal/outputs">Cookies</Link>
+              <Link style={{ cursor: 'pointer' }} className={classes.menuLink} onClick={() => { props.toggleMenu(); onChange('isVisible'); }} to="/portal/outputs">Outputs</Link>
+              
         </nav>
+      </div>
+      <div className={classes.menuImage}>
+        <img alt='menuicon' src={menuicon} className={classes.menuIcon}></img>
       </div>
     </div>
   );
