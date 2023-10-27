@@ -244,7 +244,7 @@ class SectionClip extends React.Component {
               <img alt='search button' src={this.state.isFocused ? closeicon : blankicon} ></img>
             </button>
             <button type="submit" className={classes.searchbutton} onClick={this.handleOnSubmit}
-              onMouseEnter={() => this.handleMouseEnter('Search', '435px')}
+              onMouseEnter={() => this.handleMouseEnter('Search', '448px')}
               onMouseLeave={this.handleMouseLeave}>
               <img alt='search button' src={searchicon}></img>
             </button>
