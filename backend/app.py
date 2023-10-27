@@ -16,7 +16,7 @@ app = Flask(__name__)
 d, cat, f, car, cards = methods.access_conf_info('conf_general.json')
 
 
-@app.route('/conf_info', methods=['GET'])
+@app.route('/portal/conf_info', methods=['GET'])
 def feed():
     f_list = []
     for clip in f.values():
@@ -24,7 +24,7 @@ def feed():
     return jsonify({'datasets': d, 'categories': cat, 'carousel': car, 'cards': cards, 'clips': f_list})
 
 
-@app.route('/sonic_index', methods=['GET'])
+@app.route('/portal/sonic_index', methods=['GET'])
 def index():
     cat_id = request.args.get('cat_id')
     word = request.args.get('data')
@@ -33,7 +33,7 @@ def index():
         return jsonify(suggestions)
 
 
-@app.route('/reconciliation', methods=['GET'])
+@app.route('/portal/reconciliation', methods=['GET'])
 def reconciliation(active=None):
     """ SPARQL endpoint GUI and request handler
     Parameters
