@@ -9,7 +9,6 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import NoMoreResults from "../loaders/NoMoreResults";
 import NoResultsError from "../loaders/NoResultsError";
 import SourcesBarchart from "./SourcesBarchart";
-// import classes from "./Results.module.css" 
 
 class ResultsTest extends React.Component {
     constructor(props) {
@@ -170,9 +169,7 @@ class ResultsTest extends React.Component {
                 <ResultsHeader cat={this.props.cat}>
                     <SourcesBarchart cat={this.props.cat} handleDataset={this.handleDataset} resetDataset={this.resetDataset} results={this.state.totalResults}></SourcesBarchart>
                     <FiltersContainer>
-                        <FilterButton isDisabled={this.state.filterOn || this.state.relationOn} resetClass='resetButton' buttonClick={() => this.resetFilters()}>
-                            Reset <span className="resetIcon">⟲</span>
-                        </FilterButton> <br />
+                        
                         <Filters filtersType="Categories" color={this.props.color} cat={this.props.cat} selectedOn={this.state.filterOn}>
                             {Object.keys(this.props.filters).map(f => {
                                 return <FilterButton key={'filterbutton--' + f} isDisabled={true} buttonClick={() => this.addFilter(f)} selectedOn={this.state.filterOn}>{f}</FilterButton>
@@ -187,6 +184,9 @@ class ResultsTest extends React.Component {
 
                             })}
                         </Filters>
+                        <FilterButton isDisabled={this.state.filterOn || this.state.relationOn} resetClass='resetButton' buttonClick={() => this.resetFilters()}>
+                            Reset <span className="resetIcon">⟲</span>
+                        </FilterButton> <br />
                     </FiltersContainer>
                 </ResultsHeader>
                 {Data.length ?
