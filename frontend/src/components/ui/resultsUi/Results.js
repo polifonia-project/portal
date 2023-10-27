@@ -25,8 +25,8 @@ class ResultsTest extends React.Component {
             relations: [],
             relationSet: {},
             disabled: {},
-            loader: false,
             hasMore: true,
+            loader: false,
             offsetValue: 0,
             catOffset: {},
             endMessage: false
@@ -189,7 +189,7 @@ class ResultsTest extends React.Component {
                         </FilterButton> <br />
                     </FiltersContainer>
                 </ResultsHeader>
-                {Data.length ?
+                { this.state.loader ? <LoaderResultLine></LoaderResultLine> : Data.length ? 
                     <InfiniteScroll
                         dataLength={Data.length}
                         next={this.fetchMoreData}
@@ -204,7 +204,7 @@ class ResultsTest extends React.Component {
                                 <ResultLine key={'resultline--' + index} label={res.label} rel={res.rel} cat={res.cat} dataset={res.dataset} currentDataset={this.state.currentDataset} datasetOn={this.state.datasetOn} number={index + 1} color={this.props.color} input_value={res.input_value} isdirect={res.inverse} uri={res.uri}></ResultLine>
                             )
                         })}
-                    </InfiniteScroll> : <NoResultsError />
+                    </InfiniteScroll> : <NoResultsError/> 
                 }
             </>
         )
