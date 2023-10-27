@@ -221,6 +221,7 @@ class SectionClip extends React.Component {
               value={this.state.input}
               onInput={(e) => this.handleInput(e)}
               onKeyDown={this.handleKeyPress}
+              autoComplete="off"
             ></input>
             <button type="reset" className={classes.resetbutton} onClick={this.onClickReset}
               el_iri={this.props.el_iri} style={{ cursor: this.state.isFocused ? 'pointer' : 'default' }}
