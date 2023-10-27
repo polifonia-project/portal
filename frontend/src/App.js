@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import FeedPage from "./pages/Feed";
 import OutputsPage from "./pages/OutputsPage";
 import TermsPage from "./pages/TermsPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import CookiesPage from "./pages/CookiesPage";
 import AboutPage from "./pages/About";
 import CardPage from "./pages/CardPage";
@@ -45,6 +46,7 @@ function App() {
             <Route path="/portal/cookies" element={<CookiesPage func={setPageTitle} />} />
             <Route path="/portal/about" element={<AboutPage func={setPageTitle} />} />
             <Route path="/portal/card" element={<CardPage func={setPageTitle} />} />
+            <Route path='*' element={<NotFoundPage func={setPageTitle} />}/>
           </Routes>
         </Layout>
       </CardContext.Provider>
