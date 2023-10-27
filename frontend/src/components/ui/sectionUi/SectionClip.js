@@ -124,7 +124,21 @@ class SectionClip extends React.Component {
 
   onFocus = () => { this.setState({ isFocused: true }) };
   onBlur = () => { this.setState({ isFocused: false }) };
-  onClickSearch = () => { window.console.log('search start') };
+  handleOnSubmit = () => { 
+    if (Object.keys(this.state.value_obj).length > 0) {
+      if (this.state.arrowOption === false) {
+        let label = document.getElementById('option0').innerText;
+        let iri = document.getElementById('option0').getAttribute('el_iri');
+        this.onArrowClick(iri, label);
+      } else {
+        let label = document.getElementById('option' + this.state.arrowOption).innerText;
+        let iri = document.getElementById('option' + this.state.arrowOption).getAttribute('el_iri');
+        this.onArrowClick(iri, label);
+      }
+      let inputRef = document.getElementById('thisinput' + this.props.catName);
+      inputRef.blur();
+    }
+  };
   onClickReset = e => {
     this.setState({ input: '' });
     this.setState({ current_input: this.props.placeholder });
@@ -229,8 +243,8 @@ class SectionClip extends React.Component {
               onMouseLeave={this.handleMouseLeave}>
               <img alt='search button' src={this.state.isFocused ? closeicon : blankicon} ></img>
             </button>
-            <button type="submit" className={classes.searchbutton} onClick={this.onClickSearch}
-              onMouseEnter={() => this.handleMouseEnter('Digit / Select', '435px')}
+            <button type="submit" className={classes.searchbutton} onClick={this.handleOnSubmit}
+              onMouseEnter={() => this.handleMouseEnter('Search', '435px')}
               onMouseLeave={this.handleMouseLeave}>
               <img alt='search button' src={searchicon}></img>
             </button>

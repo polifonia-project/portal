@@ -75,6 +75,7 @@ input:focus::placeholder {
   width: 4%;
   margin-right: 10px;
   margin-left: 5px;
+  cursor: pointer;
 }
 
 .resetbutton {
