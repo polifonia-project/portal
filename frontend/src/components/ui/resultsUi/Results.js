@@ -26,6 +26,7 @@ class ResultsTest extends React.Component {
             relationSet: {},
             disabled: {},
             hasMore: true,
+            moreData: false,
             loader: false,
             offsetValue: 0,
             catOffset: {},
@@ -141,6 +142,7 @@ class ResultsTest extends React.Component {
     fetchMoreData = () => {
         setTimeout(() => this.fetchResults(this.props.el_iri, false), 500);
         this.setState({ endMessage: true });
+        this.setState({ moreData: true });
         return;
     }
 
@@ -353,7 +355,7 @@ class ResultsTest extends React.Component {
             catOffset = this.state.catOffset;
         }
 
-        this.setState({ loader: true });
+       if (this.moreData === false) {this.setState({ loader: true })} ;
 
         // get dataset
         let datasets = this.props.datasets;
