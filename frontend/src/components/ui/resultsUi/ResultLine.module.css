@@ -14,7 +14,6 @@
 
 .resultLine:hover {
   /* Do something */
-
 }
 
 .scrollResult {
@@ -44,12 +43,10 @@
 .resultCat {
   display: inline-flex;
   text-transform: capitalize;
-  white-space: nowrap;
   padding-right: 20px;
   width: 150px;
   word-break: break-all;
   white-space: nowrap;
-  overflow: hidden !important;
   text-overflow: ellipsis;
 }
 
@@ -64,6 +61,10 @@
     white-space: nowrap;
     overflow: hidden !important;
     text-overflow: ellipsis;
+}
+
+.resultLabel:hover {
+    cursor: pointer;
 }
 
 .resultRel {
@@ -107,15 +108,16 @@
   transition: transform 1s ease;
 }
 
-
-.resultActions button:hover {
-  transform: scale(1.5);
-}
-
 .categoryResult {
   padding: 7px 14px 7px 14px;
   border: 0.4px solid rgb(71, 71, 71);
   border-radius: 3px;
+  transition:  1s ease;
+  cursor: pointer;
+  display:block;
+  transform-origin: left;
+  transition: transform 1s ease;
+  transform: scale(0.9);
 }
 
 .inputResult {

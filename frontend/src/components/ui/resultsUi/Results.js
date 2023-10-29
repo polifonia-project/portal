@@ -203,7 +203,7 @@ class ResultsTest extends React.Component {
                     >
                         {Data.map((res, index) => {
                             return (
-                                <ResultLine key={'resultline--' + index} label={res.label} rel={res.rel} cat={res.cat} dataset={res.dataset} currentDataset={this.state.currentDataset} datasetOn={this.state.datasetOn} number={index + 1} color={this.props.color} input_value={res.input_value} isdirect={res.inverse} uri={res.uri}></ResultLine>
+                                <ResultLine key={'resultline--' + index} label={res.label} rel={res.rel} cat={res.cat} catCode={"cat_05"} catCodes={this.props.catCodes} dataset={res.dataset} currentDataset={this.state.currentDataset} datasetOn={this.state.datasetOn} number={index + 1} color={this.props.color} input_value={res.input_value} input_category={res.input_category} input_uri={this.props.el_iri} isdirect={res.inverse} uri={res.uri}></ResultLine>
                             )
                         })}
                     </InfiniteScroll> : <NoResultsError/> 
@@ -277,6 +277,7 @@ class ResultsTest extends React.Component {
                             singleResult.rel = '';
                             singleResult.inverse = false;
                             singleResult.input_value = this.props.input_value;
+                            singleResult.input_category = this.props.input_category;
                             singleResult.dataset = datasets[dataset_id].name;
                             if (res.inverse_rel) {
                                 if (res.inverse_rel.value.length !== '') {

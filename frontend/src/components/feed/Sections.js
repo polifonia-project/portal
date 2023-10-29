@@ -48,6 +48,7 @@ class Sections extends React.Component {
             datasets={this.state.datasets}
             placeholder={clip.name} 
             tot_categories={Object.keys(this.state.categories).length} 
+            catCodes={this.state.categories}
             >
           </SectionContainer>
         ))}

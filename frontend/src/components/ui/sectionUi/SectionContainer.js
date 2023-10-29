@@ -36,6 +36,8 @@ function SectionContainer(props) {
                 datasets={props.datasets}
                 color={props.color}
                 input_value={selected_value}
+                input_category={props.catName}
+                catCodes={props.catCodes}
             >
             </ResultsContainer>
         </div>
