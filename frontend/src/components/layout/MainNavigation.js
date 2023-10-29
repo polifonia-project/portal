@@ -81,10 +81,10 @@ function MainNavigation(props) {
         <div className={classes.section} id='sectionName'><span>{props.sectionName}</span></div>
       </span>
       <span className={classes.menu} id='menuOptions' >
-        <img onClick={toggleBackClip} id='backToClip' className={classes.sound} src={backToClip} alt="Back to top Toggle" style={{ display: backToTopOn ? cardOpen ? 'none' : 'block' : 'none' }} />
-        <img onClick={toggleBackTop} id='backToTop' className={classes.sound} src={backToTop} alt="Back to top Toggle" style={{ display: backToTopOn ? cardOpen ? 'none' : 'block' : 'none' }} />
-        <img onClick={toggleSound} className={classes.sound} src={soundOn ? soundon : soundoff} alt="Sound Toggle" />
-        <img onClick={toggleMenu} className={classes.hamburger} src={menuOpen ? closemenu : hamburger} alt="Hamburger Menu" />
+        <img onClick={toggleBackClip} id='backToClip' className={classes.backToClip} src={backToClip} alt="Back to top Toggle" title="back to highlight" style={{ display: backToTopOn ? cardOpen ? 'none' : 'block' : 'none' }} />
+        <img onClick={toggleBackTop} id='backToTop' className={classes.backToTop} src={backToTop} alt="Back to top Toggle" title="back to top" style={{ display: backToTopOn ? cardOpen ? 'none' : 'block' : 'none' }} />
+        <img onClick={toggleSound} className={classes.sound} src={soundOn ? soundon : soundoff} title={soundOn ? "turn sound off" : "turn sound on"} alt="Sound Toggle" />
+        <img onClick={toggleMenu} className={classes.hamburger} src={menuOpen ? closemenu : hamburger} title="menu" alt="Hamburger Menu" />
       </span>
       {menuOpen ? <MenuOverlay toggleMenu={toggleMenu} /> : null}
       <Card></Card>

@@ -97,7 +97,9 @@
   padding: 0px;
 }
 
-.sound {
+.sound,
+.backToClip,
+.backToTop {
   cursor: pointer;
   z-index: 400;
   margin: 10px 0px 10px 10px;
@@ -105,7 +107,9 @@
   transition: all 0.5s ease;
 }
 
-.sound:hover {
+.sound:hover,
+.backToClip:hover,
+.backToTop:hover {
   background-color: #f4edec58;
   border-radius: 7px;
   background: rgba(255, 255, 255, 0.2);
