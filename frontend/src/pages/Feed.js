@@ -23,6 +23,17 @@ function FeedPage(props) {
     props.func('Portal');
   });
 
+  useEffect(() => {
+    const urlHash = window.location.hash;
+    if (urlHash.length) {
+      const element = document.getElementById(urlHash.substring(1));
+      if (element) {
+        element.scrollIntoView();
+        window.history.replaceState("", document.title, window.location.pathname);
+      }
+    }
+  });
+
   return (
     <div className={classes.feedContainer + ' ' + classes.parallax}>
       <VisibilitySensor onChange={onChange}>
@@ -43,6 +54,7 @@ function FeedPage(props) {
       </div>
     </div>
   );
+
 }
 
 export default FeedPage;
