@@ -283,7 +283,7 @@ def generate_mergerd_graph_name(data):
         dat = (dat + '__' + graph_name_parts[0]).strip('__')
         cat = (cat + '__' + graph_name_parts[1]).strip('__')
         id = (id + '__' + graph_name_parts[2]).strip('__')
-    new_graph_name = linkset_endpoint.LILNKSETGRAPH + dat + '___' + cat + '___' + id
+    new_graph_name = linkset_endpoint.LINKSETGRAPH + dat + '___' + cat + '___' + id
     return new_graph_name
 
 def add_missing_same_as_links(graph_name):

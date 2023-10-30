@@ -16,7 +16,7 @@ import methods
 import conf
 
 UPDATEMYLINKSET = conf.url_to_update_linkset
-LILNKSETGRAPH = conf.linkset_namespace
+LINKSETGRAPH = conf.linkset_namespace
 
 LINKSET_DIRECTORY = 'linkset_files'
 ENTITIES_DIRECTORY = 'entities'
@@ -89,7 +89,7 @@ def linkset_file_population(entities_dir, datasets, linkset_directory):
         uri_list = entities_file.keys()
         # activate reconciliation process
         sameAS_track_dictionary = rec.first_level_reconciliation(
-            uri_list, datasets, dat_id, cat_id, LILNKSETGRAPH, new_linkset_file_path)
+            uri_list, datasets, dat_id, cat_id, LINKSETGRAPH, new_linkset_file_path)
 
         # update sameAs information for each uri
         for uri, info in sameAS_track_dictionary.items():
