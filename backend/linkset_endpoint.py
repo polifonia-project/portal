@@ -20,6 +20,7 @@ LINKSETGRAPH = conf.linkset_namespace
 
 LINKSET_DIRECTORY = 'linkset_files'
 ENTITIES_DIRECTORY = 'entities'
+LABELS_DIRECTORY = 'index_labels'
 
 MYLINKSET = conf.linkset_url_enpoint
 
@@ -110,7 +111,7 @@ def linkset_endpoint_update(entities_dir, datasets, linkset_directory):
     for filename in os.listdir(linkset_directory):
         file_path = linkset_directory + '/' + filename
         server.update(
-            'load <file:'+ os.path.dirname(os.path.realpath(__file__)) + file_path + '>')  # to do: understand how to generalise
+            'load <file:'+ os.path.dirname(os.path.realpath(__file__)) + '/' + file_path + '>')  # to do: understand how to generalise
             # os.path.dirname(os.path.realpath(__file__))
     print('[UPDATE] linkset populated')
 
@@ -139,13 +140,14 @@ def clear_files(directory):
     for filename in os.listdir(directory):
         file_path = directory+'/'+filename
         os.remove(file_path)
-    print('[DELETE] nqs emptied')
+    print('[DELETE] '+ directory +' emptied')
 
 
-def clear_linkset(proceed, linkset_directory, entities_directory):
+def clear_linkset(proceed, linkset_directory, entities_directory, labels_directory):
     '''apply clearing functions'''
     if proceed:
         clear_files(linkset_directory)
         clear_linkset_endpoint()
         clear_files(entities_directory)
+        clear_files(labels_directory)
         print('[DELETE] linkset emptied')
