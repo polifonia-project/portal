@@ -383,3 +383,47 @@ def graphs_reconciliation(entities_dir, endpoint):
         for uri, info in entities_content.items():
             if info['sameAs'] == True:
                 graph_merging(uri, endpoint)
+
+def uri_to_named_graph(values_to_search, endpoint):
+    '''search in Blazegraph for named_graphs'''
+    query = '''
+        SELECT DISTINCT ?s ?g
+        WHERE {
+            VALUES ?s {'''+values_to_search+'''}
+            GRAPH ?g { ?s ?p ?o . }
+            }
+        '''
+    sparql = SPARQLWrapper(endpoint)
+    sparql.setQuery(query)
+    sparql.setReturnFormat(JSON)
+    try:
+        results = sparql.query().convert()
+
+        data = results['results']['bindings']
+        uri_to_graph = {}
+        for result in data:
+            uri_to_graph[result['s']['value']] = result['g']['value']
+        # {uri: named_graph}
+        return uri_to_graph
+
+    except Exception as e:
+        print('ERROR index_reconciliation in searching for uris\' graphs', e)
+        return {}
+
+def index_reconciliation(uris_list, endpoint):
+    uris_list_to_search = []
+    for uri in uris_list:
+        uris_list_to_search.append('<' + uri + '>')
+    values_to_search = ' '.join(uris_list_to_search)
+    uri_graph_match = {}
+    # search in Blazegraph for named_graphs
+    if len(values_to_search) < 1000:
+        uri_graph_match = uri_to_named_graph(values_to_search, endpoint)
+    elif len(values_to_search) >= 1000:
+        # if too long we divide the list n times to obtain n chunks
+        uris_to_search_chunks = methods.create_chunks(uris_list_to_search)
+        for chunk in uris_to_search_chunks:
+            chunk_to_search = ' '.join(chunk)
+            uri_graph_match.update(uri_to_named_graph(chunk_to_search, endpoint))
+    
+    return uri_graph_match

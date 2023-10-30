@@ -4,3 +4,5 @@ sparql_wrapper_user_agent = 'polifonia/1.0 (https://github.com/polifonia-project
 url_to_update_linkset = 'http://localhost:9999/blazegraph/namespace/kb/sparql/update'
 linkset_namespace = 'http://w3id.org/polifonia/linkset/'
 linkset_url_enpoint = 'http://localhost:9999/bigdata/sparql'
+
+reconciled_index = True

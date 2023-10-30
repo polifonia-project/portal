@@ -4,6 +4,7 @@
 .DS_Store
 entities/
 linkset_files/
+index_labels/
 
 #blazegraph
 blazegraph.jar

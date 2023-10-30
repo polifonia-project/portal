@@ -9,6 +9,7 @@ import methods
 import indexing as i
 import linkset_endpoint as endpoint
 import reconciliation as rec
+import conf
 
 app = Flask(__name__)
 
@@ -29,7 +30,8 @@ def index():
     cat_id = request.args.get('cat_id')
     word = request.args.get('data')
     if len(word) > 0:
-        suggestions = i.suggested_results(d, cat, cat_id, word.lower(), endpoint.ENTITIES_DIRECTORY)
+        suggestions = i.suggested_results(d, cat, cat_id, word.lower(), conf.reconciled_index)
+        print(suggestions)
         return jsonify(suggestions)
 
 
@@ -67,9 +69,9 @@ fill_entities_files_result = timeit.timeit(
 print(
     f"Execution time for fill_entities_files is {fill_entities_files_result} seconds")
 
-ingest_chosen_index_result = timeit.timeit(
-    stmt='i.ingest_chosen_index(cat, endpoint.ENTITIES_DIRECTORY, "GENERIC")', globals=globals(), number=1)
-print(f"Execution time for ingest_chosen_index is {ingest_chosen_index_result} seconds")
+ingest_index_result = timeit.timeit(
+    stmt='i.ingest_index(cat, endpoint.ENTITIES_DIRECTORY, conf.reconciled_index)', globals=globals(), number=1)
+print(f"Execution time for ingest_chosen_index is {ingest_index_result} seconds")
 
 # linkset_endpoint_update_result = timeit.timeit(
 #     stmt='endpoint.linkset_endpoint_update(endpoint.ENTITIES_DIRECTORY, d, endpoint.LINKSET_DIRECTORY)', globals=globals(), number=1)
