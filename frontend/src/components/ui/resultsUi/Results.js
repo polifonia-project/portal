@@ -171,7 +171,7 @@ class ResultsTest extends React.Component {
                 <ResultsHeader cat={this.props.cat}>
                     <SourcesBarchart cat={this.props.cat} handleDataset={this.handleDataset} resetDataset={this.resetDataset} results={this.state.totalResults}></SourcesBarchart>
                     <FiltersContainer>
-                        
+
                         <Filters filtersType="Categories" color={this.props.color} cat={this.props.cat} selectedOn={this.state.filterOn}>
                             {Object.keys(this.props.filters).map(f => {
                                 return <FilterButton key={'filterbutton--' + f} isDisabled={true} buttonClick={() => this.addFilter(f)} selectedOn={this.state.filterOn}>{f}</FilterButton>
@@ -191,7 +191,7 @@ class ResultsTest extends React.Component {
                         </FilterButton> <br />
                     </FiltersContainer>
                 </ResultsHeader>
-                { this.state.loader ? <LoaderResultLine></LoaderResultLine> : Data.length ? 
+                {this.state.loader ? <LoaderResultLine></LoaderResultLine> : Data.length ?
                     <InfiniteScroll
                         dataLength={Data.length}
                         next={this.fetchMoreData}
@@ -206,7 +206,7 @@ class ResultsTest extends React.Component {
                                 <ResultLine key={'resultline--' + index} label={res.label} rel={res.rel} cat={res.cat} catCode={"cat_05"} catCodes={this.props.catCodes} dataset={res.dataset} currentDataset={this.state.currentDataset} datasetOn={this.state.datasetOn} number={index + 1} color={this.props.color} input_value={res.input_value} input_category={res.input_category} input_uri={this.props.el_iri} isdirect={res.inverse} uri={res.uri}></ResultLine>
                             )
                         })}
-                    </InfiniteScroll> : <NoResultsError/> 
+                    </InfiniteScroll> : <NoResultsError />
                 }
             </>
         )
@@ -234,10 +234,9 @@ class ResultsTest extends React.Component {
         }
     }
 
-    getCorrectUri = (uri, dataset_iri_base) => {
-        let sameUriQuery = 'SELECT DISTINCT ?same_uri WHERE {GRAPH ?g {<' + uri + '> owl:sameAs|^owl:sameAs ?same_uri . ?same_uri <https://schema.org/location> <' + dataset_iri_base + '>}}';
+    getCorrectUri = (uri) => {
         try {
-            return fetch('/portal/reconciliation?query=' + encodeURIComponent(sameUriQuery))
+            return fetch('/portal/reconciliation?uri=' + encodeURIComponent(uri))
                 .then((res) => res.json())
                 .then((data) => {
                     // console.log('CORRECTURI', data)
@@ -356,7 +355,7 @@ class ResultsTest extends React.Component {
             catOffset = this.state.catOffset;
         }
 
-       if (this.moreData === false) {this.setState({ loader: true })} ;
+        if (this.moreData === false) { this.setState({ loader: true }) };
 
         // get dataset
         let datasets = this.props.datasets;
@@ -377,44 +376,19 @@ class ResultsTest extends React.Component {
                 let query = obj.query;
 
                 let new_uris = 'default';
-                // check if el_iri has location dataset
-                this.checkUriLocation(uri, iri_base).then((tryRec) => {
-                    // if true, try reconciliation
-                    if (tryRec) {
-                        if (uri.includes(iri_base)) {
-                            //console.log('uri not in dataset but same iri_base', uri, iri_base)
-                            this.queryResults(query, '<' + uri + '>', endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
-                        }
-                        else {
-                            // console.log(uri, 'uri-location different')
-                            this.getCorrectUri(uri, iri_base).then((arr) => {
-                                if (arr) {
-                                    new_uris = arr.join(' ')
-                                    this.queryResults(query, new_uris, endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
-                                } else {
-                                    // try in any case
-                                    try {
-                                        //console.log('uri not in dataset and different iri_base but tried', uri, iri_base)
-                                        this.queryResults(query, '<' + uri + '>', endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
-                                    }
-                                    catch (err) {
-                                       // console.log(err, cat, 'NO NEW URI TO USE');
-                                    }
-                                }
-                            })
-                        }
+                // activate reconciliation
+                this.getCorrectUri(uri).then((arr) => {
+                    if (arr) {
+                        new_uris = arr.join(' ')
+                        this.queryResults(query, new_uris, endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
                     } else {
-                        if (uri.includes(iri_base)) {
-                            // console.log('uri in dataset and same iri_base', uri, iri_base)
+                        // try in any case
+                        try {
+                            //console.log('uri not in dataset and different iri_base but tried', uri, iri_base)
                             this.queryResults(query, '<' + uri + '>', endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
-                        } else {
-                            // console.log('uri in dataset but different iri_base', uri, iri_base)
-                            this.getCorrectUri(uri, iri_base).then((arr) => {
-                                if (arr) {
-                                    new_uris = arr.join(' ')
-                                    this.queryResults(query, new_uris, endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
-                                }
-                            })
+                        }
+                        catch (err) {
+                            console.log(err, cat, 'NO NEW URI TO USE');
                         }
                     }
                 })

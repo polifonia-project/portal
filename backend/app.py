@@ -48,7 +48,12 @@ def reconciliation(active=None):
     """
     if request.method == 'GET':
         content_type = request.content_type
-        q = request.args.get("query")
+        uri = str(request.args.get("uri"))
+        q = ''
+        if conf.reconciled_index == True:
+            q = 'SELECT DISTINCT ?same_uri WHERE {VALUES ?g {<'+uri+'>} GRAPH ?g {?same_uri <https://schema.org/location> ?location .}}'
+        else:
+            q = 'SELECT DISTINCT ?same_uri WHERE {VALUES ?s {<'+uri+'>} GRAPH ?g {?s owl:sameAs|^owl:sameAs ?same_uri .}}'
         return endpoint.__run_query_string(active, q, content_type)
     else:
 
@@ -61,7 +66,7 @@ def reconciliation(active=None):
 
 
 clear_linkset_result = timeit.timeit(
-    stmt='endpoint.clear_linkset(False, endpoint.LINKSET_DIRECTORY, endpoint.ENTITIES_DIRECTORY)', globals=globals(), number=1)
+    stmt='endpoint.clear_linkset(False, endpoint.LINKSET_DIRECTORY, endpoint.ENTITIES_DIRECTORY, endpoint.LABELS_DIRECTORY)', globals=globals(), number=1)
 print(f"Execution time for clear_linkset is {clear_linkset_result} seconds")
 
 fill_entities_files_result = timeit.timeit(

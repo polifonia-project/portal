@@ -38,9 +38,8 @@ function Card(props) {
 
   // Function to collect sameAsUris
   const getSameAsUris = async (uri) => {
-    let sameUriQuery = 'SELECT DISTINCT ?same_uri WHERE {GRAPH ?g {<' + uri + '> owl:sameAs|^owl:sameAs ?same_uri .}}';
     const response = await fetch(
-      '/portal/reconciliation?query=' + encodeURIComponent(sameUriQuery)
+      '/portal/reconciliation?uri=' + encodeURIComponent(uri)
     ).then((response) => response.json())
     setSameAsUris(response);
   };
@@ -54,7 +53,6 @@ function Card(props) {
         console.log(sameAsUris)
         if (sameAsUris.results.bindings.length > 0) {
           let sameUriArray = (sameAsUris.results.bindings).map(val => '<' + val.same_uri.value + '>');
-          sameUriArray.push('<' + uri + '>');
           console.log('SAME URIS', sameUriArray)
           recUri = sameUriArray.join(' ');
         } else { recUri = '<' + uri + '>' }
