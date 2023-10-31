@@ -9,7 +9,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?descLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?descLabel .}}"
+                        "query": "SELECT DISTINCT ?entityLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?entityLabel .}}"
                     }
                 ]
             },
@@ -21,7 +21,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { ?card_uri wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { ?card_uri wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {?card_uri wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {?card_uri ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {?card_uri wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {?card_uri ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                        "query": "SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { ?card_uri wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { ?card_uri wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {?card_uri wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {?card_uri ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {?card_uri wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {?card_uri ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                     }
                 ]
             }
@@ -37,7 +37,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?descLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?descLabel .}}"
+                        "query": "SELECT DISTINCT ?entityLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?entityLabel .}}"
                     }
                 ]
             },
@@ -49,7 +49,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?card_uri {} { ?card_uri wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { ?card_uri wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { ?card_uri wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {?card_uri wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {?card_uri ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {?card_uri wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {?card_uri ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
+                        "query": "SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?card_uri {} { ?card_uri wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { ?card_uri wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { ?card_uri wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {?card_uri wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {?card_uri ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {?card_uri wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {?card_uri ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
                     }
                 ]
             },
@@ -61,7 +61,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?item ?itemLabel ?media WHERE { VALUES ?card_uri {} ?card_uri wdt:P18 ?media } LIMIT 1"
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE { VALUES ?card_uri {} ?card_uri wdt:P18 ?entity }"
                     }
                 ]
             }
@@ -78,7 +78,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?descLabel WHERE { VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?descLabel.}}"
+                        "query": "SELECT DISTINCT ?entityLabel WHERE { VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?entityLabel.}}"
                     }
                 ]
             },
@@ -91,7 +91,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?media }"
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?entity }"
                     }
                 ]
             },
@@ -104,7 +104,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P2716 ?media}"
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P2716 ?entity .}"
                     }
                 ]
             },
@@ -143,7 +143,7 @@
                 "content": [
                     {
                         "dataset": "d_03",
-                        "query": "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;  sdo:genre ?card_uri ; sdo:genre ?entity. ?entity skos:prefLabel ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:genre ?card_uri ; sdo:genre ?entity. ?entity skos:prefLabel ?entityLabel .} FILTER(?entity != ?card_uri) BIND(\"is associated with\" as ?rel)}"
+                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;  sdo:genre ?card_uri ; sdo:genre ?entity. ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:genre ?card_uri ; sdo:genre ?entity. ?entity skos:prefLabel ?entityLabel .} FILTER(?entity != ?card_uri) BIND(\"is associated with\" as ?rel)}"
                     }
                 ]
             },
@@ -156,7 +156,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P1846 ?media}"
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P1846 ?entity .}"
                     }
                 ]
             },
@@ -169,7 +169,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?entity ?entityLabel {VALUES ?card_uri {} ?entity wdt:P136 ?card_uri . ?entity wikibase:statements ?outcoming . {?entity wdt:P31 wd:Q5.} UNION {?entity wdt:P31 wd:Q215380 .} ?entity wikibase:sitelinks ?sitelinks . { SELECT (count(?s) AS ?incoming) ?entity WHERE {?entity wdt:P136 ?card_uri . ?s ?p ?entity .[] wikibase:directClaim ?p } GROUP BY ?entity } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" . }. } ORDER BY DESC (?incoming) LIMIT 35"
+                        "query": "SELECT DISTINCT ?entity ?entityLabel {VALUES ?card_uri {} ?entity wdt:P136 ?card_uri . ?entity wikibase:statements ?outcoming . {?entity wdt:P31 wd:Q5.} UNION {?entity wdt:P31 wd:Q215380 .} ?entity wikibase:sitelinks ?sitelinks . { SELECT (count(?s) AS ?incoming) ?entity WHERE {VALUES ?card_uri {} ?entity wdt:P136 ?card_uri . ?s ?p ?entity .[] wikibase:directClaim ?p } GROUP BY ?entity } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" . }. } ORDER BY DESC (?incoming) LIMIT 35"
                     }
                 ]
             }
@@ -185,7 +185,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?descLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?descLabel .}}"
+                        "query": "SELECT DISTINCT ?entityLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?entityLabel .}}"
                     }
                 ]
             },
@@ -209,7 +209,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?item ?itemLabel ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?media } LIMIT 1"
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?entity }"
                     }
                 ]
             }
@@ -225,7 +225,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?descLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?descLabel .}}"
+                        "query": "SELECT DISTINCT ?entityLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?entityLabel .}}"
                     }
                 ]
             },
@@ -249,7 +249,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?item ?itemLabel ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?media } LIMIT 1"
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?entity }"
                     }
                 ]
             }
@@ -266,7 +266,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?descLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?descLabel.}}"
+                        "query": "SELECT DISTINCT ?entityLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?entityLabel.}}"
                     }
                 ]
             },
@@ -279,7 +279,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?media }"
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?entity }"
                     }
                 ]
             },
@@ -292,7 +292,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P10 ?media }"
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P10 ?entity }"
                     }
                 ]
             },
@@ -305,7 +305,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P51 ?media }"
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P51 ?entity }"
                     }
                 ]
             },
@@ -318,7 +318,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE {VALUES ?card_uri {}  { ?card_uri wdt:P19 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of birth\") AS ?rel) } UNION { ?card_uri wdt:P20 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of death\") AS ?rel) } UNION { ?card_uri wdt:P937 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has work location\") AS ?rel) } UNION { ?card_uri wdt:P740 ?entity. BIND(str(\"location of formation\") AS ?rel)} UNION { ?card_uri wdt:P495 ?entity. BIND(str(\"has country of origin\") AS ?rel)} . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 10"
+                        "query": "SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?card_uri {}  { ?card_uri wdt:P19 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of birth\") AS ?rel) } UNION { ?card_uri wdt:P20 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of death\") AS ?rel) } UNION { ?card_uri wdt:P937 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has work location\") AS ?rel) } UNION { ?card_uri wdt:P740 ?entity. BIND(str(\"location of formation\") AS ?rel)} UNION { ?card_uri wdt:P495 ?entity. BIND(str(\"has country of origin\") AS ?rel)} . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 10"
                     }
                 ]
             },
@@ -356,7 +356,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?descLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?descLabel .}}"
+                        "query": "SELECT DISTINCT ?entityLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?entityLabel .}}"
                     }
                 ]
             },
@@ -395,7 +395,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?item ?itemLabel ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?media } LIMIT 1"
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?entity } LIMIT 1"
                     }
                 ]
             },
@@ -408,7 +408,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?item ?itemLabel ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P242 ?media} LIMIT 1"
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P242 ?entity} LIMIT 1"
                     }
                 ]
             },
@@ -421,7 +421,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?media WHERE { VALUES ?card_uri {} ?card_uri wdt:P51 ?media }"
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE { VALUES ?card_uri {} ?card_uri wdt:P51 ?entity }"
                     }
                 ]
             }
@@ -438,7 +438,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?descLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?descLabel.}}"
+                        "query": "SELECT DISTINCT ?entityLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?entityLabel.}}"
                     }
                 ]
             },
@@ -451,7 +451,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?media WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?media }"
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?entity }"
                     }
                 ]
             },
@@ -464,7 +464,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT ?entity ?entityLabel {VALUES ?card_uri {} ?entity wdt:P1303 ?card_uri . ?entity wikibase:statements ?outcoming . {?entity wdt:P31 wd:Q5.} UNION {?entity wdt:P31 wd:Q215380 .} ?entity wikibase:sitelinks ?sitelinks . { SELECT (count(?s) AS ?incoming) ?entity WHERE {?entity wdt:P1303 ?card_uri . ?s ?p ?entity .[] wikibase:directClaim ?p } GROUP BY ?entity } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" . }. } ORDER BY DESC (?incoming) LIMIT 17"
+                        "query": "SELECT DISTINCT ?entity ?entityLabel {VALUES ?card_uri {} ?entity wdt:P1303 ?card_uri . ?entity wikibase:statements ?outcoming . {?entity wdt:P31 wd:Q5.} UNION {?entity wdt:P31 wd:Q215380 .} ?entity wikibase:sitelinks ?sitelinks . { SELECT (count(?s) AS ?incoming) ?entity WHERE {VALUES ?card_uri {} ?entity wdt:P1303 ?card_uri . ?s ?p ?entity .[] wikibase:directClaim ?p } GROUP BY ?entity } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" . }. } ORDER BY DESC (?incoming) LIMIT 17"
                     }
                 ]
             }
@@ -481,7 +481,7 @@
                 "content": [
                     {
                         "dataset": "d_01",
-                        "query": "SELECT DISTINCT ?descLabel WHERE {VALUES ?card_uri {} ?card_uri <https://schema.org/description> ?descLabel .}"
+                        "query": "SELECT DISTINCT ?entityLabel WHERE {VALUES ?card_uri {} ?card_uri <https://schema.org/description> ?entityLabel .}"
                     }
                 ]
             },

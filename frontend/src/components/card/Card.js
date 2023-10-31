@@ -91,7 +91,7 @@ function Card(props) {
                     data.results.bindings.forEach(res => {
                       if (Object.keys(res).length > 0) {
                         let singleResult = []
-                        singleResult.desc = res.descLabel.value;
+                        singleResult.desc = res.entityLabel.value;
                         singleResult.dataset = q.dataset;
                         textResults.push(singleResult);
                       }
@@ -221,6 +221,7 @@ function Card(props) {
             endpoint = datasets[dataset].sparql_endpoint;
 
             query = query.replaceAll('{}', '{' + recUri + '}');
+            console.log(query)
             let url = endpoint + '?query=' + encodeURIComponent(query);
             try {
               fetch(url, {
@@ -229,13 +230,12 @@ function Card(props) {
               })
                 .then((res) => res.json())
                 .then((data) => {
-
                   let dataLen = data.results.bindings.length;
                   if (dataLen > 0) {
                     data.results.bindings.forEach(res => {
                       if (Object.keys(res).length > 0) {
                         let singleResult = []
-                        singleResult.mediaLink = res.media.value;
+                        singleResult.mediaLink = res.entity.value;
                         singleResult.dataset = q.dataset;
                         mediaResults.push(singleResult);
                       }
