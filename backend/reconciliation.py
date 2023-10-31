@@ -14,6 +14,8 @@ import linkset_endpoint
 import methods
 import conf
 
+g = methods.read_json('conf_general.json')
+
 WHITE_LIST = ['wikidata', 'dbpedia']
 WHITE_LIST_PARAM = {
     'wikidata': {
@@ -377,12 +379,45 @@ def graph_merging(entity_uri, endpoint):
         add_missing_same_as_links(new_graph_name)
 
 
-def graphs_reconciliation(entities_dir, endpoint):
+def graphs_reconciliation(entities_dir, endpoint, reconciled_index):
     for filename in os.listdir(entities_dir):
         entities_content = methods.read_json(entities_dir+'/'+filename)
         for uri, info in entities_content.items():
             if info['sameAs'] == True:
                 graph_merging(uri, endpoint)
+    if reconciled_index:
+        feed_file_name = g['data_sources']['feed']
+        feed_data = methods.read_json(feed_file_name)
+        origin_iri = ''
+
+        for clip, info in feed_data.items():
+            if 'origin_iri' in info:
+                origin_iri = info['origin_iri']
+            else:
+                origin_iri = info['iri']
+            query = '''
+                SELECT DISTINCT ?g
+                WHERE {
+                    GRAPH ?g { <'''+origin_iri+'''> ?p ?o . }
+                    }
+                '''
+            sparql = SPARQLWrapper(endpoint)
+            sparql.setQuery(query)
+            sparql.setReturnFormat(JSON)
+            try:
+                results = sparql.query().convert()
+
+                data = results['results']['bindings']
+                uri_to_graph = {}
+                for result in data:
+                    feed_data[clip]['origin_iri'] = origin_iri
+                    feed_data[clip]['iri'] = result['g']['value']
+
+            except Exception as e:
+                print('ERROR index_reconciliation in searching for uris\' graphs', e)
+        
+        methods.update_json(feed_file_name, feed_data)
+                  
 
 def uri_to_named_graph(values_to_search, endpoint):
     '''search in Blazegraph for named_graphs'''

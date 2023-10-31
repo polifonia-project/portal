@@ -80,13 +80,13 @@ print(
 #     f"Execution time for linkset_endpoint_update is {linkset_endpoint_update_result} seconds")
 
 # graphs_reconciliation_result = timeit.timeit(
-#     stmt='rec.graphs_reconciliation(endpoint.ENTITIES_DIRECTORY, endpoint.UPDATEMYLINKSET)', globals=globals(), number=1)
+#     stmt='rec.graphs_reconciliation(endpoint.ENTITIES_DIRECTORY, endpoint.UPDATEMYLINKSET, conf.reconciled_index)', globals=globals(), number=1)
 # print(
 #     f"Execution time for graphs_reconciliation is {graphs_reconciliation_result} seconds")
 
-ingest_index_result = timeit.timeit(
-    stmt='i.ingest_index(cat, endpoint.ENTITIES_DIRECTORY, conf.reconciled_index)', globals=globals(), number=1)
-print(f"Execution time for ingest_chosen_index is {ingest_index_result} seconds")
+# ingest_index_result = timeit.timeit(
+#     stmt='i.ingest_index(cat, endpoint.ENTITIES_DIRECTORY, conf.reconciled_index)', globals=globals(), number=1)
+# print(f"Execution time for ingest_chosen_index is {ingest_index_result} seconds")
 
 if __name__ == '__main__':
     app.run(debug=True)
