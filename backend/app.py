@@ -50,7 +50,7 @@ def reconciliation(active=None):
         content_type = request.content_type
         uri = str(request.args.get("uri"))
         q = ''
-        if conf.reconciled_index == True:
+        if conf.reconciled_index == True and conf.linkset_namespace in uri:
             q = 'SELECT DISTINCT ?same_uri WHERE {VALUES ?g {<'+uri+'>} GRAPH ?g {?same_uri <https://schema.org/location> ?location .}}'
         else:
             q = 'SELECT DISTINCT ?same_uri WHERE {VALUES ?s {<'+uri+'>} GRAPH ?g {?s owl:sameAs|^owl:sameAs ?same_uri .}}'
@@ -74,10 +74,6 @@ fill_entities_files_result = timeit.timeit(
 print(
     f"Execution time for fill_entities_files is {fill_entities_files_result} seconds")
 
-ingest_index_result = timeit.timeit(
-    stmt='i.ingest_index(cat, endpoint.ENTITIES_DIRECTORY, conf.reconciled_index)', globals=globals(), number=1)
-print(f"Execution time for ingest_chosen_index is {ingest_index_result} seconds")
-
 # linkset_endpoint_update_result = timeit.timeit(
 #     stmt='endpoint.linkset_endpoint_update(endpoint.ENTITIES_DIRECTORY, d, endpoint.LINKSET_DIRECTORY)', globals=globals(), number=1)
 # print(
@@ -87,6 +83,10 @@ print(f"Execution time for ingest_chosen_index is {ingest_index_result} seconds"
 #     stmt='rec.graphs_reconciliation(endpoint.ENTITIES_DIRECTORY, endpoint.UPDATEMYLINKSET)', globals=globals(), number=1)
 # print(
 #     f"Execution time for graphs_reconciliation is {graphs_reconciliation_result} seconds")
+
+ingest_index_result = timeit.timeit(
+    stmt='i.ingest_index(cat, endpoint.ENTITIES_DIRECTORY, conf.reconciled_index)', globals=globals(), number=1)
+print(f"Execution time for ingest_chosen_index is {ingest_index_result} seconds")
 
 if __name__ == '__main__':
     app.run(debug=True)
