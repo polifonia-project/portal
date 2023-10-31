@@ -3,6 +3,8 @@ import classes from "./ResultLine.module.css";
 import { CardContext } from "../../../context/CardContext";
 import expandIcon from '../../../assets/svg/expand.svg';
 import expandIconWhite from '../../../assets/svg/expandWhite.svg';
+import isDarkColor from 'is-dark-color';
+import { Link } from "react-router-dom";
 
 function ResultLine(props) {
   const [isHover, setIsHover] = useState(false);
@@ -11,6 +13,8 @@ function ResultLine(props) {
   const { setCardContent } = useContext(CardContext);
   const [category] = useState(props.cat)
   const [catCode, setCatCode] = useState(props.cat)
+  const [isDark, setIsDark] = useState(false)
+  const [encodedUrl, setEncodedUrl] = useState(false)
 
   const handleMouseEnter = () => {
     setIsHover(true);
@@ -31,7 +35,20 @@ function ResultLine(props) {
     } else {
       setDatasetOn(false);
     }
-  }, [props.dataset, props.currentDataset]);
+
+    if (isDarkColor(props.color)) {
+      setIsDark(true)
+    } else {
+      setIsDark(false)
+    }
+
+    const params = 'title=' + props.label + '&cat=' + props.cat + '&uri=' + props.uri;
+    const encodedParams = encodeURI(params);
+    const encodedUrl = 'card?' + encodedParams
+    setEncodedUrl(encodedUrl)
+      
+
+  }, [props.dataset, props.currentDataset, props.color, props.cat, props.label, props.uri]);
 
   useEffect(() => {
     setCategoriesCode()
@@ -60,10 +77,12 @@ function ResultLine(props) {
             <span style={{
             borderRadius: isHover ? "50px" : "50px",
             backgroundColor: isHover ?  props.color : 'transparent',
-            borderColor: isHover ? props.color : 'black'
+            borderColor: isHover ? props.color : 'black',
+            color: isHover ? isDark ? "white" : "black" : "black"
              }} 
              className={classes.categoryResult}
              onClick={() => handleClickScroll("section-" + catCode)}>{props.cat}</span>
+             <Link to={encodedUrl}></Link>
         </div>
         <div className={classes.resultLabel} 
              style={{textDecoration: isHover ? 'underline' : '', }}
@@ -71,7 +90,7 @@ function ResultLine(props) {
         ><b>{props.label}</b></div>
         <div className={classes.resultRel} 
             style={{ flexDirection: props.isdirect ? 'row-reverse' : 'row', justifyContent: props.isdirect ? 'flex-end' : 'flex-start', }}>
-              <span style={{backgroundColor: isHover ?  props.color : 'transparent', borderColor: isHover ? props.color : 'black', cursor: "pointer"}}
+              <span style={{backgroundColor: isHover ?  props.color : 'transparent', borderColor: isHover ? props.color : 'black', cursor: "pointer", color: isHover ? isDark ? "white" : "black" : "black"}}
               className={classes.inputResult}
               onClick={() => { setCardOpen(true); setCardContent({ title: props.input_value, cat: props.input_category, input: 'no input', uri: props.input_uri, color: props.color, hasInput: true, goesBack: true }) }}
               >{props.input_value}</span>
