@@ -96,7 +96,8 @@ def create_entities_files(categories, datasets):
             dataset_list = dat_cat_object[pattern['dataset']]
             dataset_list.append(cat)
             dat_cat_object[pattern['dataset']] = dataset_list
-
+    
+    os.makedirs('entities', exist_ok=True)
     for d, cat_list in dat_cat_object.items():
         for cat in cat_list:
             name = d + '__' + cat

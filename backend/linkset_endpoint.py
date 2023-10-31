@@ -78,7 +78,7 @@ def __contact_tp(data, is_post, content_type):
 
 def linkset_file_population(entities_dir, datasets, linkset_directory):
     '''fill the linkset starting from the entities files'''
-
+    os.makedirs(linkset_directory, exist_ok=True)
     for filename in os.listdir(entities_dir):
         split_name = filename.strip('.json').split('__')
         dat_id = split_name[0]
