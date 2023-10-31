@@ -212,27 +212,27 @@ class ResultsTest extends React.Component {
         )
     }
 
-    checkUriLocation = (uri, dataset_iri_base) => {
-        let returnCheck = false
-        let locationQuery = 'SELECT DISTINCT ?d_location WHERE {GRAPH ?g {<' + uri + '> <https://schema.org/location> ?d_location}}';
-        try {
-            return fetch('/portal/reconciliation?query=' + encodeURIComponent(locationQuery))
-                .then((res) => res.json())
-                .then((data) => {
-                    let dataLen = data.results.bindings.length;
+    // checkUriLocation = (uri, dataset_iri_base) => {
+    //     let returnCheck = false
+    //     let locationQuery = 'SELECT DISTINCT ?d_location WHERE {GRAPH ?g {<' + uri + '> <https://schema.org/location> ?d_location}}';
+    //     try {
+    //         return fetch('/portal/reconciliation?query=' + encodeURIComponent(locationQuery))
+    //             .then((res) => res.json())
+    //             .then((data) => {
+    //                 let dataLen = data.results.bindings.length;
 
-                    if (dataLen > 0) {
-                        let locationValues = (data.results.bindings).map(val => val.d_location.value)
-                        if (!locationValues.includes(dataset_iri_base)) {
-                            returnCheck = true;
-                        }
-                    } return returnCheck
-                })
-        }
-        catch (err) {
-            console.log('error', err)
-        }
-    }
+    //                 if (dataLen > 0) {
+    //                     let locationValues = (data.results.bindings).map(val => val.d_location.value)
+    //                     if (!locationValues.includes(dataset_iri_base)) {
+    //                         returnCheck = true;
+    //                     }
+    //                 } return returnCheck
+    //             })
+    //     }
+    //     catch (err) {
+    //         console.log('error', err)
+    //     }
+    // }
 
     getCorrectUri = (uri) => {
         try {
@@ -380,11 +380,12 @@ class ResultsTest extends React.Component {
                 this.getCorrectUri(uri).then((arr) => {
                     if (arr) {
                         new_uris = arr.join(' ')
+                        console.log('reconciled', new_uris)
                         this.queryResults(query, new_uris, endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
                     } else {
                         // try in any case
                         try {
-                            //console.log('uri not in dataset and different iri_base but tried', uri, iri_base)
+                            console.log('not reconciled', uri)
                             this.queryResults(query, '<' + uri + '>', endpoint, disabled, queryOffsetString, queryLimitString, queryLimit, catOffset, cat, datasets, dataset_id, results, relations, relationSet);
                         }
                         catch (err) {
