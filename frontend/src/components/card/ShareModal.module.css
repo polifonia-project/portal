@@ -25,12 +25,16 @@ z-index: 60000;
   color: black !important;
   border-color: transparent  !important;
   padding: 10px 14px 10px 14px;
-  width: 90px !important;
   cursor: pointer;
   transition: transform 0.5s ease;
-  margin-bottom: 100px;
   font-family: 'Helvetica Light';
   font-size: 15px;
+
+  position: relative;
+  top: 58px;
+  display: block;
+  z-index: 3000;
+  margin-left: 87%;
 }
 
 .closeButton:hover {
