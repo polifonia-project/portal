@@ -357,7 +357,10 @@ function Card(props) {
     <div className={classes.cardContainer} style={{ transform: cardOpen ? 'translateX(0)' : 'translateX(-100%)' }}>
       <ShareModal url={encodeShareLink()} display={displayShare} changeDisplay={setDisplayShare} />
       <div className={classes.titleBlock} style={{ backgroundColor: colorBackground }}>
-        <div className={classes.titleContainer}>
+      <div className={classes.titleContainer + ' ' + classes.titleContainerBack}>
+          {fromExternalLink ? <p className={classes.exitButton} onClick={() => closeCard()} style={{ color: colorIsDark ? 'white' : 'black', borderColor: colorIsDark ? 'white' : '#474747' }}>⇠ Back</p> : null}  
+      </div>
+      <div className={classes.titleContainer}>
           <h1 style={{ color: colorIsDark ? 'white' : 'black' }}>{cardContent.title}</h1>
           <p className={classes.categoryResult} style={{ color: colorIsDark ? 'white' : 'black', borderColor: colorIsDark ? 'white' : '#474747' }}>
             <span style={{ borderColor: colorIsDark ? 'white' : '#474747' }}>{cardContent.cat}</span>
@@ -368,12 +371,7 @@ function Card(props) {
           <p className={classes.cardShareButton} style={{ borderColor: colorIsDark ? 'white' : '#474747' }}>
             <span><button className={classes.shareButton} style={{ color: colorIsDark ? 'white' : 'black' }} onClick={() => setDisplayShare(true)}>Share</button></span>
           </p>
-        </div>
-        <div>
-          {fromExternalLink ? <button className={classes.exitButton} onClick={() => closeCard()} style={{ color: colorIsDark ? 'white' : 'black', borderColor: colorIsDark ? 'white' : '#474747' }}>Back ⇢</button>
-            : null
-          }
-        </div>
+      </div>
       </div>
       <div className={classes.contentBlock}>
 

@@ -22,10 +22,11 @@
   display: flex;
   align-items: flex-end;
   justify-content:space-between;
-  padding-top: 130px;
+  padding-top: 30px;
   padding-right: 80px;
   padding-left: 80px;
   padding-bottom: 30px;
+  flex-wrap: wrap;
 }
 
 .contentBlock {
@@ -49,6 +50,7 @@
 .titleContainer h1 {
   font-family: "Garnett Medium";
   margin: 0;
+  margin-top: 40px;
   width: 100%;
 }
 
@@ -90,18 +92,23 @@
   transition: all 1s ease;
   display: block;
   width: 90px !important;
+  margin-right: 20px;
+  margin-top: 30px;
+  margin-bottom: 100px;
+  transform: translateX(-50px) scale(0.8);
 }
 
 .exitButton:hover {
-  transform: translateX(20px);
+  transform: translateX(-20px);
   overflow: hidden;
-  border-radius: 30px;
+  border-radius: 30px !important;
   background-color: #f4edec;
   border-color: transparent;
   box-shadow: 0px 0px 10px -5px black;
   box-shadow: 0 4px 12px 0 rgba(12,18,45,.1);
   color: black !important;
   border-color: transparent  !important;
+  transform: translateX(-50px);
 }
 
 .cardShareButton {
@@ -123,6 +130,10 @@
   border-right: 0px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px; 
+}
+
+.titleContainerBack {
+  width: 100%;
 }
 
 .titleContainer:hover .categoryResult {
