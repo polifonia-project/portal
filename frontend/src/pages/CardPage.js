@@ -1,24 +1,27 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { useSearchParams } from 'react-router-dom';
 import { CardContext } from "../context/CardContext";
 
 function CardPage(props) {
 
-    // try with http://localhost:3000/card?title=Wolfgang%20Amadeus%20Mozart&cat=people&uri=wikidata
     let [searchParams] = useSearchParams()
     const title = searchParams.get('title');
     const cat = searchParams.get('cat');
     const uri = searchParams.get('uri');
+    const input = searchParams.get('input');
+    const hasinput = searchParams.get('hasinput');
+    const [withInput, setWithInput] = useState(false);
 
     const { setCardOpen } = useContext(CardContext);
     const { setCardContent } = useContext(CardContext);
     const { setCardBlocksNew } = useContext(CardContext);
 
     useEffect(() => {
+        if (hasinput === 'false') {setWithInput(false)} else { setWithInput(true)}
         props.func('Portal');
         setCardOpen(true);
-        setCardContent({ title: title, cat: cat, input: 'no input', uri: uri, color: '#000000', hasInput: true, goesBack: false })
-    }, [cat, props, setCardContent, setCardOpen, title, uri]);
+        setCardContent({ title: title, cat: cat, input: input, uri: uri, color: '#000000', hasInput: withInput, goesBack: false })
+    }, [cat, props, setCardContent, setCardOpen, title, uri, input, hasinput, searchParams, withInput]);
 
     useEffect(() => {
         fetch("/portal/conf_info")
