@@ -10,7 +10,6 @@ import backToClip from "../../assets/svg/backToClip.svg";
 import closemenu from "../../assets/svg/CloseMenu.svg";
 import classes from "./MainNavigation.module.css";
 import MenuOverlay from "./MenuOverlay.js";
-import Card from "../card/Card";
 import { ThemeContext } from "../../context/ThemeContext";
 import { CardContext } from "../../context/CardContext";
 
@@ -22,7 +21,6 @@ function MainNavigation(props) {
   const { soundOn, setSoundOn } = useContext(ThemeContext);
   const { backToTopOn, setbackToTopOn } = useContext(ThemeContext);
   const { cardOpen } = useContext(CardContext);
-  const { setCardOpen } = useContext(CardContext);
 
 
   const toggleMenu = () => {
@@ -66,18 +64,32 @@ function MainNavigation(props) {
 
   if (menuOpen) {
     document.body.style.overflow = "hidden";
+    document.getElementById("mainLogo").style.filter = 'none';
+    document.getElementById("sectionName").style.color = 'black';
     document.getElementById("menuOptions").style.filter = 'none';
   } else {
     document.body.style.overflow = "scroll";
     if (shownOverlay) {
-      if (theme === 'dark') { document.getElementById("menuOptions").style.filter = 'brightness(0) invert(1)'; }
+      if (theme === 'dark') { 
+        document.getElementById("mainLogo").style.filter = 'brightness(0) invert(1)';
+        document.getElementById("menuOptions").style.filter = 'brightness(0) invert(1)'; 
+        document.getElementById("sectionName").style.color = 'white';
+      }
     }
+  }
+
+  const styleBackHome = () => {
+    if (cardOpen) {
+    document.body.style.overflow = "hidden";
+    document.getElementById("mainLogo").style.filter = 'none';
+    document.getElementById("sectionName").style.color = 'black';
+    document.getElementById("menuOptions").style.filter = 'none';}
   }
 
   return (
     <header className={classes.header} id='mainHeader' >
       <span className={classes.title} id='title-logo'>
-        <Link to="/portal/" onClick={() => setCardOpen(false)}><img className={classes.logo} src={logo} alt="Logo" id='mainLogo' /></Link>
+        <Link onClick={() => { styleBackHome() }} to="/portal/" ><img className={classes.logo} src={logo} alt="Logo" id='mainLogo' /></Link>
         <div className={classes.section} id='sectionName'><span>{props.sectionName}</span></div>
       </span>
       <span className={classes.menu} id='menuOptions' >
@@ -87,7 +99,6 @@ function MainNavigation(props) {
         <img onClick={toggleMenu} className={classes.hamburger} src={menuOpen ? closemenu : hamburger} title="menu" alt="Hamburger Menu" />
       </span>
       {menuOpen ? <MenuOverlay toggleMenu={toggleMenu} /> : null}
-      <Card></Card>
     </header>
 
   );

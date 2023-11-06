@@ -1,33 +1,6 @@
 {
-    "topics": {
-        "color": "#f80000",
-        "blocks": {
-            "01": {
-                "type": "text",
-                "size": "small",
-                "title": "Biography",
-                "content": [
-                    {
-                        "dataset": "d_04",
-                        "query": "SELECT DISTINCT ?entityLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?entityLabel .}}"
-                    }
-                ]
-            },
-            "02": {
-                "type": "relation",
-                "size": "small",
-                "title": "Worked with",
-                "category": "artists",
-                "content": [
-                    {
-                        "dataset": "d_04",
-                        "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { ?card_uri wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { ?card_uri wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {?card_uri wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {?card_uri ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {?card_uri wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {?card_uri ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
-                    }
-                ]
-            }
-        }
-    },
     "music": {
+        "category": "cat_03",
         "color": "#ff02fe",
         "blocks": {
             "01": {
@@ -68,6 +41,7 @@
         }
     },
     "genres": {
+        "category": "cat_01",
         "color": "#1d00fe",
         "blocks": {
             "01": {
@@ -175,87 +149,8 @@
             }
         }
     },
-    "lyrics": {
-        "color": "#6400b4",
-        "blocks": {
-            "01": {
-                "type": "text",
-                "size": "small",
-                "title": "Biography",
-                "content": [
-                    {
-                        "dataset": "d_04",
-                        "query": "SELECT DISTINCT ?entityLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?entityLabel .}}"
-                    }
-                ]
-            },
-            "02": {
-                "type": "relation",
-                "size": "small",
-                "title": "Influenced by",
-                "category": "artists",
-                "content": [
-                    {
-                        "dataset": "d_04",
-                        "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { ?card_uri wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { ?card_uri wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {?card_uri wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {?card_uri ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {?card_uri wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {?card_uri ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
-                    }
-                ]
-            },
-            "04": {
-                "type": "media",
-                "size": "small",
-                "title": "Portrait",
-                "class": "image",
-                "content": [
-                    {
-                        "dataset": "d_04",
-                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?entity }"
-                    }
-                ]
-            }
-        }
-    },
-    "scores": {
-        "color": "#00feff",
-        "blocks": {
-            "01": {
-                "type": "text",
-                "size": "small",
-                "title": "Biography",
-                "content": [
-                    {
-                        "dataset": "d_04",
-                        "query": "SELECT DISTINCT ?entityLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?entityLabel .}}"
-                    }
-                ]
-            },
-            "02": {
-                "type": "relation",
-                "size": "small",
-                "title": "Influenced by",
-                "category": "artists",
-                "content": [
-                    {
-                        "dataset": "d_04",
-                        "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE {VALUES ?card_uri {}  { ?card_uri wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { ?card_uri wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { ?card_uri wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {?card_uri wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {?card_uri ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {?card_uri wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {?card_uri ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
-                    }
-                ]
-            },
-            "04": {
-                "type": "media",
-                "size": "small",
-                "title": "Portrait",
-                "class": "image",
-                "content": [
-                    {
-                        "dataset": "d_04",
-                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?entity }"
-                    }
-                ]
-            }
-        }
-    },
     "artists": {
+        "category": "cat_02",
         "color": "#09ff00",
         "blocks": {
             "01": {
@@ -346,6 +241,7 @@
         }
     },
     "places": {
+        "category": "cat_04",
         "color": "#fdff00",
         "blocks": {
             "01": {
@@ -428,6 +324,7 @@
         }
     },
     "instruments": {
+        "category": "cat_05",
         "color": "#000000",
         "blocks": {
             "01": {
@@ -471,6 +368,7 @@
         }
     },
     "creative works": {
+        "category": "",
         "color": "#00ffa5",
         "blocks": {
             "01": {

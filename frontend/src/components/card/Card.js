@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import classes from "./Card.module.css";
 import { CardContext } from "../../context/CardContext";
 import isDarkColor from 'is-dark-color';
+import { Link } from "react-router-dom";
 
 import TextBlock from "./TextBlock";
 import RelationBlock from "./RelationBlock.js";
@@ -13,13 +14,14 @@ import ShareModal from "./ShareModal";
 
 function Card(props) {
 
-  const { cardOpen, setCardOpen } = useContext(CardContext);
+  const { cardOpen } = useContext(CardContext);
   const { cardContent } = useContext(CardContext);
   const { cardBlocksNew } = useContext(CardContext);
 
   const [colorBackground, setColorBackground] = useState('#e2e2e2')
   const [colorIsDark, setColorIsDark] = useState(false)
   const [currentBlock, setCurrentBlock] = useState({})
+  const [currentCategory, setCurrentCategory] = useState("")
   const [fromSectionClip, setFromSectionClip] = useState(false)
   const [fromExternalLink, setFromExternalLink] = useState(false)
   const [displayShare, setDisplayShare] = useState(false)
@@ -221,7 +223,6 @@ function Card(props) {
             endpoint = datasets[dataset].sparql_endpoint;
 
             query = query.replaceAll('{}', '{' + recUri + '}');
-            console.log(query)
             let url = endpoint + '?query=' + encodeURIComponent(query);
             try {
               fetch(url, {
@@ -273,9 +274,14 @@ function Card(props) {
       if (cardBlocksNew[cardContent.cat]) {
         setColorBackground(cardBlocksNew[cardContent.cat].color);
         setCurrentBlock(cardBlocksNew[cardContent.cat].blocks);
+        if (cardBlocksNew[cardContent.cat].category === "") {
+          setCurrentCategory("/portal/")
+        } else {
+        setCurrentCategory( "/portal/#section-" + cardBlocksNew[cardContent.cat].category)}
       } else {
         setColorBackground('#e2e2e2');
         setCurrentBlock({ "01": { "type": "none" }, });
+        setCurrentCategory("/portal/");
       }
 
       if (isDarkColor(colorBackground)) {
@@ -312,20 +318,6 @@ function Card(props) {
       });
   }, []);
 
-
-  // close card
-  const closeCard = () => {
-    setCurrentBlock({});
-    setCardOpen(false);
-    setResetOn(false);
-    if (isDarkColor([cardContent.color])) {
-      setLightHeader();
-    } else {
-      setDarkHeader();
-    }
-
-  }
-
   const setLightHeader = () => {
     document.getElementById("mainLogo").style.filter = 'brightness(0) invert(1)';
     document.getElementById("sectionName").style.color = 'white';
@@ -360,7 +352,9 @@ function Card(props) {
       <div className={classes.titleContainer}>
           <h1 style={{ color: colorIsDark ? 'white' : 'black' }}>{cardContent.title}</h1>
           <p className={classes.categoryResult} style={{ color: colorIsDark ? 'white' : 'black', borderColor: colorIsDark ? 'white' : '#474747' }}>
-            <span style={{ borderColor: colorIsDark ? 'white' : '#474747' }}>{cardContent.cat}</span>
+            <span style={{ borderColor: colorIsDark ? 'white' : '#474747' }}>
+              <Link style={{ cursor: 'pointer' }} className={classes.catLink} to={ currentCategory }>{cardContent.cat}</Link>
+            </span>
             {fromSectionClip ? null
               : <span style={{ borderColor: colorIsDark ? 'white' : '#474747' }}>Related to {cardContent.input}</span>
             }

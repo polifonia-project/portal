@@ -3,12 +3,10 @@ import { Link } from "react-router-dom";
 import classes from "./MenuOverlay.module.css";
 import { ThemeContext } from "../../context/ThemeContext";
 import menuicon from "../../assets/png/logomenu.png";
-import { CardContext } from "../../context/CardContext";
 
 function MenuOverlay(props) {
 
   const { setTheme } = useContext(ThemeContext);
-  const { setCardOpen } = useContext(CardContext);
 
   function onChange(isVisible) {
     if (isVisible) {
@@ -33,12 +31,12 @@ function MenuOverlay(props) {
     <div className={classes.menu}>
       <div className={classes.menuContainer}>
         <nav>
-              <Link style={{ cursor: 'pointer' }} className={classes.menuLink} onClick={() => { props.toggleMenu(); setCardOpen(false) }} to="/portal/">Homepage</Link>
-                 <Link style={{ cursor: 'pointer' }} className={classes.catLink} onClick={() => { props.toggleMenu(); setCardOpen(false); scrollToSection("section-cat_01") }} to="/portal/#section-cat_01">Genres</Link>
-                 <Link style={{ cursor: 'pointer' }} className={classes.catLink} onClick={() => { props.toggleMenu(); setCardOpen(false); scrollToSection("section-cat_02") }} to="/portal/#section-cat_02">Artists</Link>
-                 <Link style={{ cursor: 'pointer' }} className={classes.catLink} onClick={() => { props.toggleMenu(); setCardOpen(false); scrollToSection("section-cat_03")  }} to="/portal/#section-cat_03">Music</Link>
-                 <Link style={{ cursor: 'pointer' }} className={classes.catLink} onClick={() => { props.toggleMenu(); setCardOpen(false); scrollToSection("section-cat_04")  }} to="/portal/#section-cat_04">Places</Link>
-                 <Link style={{ cursor: 'pointer' }} className={classes.catLink} onClick={() => { props.toggleMenu(); setCardOpen(false); scrollToSection("section-cat_05")  }} to="/portal/#section-cat_05">Instruments</Link>
+              <Link style={{ cursor: 'pointer' }} className={classes.menuLink} onClick={() => { props.toggleMenu();  }} to="/portal/">Homepage</Link>
+                 <Link style={{ cursor: 'pointer' }} className={classes.catLink} onClick={() => { props.toggleMenu(); scrollToSection("section-cat_01") }} to="/portal/#section-cat_01">Genres</Link>
+                 <Link style={{ cursor: 'pointer' }} className={classes.catLink} onClick={() => { props.toggleMenu(); scrollToSection("section-cat_02") }} to="/portal/#section-cat_02">Artists</Link>
+                 <Link style={{ cursor: 'pointer' }} className={classes.catLink} onClick={() => { props.toggleMenu(); scrollToSection("section-cat_03")  }} to="/portal/#section-cat_03">Music</Link>
+                 <Link style={{ cursor: 'pointer' }} className={classes.catLink} onClick={() => { props.toggleMenu(); scrollToSection("section-cat_04")  }} to="/portal/#section-cat_04">Places</Link>
+                 <Link style={{ cursor: 'pointer' }} className={classes.catLink} onClick={() => { props.toggleMenu(); scrollToSection("section-cat_05")  }} to="/portal/#section-cat_05">Instruments</Link>
               <Link style={{ cursor: 'pointer' }} className={classes.menuLink} onClick={() => { props.toggleMenu(); onChange('isVisible'); }} to="/portal/about">About</Link>
               <Link style={{ cursor: 'pointer' }} className={classes.menuLink} onClick={() => { props.toggleMenu(); onChange('isVisible'); }} to="/portal/terms">Terms</Link>
               <Link style={{ cursor: 'pointer' }} className={classes.menuLink} onClick={() => { props.toggleMenu(); onChange('isVisible'); }} to="/portal/cookies">Cookies</Link>

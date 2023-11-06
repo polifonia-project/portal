@@ -1,6 +1,7 @@
 import { useEffect, useContext, useState } from "react";
 import { useSearchParams } from 'react-router-dom';
 import { CardContext } from "../context/CardContext";
+import Card from "../components/card/Card";
 
 function CardPage(props) {
 
@@ -22,13 +23,15 @@ function CardPage(props) {
         setCardOpen(true);
         setCardContent({ title: title, cat: cat, input: input, uri: uri, color: '#000000', hasInput: withInput, goesBack: false })
     }, [cat, props, setCardContent, setCardOpen, title, uri, input, hasinput, searchParams, withInput]);
-
+    
     useEffect(() => {
         fetch("/portal/conf_info")
             .then(res => res.json())
             .then(data => setCardBlocksNew(data.cards))
     }, [setCardBlocksNew]);
-
+  return(
+  <Card></Card>
+  )
 }
 
 export default CardPage;

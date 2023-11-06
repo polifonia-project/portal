@@ -40,7 +40,7 @@ function App() {
       <CardContext.Provider value={{ cardOpen, setCardOpen, cardContent, setCardContent, cardBlocks, setCardBlocks, cardBlocksNew, setCardBlocksNew }}>
         <Layout title={pagetitle}>
           <Routes>
-            <Route path="/portal" element={<FeedPage func={setPageTitle} />} />
+            <Route path="/portal/" element={<FeedPage func={setPageTitle} />} />
             <Route path="/portal/outputs" element={<OutputsPage func={setPageTitle} />} />
             <Route path="/portal/terms" element={<TermsPage func={setPageTitle} />} />
             <Route path="/portal/cookies" element={<CookiesPage func={setPageTitle} />} />
