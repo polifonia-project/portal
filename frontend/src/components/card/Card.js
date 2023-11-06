@@ -357,9 +357,6 @@ function Card(props) {
     <div className={classes.cardContainer} style={{ transform: cardOpen ? 'translateX(0)' : 'translateX(-100%)' }}>
       <ShareModal url={encodeShareLink()} display={displayShare} changeDisplay={setDisplayShare} />
       <div className={classes.titleBlock} style={{ backgroundColor: colorBackground }}>
-      <div className={classes.titleContainer + ' ' + classes.titleContainerBack}>
-          {fromExternalLink ? <p className={classes.exitButton} onClick={() => closeCard()} style={{ color: colorIsDark ? 'white' : 'black', borderColor: colorIsDark ? 'white' : '#474747' }}>⇠ Back</p> : null}  
-      </div>
       <div className={classes.titleContainer}>
           <h1 style={{ color: colorIsDark ? 'white' : 'black' }}>{cardContent.title}</h1>
           <p className={classes.categoryResult} style={{ color: colorIsDark ? 'white' : 'black', borderColor: colorIsDark ? 'white' : '#474747' }}>

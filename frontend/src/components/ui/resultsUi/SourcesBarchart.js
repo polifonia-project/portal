@@ -26,7 +26,7 @@ function SourcesBarchart(props) {
       percSet = ({ ...percSet, [key]: parseInt((percSet[key] / totResults * 100).toFixed()) })
     ));
     setResultData(percSet)
-  }, [props]);
+  }, [props.results]);
 
   const handleHover = (key, value) => {
     if (isFiltered === false) {
