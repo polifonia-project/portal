@@ -59,9 +59,10 @@ def query_same_as_internal(uri_list):
         SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same_uri); SEPARATOR=", ") AS ?same_uri)
         WHERE {
             VALUES ?origin_uri {'''+values_to_search+'''} .
-            ?same_uri owl:sameAs|skos:exactMatch|schema:sameAs|^owl:sameAs|^skos:exactMatch|^schema:sameAs ?origin_uri .
+            ?same_uri '''+conf.same_as_path+''' ?origin_uri .
         } GROUP BY ?origin_uri
         '''
+    print('FIND QUERY',find_query)
     return find_query
 
 
@@ -177,96 +178,97 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
 
                 # Generalise the process
                 for chunk in uris_to_search_chunks:
-                    query = query_same_as_internal(chunk)
-                    same_uris_dict = find_matches(query, sparql_endpoint)
-                    for origin_uri, same_uri_list in same_uris_dict.items():
-                        try:
-                            ds_updated = add_quads_to_conj_graph(
-                                ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, datasets[d]['iri_base'], datasets[d]['name'])
-                            ds = ds_updated
-                        except Exception as e:
-                            print('ERROR add_quads_to_conj_graph INTERNAL => 1000', e)                        
-                        if len(same_uri_list) > 0:
-                            sameAs_track_dictionary[origin_uri] = True
-                            # find matches in external datasets - 1st level of reconciliation
-                            for uri in same_uri_list.split(', '):
-                                if any((match := substring) in uri for substring in WHITE_LIST):
-                                    any_match = True
-                                    match_list = uris_to_reconcile[match]
-                                    match_list.append('<' + uri + '>')
-                                    uris_to_reconcile[match] = match_list
-    # find matches in external datasets - 1st level of reconciliation
-    if any_match:
-        for match, uri_list in uris_to_reconcile.items():
-            if len(uri_list) > 0:
-                external_endpoint = WHITE_LIST_PARAM[match]['endpoint']
-                external_query = WHITE_LIST_PARAM[match]['query']
-                # 1000 is the control number to avoid having a VALUE in the QUERY that is too long
-                if len(' '.join(uri_list)) < 1000:
-                    values_to_search = ' '.join(uri_list).replace("'", "%27")
-                    external_query = external_query.replace('<>', values_to_search)
-                    same_uris_dict = {}
-                    # check if fragments rec need linked data fragments search
-                    if 'fragments' in WHITE_LIST_PARAM[match]:
-                        print('Solve fragments problem')
-                        # same_uris_dict = query_lod_fragments(external_endpoint, external_query)
-                    else:
-                        same_uris_dict = find_matches(external_query, external_endpoint)
-                    for origin_uri, same_uri_list in same_uris_dict.items():
-                        if len(same_uri_list) > 0:
-                            sameAs_track_dictionary[origin_uri] = True
-                        graph_name = ''
-                        # check if uri has already a corresponding graph_name
-                        if origin_uri in graph_names_dict:
-                            graph_name = graph_names_dict[origin_uri]
-                        else:
-                            # if not, create the graph name with last_graph_id
-                            graph_name = linkset_namespace + dataset_id + '__' + category_id + '__' + str(last_graph_id)
-                            # raise last_graph_id by 1
-                            last_graph_id = last_graph_id + 1
-                            # add the pair uri:graph_name to the graph_names_dict dict
-                            graph_names_dict[origin_uri] = graph_name
-                            try:
-                                ds_updated = add_quads_to_conj_graph(ds, graph_name, datasets[dataset_id]['iri_base'],
-                                                                    datasets[dataset_id]['name'], origin_uri, same_uri_list, WHITE_LIST_PARAM[match]['iri_base'], match)
-                                ds = ds_updated
-                            except Exception as e:
-                                print('ERROR add_quads_to_conj_graph WHITE < 1000', e)
-                elif len(' '.join(uri_list)) >= 1000:
-                    # if too long we divide the list n times to obtain n chunks
-                    uris_to_search_chunks = methods.create_chunks(uri_list)
+                    print(chunk)
+    #                 query = query_same_as_internal(chunk)
+    #                 same_uris_dict = find_matches(query, sparql_endpoint)
+    #                 for origin_uri, same_uri_list in same_uris_dict.items():
+    #                     try:
+    #                         ds_updated = add_quads_to_conj_graph(
+    #                             ds, graph_names_dict[origin_uri], datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, datasets[d]['iri_base'], datasets[d]['name'])
+    #                         ds = ds_updated
+    #                     except Exception as e:
+    #                         print('ERROR add_quads_to_conj_graph INTERNAL => 1000', e)                        
+    #                     if len(same_uri_list) > 0:
+    #                         sameAs_track_dictionary[origin_uri] = True
+    #                         # find matches in external datasets - 1st level of reconciliation
+    #                         for uri in same_uri_list.split(', '):
+    #                             if any((match := substring) in uri for substring in WHITE_LIST):
+    #                                 any_match = True
+    #                                 match_list = uris_to_reconcile[match]
+    #                                 match_list.append('<' + uri + '>')
+    #                                 uris_to_reconcile[match] = match_list
+    # # find matches in external datasets - 1st level of reconciliation
+    # if any_match:
+    #     for match, uri_list in uris_to_reconcile.items():
+    #         if len(uri_list) > 0:
+    #             external_endpoint = WHITE_LIST_PARAM[match]['endpoint']
+    #             external_query = WHITE_LIST_PARAM[match]['query']
+    #             # 1000 is the control number to avoid having a VALUE in the QUERY that is too long
+    #             if len(' '.join(uri_list)) < 1000:
+    #                 values_to_search = ' '.join(uri_list).replace("'", "%27")
+    #                 external_query = external_query.replace('<>', values_to_search)
+    #                 same_uris_dict = {}
+    #                 # check if fragments rec need linked data fragments search
+    #                 if 'fragments' in WHITE_LIST_PARAM[match]:
+    #                     print('Solve fragments problem')
+    #                     # same_uris_dict = query_lod_fragments(external_endpoint, external_query)
+    #                 else:
+    #                     same_uris_dict = find_matches(external_query, external_endpoint)
+    #                 for origin_uri, same_uri_list in same_uris_dict.items():
+    #                     if len(same_uri_list) > 0:
+    #                         sameAs_track_dictionary[origin_uri] = True
+    #                     graph_name = ''
+    #                     # check if uri has already a corresponding graph_name
+    #                     if origin_uri in graph_names_dict:
+    #                         graph_name = graph_names_dict[origin_uri]
+    #                     else:
+    #                         # if not, create the graph name with last_graph_id
+    #                         graph_name = linkset_namespace + dataset_id + '__' + category_id + '__' + str(last_graph_id)
+    #                         # raise last_graph_id by 1
+    #                         last_graph_id = last_graph_id + 1
+    #                         # add the pair uri:graph_name to the graph_names_dict dict
+    #                         graph_names_dict[origin_uri] = graph_name
+    #                         try:
+    #                             ds_updated = add_quads_to_conj_graph(ds, graph_name, datasets[dataset_id]['iri_base'],
+    #                                                                 datasets[dataset_id]['name'], origin_uri, same_uri_list, WHITE_LIST_PARAM[match]['iri_base'], match)
+    #                             ds = ds_updated
+    #                         except Exception as e:
+    #                             print('ERROR add_quads_to_conj_graph WHITE < 1000', e)
+    #             elif len(' '.join(uri_list)) >= 1000:
+    #                 # if too long we divide the list n times to obtain n chunks
+    #                 uris_to_search_chunks = methods.create_chunks(uri_list)
 
-                    for chunk in uris_to_search_chunks:
-                        values_to_search = ' '.join(chunk).replace("'", "%27")
-                        external_query = external_query.replace('<>', values_to_search)
-                        same_uris_dict = {}
-                        # check if fragments rec need linked data fragments search
-                        if 'fragments' in WHITE_LIST_PARAM[match]:
-                            print('Solve fragments problem')
-                            # same_uris_dict = query_lod_fragments(external_endpoint, external_query)
-                        else:
-                            same_uris_dict = find_matches(external_query, external_endpoint)
-                        for origin_uri, same_uri_list in same_uris_dict.items():
-                            if len(same_uri_list) > 0:
-                                sameAs_track_dictionary[origin_uri] = True
-                            graph_name = ''
-                            # check if uri has already a corresponding graph_name
-                            if origin_uri in graph_names_dict:
-                                graph_name = graph_names_dict[origin_uri]
-                            else:
-                                # if not, create the graph name with last_graph_id
-                                graph_name = linkset_namespace + dataset_id + '__' + category_id + '__' + str(last_graph_id)
-                                # raise last_graph_id by 1
-                                last_graph_id = last_graph_id + 1
-                                # add the pair uri:graph_name to the graph_names_dict dict
-                                graph_names_dict[origin_uri] = graph_name
-                            try:
-                                ds_updated = add_quads_to_conj_graph(
-                                    ds, graph_name, datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, WHITE_LIST_PARAM[match]['iri_base'], match)
-                                ds = ds_updated
-                            except Exception as e:
-                                print('ERROR add_quads_to_conj_graph WHITE => 1000', e)
-    ds.serialize(destination=file_path, format='nquads', encoding='US-ASCII')
+    #                 for chunk in uris_to_search_chunks:
+    #                     values_to_search = ' '.join(chunk).replace("'", "%27")
+    #                     external_query = external_query.replace('<>', values_to_search)
+    #                     same_uris_dict = {}
+    #                     # check if fragments rec need linked data fragments search
+    #                     if 'fragments' in WHITE_LIST_PARAM[match]:
+    #                         print('Solve fragments problem')
+    #                         # same_uris_dict = query_lod_fragments(external_endpoint, external_query)
+    #                     else:
+    #                         same_uris_dict = find_matches(external_query, external_endpoint)
+    #                     for origin_uri, same_uri_list in same_uris_dict.items():
+    #                         if len(same_uri_list) > 0:
+    #                             sameAs_track_dictionary[origin_uri] = True
+    #                         graph_name = ''
+    #                         # check if uri has already a corresponding graph_name
+    #                         if origin_uri in graph_names_dict:
+    #                             graph_name = graph_names_dict[origin_uri]
+    #                         else:
+    #                             # if not, create the graph name with last_graph_id
+    #                             graph_name = linkset_namespace + dataset_id + '__' + category_id + '__' + str(last_graph_id)
+    #                             # raise last_graph_id by 1
+    #                             last_graph_id = last_graph_id + 1
+    #                             # add the pair uri:graph_name to the graph_names_dict dict
+    #                             graph_names_dict[origin_uri] = graph_name
+    #                         try:
+    #                             ds_updated = add_quads_to_conj_graph(
+    #                                 ds, graph_name, datasets[dataset_id]['iri_base'], datasets[dataset_id]['name'], origin_uri, same_uri_list, WHITE_LIST_PARAM[match]['iri_base'], match)
+    #                             ds = ds_updated
+    #                         except Exception as e:
+    #                             print('ERROR add_quads_to_conj_graph WHITE => 1000', e)
+    # ds.serialize(destination=file_path, format='nquads', encoding='US-ASCII')
     return sameAs_track_dictionary
 
 
