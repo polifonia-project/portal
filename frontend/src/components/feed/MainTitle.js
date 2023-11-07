@@ -17,7 +17,7 @@ const MainTitle = () => {
 
   return (
     <div className={classes.mainTitleContainer}>
-      <h3>Play the sound of Heritage</h3> {/* MUSIC, HISTORY, ... */}
+      <h3>Play the sound <br></br>of Heritage</h3> {/* MUSIC, HISTORY, ... */}
       <button onClick={() => handleClickScroll('introduction-Polifonia')}></button>
     </div>
 

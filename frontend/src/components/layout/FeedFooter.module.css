@@ -9,7 +9,9 @@
 }
 
 .visibilityHook {
-  opacity: 1;
+  opacity: 0;
+  -moz-opacity: 0; /* Firefox and Mozilla browsers */
+  -webkit-opacity: 0; /* WebKit browser e.g. Safari */
   margin: 0px;
   width: 100%;
   height: 0%;

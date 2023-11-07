@@ -197,6 +197,8 @@
 
 .visibilityHook {
   opacity: 0;
+  -moz-opacity: 0; /* Firefox and Mozilla browsers */
+  -webkit-opacity: 0; /* WebKit browser e.g. Safari */
   padding-bottom: 10px;
   width: 100%;
 }
