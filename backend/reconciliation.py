@@ -1,6 +1,5 @@
 # builtin libraries
 import os
-import re
 
 # external libraries
 from SPARQLWrapper import SPARQLWrapper, JSON
@@ -62,7 +61,6 @@ def query_same_as_internal(uri_list):
             ?same_uri '''+conf.same_as_path+''' ?origin_uri .
         } GROUP BY ?origin_uri
         '''
-    print('FIND QUERY',find_query)
     return find_query
 
 
@@ -178,7 +176,6 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
 
                 # Generalise the process
                 for chunk in uris_to_search_chunks:
-                    print(chunk)
                     query = query_same_as_internal(chunk)
                     same_uris_dict = find_matches(query, sparql_endpoint)
                     for origin_uri, same_uri_list in same_uris_dict.items():
