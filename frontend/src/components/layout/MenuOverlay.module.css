@@ -92,9 +92,21 @@
   box-shadow: 0 4px 12px 0 rgba(12,18,45,.1);
   display: inline-block;
   transition: all 1s ease;
+  margin-bottom: 15px;
+}
+
+.catLink+.menuLink {
+  margin-top: 15px;
 }
 
  .catLink:hover {
   transform: scale(1.5);
   background-color: #f4edec;
  }
+
+ @media only screen and (max-width: 400px) {
+  .menuLink, .catLink {
+    transform: scale(0.7);
+    margin: 2px;
+  }
+}
