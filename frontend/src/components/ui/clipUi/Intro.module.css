@@ -66,3 +66,21 @@
   color: black !important;
   border-color: transparent  !important;
 }
+
+
+@media only screen and (max-width: 1000px) {
+  .feedIntro h3 {
+    font-size: 35px;
+    width: 90%;
+  }
+  
+  .feedIntro h4 {
+    font-size: 18px;
+    width: 90%;
+  }
+  
+  .feedIntro p {
+    font-size: 18px;
+    width: 90%;
+  }
+}

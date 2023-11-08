@@ -147,3 +147,20 @@
   padding: 10px;
   font-size: 0.7em;
 }
+
+
+@media only screen and (max-width: 1000px) {
+  .flexZero {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .flexZero {
+    width: 100%;
+    margin-left: 0%;
+    margin-right: 0%;
+  }
+}

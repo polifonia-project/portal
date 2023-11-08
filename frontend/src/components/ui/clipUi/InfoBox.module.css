@@ -144,3 +144,27 @@ div.infoBox p {
   padding-left: calc(((100% / 16 * 1) + 5px));
   max-width: 40%;
 }
+
+@media only screen and (max-width: 1000px) {
+  div.infoBox h3 {
+    font-size: 25px;
+  }
+  
+  div.infoBox h3 i {
+    font-size: 25px;
+  }
+  
+  div.infoBox p {
+    font-size: 18px;
+    line-height: 25px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  
+  div.infoBox {
+    padding-left: calc(((100% / 16 * 1) + 5px));
+    margin-bottom: 220px;
+    max-width: 90%;
+  }
+}

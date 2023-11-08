@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import logo from "../../assets/svg/PolifoniaLogo.svg";
@@ -86,6 +86,22 @@ function MainNavigation(props) {
     document.getElementById("menuOptions").style.filter = 'none';}
   }
 
+    // The width below which the mobile view should be rendered
+    const breakpointSmall = 500;
+    const [width, setWidth] = useState(window.innerWidth);
+  
+    useEffect(() => {
+      const updateWindowDimensions = () => {
+        const newWidth = window.innerWidth;
+        setWidth(newWidth);
+      };
+  
+      window.addEventListener("resize", updateWindowDimensions);
+  
+      return () => window.removeEventListener("resize", updateWindowDimensions) 
+  
+    }, []);
+
   return (
     <header className={classes.header} id='mainHeader' >
       <span className={classes.title} id='title-logo'>
@@ -93,8 +109,10 @@ function MainNavigation(props) {
         <div className={classes.section} id='sectionName'><span>{props.sectionName}</span></div>
       </span>
       <span className={classes.menu} id='menuOptions' >
-        <img onClick={toggleBackClip} id='backToClip' className={classes.backToClip} src={backToClip} alt="Back to top Toggle" title="back to highlight" style={{ display: backToTopOn ? cardOpen ? 'none' : 'block' : 'none' }} />
-        <img onClick={toggleBackTop} id='backToTop' className={classes.backToTop} src={backToTop} alt="Back to top Toggle" title="back to top" style={{ display: backToTopOn ? cardOpen ? 'none' : 'block' : 'none' }} />
+        {width < breakpointSmall ? null :
+       [<img onClick={toggleBackClip} id='backToClip' className={classes.backToClip} src={backToClip} alt="Back to top Toggle" title="back to highlight" style={{ display: backToTopOn ? cardOpen ? 'none' : 'block' : 'none' }} />,
+        <img onClick={toggleBackTop} id='backToTop' className={classes.backToTop} src={backToTop} alt="Back to top Toggle" title="back to top" style={{ display: backToTopOn ? cardOpen ? 'none' : 'block' : 'none' }} />]
+      }
         <img onClick={toggleSound} className={classes.sound} src={soundOn ? soundon : soundoff} title={soundOn ? "turn sound off" : "turn sound on"} alt="Sound Toggle" />
         <img onClick={toggleMenu} className={classes.hamburger} src={menuOpen ? closemenu : hamburger} title="menu" alt="Hamburger Menu" />
       </span>

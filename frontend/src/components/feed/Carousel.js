@@ -8,10 +8,6 @@ const Carousel = () => {
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const [content, setContent] = useState([]);
   const chevronWidth = 90;
-    // The width below which the mobile view should be rendered
-  const breakpointTablet = 1000;
-  const breakpointPhone = 700;
-  const breakpointSmall = 500;
 
   useEffect(() => {
     fetch("/portal/conf_info")
@@ -25,6 +21,10 @@ const Carousel = () => {
 
   }, [])
 
+  // The width below which the mobile view should be rendered
+  const breakpointTablet = 1000;
+  const breakpointPhone = 700;
+  const breakpointSmall = 500;
   const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
