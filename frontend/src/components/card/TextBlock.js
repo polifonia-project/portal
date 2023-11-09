@@ -32,16 +32,28 @@ function TextBlock(props) {
 
     // width
     var current_width = props.width;
-    if (current_width === 'small') {
-      setNumericWidth(25);
-    } else if (current_width === 'medium') {
-      setNumericWidth(50);
-    } else if (current_width === 'large') {
-      setNumericWidth(100);
+    if (props.screen === 4 ){
+      if (current_width === 'small') { setNumericWidth(25);} 
+      else if (current_width === 'medium') {setNumericWidth(50);} 
+      else if (current_width === 'large') {setNumericWidth(100);} 
+      else {setNumericWidth(100);}
+    } else if (props.screen === 3 ) {
+      if (current_width === 'small') { setNumericWidth(50);} 
+      else if (current_width === 'medium') {setNumericWidth(100);} 
+      else if (current_width === 'large') {setNumericWidth(100);} 
+      else {setNumericWidth(100);}
+    } else if (props.screen === 2 ) {
+      if (current_width === 'small') { setNumericWidth(100);} 
+      else if (current_width === 'medium') {setNumericWidth(100);} 
+      else if (current_width === 'large') {setNumericWidth(100);} 
+      else {setNumericWidth(100);}
     } else {
-      setNumericWidth(25);
+      if (current_width === 'small') { setNumericWidth(100);} 
+      else if (current_width === 'medium') {setNumericWidth(100);} 
+      else if (current_width === 'large') {setNumericWidth(100);} 
+      else {setNumericWidth(100);}
     }
-  }, [props.content, props.width, textList.length]);
+  }, [props.content, props.width, textList.length, props.screen]);
 
   return (
     isLoaded ?

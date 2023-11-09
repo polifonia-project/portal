@@ -4,8 +4,7 @@ import { CardContext } from "../context/CardContext";
 import Card from "../components/card/Card";
 
 function CardPage(props) {
-
-    let [searchParams] = useSearchParams()
+    const [searchParams] = useSearchParams();
     const title = searchParams.get('title');
     const cat = searchParams.get('cat');
     const uri = searchParams.get('uri');
@@ -17,10 +16,16 @@ function CardPage(props) {
     const { setCardContent } = useContext(CardContext);
     const { setCardBlocksNew } = useContext(CardContext);
 
+  // When the user first comes here from general search route, 
+    
+
+    useEffect(() => {
+        setCardOpen(true);
+    }, [setCardOpen]);
+
     useEffect(() => {
         if (hasinput === 'false') {setWithInput(false)} else { setWithInput(true)}
         props.func('Portal');
-        setCardOpen(true);
         setCardContent({ title: title, cat: cat, input: input, uri: uri, color: '#000000', hasInput: withInput, goesBack: false })
     }, [cat, props, setCardContent, setCardOpen, title, uri, input, hasinput, searchParams, withInput]);
     
@@ -29,6 +34,7 @@ function CardPage(props) {
             .then(res => res.json())
             .then(data => setCardBlocksNew(data.cards))
     }, [setCardBlocksNew]);
+
   return(
   <Card></Card>
   )

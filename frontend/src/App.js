@@ -45,7 +45,7 @@ function App() {
             <Route path="/portal/terms" element={<TermsPage func={setPageTitle} />} />
             <Route path="/portal/cookies" element={<CookiesPage func={setPageTitle} />} />
             <Route path="/portal/about" element={<AboutPage func={setPageTitle} />} />
-            <Route path="/portal/card" element={<CardPage func={setPageTitle} />} />
+            <Route path="/portal/card" exact={true} element={<CardPage func={setPageTitle} />} />
             <Route path='*' element={<NotFoundPage func={setPageTitle} />}/>
           </Routes>
         </Layout>
