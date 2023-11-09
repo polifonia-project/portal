@@ -21,7 +21,9 @@
   background-color: #fdff00;
   box-shadow: inset 0px -20px 200px -90px black;
   padding-left: calc(((100% / 16 * 1) + 5px));
+  flex-wrap: wrap;
 }
+
 
 .textContainer {
   margin: 0px;
@@ -77,6 +79,7 @@
   box-shadow: 0 4px 12px 0 rgba(12,18,45,.1);
   color: black !important;
   border-color: transparent  !important;
+  white-space: nowrap;
 }
 
 .textButton {
@@ -117,4 +120,21 @@
   -webkit-opacity: 0; /* WebKit browser e.g. Safari */
   margin: 0px;
   width: 100%;
+}
+
+@media only screen and (max-width: 1000px) {
+  .textContainer h3 {
+    font-size: 35px;
+    width: 90%;
+  }
+  
+  .textContainer h4 {
+    font-size: 18px;
+    width: 90%;
+  }
+  
+  .textContainer p {
+    font-size: 18px;
+    width: 90%;
+  }
 }
