@@ -27,9 +27,13 @@ class SectionClip extends React.Component {
       isHover: false,
       helpT: '',
       helpTMargin: '400px',
-      arrowOption: false
+      arrowOption: false,
+      breakpointSmall: 500,
+      width: window.innerWidth,
+      isSmallScreen: false
     };
   };
+
   handleMouseEnterOption = (e) => {
     this.setState({ arrowOption: false });
     let ul = e.target.parentNode;
@@ -239,19 +243,19 @@ class SectionClip extends React.Component {
             ></input>
             <button type="reset" className={classes.resetbutton} onClick={this.onClickReset}
               el_iri={this.props.el_iri} style={{ cursor: this.state.isFocused ? 'pointer' : 'default' }}
-              onMouseEnter={this.state.isFocused ? () => this.handleMouseEnter('Reset', '420px') : null}
+              onMouseEnter={this.state.isFocused ? () => this.handleMouseEnter('Reset',this.props.smallScreen ? '420px': '70vw') : null}
               onMouseLeave={this.handleMouseLeave}>
               <img alt='search button' src={this.state.isFocused ? closeicon : blankicon} ></img>
             </button>
             <button type="submit" className={classes.searchbutton} onClick={this.handleOnSubmit}
-              onMouseEnter={() => this.handleMouseEnter('Search', '448px')}
+              onMouseEnter={() => this.handleMouseEnter('Search', this.props.smallScreen ? '448px': '75vw')}
               onMouseLeave={this.handleMouseLeave}>
               <img alt='search button' src={searchicon}></img>
             </button>
           </div>
           <div className={classes.helpText + ' ' + classes[this.state.isHover ? 'helpTextVisible' : 'helpTextHidden']} style={{ marginLeft: this.state.helpTMargin }}><p>{this.state.helpT}</p></div>
           <ExpandButton
-            mouseEnter={() => this.handleMouseEnter('Expand', '508px')}
+            mouseEnter={() => this.handleMouseEnter('Expand', this.props.smallScreen ? '508px': '86vw')}
             mouseLeave={this.handleMouseLeave}
             label={this.state.current_input}
             cat={this.props.catName}

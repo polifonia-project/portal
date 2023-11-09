@@ -28,3 +28,13 @@
   transform: scale(2);
   opacity: 1;
 }
+
+
+@media only screen and (max-width: 500px) {
+  .expandButton {
+    height: 25px;
+    width: 25px;
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+}
