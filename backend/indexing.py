@@ -12,6 +12,7 @@ import urllib.parse
 import methods
 import reconciliation as rec
 import linkset_endpoint as endpoint
+import conf
 
 g = methods.read_json('conf_general.json')
 
@@ -50,7 +51,7 @@ def sonic_flush_index(collection):
 def index_per_category(cat_id, cat_name, entities_dir, reconciled_index):
     '''ingest data for each category iterating over the entities files for that category'''
     index_dict = {}
-    graphs_labels_set= {}
+    graphs_labels_pairs = {}
 
     # iterate over entities file and search for the ones that have cat_id
     for filename in os.listdir(entities_dir):
@@ -64,21 +65,31 @@ def index_per_category(cat_id, cat_name, entities_dir, reconciled_index):
                     index_dict[entity_uri] = entities_file_data[entity_uri]['label']
             elif reconciled_index == True:
                 uri_graph_match = rec.index_reconciliation(entities_file_data.keys(), endpoint.UPDATEMYLINKSET)
-                # prepare dictionary with named_graph: set(label1, label2, labeln)
+                # prepare dictionary with named_graph: label
+                # iterate over options in preferred_labels
+                # when possible add the label for the first option, then for the second
                 for uri, graph in uri_graph_match.items():
-                    if graph not in graphs_labels_set:
-                        labels_set = set()
-                        labels_set.add(entities_file_data[uri]['label'])
-                        graphs_labels_set[graph] = labels_set
-                    elif graph in graphs_labels_set:
-                        labels_set = graphs_labels_set[graph]
-                        labels_set.add(entities_file_data[uri]['label'])
-                        graphs_labels_set[graph] = labels_set
+                    hostname = urllib.parse.urlparse(uri).hostname
+                    if graph not in graphs_labels_pairs:
+                        # create new dict to contain history for label and source uri 
+                        labels_dict = {}
+                    else:
+                        labels_dict = graphs_labels_pairs[graph]
+                    # add hostname: label to the labels_dict to later check and retrieve label based on prefferd ones
+                    labels_dict[hostname] = entities_file_data[uri]['label']
+                    graphs_labels_pairs[graph] = labels_dict
 
-    if reconciled_index == True:        
-        for graph, labels_set in graphs_labels_set.items():
-            # select the longest label
-            index_dict[graph] = max(labels_set, key=len)
+    if reconciled_index == True:    
+        for graph, labels_dict in graphs_labels_pairs.items():
+            # select the preferred label if it exists
+            if hostname not in conf.preferred_iribase_for_labels:
+                for label in labels_dict.values():
+                    index_dict[graph] = label
+                    break
+            else:
+                for iribase in conf.preferred_iribase_for_labels:
+                    if hostname in iribase:
+                        index_dict[graph] = labels_dict[hostname]
         # put everything in file to access labels for suggestion
         labels_dir_path = os.path.dirname(os.path.realpath(__file__))+'/index_labels'
         os.makedirs(labels_dir_path, exist_ok=True)
@@ -152,25 +163,3 @@ def ingest_index(categories, entities_dir, reconciled_index):
             methods.update_json(g['data_sources']['categories'], categories)
         else:
             print('[UPDATE] data already ingested for', cat_name)
-
-# def ingest_reconciled_index(categories, entities_dir):
-#     for cat in categories:
-#         cat_name = categories[cat]['name'].lower()
-
-#         is_ingested = False if 'status' not in categories[cat] else True
-#         # FIRST INGESTION
-#         if is_ingested == False:
-#             index_per_category(cat, cat_name, entities_dir)
-#             #  change status in categories config
-#             categories[cat]['status'] = 'ingested'
-#             methods.update_json(g['data_sources']['categories'], categories)
-#         else:
-#             print('[UPDATE] data already ingested for', cat_name)
-
-# def ingest_chosen_index(categories, entities_dir, reconciled_index=False):
-#     '''initilise correct sonic index based on type'''
-#     ingest_generic_index(categories, entities_dir, reconciled_index)
-#     elif reconciled_index == True:
-#         print('here')
-#         ingest_reconciled_index(categories, entities_dir, reconciled_index)
-#     pass

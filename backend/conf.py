@@ -8,3 +8,4 @@ linkset_url_enpoint = 'http://localhost:9999/bigdata/sparql'
 same_as_path = 'owl:sameAs|skos:exactMatch|schema:sameAs|<http://w3id.org/polifonia/ontology/meetups-ontology#hasWikidataEntity>|^owl:sameAs|^skos:exactMatch|^schema:sameAs|^<http://w3id.org/polifonia/ontology/meetups-ontology#hasWikidataEntity>'
 
 reconciled_index = True
+preferred_iribase_for_labels = ['http://www.wikidata.org/', 'http://dbpedia.org/']
