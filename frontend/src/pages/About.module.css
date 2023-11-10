@@ -48,6 +48,10 @@
     margin: 0;
 }
 
+.textContainer  h4 + p {
+  margin-top: 10px;
+}
+
 .introContainer  p,
 .textContainer  p {
   width: 70%;

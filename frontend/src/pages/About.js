@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./About.module.css";
 import Footer from "../components/layout/Footer";
 import VisibilitySensor from "react-visibility-sensor";
 
 function AboutPage(props) {
+
+  const [datasets, setDatasets] = useState({})
 
   useEffect(() => {
     props.func('About');
@@ -28,6 +30,15 @@ function AboutPage(props) {
     }
   }
 
+  // fetch datasets
+  useEffect(() => {
+      fetch("/portal/conf_info")
+      .then((res) => res.json())
+      .then((data) => {
+       setDatasets(data.datasets);
+      });
+   }, []);
+
   return (
     <div div className={classes.aboutPageContainer}>
       <VisibilitySensor onChange={onChange}>
@@ -38,6 +49,7 @@ function AboutPage(props) {
         <button className={classes.introButton} onClick={(() => handleClickScroll("mission-section"))}>Mission</button>
         <button className={classes.introButton} onClick={(() => handleClickScroll("approach-section"))}>Approach</button>
         <button className={classes.introButton} onClick={(() => handleClickScroll("portal-section"))}>Portal</button>
+        <button className={classes.introButton} onClick={(() => handleClickScroll("datasets-section"))}>Datasets</button>
       </div>
       <div className={classes.textContainer} id="project-section">
         <h3>The Project</h3>
@@ -60,6 +72,16 @@ function AboutPage(props) {
           <br /><br /> Designed with user-friendliness in mind, the portal serves as a gateway to Europe's vast musical heritage. Its intuitive interface allows scholars, musicians, educators, and enthusiasts to explore a diverse range of musical data extracted from historical manuscripts, recordings, and documents. Through meticulously curated collections and interactive features, users can delve into the intricate tapestry of European music, discovering rare compositions, historical contexts, and cultural influences. The portal's advanced search capabilities, coupled with innovative visualization tools, empower users to navigate through centuries of musical evolution effortlessly.
           <br /><br /> Additionally, the portal acts as a hub for collaborative research, enabling scholars to contribute their expertise, share insights, and engage in scholarly discourse. By fostering a sense of community and democratizing access to musical knowledge, the Polifonia web portal stands as a testament to the project's commitment to preserving, promoting, and enriching Europe's musical legacy for generations to come.</p>
       </div>
+      <div className={classes.textContainer} id="datasets-section">
+        <h3>Datasets</h3>
+        <p>The Polifonia H2020 project's web portal stands as a beacon of accessibility and knowledge, representing the culmination of the project's extensive research and technological innovations.
+       </p>
+       {Object.values(datasets).map(function(dataset, index) {
+          const name = dataset.name
+          const desc = dataset.description
+          return [<h4>{index  +1  + ". " +name}</h4>,<p>{desc}</p>]
+        })}
+       </div>
       <Footer></Footer>
     </div>
   );
