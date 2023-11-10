@@ -1,42 +1,49 @@
 {
     "d_01": {
         "id": "d_01",
-        "name": "musow",
+        "name": "Musow",
         "iri_base": "https://w3id.org/musow/",
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://projects.dharc.unibo.it/musow/sparql",
-        "rest_api": ""
+        "rest_api": "",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula."
     },
     "d_02": {
         "id": "d_02",
-        "name": "meetups",
+        "name": "Meetups",
         "iri_base": "http://w3id.org/polifonia/pilot/meetups/",
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://data.open.ac.uk/sparql",
-        "rest_api": ""
+        "rest_api": "",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula."
+    
     },
     "d_03": {
         "id": "d_03",
-        "name": "sound and vision",
+        "name": "Sound and Vision",
         "iri_base": "https://cat.apis.beeldengeluid.nl/",
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://cat.apis.beeldengeluid.nl/sparql",
-        "rest_api": ""
+        "rest_api": "",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula."
+    
     },
     "d_04": {
         "id": "d_04",
-        "name": "wikidata",
+        "name": "Wikidata",
         "iri_base": "http://www.wikidata.org/",
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://query.wikidata.org/sparql",
-        "rest_api": ""
+        "rest_api": "",
+        "description": "The Wikidata dataset is a dynamic knowledge graph, encompassing a broad spectrum of entities (individuals, places, concepts) and relationships. It interconnects various types of information, facilitating comprehensive exploration and analysis across diverse domains.</p>"
     },
     "d_05": {
         "id": "d_05",
-        "name": "led",
+        "name": "Led",
         "iri_base": "http://w3id.org/polifonia/pilot/led/",
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://data.open.ac.uk/sparql",
-        "rest_api": ""
+        "rest_api": "",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula."
     }
 }

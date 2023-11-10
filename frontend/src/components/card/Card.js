@@ -95,8 +95,7 @@ function Card(props) {
             number = block.id;
             number = number - 1;
             number = "id_" + number;
-            console.log("THIS IS DATASET")
-            console.log(datasets);
+            if (Object.keys(datasets).length === 0) {window.location.reload(false);}
             endpoint = datasets[dataset].sparql_endpoint;
             textResults = [];
 
@@ -139,6 +138,7 @@ function Card(props) {
             number = block.id;
             number = number - 1;
             number = "id_" + number;
+            if (Object.keys(datasets).length === 0) {window.location.reload(false);}
             endpoint = datasets[dataset].sparql_endpoint;
             linkResults = [];
 
@@ -182,6 +182,7 @@ function Card(props) {
             number = block.id;
             number = number - 1;
             number = "id_" + number;
+            if (Object.keys(datasets).length === 0) {window.location.reload(false);}
             endpoint = datasets[dataset].sparql_endpoint;
             relResults = [];
 
@@ -229,6 +230,7 @@ function Card(props) {
             number = number - 1;
             number = "id_" + number;
             mediaResults = [];
+            if (Object.keys(datasets).length === 0) {window.location.reload(false);}
             endpoint = datasets[dataset].sparql_endpoint;
 
             query = query.replaceAll("{}", "{" + recUri + "}");
@@ -327,11 +329,20 @@ function Card(props) {
 
   // fetch datasets
   useEffect(() => {
-    fetch("/portal/conf_info")
+    try {
+      fetch("/portal/conf_info")
       .then((res) => res.json())
       .then((data) => {
        setDatasets(data.datasets);
       });
+    } 
+    catch {
+      fetch("conf_info")
+      .then((res) => res.json())
+      .then((data) => {
+       setDatasets(data.datasets);
+      });
+    }
   }, []);
 
   const setLightHeader = () => {
