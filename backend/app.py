@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify
 
 # builtin libraries
 import timeit
+import json
 
 # internal libraries
 import methods
@@ -31,8 +32,10 @@ def index():
     word = request.args.get('data')
     if len(word) > 0:
         suggestions = i.suggested_results(d, cat, cat_id, word.lower(), conf.reconciled_index)
-        print(suggestions)
-        return jsonify(suggestions)
+        sliced_items = list(suggestions.items())[:10]
+        result_dict = dict(sliced_items)
+        print(result_dict)
+        return json.dumps(result_dict, sort_keys=False)
 
 
 @app.route('/portal/reconciliation', methods=['GET'])
