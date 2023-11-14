@@ -151,7 +151,9 @@ def suggested_results(d, c, cat_id, word, reconciled_index):
                         # append uri and its label to suggestions dict
                         suggestions[uri] = entities_file_data[uri]['label']
     sorted_suggestions = order_dict_by_similarity(word, suggestions)
-    return sorted_suggestions
+    sliced_suggestions = list(sorted_suggestions.items())[:10]
+    result_suggestions = dict(sliced_suggestions)
+    return result_suggestions
 
 def ingest_index(categories, entities_dir, reconciled_index):
     for cat in categories:
