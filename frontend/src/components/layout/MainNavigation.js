@@ -20,12 +20,17 @@ function MainNavigation(props) {
   const { currentSection } = useContext(ThemeContext);
   const { soundOn, setSoundOn } = useContext(ThemeContext);
   const { backToTopOn, setbackToTopOn } = useContext(ThemeContext);
-  const { cardOpen } = useContext(CardContext);
+  const { cardOpen, setCardOpen } = useContext(CardContext);
 
 
   const toggleMenu = () => {
     setMenuOpen(prev => !prev)
     setOverlayStatus(true)
+    if (cardOpen) {
+      setCardOpen(false)
+    } else {
+      setCardOpen(true)
+    }
   }
 
   const toggleSound = () => {
