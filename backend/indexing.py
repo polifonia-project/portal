@@ -6,6 +6,7 @@ import json
 from sonicclient import SearchClient, IngestClient, ControlClient
 from flask import jsonify
 import urllib.parse
+import difflib
 
 
 # internal libraries
@@ -105,16 +106,19 @@ def index_per_category(cat_id, cat_name, entities_dir, reconciled_index):
     print('[SUCCESS] ingestion for:', cat_name)
 
 
-# def sonic_suggest(cat, word):
-#     with SearchClient(g['index_host'], g['index_channel'], g['index_pw']) as querycl:
-#         print(querycl.ping())
-#         return querycl.suggest(cat, 'entities', word)
+def similarity(string1, string2):
+    '''calculates the similarity between two string using the difflib library'''
+    return difflib.SequenceMatcher(None, string1, string2).ratio()
+
+def order_dict_by_similarity(input_str, input_dict):
+    '''order dictionary based on similarity to a given string. return the ordered dict'''
+    return dict(sorted(input_dict.items(), key=lambda x: similarity(input_str, x[1]), reverse=True))
 
 
 def sonic_query(cat, word):
     with SearchClient(g['index_host'], g['index_channel'], g['index_pw']) as querycl:
         print(querycl.ping())
-        return querycl.query(cat, 'entities', word)
+        return querycl.query(cat, 'entities', word, 100)
 
 
 def suggested_results(d, c, cat_id, word, reconciled_index):
@@ -146,9 +150,8 @@ def suggested_results(d, c, cat_id, word, reconciled_index):
                         print('LABEL', entities_file_data[uri]['label'])
                         # append uri and its label to suggestions dict
                         suggestions[uri] = entities_file_data[uri]['label']
-                    
-    print(suggestions)
-    return suggestions
+    sorted_suggestions = order_dict_by_similarity(word, suggestions)
+    return sorted_suggestions
 
 def ingest_index(categories, entities_dir, reconciled_index):
     for cat in categories:
