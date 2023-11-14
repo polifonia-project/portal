@@ -370,7 +370,7 @@ class ResultsTest extends React.Component {
             for (const obj of this.props.filters[cat]) {
                 let dataset_id = obj.dataset
 
-                let iri_base = datasets[dataset_id].iri_base
+                //let iri_base = datasets[dataset_id].iri_base
                 let query_method = datasets[dataset_id].query_method
                 let endpoint = datasets[dataset_id][query_method]
                 let query = obj.query;
