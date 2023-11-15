@@ -258,77 +258,114 @@ class ResultsTest extends React.Component {
         query = query.replaceAll('{}', '{' + uri + '}');
         query = query.concat(' ', queryOffsetString).concat(' ', queryLimitString);
         let url = endpoint + '?query=' + encodeURIComponent(query);
-        try {
-            return fetch(url, {
-                method: 'GET',
-                headers: { 'Accept': 'application/sparql-results+json' }
-            })
-                .then((res) => res.json())
-                .then((data) => {
 
-                    let dataLen = data.results.bindings.length;
-                    if (dataLen > 0) {
-                        data.results.bindings.forEach(res => {
-                            let singleResult = {}
-                            singleResult.uri = res.entity.value;
-                            singleResult.label = res.entityLabel.value;
-                            singleResult.cat = cat;
-                            singleResult.rel = '';
-                            singleResult.inverse = false;
-                            singleResult.input_value = this.props.input_value;
-                            singleResult.input_category = this.props.input_category;
-                            singleResult.dataset = datasets[dataset_id].name;
-                            if (res.inverse_rel) {
-                                if (res.inverse_rel.value.length !== '') {
-                                    singleResult.rel = res.inverse_rel.value;
-                                    singleResult.inverse = true;
-                                } else {
-                                    singleResult.rel = res.rel.value;
-                                    singleResult.inverse = false;
-                                }
+        // Create an instance of AbortController
+        const controller = new AbortController();
+        const signal = controller.signal;
+        // Set up a timeout to abort the fetch after 30 seconds
+        const timeoutId = setTimeout(() => {
+            controller.abort();
+            console.log('Fetch aborted due to timeout');
+        }, 40000);
+
+        // Create a function to clear the timeout and handle the fetch response
+        const handleFetchResponse = (res) => {
+            // Clear the timeout since the fetch started successfully
+            clearTimeout(timeoutId);
+
+            // Check if the fetch was aborted
+            if (signal.aborted) {
+                console.log('Fetch aborted');
+                return Promise.reject(new Error('Fetch aborted'));
+            }
+
+            // Check if the response is OK
+            if (!res.ok) {
+                console.log('Fetch failed with status:', res.status);
+                return Promise.reject(new Error('Fetch failed'));
+            }
+
+            // Parse and return the JSON data
+            return res.json();
+        };
+
+
+        return fetch(url, {
+            method: 'GET',
+            headers: { 'Accept': 'application/sparql-results+json' },
+            signal: signal,
+        })
+            .then(handleFetchResponse)
+            .then((data) => {
+                let dataLen = data.results.bindings.length;
+                if (dataLen > 0) {
+                    data.results.bindings.forEach(res => {
+                        let singleResult = {}
+                        singleResult.uri = res.entity.value;
+                        singleResult.label = res.entityLabel.value;
+                        singleResult.cat = cat;
+                        singleResult.rel = '';
+                        singleResult.inverse = false;
+                        singleResult.input_value = this.props.input_value;
+                        singleResult.input_category = this.props.input_category;
+                        singleResult.dataset = datasets[dataset_id].name;
+                        if (res.inverse_rel) {
+                            if (res.inverse_rel.value.length !== '') {
+                                singleResult.rel = res.inverse_rel.value;
+                                singleResult.inverse = true;
                             } else {
                                 singleResult.rel = res.rel.value;
                                 singleResult.inverse = false;
                             }
-                            results.push(singleResult);
-                            if (!relations.includes(singleResult.rel)) {
-                                relations.push(singleResult.rel);
-                            }
-
-                            if (!relationSet[singleResult.cat]) {
-                                relationSet[singleResult.cat] = [];
-                                disabled[singleResult.cat] = true;
-                                if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
-                                    relationSet[singleResult.cat].push(singleResult.rel)
-                                }
-                            } else {
-                                if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
-                                    relationSet[singleResult.cat].push(singleResult.rel)
-                                }
-                            }
-                            this.setState({ totalResults: results });
-                            this.setState({ relations: relations });
-                            this.setState({ relationSet: relationSet });
-                            this.setState({ disabled: disabled });
-                            this.setState({ loader: false })
+                        } else {
+                            singleResult.rel = res.rel.value;
+                            singleResult.inverse = false;
                         }
-                        )
-                        if (dataLen < queryLimit) {
-                            catOffset[cat] = false;
-                            this.setState({ catOffset: catOffset })
-                            if (!Object.values(catOffset).includes(true)) {
-                                this.setState({ hasMore: false })
+                        results.push(singleResult);
+                        if (!relations.includes(singleResult.rel)) {
+                            relations.push(singleResult.rel);
+                        }
+
+                        if (!relationSet[singleResult.cat]) {
+                            relationSet[singleResult.cat] = [];
+                            disabled[singleResult.cat] = true;
+                            if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
+                                relationSet[singleResult.cat].push(singleResult.rel)
                             }
                         } else {
-                            catOffset[cat] = true;
-                            this.setState({ catOffset: catOffset });
+                            if (!relationSet[singleResult.cat].includes(singleResult.rel)) {
+                                relationSet[singleResult.cat].push(singleResult.rel)
+                            }
                         }
+                        this.setState({ totalResults: results });
+                        this.setState({ relations: relations });
+                        this.setState({ relationSet: relationSet });
+                        this.setState({ disabled: disabled });
+                        this.setState({ loader: false })
                     }
-                });
-        }
-        catch (err) {
-            console.log('error', err)
-        }
+                    )
+                    if (dataLen < queryLimit) {
+                        catOffset[cat] = false;
+                        this.setState({ catOffset: catOffset })
+                        if (!Object.values(catOffset).includes(true)) {
+                            this.setState({ hasMore: false })
+                        }
+                    } else {
+                        catOffset[cat] = true;
+                        this.setState({ catOffset: catOffset });
+                    }
+                }
+            })
+            .catch((err) => {
+                // Handle errors
+                if (err.name === 'AbortError') {
+                    // The fetch was aborted, handle accordingly
+                    console.log('Fetch aborted');
+                } else {
+                    console.log('Fetch error:', err.message);
+                }
+
+            });
     }
 
     fetchResults = (uri, newState = true) => {

@@ -37,23 +37,23 @@ function Card(props) {
   const sameAsUriList = [];
   const [sameAsUris, setSameAsUris] = useState(sameAsUriList);
 
-    // The width below which the mobile view should be rendered
-    const breakpointTablet = 1000;
-    const breakpointPhone = 700;
-    const breakpointSmall = 500;
-    const [width, setWidth] = useState(window.innerWidth);
-  
-    useEffect(() => {
-      const updateWindowDimensions = () => {
-        const newWidth = window.innerWidth;
-        setWidth(newWidth);
-      };
-  
-      window.addEventListener("resize", updateWindowDimensions);
-  
-      return () => window.removeEventListener("resize", updateWindowDimensions) 
-  
-    }, []);
+  // The width below which the mobile view should be rendered
+  const breakpointTablet = 1000;
+  const breakpointPhone = 700;
+  const breakpointSmall = 500;
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const updateWindowDimensions = () => {
+      const newWidth = window.innerWidth;
+      setWidth(newWidth);
+    };
+
+    window.addEventListener("resize", updateWindowDimensions);
+
+    return () => window.removeEventListener("resize", updateWindowDimensions)
+
+  }, []);
 
   // Function to collect sameAsUris
   const getSameAsUris = async (uri) => {
@@ -61,6 +61,36 @@ function Card(props) {
       "/portal/reconciliation?uri=" + encodeURIComponent(uri)
     ).then((response) => response.json());
     setSameAsUris(response);
+  };
+
+  // Handle fetch errors
+  const handleFetchError = (err) => {
+    if (err.name === 'AbortError') {
+      // The fetch was aborted, handle accordingly
+      console.log('Fetch aborted');
+    } else {
+      console.log('Fetch error:', err.message);
+    }
+  }
+  // clear the timeout and handle the fetch response
+  const handleFetchResponse = (res, timeoutId, signal) => {
+    // Clear the timeout since the fetch started successfully
+    clearTimeout(timeoutId);
+
+    // Check if the fetch was aborted
+    if (signal.aborted) {
+      console.log('Fetch aborted');
+      return Promise.reject(new Error('Fetch aborted'));
+    }
+
+    // Check if the response is OK
+    if (!res.ok) {
+      console.log('Fetch failed with status:', res.status);
+      return Promise.reject(new Error('Fetch failed'));
+    }
+
+    // Parse and return the JSON data
+    return res.json();
   };
 
   useEffect(() => {
@@ -95,18 +125,27 @@ function Card(props) {
             number = block.id;
             number = number - 1;
             number = "id_" + number;
-            if (Object.keys(datasets).length === 0) {window.location.reload(false);}
+            if (Object.keys(datasets).length === 0) { window.location.reload(false); }
             endpoint = datasets[dataset].sparql_endpoint;
             textResults = [];
 
             query = query.replaceAll("{}", "{" + recUri + "}");
             let url = endpoint + "?query=" + encodeURIComponent(query);
+            // Create an instance of AbortController
+            const controller = new AbortController();
+            const signal = controller.signal;
+            // Set up a timeout to abort the fetch after 30 seconds
+            const timeoutId = setTimeout(() => {
+              controller.abort();
+              console.log('Fetch aborted due to timeout');
+            }, 40000);
             try {
               fetch(url, {
                 method: "GET",
                 headers: { Accept: "application/sparql-results+json" },
+                signal: signal,
               })
-                .then((res) => res.json())
+                .then((res) => handleFetchResponse(res, timeoutId, signal))
                 .then((data) => {
                   let dataLen = data.results.bindings.length;
                   if (dataLen > 0) {
@@ -125,7 +164,7 @@ function Card(props) {
                   }
                 });
             } catch (err) {
-              console.log("error", err);
+              handleFetchError(err);
             }
             return null;
           });
@@ -138,18 +177,27 @@ function Card(props) {
             number = block.id;
             number = number - 1;
             number = "id_" + number;
-            if (Object.keys(datasets).length === 0) {window.location.reload(false);}
+            if (Object.keys(datasets).length === 0) { window.location.reload(false); }
             endpoint = datasets[dataset].sparql_endpoint;
             linkResults = [];
 
             query = query.replaceAll("{}", "{" + recUri + "}");
             let url = endpoint + "?query=" + encodeURIComponent(query);
+            // Create an instance of AbortController
+            const controller = new AbortController();
+            const signal = controller.signal;
+            // Set up a timeout to abort the fetch after 30 seconds
+            const timeoutId = setTimeout(() => {
+              controller.abort();
+              console.log('Fetch aborted due to timeout');
+            }, 40000);
             try {
               fetch(url, {
                 method: "GET",
                 headers: { Accept: "application/sparql-results+json" },
+                signal: signal,
               })
-                .then((res) => res.json())
+                .then((res) => handleFetchResponse(res, timeoutId, signal))
                 .then((data) => {
                   let dataLen = data.results.bindings.length;
                   if (dataLen > 0) {
@@ -169,7 +217,7 @@ function Card(props) {
                   }
                 });
             } catch (err) {
-              console.log("error", err);
+              handleFetchError(err);
             }
             return null;
           });
@@ -182,18 +230,27 @@ function Card(props) {
             number = block.id;
             number = number - 1;
             number = "id_" + number;
-            if (Object.keys(datasets).length === 0) {window.location.reload(false);}
+            if (Object.keys(datasets).length === 0) { window.location.reload(false); }
             endpoint = datasets[dataset].sparql_endpoint;
             relResults = [];
 
             query = query.replaceAll("{}", "{" + recUri + "}");
             let url = endpoint + "?query=" + encodeURIComponent(query);
+            // Create an instance of AbortController
+            const controller = new AbortController();
+            const signal = controller.signal;
+            // Set up a timeout to abort the fetch after 30 seconds
+            const timeoutId = setTimeout(() => {
+              controller.abort();
+              console.log('Fetch aborted due to timeout');
+            }, 40000);
             try {
               fetch(url, {
                 method: "GET",
                 headers: { Accept: "application/sparql-results+json" },
+                signal: signal,
               })
-                .then((res) => res.json())
+                .then((res) => handleFetchResponse(res, timeoutId, signal))
                 .then((data) => {
                   let dataLen = data.results.bindings.length;
                   if (dataLen > 0) {
@@ -216,7 +273,7 @@ function Card(props) {
                   }
                 });
             } catch (err) {
-              console.log("error", err);
+              handleFetchError(err);
             }
             return null;
           });
@@ -230,17 +287,26 @@ function Card(props) {
             number = number - 1;
             number = "id_" + number;
             mediaResults = [];
-            if (Object.keys(datasets).length === 0) {window.location.reload(false);}
+            if (Object.keys(datasets).length === 0) { window.location.reload(false); }
             endpoint = datasets[dataset].sparql_endpoint;
 
             query = query.replaceAll("{}", "{" + recUri + "}");
             let url = endpoint + "?query=" + encodeURIComponent(query);
+            // Create an instance of AbortController
+            const controller = new AbortController();
+            const signal = controller.signal;
+            // Set up a timeout to abort the fetch after 30 seconds
+            const timeoutId = setTimeout(() => {
+              controller.abort();
+              console.log('Fetch aborted due to timeout');
+            }, 40000);
             try {
               fetch(url, {
                 method: "GET",
                 headers: { Accept: "application/sparql-results+json" },
+                signal: signal,
               })
-                .then((res) => res.json())
+                .then((res) => handleFetchResponse(res, timeoutId, signal))
                 .then((data) => {
                   let dataLen = data.results.bindings.length;
                   if (dataLen > 0) {
@@ -259,7 +325,7 @@ function Card(props) {
                   }
                 });
             } catch (err) {
-              console.log("error", err);
+              handleFetchError(err);
             }
             return null;
           });
@@ -331,17 +397,17 @@ function Card(props) {
   useEffect(() => {
     try {
       fetch("/portal/conf_info")
-      .then((res) => res.json())
-      .then((data) => {
-       setDatasets(data.datasets);
-      });
-    } 
+        .then((res) => res.json())
+        .then((data) => {
+          setDatasets(data.datasets);
+        });
+    }
     catch {
       fetch("conf_info")
-      .then((res) => res.json())
-      .then((data) => {
-       setDatasets(data.datasets);
-      });
+        .then((res) => res.json())
+        .then((data) => {
+          setDatasets(data.datasets);
+        });
     }
   }, []);
 
@@ -454,7 +520,7 @@ function Card(props) {
                 content={textContent["id_" + i]}
                 reset={resetOn}
                 datasets={datasets}
-                screen= {width < breakpointSmall ? 1 : width < breakpointPhone ? 2 : width < breakpointTablet ? 3 : 4}
+                screen={width < breakpointSmall ? 1 : width < breakpointPhone ? 2 : width < breakpointTablet ? 3 : 4}
               ></TextBlock>
             );
           } else if (block.type === "relation") {
@@ -468,7 +534,7 @@ function Card(props) {
                 content={relContent["id_" + i]}
                 datasets={datasets}
                 isExternal={fromExternalLink}
-                screen= {width < breakpointSmall ? 1 : width < breakpointPhone ? 2 : width < breakpointTablet ? 3 : 4}
+                screen={width < breakpointSmall ? 1 : width < breakpointPhone ? 2 : width < breakpointTablet ? 3 : 4}
               ></RelationBlock>
             );
           } else if (block.type === "link") {
@@ -481,8 +547,8 @@ function Card(props) {
                 reset={resetOn}
                 links={block.content}
                 content={linkContent["id_" + i]}
-                screen= {width < breakpointSmall ? 1 : width < breakpointPhone ? 2 : width < breakpointTablet ? 3 : 4}
-              
+                screen={width < breakpointSmall ? 1 : width < breakpointPhone ? 2 : width < breakpointTablet ? 3 : 4}
+
               ></LinkBlock>
             );
           } else if (block.type === "media") {
@@ -494,7 +560,7 @@ function Card(props) {
                 class={block.class}
                 content={mediaContent["id_" + i]}
                 datasets={datasets}
-                screen= {width < breakpointSmall ? 1 : width < breakpointPhone ? 2 : width < breakpointTablet ? 3 : 4}
+                screen={width < breakpointSmall ? 1 : width < breakpointPhone ? 2 : width < breakpointTablet ? 3 : 4}
               ></MediaBlock>
             );
           } else if (block.type === "none") {
@@ -502,7 +568,7 @@ function Card(props) {
               <WarningBlock
                 key={"warningblock-" + i}
                 width={"large"}
-                screen= {width < breakpointSmall ? 1 : width < breakpointPhone ? 2 : width < breakpointTablet ? 3 : 4}
+                screen={width < breakpointSmall ? 1 : width < breakpointPhone ? 2 : width < breakpointTablet ? 3 : 4}
               ></WarningBlock>
             );
           }
