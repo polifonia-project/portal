@@ -32,10 +32,8 @@ def index():
     word = request.args.get('data')
     if len(word) > 0:
         suggestions = i.suggested_results(d, cat, cat_id, word.lower(), conf.reconciled_index)
-        sliced_items = list(suggestions.items())[:10]
-        result_dict = dict(sliced_items)
-        print(result_dict)
-        return json.dumps(result_dict, sort_keys=False)
+        print(suggestions)
+        return json.dumps(suggestions, sort_keys=False)
 
 
 @app.route('/portal/reconciliation', methods=['GET'])
@@ -88,7 +86,7 @@ print(
 #     f"Execution time for graphs_reconciliation is {graphs_reconciliation_result} seconds")
 
 # ingest_index_result = timeit.timeit(
-#     stmt='i.ingest_index(cat, endpoint.ENTITIES_DIRECTORY, conf.reconciled_index)', globals=globals(), number=1)
+#     stmt='i.ingest_index(d, cat, endpoint.ENTITIES_DIRECTORY, conf.reconciled_index)', globals=globals(), number=1)
 # print(f"Execution time for ingest_chosen_index is {ingest_index_result} seconds")
 
 if __name__ == '__main__':
