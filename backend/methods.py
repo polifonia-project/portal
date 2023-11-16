@@ -89,13 +89,17 @@ def create_entities_files(categories, datasets):
     '''create a file for each dataset_category to contain a list of their entities'''
     dat_cat_object = {}
     for dat in datasets:
-        dat_cat_object[dat] = []
+        is_parsed = False if 'status' not in datasets[dat] else True
+        if is_parsed == False:
+            dat_cat_object[dat] = []
 
     for cat in categories:
         for pattern in categories[cat]['search_pattern']:
-            dataset_list = dat_cat_object[pattern['dataset']]
-            dataset_list.append(cat)
-            dat_cat_object[pattern['dataset']] = dataset_list
+            dataset_id = pattern['dataset']
+            if dataset_id in dat_cat_object:
+                dataset_list = dat_cat_object[pattern['dataset']]
+                dataset_list.append(cat)
+                dat_cat_object[pattern['dataset']] = dataset_list
     
     os.makedirs('entities', exist_ok=True)
     for d, cat_list in dat_cat_object.items():
@@ -135,21 +139,23 @@ def fill_entities_files(state, categories, datasets, directory):
             split_name = filename.strip('.json').split('__')
             dat_id = split_name[0]
             cat_id = split_name[1]
-
+            # check if dataset already parsed
+            is_parsed = False if 'status' not in datasets[dat_id] else True
+            if is_parsed == False:
             # send query for that cat to the dat endpoint and retrieve dict uri:label
-            entities_data = collect_entities_uris(categories, cat_id, datasets, dat_id)
-            # get list of uris using keys method
-            entities_uris = entities_data.keys()
-            entities_list.extend(entities_uris)
-            for entity in entities_list:
-                entity_info = {
-                    'sameAs': False,
-                    'label': entities_data[entity]
-                }
-                entities_file[entity] = entity_info
+                entities_data = collect_entities_uris(categories, cat_id, datasets, dat_id)
+                # get list of uris using keys method
+                entities_uris = entities_data.keys()
+                entities_list.extend(entities_uris)
+                for entity in entities_list:
+                    entity_info = {
+                        'sameAs': False,
+                        'label': entities_data[entity]
+                    }
+                    entities_file[entity] = entity_info
 
-            # put everything in the corresponding json file
-            update_json(directory+'/'+filename, entities_file)
+                # put everything in the corresponding json file
+                update_json(directory+'/'+filename, entities_file)
 
         print('[SUCCESS] filled entities files')
     else:
