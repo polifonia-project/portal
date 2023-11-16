@@ -84,20 +84,22 @@ def linkset_file_population(entities_dir, datasets, linkset_directory):
         dat_id = split_name[0]
         cat_id = split_name[1]
 
-        new_linkset_file_path = linkset_directory + '/' + dat_id + '__' + cat_id + '.nq'
-        # get the list of uris in the file
-        entities_file = methods.read_json(entities_dir+'/'+filename)
-        uri_list = entities_file.keys()
-        # activate reconciliation process
-        sameAS_track_dictionary = rec.first_level_reconciliation(
-            uri_list, datasets, dat_id, cat_id, LINKSETGRAPH, new_linkset_file_path)
+        # check if dataset already parsed
+        is_parsed = False if 'status' not in datasets[dat_id] else True
+        if is_parsed == False:
+            new_linkset_file_path = linkset_directory + '/' + dat_id + '__' + cat_id + '.nq'
+            # get the list of uris in the file
+            entities_file = methods.read_json(entities_dir+'/'+filename)
+            uri_list = entities_file.keys()
+            # activate reconciliation process
+            sameAS_track_dictionary = rec.first_level_reconciliation(uri_list, datasets, dat_id, cat_id, LINKSETGRAPH, new_linkset_file_path)
 
-        # update sameAs information for each uri
-        for uri, info in sameAS_track_dictionary.items():
-            if uri in entities_file:
-                entities_file[uri]['sameAs'] = info
+            # update sameAs information for each uri
+            for uri, info in sameAS_track_dictionary.items():
+                if uri in entities_file:
+                    entities_file[uri]['sameAs'] = info
 
-        methods.update_json(entities_dir+'/'+filename, entities_file)
+            methods.update_json(entities_dir+'/'+filename, entities_file)
 
 
 def linkset_endpoint_update(entities_dir, datasets, linkset_directory):
@@ -109,10 +111,16 @@ def linkset_endpoint_update(entities_dir, datasets, linkset_directory):
 
     # Loading data to Blazegraph
     for filename in os.listdir(linkset_directory):
-        file_path = linkset_directory + '/' + filename
-        server.update(
-            'load <file:'+ os.path.dirname(os.path.realpath(__file__)) + '/' + file_path + '>')  # to do: understand how to generalise
-            # os.path.dirname(os.path.realpath(__file__))
+        split_name = filename.strip('.json').split('__')
+        dat_id = split_name[0]
+
+        # check if dataset already parsed
+        is_parsed = False if 'status' not in datasets[dat_id] else True
+        if is_parsed == False:
+            file_path = linkset_directory + '/' + filename
+            server.update(
+                'load <file:'+ os.path.dirname(os.path.realpath(__file__)) + '/' + file_path + '>')  # to do: understand how to generalise
+                # os.path.dirname(os.path.realpath(__file__))
     print('[UPDATE] linkset populated')
 
 
