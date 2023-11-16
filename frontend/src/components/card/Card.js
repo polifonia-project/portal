@@ -510,14 +510,15 @@ function Card(props) {
         </div>
       </div>
       <div className={classes.contentBlock}>
-        {Object.values(currentBlock).map((block, i) => {
+        {Object.values(currentBlock).sort((a, b) => a.id - b.id).map((block, i) => {
+        
           if (block.type === "text") {
             return (
               <TextBlock
-                key={"textblock-" + i}
+                key={"textblock-" + i.toString()}
                 width={block.size}
                 title={block.title}
-                content={textContent["id_" + i]}
+                content={textContent["id_" + i.toString()]}
                 reset={resetOn}
                 datasets={datasets}
                 screen={width < breakpointSmall ? 1 : width < breakpointPhone ? 2 : width < breakpointTablet ? 3 : 4}
@@ -526,12 +527,12 @@ function Card(props) {
           } else if (block.type === "relation") {
             return (
               <RelationBlock
-                key={"relationblock-" + i}
+                key={"relationblock-" + i.toString()}
                 width={block.size}
                 title={block.title}
                 category={block.category}
                 reset={resetOn}
-                content={relContent["id_" + i]}
+                content={relContent["id_" + i.toString()]}
                 datasets={datasets}
                 isExternal={fromExternalLink}
                 screen={width < breakpointSmall ? 1 : width < breakpointPhone ? 2 : width < breakpointTablet ? 3 : 4}
@@ -540,13 +541,13 @@ function Card(props) {
           } else if (block.type === "link") {
             return (
               <LinkBlock
-                key={"linkblock-" + i}
+                key={"linkblock-" + i.toString()}
                 width={block.size}
                 title={block.title}
                 desc={block.description}
                 reset={resetOn}
                 links={block.content}
-                content={linkContent["id_" + i]}
+                content={linkContent["id_" + i.toString()]}
                 screen={width < breakpointSmall ? 1 : width < breakpointPhone ? 2 : width < breakpointTablet ? 3 : 4}
 
               ></LinkBlock>
@@ -554,11 +555,11 @@ function Card(props) {
           } else if (block.type === "media") {
             return (
               <MediaBlock
-                key={"mediablock-" + i}
+                key={"mediablock-" + i.toString()}
                 width={block.size}
                 title={block.title}
                 class={block.class}
-                content={mediaContent["id_" + i]}
+                content={mediaContent["id_" + i.toString()]}
                 datasets={datasets}
                 screen={width < breakpointSmall ? 1 : width < breakpointPhone ? 2 : width < breakpointTablet ? 3 : 4}
               ></MediaBlock>
@@ -566,7 +567,7 @@ function Card(props) {
           } else if (block.type === "none") {
             return (
               <WarningBlock
-                key={"warningblock-" + i}
+                key={"warningblock-" + i.toString()}
                 width={"large"}
                 screen={width < breakpointSmall ? 1 : width < breakpointPhone ? 2 : width < breakpointTablet ? 3 : 4}
               ></WarningBlock>

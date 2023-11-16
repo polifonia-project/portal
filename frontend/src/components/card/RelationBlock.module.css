@@ -51,6 +51,10 @@
   line-height: 1.2;
 }
 
+.relationCouple {
+  display: flex;
+}
+
 .cardBlockBox:hover .relationLi a{ 
   opacity: 0.6;
  }

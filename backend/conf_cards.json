@@ -3,41 +3,154 @@
         "category": "cat_03",
         "color": "#ff02fe",
         "blocks": {
-            "01": {
+        "01": {
+            "id": 1,
+            "type": "text",
+            "size": "small",
+            "title": "Type of music work",
+            "content": [
+                {
+                    "dataset": "d_04",
+                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P7937 ?entity.} UNION { ?card_uri wdt:P7937 ?entity. } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                }
+            ]
+        },
+            "02": {
+                "id": 2,
                 "type": "text",
                 "size": "small",
-                "title": "Biography",
+                "title": "Definition",
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT DISTINCT ?entityLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?entityLabel .}}"
+                        "query": "SELECT DISTINCT ?entityLabel WHERE { VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?entityLabel.}}"
                     }
                 ]
             },
-            "02": {
-                "type": "relation",
-                "size": "small",
-                "title": "Influenced by",
-                "category": "artists",
-                "content": [
-                    {
-                        "dataset": "d_04",
-                        "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?card_uri {} { ?card_uri wdt:P25 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has mother\") AS ?rel) } UNION { ?card_uri wdt:P22 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has father\") AS ?rel) } UNION { ?card_uri wdt:P40 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has child\") AS ?rel) } UNION {?card_uri wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?rel)} UNION {?card_uri ^wdt:P802 ?entity. ?entity wdt:P31 wd:Q5 . BIND(str(\"has student\") AS ?inverse_rel)} UNION {?card_uri wdt:P737/wdt:P737/wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?rel)} UNION {?card_uri ^wdt:P737 ?entity. BIND(str(\"influenced by\") AS ?inverse_rel)}. SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel"
-                    }
-                ]
-            },
-            "04": {
+            "03": {
+                "id": 3,
                 "type": "media",
                 "size": "small",
-                "title": "Portrait",
+                "title": "Image",
                 "class": "image",
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE { VALUES ?card_uri {} ?card_uri wdt:P18 ?entity }"
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?entity }"
+                    }
+                ]
+            },
+            "04": {
+                "id": 4,
+                "type": "media",
+                "size": "small",
+                "title": "Collage image",
+                "class": "image",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P2716 ?entity .}"
+                    }
+                ]
+            },
+            "05": {
+                "id": 5,
+                "type": "relation",
+                "size": "small",
+                "title": "Performed by",
+                "category": "artists",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P175 ?entity.} UNION { ?card_uri wdt:P175 ?entity. } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                    }
+                ]
+            },
+            "06": {
+                "id": 6,
+                "type": "relation",
+                "size": "small",
+                "title": "Composed by",
+                "category": "artists",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P86 ?entity.} SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                    }
+                ]
+            },
+            "07": {
+                "id": 7,
+                "type": "relation",
+                "size": "small",
+                "title": "Lyrics by",
+                "category": "artists",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P676 ?entity.} SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                    }
+                ]
+            },
+            "08": {
+                "id": 8,
+                "type": "relation",
+                "size": "small",
+                "title": "Produced by",
+                "category": "artists",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P162 ?entity.} SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                    }
+                ]
+            },
+            "09": {
+                "id": 9,
+                "type": "link",
+                "size": "small",
+                "title": "Useful links",
+                "description": "Discover many other resources related to this music work, all available on the web",
+                "content": [
+                    {
+                        "label": "Website",
+                        "url": "https://www.google.com/",
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity  WHERE {VALUES ?card_uri {} ?card_uri wdt:P856 ?entity .}"
+                    },
+                    {
+                        "label": "Alt Source",
+                        "url": "https://www.google.com/",
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P973 ?entity .}"
+                    }
+                ]
+            },
+            "10": {
+                "id": 10,
+                "type": "text",
+                "size": "small",
+                "title": "Language",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P407 ?entity.} UNION { ?card_uri wdt:P407 ?entity. } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                    }
+                ]
+            },
+            "11": {
+                "id": 11,
+                "type": "text",
+                "size": "small",
+                "title": "Date",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity (YEAR(?entity) AS ?entityLabel) WHERE {VALUES ?card_uri {} { ?card_uri wdt:P577 ?entity.} UNION { ?card_uri wdt:P577 ?entity. } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
                     }
                 ]
             }
+            
         }
     },
     "genres": {
@@ -130,7 +243,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P1846 ?entity .}"
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P407 ?entity.} SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
                     }
                 ]
             },
@@ -143,7 +256,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT DISTINCT ?entity ?entityLabel {VALUES ?card_uri {} ?entity wdt:P136 ?card_uri . ?entity wikibase:statements ?outcoming . {?entity wdt:P31 wd:Q5.} UNION {?entity wdt:P31 wd:Q215380 .} ?entity wikibase:sitelinks ?sitelinks . { SELECT (count(?s) AS ?incoming) ?entity WHERE {VALUES ?card_uri {} ?entity wdt:P136 ?card_uri . ?s ?p ?entity .[] wikibase:directClaim ?p } GROUP BY ?entity } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" . }. } ORDER BY DESC (?incoming) LIMIT 35"
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P577 ?entity.} SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
                     }
                 ]
             }

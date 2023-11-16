@@ -70,16 +70,16 @@ function RelationBlock(props) {
     isLoaded ? <>
       {chunkedList.map(function (list, idx) {
         return (
-          <div key={'idx-' + idx} className={classes.cardBlockContainer} style={{ width: 'calc(' + numericWidth + '% - 25px)' }}>
+          <div  className={classes.cardBlockContainer} style={{ width: 'calc(' + numericWidth + '% - 25px)' }}>
             <div className={classes.relationBlock}>
               {(() => { if (idx === 0) { return <p className={classes.blockTitle}><span>{props.title}</span></p> } else { return <p className={classes.blockTitleHidden}><span>{props.title}</span></p> } })()}
 
               <div className={classes.cardBlockBox}>
-                {list.map(function (data) {
+                {list.map(function (data,idx) {
                   return (<>
                     {(() => {
-                      if (data.name) { return <p key={data.link} className={classes.relationLi}><a href={ props.isExternal ? window.location + "card?title=" + data.name + "&cat=" + props.category + "&uri=" + data.link : window.location.origin + window.location.pathname + "?title=" + data.name + "&cat=" + props.category + "&uri=" + data.link} target="_blank" rel="noopener noreferrer">————&nbsp;&nbsp; {data.name}</a></p> }
-                      else { return <p className={classes.sourceTag}>Source: {props.datasets[data.dataset].name} </p> }
+                      if (data.name) { return <span className={classes.relationCouple}><p className={classes.relationLi}>———&nbsp;&nbsp;</p><p className={classes.relationLi}><a href={ props.isExternal ? window.location + "card?title=" + data.name + "&cat=" + props.category + "&uri=" + data.link : window.location.origin + window.location.pathname + "?title=" + data.name + "&cat=" + props.category + "&uri=" + data.link} target="_blank" rel="noopener noreferrer">{data.name}</a></p></span> }
+                      else { return <p   className={classes.sourceTag}>Source: {props.datasets[data.dataset].name} </p> }
                     })()}
                   </>)
                 })}

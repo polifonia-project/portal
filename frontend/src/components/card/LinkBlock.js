@@ -9,6 +9,7 @@ function LinkBlock(props) {
   const [linkList, setLinkList] = useState([])
 
   useEffect(() => {
+    console.log("PROPS: ", props.content)
   // loading
   if (props.content === undefined) { // add or empty
     setIsLoaded(false)
