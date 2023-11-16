@@ -47,6 +47,7 @@ def sonic_flush_index(collection):
     with IngestClient(g['index_host'], g['index_channel'], g['index_pw']) as ingestcl:
         print('FLUSHED ', collection)
         ingestcl.flush(collection)
+        print('[DELETE] flushed index for:', collection)
 
 
 def index_per_category(cat_id, cat_name, entities_dir, reconciled_index):
@@ -104,9 +105,6 @@ def index_per_category(cat_id, cat_name, entities_dir, reconciled_index):
             with open('index_labels/' + cat_id + '.json', 'w') as f:
                 json.dump(index_dict, f)
     print('CHECK DICT TO INGEST', index_dict)
-    # flush
-    sonic_flush_index(cat_name)
-    print('[DELETE] flushed index for:', cat_name)
     # ingest
     sonic_ingest(index_dict, cat_name)
     print('[SUCCESS] ingestion for:', cat_name)
@@ -161,6 +159,19 @@ def suggested_results(d, c, cat_id, word, reconciled_index):
     result_suggestions = dict(sliced_suggestions)
     return result_suggestions
 
+def clean_index(cat_name, cat_id):
+    # flush
+    sonic_flush_index(cat_name)
+
+    # empty cat labels file
+    labels_dir_path = os.path.dirname(os.path.realpath(__file__))+'/index_labels'
+    cat_labels_file_path = labels_dir_path + cat_id + '.json'
+    if os.path.exists(cat_labels_file_path):
+        os.remove(cat_labels_file_path)
+        print(f"File {cat_labels_file_path} in {labels_dir_path} removed.")
+    else:
+        print(f"File {cat_labels_file_path} in {labels_dir_path} does not exist.")
+
 def ingest_index(datasets, categories, entities_dir, reconciled_index):
     for cat in categories:
         cat_name = categories[cat]['name'].lower()
@@ -168,6 +179,8 @@ def ingest_index(datasets, categories, entities_dir, reconciled_index):
         is_ingested = False if 'status' not in categories[cat] else True
         # FIRST INGESTION
         if is_ingested == False:
+            # clear first both index and labels file
+            clean_index(cat_name, cat)
             index_per_category(cat, cat_name, entities_dir, reconciled_index)
             #  change status in categories config
             categories[cat]['status'] = 'ingested'
