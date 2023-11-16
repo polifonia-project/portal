@@ -94,9 +94,15 @@ def index_per_category(cat_id, cat_name, entities_dir, reconciled_index):
         # put everything in file to access labels for suggestion
         labels_dir_path = os.path.dirname(os.path.realpath(__file__))+'/index_labels'
         os.makedirs(labels_dir_path, exist_ok=True)
-        
-        with open('index_labels/' + cat_id + '.json', 'w') as f:
-            json.dump(index_dict, f)
+        # check if file for cat already exists, else create it an add/update content
+        cat_labels_file_path = labels_dir_path + cat_id + '.json'
+        if os.path.exists(cat_labels_file_path):
+            cat_labels_file_content = methods.read_json()
+            index_dict.update(cat_labels_file_content)
+            methods.update_json(cat_labels_file_path, index_dict)
+        else:
+            with open('index_labels/' + cat_id + '.json', 'w') as f:
+                json.dump(index_dict, f)
     print('CHECK DICT TO INGEST', index_dict)
     # flush
     sonic_flush_index(cat_name)
@@ -155,7 +161,7 @@ def suggested_results(d, c, cat_id, word, reconciled_index):
     result_suggestions = dict(sliced_suggestions)
     return result_suggestions
 
-def ingest_index(categories, entities_dir, reconciled_index):
+def ingest_index(datasets, categories, entities_dir, reconciled_index):
     for cat in categories:
         cat_name = categories[cat]['name'].lower()
 
@@ -168,3 +174,8 @@ def ingest_index(categories, entities_dir, reconciled_index):
             methods.update_json(g['data_sources']['categories'], categories)
         else:
             print('[UPDATE] data already ingested for', cat_name)
+    for d in datasets:
+        #  change status in datasets config
+        datasets[d]['status'] = 'parsed'
+        methods.update_json(g['data_sources']['datasets'], datasets)
+        print('[UPDATE] data parsed for ', d)
