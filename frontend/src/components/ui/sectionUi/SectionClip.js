@@ -6,6 +6,7 @@ import { ThemeContext } from "../../../context/ThemeContext";
 import searchicon from '../../../assets/svg/magnglass.svg';
 import closeicon from '../../../assets/svg/closesearch.svg';
 import blankicon from '../../../assets/svg/blanksearch.svg';
+import InfiniteScroll from "react-infinite-scroll-component";
 import Remainder from "./Remainder";
 import ExpandButton from "./ExpandButton";
 
@@ -19,7 +20,8 @@ class SectionClip extends React.Component {
       clips: [],
       categories: [],
       searchField: "",
-      value_obj: {},
+      value_obj: {}, // Initialize with an empty object
+      loadedElements: 10, // Initial number of elements to load
       input: "",
       current_input: this.props.placeholder,
       isFocused: false,
@@ -30,8 +32,15 @@ class SectionClip extends React.Component {
       arrowOption: false,
       breakpointSmall: 500,
       width: window.innerWidth,
-      isSmallScreen: false
+      isSmallScreen: false,
     };
+  };
+
+  fetchMoreData = () => {
+    // Increase the count of loaded elements by 10
+    this.setState(prevState => ({
+      loadedElements: prevState.loadedElements + 10,
+    }));
   };
 
   handleMouseEnterOption = (e) => {
@@ -94,6 +103,7 @@ class SectionClip extends React.Component {
     this.setState({ searchField: event.target.value });
     if (event.target.value === '') {
       this.setState({ value_obj: {} });
+      this.setState({ loadedElements: 10 });
       this.setState({ arrowOption: false });
     };
     let request = "/portal/sonic_index?data=" + event.target.value + "&cat_id=" + category;
@@ -143,11 +153,13 @@ class SectionClip extends React.Component {
       inputRef.blur();
     }
   };
+
   onClickReset = e => {
     this.setState({ input: '' });
     this.setState({ current_input: this.props.placeholder });
     this.props.setInputValue(this.props.placeholder);
     this.setState({ value_obj: {} });
+    this.setState({ loadedElements: 10 });
     this.setState({ arrowOption: false });
     this.props.onQuery(this.state.mainClip);
   };
@@ -157,6 +169,7 @@ class SectionClip extends React.Component {
     this.setState({ current_input: e.currentTarget.innerText });
     this.props.setInputValue(e.currentTarget.innerText);
     this.setState({ value_obj: {} });
+    this.setState({ loadedElements: 10 });
     this.props.onQuery(e.currentTarget.getAttribute('el_iri'));
   };
 
@@ -164,11 +177,16 @@ class SectionClip extends React.Component {
     this.setState({ input: label });
     this.props.setInputValue(label);
     this.setState({ value_obj: {} });
+    this.setState({ loadedElements: 10 });
     this.setState({ arrowOption: false });
     this.props.onQuery(iri);
   };
 
   handleKeyPress = (e) => {
+    const suggestionsContainer = document.getElementById('suggContainer');
+    if (!suggestionsContainer) {
+      return;
+    }
     if (e.key === 'Enter') {
       if (Object.keys(this.state.value_obj).length > 0) {
         if (this.state.arrowOption === false) {
@@ -183,9 +201,9 @@ class SectionClip extends React.Component {
         let inputRef = document.getElementById('thisinput' + this.props.catName);
         inputRef.blur();
       }
-    };
+    }
 
-    if (e.key === 'ArrowDown') {
+    else if (e.key === 'ArrowDown') {
       if (this.state.arrowOption === false) {
         this.setState({ arrowOption: 0 });
         this.styleOption(document.getElementById('option0'));
@@ -200,9 +218,8 @@ class SectionClip extends React.Component {
         this.styleOption(document.getElementById('option' + newNumber));
         this.setState({ arrowOption: newNumber });
       }
-    };
-
-    if (e.key === 'ArrowUp') {
+    
+    } else if (e.key === 'ArrowUp') {
       if (this.state.arrowOption === false) {
         this.setState({ arrowOption: 0 });
         this.styleOption(document.getElementById('option0'));
@@ -221,6 +238,10 @@ class SectionClip extends React.Component {
   };
 
   render() {
+    const { value_obj, loadedElements } = this.state;
+    const keysToDisplay = Object.keys(value_obj).slice(0, loadedElements);
+    const height = keysToDisplay.length > 8 ? 300 : 'auto';
+
     return (
       <div className={classes.sectionClipFlex + ' ' + classes['sectionClipFlex' + this.props.category]}>
         <div className={classes.sectionClipContainer + ' ' + classes['sectionclip-' + this.props.category]}>
@@ -240,6 +261,7 @@ class SectionClip extends React.Component {
               onInput={(e) => this.handleInput(e)}
               onKeyDown={this.handleKeyPress}
               autoComplete="off"
+              tabIndex={0} 
             ></input>
             <button type="reset" className={classes.resetbutton} onClick={this.onClickReset}
               el_iri={this.props.el_iri} style={{ cursor: this.state.isFocused ? 'pointer' : 'default' }}
@@ -263,15 +285,27 @@ class SectionClip extends React.Component {
             uri={this.props.el_iri}
           ></ExpandButton>
           <div id={'suggContainer'} className={classes.suggestionsContainer} style={{ opacity: this.state.isFocused ? '1' : '0' }}>
-            {
-              Object.keys(this.state.value_obj).map((key, index) => (
-                <p onClick={this.onOptionClick}
-                  onMouseEnter={(e) => this.handleMouseEnterOption(e)}
-                  onMouseLeave={this.handleMouseLeaveOption}
-                  className={classes.suggestionoption}
-                  el_iri={key} id={'option' + index} key={'option--' + index}>{this.state.value_obj[key]}</p>
-              ))
-            }
+          <InfiniteScroll
+            dataLength={keysToDisplay.length}
+            next={this.fetchMoreData}
+            hasMore={true}
+            height={height}
+            scrollThreshold={0.9}
+          >
+            {keysToDisplay.map((key, index) => (
+            <p
+            onClick={this.onOptionClick}
+            onMouseEnter={e => this.handleMouseEnterOption(e)}
+            onMouseLeave={this.handleMouseLeaveOption}
+            className={classes.suggestionoption}
+            el_iri={key}
+            id={'option' + index}
+            key={'option--' + index}
+            >
+            {value_obj[key]}
+            </p>
+         ))}
+      </InfiniteScroll>
           </div>
         </div>
       </div>
