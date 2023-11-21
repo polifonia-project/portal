@@ -368,7 +368,7 @@ def graph_merging(entity_uri, endpoint):
 
     # if there is more than 1 graph, create new name for graph (the merging of the existing ones)
     if len(set(graph_set)) > 1:
-        new_graph_name = generate_mergerd_graph_name(graph_set)
+        new_graph_name = generate_merged_graph_name(graph_set)
         # insert triples from each graph into the new one and delete the olds
         values_to_search = ' '.join(graph_set)
 
