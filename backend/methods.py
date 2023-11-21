@@ -52,7 +52,7 @@ def access_conf_info(file_path):
     # read feed json
     f = read_json(g['data_sources']['feed'])
     # read dataset json
-    d = read_json(g['data_sources']['datatsets'])
+    d = read_json(g['data_sources']['datasets'])
     # read feed json
     cat = read_json(g['data_sources']['categories'])
     # read carousel json
