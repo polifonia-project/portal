@@ -77,7 +77,7 @@ def find_matches(query, endpoint):
                 for result in results['results']['bindings'] if len(result['same_uri']['value']) > 0}
         return results
     except Exception as e:
-        print('ERROR find_matches for ', endpoint, e)
+        print('ERROR find_matches for ', endpoint, query, e)
         return results
 
 
@@ -273,17 +273,33 @@ def white_list_reconciliation():
     pass
 
 
-def generate_mergerd_graph_name(data):
+def generate_merged_graph_name(data):
     '''this function creates a new graph name combining existing names.'''
     dat = ''
     cat = ''
     id = ''
 
+    merged_split = '___'
+    simple_split = '__'
+
     for result in data:
-        graph_name_parts = result.strip('<>').split('/')[-1].split('__')
-        dat = (dat + '__' + graph_name_parts[0]).strip('__')
-        cat = (cat + '__' + graph_name_parts[1]).strip('__')
-        id = (id + '__' + graph_name_parts[2]).strip('__')
+        graph_name_parts = ''
+        if merged_split in result:
+            graph_name_parts = result.strip('<>').split('/')[-1].split(merged_split)
+        else:
+            graph_name_parts = result.strip('<>').split('/')[-1].split(simple_split)
+        dat_parts = graph_name_parts[0].split(simple_split)
+        cat_parts = graph_name_parts[1].split(simple_split)
+        id_parts = graph_name_parts[2].split(simple_split)
+        for d in dat_parts:
+            if d not in dat:
+                dat = (dat + '__' + d).strip('__')
+        for c in cat_parts:
+            if c not in cat:
+                cat = (cat + '__' + c).strip('__')
+        for i in id_parts:
+            if i not in id:
+                id = (id + '__' + i).strip('__')
     new_graph_name = linkset_endpoint.LINKSETGRAPH + dat + '___' + cat + '___' + id
     return new_graph_name
 
