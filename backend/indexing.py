@@ -190,5 +190,4 @@ def ingest_index(datasets, categories, entities_dir, reconciled_index):
     for d in datasets:
         #  change status in datasets config
         datasets[d]['status'] = 'parsed'
-        methods.update_json(g['data_sources']['datasets'], datasets)
-        print('[UPDATE] data parsed for ', d)
+    methods.update_json(g['data_sources']['datasets'], datasets)
