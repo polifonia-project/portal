@@ -3,18 +3,18 @@
         "category": "cat_03",
         "color": "#ff02fe",
         "blocks": {
-        "01": {
-            "id": 1,
-            "type": "text",
-            "size": "small",
-            "title": "Type of music work",
-            "content": [
-                {
-                    "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P7937 ?entity.} UNION { ?card_uri wdt:P7937 ?entity. } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
-                }
-            ]
-        },
+            "01": {
+                "id": 1,
+                "type": "text",
+                "size": "small",
+                "title": "Type of music work",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P7937 ?entity.} UNION { ?card_uri wdt:P7937 ?entity. } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                    }
+                ]
+            },
             "02": {
                 "id": 2,
                 "type": "text",
@@ -150,7 +150,6 @@
                     }
                 ]
             }
-            
         }
     },
     "genres": {
@@ -444,11 +443,15 @@
                 "id": "1",
                 "type": "text",
                 "size": "small",
-                "title": "Definition",
+                "title": "Description",
                 "content": [
                     {
                         "dataset": "d_04",
                         "query": "SELECT DISTINCT ?entityLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?entityLabel.}}"
+                    },
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT (CONCAT(UCASE(SUBSTR(?description, 1, 1)), LCASE(SUBSTR(?description, 2)) ) as ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value dc:description ?description . }"
                     }
                 ]
             },
@@ -462,11 +465,164 @@
                     {
                         "dataset": "d_04",
                         "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?entity }"
+                    },
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT ?entity WHERE { VALUES ?starting_value {} ?starting_value a-cd:hasDocumentation/foaf:depiction ?entity. }"
                     }
                 ]
             },
             "03": {
                 "id": "3",
+                "type": "media",
+                "size": "small",
+                "title": "Sound",
+                "class": "audio",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT ?entity WHERE { VALUES ?starting_value {} ?starting_value a-cd:hasDocumentation/<https://w3id.org/italia/onto/SM/URL> ?entity. }"
+                    }
+                ]
+            },
+            "04": {
+                "id": "4",
+                "type": "text",
+                "size": "small",
+                "title": "Main note",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT ?entityLabel WHERE { VALUES ?starting_value {} ?starting_value <https://w3id.org/arco/ontology/musical-instrument/producesMusicalNote>/rdfs:label ?entityLabel. }"
+                    }
+                ]
+            },
+            "05": {
+                "id": "5",
+                "type": "relation",
+                "size": "small",
+                "title": "Built by",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { VALUES ?starting_value {} ?starting_value a-cd:hasAuthor ?entity . ?entity rdfs:label ?entityLabel . }"
+                    }
+                ]
+            },
+            "06": {
+                "id": "6",
+                "type": "text",
+                "size": "small",
+                "title": "Time period",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT (IF(STRBEFORE(?label, \"-\") = STRAFTER(?label, \"-\"), STRBEFORE(?label, \"-\"), ?label) AS ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value dc:date ?label . }"
+                    }
+                ]
+            },
+            "07": {
+                "id": "7",
+                "type": "relation",
+                "size": "small",
+                "title": "Has same builder of",
+                "category": "instruments",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "PREFIX clv: <https://w3id.org/italia/onto/CLV/> SELECT DISTINCT ?entity (CONCAT(?bellString, \" - \", ?church, \" - \", ?city) AS ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value a-cd:hasAuthor ?author . ?entity rdf:type a-dd:MusicalInstrument ; a-cd:hasAuthor ?author ; dc:coverage ?city ; a-loc:hasTimeIndexedTypedLocation/a-loc:atSite/rdfs:label ?church ; rdfs:label ?title ; dc:subject ?subject FILTER (str(?subject) = 'campana') . BIND (STRBEFORE(?title, \" (\") AS ?bellString) . FILTER (LANGMATCHES(LANG(?bellString), \"it\")) . FILTER (?entity != ?starting_value) . }"
+                    }
+                ]
+            },
+            "08": {
+                "id": "8",
+                "type": "text",
+                "size": "small",
+                "title": "Current location",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT ?entityLabel WHERE { VALUES ?starting_value {} ?starting_value dc:coverage ?entityLabel . }"
+                    }
+                ]
+            },
+            "09": {
+                "id": "9",
+                "type": "text",
+                "size": "small",
+                "title": "Place of production",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT (SUBSTR(?entityLabelToTrim, 8) as ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value a-loc:hasTimeIndexedTypedLocation/a-loc:hasLocationType a-loc:ProductionRealizationLocation ; a-loc:hasTimeIndexedTypedLocation/a-loc:atLocation/rdfs:label ?entityLabelToTrim . }"
+                    }
+                ]
+            },
+            "10": {
+                "id": "10",
+                "type": "text",
+                "size": "small",
+                "title": "Material",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT (SAMPLE(?label_to_format) AS ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value a-dd:hasMaterial/rdfs:label ?label_to_format. }"
+                    }
+                ]
+            },
+            "11": {
+                "id": "11",
+                "type": "text",
+                "size": "small",
+                "title": "Inscriptions",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT ?entityLabel WHERE { VALUES ?starting_value {} ?starting_value a-dd:hasAffixedElement/a-dd:transcript ?entityLabel . }"
+                    }
+                ]
+            },
+            "12": {
+                "id": "12",
+                "type": "relation",
+                "size": "small",
+                "title": "Iconography subjects",
+                "category": "",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT (CONCAT(UCASE(SUBSTR(?entityLabel, 1, 1)), SUBSTR(?entityLabel, 2)) AS ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value a-dd:hasIconographicOrDecorativeApparatus/a-cd:subject ?entityLabel . }"
+                    }
+                ]
+            },
+            "13": {
+                "id": "13",
+                "type": "relation",
+                "size": "small",
+                "title": "Is component of",
+                "category": "instruments",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT ?entity (CONCAT(UCASE(SUBSTR(?subject, 1, 1)), SUBSTR(?subject, 2), \" - \", ?church, \" - \", ?city) AS ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value arco:isCulturalPropertyComponentOf ?entity . ?entity a-loc:hasTimeIndexedTypedLocation/a-loc:atSite/rdfs:label ?church ; dc:coverage ?city ; dc:subject ?subject FILTER (str(?subject) = 'concerto di campane'). }"
+                    }
+                ]
+            },
+            "14": {
+                "id": "14",
+                "type": "relation",
+                "size": "small",
+                "title": "Other bells in the same set",
+                "category": "instruments",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT ?entity (CONCAT(?bellString, \" - \", ?church, \" - \", ?city) AS ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value arco:isCulturalPropertyComponentOf ?setOfBells . ?entity arco:isCulturalPropertyComponentOf ?setOfBells ; a-loc:hasTimeIndexedTypedLocation/a-loc:atSite/rdfs:label ?church ; rdfs:label ?title ; dc:coverage ?city ; dc:subject ?subject FILTER (str(?subject) = 'campana') . BIND (STRBEFORE(?title, \" (\") AS ?bellString) . FILTER (LANGMATCHES(LANG(?bellString), \"it\")) . FILTER (?starting_value != ?entity) . } ORDER BY ?starting_value"
+                    }
+                ]
+            },
+            "15": {
+                "id": "15",
                 "type": "relation",
                 "size": "small",
                 "title": "Played by",
@@ -475,6 +631,20 @@
                     {
                         "dataset": "d_04",
                         "query": "SELECT DISTINCT ?entity ?entityLabel {VALUES ?card_uri {} ?entity wdt:P1303 ?card_uri . ?entity wikibase:statements ?outcoming . {?entity wdt:P31 wd:Q5.} UNION {?entity wdt:P31 wd:Q215380 .} ?entity wikibase:sitelinks ?sitelinks . { SELECT (count(?s) AS ?incoming) ?entity WHERE {VALUES ?card_uri {} ?entity wdt:P1303 ?card_uri . ?s ?p ?entity .[] wikibase:directClaim ?p } GROUP BY ?entity } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" . }. } ORDER BY DESC (?incoming) LIMIT 17"
+                    }
+                ]
+            },
+            "16": {
+                "id": "16",
+                "type": "link",
+                "size": "small",
+                "title": "Useful links",
+                "description": "Discover more details related to this instrument available on the Web.",
+                "content": [
+                    {
+                        "label": "Italian Catalogue of Cultural Heritage",
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT ?entity WHERE { VALUES ?starting_value {} ?starting_value dc:source ?entity . FILTER(contains(str(?entity), 'https://catalogo.beniculturali.it')) }"
                     }
                 ]
             }
