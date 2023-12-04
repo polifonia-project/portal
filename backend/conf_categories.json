@@ -25,7 +25,7 @@
             "artists": [
                 {
                     "dataset": "d_03",
-                    "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;  (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?starting_value ;sdo:genre ?entity.  ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?starting_value  ;sdo:genre ?entity. ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel .} BIND(\"is associated with\" as ?rel)}"
+                    "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ; sdo:genre ?starting_value;  (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:genre ?starting_value;   (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity  . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel .} BIND(\"is associated with\" as ?rel)}"
                 },
                 {
                     "dataset": "d_04",
@@ -39,7 +39,7 @@
             "places": [
                 {
                     "dataset": "d_03",
-                    "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?starting_value {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ; sdo:genre ?starting_value ; sdo:locationCreated ?blank_entity . ?blank_entity rdfs:label ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:genre ?starting_value; sdo:locationCreated ?blank_entity  . ?blank_entity rdfs:label ?entityLabel .} BIND(\"is associated with\" as ?rel) BIND(IRI(CONCAT(\"https://cat.apis.beeldengeluid.nl/\", STR(?entityLabel))) AS ?entity)} ORDER BY ?entityLabel"
+                    "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?starting_value {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ; sdo:genre ?starting_value ; sdo:locationCreated ?location . ?location sdo:sameAs ?entity . ?location sdo:name ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:genre ?starting_value; sdo:locationCreated ?location . ?location sdo:sameAs ?entity . ?location sdo:name ?entityLabel .} BIND(\"is associated with\" as ?rel)} }"
                 },
                 {
                     "dataset": "d_04",
@@ -60,6 +60,12 @@
                 {
                     "dataset": "d_01",
                     "query": "SELECT DISTINCT ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value ^<https://schema.org/genre> ?entity. ?entity rdfs:label ?entityLabel BIND(str(\"has subject\") AS ?inverse_rel) } } ORDER BY ?entityLabel"
+                }
+            ],
+            "instruments": [
+                {
+                    "dataset": "d_03",
+                    "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?starting_value {<http://data.beeldengeluid.nl/gtaa/234346>}{ ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ; sdo:genre ?starting_value ; sdo:byArtist/sdo:roleName ?entity . ?entity rdfs:label ?entityLabel . ?entity a <http://www.wikidata.org/entity/Q34379> .  } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:genre ?starting_value; sdo:byArtist/sdo:roleName ?entity . ?entity rdfs:label ?entityLabel . ?entity a <http://www.wikidata.org/entity/Q34379> .} BIND(\"is associated with\" as ?rel)} "
                 }
             ]
         },
@@ -120,7 +126,7 @@
                 },
                 {
                     "dataset": "d_03",
-                    "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?starting_value {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;  (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?starting_value ; sdo:locationCreated ?blank_entity.  ?blank_entity rdfs:label ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?starting_value ; sdo:locationCreated ?blank_entity  . ?blank_entity rdfs:label ?entityLabel .} BIND(\"is associated with\" as ?rel) BIND(IRI(CONCAT(\"https://cat.apis.beeldengeluid.nl/\", STR(?entityLabel))) AS ?entity)} ORDER BY ?entityLabel"
+                    "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?starting_value {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/gtaa/124434> ;  (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?starting_value ; sdo:locationCreated ?blank_node.  ?blank_node sdo:sameAs ?entity .  ?blank_node sdo:name ?entityLabel } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?starting_value ; sdo:locationCreated ?blank_node  . ?blank_node sdo:sameAs ?entity . ?blank_node sdo:name ?entityLabel} BIND(\"is associated with\" as ?rel)} ORDER BY ?entityLabe"
                 },
                 {
                     "dataset": "d_04",
@@ -140,7 +146,7 @@
             "genres": [
                 {
                     "dataset": "d_03",
-                    "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ; sdo:genre ?starting_value;  (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:genre ?starting_value;   (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity  . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel .} BIND(\"is associated with\" as ?rel)} "
+                    "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;  (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?starting_value ;sdo:genre ?entity.  ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?starting_value  ;sdo:genre ?entity. ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel .} BIND(\"is associated with\" as ?rel)}"
                 },
                 {
                     "dataset": "d_04",
@@ -158,6 +164,10 @@
                 }
             ],
             "instruments": [
+                {
+                    "dataset": "d_03",
+                    "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ; sdo:byArtist ?artistInRole . ?artistInRole sdo:byArtist ?starting_value .?artistInRole sdo:roleName ?entity . ?entity rdfs:label ?entityLabel . ?entity a <http://www.wikidata.org/entity/Q34379> .} UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:byArtist ?artistInRole . ?artistInRole sdo:byArtist ?starting_value ; sdo:roleName ?entity . ?entity rdfs:label ?entityLabel ; a <http://www.wikidata.org/entity/Q34379> . } BIND(\"is associated with\" as ?rel)}"
+                },
                 {
                     "dataset": "d_05",
                     "query": "PREFIX mo: <http://purl.org/ontology/mo/> PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX led: <http://led.kmi.open.ac.uk/agent/> PREFIX dct: <http://purl.org/dc/terms/> PREFIX pl: <http://purl.org/NET/c4dm/event.owl#> SELECT DISTINCT ?rel ?entity ?entitylabel FROM <http://data.open.ac.uk/context/led> WHERE { VALUES ?starting_value {}  ?x mo:instrument ?entity .  ?x (led:agent | mo:performer | mo:performance_of/(led:agent | mo:performer)) ?starting_value .  ?entity rdfs:label ?entitylabel .  BIND(\"plays\" AS ?rel) .} ORDER BY ?entitylabel"
@@ -211,7 +221,7 @@
             },
             {
                 "dataset": "d_03",
-                "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?entity ?entityLabel WHERE { { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;sdo:locationCreated ?blank_entity . ?blank_entity rdfs:label ?entityLabel .} UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> . ?programUri sdo:hasPart ?sceneUri. ?sceneUri  sdo:locationCreated ?blank_entity . ?blank_entity rdfs:label ?entityLabel .} BIND(IRI(CONCAT(\"https://cat.apis.beeldengeluid.nl/\", STR(?entityLabel))) AS ?entity)}"
+                "query": "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX sdo: <https://schema.org/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>  SELECT DISTINCT ?entity ?entityLabel WHERE {?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .{?programUri sdo:locationCreated ?location . ?location sdo:sameAs ?entity .?location sdo:name ?entityLabel .}UNION{?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:locationCreated ?location .?location sdo:sameAs ?entity .?location sdo:name ?entityLabel.} }"
             },
             {
                 "dataset": "d_04",
@@ -230,7 +240,7 @@
                 },
                 {
                     "dataset": "d_03",
-                    "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?starting_value {} BIND(STRAFTER( STR(?starting_value), \"https://cat.apis.beeldengeluid.nl/\" ) AS ?starting_value_label) { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ; sdo:locationCreated/rdfs:label ?starting_value_label ;  (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:locationCreated/rdfs:label ?starting_value_label; (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity  . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel .} BIND(\"is associated with\" as ?rel)} ORDER BY ?entityLabel"
+                    "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?starting_value {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ; sdo:locationCreated/sdo:sameAs ?starting_value ;  (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:locationCreated/sdo:sameAs ?starting_value; (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/ (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity  . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel .} BIND(\"is associated with\" as ?rel)} ORDER BY ?entityLabel"
                 },
                 {
                     "dataset": "d_04",
@@ -246,13 +256,13 @@
             "genres": [
                 {
                     "dataset": "d_03",
-                    "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} BIND(STRAFTER( STR(?starting_value), \"https://cat.apis.beeldengeluid.nl/\" ) AS ?starting_value_label){ ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;sdo:locationCreated/rdfs:label ?starting_value_label ;sdo:genre ?entity. ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } UNION {?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> . ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:locationCreated/rdfs:label ?starting_value_label  ; sdo:genre ?entity. ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel .} BIND(\"is associated with\" as ?rel)} ORDER BY ?entityLabel"
+                    "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;sdo:locationCreated/sdo:sameAs ?starting_value ;sdo:genre ?entity. ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } UNION {?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> . ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:locationCreated/sdo:sameAs ?starting_value  ; sdo:genre ?entity. ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel .} BIND(\"is associated with\" as ?rel)} ORDER BY ?entityLabel"
                 }
             ],
             "places": [
                 {
                     "dataset": "d_03",
-                    "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?starting_value {} BIND(STRAFTER( STR(?starting_value), \"https://cat.apis.beeldengeluid.nl/\" ) AS ?starting_value_label) { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131>  ; sdo:locationCreated/rdfs:label ?starting_value_label ; sdo:locationCreated ?blank_entity .?blank_entity rdfs:label ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:locationCreated/rdfs:label ?starting_value_label ; sdo:locationCreated ?blank_entity .?blank_entity rdfs:label ?entityLabel .} FILTER(?entityLabel != ?starting_value_label) BIND(\"is associated with\" as ?rel) BIND(IRI(CONCAT(\"https://cat.apis.beeldengeluid.nl/\", STR(?entityLabel))) AS ?entity)} ORDER BY ?entityLabel"
+                    "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?starting_value {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131>  ; sdo:locationCreated/sdo:sameAs ?starting_value; sdo:locationCreated ?location . ?location sdo:sameAs ?entity . ?location sdo:name ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:locationCreated/sdo:sameAs ?starting_value; sdo:locationCreated ?location . ?location sdo:sameAs ?entity . ?location sdo:name ?entityLabel .} BIND(\"is associated with\" as ?rel)}"
                 }
             ]
         },
@@ -271,6 +281,10 @@
         "color": "#000000",
         "search_pattern": [
             {
+                "dataset": "d_03",
+                "query": "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX sdo: <https://schema.org/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>  SELECT DISTINCT ?entity ?entityLabel WHERE {?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .{?programUri sdo:byArtist/sdo:roleName ?entity . ?entity rdfs:label ?entityLabel .?entity a <http://www.wikidata.org/entity/Q34379> .}UNION{ ?programUri sdo:hasPart/sdo:byArtist/sdo:roleName ?entity . ?entity rdfs:label ?entityLabel . ?entity a <http://www.wikidata.org/entity/Q34379>. }}"
+            },
+            {
                 "dataset": "d_04",
                 "query": "SELECT ?entity ?entityLabel { ?entity wdt:P31 wd:Q110295396 . ?entity wikibase:statements ?outcoming . ?entity wikibase:sitelinks ?sitelinks . { SELECT (count(?s) AS ?incoming) ?entity WHERE { ?entity wdt:P31 wd:Q110295396 . ?s ?p ?entity . [] wikibase:directClaim ?p} GROUP BY ?entity} SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" . }.} ORDER BY DESC (?incoming)"
             },
@@ -285,6 +299,10 @@
         ],
         "filters": {
             "artists": [
+                {
+                    "dataset": "d_03",
+                    "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?starting_value {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ; sdo:byArtist ?artistInRole. ?artistInRole sdo:roleName ?starting_value . ?artistInRole sdo:byArtist ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel  } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:byArtist ?artistInRole . ?artistInRole sdo:roleName ?starting_value. ?artistInRole sdo:byArtist ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel  } BIND(\"is associated with\" as ?rel)}"
+                },
                 {
                     "dataset": "d_04",
                     "query": "SELECT DISTINCT ?rel ?inverse_rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?starting_value wdt:P61 ?entity. BIND(str(\"invented by\") AS ?rel) } UNION { ?entity wdt:P1535 ?starting_value . BIND(str(\"used by\") AS ?rel) } UNION { ?entity wdt:P1303 ?starting_value. BIND(str(\"played by\") AS ?rel) } . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } }"
@@ -308,8 +326,18 @@
             ],
             "instruments": [
                 {
+                    "dataset": "d_03",
+                    "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?starting_value {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ; sdo:byArtist ?artistInRole. ?artistInRole sdo:roleName ?starting_value . ?programUri sdo:byArtist/sdo:roleName ?entity .  ?entity a <http://www.wikidata.org/entity/Q34379> . ?entity rdfs:label ?entityLabel } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:byArtist ?artistInRole . ?artistInRole sdo:roleName ?starting_value.   ?sceneUri sdo:byArtist/sdo:roleName ?entity .  ?entity a <http://www.wikidata.org/entity/Q34379> . ?entity rdfs:label ?entityLabel  } BIND(\"is associated with\" as ?rel)} "
+                },
+                {
                     "dataset": "d_06",
                     "query": "SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?starting_value {} {?entity arco:isCulturalPropertyComponentOf ?starting_value ;a-loc:hasTimeIndexedTypedLocation/a-loc:atSite/rdfs:label ?church ;rdfs:label ?title ;dc:coverage ?city . BIND(STRBEFORE(?title, \" (\") AS ?bellString) .FILTER (LANGMATCHES(LANG(?bellString), \"it\")) .BIND(CONCAT(?bellString, \" - \", ?church, \" - \", ?city) AS ?entityLabel) .BIND(str(\"has component\") AS ?rel)}UNION{?starting_value arco:isCulturalPropertyComponentOf ?entity .?entity rdf:type a-dd:MusicalInstrument ;dc:coverage ?city ;a-loc:hasCulturalPropertyAddress/clvapit:hasRegion <https://w3id.org/arco/resource/Region/liguria> ;a-loc:hasTimeIndexedTypedLocation/a-loc:atSite/rdfs:label ?church ; dc:subject ?subject . FILTER (str(?subject) = 'concerto di campane') .BIND(CONCAT(UCASE(SUBSTR(?subject, 1, 1)), SUBSTR(?subject, 2), \" - \", ?church, \" - \", ?city) AS ?entityLabel).BIND(str(\"is component of\") AS ?rel)}UNION{?starting_value a-cd:hasAuthor ?author .?entity rdf:type a-dd:MusicalInstrument ;a-cd:hasAuthor ?author ;dc:coverage ?city ;a-loc:hasTimeIndexedTypedLocation/a-loc:atSite/rdfs:label ?church ;rdfs:label ?title ;dc:subject ?o FILTER (str(?o) = 'campana') .BIND (STRBEFORE(?title, \" (\") AS ?bellString) .FILTER (LANGMATCHES(LANG(?bellString), \"it\")) .FILTER (?entity != ?starting_value) .BIND(\"has same author of\" AS ?rel). BIND(CONCAT(?bellString, \" - \", ?church, \" - \", ?city) AS ?entityLabel)}UNION{?starting_value a-loc:hasTimeIndexedTypedLocation/a-loc:atLocation ?locale .?entity rdf:type a-dd:MusicalInstrument ;a-loc:hasTimeIndexedTypedLocation/a-loc:hasLocationType a-loc:ProductionRealizationLocation ;a-loc:hasTimeIndexedTypedLocation/a-loc:atLocation ?locale ;dc:coverage ?city ;a-loc:hasTimeIndexedTypedLocation/a-loc:atSite/rdfs:label ?church ;rdfs:label ?title ;dc:subject ?subject FILTER (str(?subject) = 'campana') .BIND (STRBEFORE(?title, \" (\") AS ?bellString) .FILTER (LANGMATCHES(LANG(?bellString), \"it\")) .FILTER (?entity != ?starting_value) .BIND(str(\"has same place of\") AS ?rel). BIND(CONCAT(?bellString, \" - \", ?church, \" - \", ?city) AS ?entityLabel)}} ORDER BY ?entityLabel"
+                }
+            ],
+            "genres": [
+                {
+                    "dataset": "d_03",
+                    "query": "PREFIX skos: <http://www.w3.org/2004/02/skos/core#>  PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/>  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?starting_value {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;sdo:genre ?entity;sdo:byArtist/sdo:roleName ?starting_value . ?starting_value a <http://www.wikidata.org/entity/Q34379> . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ; sdo:hasPart ?sceneUri. ?sceneUri sdo:genre ?entity; sdo:byArtist/sdo:roleName ?starting_value .?starting_value a <http://www.wikidata.org/entity/Q34379> . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel .} BIND(\"is associated with\" as ?rel)}"
                 }
             ]
         },
