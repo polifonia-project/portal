@@ -7,6 +7,8 @@ function RelationBlock(props) {
   const [numericWidth, setNumericWidth] = useState(25);
   const [isLoaded, setIsLoaded] = useState(true);
   const [relList, setRelList] = useState([])
+  const [visibleNum, setVisibleNum] = useState(36)
+  const [canLoad, setCanLoad] = useState(true);
   const [chunkedList, setchunkedList] = useState([])
 
   useEffect(() => {
@@ -47,28 +49,41 @@ function RelationBlock(props) {
 
   useEffect(() => { // compontentDidUpdate
 
+    var visibleTot = []
+    
+    // limit tot number of content shown
+    if (relList.length > visibleNum) {
+      visibleTot = relList.slice(0, visibleNum);
+      setCanLoad(true)
+    } else {
+      visibleTot = relList;
+      setCanLoad(false)
+    }
+
     // reset lists
     props.reset ? console.log("not resetted") : setchunkedList([]);
 
 
     // limit 10 results per column
-    if (relList.length > 9) {
+    if (visibleTot.length > 9) {
       const chunkSize = 9;
-      for (let i = 0; i < relList.length; i += chunkSize) {
-        const chunk = relList.slice(i, i + chunkSize);
+      for (let i = 0; i < visibleTot.length; i += chunkSize) {
+        const chunk = visibleTot.slice(i, i + chunkSize);
         setchunkedList(prevState => [...prevState, chunk])
       }
-    } else if (relList.length === 0) {
+    } else if (visibleTot.length === 0) {
       setchunkedList([]);
     } else {
-      setchunkedList([relList]);
+      setchunkedList([visibleTot]);
     }
-  }, [isLoaded, relList, props.reset]);
+  }, [isLoaded, relList, props.reset, visibleNum]);
 
 
   return (
     isLoaded ? <>
       {chunkedList.map(function (list, idx) {
+        var totalElements = chunkedList.length;
+        const lastElement = idx +1;
         return (
           <div  className={classes.cardBlockContainer} style={{ width: 'calc(' + numericWidth + '% - 25px)' }}>
             <div className={classes.relationBlock}>
@@ -83,6 +98,7 @@ function RelationBlock(props) {
                     })()}
                   </>)
                 })}
+               {totalElements === lastElement &&( canLoad? <button class= {classes.loadMoreButton} onClick={() => setVisibleNum(visibleNum + 36)}>Load more +</button> : null )}
               </div>
             </div>
           </div>)

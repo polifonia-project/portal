@@ -26,7 +26,7 @@
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://cat.apis.beeldengeluid.nl/sparql",
         "rest_api": "",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula.",
+        "description": "The Sound & Vision MOZ (Muziekopnamen Zendgemachtigden) collection features diverse concert recordings from Beethoven to Metallica, spanning Pinkpop to The Big Sing. Intended for Dutch public TV and radio broadcast, it holds over 36,000 artists across 200 genres. Predominantly classical, it includes jazz, folk, indie, and pop. Linked to Wikidata and Discogs, roles like artist or creator are specified, with 282 simple text roles, 311 linked to Wikidata entities, and 201 linked to Performance Medium ontology. Recording locations are part of metadata, with approximately a third linked to Wikidata. This dataset is in the Sound & Vision catalog Open Data, accessible as Linked Data via Polifonia and Podiumkunst.net projects, and viewable in the Media Suite. Metadata is available to all, and account holders can play certain concert recordings.",
         "status": "parsed"
     },
     "d_04": {
