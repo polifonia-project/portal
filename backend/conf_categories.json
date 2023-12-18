@@ -89,7 +89,7 @@
             },
             {
                 "dataset": "d_02",
-                "query": "PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> SELECT DISTINCT ?entity ?entityLabel FROM <http://data.open.ac.uk/context/meetups> WHERE { ?s mtp:hasSubject ?entity. ?entity rdfs:label ?entityLabel.}"
+                "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> SELECT DISTINCT ?entity ?entityLabel WHERE { ?s mtp:hasSubject ?entity. ?entity rdfs:label ?entityLabel. }"
             },
             {
                 "dataset": "d_03",
@@ -101,14 +101,14 @@
             },
             {
                 "dataset": "d_05",
-                "query": "PREFIX mo: <http://purl.org/ontology/mo/> PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX led: <http://led.kmi.open.ac.uk/term/> PREFIX dct: <http://purl.org/dc/terms/> PREFIX pl: <http://purl.org/NET/c4dm/event.owl#> SELECT DISTINCT ?entity ?entityLabel FROM <http://data.open.ac.uk/context/led> WHERE {?x (dbo:agent | mo:performer | dbo:writer | mo:composer | dbo:author| mo:listener) ?entity .?entity rdfs:label ?entityLabel .}"
+                "query": "PREFIX mo: <http://purl.org/ontology/mo/> PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX led: <http://led.kmi.open.ac.uk/term/> PREFIX dct: <http://purl.org/dc/terms/> PREFIX pl: <http://purl.org/NET/c4dm/event.owl#> SELECT DISTINCT ?entity ?entityLabel FROM <http://data.open.ac.uk/context/led> WHERE {?x (dbo:agent | mo:performer | dbo:writer | mo:composer | dbo:author) ?entity .?entity rdfs:label ?entityLabel .}"
             }
         ],
         "filters": {
             "artists": [
                 {
                     "dataset": "d_02",
-                    "query": "PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> SELECT DISTINCT ?rel ?entity ?entityLabel FROM <http://data.open.ac.uk/context/meetups> WHERE {  VALUES ?starting_value {}  ?s mtp:hasSubject ?starting_value ;    mtp:hasParticipant ?participant .  FILTER  (!regex (str(?participant), str(?starting_value) ) ) .  ?participant rdfs:label ?entityLabel . BIND(str(\"shared a meetup with\") AS ?rel) . BIND(?participant AS ?entity) } ORDER BY ?entityLabel"
+                    "query": "PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?subject {} ?s mtp:hasSubject ?subject ; mtp:hasParticipant ?participant ; mtp:hasType ?type . FILTER (regex ( str (?type), str (\"HM\") ) ) . ?participant mtp:hasEntity ?entityURI . ?entityURI rdfs:label ?entityLabel . BIND(str(\"interacted with\") AS ?rel) . BIND(?entityURI AS ?entity) . } ORDER BY ?entityLabel"
                 },
                 {
                     "dataset": "d_04",
@@ -122,7 +122,7 @@
             "places": [
                 {
                     "dataset": "d_02",
-                    "query": "PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> SELECT DISTINCT ?rel ?entity ?entityLabel FROM <http://data.open.ac.uk/context/meetups> WHERE {  VALUES ?starting_value {}  ?s mtp:hasSubject ?starting_value ;    mtp:hasPlace ?place .  ?place rdfs:label ?entityLabel .  BIND(str(\"meetup happened at\") AS ?rel) .  BIND(?place AS ?entity) }ORDER BY ?entityLabel"
+                    "query": "PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?subject {} ?s mtp:hasSubject ?subject ; mtp:hasPlace ?aPlaceURI ; mtp:hasType ?type . FILTER (regex ( str (?type), str (\"HM\") ) ) . ?aPlaceURI mtp:hasEntity ?entityURI . ?entityURI rdfs:label ?entityLabel . BIND(str(\"connected to\") AS ?rel) . BIND(?entityURI AS ?entity) . } ORDER BY ?entityLabel"
                 },
                 {
                     "dataset": "d_03",
@@ -217,7 +217,7 @@
         "search_pattern": [
             {
                 "dataset": "d_02",
-                "query": "prefix mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> prefix geo: <https://www.w3.org/2003/01/geo/wgs84_pos> select DISTINCT ?entity ?entityLabel from <http://data.open.ac.uk/context/meetups> where { ?entity rdf:type mtp:Location ; rdfs:label ?entityLabel; geo:lat ?lat ; geo:long ?long . }"
+                "query": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> SELECT DISTINCT ?entity ?entityLabel WHERE { ?entity rdf:type mtp:Location ; rdfs:label ?entityLabel . }"
             },
             {
                 "dataset": "d_03",
@@ -236,7 +236,7 @@
             "artists": [
                 {
                     "dataset": "d_02",
-                    "query": "PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> SELECT DISTINCT ?rel ?entity ?entityLabel FROM <http://data.open.ac.uk/context/meetups>WHERE {  VALUES ?starting_value {}  ?starting_value rdf:type mtp:Location .  ?meetup mtp:hasPlace ?starting_value ;    mtp:hasParticipant ?participant .  ?participant rdfs:label ?entityLabel .  BIND(str(\"has meetup participant\") AS ?rel) .  BIND(?participant AS ?entity) }"
+                    "query": "PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?subject {} ?placeMeetupIRI mtp:hasEntity ?subject . ?meetup mtp:hasPlace ?placeMeetupIRI ; mtp:hasParticipant ?meetupParticipantIRI . ?meetupParticipantIRI mtp:hasEntity ?entity . ?entity rdfs:label ?entityLabel . BIND(str(\"has meetup participant\") AS ?rel) . } ORDER BY ?entityLabel"
                 },
                 {
                     "dataset": "d_03",
@@ -257,6 +257,10 @@
                 {
                     "dataset": "d_03",
                     "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;sdo:locationCreated/sdo:sameAs ?starting_value ;sdo:genre ?entity. ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } UNION {?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> . ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:locationCreated/sdo:sameAs ?starting_value  ; sdo:genre ?entity. ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel .} BIND(\"is associated with\" as ?rel)} ORDER BY ?entityLabel"
+                },
+                {
+                    "dataset": "d_04",
+                    "query": "SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} ?musician wdt:P31 wd:Q5; ?place_rel ?starting_value; wdt:P136 ?entity.  BIND(str(\"artist's genre\") AS ?rel) SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
                 }
             ],
             "places": [

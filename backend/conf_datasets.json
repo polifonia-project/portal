@@ -14,7 +14,7 @@
         "name": "Meetups",
         "iri_base": "http://w3id.org/polifonia/pilot/meetups/",
         "query_method": "sparql_endpoint",
-        "sparql_endpoint": "https://data.open.ac.uk/sparql",
+        "sparql_endpoint": "https://polifonia.kmi.open.ac.uk/meetups/sparql",
         "rest_api": "",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula.",
         "status": "parsed"
