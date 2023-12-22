@@ -58,5 +58,35 @@
         "rest_api": "",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula.",
         "status": "parsed"
+    },
+    "d_07": {
+        "id": "d_07",
+        "name": "MusicBo",
+        "iri_base": "https://w3id.org/polifonia/resource/MusicBO",
+        "query_method": "sparql_endpoint",
+        "sparql_endpoint": "https://polifonia.disi.unibo.it/musicbo/sparql",
+        "rest_api": "",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula.",
+        "status": "parsed"
+    },
+    "d_08": {
+        "id": "d_08",
+        "name": "Corago",
+        "iri_base": "https://w3id.org/polifonia/resource/MusicBO",
+        "query_method": "sparql_endpoint",
+        "sparql_endpoint": "http://137.204.168.16:8080/blazegraph/namespace/corago/sparql",
+        "rest_api": "",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula.",
+        "status": "parsed"
+    },
+    "d_09": {
+        "id": "d_09",
+        "name": "RISM",
+        "iri_base": "https://w3id.org/polifonia/resource/MusicBO",
+        "query_method": "sparql_endpoint",
+        "sparql_endpoint": "https://polifonia.disi.unibo.it/musicbo/sparql",
+        "rest_api": "",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula.",
+        "status": "parsed"
     }
 }
