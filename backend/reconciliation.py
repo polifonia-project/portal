@@ -1,5 +1,6 @@
 # builtin libraries
 import os
+import hashlib
 
 # external libraries
 from SPARQLWrapper import SPARQLWrapper, JSON
@@ -300,7 +301,9 @@ def generate_merged_graph_name(data):
         for i in id_parts:
             if i not in id:
                 id = (id + '__' + i).strip('__')
-    new_graph_name = linkset_endpoint.LINKSETGRAPH + dat + '___' + cat + '___' + id
+    # Using SHA-256 hash to generate a unique hash value for the id
+    hash_id = hashlib.sha256(id.encode()).hexdigest()
+    new_graph_name = linkset_endpoint.LINKSETGRAPH + dat + '___' + cat + '___' + hash_id
     return new_graph_name
 
 def add_missing_same_as_links(graph_name):
