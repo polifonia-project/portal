@@ -61,6 +61,10 @@
                 "category": "artists",
                 "content": [
                     {
+                        "dataset": "d_03",
+                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/>  SELECT DISTINCT  ?entity ?entityLabel WHERE {  VALUES ?card_uri {}  { ?card_uri sdo:byArtist/sdo:byArtist ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel } UNION { ?card_uri  sdo:hasPart/sdo:byArtist/sdo:byArtist ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel} } "
+                    },
+                    {
                         "dataset": "d_04",
                         "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P175 ?entity.} UNION { ?card_uri wdt:P175 ?entity. } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
                     }
@@ -73,6 +77,10 @@
                 "title": "Composed by",
                 "category": "artists",
                 "content": [
+                    {
+                        "dataset": "d_03",
+                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/>  SELECT DISTINCT ?entity ?entityLabel WHERE { VALUES ?card_uri {} { ?card_uri sdo:creator/sdo:creator ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel } UNION { ?card_uri sdo:hasPart/sdo:creator/sdo:creator ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel } }"
+                    },
                     {
                         "dataset": "d_04",
                         "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P86 ?entity.} SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
@@ -119,6 +127,12 @@
                         "query": "SELECT DISTINCT ?entity  WHERE {VALUES ?card_uri {} ?card_uri wdt:P856 ?entity .}"
                     },
                     {
+                        "label": "Concert Page",
+                        "url": "https://zoeken.beeldengeluid.nl/",
+                        "dataset": "d_03",
+                        "query": "PREFIX sdo: <https://schema.org/>  SELECT DISTINCT  ?entity ?entityLabel WHERE {VALUES ?card_uri {} ?card_uri  sdo:url ?entity  "
+                    },
+                    {
                         "label": "Alt Source",
                         "url": "https://www.google.com/",
                         "dataset": "d_04",
@@ -145,8 +159,38 @@
                 "title": "Date",
                 "content": [
                     {
+                        "dataset": "d_03",
+                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/>  SELECT DISTINCT  ?entity WHERE {VALUES ?card_uri {}  ?card_uri  sdo:datePublished ?entity } "
+                    },
+                    {
                         "dataset": "d_04",
                         "query": "SELECT DISTINCT ?entity (YEAR(?entity) AS ?entityLabel) WHERE {VALUES ?card_uri {} { ?card_uri wdt:P577 ?entity.} UNION { ?card_uri wdt:P577 ?entity. } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                    }
+                ]
+            },
+            "12": {
+                "id": 12,
+                "type": "relation",
+                "size": "small",
+                "title": "Took place at",
+                "category": "places",
+                "content": [
+                    {
+                        "dataset": "d_03",
+                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/>  SELECT DISTINCT  ?entity ?entityLabel WHERE { VALUES ?card_uri {}  { ?card_uir  sdo:locationCreated ?location . ?location sdo:sameAs ?entity . ?location sdo:name ?entityLabel} UNION { ?card_uri  sdo:hasPart/sdo:locationCreated ?location . ?location sdo:sameAs ?entity . ?location sdo:name ?entityLabel}  } "
+                    }
+                ]
+            },
+            "13": {
+                "id": 13,
+                "type": "relation",
+                "size": "small",
+                "title": "Genre",
+                "category": "genres",
+                "content": [
+                    {
+                        "dataset": "d_03",
+                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/>  SELECT DISTINCT  ?p WHERE {VALUES ?card_uri {}   {?card_uri  sdo:genre ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel;} UNION {?card_uri  sdo:hasPart/sdo:genre ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel} }"
                     }
                 ]
             }
@@ -224,7 +268,7 @@
                 "id": 6,
                 "type": "relation",
                 "size": "small",
-                "title": "Associated with",
+                "title": "Related Genres",
                 "category": "genres",
                 "content": [
                     {
@@ -282,6 +326,19 @@
                     {
                         "dataset": "d_03",
                         "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>  SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131>.?programUri sdo:genre ?card_uri . { ?programUri sdo:byArtist/sdo:byArtist ?entity .?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel .} UNION { ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:byArtist/sdo:byArtist ?entity .  ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } } LIMIT 30"
+                    }
+                ]
+            },
+            "11": {
+                "id": 11,
+                "type": "relation",
+                "size": "small",
+                "title": "Thematic Digital Collections",
+                "category": "creative works",
+                "content": [
+                    {
+                        "dataset": "d_01",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { VALUES ?card_uri {} ?entity <https://schema.org/genre> ?starting_value ; rdfs:label ?entityLabel . }"
                     }
                 ]
             }
@@ -482,6 +539,19 @@
                     {
                         "dataset": "d_03",
                         "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>  SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> . { ?location sdo:sameAs ?card_uri .?programUri sdo:locationCreated ?location .?programUri (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/             (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity .?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . }UNION{?location sdo:sameAs ?card_uri .?sceneUri sdo:locationCreated ?location . ?programUri sdo:hasPart ?sceneUri.?sceneUri  (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/(sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } } LIMIT 30"
+                    }
+                ]
+            },
+            "09": {
+                "id": 9,
+                "type": "relation",
+                "size": "small",
+                "title": "Albums from artists related to the place",
+                "category": "music",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?starting_value {} ?musician wdt:P31 wd:Q5; wdt:P740 ?starting_value. ?entity wdt:P175 ?musician ; rdfs:label ?label . ?musician rdfs:label ?musicianLabel . FILTER(LANG(?label) = \"en\") FILTER(LANG(?musicianLabel) = \"en\") BIND(CONCAT(?label, ' by ', ?musicianLabel) AS ?entityLabel)}"
                     }
                 ]
             }
