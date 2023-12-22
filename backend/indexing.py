@@ -164,7 +164,7 @@ def clean_index(cat_name, cat_id):
     sonic_flush_index(cat_name)
 
     # empty cat labels file
-    labels_dir_path = os.path.dirname(os.path.realpath(__file__))+'/index_labels'
+    labels_dir_path = os.path.dirname(os.path.realpath(__file__))+'/index_labels/'
     cat_labels_file_path = labels_dir_path + cat_id + '.json'
     if os.path.exists(cat_labels_file_path):
         os.remove(cat_labels_file_path)
