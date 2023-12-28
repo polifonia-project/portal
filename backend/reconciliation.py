@@ -7,7 +7,7 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 from rdflib import URIRef, Literal, Dataset, Graph
 from rdflib.plugins.sparql import prepareQuery
 from rdflib.namespace import SDO, RDFS, OWL, SDO
-# import hydra.tpf
+import requests
 
 # internal methods
 import linkset_endpoint
@@ -79,6 +79,17 @@ def find_matches(query, endpoint):
         return results
     except Exception as e:
         print('ERROR find_matches for ', endpoint, query, e)
+        url = endpoint
+        params = {'query': query}
+        payload = {}
+        headers = {
+            'Accept': 'application/json'
+        }
+
+        response = requests.get(url, headers=headers, params=params, data=payload)
+        results = response.json()
+        results = {result['origin_uri']['value']: result['same_uri']['value']
+                for result in results['results']['bindings'] if len(result['same_uri']['value']) > 0}
         return results
 
 
