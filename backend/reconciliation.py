@@ -26,7 +26,7 @@ WHITE_LIST_PARAM = {
     'dbpedia': {
         'endpoint': 'https://dbpedia.org/sparql',
         'iri_base': 'http://dbpedia.org/',
-        'query': 'SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same); SEPARATOR=\", \") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} ?same schema:sameAs|skos:exactMatch|^schema:sameAs|^skos:exactMatch ?origin_uri . } GROUP BY ?origin_uri'
+        'query': 'SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same); SEPARATOR=\", \") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} {?origin_uri (schema:sameAs|^schema:sameAs) ?same .} UNION {?origin_uri (skos:exactMatch|^skos:exactMatch) ?same .} } GROUP BY ?origin_uri'
     },
     'viaf': {
         'fragments': 'true',
@@ -200,10 +200,10 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
         for match, uri_list in uris_to_reconcile.items():
             if len(uri_list) > 0:
                 external_endpoint = WHITE_LIST_PARAM[match]['endpoint']
-                external_query = WHITE_LIST_PARAM[match]['query']
                 # 1000 is the control number to avoid having a VALUE in the QUERY that is too long
                 if len(' '.join(uri_list)) < 1000:
                     values_to_search = ' '.join(uri_list).replace("'", "%27")
+                    external_query = WHITE_LIST_PARAM[match]['query']
                     external_query = external_query.replace('<>', values_to_search)
                     same_uris_dict = {}
                     # check if fragments rec need linked data fragments search
@@ -238,6 +238,7 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
 
                     for chunk in uris_to_search_chunks:
                         values_to_search = ' '.join(chunk).replace("'", "%27")
+                        external_query = WHITE_LIST_PARAM[match]['query']
                         external_query = external_query.replace('<>', values_to_search)
                         same_uris_dict = {}
                         # check if fragments rec need linked data fragments search
