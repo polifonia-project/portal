@@ -3,8 +3,8 @@ import json
 import os
 
 # external libraries
-from SPARQLWrapper import SPARQLWrapper, JSON
-import urllib.parse
+from SPARQLWrapper import SPARQLWrapper, JSON, SPARQLExceptions
+import requests
 
 # internal methods
 import conf
@@ -80,7 +80,17 @@ def get_sparql_results(query, endpoint):
                 for result in results['results']['bindings'] if len(result['entityLabel']['value']) > 0}
         return results
     except Exception as e:
-        print('ERROR for ', endpoint, e)
+        url = endpoint
+        params = {'query': query}
+        payload = {}
+        headers = {
+            'Accept': 'application/json'
+        }
+
+        response = requests.get(url, headers=headers, params=params, data=payload)
+        results = response.json()
+        results = {result['entity']['value']: result['entityLabel']['value']
+                for result in results['results']['bindings'] if len(result['entityLabel']['value']) > 0}
         return results
 
 
