@@ -1,71 +1,71 @@
 {
-  "clip_01": {
-    "id": "clip_01",
-    "name": "Manchester",
-    "textcontext": {
-      "title": "Start with some highlights",
-      "description": "Explore the selection of unique music data we made for you. Each highlight represents a concept, a person, a place, a tune (and more!) that is somehow interconnected with others, to tell us a story. We update highlights on a regular basis, so that you never get bored. Scroll down and listen to our music box!",
-      "highlights": [
-        "More +"
-      ]
+    "clip_01": {
+        "id": "clip_01",
+        "name": "Manchester",
+        "textcontext": {
+            "title": "Start with some highlights",
+            "description": "Explore the selection of unique music data we made for you. Each highlight represents a concept, a person, a place, a tune (and more!) that is somehow interconnected with others, to tell us a story. We update highlights on a regular basis, so that you never get bored. Scroll down and listen to our music box!",
+            "highlights": [
+                "More +"
+            ]
+        },
+        "category": "cat_04",
+        "timestamp": "",
+        "iri": "http://w3id.org/polifonia/linkset/d_05__d_02__d_04___cat_04___c91de2e6-24c6-4dfd-857e-e5da30d4e94e",
+        "origin_iri": "http://www.wikidata.org/entity/Q18125"
     },
-    "iri": "http://w3id.org/polifonia/linkset/d_04__cat_04__423",
-    "category": "cat_04",
-    "timestamp": "",
-    "origin_iri": "http://www.wikidata.org/entity/Q18125"
-  },
-  "clip_02": {
-    "id": "clip_02",
-    "name": "Joy Division",
-    "textcontext": {
-      "title": "",
-      "description": "",
-      "highlights": []
+    "clip_02": {
+        "id": "clip_02",
+        "name": "Joy Division",
+        "textcontext": {
+            "title": "",
+            "description": "",
+            "highlights": []
+        },
+        "category": "cat_02",
+        "timestamp": "",
+        "iri": "http://w3id.org/polifonia/linkset/d_04__d_01___cat_02___389afd8d-fc9d-4479-afdd-882996b77cc3",
+        "origin_iri": "http://www.wikidata.org/entity/Q172763"
     },
-    "iri": "http://w3id.org/polifonia/linkset/d_01__d_04___cat_02__cat_02___11__1661",
-    "category": "cat_02",
-    "timestamp": "",
-    "origin_iri": "http://www.wikidata.org/entity/Q172763"
-  },
-  "clip_03": {
-    "id": "clip_03",
-    "name": "Punk Rock",
-    "textcontext": {
-      "title": "Do you want to know more?",
-      "description": "Click on any highlight to unveil unexpected music connections! We selected some of the most insightful relations between people, places, genres, and more. Wouldn’t mind a different genre? You can change the subject and start new research.",
-      "highlights": [
-        "more?"
-      ]
+    "clip_03": {
+        "id": "clip_03",
+        "name": "Punk Rock",
+        "textcontext": {
+            "title": "Do you want to know more?",
+            "description": "Click on any highlight to unveil unexpected music connections! We selected some of the most insightful relations between people, places, genres, and more. Wouldn’t mind a different genre? You can change the subject and start new research.",
+            "highlights": [
+                "more?"
+            ]
+        },
+        "category": "cat_01",
+        "timestamp": "",
+        "iri": "http://w3id.org/polifonia/linkset/d_03__d_01__d_04___cat_01___e45971ae-225b-4bfc-9f09-9ecc953d0938",
+        "origin_iri": "http://www.wikidata.org/entity/Q3071"
     },
-    "iri": "http://w3id.org/polifonia/linkset/d_01__d_03__d_04___cat_01__cat_01__cat_01___61__57__92",
-    "category": "cat_01",
-    "timestamp": "",
-    "origin_iri": "http://www.wikidata.org/entity/Q3071"
-  },
-  "clip_04": {
-    "id": "clip_04",
-    "name": "Electric Guitar",
-    "textcontext": {
-      "title": "",
-      "description": "",
-      "highlights": []
+    "clip_04": {
+        "id": "clip_04",
+        "name": "Electric Guitar",
+        "textcontext": {
+            "title": "",
+            "description": "",
+            "highlights": []
+        },
+        "category": "cat_05",
+        "timestamp": "",
+        "iri": "http://w3id.org/polifonia/linkset/d_04__d_05__d_03___cat_05___b1585004-7a43-4353-a8be-a7d3090c9d84",
+        "origin_iri": "http://www.wikidata.org/entity/Q78987"
     },
-    "iri": "http://w3id.org/polifonia/linkset/d_04__cat_05__11",
-    "category": "cat_05",
-    "timestamp": "",
-    "origin_iri": "http://www.wikidata.org/entity/Q78987"
-  },
-  "clip_05": {
-    "id": "clip_05",
-    "name": "Love Will Tear Us Apart",
-    "textcontext": {
-      "title": "",
-      "description": "",
-      "highlights": []
-    },
-    "iri": "http://w3id.org/polifonia/linkset/d_04__cat_03__3747",
-    "category": "cat_03",
-    "timestamp": "",
-    "origin_iri": "http://www.wikidata.org/entity/Q1426177"
-  }
+    "clip_05": {
+        "id": "clip_05",
+        "name": "Love Will Tear Us Apart",
+        "textcontext": {
+            "title": "",
+            "description": "",
+            "highlights": []
+        },
+        "category": "cat_03",
+        "timestamp": "",
+        "iri": "http://w3id.org/polifonia/linkset/d_04__cat_03__3849",
+        "origin_iri": "http://www.wikidata.org/entity/Q1426177"
+    }
 }
