@@ -355,6 +355,10 @@
                 "title": "Biography",
                 "content": [
                     {
+                        "dataset": "d_02",
+                        "query": "PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?entityLabel { VALUES ?card_uri {} ?card_uri rdf:type mtp:Participant ; mtp:hasAbstract ?entityLabel . }"
+                    },
+                    {
                         "dataset": "d_04",
                         "query": "SELECT DISTINCT ?entityLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?entityLabel.}}"
                     }
@@ -403,6 +407,19 @@
                 "id": 5,
                 "type": "relation",
                 "size": "small",
+                "title": "People met",
+                "category": "artists",
+                "content": [
+                    {
+                        "dataset": "d_02",
+                        "query": "PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?entity ?entityLabel WHERE { VALUES ?card_uri { <http://dbpedia.org/resource/Yehudi_Menuhin> } ?s mtp:hasSubject ?card_uri ; mtp:hasParticipant ?participant ; mtp:hasType ?type .  FILTER (regex ( str (?type), str (\"HM\") ) ) . ?s mtp:hasParticipant ?aParticipantURI . ?aParticipantURI mtp:hasEntity ?entity .  ?entity rdfs:label ?entityLabel .  }"
+                    }
+                ]
+            },
+            "06": {
+                "id": 6,
+                "type": "relation",
+                "size": "small",
                 "title": "Related places",
                 "category": "places",
                 "content": [
@@ -412,8 +429,8 @@
                     }
                 ]
             },
-            "06": {
-                "id": 6,
+            "07": {
+                "id": 7,
                 "type": "link",
                 "size": "small",
                 "title": "Useful links",
@@ -849,6 +866,75 @@
                         "url": "https://www.google.com/",
                         "dataset": "d_01",
                         "query": "SELECT DISTINCT ?entity WHERE {VALUES ?card_uri {} ?card_uri <https://schema.org/workExample> ?entity .}"
+                    }
+                ]
+            }
+        }
+    },
+    "listening experience": {
+        "category": "",
+        "color": "#fea360",
+        "blocks": {
+            "01": {
+                "id": 1,
+                "type": "relation",
+                "size": "small",
+                "title": "Performers",
+                "category": "artists",
+                "content": [
+                    {
+                        "dataset": "d_05",
+                        "query": "PREFIX mo: <http://purl.org/ontology/mo/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?entity ?entityLabel FROM <http://data.open.ac.uk/context/led> WHERE { VALUES ?card_uri {} ?card_uri mo:performer ?entity . ?entity rdfs:label ?entityLabel .}"
+                    }
+                ]
+            },
+            "02": {
+                "id": 2,
+                "type": "relation",
+                "size": "small",
+                "title": "Instruments played",
+                "category": "instruments",
+                "content": [
+                    {
+                        "dataset": "d_05",
+                        "query": "PREFIX mo: <http://purl.org/ontology/mo/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?entity ?entityLabel FROM <http://data.open.ac.uk/context/led> WHERE { VALUES ?card_uri {} ?card_uri mo:instrument ?entity . ?entity rdfs:label ?entityLabel .}"
+                    }
+                ]
+            },
+            "03": {
+                "id": 3,
+                "type": "text",
+                "size": "small",
+                "title": "Took place in",
+                "content": [
+                    {
+                        "dataset": "d_05",
+                        "query": "PREFIX mo: <http://purl.org/ontology/mo/> PREFIX led: <http://led.kmi.open.ac.uk/term/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX c4dm: <http://purl.org/NET/c4dm/event.owl#> SELECT (SAMPLE(?label) AS ?entityLabel) FROM <http://data.open.ac.uk/context/led> WHERE { VALUES ?card_uri {} ?experience a led:ListeningExperience ; <http://purl.org/dc/terms/subject> ?card_uri ; c4dm:place ?entity . ?entity rdfs:label ?label .}"
+                    }
+                ]
+            },
+            "04": {
+                "id": 4,
+                "type": "relation",
+                "size": "small",
+                "title": "Audience",
+                "category": "people",
+                "content": [
+                    {
+                        "dataset": "d_05",
+                        "query": "PREFIX mo: <http://purl.org/ontology/mo/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?entity ?entityLabel FROM <http://data.open.ac.uk/context/led> WHERE { VALUES ?card_uri {} ?card_uri mo:listener ?entity . ?entity rdfs:label ?entityLabel .}"
+                    }
+                ]
+            },
+            "05": {
+                "id": 5,
+                "type": "text",
+                "size": "medium",
+                "title": "Evidence text",
+                "content": [
+                    {
+                        "dataset": "d_05",
+                        "query": "PREFIX led: <http://led.kmi.open.ac.uk/term/>  SELECT DISTINCT ?entityLabel FROM <http://data.open.ac.uk/context/led> WHERE {VALUES ?card_uri {} ?experience a led:ListeningExperience ; <http://purl.org/dc/terms/subject> ?card_uri { ?experience led:has_evidence_text ?entityLabel } UNION { ?experience led:is_reported_in/rdf:value ?entityLabel } }"
                     }
                 ]
             }

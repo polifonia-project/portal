@@ -33,7 +33,7 @@
                 },
                 {
                     "dataset": "d_05",
-                    "query": "PREFIX mo: <http://purl.org/ontology/mo/> PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX led: <http://led.kmi.open.ac.uk/term/> PREFIX dct: <http://purl.org/dc/terms/> PREFIX pl: <http://purl.org/NET/c4dm/event.owl#> SELECT DISTINCT ?rel ?entity ?entitylabel FROM <http://data.open.ac.uk/context/led> WHERE { VALUES ?starting_value {}  ?x mo:genre ?starting_value .  ?x (dbo:writer | mo:composer | mo:performance_of/(dbo:writer | mo:composer)) ?entity .  ?entity rdfs:label ?entitylabel .  BIND(\"explored by\" AS ?rel) . } ORDER BY ?entitylabel"
+                    "query": "PREFIX mo: <http://purl.org/ontology/mo/> PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?rel ?entity ?entitylabel FROM <http://data.open.ac.uk/context/led> WHERE { VALUES ?starting_value {}  ?x mo:genre ?starting_value .  ?x (dbo:writer | mo:composer | mo:performance_of/(dbo:writer | mo:composer)) ?entity .  ?entity rdfs:label ?entitylabel .  BIND(\"explored by\" AS ?rel) . } ORDER BY ?entitylabel"
                 }
             ],
             "places": [
@@ -75,8 +75,7 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     },
     "cat_02": {
         "id": "cat_02",
@@ -176,6 +175,12 @@
                     "dataset": "d_05",
                     "query": "PREFIX mo: <http://purl.org/ontology/mo/> PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX led: <http://led.kmi.open.ac.uk/agent/> PREFIX dct: <http://purl.org/dc/terms/> PREFIX pl: <http://purl.org/NET/c4dm/event.owl#> SELECT DISTINCT ?rel ?entity ?entitylabel FROM <http://data.open.ac.uk/context/led> WHERE { VALUES ?starting_value {}  ?x mo:instrument ?entity .  ?x (led:agent | mo:performer | mo:performance_of/(led:agent | mo:performer)) ?starting_value .  ?entity rdfs:label ?entitylabel .  BIND(\"plays\" AS ?rel) .} ORDER BY ?entitylabel"
                 }
+            ],
+            "listening experience": [
+                {
+                    "dataset": "d_05",
+                    "query": "PREFIX mo: <http://purl.org/ontology/mo/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?entity ?entityLabel ?rel FROM <http://data.open.ac.uk/context/led> WHERE { VALUES ?starting_value {} { ?entity mo:performer ?starting_value . BIND(\"performed in\" AS ?rel) } UNION { ?entity mo:listener ?starting_value . BIND(\"attended\" AS ?rel)} ?entity rdfs:label ?entityLabel .}"
+                }
             ]
         },
         "section": {
@@ -184,8 +189,7 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     },
     "cat_03": {
         "id": "cat_03",
@@ -215,8 +219,7 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     },
     "cat_04": {
         "id": "cat_04",
@@ -284,8 +287,7 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     },
     "cat_05": {
         "id": "cat_05",
@@ -359,7 +361,6 @@
             "highlights": [
                 ""
             ]
-        },
-        "status": "ingested"
+        }
     }
 }
