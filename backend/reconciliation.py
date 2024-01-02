@@ -1,6 +1,6 @@
 # builtin libraries
 import os
-import hashlib
+import uuid
 
 # external libraries
 from SPARQLWrapper import SPARQLWrapper, JSON
@@ -69,7 +69,6 @@ def find_matches(query, endpoint):
     user_agent = conf.sparql_wrapper_user_agent
     sparql = SPARQLWrapper(endpoint, agent=user_agent)
     sparql.setQuery(query)
-    sparql.setReturnFormat(JSON)
     results = {}
     try:
         results = sparql.query().convert()
@@ -303,19 +302,16 @@ def generate_merged_graph_name(data):
             graph_name_parts = result.strip('<>').split('/')[-1].split(simple_split)
         dat_parts = graph_name_parts[0].split(simple_split)
         cat_parts = graph_name_parts[1].split(simple_split)
-        id_parts = graph_name_parts[2].split(simple_split)
+        # id_parts = graph_name_parts[2].split(simple_split)
         for d in dat_parts:
             if d not in dat:
                 dat = (dat + '__' + d).strip('__')
         for c in cat_parts:
             if c not in cat:
                 cat = (cat + '__' + c).strip('__')
-        for i in id_parts:
-            if i not in id:
-                id = (id + '__' + i).strip('__')
-    # Using SHA-256 hash to generate a unique hash value for the id
-    hash_id = hashlib.sha256(id.encode()).hexdigest()
-    new_graph_name = linkset_endpoint.LINKSETGRAPH + dat + '___' + cat + '___' + hash_id
+    # Generate a random UUID for the id
+    id = str(uuid.uuid4())
+    new_graph_name = linkset_endpoint.LINKSETGRAPH + dat + '___' + cat + '___' + id
     return new_graph_name
 
 def add_missing_same_as_links(graph_name):
