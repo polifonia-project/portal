@@ -6,8 +6,7 @@
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://projects.dharc.unibo.it/musow/sparql",
         "rest_api": "",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula.",
-        "status": "parsed"
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula."
     },
     "d_02": {
         "id": "d_02",
@@ -16,8 +15,7 @@
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://polifonia.kmi.open.ac.uk/meetups/sparql",
         "rest_api": "",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula.",
-        "status": "parsed"
+        "description": "The MEETUPS knowledge graph contains data about historical encounters of people in the musical world in Europe from c. 1800 to c. 1945. All the data is extracted from artists’ biographies, mainly from open-access digital sources such as Wikipedia artists’ web pages. A total of 33,309 biographies were collected for knowledge extraction and construction of the Kowledge Graph."
     },
     "d_03": {
         "id": "d_03",
@@ -26,8 +24,7 @@
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://cat.apis.beeldengeluid.nl/sparql",
         "rest_api": "",
-        "description": "The Sound & Vision MOZ (Muziekopnamen Zendgemachtigden) collection features diverse concert recordings from Beethoven to Metallica, spanning Pinkpop to The Big Sing. Intended for Dutch public TV and radio broadcast, it holds over 36,000 artists across 200 genres. Predominantly classical, it includes jazz, folk, indie, and pop. Linked to Wikidata and Discogs, roles like artist or creator are specified, with 282 simple text roles, 311 linked to Wikidata entities, and 201 linked to Performance Medium ontology. Recording locations are part of metadata, with approximately a third linked to Wikidata. This dataset is in the Sound & Vision catalog Open Data, accessible as Linked Data via Polifonia and Podiumkunst.net projects, and viewable in the Media Suite. Metadata is available to all, and account holders can play certain concert recordings.",
-        "status": "parsed"
+        "description": "The Sound & Vision MOZ (Muziekopnamen Zendgemachtigden) collection features diverse concert recordings from Beethoven to Metallica, spanning Pinkpop to The Big Sing. Intended for Dutch public TV and radio broadcast, it holds over 36,000 artists across 200 genres. Predominantly classical, it includes jazz, folk, indie, and pop. Linked to Wikidata and Discogs, roles like artist or creator are specified, with 282 simple text roles, 311 linked to Wikidata entities, and 201 linked to Performance Medium ontology. Recording locations are part of metadata, with approximately a third linked to Wikidata. This dataset is in the Sound & Vision catalog Open Data, accessible as Linked Data via Polifonia and Podiumkunst.net projects, and viewable in the Media Suite. Metadata is available to all, and account holders can play certain concert recordings."
     },
     "d_04": {
         "id": "d_04",
@@ -36,8 +33,7 @@
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://query.wikidata.org/sparql",
         "rest_api": "",
-        "description": "The Wikidata dataset is a dynamic knowledge graph, encompassing a broad spectrum of entities (individuals, places, concepts) and relationships. It interconnects various types of information, facilitating comprehensive exploration and analysis across diverse domains.",
-        "status": "parsed"
+        "description": "The Wikidata dataset is a dynamic knowledge graph, encompassing a broad spectrum of entities (individuals, places, concepts) and relationships. It interconnects various types of information, facilitating comprehensive exploration and analysis across diverse domains."
     },
     "d_05": {
         "id": "d_05",
@@ -46,8 +42,7 @@
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://data.open.ac.uk/sparql",
         "rest_api": "",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula.",
-        "status": "parsed"
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula."
     },
     "d_06": {
         "id": "d_06",
@@ -56,37 +51,6 @@
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://dati.cultura.gov.it/sparql",
         "rest_api": "",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula.",
-        "status": "parsed"
-    },
-    "d_07": {
-        "id": "d_07",
-        "name": "MusicBo",
-        "iri_base": "https://w3id.org/polifonia/resource/MusicBO",
-        "query_method": "sparql_endpoint",
-        "sparql_endpoint": "https://polifonia.disi.unibo.it/musicbo/sparql",
-        "rest_api": "",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula.",
-        "status": "parsed"
-    },
-    "d_08": {
-        "id": "d_08",
-        "name": "Corago",
-        "iri_base": "https://w3id.org/polifonia/resource/MusicBO",
-        "query_method": "sparql_endpoint",
-        "sparql_endpoint": "http://137.204.168.16:8080/blazegraph/namespace/corago/sparql",
-        "rest_api": "",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula.",
-        "status": "parsed"
-    },
-    "d_09": {
-        "id": "d_09",
-        "name": "RISM",
-        "iri_base": "https://w3id.org/polifonia/resource/MusicBO",
-        "query_method": "sparql_endpoint",
-        "sparql_endpoint": "https://polifonia.disi.unibo.it/musicbo/sparql",
-        "rest_api": "",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula.",
-        "status": "parsed"
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula."
     }
 }
