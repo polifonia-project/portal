@@ -273,7 +273,7 @@
                 "content": [
                     {
                         "dataset": "d_03",
-                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;  sdo:genre ?card_uri ; sdo:genre ?entity. ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:genre ?card_uri ; sdo:genre ?entity. ?entity skos:prefLabel ?entityLabel .} FILTER(?entity != ?card_uri) BIND(\"is associated with\" as ?rel)} LIMIT 30"
+                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;  sdo:genre ?card_uri ; sdo:genre ?entity. ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:genre ?card_uri ; sdo:genre ?entity. ?entity skos:prefLabel ?entityLabel .} FILTER(?entity != ?card_uri) BIND(\"is associated with\" as ?rel)}"
                     }
                 ]
             },
@@ -312,7 +312,7 @@
                 "content": [
                     {
                         "dataset": "d_03",
-                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>  SELECT DISTINCT ?entity ?entityLabel WHERE { VALUES ?card_uri {}  ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131>. ?programUri sdo:genre ?card_uri.{ ?programUri sdo:creator/sdo:creator ?entity .?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } UNION { ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:creator/sdo:creator ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel .} } LIMIT 30"
+                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>  SELECT DISTINCT ?entity ?entityLabel WHERE { VALUES ?card_uri {}  ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131>. ?programUri sdo:genre ?card_uri.{ ?programUri sdo:creator/sdo:creator ?entity .?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } UNION { ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:creator/sdo:creator ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel .} }"
                     }
                 ]
             },
@@ -325,7 +325,7 @@
                 "content": [
                     {
                         "dataset": "d_03",
-                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>  SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131>.?programUri sdo:genre ?card_uri . { ?programUri sdo:byArtist/sdo:byArtist ?entity .?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel .} UNION { ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:byArtist/sdo:byArtist ?entity .  ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } } LIMIT 30"
+                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>  SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131>.?programUri sdo:genre ?card_uri . { ?programUri sdo:byArtist/sdo:byArtist ?entity .?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel .} UNION { ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:byArtist/sdo:byArtist ?entity .  ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } }"
                     }
                 ]
             },
@@ -368,7 +368,7 @@
                 "id": 2,
                 "type": "media",
                 "size": "small",
-                "title": "Portrait",
+                "title": "Logo",
                 "class": "image",
                 "content": [
                     {
@@ -407,7 +407,7 @@
                 "id": 5,
                 "type": "relation",
                 "size": "small",
-                "title": "People met",
+                "title": "Meeting with",
                 "category": "artists",
                 "content": [
                     {
@@ -477,7 +477,7 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {}  ?card_uri wdt:P190 ?entity. ?entity wdt:P31/wdt:P279* wd:Q82794 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 30"
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {}  ?card_uri wdt:P190 ?entity. ?entity wdt:P31/wdt:P279* wd:Q82794 . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } }"
                     }
                 ]
             },
@@ -490,33 +490,33 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT DISTINCT ?entity ?entityLabel ?rel ?inverse_rel WHERE {VALUES ?card_uri {}  ?card_uri ^wdt:P47 ?entity . ?entity wdt:P31/wdt:P279* wd:Q82794 . BIND(str(\"shares border with\") AS ?inverse_rel) .  SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 10"
+                        "query": "SELECT DISTINCT ?entity ?entityLabel ?rel ?inverse_rel WHERE {VALUES ?card_uri {}  ?card_uri ^wdt:P47 ?entity . ?entity wdt:P31/wdt:P279* wd:Q82794 . BIND(str(\"shares border with\") AS ?inverse_rel) .  SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } }"
                     }
                 ]
             },
             "04": {
                 "id": 4,
                 "type": "media",
-                "size": "medium",
+                "size": "small",
                 "title": "City View",
                 "class": "image",
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?entity } LIMIT 1"
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?entity }"
                     }
                 ]
             },
             "05": {
                 "id": 5,
                 "type": "media",
-                "size": "medium",
+                "size": "small",
                 "title": "Map",
                 "class": "image",
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P242 ?entity} LIMIT 1"
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P242 ?entity}"
                     }
                 ]
             },
@@ -542,7 +542,7 @@
                 "content": [
                     {
                         "dataset": "d_03",
-                        "query": "PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {<http://www.wikidata.org/entity/Q849957>} ?entity sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> . ?entity sdo:name ?entityLabel . {?entity sdo:locationCreated ?location . ?location sdo:sameAs ?card_uri.   }   UNION  {  ?entity sdo:hasPart/sdo:locationCreated ?location . ?location sdo:sameAs ?card_uri .  } } LIMIT 30"
+                        "query": "PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {<http://www.wikidata.org/entity/Q849957>} ?entity sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> . ?entity sdo:name ?entityLabel . {?entity sdo:locationCreated ?location . ?location sdo:sameAs ?card_uri.   }   UNION  {  ?entity sdo:hasPart/sdo:locationCreated ?location . ?location sdo:sameAs ?card_uri .  } }"
                     }
                 ]
             },
@@ -555,7 +555,7 @@
                 "content": [
                     {
                         "dataset": "d_03",
-                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>  SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> . { ?location sdo:sameAs ?card_uri .?programUri sdo:locationCreated ?location .?programUri (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/             (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity .?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . }UNION{?location sdo:sameAs ?card_uri .?sceneUri sdo:locationCreated ?location . ?programUri sdo:hasPart ?sceneUri.?sceneUri  (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/(sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } } LIMIT 30"
+                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>  SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> . { ?location sdo:sameAs ?card_uri .?programUri sdo:locationCreated ?location .?programUri (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/             (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity .?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . }UNION{?location sdo:sameAs ?card_uri .?sceneUri sdo:locationCreated ?location . ?programUri sdo:hasPart ?sceneUri.?sceneUri  (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/(sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } }"
                     }
                 ]
             },
@@ -769,11 +769,11 @@
                 "content": [
                     {
                         "dataset": "d_04",
-                        "query": "SELECT DISTINCT ?entity ?entityLabel {VALUES ?card_uri {} ?entity wdt:P1303 ?card_uri . ?entity wikibase:statements ?outcoming . {?entity wdt:P31 wd:Q5.} UNION {?entity wdt:P31 wd:Q215380 .} ?entity wikibase:sitelinks ?sitelinks . { SELECT (count(?s) AS ?incoming) ?entity WHERE {VALUES ?card_uri {} ?entity wdt:P1303 ?card_uri . ?s ?p ?entity .[] wikibase:directClaim ?p } GROUP BY ?entity } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" . }. } ORDER BY DESC (?incoming) LIMIT 17"
+                        "query": "SELECT DISTINCT ?entity ?entityLabel {VALUES ?card_uri {} ?entity wdt:P1303 ?card_uri . ?entity wikibase:statements ?outcoming . {?entity wdt:P31 wd:Q5.} UNION {?entity wdt:P31 wd:Q215380 .} ?entity wikibase:sitelinks ?sitelinks . { SELECT (count(?s) AS ?incoming) ?entity WHERE {VALUES ?card_uri {} ?entity wdt:P1303 ?card_uri . ?s ?p ?entity .[] wikibase:directClaim ?p } GROUP BY ?entity } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" . }. } ORDER BY DESC (?incoming)"
                     },
                     {
                         "dataset": "d_03",
-                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .{ ?programUri (sdo:byArtist|sdo:creator) ?role .?role sdo:roleName ?card_uri. ?role (sdo:byArtist|sdo:creator) ?entity.?entity skosxl:prefLabel/skosxl:literalForm  ?entityLabel . } UNION {?programUri sdo:hasPart/(sdo:byArtist|sdo:creator) ?role . ?role sdo:roleName ?card_uri. ?role (sdo:byArtist|sdo:creator) ?entity.?entity skosxl:prefLabel/skosxl:literalForm  ?entityLabel . } } LIMIT 30"
+                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .{ ?programUri (sdo:byArtist|sdo:creator) ?role .?role sdo:roleName ?card_uri. ?role (sdo:byArtist|sdo:creator) ?entity.?entity skosxl:prefLabel/skosxl:literalForm  ?entityLabel . } UNION {?programUri sdo:hasPart/(sdo:byArtist|sdo:creator) ?role . ?role sdo:roleName ?card_uri. ?role (sdo:byArtist|sdo:creator) ?entity.?entity skosxl:prefLabel/skosxl:literalForm  ?entityLabel . } }"
                     }
                 ]
             },
@@ -786,7 +786,7 @@
                 "content": [
                     {
                         "dataset": "d_03",
-                        "query": "PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?entity ?entityLabel  WHERE {VALUES ?card_uri {}   ?entity sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .?entity sdo:name ?entityLabel . { ?entity sdo:byArtist/sdo:roleName ?card_uri . }UNION {?entity sdo:hasPart/sdo:byArtist/sdo:roleName ?card_uri .} } LIMIT 30"
+                        "query": "PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?entity ?entityLabel  WHERE {VALUES ?card_uri {}   ?entity sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .?entity sdo:name ?entityLabel . { ?entity sdo:byArtist/sdo:roleName ?card_uri . }UNION {?entity sdo:hasPart/sdo:byArtist/sdo:roleName ?card_uri .} }"
                     }
                 ]
             },
