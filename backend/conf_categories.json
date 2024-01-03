@@ -271,7 +271,7 @@
                 },
                 {
                     "dataset": "d_04",
-                    "query": "SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} ?musician wdt:P31 wd:Q5; ?place_rel ?starting_value; wdt:P136 ?entity.  BIND(str(\"artist's genre\") AS ?rel) SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                    "query": "SELECT DISTINCT ?rel ?entity ?entityLabel WHERE { VALUES ?starting_value {} ?musician wdt:P31 wd:Q5; ?place_rel ?starting_value; wdt:P136 ?entity.  BIND(str(\"has been location for artists of genre\") AS ?rel) SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
                 }
             ],
             "places": [
