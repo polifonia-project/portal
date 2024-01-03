@@ -8,6 +8,10 @@ work-package:
 project: polifonia-project
 resource: https://polifonia.disi.unibo.it/portal/
 demo: https://polifonia.disi.unibo.it/portal/
+release-date: 2024/1/03
+release-number: v0.1.1
+release link: https://github.com/polifonia-project/portal/releases/tag/Latest
+doi: 10.5281/zenodo.10454048
 licence:
 - Cc010Universal
 contributors:
@@ -33,7 +37,7 @@ related-components:
 ---
 
 # Polifonia Web Portal
-
+[![DOI](https://zenodo.org/badge/587248478.svg)](https://zenodo.org/doi/10.5281/zenodo.10454047)
 ## Requirements
 
 Install python and nodejs
