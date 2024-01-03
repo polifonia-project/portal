@@ -511,7 +511,7 @@ function Card(props) {
       </div>
       <div className={classes.contentBlock}>
         {Object.values(currentBlock).sort((a, b) => a.id - b.id).map((block, i) => {
-        
+
           if (block.type === "text") {
             return (
               <TextBlock
