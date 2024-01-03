@@ -6,7 +6,7 @@
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://projects.dharc.unibo.it/musow/sparql",
         "rest_api": "",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula."
+        "description": "musoW is a catalogue of musical resources available on the web realized with the idea to support teachers in music education, creative industries, historians, and musicologists in finding what they need. musoW supports users in searching over hundreds of online resources, including digital libraries, archives, datasets, and related technologies."
     },
     "d_02": {
         "id": "d_02",
@@ -42,7 +42,7 @@
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://data.open.ac.uk/sparql",
         "rest_api": "",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula."
+        "description": "The Listening Experience Database (LED) project is a collaboration between The Open University, the Royal College of Music and (in its second phase) the University of Glasgow. LED brings together a mass of data about people’s experiences of listening to music of all kinds, in any historical period and any culture. The project involves the general public by using crowdsourcing as one of the ways in which data is collected."
     },
     "d_06": {
         "id": "d_06",
@@ -51,6 +51,6 @@
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://dati.cultura.gov.it/sparql",
         "rest_api": "",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium lacus vitae ultrices pulvinar. Nullam sagittis scelerisque erat sed vehicula."
+        "description": "BELLS stores information about Italian bells, bell towers and bell ringers. In particular, in this version, the data collected is related to the bells of the Italian region Ligueria, and comes from catalogue records of the General Catalogue of Italian Cultural Heritage."
     }
 }
