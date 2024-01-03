@@ -6,22 +6,13 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background-color: #f4edec;
+  background-color: #e2e2e2;
   z-index: 200; 
-  cursor: pointer; 
   display: flex;
-  /*
-  background-color: transparent;
-  backdrop-filter: blur(19.2px);  blur glass effect
-  -webkit-backdrop-filter: blur(14.2px); */
 }
 
-.menulist {
-  list-style-type: none;
-  padding-top: 50px;
-}
 
-.menulist li a{
+ .menuLink{
   font-family: "Helvetica Light";
   font-size: 35px;
   color: black;
@@ -29,46 +20,93 @@
   font-weight: 100;
 }
 
-.menulist li {
-  padding-bottom: 60px;
-}
+ .menuLink {
+  padding: 10px 20px 10px 20px;
+  border: 0.4px solid transparent;
+  border-radius: 10px;
+  transition: all 1s ease;
+  display: block;
+  width: fit-content;
+  font-size: 23px;
 
+}
 /* visited link */
-.menulist li a:visited {
+ .menuLink:visited {
   color: black;
 }
 
 /* mouse over link */
-.menulist li a:hover {
-  color: #ff02fe;
+ .menuLink {
+  overflow: hidden;
+  cursor: pointer;
+  background-color: #f4edec;
+  border-color: transparent;
+  box-shadow: 0px 0px 10px -5px black;
+  box-shadow: 0 4px 12px 0 rgba(12,18,45,.1);
+  color: black !important;
+  border-color: transparent  !important;
+  margin-bottom: 30px;
+  margin-top: 40px;
+  transform: (0.9);
 }
 
+ .menuLink:hover {
+  transform: scale(1.4) translateX(20px);
+ }
+
 /* selected link */
-.menulist li a:active {
+ .menuLink:active {
   color: black;
 }
 
 .menuImage {
   display: inline-flex;
-  width: 30%;
+  width: 40%;
   height: 100vh; 
-  background-color:#f4edec;
   margin: 0px;
 }
 
 .menuContainer {
   display: inline-flex;
-  width: 70%;
+  width: 45%;
   height: 100vh; 
-  background-color: #f4edec;
   margin: 0px;
+  margin-left: 80px;
   align-items: center;
-  box-shadow: 30px 0px 50px -18px black;
 }
 
 .menuIcon {
-
-  width: 100px;
+ /*width: 100px;
   margin-left: 40%;
-  
+  */ 
+}
+
+  .catLink {
+  border-radius: 50px;
+  color: #384243;
+  background-color: transparent;
+  padding: 10px 20px 10px 20px;
+  cursor: pointer;
+  margin-right: 20px;
+  box-shadow: 0px 0px 10px -5px black;
+  box-shadow: 0 4px 12px 0 rgba(12,18,45,.1);
+  display: inline-block;
+  transition: all 1s ease;
+  margin-bottom: 15px;
+}
+
+.catLink+.menuLink {
+  margin-top: 15px;
+}
+
+ .catLink:hover {
+  transform: scale(1.5);
+  background-color: #f4edec;
+ }
+
+ @media only screen and (max-width: 400px) {
+  .menuLink, .catLink {
+    transform: scale(0.7);
+    margin: 2px;
+  }
 }

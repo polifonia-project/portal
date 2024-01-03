@@ -1,581 +1,933 @@
-{ 
-    "topics": {
-        "color": "#f80000",
-        "blocks" : { 
-            "01" : {
-                "type": "text",
-                "size": "small",
-                "title": "Biography",
-                "content": [{},{},{}]
-            },
-            "02" : {
-                "type": "relation",
-                "size": "small",
-                "title": "Influenced by",
-                "content": [{},{},{}]
-            },
-            "03" : {
-                "type": "relation",
-                "size": "small",
-                "title": "Worked with",
-                "content": [{},{},{}]
-            },
-            "04" : {
-                "type": "visual",
-                "size": "small",
-                "title": "Portrait",
-                "content": [{},{},{}]
-            },
-            "05" : {
-                "type": "link",
-                "size": "small",
-                "title": "Useful links",
-                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-                "content": [{
-                    "linktype" : "static",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Wikipedia",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Genius Lyrics",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "api",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "query",
-                    "label" : "Spotify",
-                    "dataset" : [{
-                            "dataset_01" : "query/...",
-                            "dataset_02" : "query/..."
-                            }]
-                    }
-                ]
-            }
-        }
-
-    }, 
-    "tunes": {
+{
+    "music": {
+        "category": "cat_03",
         "color": "#ff02fe",
-        "blocks" : { 
-            "01" : {
+        "blocks": {
+            "01": {
+                "id": 1,
                 "type": "text",
                 "size": "small",
-                "title": "Biography",
-                "content": [{},{},{}]
+                "title": "Type of music work",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P7937 ?entity.} UNION { ?card_uri wdt:P7937 ?entity. } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                    }
+                ]
             },
-            "02" : {
+            "02": {
+                "id": 2,
+                "type": "text",
+                "size": "small",
+                "title": "Definition",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entityLabel WHERE { VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?entityLabel.}}"
+                    }
+                ]
+            },
+            "03": {
+                "id": 3,
+                "type": "media",
+                "size": "small",
+                "title": "Image",
+                "class": "image",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?entity }"
+                    }
+                ]
+            },
+            "04": {
+                "id": 4,
+                "type": "media",
+                "size": "small",
+                "title": "Collage image",
+                "class": "image",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P2716 ?entity .}"
+                    }
+                ]
+            },
+            "05": {
+                "id": 5,
                 "type": "relation",
                 "size": "small",
-                "title": "Influenced by",
-                "content": [{},{},{}]
+                "title": "Performed by",
+                "category": "artists",
+                "content": [
+                    {
+                        "dataset": "d_03",
+                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/>  SELECT DISTINCT  ?entity ?entityLabel WHERE {  VALUES ?card_uri {}  { ?card_uri sdo:byArtist/sdo:byArtist ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel } UNION { ?card_uri  sdo:hasPart/sdo:byArtist/sdo:byArtist ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel} } "
+                    },
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P175 ?entity.} UNION { ?card_uri wdt:P175 ?entity. } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                    }
+                ]
             },
-            "03" : {
+            "06": {
+                "id": 6,
                 "type": "relation",
                 "size": "small",
-                "title": "Worked with",
-                "content": [{},{},{}]
+                "title": "Composed by",
+                "category": "artists",
+                "content": [
+                    {
+                        "dataset": "d_03",
+                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/>  SELECT DISTINCT ?entity ?entityLabel WHERE { VALUES ?card_uri {} { ?card_uri sdo:creator/sdo:creator ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel } UNION { ?card_uri sdo:hasPart/sdo:creator/sdo:creator ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel } }"
+                    },
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P86 ?entity.} SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                    }
+                ]
             },
-            "04" : {
-                "type": "visual",
+            "07": {
+                "id": 7,
+                "type": "relation",
                 "size": "small",
-                "title": "Portrait",
-                "content": [{},{},{}]
+                "title": "Lyrics by",
+                "category": "artists",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P676 ?entity.} SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                    }
+                ]
             },
-            "05" : {
+            "08": {
+                "id": 8,
+                "type": "relation",
+                "size": "small",
+                "title": "Produced by",
+                "category": "artists",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P162 ?entity.} SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                    }
+                ]
+            },
+            "09": {
+                "id": 9,
                 "type": "link",
                 "size": "small",
                 "title": "Useful links",
-                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-                "content": [{
-                    "linktype" : "static",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
+                "description": "Discover many other resources related to this music work, all available on the web",
+                "content": [
+                    {
+                        "label": "Website",
+                        "url": "https://www.google.com/",
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity  WHERE {VALUES ?card_uri {} ?card_uri wdt:P856 ?entity .}"
                     },
                     {
-                    "linktype" : "static",
-                    "label" : "Wikipedia",
-                    "url" : "https://www.google.com/"
+                        "label": "Concert Page",
+                        "url": "https://zoeken.beeldengeluid.nl/",
+                        "dataset": "d_03",
+                        "query": "PREFIX sdo: <https://schema.org/>  SELECT DISTINCT  ?entity ?entityLabel WHERE {VALUES ?card_uri {} ?card_uri  sdo:url ?entity  "
                     },
                     {
-                    "linktype" : "static",
-                    "label" : "Genius Lyrics",
-                    "url" : "https://www.google.com/"
+                        "label": "Alt Source",
+                        "url": "https://www.google.com/",
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P973 ?entity .}"
+                    }
+                ]
+            },
+            "10": {
+                "id": 10,
+                "type": "text",
+                "size": "small",
+                "title": "Language",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P407 ?entity.} UNION { ?card_uri wdt:P407 ?entity. } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                    }
+                ]
+            },
+            "11": {
+                "id": 11,
+                "type": "text",
+                "size": "small",
+                "title": "Date",
+                "content": [
+                    {
+                        "dataset": "d_03",
+                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/>  SELECT DISTINCT  ?entity WHERE {VALUES ?card_uri {}  ?card_uri  sdo:datePublished ?entity } "
                     },
                     {
-                    "linktype" : "api",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity (YEAR(?entity) AS ?entityLabel) WHERE {VALUES ?card_uri {} { ?card_uri wdt:P577 ?entity.} UNION { ?card_uri wdt:P577 ?entity. } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                    }
+                ]
+            },
+            "12": {
+                "id": 12,
+                "type": "relation",
+                "size": "small",
+                "title": "Took place at",
+                "category": "places",
+                "content": [
                     {
-                    "linktype" : "query",
-                    "label" : "Spotify",
-                    "dataset" : [{
-                            "dataset_01" : "query/...",
-                            "dataset_02" : "query/..."
-                            }]
+                        "dataset": "d_03",
+                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/>  SELECT DISTINCT  ?entity ?entityLabel WHERE { VALUES ?card_uri {}  { ?card_uir  sdo:locationCreated ?location . ?location sdo:sameAs ?entity . ?location sdo:name ?entityLabel} UNION { ?card_uri  sdo:hasPart/sdo:locationCreated ?location . ?location sdo:sameAs ?entity . ?location sdo:name ?entityLabel}  } "
+                    }
+                ]
+            },
+            "13": {
+                "id": 13,
+                "type": "relation",
+                "size": "small",
+                "title": "Genre",
+                "category": "genres",
+                "content": [
+                    {
+                        "dataset": "d_03",
+                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/>  SELECT DISTINCT  ?p WHERE {VALUES ?card_uri {}   {?card_uri  sdo:genre ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel;} UNION {?card_uri  sdo:hasPart/sdo:genre ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel} }"
                     }
                 ]
             }
         }
-
     },
     "genres": {
+        "category": "cat_01",
         "color": "#1d00fe",
-        "blocks" : { 
-            "01" : {
+        "blocks": {
+            "01": {
+                "id": 1,
                 "type": "text",
                 "size": "small",
-                "title": "Biography",
-                "content": [{},{},{}]
+                "title": "Definition",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entityLabel WHERE { VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?entityLabel.}}"
+                    }
+                ]
             },
-            "02" : {
+            "02": {
+                "id": 2,
+                "type": "media",
+                "size": "small",
+                "title": "Image",
+                "class": "image",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?entity }"
+                    }
+                ]
+            },
+            "03": {
+                "id": 3,
+                "type": "media",
+                "size": "small",
+                "title": "Collage image",
+                "class": "image",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P2716 ?entity .}"
+                    }
+                ]
+            },
+            "04": {
+                "id": 4,
                 "type": "relation",
                 "size": "small",
-                "title": "Influenced by",
-                "content": [{},{},{}]
+                "title": "Originated in",
+                "category": "places",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P495 ?entity.} UNION { ?card_uri wdt:P740 ?entity. } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                    }
+                ]
             },
-            "03" : {
+            "05": {
+                "id": 5,
                 "type": "relation",
                 "size": "small",
-                "title": "Worked with",
-                "content": [{},{},{}]
+                "title": "Subclass of",
+                "category": "genres",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P279 ?entity.} SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                    }
+                ]
             },
-            "04" : {
-                "type": "visual",
+            "06": {
+                "id": 6,
+                "type": "relation",
                 "size": "small",
-                "title": "Portrait",
-                "content": [{},{},{}]
+                "title": "Related Genres",
+                "category": "genres",
+                "content": [
+                    {
+                        "dataset": "d_03",
+                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> ;  sdo:genre ?card_uri ; sdo:genre ?entity. ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } UNION { ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .  ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:genre ?card_uri ; sdo:genre ?entity. ?entity skos:prefLabel ?entityLabel .} FILTER(?entity != ?card_uri) BIND(\"is associated with\" as ?rel)}"
+                    }
+                ]
             },
-            "05" : {
-                "type": "link",
+            "07": {
+                "id": 7,
+                "type": "media",
+                "size": "medium",
+                "title": "Distribution map",
+                "class": "image",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P407 ?entity.} SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                    }
+                ]
+            },
+            "08": {
+                "id": 8,
+                "type": "relation",
                 "size": "small",
-                "title": "Useful links",
-                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-                "content": [{
-                    "linktype" : "static",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
+                "title": "Artists",
+                "category": "artists",
+                "content": [
                     {
-                    "linktype" : "static",
-                    "label" : "Wikipedia",
-                    "url" : "https://www.google.com/"
-                    },
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} { ?card_uri wdt:P577 ?entity.} SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" }}"
+                    }
+                ]
+            },
+            "09": {
+                "id": 9,
+                "type": "relation",
+                "size": "small",
+                "title": "Composers",
+                "category": "artists",
+                "content": [
                     {
-                    "linktype" : "static",
-                    "label" : "Genius Lyrics",
-                    "url" : "https://www.google.com/"
-                    },
+                        "dataset": "d_03",
+                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>  SELECT DISTINCT ?entity ?entityLabel WHERE { VALUES ?card_uri {}  ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131>. ?programUri sdo:genre ?card_uri.{ ?programUri sdo:creator/sdo:creator ?entity .?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } UNION { ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:creator/sdo:creator ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel .} }"
+                    }
+                ]
+            },
+            "10": {
+                "id": 10,
+                "type": "relation",
+                "size": "small",
+                "title": "Musicians",
+                "category": "artists",
+                "content": [
                     {
-                    "linktype" : "api",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
+                        "dataset": "d_03",
+                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>  SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131>.?programUri sdo:genre ?card_uri . { ?programUri sdo:byArtist/sdo:byArtist ?entity .?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel .} UNION { ?programUri sdo:hasPart ?sceneUri. ?sceneUri sdo:byArtist/sdo:byArtist ?entity .  ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } }"
+                    }
+                ]
+            },
+            "11": {
+                "id": 11,
+                "type": "relation",
+                "size": "small",
+                "title": "Thematic Digital Collections",
+                "category": "creative works",
+                "content": [
                     {
-                    "linktype" : "query",
-                    "label" : "Spotify",
-                    "dataset" : [{
-                            "dataset_01" : "query/...",
-                            "dataset_02" : "query/..."
-                            }]
+                        "dataset": "d_01",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { VALUES ?card_uri {} ?entity <https://schema.org/genre> ?starting_value ; rdfs:label ?entityLabel . }"
                     }
                 ]
             }
         }
-
-    }, 
-    "lyrics": {
-        "color": "#6400b4",
-        "blocks" : { 
-            "01" : {
-                "type": "text",
-                "size": "small",
-                "title": "Biography",
-                "content": [{},{},{}]
-            },
-            "02" : {
-                "type": "relation",
-                "size": "small",
-                "title": "Influenced by",
-                "content": [{},{},{}]
-            },
-            "03" : {
-                "type": "relation",
-                "size": "small",
-                "title": "Worked with",
-                "content": [{},{},{}]
-            },
-            "04" : {
-                "type": "visual",
-                "size": "small",
-                "title": "Portrait",
-                "content": [{},{},{}]
-            },
-            "05" : {
-                "type": "link",
-                "size": "small",
-                "title": "Useful links",
-                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-                "content": [{
-                    "linktype" : "static",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Wikipedia",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Genius Lyrics",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "api",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "query",
-                    "label" : "Spotify",
-                    "dataset" : [{
-                            "dataset_01" : "query/...",
-                            "dataset_02" : "query/..."
-                            }]
-                    }
-                ]
-            }
-        }
-
-    }, 
-    "scores": {
-        "color": "#00feff",
-        "blocks" : { 
-            "01" : {
-                "type": "text",
-                "size": "small",
-                "title": "Biography",
-                "content": [{},{},{}]
-            },
-            "02" : {
-                "type": "relation",
-                "size": "small",
-                "title": "Influenced by",
-                "content": [{},{},{}]
-            },
-            "03" : {
-                "type": "relation",
-                "size": "small",
-                "title": "Worked with",
-                "content": [{},{},{}]
-            },
-            "04" : {
-                "type": "visual",
-                "size": "small",
-                "title": "Portrait",
-                "content": [{},{},{}]
-            },
-            "05" : {
-                "type": "link",
-                "size": "small",
-                "title": "Useful links",
-                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-                "content": [{
-                    "linktype" : "static",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Wikipedia",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Genius Lyrics",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "api",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "query",
-                    "label" : "Spotify",
-                    "dataset" : [{
-                            "dataset_01" : "query/...",
-                            "dataset_02" : "query/..."
-                            }]
-                    }
-                ]
-            }
-        }
-
-    }, 
-    "people": {
+    },
+    "artists": {
+        "category": "cat_02",
         "color": "#09ff00",
-        "blocks" : { 
-            "01" : {
-                "type": "text",
-                "size": "small",
-                "title": "Biography",
-                "content": [{},{},{}]
-            },
-            "02" : {
-                "type": "relation",
-                "size": "small",
-                "title": "Influenced by",
-                "content": [{},{},{}]
-            },
-            "03" : {
-                "type": "relation",
-                "size": "small",
-                "title": "Worked with",
-                "content": [{},{},{}]
-            },
-            "04" : {
-                "type": "visual",
-                "size": "small",
-                "title": "Portrait",
-                "content": [{},{},{}]
-            },
-            "05" : {
-                "type": "link",
-                "size": "small",
-                "title": "Useful links",
-                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-                "content": [{
-                    "linktype" : "static",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Wikipedia",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Genius Lyrics",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "api",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "query",
-                    "label" : "Spotify",
-                    "dataset" : [{
-                            "dataset_01" : "query/...",
-                            "dataset_02" : "query/..."
-                            }]
-                    }
-                ]
-            }
-        }
-
-    }, 
-    "places": {
-        "color": "#fdff00",
-        "blocks" : { 
-            "01" : {
+        "blocks": {
+            "01": {
+                "id": 1,
                 "type": "text",
                 "size": "medium",
-                "title": "Description",
-                "content": [{},{},{}]
-            },
-            "02" : {
-                "type": "relation",
-                "size": "small",
-                "title": "Famous guests",
-                "content": [{},{},{}]
-            },
-            "03" : {
-                "type": "link",
-                "size": "small",
-                "title": "Useful links",
-                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-                "content": [{
-                    "linktype" : "static",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
+                "title": "Biography",
+                "content": [
+                    {
+                        "dataset": "d_02",
+                        "query": "PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?entityLabel { VALUES ?card_uri {} ?card_uri rdf:type mtp:Participant ; mtp:hasAbstract ?entityLabel . }"
                     },
                     {
-                    "linktype" : "static",
-                    "label" : "Wikipedia",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Genius Lyrics",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "api",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "query",
-                    "label" : "Spotify",
-                    "dataset" : [{
-                            "dataset_01" : "query/...",
-                            "dataset_02" : "query/..."
-                            }]
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entityLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?entityLabel.}}"
                     }
                 ]
             },
-            "04" :{
-                "type": "visual",
-                "size": "large",
-                "title": "Map",
-                "content": [{},{},{}]
+            "02": {
+                "id": 2,
+                "type": "media",
+                "size": "small",
+                "title": "Image",
+                "class": "image",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?entity }"
+                    }
+                ]
+            },
+            "03": {
+                "id": 3,
+                "type": "media",
+                "size": "medium",
+                "title": "Video",
+                "class": "video",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P10 ?entity }"
+                    }
+                ]
+            },
+            "04": {
+                "id": 4,
+                "type": "media",
+                "size": "medium",
+                "title": "Voice",
+                "class": "audio",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P51 ?entity }"
+                    }
+                ]
+            },
+            "05": {
+                "id": 5,
+                "type": "relation",
+                "size": "small",
+                "title": "Related Digital Collections",
+                "category": "creative works",
+                "content": [
+                    {
+                        "dataset": "d_01",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} ?entity <https://schema.org/character> ?card_uri ; rdfs:label ?entityLabel .}"
+                    }
+                ]
+            },
+            "06": {
+                "id": 6,
+                "type": "relation",
+                "size": "small",
+                "title": "Related places",
+                "category": "places",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?rel ?entity ?entityLabel WHERE {VALUES ?card_uri {}  { ?card_uri wdt:P19 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of birth\") AS ?rel) } UNION { ?card_uri wdt:P20 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has place of death\") AS ?rel) } UNION { ?card_uri wdt:P937 ?entity. ?entity wdt:P31/wdt:P279* wd:Q702492 . BIND(str(\"has work location\") AS ?rel) } UNION { ?card_uri wdt:P740 ?entity. BIND(str(\"location of formation\") AS ?rel)} UNION { ?card_uri wdt:P495 ?entity. BIND(str(\"has country of origin\") AS ?rel)} . SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" } } ORDER BY ?entityLabel LIMIT 10"
+                    }
+                ]
+            },
+            "07": {
+                "id": 7,
+                "type": "relation",
+                "size": "small",
+                "title": "Meeting with",
+                "category": "artists",
+                "content": [
+                    {
+                        "dataset": "d_02",
+                        "query": "PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?entity ?entityLabel WHERE { VALUES ?card_uri { <http://dbpedia.org/resource/Yehudi_Menuhin> } ?s mtp:hasSubject ?card_uri ; mtp:hasParticipant ?participant ; mtp:hasType ?type .  FILTER (regex ( str (?type), str (\"HM\") ) ) . ?s mtp:hasParticipant ?aParticipantURI . ?aParticipantURI mtp:hasEntity ?entity .  ?entity rdfs:label ?entityLabel .  }"
+                    }
+                ]
+            },
+            "08": {
+                "id": 8,
+                "type": "link",
+                "size": "small",
+                "title": "Useful links",
+                "description": "Discover many other resources related to this person, all available on the web",
+                "content": [
+                    {
+                        "label": "Website",
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity  WHERE {VALUES ?card_uri {} ?card_uri wdt:P856 ?entity .}"
+                    },
+                    {
+                        "label": "Alt Source",
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P973 ?entity .}"
+                    },
+                    {
+                        "label": "Discogs Page",
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P1953 ?discogsArtistID. BIND(IRI(CONCAT(\"https://www.discogs.com/artist/\", STR(?discogsArtistID))) AS ?entity) SERVICE wikibase:label { bd:serviceParam wikibase:language \"[AUTO_LANGUAGE],en\". }}"
+                    }
+                ]
+            },
+            "09": {
+                "id": 9,
+                "type": "relation",
+                "size": "medium",
+                "title": "Concerts",
+                "category": "music",
+                "content": [
+                    {
+                        "dataset": "d_03",
+                        "query": "PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} ?entity sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> . ?entity sdo:name ?entityLabel . {?entity (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/             (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?card_uri .  } }"
+                    }
+                ]
             }
         }
-
-    }, 
-    "instruments": {
-        "color": "#000000",
-        "blocks" : { 
-            "01" : {
+    },
+    "places": {
+        "category": "cat_04",
+        "color": "#fdff00",
+        "blocks": {
+            "01": {
+                "id": 1,
                 "type": "text",
                 "size": "small",
-                "title": "Biography",
-                "content": [{},{},{}]
+                "title": "Description",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entityLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?entityLabel .}}"
+                    }
+                ]
             },
-            "02" : {
+            "02": {
+                "id": 2,
+                "type": "media",
+                "size": "small",
+                "title": "Map",
+                "class": "image",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P242 ?entity}"
+                    }
+                ]
+            },
+            "03": {
+                "id": 3,
                 "type": "relation",
                 "size": "small",
-                "title": "Influenced by",
-                "content": [{},{},{}]
+                "title": "Related places by genre",
+                "category": "places",
+                "content": [
+                    {
+                        "dataset": "d_02",
+                        "query": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>PREFIX dbo: <http://dbpedia.org/ontology/> PREFIX mtp: <http://w3id.org/polifonia/ontology/meetups-ontology#> SELECT DISTINCT ?entity ?label (CONCAT(STR(?label), \" (\", group_concat(distinct ?genreLabel;separator=\"; \"), \")\" ) AS ?entityLabel) (COUNT(?otherpers) AS ?count) WHERE { VALUES ?card_uri {} ?placeMeetupIRI mtp:hasEntity ?card_uri . ?meetup mtp:hasPlace ?placeMeetupIRI ; mtp:hasParticipant ?meetupParticipantIRI ; mtp:hasType ?type . FILTER (regex (str(?type), str(\"HM\") ) ) . ?meetupParticipantIRI mtp:hasEntity ?personIRI . SERVICE <https://dbpedia.org/sparql> {?personIRI dbo:genre ?genreIRI . ?genreIRI ^dbo:genre ?otherpers ; rdfs:label ?genreLabel .FILTER(langMatches(lang(?genreLabel),\"en\"))} ?meetupParticipantIRI2 mtp:hasEntity ?otherpers .?meetup2 mtp:hasParticipant ?meetupParticipantIRI2; mtp:hasPlace ?placeMeetupIRI2 .?placeMeetupIRI2 mtp:hasEntity ?entity .?entity rdfs:label ?label .} GROUP BY ?entity ?label ?count ORDER BY DESC(?count) LIMIT 50"
+                    }
+                ]
             },
-            "03" : {
+            "074": {
+                "id": 4,
                 "type": "relation",
                 "size": "small",
-                "title": "Worked with",
-                "content": [{},{},{}]
+                "title": "Concerts that took place",
+                "category": "music",
+                "content": [
+                    {
+                        "dataset": "d_03",
+                        "query": "PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} ?entity sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> . ?entity sdo:name ?entityLabel . {?entity sdo:locationCreated ?location . ?location sdo:sameAs ?card_uri.   }   UNION  {  ?entity sdo:hasPart/sdo:locationCreated ?location . ?location sdo:sameAs ?card_uri .  } }"
+                    }
+                ]
             },
-            "04" : {
-                "type": "visual",
+            "05": {
+                "id": 5,
+                "type": "relation",
                 "size": "small",
-                "title": "Portrait",
-                "content": [{},{},{}]
+                "title": "Related artists",
+                "category": "artists",
+                "content": [
+                    {
+                        "dataset": "d_03",
+                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>  SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> . { ?location sdo:sameAs ?card_uri .?programUri sdo:locationCreated ?location .?programUri (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/             (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity .?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . }UNION{?location sdo:sameAs ?card_uri .?sceneUri sdo:locationCreated ?location . ?programUri sdo:hasPart ?sceneUri.?sceneUri  (sdo:byArtist|sdo:about|sdo:mentions|sdo:creator)/(sdo:byArtist|sdo:about|sdo:mentions|sdo:creator) ?entity . ?entity skosxl:prefLabel/skosxl:literalForm ?entityLabel . } }"
+                    }
+                ]
             },
-            "05" : {
-                "type": "link",
+            "06": {
+                "id": 6,
+                "type": "relation",
                 "size": "small",
-                "title": "Useful links",
-                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-                "content": [{
-                    "linktype" : "static",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
+                "title": "Most prolific bands founded here",
+                "category": "artists",
+                "content": [
                     {
-                    "linktype" : "static",
-                    "label" : "Wikipedia",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Genius Lyrics",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "api",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "query",
-                    "label" : "Spotify",
-                    "dataset" : [{
-                            "dataset_01" : "query/...",
-                            "dataset_02" : "query/..."
-                            }]
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel (COUNT(?album) as ?albumCount) WHERE {VALUES ?card_uri {} ?entity wdt:P740 ?card_uri; wdt:P31 wd:Q215380; rdfs:label ?entityLabel. ?album wdt:P175 ?entity . FILTER(LANG(?entityLabel) = \"en\")  } GROUP BY ?entity ?entityLabel ORDER BY DESC(?albumCount) LIMIT 20"
                     }
                 ]
             }
         }
-
+    },
+    "instruments": {
+        "category": "cat_05",
+        "color": "#000000",
+        "blocks": {
+            "01": {
+                "id": 1,
+                "type": "text",
+                "size": "small",
+                "title": "Description",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entityLabel WHERE {VALUES ?card_uri {} SERVICE wikibase:label {bd:serviceParam wikibase:language 'en' . ?card_uri schema:description ?entityLabel.}}"
+                    },
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT (CONCAT(UCASE(SUBSTR(?description, 1, 1)), LCASE(SUBSTR(?description, 2)) ) as ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value dc:description ?description . }"
+                    }
+                ]
+            },
+            "02": {
+                "id": 2,
+                "type": "media",
+                "size": "small",
+                "title": "Image",
+                "class": "image",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?card_uri ?entity WHERE {VALUES ?card_uri {} ?card_uri wdt:P18 ?entity }"
+                    },
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT ?entity WHERE { VALUES ?starting_value {} ?starting_value a-cd:hasDocumentation/foaf:depiction ?entity. }"
+                    }
+                ]
+            },
+            "03": {
+                "id": 3,
+                "type": "media",
+                "size": "small",
+                "title": "Sound",
+                "class": "audio",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT ?entity WHERE { VALUES ?starting_value {} ?starting_value a-cd:hasDocumentation/<https://w3id.org/italia/onto/SM/URL> ?entity. }"
+                    }
+                ]
+            },
+            "04": {
+                "id": 4,
+                "type": "text",
+                "size": "small",
+                "title": "Main note",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT ?entityLabel WHERE { VALUES ?starting_value {} ?starting_value <https://w3id.org/arco/ontology/musical-instrument/producesMusicalNote>/rdfs:label ?entityLabel. }"
+                    }
+                ]
+            },
+            "05": {
+                "id": 5,
+                "type": "relation",
+                "size": "small",
+                "title": "Built by",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { VALUES ?starting_value {} ?starting_value a-cd:hasAuthor ?entity . ?entity rdfs:label ?entityLabel . }"
+                    }
+                ]
+            },
+            "06": {
+                "id": 6,
+                "type": "text",
+                "size": "small",
+                "title": "Time period",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT (IF(STRBEFORE(?label, \"-\") = STRAFTER(?label, \"-\"), STRBEFORE(?label, \"-\"), ?label) AS ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value dc:date ?label . }"
+                    }
+                ]
+            },
+            "07": {
+                "id": 7,
+                "type": "relation",
+                "size": "small",
+                "title": "Has same builder of",
+                "category": "instruments",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "PREFIX clv: <https://w3id.org/italia/onto/CLV/> SELECT DISTINCT ?entity (CONCAT(?bellString, \" - \", ?church, \" - \", ?city) AS ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value a-cd:hasAuthor ?author . ?entity rdf:type a-dd:MusicalInstrument ; a-cd:hasAuthor ?author ; dc:coverage ?city ; a-loc:hasTimeIndexedTypedLocation/a-loc:atSite/rdfs:label ?church ; rdfs:label ?title ; dc:subject ?subject FILTER (str(?subject) = 'campana') . BIND (STRBEFORE(?title, \" (\") AS ?bellString) . FILTER (LANGMATCHES(LANG(?bellString), \"it\")) . FILTER (?entity != ?starting_value) . }"
+                    }
+                ]
+            },
+            "08": {
+                "id": 8,
+                "type": "text",
+                "size": "small",
+                "title": "Current location",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT ?entityLabel WHERE { VALUES ?starting_value {} ?starting_value dc:coverage ?entityLabel . }"
+                    }
+                ]
+            },
+            "09": {
+                "id": 9,
+                "type": "text",
+                "size": "small",
+                "title": "Place of production",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT (SUBSTR(?entityLabelToTrim, 8) as ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value a-loc:hasTimeIndexedTypedLocation/a-loc:hasLocationType a-loc:ProductionRealizationLocation ; a-loc:hasTimeIndexedTypedLocation/a-loc:atLocation/rdfs:label ?entityLabelToTrim . }"
+                    }
+                ]
+            },
+            "10": {
+                "id": 10,
+                "type": "text",
+                "size": "small",
+                "title": "Material",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT (SAMPLE(?label_to_format) AS ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value a-dd:hasMaterial/rdfs:label ?label_to_format. }"
+                    }
+                ]
+            },
+            "11": {
+                "id": 11,
+                "type": "text",
+                "size": "small",
+                "title": "Inscriptions",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT ?entityLabel WHERE { VALUES ?starting_value {} ?starting_value a-dd:hasAffixedElement/a-dd:transcript ?entityLabel . }"
+                    }
+                ]
+            },
+            "12": {
+                "id": 12,
+                "type": "relation",
+                "size": "small",
+                "title": "Iconography subjects",
+                "category": "",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT (CONCAT(UCASE(SUBSTR(?entityLabel, 1, 1)), SUBSTR(?entityLabel, 2)) AS ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value a-dd:hasIconographicOrDecorativeApparatus/a-cd:subject ?entityLabel . }"
+                    }
+                ]
+            },
+            "13": {
+                "id": 13,
+                "type": "relation",
+                "size": "small",
+                "title": "Is component of",
+                "category": "instruments",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT ?entity (CONCAT(UCASE(SUBSTR(?subject, 1, 1)), SUBSTR(?subject, 2), \" - \", ?church, \" - \", ?city) AS ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value arco:isCulturalPropertyComponentOf ?entity . ?entity a-loc:hasTimeIndexedTypedLocation/a-loc:atSite/rdfs:label ?church ; dc:coverage ?city ; dc:subject ?subject FILTER (str(?subject) = 'concerto di campane'). }"
+                    }
+                ]
+            },
+            "14": {
+                "id": 14,
+                "type": "relation",
+                "size": "small",
+                "title": "Other bells in the same set",
+                "category": "instruments",
+                "content": [
+                    {
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT ?entity (CONCAT(?bellString, \" - \", ?church, \" - \", ?city) AS ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value arco:isCulturalPropertyComponentOf ?setOfBells . ?entity arco:isCulturalPropertyComponentOf ?setOfBells ; a-loc:hasTimeIndexedTypedLocation/a-loc:atSite/rdfs:label ?church ; rdfs:label ?title ; dc:coverage ?city ; dc:subject ?subject FILTER (str(?subject) = 'campana') . BIND (STRBEFORE(?title, \" (\") AS ?bellString) . FILTER (LANGMATCHES(LANG(?bellString), \"it\")) . FILTER (?starting_value != ?entity) . } ORDER BY ?starting_value"
+                    }
+                ]
+            },
+            "15": {
+                "id": 15,
+                "type": "relation",
+                "size": "small",
+                "title": "Played by",
+                "category": "artists",
+                "content": [
+                    {
+                        "dataset": "d_04",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel {VALUES ?card_uri {} ?entity wdt:P1303 ?card_uri . ?entity wikibase:statements ?outcoming . {?entity wdt:P31 wd:Q5.} UNION {?entity wdt:P31 wd:Q215380 .} ?entity wikibase:sitelinks ?sitelinks . { SELECT (count(?s) AS ?incoming) ?entity WHERE {VALUES ?card_uri {} ?entity wdt:P1303 ?card_uri . ?s ?p ?entity .[] wikibase:directClaim ?p } GROUP BY ?entity } SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\" . }. } ORDER BY DESC (?incoming)"
+                    },
+                    {
+                        "dataset": "d_03",
+                        "query": "PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} ?programUri sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .{ ?programUri (sdo:byArtist|sdo:creator) ?role .?role sdo:roleName ?card_uri. ?role (sdo:byArtist|sdo:creator) ?entity.?entity skosxl:prefLabel/skosxl:literalForm  ?entityLabel . } UNION {?programUri sdo:hasPart/(sdo:byArtist|sdo:creator) ?role . ?role sdo:roleName ?card_uri. ?role (sdo:byArtist|sdo:creator) ?entity.?entity skosxl:prefLabel/skosxl:literalForm  ?entityLabel . } }"
+                    }
+                ]
+            },
+            "16": {
+                "id": 16,
+                "type": "relation",
+                "size": "small",
+                "title": "Played during concerts",
+                "category": "music",
+                "content": [
+                    {
+                        "dataset": "d_03",
+                        "query": "PREFIX sdo: <https://schema.org/> SELECT DISTINCT ?entity ?entityLabel  WHERE {VALUES ?card_uri {}   ?entity sdo:partOfSeason/sdo:partOfSeries <http://data.beeldengeluid.nl/id/series/2101608030025711131> .?entity sdo:name ?entityLabel . { ?entity sdo:byArtist/sdo:roleName ?card_uri . }UNION {?entity sdo:hasPart/sdo:byArtist/sdo:roleName ?card_uri .} }"
+                    }
+                ]
+            },
+            "17": {
+                "id": 17,
+                "type": "link",
+                "size": "small",
+                "title": "Useful links",
+                "description": "Discover more details related to this instrument available on the Web.",
+                "content": [
+                    {
+                        "label": "Italian Catalogue of Cultural Heritage",
+                        "dataset": "d_06",
+                        "query": "SELECT DISTINCT ?entity WHERE { VALUES ?starting_value {} ?starting_value dc:source ?entity . FILTER(contains(str(?entity), 'https://catalogo.beniculturali.it')) }"
+                    }
+                ]
+            }
+        }
     },
     "creative works": {
+        "category": "",
         "color": "#00ffa5",
-        "blocks" : { 
-            "01" : {
+        "blocks": {
+            "01": {
+                "id": 1,
                 "type": "text",
                 "size": "small",
-                "title": "Biography",
-                "content": [{},{},{}]
+                "title": "Description",
+                "content": [
+                    {
+                        "dataset": "d_01",
+                        "query": "SELECT DISTINCT ?entityLabel WHERE {VALUES ?card_uri {} ?card_uri <https://schema.org/description> ?entityLabel .}"
+                    }
+                ]
             },
-            "02" : {
+            "02": {
+                "id": 2,
                 "type": "relation",
                 "size": "small",
-                "title": "Influenced by",
-                "content": [{},{},{}]
+                "title": "Audience",
+                "category": "audience type",
+                "content": [
+                    {
+                        "dataset": "d_01",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} ?card_uri <https://schema.org/audience> ?entity. ?entity <http://www.w3.org/2000/01/rdf-schema#label> ?entityLabel .}"
+                    }
+                ]
             },
-            "03" : {
+            "03": {
+                "id": 3,
                 "type": "relation",
                 "size": "small",
-                "title": "Worked with",
-                "content": [{},{},{}]
+                "title": "Type of resources",
+                "category": "resource type",
+                "content": [
+                    {
+                        "dataset": "d_01",
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE {VALUES ?card_uri {} ?card_uri <https://schema.org/mainEntity> ?entity. ?entity <http://www.w3.org/2000/01/rdf-schema#label> ?entityLabel .}"
+                    }
+                ]
             },
-            "04" : {
-                "type": "visual",
-                "size": "small",
-                "title": "Portrait",
-                "content": [{},{},{}]
-            },
-            "05" : {
+            "04": {
+                "id": 4,
                 "type": "link",
                 "size": "small",
                 "title": "Useful links",
-                "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
-                "content": [{
-                    "linktype" : "static",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
+                "description": "Discover many other resources related to this creative work available on the web",
+                "content": [
+                    {
+                        "label": "Website",
+                        "url": "https://www.google.com/",
+                        "dataset": "d_01",
+                        "query": "SELECT DISTINCT ?entity  WHERE {VALUES ?card_uri {} ?card_uri <https://schema.org/mainEntityOfPage> ?entity .}"
                     },
                     {
-                    "linktype" : "static",
-                    "label" : "Wikipedia",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "static",
-                    "label" : "Genius Lyrics",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "api",
-                    "label" : "Spotify",
-                    "url" : "https://www.google.com/"
-                    },
-                    {
-                    "linktype" : "query",
-                    "label" : "Spotify",
-                    "dataset" : [{
-                            "dataset_01" : "query/...",
-                            "dataset_02" : "query/..."
-                            }]
+                        "label": "Sample Resource",
+                        "url": "https://www.google.com/",
+                        "dataset": "d_01",
+                        "query": "SELECT DISTINCT ?entity WHERE {VALUES ?card_uri {} ?card_uri <https://schema.org/workExample> ?entity .}"
                     }
                 ]
             }
         }
-
+    },
+    "listening experience": {
+        "category": "",
+        "color": "#fea360",
+        "blocks": {
+            "01": {
+                "id": 1,
+                "type": "relation",
+                "size": "small",
+                "title": "Performers",
+                "category": "artists",
+                "content": [
+                    {
+                        "dataset": "d_05",
+                        "query": "PREFIX mo: <http://purl.org/ontology/mo/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?entity ?entityLabel FROM <http://data.open.ac.uk/context/led> WHERE { VALUES ?card_uri {} ?card_uri mo:performer ?entity . ?entity rdfs:label ?entityLabel .}"
+                    }
+                ]
+            },
+            "02": {
+                "id": 2,
+                "type": "relation",
+                "size": "small",
+                "title": "Instruments played",
+                "category": "instruments",
+                "content": [
+                    {
+                        "dataset": "d_05",
+                        "query": "PREFIX mo: <http://purl.org/ontology/mo/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?entity ?entityLabel FROM <http://data.open.ac.uk/context/led> WHERE { VALUES ?card_uri {} ?card_uri mo:instrument ?entity . ?entity rdfs:label ?entityLabel .}"
+                    }
+                ]
+            },
+            "03": {
+                "id": 3,
+                "type": "text",
+                "size": "small",
+                "title": "Took place in",
+                "content": [
+                    {
+                        "dataset": "d_05",
+                        "query": "PREFIX mo: <http://purl.org/ontology/mo/> PREFIX led: <http://led.kmi.open.ac.uk/term/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX c4dm: <http://purl.org/NET/c4dm/event.owl#> SELECT (SAMPLE(?label) AS ?entityLabel) FROM <http://data.open.ac.uk/context/led> WHERE { VALUES ?card_uri {} ?experience a led:ListeningExperience ; <http://purl.org/dc/terms/subject> ?card_uri ; c4dm:place ?entity . ?entity rdfs:label ?label .}"
+                    }
+                ]
+            },
+            "04": {
+                "id": 4,
+                "type": "relation",
+                "size": "small",
+                "title": "Audience",
+                "category": "people",
+                "content": [
+                    {
+                        "dataset": "d_05",
+                        "query": "PREFIX mo: <http://purl.org/ontology/mo/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT DISTINCT ?entity ?entityLabel FROM <http://data.open.ac.uk/context/led> WHERE { VALUES ?card_uri {} ?card_uri mo:listener ?entity . ?entity rdfs:label ?entityLabel .}"
+                    }
+                ]
+            },
+            "05": {
+                "id": 5,
+                "type": "text",
+                "size": "medium",
+                "title": "Evidence text",
+                "content": [
+                    {
+                        "dataset": "d_05",
+                        "query": "PREFIX led: <http://led.kmi.open.ac.uk/term/>  SELECT DISTINCT ?entityLabel FROM <http://data.open.ac.uk/context/led> WHERE {VALUES ?card_uri {} ?experience a led:ListeningExperience ; <http://purl.org/dc/terms/subject> ?card_uri { ?experience led:has_evidence_text ?entityLabel } UNION { ?experience led:is_reported_in/rdf:value ?entityLabel } }"
+                    }
+                ]
+            }
+        }
     }
 }

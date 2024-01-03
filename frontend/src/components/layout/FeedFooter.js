@@ -1,8 +1,9 @@
 import React from "react";
 import classes from "./FeedFooter.module.css";
 import VisibilitySensor from "react-visibility-sensor";
-import logoPolifonia from "../../assets/svg/logo-polifonia-whitecopia.svg"
+import logoPolifonia from "../../assets/png/polifonia-logo-white.png"
 import logoHorizon from "../../assets/svg/logo-eu-white-caption.svg"
+import { Link } from "react-router-dom";
 
 function FeedFooter(props) {
 
@@ -21,6 +22,8 @@ function FeedFooter(props) {
     }
   }
 
+  function onClickChange() { window.scrollTo(0, 0)}
+
   return (
     <div className={classes.footerContainer}> 
       <VisibilitySensor onChange={onChange}>
@@ -38,32 +41,30 @@ function FeedFooter(props) {
           <div className={classes.flexOne}>
             <p className={classes.flexTitle}>Contact</p>
             <br></br>
-            <p>Official website</p>
-            <p>Github</p>
-            <p>Linkedin</p>
-            <p>Twitter</p>
+            <a href="https://polifonia-project.eu/" target="_blank" rel="noopener noreferrer">Official website</a>
+            <a href="https://github.com/polifonia-project" target="_blank" rel="noopener noreferrer">Github</a>
+            <a href="https://www.linkedin.com/company/polifonia-h2020/" target="_blank" rel="noopener noreferrer">Linkedin</a>
+            <a href="https://twitter.com/PolifoniaH2020" target="_blank" rel="noopener noreferrer">Twitter</a>
           </div>
           <div className={classes.flexTwo}>
-            <p className={classes.flexTitle}>Site Map</p>
+            <p className={classes.flexTitle}>Polifonia</p>
             <br></br>
-            <p>Feed</p>
-            <p>Data stories</p>
-            <p>Corpus</p>
-            <p>Sonar</p>
-            <p>About</p>
+            <Link onClick={() => {onClickChange() }}  to="/portal/">Homepage</Link>
+            <Link onClick={() => {onClickChange() }}  to="/portal/about">About</Link>
+            <Link onClick={() => {onClickChange() }}  to="/portal/outputs">Outputs</Link>
           </div>
           <div className={classes.flexThree}>
             <p className={classes.flexTitle}>People</p>
             <br></br>
-            <p>Team</p>
-            <p>Partners</p>
-            <p>Stakeholders</p>
+            <a href="https://polifonia-project.eu/people/" target="_blank" rel="noopener noreferrer" >Team</a>
+            <a href="https://polifonia-project.eu/partners/" target="_blank" rel="noopener noreferrer" >Partners</a>
+            <a href="https://polifonia-project.eu/stakeholders/" target="_blank" rel="noopener noreferrer" >Stakeholders</a>
           </div>
           <div className={classes.flexFour}>
             <p className={classes.flexTitle}>Privacy</p>
             <br></br>
-            <p>Cookies</p>
-            <p>Terms</p>
+            <Link onClick={() => {onClickChange() }}  to="/portal/terms">Terms</Link>
+            <Link onClick={() => {onClickChange() }}  to="/portal/cookies">Cookies</Link>
           </div>
         </div>
         <div className={classes.footerCloser}>

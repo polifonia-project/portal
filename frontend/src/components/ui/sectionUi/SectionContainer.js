@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./SectionContainer.module.css";
 import ResultsContainer from "../resultsUi/ResultsContainer";
 import SectionClip from "./SectionClip";
@@ -6,6 +6,21 @@ import SectionClip from "./SectionClip";
 function SectionContainer(props) {
     const [selected_uri, setSelected] = useState(props.el_iri);
     const [selected_value, setValue] = useState(props.placeholder);
+    
+      // The width below which the mobile view should be rendered
+    const breakpointSmall = 500;
+    const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const updateWindowDimensions = () => {
+      const newWidth = window.innerWidth;
+      setWidth(newWidth);
+    };
+    
+    window.addEventListener("resize", updateWindowDimensions);
+    return () => window.removeEventListener("resize", updateWindowDimensions) 
+
+  }, []);
 
     return (
         <div id={props.id} className={classes.sectionContainer + " " + classes['background' + props.tot_categories]}>
@@ -27,6 +42,7 @@ function SectionContainer(props) {
                 el_iri={selected_uri}
                 setInputValue={setValue}
                 onQuery={setSelected}
+                smallScreen={width > breakpointSmall ? true : false}
             >
             </SectionClip>
             <ResultsContainer
@@ -36,6 +52,8 @@ function SectionContainer(props) {
                 datasets={props.datasets}
                 color={props.color}
                 input_value={selected_value}
+                input_category={props.catName}
+                catCodes={props.catCodes}
             >
             </ResultsContainer>
         </div>

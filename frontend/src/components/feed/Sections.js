@@ -19,7 +19,7 @@ class Sections extends React.Component {
   }
 
   componentDidMount = () => {
-    fetch("/conf_info")
+    fetch("/portal/conf_info")
       .then((res) => res.json())
       .then((data) => {
         this.setState({ datasets: data.datasets });
@@ -48,6 +48,7 @@ class Sections extends React.Component {
             datasets={this.state.datasets}
             placeholder={clip.name} 
             tot_categories={Object.keys(this.state.categories).length} 
+            catCodes={this.state.categories}
             >
           </SectionContainer>
         ))}

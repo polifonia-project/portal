@@ -197,6 +197,8 @@
 
 .visibilityHook {
   opacity: 0;
+  -moz-opacity: 0; /* Firefox and Mozilla browsers */
+  -webkit-opacity: 0; /* WebKit browser e.g. Safari */
   padding-bottom: 10px;
   width: 100%;
 }
@@ -460,4 +462,30 @@
 
 .section-cat_0101 {
   padding-left: calc(((100% /2 * 1) - 26px));
+}
+
+@media only screen and (max-width: 600px) {
+  
+.clipBox {
+  padding-bottom: 0px !important;
+  padding-top: 0px !important;
+  margin-top: -50px;
+}
+
+.clipContainer {
+  padding-left: calc(((100% / 10 * 1) - 26px)) !important;
+  padding-right: 0 !important;
+  justify-content: start;
+}
+
+.dot {
+  display: inline-block !important;
+}
+
+.end_dot {
+  display: none !important;
+}
+.cliptitle {
+  margin-left: 20px !important;
+}
 }

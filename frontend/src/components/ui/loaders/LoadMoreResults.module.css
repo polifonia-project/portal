@@ -106,7 +106,9 @@
 .categoryResult {
   padding: 7px 14px 7px 14px;
   border: 0.4px solid transparent;
-  border-radius: 3px;
+  border-radius: 50px;
+  transform: scale(0.9);
+  transform-origin: left;
   color: transparent;
   background: linear-gradient(90deg, rgba(230,230,230,1) 31%, rgba(244,237,236,1) 47%, rgba(230,230,230,1) 68%);
   background-size: 300% 200%;

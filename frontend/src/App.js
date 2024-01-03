@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
 
 import FeedPage from "./pages/Feed";
-import DataStoriesPage from "./pages/DataStories";
+import OutputsPage from "./pages/OutputsPage";
+import TermsPage from "./pages/TermsPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import CookiesPage from "./pages/CookiesPage";
 import AboutPage from "./pages/About";
+import CardPage from "./pages/CardPage";
 import Layout from "./components/layout/Layout";
 import { ThemeContext } from "./context/ThemeContext";
 import { CardContext } from "./context/CardContext";
@@ -22,24 +25,31 @@ function App() {
   const [cardBlocks, setCardBlocks] = useState({});
   const [cardBlocksNew, setCardBlocksNew] = useState({});
   const [cardContent, setCardContent] = useState(
-    {title: 'Card Title', 
-    cat: 'Card category', 
-    input: 'Input name', 
-    uri: 'url',
-    color: '#e5e3e3',
-    hasInput: false});
+    {
+      title: 'Card Title',
+      cat: 'Card category',
+      input: 'Input name',
+      uri: 'url',
+      color: '#e5e3e3',
+      hasInput: false,
+      goesBack: true
+    });
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, soundOn, setSoundOn, colorSet, setColorSet, backToTopOn, setbackToTopOn, currentSection, setCurrentSection}}>
-    <CardContext.Provider value={{cardOpen, setCardOpen, cardContent, setCardContent, cardBlocks, setCardBlocks, cardBlocksNew, setCardBlocksNew}}>
-      <Layout title={pagetitle}>
-        <Routes>
-          <Route path="/" element={<FeedPage func={setPageTitle} />} />
-          <Route path="/datastories" element={<DataStoriesPage func={setPageTitle} />}/>
-          <Route path="/about" element={<AboutPage func={setPageTitle} />} />
-        </Routes>
-      </Layout>
-    </CardContext.Provider>
+    <ThemeContext.Provider value={{ theme, setTheme, soundOn, setSoundOn, colorSet, setColorSet, backToTopOn, setbackToTopOn, currentSection, setCurrentSection }}>
+      <CardContext.Provider value={{ cardOpen, setCardOpen, cardContent, setCardContent, cardBlocks, setCardBlocks, cardBlocksNew, setCardBlocksNew }}>
+        <Layout title={pagetitle}>
+          <Routes>
+            <Route path="/portal/" element={<FeedPage func={setPageTitle} />} />
+            <Route path="/portal/outputs" element={<OutputsPage func={setPageTitle} />} />
+            <Route path="/portal/terms" element={<TermsPage func={setPageTitle} />} />
+            <Route path="/portal/cookies" element={<CookiesPage func={setPageTitle} />} />
+            <Route path="/portal/about" element={<AboutPage func={setPageTitle} />} />
+            <Route path="/portal/card" exact={true} element={<CardPage func={setPageTitle} />} />
+            <Route path='*' element={<NotFoundPage func={setPageTitle} />}/>
+          </Routes>
+        </Layout>
+      </CardContext.Provider>
     </ThemeContext.Provider>
   );
 }

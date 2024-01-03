@@ -3,7 +3,7 @@
     "index_channel": 1491,
     "index_pw": "SecretPassword",
     "data_sources": {
-        "datatsets": "conf_datasets.json",
+        "datasets": "conf_datasets.json",
         "categories": "conf_categories.json",
         "feed": "conf_feed.json",
         "carousel": "conf_carousel.json",

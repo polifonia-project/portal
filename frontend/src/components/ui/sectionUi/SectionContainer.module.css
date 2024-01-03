@@ -47,17 +47,20 @@
 
 .sectionTitle {
   font-size: 35px;
+  line-height: 35px;
   font-family: "Garnett Medium";
   font-weight: 100;
   margin: 0;
   padding-right: 45%;
   padding-top: 10px;
+  white-space: nowrap;
 }
 
 .sectionDescription {
-  font-size: 18px;
-  line-height: 20px;
+  font-size: 21px;
+  line-height: 28px;
   padding-right: 40%;
+  margin-top:10px;
 }
 
 .section-cat_01,
@@ -248,4 +251,43 @@ width: 80px !important;
   linear-gradient(90deg, transparent, transparent calc((100% / 2 * 13) - 1px), #D8D8D8 calc(100% / 2 * 13), transparent calc(100% / 2 * 13)),
   linear-gradient(90deg, transparent, transparent calc((100% / 2 * 15) - 1px), #D8D8D8 calc(100% / 2 * 15), transparent calc(100% / 2 * 15));
 
+}
+
+@media only screen and (max-width: 1000px) {
+  .sectionTitle {
+    font-size: 20px;
+    padding-right: 10%;
+    line-height: 22px;
+
+  }
+  
+  .sectionDescription {
+    font-size: 16px;
+    padding-right: 10%;
+    line-height: 18px;
+  }
+
+  .section-cat_01 .sectionInfobox h3,
+.section-cat_02 .sectionInfobox h3,
+.section-cat_03 .sectionInfobox h3,
+.section-cat_04 .sectionInfobox h3
+{
+  display: flex;
+  text-align: right;
+  justify-content: flex-end;
+  padding-right: 0%;
+  padding-left: 10%;
+}
+
+.section-cat_01 .sectionInfobox p,
+.section-cat_02 .sectionInfobox p,
+.section-cat_03 .sectionInfobox p,
+.section-cat_04 .sectionInfobox p
+{
+  display: flex;
+  text-align: right;
+  justify-content: flex-end;
+  padding-right: 0%;
+  padding-left: 10%;
+}
 }

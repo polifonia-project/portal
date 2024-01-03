@@ -1,68 +1,65 @@
-{ 
-"card_01": {
-  "id": "card_01",
-  "claim" : "Explore",
-  "title" : "Scroll to see our highlights",
-  "paragraph": "Get acquainted with curated stories featuring the protagonists of European Music Heritage",
-  "type": "scroll",
-  "href" : "clips_container",
-  "logo": "icon-1.svg"
-}, 
-"card_02": {
-  "id": "card_02",
-  "claim" : "Search",
-  "title" : "Look for what you like",
-  "paragraph": "Choose a different protagonist and start searching for their connections",
-  "type": "scroll",
-  "href" : "section-cat_05",
-  "logo": "icon-2.svg"
-},
+{
+  "card_01": {
+    "id": "card_01",
+    "claim": "Explore",
+    "title": "Scroll to see our highlights",
+    "paragraph": "Get acquainted with curated stories featuring the protagonists of European Music Heritage",
+    "type": "scroll",
+    "href": "clips_container",
+    "logo": "icon-1.svg"
+  },
+  "card_02": {
+    "id": "card_02",
+    "claim": "Search",
+    "title": "Look for what you like",
+    "paragraph": "Choose a different protagonist and start searching for their connections",
+    "type": "scroll",
+    "href": "section-intro-search",
+    "logo": "icon-2.svg"
+  },
   "card_03": {
     "id": "card_03",
-    "claim" : "Play",
-    "title" : "Know your music taste",
-    "paragraph": "Get recommendations based on your taste, habits, and loved music. Coming soon!",
+    "claim": "Play",
+    "title": "Explore all the outputs",
+    "paragraph": "Have a look at all the results coming from Polifonia project",
     "type": "internal",
-    "href" : "/about",
+    "href": "/portal/outputs",
     "logo": "icon-3.svg"
   },
   "card_04": {
     "id": "card_04",
-    "claim" : "Discover",
-    "title" : "Who's working with music resources?",
+    "claim": "Discover",
+    "title": "Who's working with music resources?",
     "paragraph": "Go to the musoW catalogue, including hundreds of music datasets, repertories, software solutions, and more",
     "type": "external",
-    "href" : "https://projects.dharc.unibo.it/musow/",
+    "href": "https://projects.dharc.unibo.it/musow/",
     "logo": "icon-4.svg"
   },
   "card_05": {
     "id": "card_05",
-    "claim" : "Analyse",
-    "title" : "Study millions of text documents",
+    "claim": "Analyse",
+    "title": "Study millions of text documents",
     "paragraph": "The Polifonia Corpus offers a professional interface to study how music terminology evolved across countries",
     "type": "external",
-    "href" : "https://polifonia.disi.unibo.it/corpus/",
+    "href": "https://polifonia.disi.unibo.it/corpus/",
     "logo": "icon-5.svg"
   },
   "card_06": {
     "id": "card_06",
-    "claim" : "Create",
-    "title" : "Create stories with music data",
+    "claim": "Create",
+    "title": "Create stories with music data",
     "paragraph": "Charts, searches, maps, and more on MELODY, a platform for authoring data stories with Linked Open Data",
     "type": "external",
-    "href" : "https://projects.dharc.unibo.it/melody/",
+    "href": "https://projects.dharc.unibo.it/melody/",
     "logo": "icon-6.svg"
   },
   "card_07": {
     "id": "card_07",
-    "claim" : "Learn more",
-    "title" : "Who we are",
+    "claim": "Learn more",
+    "title": "Who we are",
     "paragraph": "Got your interest? Know more about the Polifonia project, community, and resources",
     "type": "internal",
-    "href" : "/about",
+    "href": "/portal/about",
     "logo": "icon-7.svg"
   }
-  
-  
-  
 }

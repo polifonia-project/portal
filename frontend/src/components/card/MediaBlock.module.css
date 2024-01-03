@@ -1,0 +1,140 @@
+.cardBlockContainer {
+  display: block;
+  width: 30%;
+  background-color: #f4edec;
+  margin-top:25px;
+  font-size: 0.85em;
+  margin-right: 25px;
+  transition: all 1s ease;
+  cursor: default;
+  padding: 0px 30px 30px 30px;
+}
+
+.cardBlockBox {
+ /* box-shadow: 0px 0px 7px 0.3px #dfdad9; */
+  
+  font-family: "Helvetica Light";
+  margin: 0;
+  padding-top: 10px;
+}
+
+.cardBlockContainer:hover {
+}
+
+.blockTitle {
+  margin: 0;
+}
+
+.blockTitle span{
+  font-size: 1.2em;
+  color: rgb(40, 39, 39);
+  font-family: 'Helvetica Regular';
+}
+
+.mockVis {
+  display: contents;
+  width: 100%;
+  background-color: rgb(141, 140, 140);
+  text-align: center;
+}
+
+.mockVis img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.mockVis video {
+  width: 100%;
+}
+
+.mockVis audio {
+  width: 100%;
+  padding: 10px 19px 10px 19px;
+    border: 0.4px solid rgb(71, 71, 71);
+    border-radius: 3px;
+}
+
+
+.mockVis audio::-webkit-media-controls-play-button,
+     audio::-webkit-media-controls-panel {
+     background-color: #f4edec;
+     color: #f4edec;
+     }
+
+
+.sourceTag {
+      font-size: 10px;
+      margin: 0;
+      margin-top: 3px;
+      color: grey;
+      text-align: left;
+      margin-bottom: 10px;
+    }
+
+.cardChevronRight {
+  opacity: 1;
+  position:absolute;
+  transform: translateX(-30px);
+  transition: all 1s ease;
+}
+
+.cardChevronLeft {
+  opacity: 1;
+  position:absolute;
+  transform: translateX(30px);
+  transition: all 1s ease;
+}
+
+.cardChevronRight:hover {
+  opacity: 1;
+  position:absolute;
+  transform: translateX(-30px);
+}
+
+.cardChevronLeft:hover {
+  opacity: 1;
+  position:absolute;
+  transform: translateX(30px);
+}
+
+.leftChevron {
+  border-radius: 50%;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  color: white;
+  border: 0.5px solid transparent;
+  outline: 0;
+  background-color: #f4edec;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background-image: url("../../assets/png/carouselarrow.png");
+  background-repeat: no-repeat;
+  background-size: 35%;
+  background-position: right 8px top 5px;
+  transform: scaleX(-1);
+  position: absolute;
+  top: 0;
+}
+
+.rightChevron {
+  border-radius: 50%;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  color: white;
+  border: 0.5px solid transparent;
+  outline: 0;
+  background-color: #f4edec;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background-image: url("../../assets/png/carouselarrow.png");
+  background-repeat: no-repeat;
+  background-size: 35%;
+  background-position: right 8px top 5px;
+  position: absolute;
+  top: 0;
+}
+
+.leftChevron, 
+.rightChevron { 
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}

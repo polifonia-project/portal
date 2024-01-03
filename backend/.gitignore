@@ -2,3 +2,16 @@
 .flaskenv
 /__pycache__
 .DS_Store
+entities/
+linkset_files/
+index_labels/
+
+#blazegraph
+blazegraph.jar
+blazegraph.jnl
+rules.log
+linkset.nq
+
+#hydra
+hydra/build/
+hydra/lib/hydra.egg-info/

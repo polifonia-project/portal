@@ -133,8 +133,10 @@
 .categoryResult {
   padding: 7px 14px 7px 14px;
   border: 0.4px solid transparent;
-  border-radius: 3px;
+  border-radius: 50px;
   color: transparent;
+  transform: scale(0.9);
+  transform-origin: left;
   background: linear-gradient(90deg, rgba(230,230,230,1) 31%, rgba(244,237,236,1) 47%, rgba(230,230,230,1) 68%);
   background-size: 300% 200%;
   animation: slidein 1s ease 0.5s infinite;

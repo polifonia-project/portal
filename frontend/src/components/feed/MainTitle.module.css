@@ -9,9 +9,7 @@
   box-shadow: 1px 1px 16px -5px transparent;
   color: black;
   font-size: 5.8em;
-  width: 60%;
-  margin-right: 20%;
-  margin-left: 20%;
+  width: 100%;
 }
 
 .mainTitleContainer button {
@@ -70,4 +68,21 @@
   display: block;
   background-color: red;
   transform: scaleY();
+  opacity: 0 !important;
+  -moz-opacity: 0; /* Firefox and Mozilla browsers */
+  -webkit-opacity: 0; /* WebKit browser e.g. Safari */
+}
+
+@media only screen and (max-width: 1000px) {
+  .mainTitleContainer h3 {
+    margin-top: 30px;
+    font-size: 0.8em;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .mainTitleContainer h3 {
+    margin-top: 40px;
+    font-size: 0.6em;
+  }
 }

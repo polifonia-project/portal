@@ -75,6 +75,7 @@ input:focus::placeholder {
   width: 4%;
   margin-right: 10px;
   margin-left: 5px;
+  cursor: pointer;
 }
 
 .resetbutton {
@@ -263,4 +264,18 @@ input[type="search"]::-webkit-search-results-decoration {
   margin-right: 0px;
 }
 
+}
+
+@media only screen and (max-width: 500px) {
+  .sectionClip {
+    width: 85vw;
+  }
+
+  .sectionClip button {
+    transform: scale(1.5);
+  }
+
+  .suggestionsContainer {
+    width: 75vw;
+  }
 }

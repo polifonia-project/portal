@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import logo from "../../assets/svg/PolifoniaLogo.svg";
@@ -11,7 +10,6 @@ import backToClip from "../../assets/svg/backToClip.svg";
 import closemenu from "../../assets/svg/CloseMenu.svg";
 import classes from "./MainNavigation.module.css";
 import MenuOverlay from "./MenuOverlay.js";
-import Card from "../card/Card";
 import { ThemeContext } from "../../context/ThemeContext";
 import { CardContext } from "../../context/CardContext";
 
@@ -22,13 +20,18 @@ function MainNavigation(props) {
   const { currentSection } = useContext(ThemeContext);
   const { soundOn, setSoundOn } = useContext(ThemeContext);
   const { backToTopOn, setbackToTopOn } = useContext(ThemeContext);
-  const { cardOpen } = useContext(CardContext);
+  const { cardOpen, setCardOpen } = useContext(CardContext);
 
 
   const toggleMenu = () => {
-      setMenuOpen(prev => !prev)
-      setOverlayStatus(true)
+    setMenuOpen(prev => !prev)
+    setOverlayStatus(true)
+    if (cardOpen) {
+      setCardOpen(false)
+    } else {
+      setCardOpen(true)
     }
+  }
 
   const toggleSound = () => {
     setSoundOn(prev => !prev)
@@ -41,8 +44,8 @@ function MainNavigation(props) {
     document.getElementById("backToClip").style.opacity = '0';
 
     setTimeout(() => {
-    document.getElementById("backToTop").style.opacity = '1';
-    document.getElementById("backToClip").style.opacity = '1';
+      document.getElementById("backToTop").style.opacity = '1';
+      document.getElementById("backToClip").style.opacity = '1';
     }, 3000);
 
   }
@@ -52,9 +55,9 @@ function MainNavigation(props) {
     handleBackScroll("clipbox-" + currentSection);
     document.getElementById("backToClip").style.opacity = '0';
     setTimeout(() => {
-    document.getElementById("backToClip").style.opacity = '1';
+      document.getElementById("backToClip").style.opacity = '1';
     }, 3000);
-    
+
   }
 
   const handleBackScroll = (section) => {
@@ -66,30 +69,61 @@ function MainNavigation(props) {
 
   if (menuOpen) {
     document.body.style.overflow = "hidden";
-    document.getElementById("menuOptions").style.filter= 'none';
+    document.getElementById("mainLogo").style.filter = 'none';
+    document.getElementById("sectionName").style.color = 'black';
+    document.getElementById("menuOptions").style.filter = 'none';
   } else {
     document.body.style.overflow = "scroll";
     if (shownOverlay) {
-      if (theme === 'dark') {document.getElementById("menuOptions").style.filter= 'brightness(0) invert(1)';}
+      if (theme === 'dark') { 
+        document.getElementById("mainLogo").style.filter = 'brightness(0) invert(1)';
+        document.getElementById("menuOptions").style.filter = 'brightness(0) invert(1)'; 
+        document.getElementById("sectionName").style.color = 'white';
+      }
     }
   }
+
+  const styleBackHome = () => {
+    if (cardOpen) {
+    document.body.style.overflow = "hidden";
+    document.getElementById("mainLogo").style.filter = 'none';
+    document.getElementById("sectionName").style.color = 'black';
+    document.getElementById("menuOptions").style.filter = 'none';}
+  }
+
+    // The width below which the mobile view should be rendered
+    const breakpointSmall = 500;
+    const [width, setWidth] = useState(window.innerWidth);
+  
+    useEffect(() => {
+      const updateWindowDimensions = () => {
+        const newWidth = window.innerWidth;
+        setWidth(newWidth);
+      };
+  
+      window.addEventListener("resize", updateWindowDimensions);
+  
+      return () => window.removeEventListener("resize", updateWindowDimensions) 
+  
+    }, []);
 
   return (
     <header className={classes.header} id='mainHeader' >
       <span className={classes.title} id='title-logo'>
-        <Link to="/"><img className={classes.logo} src={logo} alt="Logo" id='mainLogo'/></Link>
+        <Link onClick={() => { styleBackHome() }} to="/portal/" ><img className={classes.logo} src={logo} alt="Logo" id='mainLogo' /></Link>
         <div className={classes.section} id='sectionName'><span>{props.sectionName}</span></div>
       </span>
-      <span  className={classes.menu} id='menuOptions' >
-        <img onClick={toggleBackClip} id='backToClip' className={classes.sound} src={backToClip} alt="Back to top Toggle" style={{display: backToTopOn ? cardOpen ? 'none' :'block' : 'none' }}/>
-        <img onClick={toggleBackTop} id='backToTop' className={classes.sound} src={backToTop} alt="Back to top Toggle" style={{display: backToTopOn ? cardOpen ? 'none' :'block' : 'none' }}/>
-        <img onClick={toggleSound} className={classes.sound} src={soundOn ? soundon : soundoff} alt="Sound Toggle" />
-        <img onClick={toggleMenu} className={classes.hamburger} src={menuOpen ? closemenu : hamburger} alt="Hamburger Menu" />
+      <span className={classes.menu} id='menuOptions' >
+        {width < breakpointSmall ? null :
+       [<img onClick={toggleBackClip} id='backToClip' className={classes.backToClip} src={backToClip} alt="Back to top Toggle" title="back to highlight" style={{ display: backToTopOn ? cardOpen ? 'none' : 'block' : 'none' }} />,
+        <img onClick={toggleBackTop} id='backToTop' className={classes.backToTop} src={backToTop} alt="Back to top Toggle" title="back to top" style={{ display: backToTopOn ? cardOpen ? 'none' : 'block' : 'none' }} />]
+      }
+        <img onClick={toggleSound} className={classes.sound} src={soundOn ? soundon : soundoff} title={soundOn ? "turn sound off" : "turn sound on"} alt="Sound Toggle" />
+        <img onClick={toggleMenu} className={classes.hamburger} src={menuOpen ? closemenu : hamburger} title="menu" alt="Hamburger Menu" />
       </span>
-      {menuOpen ? <MenuOverlay toggleMenu={toggleMenu}/> : null}
-      <Card></Card>
+      {menuOpen ? <MenuOverlay toggleMenu={toggleMenu} /> : null}
     </header>
-    
+
   );
 }
 

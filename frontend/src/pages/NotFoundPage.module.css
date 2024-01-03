@@ -1,0 +1,223 @@
+.termsPageContainer {
+  height: 100%;
+  scrollbar-width: none;
+}
+
+.termsPageContainer:-webkit-scrollbar {
+  -ms-overflow-style: none;
+  display: none;
+}
+
+.introContainer {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  display: flex;
+  margin: 0px;
+  padding-top: 100px;
+  margin-top: -40px;
+  margin-bottom: 100px;
+  padding-bottom: 5px;
+  background-color: #e2e2e2;
+  box-shadow: inset 0px -20px 200px -90px black;
+  padding-left: calc(((100% / 16 * 1) + 5px));
+  flex-wrap: wrap;
+}
+
+.textContainer {
+  margin: 0px;
+  padding-left: calc(((100% / 16 * 1) + 5px));
+  padding-bottom: 80px;
+}
+
+.introContainer  h3,
+.textContainer  h3 {
+  width: 70%;
+  font-size: 65px;
+  font-family: "Garnett Medium";
+  font-weight: 100;
+  margin: 0;
+}
+
+.introContainer  h4,
+.textContainer  h4 {
+  font-size: 25px;
+    font-family: "Garnett Medium";
+    font-weight: 100;
+    margin: 0;
+}
+
+.introContainer  p,
+.textContainer  p {
+  width: 70%;
+  padding-bottom: 10px;
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.introButton {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  padding: 10px 14px 10px 14px;
+  border: 0.4px solid rgb(71, 71, 71);
+  border-radius: 3px;
+  transition: all 1s ease;
+  display: block;
+  margin-bottom: 15px;
+  margin-right: 30px;
+  overflow: hidden;
+  border-radius: 30px;
+  background-color: #f4edec;
+  border-color: transparent;
+  box-shadow: 0px 0px 10px -5px black;
+  box-shadow: 0 4px 12px 0 rgba(12,18,45,.1);
+  color: black !important;
+  border-color: transparent  !important;
+  white-space: nowrap;
+}
+
+.textButton {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    padding: 10px 14px 10px 14px;
+    border: 0.4px solid rgb(71, 71, 71);
+    border-radius: 3px;
+    transition: all 1s ease;
+    display: block;
+    margin-bottom: 30px;
+}
+
+.introButton:hover {
+  transform: scale(1.1);
+}
+
+.textButton:hover {
+
+  overflow: hidden;
+  border-radius: 30px;
+  background-color: #f4edec;
+  border-color: transparent;
+  box-shadow: 0px 0px 10px -5px black;
+  box-shadow: 0 4px 12px 0 rgba(12,18,45,.1);
+  color: black !important;
+  border-color: transparent  !important;
+}
+
+.visibilityHook {
+  -moz-opacity: 0; /* Firefox and Mozilla browsers */
+  -webkit-opacity: 0; /* WebKit browser e.g. Safari */
+  opacity: 0;
+  margin: 0px;
+  width: 100%;
+}
+
+.cardBlockContainer {
+  display: block;
+  width: 30%;
+  background-color: #f4edec;
+  margin-top:25px;
+  font-size: 0.85em;
+  margin-right: 25px;
+  border-radius: 3px;
+  transition: all 1s ease;
+  cursor: default;
+  padding: 0px 30px 30px 30px;
+}
+
+.cardBlockBox {
+ /* box-shadow: 0px 0px 7px 0.3px #dfdad9; */
+  border-radius: 3px;
+  overflow: hidden;
+  font-family: "Helvetica Light";
+  margin: 0;
+}
+
+.blockTitle {
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.alertTitle{
+  font-size: 2em;
+  margin: 0;
+  font-family: 'Helvetica Regular';
+  width: 100%;
+  margin-top: 50px;
+  
+}
+
+.blockTitle span{
+  font-size: 1.2em;
+  color: rgb(40, 39, 39);
+  font-family: 'Helvetica Regular';
+}
+
+.blockParagraph {
+  font-size: 1.1em;
+  font-weight:lighter;
+  color: black;
+  font-family: 'Helvetica Light';
+  font-size: 1.2em;
+  line-height: 1.4em;
+  margin-top: 15px;
+}
+
+.alertIcon {
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 20px;
+	font: inherit;
+	outline: inherit;
+  background-color: transparent;
+  border: 0.2px solid transparent;
+  border-radius: 6px;
+  padding: 10px 19px 10px 19px;
+  border: 0.4px solid rgb(71, 71, 71);
+  border-radius: 3px;
+  transition: all 1s ease;
+}
+
+.bodyContainer {
+padding: 50px 100px 200px 150px; 
+}
+
+.backLink {
+  text-decoration: underline !important;
+  cursor: pointer !important;
+  color:blue !important;
+}
+
+@media only screen and (max-width: 1000px) {
+  .textContainer h3 {
+    font-size: 35px;
+    width: 90%;
+  }
+  
+  .textContainer h4 {
+    font-size: 18px;
+    width: 90%;
+  }
+  
+  .textContainer p {
+    font-size: 18px;
+    width: 90%;
+  }
+
+  .bodyContainer {
+    padding: 20px 50px 20px 50px; 
+    }
+}
