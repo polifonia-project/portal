@@ -66,7 +66,7 @@ def index_per_category(cat_id, cat_name, entities_dir, reconciled_index):
                 for entity_uri in entities_file_data:
                     index_dict[entity_uri] = entities_file_data[entity_uri]['label']
             elif reconciled_index == True:
-                uri_graph_match = rec.index_reconciliation(entities_file_data.keys(), endpoint.UPDATEMYLINKSET)
+                uri_graph_match = rec.index_reconciliation(entities_file_data.keys(), endpoint.MYLINKSET)
                 # prepare dictionary with named_graph: label
                 # iterate over options in preferred_labels
                 # when possible add the label for the first option, then for the second
