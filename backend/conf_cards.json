@@ -338,7 +338,7 @@
                 "content": [
                     {
                         "dataset": "d_01",
-                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { VALUES ?card_uri {} ?entity <https://schema.org/genre> ?starting_value ; rdfs:label ?entityLabel . }"
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { VALUES ?card_uri {} ?entity <https://schema.org/genre> ?card_uri ; rdfs:label ?entityLabel . }"
                     }
                 ]
             }
@@ -580,7 +580,7 @@
                     },
                     {
                         "dataset": "d_06",
-                        "query": "SELECT DISTINCT (CONCAT(UCASE(SUBSTR(?description, 1, 1)), LCASE(SUBSTR(?description, 2)) ) as ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value dc:description ?description . }"
+                        "query": "SELECT DISTINCT (CONCAT(UCASE(SUBSTR(?description, 1, 1)), LCASE(SUBSTR(?description, 2)) ) as ?entityLabel) WHERE { VALUES ?card_uri {} ?card_uri dc:description ?description . }"
                     }
                 ]
             },
@@ -597,7 +597,7 @@
                     },
                     {
                         "dataset": "d_06",
-                        "query": "SELECT DISTINCT ?entity WHERE { VALUES ?starting_value {} ?starting_value a-cd:hasDocumentation/foaf:depiction ?entity. }"
+                        "query": "SELECT DISTINCT ?entity WHERE { VALUES ?card_uri {} ?card_uri a-cd:hasDocumentation/foaf:depiction ?entity. }"
                     }
                 ]
             },
@@ -610,7 +610,7 @@
                 "content": [
                     {
                         "dataset": "d_06",
-                        "query": "SELECT DISTINCT ?entity WHERE { VALUES ?starting_value {} ?starting_value a-cd:hasDocumentation/<https://w3id.org/italia/onto/SM/URL> ?entity. }"
+                        "query": "SELECT DISTINCT ?entity WHERE { VALUES ?card_uri {} ?card_uri a-cd:hasDocumentation/<https://w3id.org/italia/onto/SM/URL> ?entity. }"
                     }
                 ]
             },
@@ -622,7 +622,7 @@
                 "content": [
                     {
                         "dataset": "d_06",
-                        "query": "SELECT DISTINCT ?entityLabel WHERE { VALUES ?starting_value {} ?starting_value <https://w3id.org/arco/ontology/musical-instrument/producesMusicalNote>/rdfs:label ?entityLabel. }"
+                        "query": "SELECT DISTINCT ?entityLabel WHERE { VALUES ?card_uri {} ?card_uri <https://w3id.org/arco/ontology/musical-instrument/producesMusicalNote>/rdfs:label ?entityLabel. }"
                     }
                 ]
             },
@@ -634,7 +634,7 @@
                 "content": [
                     {
                         "dataset": "d_06",
-                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { VALUES ?starting_value {} ?starting_value a-cd:hasAuthor ?entity . ?entity rdfs:label ?entityLabel . }"
+                        "query": "SELECT DISTINCT ?entity ?entityLabel WHERE { VALUES ?card_uri {} ?card_uri a-cd:hasAuthor ?entity . ?entity rdfs:label ?entityLabel . }"
                     }
                 ]
             },
@@ -646,7 +646,7 @@
                 "content": [
                     {
                         "dataset": "d_06",
-                        "query": "SELECT DISTINCT (IF(STRBEFORE(?label, \"-\") = STRAFTER(?label, \"-\"), STRBEFORE(?label, \"-\"), ?label) AS ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value dc:date ?label . }"
+                        "query": "SELECT DISTINCT (IF(STRBEFORE(?label, \"-\") = STRAFTER(?label, \"-\"), STRBEFORE(?label, \"-\"), ?label) AS ?entityLabel) WHERE { VALUES ?card_uri {} ?card_uri dc:date ?label . }"
                     }
                 ]
             },
@@ -659,7 +659,7 @@
                 "content": [
                     {
                         "dataset": "d_06",
-                        "query": "PREFIX clv: <https://w3id.org/italia/onto/CLV/> SELECT DISTINCT ?entity (CONCAT(?bellString, \" - \", ?church, \" - \", ?city) AS ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value a-cd:hasAuthor ?author . ?entity rdf:type a-dd:MusicalInstrument ; a-cd:hasAuthor ?author ; dc:coverage ?city ; a-loc:hasTimeIndexedTypedLocation/a-loc:atSite/rdfs:label ?church ; rdfs:label ?title ; dc:subject ?subject FILTER (str(?subject) = 'campana') . BIND (STRBEFORE(?title, \" (\") AS ?bellString) . FILTER (LANGMATCHES(LANG(?bellString), \"it\")) . FILTER (?entity != ?starting_value) . }"
+                        "query": "PREFIX clv: <https://w3id.org/italia/onto/CLV/> SELECT DISTINCT ?entity (CONCAT(?bellString, \" - \", ?church, \" - \", ?city) AS ?entityLabel) WHERE { VALUES ?card_uri {} ?card_uri a-cd:hasAuthor ?author . ?entity rdf:type a-dd:MusicalInstrument ; a-cd:hasAuthor ?author ; dc:coverage ?city ; a-loc:hasTimeIndexedTypedLocation/a-loc:atSite/rdfs:label ?church ; rdfs:label ?title ; dc:subject ?subject FILTER (str(?subject) = 'campana') . BIND (STRBEFORE(?title, \" (\") AS ?bellString) . FILTER (LANGMATCHES(LANG(?bellString), \"it\")) . FILTER (?entity != ?card_uri) . }"
                     }
                 ]
             },
@@ -671,7 +671,7 @@
                 "content": [
                     {
                         "dataset": "d_06",
-                        "query": "SELECT DISTINCT ?entityLabel WHERE { VALUES ?starting_value {} ?starting_value dc:coverage ?entityLabel . }"
+                        "query": "SELECT DISTINCT ?entityLabel WHERE { VALUES ?card_uri {} ?card_uri dc:coverage ?entityLabel . }"
                     }
                 ]
             },
@@ -683,7 +683,7 @@
                 "content": [
                     {
                         "dataset": "d_06",
-                        "query": "SELECT DISTINCT (SUBSTR(?entityLabelToTrim, 8) as ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value a-loc:hasTimeIndexedTypedLocation/a-loc:hasLocationType a-loc:ProductionRealizationLocation ; a-loc:hasTimeIndexedTypedLocation/a-loc:atLocation/rdfs:label ?entityLabelToTrim . }"
+                        "query": "SELECT DISTINCT (SUBSTR(?entityLabelToTrim, 8) as ?entityLabel) WHERE { VALUES ?card_uri {} ?card_uri a-loc:hasTimeIndexedTypedLocation/a-loc:hasLocationType a-loc:ProductionRealizationLocation ; a-loc:hasTimeIndexedTypedLocation/a-loc:atLocation/rdfs:label ?entityLabelToTrim . }"
                     }
                 ]
             },
@@ -695,7 +695,7 @@
                 "content": [
                     {
                         "dataset": "d_06",
-                        "query": "SELECT DISTINCT (SAMPLE(?label_to_format) AS ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value a-dd:hasMaterial/rdfs:label ?label_to_format. }"
+                        "query": "SELECT DISTINCT (SAMPLE(?label_to_format) AS ?entityLabel) WHERE { VALUES ?card_uri {} ?card_uri a-dd:hasMaterial/rdfs:label ?label_to_format. }"
                     }
                 ]
             },
@@ -707,7 +707,7 @@
                 "content": [
                     {
                         "dataset": "d_06",
-                        "query": "SELECT DISTINCT ?entityLabel WHERE { VALUES ?starting_value {} ?starting_value a-dd:hasAffixedElement/a-dd:transcript ?entityLabel . }"
+                        "query": "SELECT DISTINCT ?entityLabel WHERE { VALUES ?card_uri {} ?card_uri a-dd:hasAffixedElement/a-dd:transcript ?entityLabel . }"
                     }
                 ]
             },
@@ -720,7 +720,7 @@
                 "content": [
                     {
                         "dataset": "d_06",
-                        "query": "SELECT DISTINCT (CONCAT(UCASE(SUBSTR(?entityLabel, 1, 1)), SUBSTR(?entityLabel, 2)) AS ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value a-dd:hasIconographicOrDecorativeApparatus/a-cd:subject ?entityLabel . }"
+                        "query": "SELECT DISTINCT (CONCAT(UCASE(SUBSTR(?entityLabel, 1, 1)), SUBSTR(?entityLabel, 2)) AS ?entityLabel) WHERE { VALUES ?card_uri {} ?card_uri a-dd:hasIconographicOrDecorativeApparatus/a-cd:subject ?entityLabel . }"
                     }
                 ]
             },
@@ -733,7 +733,7 @@
                 "content": [
                     {
                         "dataset": "d_06",
-                        "query": "SELECT DISTINCT ?entity (CONCAT(UCASE(SUBSTR(?subject, 1, 1)), SUBSTR(?subject, 2), \" - \", ?church, \" - \", ?city) AS ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value arco:isCulturalPropertyComponentOf ?entity . ?entity a-loc:hasTimeIndexedTypedLocation/a-loc:atSite/rdfs:label ?church ; dc:coverage ?city ; dc:subject ?subject FILTER (str(?subject) = 'concerto di campane'). }"
+                        "query": "SELECT DISTINCT ?entity (CONCAT(UCASE(SUBSTR(?subject, 1, 1)), SUBSTR(?subject, 2), \" - \", ?church, \" - \", ?city) AS ?entityLabel) WHERE { VALUES ?card_uri {} ?card_uri arco:isCulturalPropertyComponentOf ?entity . ?entity a-loc:hasTimeIndexedTypedLocation/a-loc:atSite/rdfs:label ?church ; dc:coverage ?city ; dc:subject ?subject FILTER (str(?subject) = 'concerto di campane'). }"
                     }
                 ]
             },
@@ -746,7 +746,7 @@
                 "content": [
                     {
                         "dataset": "d_06",
-                        "query": "SELECT DISTINCT ?entity (CONCAT(?bellString, \" - \", ?church, \" - \", ?city) AS ?entityLabel) WHERE { VALUES ?starting_value {} ?starting_value arco:isCulturalPropertyComponentOf ?setOfBells . ?entity arco:isCulturalPropertyComponentOf ?setOfBells ; a-loc:hasTimeIndexedTypedLocation/a-loc:atSite/rdfs:label ?church ; rdfs:label ?title ; dc:coverage ?city ; dc:subject ?subject FILTER (str(?subject) = 'campana') . BIND (STRBEFORE(?title, \" (\") AS ?bellString) . FILTER (LANGMATCHES(LANG(?bellString), \"it\")) . FILTER (?starting_value != ?entity) . } ORDER BY ?starting_value"
+                        "query": "SELECT DISTINCT ?entity (CONCAT(?bellString, \" - \", ?church, \" - \", ?city) AS ?entityLabel) WHERE { VALUES ?card_uri {} ?card_uri arco:isCulturalPropertyComponentOf ?setOfBells . ?entity arco:isCulturalPropertyComponentOf ?setOfBells ; a-loc:hasTimeIndexedTypedLocation/a-loc:atSite/rdfs:label ?church ; rdfs:label ?title ; dc:coverage ?city ; dc:subject ?subject FILTER (str(?subject) = 'campana') . BIND (STRBEFORE(?title, \" (\") AS ?bellString) . FILTER (LANGMATCHES(LANG(?bellString), \"it\")) . FILTER (?card_uri != ?entity) . } ORDER BY ?card_uri"
                     }
                 ]
             },
@@ -790,7 +790,7 @@
                     {
                         "label": "Italian Catalogue of Cultural Heritage",
                         "dataset": "d_06",
-                        "query": "SELECT DISTINCT ?entity WHERE { VALUES ?starting_value {} ?starting_value dc:source ?entity . FILTER(contains(str(?entity), 'https://catalogo.beniculturali.it')) }"
+                        "query": "SELECT DISTINCT ?entity WHERE { VALUES ?card_uri {} ?card_uri dc:source ?entity . FILTER(contains(str(?entity), 'https://catalogo.beniculturali.it')) }"
                     }
                 ]
             }
