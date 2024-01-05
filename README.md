@@ -38,6 +38,20 @@ related-components:
 
 # Polifonia Web Portal
 [![DOI](https://zenodo.org/badge/587248478.svg)](https://zenodo.org/doi/10.5281/zenodo.10454047)
+
+The Polifonia Web portal is the main entry point into the extensive musical heritage produced by Polifonia. It is targeted to enthusiasts, scholars, musicians, and educators, and facilitates exploration of a varied spectrum of musical Linked Data. Key functionalities of the portal include text search and on-demand insights. The web portal currently ingests a selection of pilot datasets and allows their exploration via bespoke user journeys designed to foster serendipitous discovery.
+
+Users can:
+1. Explore content by category (Genres, Artists, Music, Places, Instruments) thanks to a text search.
+2. Discover relationships between entities of different types.
+3. Open insight cards for each entity.
+
+The technology stack of the Web portal includes: 
+* A Flask backend and a React-native frontend application. Communication between the frontend and backend is ensured by RESTful APIs. 
+* Sonic search backend is used for fast indexing of data ingested in the web portal and ensures a responsive user experience. 
+* Blazegraph triplestore is used to store post-processed data. In particular, data ingested from external sources is analysed to extract alignments between entities described in different data sources (e.g. people, places, genres) and the links across datasets are stored in a dedicated linkset (reconciliation process).
+
+
 ## Requirements
 
 Install python and nodejs
@@ -187,6 +201,14 @@ Flask + React with nginx (see a nice [tutorial](https://blog.miguelgrinberg.com/
 ./target/release/sonic -c config.cfg &
 ```
 
+### Blazegraph
+
+Run blazegraph as you would do in dev
+
+```
+$ java -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -server -Xmx1g -Djetty.port=9999 -jar blazegraph.jar 
+```
+
 ### Flask and gunicorn
 
 Install gunicorn and run the Flask API
@@ -195,14 +217,6 @@ Install gunicorn and run the Flask API
 pip install gunicorn
 cd ../backend
 gunicorn -w 4 -b 0.0.0.0:5000 app:app &
-```
-
-### Blazegraph
-
-Run blazegraph as you would do in dev
-
-```
-$ java -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -server -Xmx1g -Djetty.port=9999 -jar blazegraph.jar 
 ```
 
 

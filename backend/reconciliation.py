@@ -472,7 +472,7 @@ def uri_to_named_graph(values_to_search, endpoint):
         return uri_to_graph
 
     except Exception as e:
-        print('ERROR index_reconciliation in searching for uris\' graphs', e)
+        print('ERROR uri_to_named_graph in searching for uris\' graphs', e)
         return {}
 
 def index_reconciliation(uris_list, endpoint):
