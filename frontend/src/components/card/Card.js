@@ -9,6 +9,7 @@ import RelationBlock from "./RelationBlock.js";
 import MediaBlock from "./MediaBlock";
 import LinkBlock from "./LinkBlock";
 import WarningBlock from "./WarningBlock";
+import WarningBlockNoData from "./WarningBlockNoData";
 
 import ShareModal from "./ShareModal";
 
@@ -25,6 +26,7 @@ function Card(props) {
   const [fromExternalLink, setFromExternalLink] = useState(false);
   const [displayShare, setDisplayShare] = useState(false);
   const [resetOn, setResetOn] = useState(false);
+  const [fontSize, setFontSize] = useState('2.5rem');
 
   const [datasets, setDatasets] = useState({});
 
@@ -55,6 +57,17 @@ function Card(props) {
 
   }, []);
 
+  useEffect(() => {
+    if (cardContent.title.length > 300) {
+      setFontSize("1rem");
+    } else if (cardContent.title.length > 100) {
+      setFontSize("1.5rem");
+    } else {
+      // set default font size
+      setFontSize("2.5rem");
+    }
+  }, [cardContent.title]); 
+
   // Function to collect sameAsUris
   const getSameAsUris = async (uri) => {
     const response = await fetch(
@@ -72,6 +85,7 @@ function Card(props) {
       console.log('Fetch error:', err.message);
     }
   }
+
   // clear the timeout and handle the fetch response
   const handleFetchResponse = (res, timeoutId, signal) => {
     // Clear the timeout since the fetch started successfully
@@ -117,7 +131,7 @@ function Card(props) {
       let dataset = "";
       Object.values(currentBlock).forEach((block, i) => {
         if (block.type === "text") {
-          let textResults = [];
+          let textResults = []; 
           let number = "";
           Object.values(block.content).forEach((q, i) => {
             query = q.query;
@@ -157,10 +171,12 @@ function Card(props) {
                         textResults.push(singleResult);
                       }
                     });
-                    setTextContent((prev) => ({
-                      ...prev,
-                      [number]: textResults,
-                    }));
+                    if (textResults.length > 0) {
+                      setTextContent((prev) => ({
+                        ...prev,
+                        [number]: textResults,
+                      }));
+                    }
                   }
                 });
             } catch (err) {
@@ -426,6 +442,10 @@ function Card(props) {
     document.getElementById("menuOptions").style.filter = "none";
   };
 
+  function isObjectEmpty(obj) {
+    return Object.keys(obj).length === 0 || Object.values(obj).every(value => !value);
+  }
+
   const encodeShareLink = () => {
     if (fromExternalLink) {
       const params =
@@ -468,7 +488,7 @@ function Card(props) {
         style={{ backgroundColor: colorBackground }}
       >
         <div className={classes.titleContainer}>
-          <h1 style={{ color: colorIsDark ? "white" : "black" }}>
+          <h1 style={{ fontSize: fontSize, color: colorIsDark ? "white" : "black" }}>
             {cardContent.title}
           </h1>
           <p
@@ -510,8 +530,7 @@ function Card(props) {
         </div>
       </div>
       <div className={classes.contentBlock}>
-        {Object.values(currentBlock).sort((a, b) => a.id - b.id).map((block, i) => {
-
+       {Object.values(currentBlock).sort((a, b) => a.id - b.id).map((block, i) => {
           if (block.type === "text") {
             return (
               <TextBlock
@@ -558,7 +577,7 @@ function Card(props) {
                 key={"mediablock-" + i.toString()}
                 width={block.size}
                 title={block.title}
-                class={block.class}
+                mediaclass={block.class}
                 content={mediaContent["id_" + i.toString()]}
                 datasets={datasets}
                 screen={width < breakpointSmall ? 1 : width < breakpointPhone ? 2 : width < breakpointTablet ? 3 : 4}
@@ -575,6 +594,12 @@ function Card(props) {
           }
           return null;
         })}
+        {isObjectEmpty(textContent) && isObjectEmpty(mediaContent) && isObjectEmpty(relContent) && isObjectEmpty(linkContent) ?
+        <WarningBlockNoData
+                key={"warningblock"}
+                width={"large"}
+                screen={width < breakpointSmall ? 1 : width < breakpointPhone ? 2 : width < breakpointTablet ? 3 : 4}
+        ></WarningBlockNoData>: null }
       </div>
     </div>
   );

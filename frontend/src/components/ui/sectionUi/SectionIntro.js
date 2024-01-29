@@ -13,12 +13,24 @@ function SectionIntro() {
     }
   }
 
-  const handleClickScroll = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ block: "start", behavior: 'smooth' });
-    };
-  };
+  const handleClickScroll = () => {
+    // Get all sections
+    const sections = document.querySelectorAll("[id^='section-cat_']");
+
+    // Get current scroll position
+    const currentScrollPosition = window.pageYOffset;
+
+    // Find the first section below the current scroll position
+    const nextSection = Array.from(sections).find(section => {
+        const sectionTop = section.getBoundingClientRect().top + currentScrollPosition;
+        return sectionTop > currentScrollPosition;
+    });
+
+    // Scroll to the next section if it exists
+    if (nextSection) {
+        nextSection.scrollIntoView({ behavior: 'smooth' });
+    }
+};
 
   return (
     <div className={classes.feedIntro} id="section-intro-search">
@@ -28,7 +40,7 @@ function SectionIntro() {
       <div className={classes.introContainer}>
         <h3>Search for what you care the most</h3>
         <p>Search among music resources and discover the gems of the European Cultural Heritage by using our search & filter feature. Choose your starting point (e.g. a person), type a word and start looking for connections. You will combine the utility of an advanced search tool with the browsing experience of an archive interface of music related resources. So, it’s time to search, filter and expand your knowledge. </p>
-        <button className={classes.introButton}onClick={() => handleClickScroll('section-cat_03')}>Start now</button>
+        <button className={classes.introButton} onClick={handleClickScroll}>Start now</button>
       </div>
     </div>
   );

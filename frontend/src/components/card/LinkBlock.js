@@ -9,15 +9,15 @@ function LinkBlock(props) {
   const [linkList, setLinkList] = useState([])
 
   useEffect(() => {
-    console.log("PROPS: ", props.content)
   // loading
-  if (props.content === undefined) { // add or empty
+  if (props.content === undefined) { 
+    setIsLoaded(false)
+  } else if (Object.keys(props.content).length === 0) {
     setIsLoaded(false)
   } else {
     setIsLoaded(true)
     setLinkList(props.content);
   }
-
 
         // width
         var current_width = props.width;

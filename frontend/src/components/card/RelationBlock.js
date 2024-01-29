@@ -15,6 +15,8 @@ function RelationBlock(props) {
     // loading
     if (props.content === undefined) {
       setIsLoaded(false);
+    } else if (Object.keys(props.content).length === 0) {
+      setIsLoaded(false)
     } else {
       setIsLoaded(true);
       setRelList(props.content);
@@ -98,7 +100,7 @@ function RelationBlock(props) {
                     })()}
                   </>)
                 })}
-               {totalElements === lastElement &&( canLoad? <button class= {classes.loadMoreButton} onClick={() => setVisibleNum(visibleNum + 36)}>Load more +</button> : null )}
+               {totalElements === lastElement &&( canLoad? <button className= {classes.loadMoreButton} onClick={() => setVisibleNum(visibleNum + 36)}>Load more +</button> : null )}
               </div>
             </div>
           </div>)

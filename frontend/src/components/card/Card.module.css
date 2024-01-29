@@ -52,6 +52,7 @@
   margin: 0;
   margin-top: 120px;
   width: 100%;
+  font-size: clamp(1.5rem, 2.5vw, 2.5rem);
 }
 
 .titleContainer p {

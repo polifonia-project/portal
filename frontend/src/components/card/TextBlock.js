@@ -16,9 +16,12 @@ function TextBlock(props) {
     // loading
     if (props.content === undefined) {
       setIsLoaded(false)
+    } else if (Object.keys(props.content).length === 0) {
+      setIsLoaded(false)
     } else {
       setIsLoaded(true)
       setTextList(props.content);
+      console.log(props.content)
     }
 
     // single-result
@@ -33,7 +36,8 @@ function TextBlock(props) {
     // width
     var current_width = props.width;
     if (props.screen === 4 ){
-      if (current_width === 'small') { setNumericWidth(25);} 
+      if (current_width === 'small') { 
+        if (hasLongDescription(props.content)) {setNumericWidth(50)} else {setNumericWidth(25);} }
       else if (current_width === 'medium') {setNumericWidth(50);} 
       else if (current_width === 'large') {setNumericWidth(100);} 
       else {setNumericWidth(100);}
@@ -55,6 +59,18 @@ function TextBlock(props) {
     }
   }, [props.content, props.width, textList.length, props.screen]);
 
+  function hasLongDescription(obj) {
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            const item = obj[key];
+            if (item.desc && item.desc.length > 600) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
   return (
     isLoaded ?
       <div className={classes.cardBlockContainer} style={{ width: 'calc(' + numericWidth + '% - 25px)' }}>
@@ -71,7 +87,7 @@ function TextBlock(props) {
             {textList.map(function (content, indx) {
               return (
                 <div className={classes.textResult} key={content.desc}>
-                  <p className={classes.blockParagraph}>{content.desc}.</p>
+                  <p className={classes.blockParagraph}>{content.desc}</p>
                   <p className={classes.sourceTag}>Source: {props.datasets[content.dataset].name}</p>
                   {singleResult ? <p className={classes.sourceTag}> {indx + 1}/{textList.length}</p> : null}
                 </div>
