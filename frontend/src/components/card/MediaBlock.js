@@ -22,6 +22,11 @@ function MediaBlock(props) {
       setIsImage(false);
       setIsVideo(false);
       setIsAudio(false);
+    } else if (Object.keys(props.content).length === 0) {
+      setIsLoaded(false);
+      setIsImage(false);
+      setIsVideo(false);
+      setIsAudio(false);
     } else {
       setIsImage(false);
       setIsVideo(false);
@@ -30,15 +35,15 @@ function MediaBlock(props) {
       setMediaList(props.content);
 
       // class 
-      if (props.class === "image") {
+      if (props.mediaclass === "image") {
         setIsImage(true)
         setIsVideo(false)
         setIsAudio(false)
-      } else if (props.class === "video") {
+      } else if (props.mediaclass === "video") {
         setIsVideo(true)
         setIsImage(false)
         setIsAudio(false)
-      } else if (props.class === "audio") {
+      } else if (props.mediaclass === "audio") {
         setIsAudio(true)
         setIsVideo(false)
         setIsImage(false)
@@ -78,7 +83,7 @@ function MediaBlock(props) {
             else {setNumericWidth(100);}
           }
     
-  }, [props.content, props.width, props.class, mediaList.length, props.screen]);
+  }, [props.content, props.width, props.mediaclass, mediaList.length, props.screen]);
   
 
 

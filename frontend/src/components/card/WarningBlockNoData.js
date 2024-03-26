@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import classes from "./WarningBlock.module.css";
+import classes from "./WarningBlockNoData.module.css";
 
-function WarningBlock(props) {
+function WarningBlockNoData(props) {
 
   const [numericWidth, setNumericWidth] = useState(25);
 
@@ -22,10 +22,10 @@ function WarningBlock(props) {
     <div className={classes.cardBlockContainer} style={{ width: 'calc(' + numericWidth + '% - 25px)' }}>
       <div className={classes.blockTitle}>
         <span className={classes.alertIcon}>!</span>
-        <p className={classes.alertTitle}>Warning</p>
+        <p className={classes.alertTitle}>Notice</p>
       </div>
       <div className={classes.cardBlockBox}>
-        <p className={classes.blockParagraph}>We're sorry, but currently, there is no insights information configured for this category. <br></br> Please check back later for new insights and data. </p>
+        <p className={classes.blockParagraph}>We're sorry, but there are no data available at the moment for this entity. <br></br>Please check back later for updated information.</p>
 
       </div>
     </div>
@@ -33,4 +33,4 @@ function WarningBlock(props) {
 }
 
 
-export default WarningBlock;
+export default WarningBlockNoData;

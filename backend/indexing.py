@@ -121,8 +121,17 @@ def order_dict_by_similarity(input_str, input_dict):
 
 def sonic_query(cat, word):
     with SearchClient(g['index_host'], g['index_channel'], g['index_pw']) as querycl:
-        print(querycl.ping())
-        return querycl.query(cat, 'entities', word, 100)
+        offset = 0
+        results = []
+        print('PING', querycl.ping())
+        while True:
+            chunk = querycl.query(cat, 'entities', word, 100, offset)
+            if not chunk:
+                break
+            results = results + chunk
+            offset += len(chunk)
+            print('LEN', len(chunk))
+        return results
 
 
 def suggested_results(d, c, cat_id, word, reconciled_index):
