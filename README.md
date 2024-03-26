@@ -34,7 +34,7 @@ related-components:
   - extends: 
      - web-portal-prototypes
 bibliography:
-- main-publication:"Renda, Giulia, Marco Grasso, and Marilena Daquino. 2023. "From ontology design to user-centred interfaces for music heritage." In Proceedings of AIUCD 2023. Preprint available at: https://arxiv.org/abs/2306.12973v1"
+- main-publication: "Giulia Renda, Marco Grasso, and Marilena Daquino (2023). From ontology design to user-centred interfaces for music heritage. In Proceedings of AIUCD 2023. Preprint available at: https://arxiv.org/abs/2306.12973v1"
   
 ---
 
