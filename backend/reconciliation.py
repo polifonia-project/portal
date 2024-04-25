@@ -26,7 +26,7 @@ WHITE_LIST_PARAM = {
     'dbpedia': {
         'endpoint': 'https://dbpedia.org/sparql',
         'iri_base': 'http://dbpedia.org/',
-        'query': 'SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same); SEPARATOR=\", \") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} {?origin_uri (schema:sameAs|^schema:sameAs) ?same .} UNION {?origin_uri (skos:exactMatch|^skos:exactMatch) ?same .} } GROUP BY ?origin_uri'
+        'query': 'SELECT ?origin_uri (GROUP_CONCAT(DISTINCT str(?same); SEPARATOR=\", \") AS ?same_uri) WHERE { VALUES ?origin_uri {<>} {?origin_uri (schema:sameAs|^schema:sameAs) ?same .} UNION {?origin_uri (skos:exactMatch|^skos:exactMatch) ?same .} UNION {?origin_uri owl:sameAs|^owl:sameAs ?same . FILTER(regex(str(?same), "http://www.wikidata.org/", "i") || regex(str(?same), "http://dbpedia.org/", "i") || regex(str(?same), "http://viaf.org/viaf/", "i") || regex(str(?same), "http://musicbrainz.org", "i")) } } GROUP BY ?origin_uri'
     },
     'viaf': {
         'fragments': 'true',
