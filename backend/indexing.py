@@ -36,7 +36,7 @@ def sonic_ingest(data, collection, bucket='entities'):
                 print(e)
 
 
-def sonic_flush_index(collection):
+def sonic_clean_index(data, collection, bucket='entities'):
     """
     Parameters
     ----------
@@ -45,9 +45,13 @@ def sonic_flush_index(collection):
     -------
     """
     with IngestClient(g['index_host'], g['index_channel'], g['index_pw']) as ingestcl:
-        print('FLUSHED ', collection)
-        ingestcl.flush(collection)
-        print('[DELETE] flushed index for:', collection)
+        for iri, label in data.items():
+            try:
+                ingestcl.ping()
+                ingestcl.pop(collection, bucket, urllib.parse.quote(iri), label.lower())
+            except Exception as e:
+                print(iri, label.lower())
+                print(e)
 
 
 def index_per_category(cat_id, cat_name, entities_dir, reconciled_index):
@@ -64,7 +68,7 @@ def index_per_category(cat_id, cat_name, entities_dir, reconciled_index):
             if reconciled_index == False:
                 # create index with uris
                 for entity_uri in entities_file_data:
-                    index_dict[entity_uri] = entities_file_data[entity_uri]['label']
+                    index_dict[entity_uri] = entities_file_data[entity_uri]['label'].lower()
             elif reconciled_index == True:
                 uri_graph_match = rec.index_reconciliation(entities_file_data.keys(), endpoint.MYLINKSET)
                 # prepare dictionary with named_graph: label
@@ -78,7 +82,7 @@ def index_per_category(cat_id, cat_name, entities_dir, reconciled_index):
                     else:
                         labels_dict = graphs_labels_pairs[graph]
                     # add hostname: label to the labels_dict to later check and retrieve label based on prefferd ones
-                    labels_dict[hostname] = entities_file_data[uri]['label']
+                    labels_dict[hostname] = entities_file_data[uri]['label'].lower()
                     graphs_labels_pairs[graph] = labels_dict
 
     if reconciled_index == True:    
@@ -86,7 +90,7 @@ def index_per_category(cat_id, cat_name, entities_dir, reconciled_index):
             # select the preferred label if it exists
             if hostname not in conf.preferred_iribase_for_labels:
                 for label in labels_dict.values():
-                    index_dict[graph] = label
+                    index_dict[graph] = label.lower()
                     break
             else:
                 for iribase in conf.preferred_iribase_for_labels:
@@ -98,7 +102,7 @@ def index_per_category(cat_id, cat_name, entities_dir, reconciled_index):
         # check if file for cat already exists, else create it an add/update content
         cat_labels_file_path = labels_dir_path + cat_id + '.json'
         if os.path.exists(cat_labels_file_path):
-            cat_labels_file_content = methods.read_json()
+            cat_labels_file_content = methods.read_json(cat_labels_file_path)
             index_dict.update(cat_labels_file_content)
             methods.update_json(cat_labels_file_path, index_dict)
         else:
@@ -169,17 +173,19 @@ def suggested_results(d, c, cat_id, word, reconciled_index):
     return result_suggestions
 
 def clean_index(cat_name, cat_id):
-    # flush
-    sonic_flush_index(cat_name)
 
-    # empty cat labels file
+    
     labels_dir_path = os.path.dirname(os.path.realpath(__file__))+'/index_labels/'
     cat_labels_file_path = labels_dir_path + cat_id + '.json'
     if os.path.exists(cat_labels_file_path):
+        cat_labels_file_content = methods.read_json(cat_labels_file_path)
+        # clean index per category
+        sonic_clean_index(cat_labels_file_content, cat_name)
+        # empty cat labels file
         os.remove(cat_labels_file_path)
         print(f"File {cat_labels_file_path} in {labels_dir_path} removed.")
     else:
-        print(f"File {cat_labels_file_path} in {labels_dir_path} does not exist.")
+        print(f"File {cat_labels_file_path} in {labels_dir_path} does not exist, no need to clean.")
 
 def ingest_index(datasets, categories, entities_dir, reconciled_index):
     for cat in categories:
