@@ -288,13 +288,30 @@ class ResultsTest extends React.Component {
             // Parse and return the JSON data
             return res.json();
         };
-
-
-        return fetch(url, {
-            method: 'GET',
+        // temporarly handle exception for POST in musicbo
+        let fetch_method = 'GET';
+        let requestBody = {
+            method: fetch_method,
             headers: { 'Accept': 'application/sparql-results+json' },
             signal: signal,
-        })
+        };
+        if (endpoint.includes('musicbo')) {
+
+            url = endpoint;
+            fetch_method = 'POST';
+            requestBody = {
+                method: fetch_method,
+                headers: {
+                    'Accept': 'application/sparql-results+json,*/*;q=0.9',
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                },
+                body: 'query=' + encodeURIComponent(query), // The SPARQL query is sent in the request body
+                signal: signal,
+            }
+
+        }
+
+        return fetch(url, requestBody)
             .then(handleFetchResponse)
             .then((data) => {
                 let dataLen = data.results.bindings.length;
@@ -357,12 +374,13 @@ class ResultsTest extends React.Component {
                 }
             })
             .catch((err) => {
+                console.log(err.name)
                 // Handle errors
                 if (err.name === 'AbortError') {
                     // The fetch was aborted, handle accordingly
                     console.log('Fetch aborted');
                 } else {
-                    console.log('Fetch error:', err.message);
+                    console.log('Fetch error:', endpoint, err.message);
                 }
 
             });

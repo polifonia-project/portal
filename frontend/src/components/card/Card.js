@@ -66,7 +66,7 @@ function Card(props) {
       // set default font size
       setFontSize("2.5rem");
     }
-  }, [cardContent.title]); 
+  }, [cardContent.title]);
 
   // Function to collect sameAsUris
   const getSameAsUris = async (uri) => {
@@ -131,7 +131,7 @@ function Card(props) {
       let dataset = "";
       Object.values(currentBlock).forEach((block, i) => {
         if (block.type === "text") {
-          let textResults = []; 
+          let textResults = [];
           let number = "";
           Object.values(block.content).forEach((q, i) => {
             query = q.query;
@@ -242,6 +242,7 @@ function Card(props) {
           let number = "";
           Object.values(block.content).map((q, i) => {
             query = q.query;
+            console.log(query)
             dataset = q.dataset;
             number = block.id;
             number = number - 1;
@@ -260,12 +261,30 @@ function Card(props) {
               controller.abort();
               console.log('Fetch aborted due to timeout');
             }, 40000);
-            try {
-              fetch(url, {
-                method: "GET",
-                headers: { Accept: "application/sparql-results+json" },
+            // temporarly handle exception for POST in musicbo
+            let fetch_method = 'GET';
+            let requestBody = {
+              method: fetch_method,
+              headers: { 'Accept': 'application/sparql-results+json' },
+              signal: signal,
+            };
+            if (endpoint.includes('musicbo')) {
+              console.log(query)
+              url = endpoint;
+              fetch_method = 'POST';
+              requestBody = {
+                method: fetch_method,
+                headers: {
+                  'Accept': 'application/sparql-results+json,*/*;q=0.9',
+                  'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                },
+                body: 'query=' + encodeURIComponent(query), // The SPARQL query is sent in the request body
                 signal: signal,
-              })
+              }
+
+            }
+            try {
+              fetch(url, requestBody)
                 .then((res) => handleFetchResponse(res, timeoutId, signal))
                 .then((data) => {
                   let dataLen = data.results.bindings.length;
@@ -530,7 +549,7 @@ function Card(props) {
         </div>
       </div>
       <div className={classes.contentBlock}>
-       {Object.values(currentBlock).sort((a, b) => a.id - b.id).map((block, i) => {
+        {Object.values(currentBlock).sort((a, b) => a.id - b.id).map((block, i) => {
           if (block.type === "text") {
             return (
               <TextBlock
@@ -595,11 +614,11 @@ function Card(props) {
           return null;
         })}
         {isObjectEmpty(textContent) && isObjectEmpty(mediaContent) && isObjectEmpty(relContent) && isObjectEmpty(linkContent) ?
-        <WarningBlockNoData
-                key={"warningblock"}
-                width={"large"}
-                screen={width < breakpointSmall ? 1 : width < breakpointPhone ? 2 : width < breakpointTablet ? 3 : 4}
-        ></WarningBlockNoData>: null }
+          <WarningBlockNoData
+            key={"warningblock"}
+            width={"large"}
+            screen={width < breakpointSmall ? 1 : width < breakpointPhone ? 2 : width < breakpointTablet ? 3 : 4}
+          ></WarningBlockNoData> : null}
       </div>
     </div>
   );
