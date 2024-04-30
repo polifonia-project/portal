@@ -11,7 +11,7 @@
         },
         "category": "cat_04",
         "timestamp": "",
-        "iri": "http://w3id.org/polifonia/linkset/d_05__d_02__d_04___cat_04___c91de2e6-24c6-4dfd-857e-e5da30d4e94e",
+        "iri": "http://w3id.org/polifonia/linkset/d_05__d_04__d_02___cat_04___0b6710da-b958-4cc5-a8b2-34836a276cf1",
         "origin_iri": "http://www.wikidata.org/entity/Q18125"
     },
     "clip_02": {
@@ -24,7 +24,7 @@
         },
         "category": "cat_02",
         "timestamp": "",
-        "iri": "http://w3id.org/polifonia/linkset/d_04__d_01___cat_02___389afd8d-fc9d-4479-afdd-882996b77cc3",
+        "iri": "http://w3id.org/polifonia/linkset/d_04__d_01___cat_02___a0534d5e-a76d-4f1a-99e1-0d57fdc8bda9",
         "origin_iri": "http://www.wikidata.org/entity/Q172763"
     },
     "clip_03": {
@@ -39,7 +39,7 @@
         },
         "category": "cat_01",
         "timestamp": "",
-        "iri": "http://w3id.org/polifonia/linkset/d_03__d_01__d_04___cat_01___e45971ae-225b-4bfc-9f09-9ecc953d0938",
+        "iri": "http://w3id.org/polifonia/linkset/d_01__d_03__d_04__d_05___cat_01___42edcf80-62f5-429b-abd7-696bbdf84937",
         "origin_iri": "http://www.wikidata.org/entity/Q3071"
     },
     "clip_04": {
@@ -52,7 +52,7 @@
         },
         "category": "cat_05",
         "timestamp": "",
-        "iri": "http://w3id.org/polifonia/linkset/d_04__d_05__d_03___cat_05___b1585004-7a43-4353-a8be-a7d3090c9d84",
+        "iri": "http://w3id.org/polifonia/linkset/d_05__d_03__d_04___cat_05___5ba2568b-cb70-42dd-a370-4619d0c5f9a5",
         "origin_iri": "http://www.wikidata.org/entity/Q78987"
     },
     "clip_05": {
@@ -65,7 +65,7 @@
         },
         "category": "cat_03",
         "timestamp": "",
-        "iri": "http://w3id.org/polifonia/linkset/d_04__cat_03__3849",
+        "iri": "http://w3id.org/polifonia/linkset/d_04__cat_03__2470",
         "origin_iri": "http://www.wikidata.org/entity/Q1426177"
     }
 }

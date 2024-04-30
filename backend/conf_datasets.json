@@ -6,7 +6,8 @@
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://projects.dharc.unibo.it/musow/sparql",
         "rest_api": "",
-        "description": "musoW is a catalogue of musical resources available on the web realized with the idea to support teachers in music education, creative industries, historians, and musicologists in finding what they need. musoW supports users in searching over hundreds of online resources, including digital libraries, archives, datasets, and related technologies."
+        "description": "musoW is a catalogue of musical resources available on the web realized with the idea to support teachers in music education, creative industries, historians, and musicologists in finding what they need. musoW supports users in searching over hundreds of online resources, including digital libraries, archives, datasets, and related technologies.",
+        "status": "parsed"
     },
     "d_02": {
         "id": "d_02",
@@ -15,16 +16,18 @@
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://polifonia.kmi.open.ac.uk/meetups/sparql",
         "rest_api": "",
-        "description": "The MEETUPS knowledge graph contains data about historical encounters of people in the musical world in Europe from c. 1800 to c. 1945. All the data is extracted from artists’ biographies, mainly from open-access digital sources such as Wikipedia artists’ web pages. A total of 33,309 biographies were collected for knowledge extraction and construction of the Kowledge Graph."
+        "description": "The MEETUPS knowledge graph contains data about historical encounters of people in the musical world in Europe from c. 1800 to c. 1945. All the data is extracted from artists’ biographies, mainly from open-access digital sources such as Wikipedia artists’ web pages. A total of 33,309 biographies were collected for knowledge extraction and construction of the Kowledge Graph.",
+        "status": "parsed"
     },
     "d_03": {
         "id": "d_03",
         "name": "Sound and Vision",
-        "iri_base": "https://cat.apis.beeldengeluid.nl/",
+        "iri_base": "http://data.beeldengeluid.nl/",
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://cat.apis.beeldengeluid.nl/sparql",
         "rest_api": "",
-        "description": "The Sound & Vision MOZ (Muziekopnamen Zendgemachtigden) collection features diverse concert recordings from Beethoven to Metallica, spanning Pinkpop to The Big Sing. Intended for Dutch public TV and radio broadcast, it holds over 36,000 artists across 200 genres. Predominantly classical, it includes jazz, folk, indie, and pop. Linked to Wikidata and Discogs, roles like artist or creator are specified, with 282 simple text roles, 311 linked to Wikidata entities, and 201 linked to Performance Medium ontology. Recording locations are part of metadata, with approximately a third linked to Wikidata. This dataset is in the Sound & Vision catalog Open Data, accessible as Linked Data via Polifonia and Podiumkunst.net projects, and viewable in the Media Suite. Metadata is available to all, and account holders can play certain concert recordings."
+        "description": "The Sound & Vision MOZ (Muziekopnamen Zendgemachtigden) collection features diverse concert recordings from Beethoven to Metallica, spanning Pinkpop to The Big Sing. Intended for Dutch public TV and radio broadcast, it holds over 36,000 artists across 200 genres. Predominantly classical, it includes jazz, folk, indie, and pop. Linked to Wikidata and Discogs, roles like artist or creator are specified, with 282 simple text roles, 311 linked to Wikidata entities, and 201 linked to Performance Medium ontology. Recording locations are part of metadata, with approximately a third linked to Wikidata. This dataset is in the Sound & Vision catalog Open Data, accessible as Linked Data via Polifonia and Podiumkunst.net projects, and viewable in the Media Suite. Metadata is available to all, and account holders can play certain concert recordings.",
+        "status": "parsed"
     },
     "d_04": {
         "id": "d_04",
@@ -33,7 +36,8 @@
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://query.wikidata.org/sparql",
         "rest_api": "",
-        "description": "The Wikidata dataset is a dynamic knowledge graph, encompassing a broad spectrum of entities (individuals, places, concepts) and relationships. It interconnects various types of information, facilitating comprehensive exploration and analysis across diverse domains."
+        "description": "The Wikidata dataset is a dynamic knowledge graph, encompassing a broad spectrum of entities (individuals, places, concepts) and relationships. It interconnects various types of information, facilitating comprehensive exploration and analysis across diverse domains.",
+        "status": "parsed"
     },
     "d_05": {
         "id": "d_05",
@@ -42,7 +46,8 @@
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://data.open.ac.uk/sparql",
         "rest_api": "",
-        "description": "The Listening Experience Database (LED) project is a collaboration between The Open University, the Royal College of Music and (in its second phase) the University of Glasgow. LED brings together a mass of data about people’s experiences of listening to music of all kinds, in any historical period and any culture. The project involves the general public by using crowdsourcing as one of the ways in which data is collected."
+        "description": "The Listening Experience Database (LED) project is a collaboration between The Open University, the Royal College of Music and (in its second phase) the University of Glasgow. LED brings together a mass of data about people’s experiences of listening to music of all kinds, in any historical period and any culture. The project involves the general public by using crowdsourcing as one of the ways in which data is collected.",
+        "status": "parsed"
     },
     "d_06": {
         "id": "d_06",
@@ -51,6 +56,27 @@
         "query_method": "sparql_endpoint",
         "sparql_endpoint": "https://dati.cultura.gov.it/sparql",
         "rest_api": "",
-        "description": "BELLS stores information about Italian bells, bell towers and bell ringers. In particular, in this version, the data collected is related to the bells of the Italian region Ligueria, and comes from catalogue records of the General Catalogue of Italian Cultural Heritage."
+        "description": "BELLS stores information about Italian bells, bell towers and bell ringers. In particular, in this version, the data collected is related to the bells of the Italian region Ligueria, and comes from catalogue records of the General Catalogue of Italian Cultural Heritage.",
+        "status": "parsed"
+    },
+    "d_07": {
+        "id": "d_07",
+        "name": "MusicBo",
+        "iri_base": "http://w3id.org/polifonia/pilot/musicbo/",
+        "query_method": "sparql_endpoint",
+        "sparql_endpoint": "https://polifonia.disi.unibo.it/musicbo/sparql",
+        "rest_api": "",
+        "description": "TODO",
+        "status": "parsed"
+    },
+    "d_08": {
+        "id": "d_08",
+        "name": "Organs",
+        "iri_base": "http://w3id.org/polifonia/resource/organs",
+        "query_method": "sparql_endpoint",
+        "sparql_endpoint": "https://polifonia.disi.unibo.it/organs/sparql",
+        "rest_api": "",
+        "description": "TODO",
+        "status": "parsed"
     }
 }
