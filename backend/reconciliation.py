@@ -50,6 +50,26 @@ def query_lod_fragments(endpoint, query):
         print('ERROR query_lod_fragments for ', endpoint, e)
         return results
 
+def find_same_as_existance(endpoint):
+    query = '''
+    SELECT ?s WHERE  {?s ''' + conf.same_as_path + ''' ?o } LIMIT 1
+    '''
+    user_agent = conf.sparql_wrapper_user_agent
+    sparql = SPARQLWrapper(endpoint, agent=user_agent)
+    sparql.setQuery(query)
+    answer = False
+    try:
+        sparql.setReturnFormat(JSON)
+        results = sparql.query().convert()
+        print('RESULTS', results)
+        if len(results['results']['bindings']) > 0:
+            answer = True
+        return answer
+    except Exception as e:
+        print('ERROR find_same_as_existance', endpoint, e)
+        return answer
+
+
 def query_same_as_internal(uri_list):
     values_to_search = ' '.join(uri_list).replace("'", "%27")
     find_query = '''
@@ -163,6 +183,11 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
             ds = ds_updated
         for d in datasets:
             sparql_endpoint = datasets[d]['sparql_endpoint']
+            # check if dataset contains sameAs-type of properties, otherwise ignore
+            same_as_exist = find_same_as_existance(sparql_endpoint)
+            if not same_as_exist:
+                # ignore iteration
+                continue
             # 1000 is the control number to avoid having a VALUE in the QUERY that is too long
             if len(' '.join(uris_to_search)) < 1000:
                 query = query_same_as_internal(uris_to_search)
