@@ -53,13 +53,11 @@ def query_lod_fragments(endpoint, query):
 def query_same_as_internal(uri_list):
     values_to_search = ' '.join(uri_list).replace("'", "%27")
     find_query = '''
-        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-        PREFIX owl: <http://www.w3.org/2002/07/owl#>
-        PREFIX schema: <https://schema.org/>
         SELECT DISTINCT ?origin_uri (GROUP_CONCAT(str(?same_uri); SEPARATOR=", ") AS ?same_uri)
         WHERE {
             VALUES ?origin_uri {'''+values_to_search+'''} .
             ?same_uri '''+conf.same_as_path+''' ?origin_uri .
+            FILTER(!regex(STR(?same_uri), 'MusicBO', 'i'))
         } GROUP BY ?origin_uri
         '''
     return find_query
@@ -78,6 +76,7 @@ def find_matches(query, endpoint):
                 for result in results['results']['bindings'] if len(result['same_uri']['value']) > 0}
         return results
     except Exception as e:
+        print('ERROR 1 find_matches for ', endpoint, e)
         try:
             url = endpoint
             params = {'query': query}
@@ -92,7 +91,7 @@ def find_matches(query, endpoint):
                     for result in results['results']['bindings'] if len(result['same_uri']['value']) > 0}
             return results
         except Exception as e:
-            print('ERROR find_matches for ', endpoint, query, e)
+            print('ERROR 2 find_matches for ', endpoint, query, e)
             return results
 
 
@@ -289,7 +288,7 @@ def white_list_reconciliation():
     pass
 
 
-def generate_merged_graph_name(data):
+def generate_merged_graph_name(data, id):
     '''this function creates a new graph name combining existing names.'''
     dat = ''
     cat = ''
@@ -313,8 +312,6 @@ def generate_merged_graph_name(data):
         for c in cat_parts:
             if c not in cat:
                 cat = (cat + '__' + c).strip('__')
-    # Generate a random UUID for the id
-    id = str(uuid.uuid4())
     new_graph_name = linkset_endpoint.LINKSETGRAPH + dat + '___' + cat + '___' + id
     return new_graph_name
 
@@ -338,7 +335,7 @@ def add_missing_same_as_links(graph_name):
     except Exception as e:
         print('ERROR add_missing_same_as_links', e)
 
-def graph_merging(entity_uri, endpoint):
+def graph_merging(entity_uri, endpoint, id):
     graph_set = set()
     query = '''
         SELECT DISTINCT ?g
@@ -383,7 +380,8 @@ def graph_merging(entity_uri, endpoint):
 
     # if there is more than 1 graph, create new name for graph (the merging of the existing ones)
     if len(set(graph_set)) > 1:
-        new_graph_name = generate_merged_graph_name(graph_set)
+        new_graph_name = generate_merged_graph_name(graph_set, id)
+        print('new_graph_name',graph_set, new_graph_name)
         # insert triples from each graph into the new one and delete the olds
         values_to_search = ' '.join(graph_set)
 
@@ -414,7 +412,9 @@ def graphs_reconciliation(entities_dir, endpoint, reconciled_index):
         entities_content = methods.read_json(entities_dir+'/'+filename)
         for uri, info in entities_content.items():
             if info['sameAs'] == True:
-                graph_merging(uri, endpoint)
+                # Generate a random UUID for the id
+                id = str(uuid.uuid4())
+                graph_merging(uri, endpoint, id)
     if reconciled_index:
         feed_file_name = g['data_sources']['feed']
         feed_data = methods.read_json(feed_file_name)
