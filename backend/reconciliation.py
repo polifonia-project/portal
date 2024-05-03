@@ -61,13 +61,27 @@ def find_same_as_existance(endpoint):
     try:
         sparql.setReturnFormat(JSON)
         results = sparql.query().convert()
-        print('RESULTS', results)
         if len(results['results']['bindings']) > 0:
             answer = True
         return answer
     except Exception as e:
-        print('ERROR find_same_as_existance', endpoint, e)
-        return answer
+        print('ERROR 1 find_same_as_existance ', endpoint, e)
+        try:
+            url = endpoint
+            params = {'query': query}
+            payload = {}
+            headers = {
+                'Accept': 'application/json'
+            }
+
+            response = requests.get(url, headers=headers, params=params, data=payload)
+            results = response.json()
+            if len(results['results']['bindings']) > 0:
+                answer = True
+            return answer
+        except Exception as e:
+            print('ERROR 2 find_same_as_existance ', endpoint, query, e)
+            return answer
 
 
 def query_same_as_internal(uri_list):
