@@ -135,7 +135,7 @@ def add_quads_to_conj_graph(ds, graph_name, dataset_1, dataset_1_label, uri_1, s
     named_graph.add((URIRef(uri_1), SDO.location, URIRef(dataset_1)))
     named_graph.add((URIRef(dataset_1), RDFS.label,
                      Literal(dataset_1_label, lang="en")))
-
+    
     if len(same_uri_list) > 0:
         # in case more than one uri for each origin_uri
         same_uri_list = same_uri_list.split(', ')
@@ -273,7 +273,7 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                             graph_name = graph_names_dict[origin_uri]
                         else:
                             # if not, create the graph name with last_graph_id
-                            graph_name = linkset_namespace + dataset_id + '__' + category_id + '__' + str(last_graph_id)
+                            graph_name = linkset_namespace + dataset_id + '__' + category_id + '__' + str(last_graph_id + 1)
                             # raise last_graph_id by 1
                             last_graph_id = last_graph_id + 1
                             # add the pair uri:graph_name to the graph_names_dict dict
@@ -308,7 +308,7 @@ def first_level_reconciliation(uris_list, datasets, dataset_id, category_id, lin
                                 graph_name = graph_names_dict[origin_uri]
                             else:
                                 # if not, create the graph name with last_graph_id
-                                graph_name = linkset_namespace + dataset_id + '__' + category_id + '__' + str(last_graph_id)
+                                graph_name = linkset_namespace + dataset_id + '__' + category_id + '__' + str(last_graph_id+1)
                                 # raise last_graph_id by 1
                                 last_graph_id = last_graph_id + 1
                                 # add the pair uri:graph_name to the graph_names_dict dict
@@ -331,7 +331,6 @@ def generate_merged_graph_name(data, id):
     '''this function creates a new graph name combining existing names.'''
     dat = ''
     cat = ''
-    id = ''
 
     merged_split = '___'
     simple_split = '__'
@@ -420,7 +419,6 @@ def graph_merging(entity_uri, endpoint, id):
     # if there is more than 1 graph, create new name for graph (the merging of the existing ones)
     if len(set(graph_set)) > 1:
         new_graph_name = generate_merged_graph_name(graph_set, id)
-        print('new_graph_name',graph_set, new_graph_name)
         # insert triples from each graph into the new one and delete the olds
         values_to_search = ' '.join(graph_set)
 
