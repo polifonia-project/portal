@@ -31,8 +31,8 @@
   padding-bottom: 80px;
 }
 
-.introContainer  h3,
-.textContainer  h3 {
+.introContainer h3,
+.textContainer h3 {
   width: 70%;
   font-size: 65px;
   font-family: "Garnett Medium";
@@ -40,20 +40,20 @@
   margin: 0;
 }
 
-.introContainer  h4,
-.textContainer  h4 {
+.introContainer h4,
+.textContainer h4 {
   font-size: 25px;
-    font-family: "Garnett Medium";
-    font-weight: 100;
-    margin: 0;
+  font-family: "Garnett Medium";
+  font-weight: 100;
+  margin: 0;
 }
 
-.textContainer  h4 + p {
+.textContainer h4+p {
   margin-top: 10px;
 }
 
-.introContainer  p,
-.textContainer  p {
+.introContainer p,
+.textContainer p {
   width: 70%;
   padding-bottom: 10px;
   font-size: 20px;
@@ -80,26 +80,26 @@
   background-color: #f4edec;
   border-color: transparent;
   box-shadow: 0px 0px 10px -5px black;
-  box-shadow: 0 4px 12px 0 rgba(12,18,45,.1);
+  box-shadow: 0 4px 12px 0 rgba(12, 18, 45, .1);
   color: black !important;
-  border-color: transparent  !important;
+  border-color: transparent !important;
   white-space: nowrap;
 }
 
 .textButton {
-    background: none;
-    color: inherit;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-    padding: 10px 14px 10px 14px;
-    border: 0.4px solid rgb(71, 71, 71);
-    border-radius: 3px;
-    transition: all 1s ease;
-    display: block;
-    margin-bottom: 30px;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  padding: 10px 14px 10px 14px;
+  border: 0.4px solid rgb(71, 71, 71);
+  border-radius: 3px;
+  transition: all 1s ease;
+  display: block;
+  margin-bottom: 30px;
 }
 
 .introButton:hover {
@@ -113,15 +113,17 @@
   background-color: #f4edec;
   border-color: transparent;
   box-shadow: 0px 0px 10px -5px black;
-  box-shadow: 0 4px 12px 0 rgba(12,18,45,.1);
+  box-shadow: 0 4px 12px 0 rgba(12, 18, 45, .1);
   color: black !important;
-  border-color: transparent  !important;
+  border-color: transparent !important;
 }
 
 .visibilityHook {
   opacity: 0;
-  -moz-opacity: 0; /* Firefox and Mozilla browsers */
-  -webkit-opacity: 0; /* WebKit browser e.g. Safari */
+  -moz-opacity: 0;
+  /* Firefox and Mozilla browsers */
+  -webkit-opacity: 0;
+  /* WebKit browser e.g. Safari */
   margin: 0px;
   width: 100%;
 }
@@ -131,14 +133,23 @@
     font-size: 35px;
     width: 90%;
   }
-  
+
   .textContainer h4 {
     font-size: 18px;
     width: 90%;
   }
-  
+
   .textContainer p {
     font-size: 18px;
     width: 90%;
   }
+}
+
+.customLink {
+  text-decoration: underline !important;
+}
+
+.customLink:hover {
+  cursor: pointer;
+  /* or cursor: auto; */
 }
